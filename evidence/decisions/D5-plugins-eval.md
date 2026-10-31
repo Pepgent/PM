@@ -57,14 +57,15 @@ subagent 插件：
 | 决策 | 采用的内容 |
 | --- | --- |
 | D2-02、D2-03、D2-05 | 并发写步由主 agent 经 omp-soroi-subagent 派出的中心 agent 承担；两插件之间是进程内调用，契约由本表给出（`D2-components.md:32,39-42`） |
-| D2-25 | 发行仓 `Pepgent/soroi` 把两个插件、设置、agent 定义、技能、规则打成一个可安装的整体 |
+| D2-25 与 leader 裁决（A） | `Pepgent/soroi` 是单仓：内含包 `packages/omp-soroi`（两个插件合并而成）、`packages/store`、compose、agent 定义、技能、规则和设置覆盖，作为一个可安装的整体发行；两个旧仓迁入后在 GitHub 归档 |
+| D3-07/09/12/19（含 leader 裁决 D） | Mux 不启动进程。本机子 agent 由 subagent 模块自己启动 `omp-rpc-mux dial --generation g --token t -- omp --mode rpc …`，由 dial 持有 stdio 并连到 `/agents/{id}/process`；远程子 agent 照旧走 `remote run`，body 是同一条 dial。监管者经 Mux 的写方 WS `/agents/{id}/writer` 驱动子进程；人的 IRC 以 `mux_human_irc { principal, body }` 到达写方；eval 注册控制端点 `WS /endpoints/eval:<根会话>`（`D3-network-mux.md`） |
 | D4-16 | 角色 `Main \| LocalChild \| RemoteChild`，由 `SOROI_ROLE` 决定 |
 | D4-19 | 单次调用换 env 写在 `soroi_eval` 参数里，以产出 atom 名为键 |
 | D6-04 | 一步一次提交 |
 | D6-11 | 在途状态从 eval 插件经 Mux 注册的控制端点读取 |
 | D6 回复 | store 里没有批次记录；步只记写它的 omp 会话 id |
 
-U23 要求“完整 omp 定制”。D5-02 写这两个插件给发行包贡献什么，以及 Pepgent 怎样调用它们。
+U23 要求“完整 omp 定制”。D5-02 写 `packages/omp-soroi` 给这个整体贡献什么，以及 Pepgent 怎样调用它。
 
 ## 2. 决策表
 
@@ -72,10 +73,10 @@ U23 要求“完整 omp 定制”。D5-02 写这两个插件给发行包贡献�
 
 | ID | what | where | how | 取舍 | 分类 | 补充 |
 | --- | --- | --- | --- | --- | --- | --- |
-| D5-01 | 两个插件合并成一个仓库、一个 omp 插件包（**与 D2-03、D2-25 不同，已报 leader 裁决**） | 提议：把 `Pepgent/omp-soroi-eval` 改名为 `Pepgent/omp-soroi`，再把 `omp-soroi-subagent` 的 `src/` 移进去成为 `src/subagent/`，然后归档 `Pepgent/omp-soroi-subagent`。D2 的口径：两个仓库各自独立，由发行仓 `Pepgent/soroi` 把两者作为依赖打包 | 合并后只有一个扩展入口，按 `SOROI_ROLE`（D4-16）选角色；eval 直接 import subagent 模块的 `Subagents` 接口（§3.1）。若保留两个仓库：`Subagents` 的类型由 subagent 包导出，eval 只做类型导入；运行时经 omp 公开的 `pi.events` 取得服务对象（同一进程里所有扩展共用一个 EventBus，`loader.ts:557`，`types.ts:2156-2157`）。**其余各行不受本行结论影响** | **合并的好处：** 两边之间的契约很宽，包括角色、交回契约、写 eval 的资格（D5-06）、批次成员、`LocalChild` 里转发 spawn。合并后这些都是编译期类型，交回工具只有一处定义，`eval.md:3`“同一个插件还提供交回工具”仍然成立。**代价：** 一个仓库改名、另一个归档；两边的工程师共用一个仓库（D1-07 按 issue 各开 worktree，可以共存）。**与 D2 的差别：** D2 认为两者变化驱动不同（subagent 跟网络层和 remote 走，eval 跟 store 走），应分开交付，由 `Pepgent/soroi` 统一发行。分开的代价是多一个跨仓库的契约包，以及一个靠 EventBus 的运行时握手 | 技术 / 串联 | 设计补充 |
-| D5-02 | 两个插件在“完整 omp 定制”中的贡献，以及 Pepgent 怎样调用（U23，归属按 D2-25） | 发行仓 `Pepgent/soroi`（D2-25）；两个插件的 `package.json` 里的 `omp.extensions` | **插件：** eval 提供 `soroi_eval`、未消费提醒、中间件和介入控制端点；subagent 提供监管者、`soroi_task`、`soroi_return` 和子进程桥接。**技能 `soroi-eval`：** 怎样写一步，dry run 与正式运行，pins 与 env，`stop`，派出中心 agent 并写批次目的。**规则：** 每个 atom 都要消费；dry run 通过后原样提交同一段代码，不合并、不改写。**agent 定义（D2-25 列出的三种角色）：** 写 eval 的主 agent，写 eval 的中心 worker，`Agent` 体。**调用路径：** Pepgent 的 Lab 后端经 Mux 启动中心 omp 主会话（D2-15），以 RPC 发 prompt、收事件；运行图和时间轴读 store 服务（D6）；在途调用读 eval 的控制端点（D6-11） | 一个发行包就是一份定制。远程机器的 omp-agent 镜像装的也是同一份（D2-11），不会分叉。omp 插件 manifest 只声明 extensions、tools、hooks、commands 和 settings（`plugins/types.ts:26-49`）；扩展包里的 agent 目录会被发现（`inv/o-placement.md:34-40`）。技能和规则随包加载，记为占位 P11 | 串联 | 缺失部分 |
+| D5-01 | 两个插件合并成一个包 `packages/omp-soroi`（leader 已裁决 A） | `Pepgent/soroi` 单仓里的 `packages/omp-soroi`：eval 代码在 `src/eval/`，subagent 代码在 `src/subagent/`，交回契约在 `src/contract.ts`。`Pepgent/omp-soroi-eval` 和 `Pepgent/omp-soroi-subagent` 的代码迁入后，两个旧仓在 GitHub 归档 | 一个扩展入口，按 `SOROI_ROLE`（D4-16）选角色。eval 直接 import subagent 模块的 `Subagents` 接口（§3.1），不经事件总线 | **合并的好处：** 两边之间的契约很宽，包括角色、交回契约、写 eval 的资格（D5-06）、批次成员、`LocalChild` 里转发 spawn。合并后这些都是编译期类型，交回工具只有一处定义，`eval.md:3`“同一个插件还提供交回工具”仍然成立。与 store、compose、技能、规则同仓同版本，就是 U23 要的一个可安装整体。**代价：** 两个旧仓的代码要迁移，旧仓要归档。**落选方案：** D2 原稿让两个仓库各自独立，由发行仓把两者作为依赖打包。那样要多维护一个跨仓库的契约包，还要靠 `pi.events`（`loader.ts:557`）做运行时握手 | 技术 / 串联 | 设计补充 |
+| D5-02 | `packages/omp-soroi` 在“完整 omp 定制”中的贡献，以及 Pepgent 怎样调用（U23） | `Pepgent/soroi` 单仓：`packages/omp-soroi` 的 `package.json` 里的 `omp.extensions`；同仓的 agent 定义、技能、规则和设置覆盖（D2-25） | **插件：** eval 模块提供 `soroi_eval`、未消费提醒、中间件和介入控制端点；subagent 模块提供监管者、`soroi_task`、`soroi_return` 和子进程桥接。**技能 `soroi-eval`：** 怎样写一步，dry run 与正式运行，pins 与 env，`stop`，派出中心 worker 并写批次目的。**规则：** 每个 atom 都要消费；dry run 通过后原样提交同一段代码，不合并、不改写。**agent 定义（D2-25 列出的三种角色）：** 写 eval 的主 agent，写 eval 的中心 worker，`Agent` 体。**调用路径：** Pepgent 的 Lab 后端经 Mux 启动中心 omp 主会话（D2-15），以 RPC 发 prompt、收事件；运行图和时间轴读 store 服务（D6）；在途调用读 eval 的控制端点（D6-11） | 一个仓库发行一份定制。远程机器的 omp-agent 镜像装的也是同一份（D2-11），不会分叉。omp 插件 manifest 只声明 extensions、tools、hooks、commands 和 settings（`plugins/types.ts:26-49`）；扩展包里的 agent 目录会被发现（`inv/o-placement.md:34-40`）。技能和规则怎样随安装生效，记为占位 P11 | 串联 | 缺失部分 |
 | D5-03 | `Agent` 节点改走 soroi subagent，替换 `runSubprocess` | `src/eval/agent-body.ts` 改为调用 `Subagents.spawnCapture`；删除 `AGENT_BODY_PREFIX` 前缀约定（`agent-body.ts:11-12`） | 中间件调用 `spawnCapture({ parentId: 写这一步的 agent, cwd, agent: AgentTemplate, assignment: prompt, placement }, shape, signal)`，返回 `Promise<CaptureHandback>`。写这一步的 agent 可以是主 agent，也可以是 soroi 派出的中心 worker。在 `Main` 里，这个调用直接进同进程的监管者；在 `LocalChild` 里，经 host call `{ op: "spawn_capture" }` 转到主进程的监管者，交回随 host call 的回复返回。捕获轮次不在父 agent 上登记异步作业，因为 `soroi_eval` 这次调用本身就在等它；取消走 `soroi_eval` 的 AbortSignal，中止子 agent 当前这一轮。子 agent 照常登记进 `AgentRegistry`，受内置生命周期管理。捕获记录里存 `agentId` 和 transcript 文件，GUI 经 `history://` 查看 | 落实 C-5 的技术面：以 omp-soroi-subagent 替换 runSubprocess（`argon/rulings-C.md:135`），也落实 D2-05 的进程内 API。agent 的身份与状态仍只由主进程的 `AgentRegistry` 持有。代价：每次 `Agent` 调用都起一个 omp 进程，比进程内 subagent 重 | 实现 / 串联 | 否（已定意图的落地） |
-| D5-04 | 唯一交回工具 `soroi_return` 的统一契约 | subagent 包导出的 `contract.ts`；`#launch` 里的 `set_host_tools`；sidecar `<id>.soroi.json` | 工具名只有一个，schema 按委派种类生成，`ReturnContract = report \| capture`。<br>• `report`（`soroi_task` 的委派）：`{ result: string }`。<br>• `capture`：按节点的返回形状生成。单个输出是 `{ value }`，多个输出是扁平字段；`File` 字段收文件路径字符串。<br>交回值的类型是 `Returned`，文件写成 `{ kind: "file", path, placement }`。subagent 只收下路径；取回、算内容身份、送进 store 的对象由中间件做（`eval.md:94`）。契约是启动参数：spawn 时写进 sidecar，复活时按 sidecar 重新 `set_host_tools`，所以复活后 schema 不变 | 落实 C-5 要求的 typed 结果与 `File` 路径捕获（`argon/bootstrap.md:96`），以及 D2-05“按节点返回类型生成 schema”。契约在 agent 的一生里不变，属于启动配方，不另设状态源。代价：同一个 agent 不能在两种委派之间切换 schema（主路径不需要） | 技术 | 设计补充 |
+| D5-04 | 唯一交回工具 `soroi_return` 的统一契约 | `packages/omp-soroi/src/contract.ts`；`#launch` 里的 `set_host_tools`；sidecar `<id>.soroi.json` | 工具名只有一个，schema 按委派种类生成，`ReturnContract = report \| capture`。<br>• `report`（`soroi_task` 的委派）：`{ result: string }`。<br>• `capture`：按节点的返回形状生成。单个输出是 `{ value }`，多个输出是扁平字段；`File` 字段收文件路径字符串。<br>交回值的类型是 `Returned`，文件写成 `{ kind: "file", path, placement }`。subagent 只收下路径；取回、算内容身份、送进 store 的对象由中间件做（`eval.md:94`）。契约是启动参数：spawn 时写进 sidecar，复活时按 sidecar 重新 `set_host_tools`，所以复活后 schema 不变 | 落实 C-5 要求的 typed 结果与 `File` 路径捕获（`argon/bootstrap.md:96`），以及 D2-05“按节点返回类型生成 schema”。契约在 agent 的一生里不变，属于启动配方，不另设状态源。代价：同一个 agent 不能在两种委派之间切换 schema（主路径不需要） | 技术 | 设计补充 |
 | D5-05 | 删除“最后一条回复兜底”；保留 IRC 唤醒回执 | `supervisor.ts:309-328` 的 `#settleTurn` | 作业轮次和捕获轮次只在 `soroi_return` 被调用时交回。一轮结束而没有交回，就没有结果，不发 `lastAssistantText`。别的 agent 用 IRC 唤醒它的那一轮，结束时把输出回给唤醒者：这对标内置的唤醒监视器，属于 IRC 语义，不是结果通道，保留。同步改 README:21 和工具说明 `main/index.ts:9` | C-5【定】否决兜底（`argon/rulings-C.md:132-133`）。保留唤醒回执，是为了满足“生命周期和irc全方位对标omp内置subagent”（`inv/s-subagent.md:90-91`，U `#f488be08`） | 意图（落地为实现） | 否 |
 | D5-06 | 嵌套边界：谁能写 eval，谁能派出 subagent | 两插件的角色判定（`SOROI_ROLE`，D4-16）；启动配方里的 `writesEval` | (1) **写 eval：** `soroi_eval` 和未消费提醒只在 `writesEval` 为真的会话里注册。`Main` 为真；`soroi_task` 派出的 `report` worker，在派出方为真时为真；`capture`（`Agent` 体）和它派出的一切都为假。`writesEval` 由监管者在 spawn 时计算，写进启动配方。<br>(2) **派出 soroi subagent：** `Main` 和 `LocalChild` 注册 `soroi_task`。去掉 `MAIN_AGENT_ID` 检查；`LocalChild` 里的调用经 host call `{ op: "spawn" }` 转到主进程的监管者，父 id 是这个子 agent。`RemoteChild` 不注册 `soroi_task`，只能用自己进程里的内置 task。<br>(3) **远程启动：** 只有一条路，即写 eval 的中心 agent 调用 env 为远程的 `Agent` 节点（D4-16） | 正好落在用户的两条禁令上（`argon/rulings-C.md:117-120`）：任何 `Agent` 体之下都没有 eval，所以 eval 不会嵌套；远程 agent 没有工具能再开 soroi subagent。同时撤销没有用户依据的一刀切（`inv/s-subagent.md:175`）。用结构保证，不做运行时计数 | 意图 + 技术 | 否 |
 | D5-07 | 并发写步由 soroi 派出的中心 worker 承担，不用 fork | `soroi_task`；技能 `soroi-eval` | 两种并发：<br>• **一步之内：** 平铺写多条互不依赖的调用，引擎自然并发（`eval.md:136`，依据 U `#13abc2a1`）。<br>• **多个 agent 分头写步：** 主 agent 用 `soroi_task` 派出几个中心 worker（`LocalChild`，`report` 契约，`writesEval` 为真），每个 worker 在同一个运行里用 `soroi_eval` 写自己的一步。<br>这些 worker 写的步属于同一个运行：worker 的运行，是它所属根会话的运行。按 D6，步记下写它的会话 id | U24 要求 soroi 不含 fork。用户最早要“可以通过fork self开分身去处理”（`argon/rulings-C.md:121-122`），本意是让多个 agent 分头消费，这里换成 soroi 自己的机制，与 D2 的口径一致（`D2-components.md:32`）。代价：worker 不继承父 agent 的对话，父 agent 要在委派里写清这几路为什么开；这正是 D5-09 的“目的说明” | 技术 | 设计补充 |
@@ -96,10 +97,10 @@ U23 要求“完整 omp 定制”。D5-02 写这两个插件给发行包贡献�
 
 ### 3.1 eval 与 subagent 之间
 
-合并时是同一个包内的模块接口；分开时，类型由 subagent 包导出。
+两者在同一个包里，这是包内的模块接口。
 
 ```ts
-// contract.ts（subagent 侧导出）
+// packages/omp-soroi/src/contract.ts
 type AgentId = string & { readonly __brand: "AgentId" }
 type TemplateName = string & { readonly __brand: "TemplateName" } // remote 模板目录里的名字
 type Role = "Main" | "LocalChild" | "RemoteChild"                  // SOROI_ROLE，D4-16
@@ -170,6 +171,7 @@ type Turn =
   | { readonly kind: "job"; readonly resolve: (text: string) => void }               // report
   | { readonly kind: "capture"; readonly resolve: (h: CaptureHandback) => void }      // capture
   | { readonly kind: "relay"; readonly to: AgentId; readonly replyTo: string }        // IRC 唤醒回执
+  | { readonly kind: "human"; readonly principal: string }                           // 人经 Mux 发来的 IRC 开启的一轮（D3）：不发布结果，不对 human:* 做 ensureLive
 ```
 
 `soroi_task` 的参数：
@@ -328,15 +330,15 @@ sequenceDiagram
 
 | 编号 | 占位 | 假定 | 归属 |
 | --- | --- | --- | --- |
-| P1 | eval 取得 `Subagents` 服务 | 合并时直接 import；分开时 eval 在会话开始时经 `pi.events` 拿到 subagent 插件发布的服务对象 | 本表 D5-01 |
-| P2 | `LocalChild` 的 host call 承载 spawn 与 capture 交回 | 现有 `soroi-host` 机制能承载 `spawn`、`spawn_capture`、`abort_turn`、`batch_of` 这几种 host call，以及它们的长时回复 | subagent 插件 |
+| P1 | 合并后的单个入口在主进程和每个子进程各加载一次 | 子进程经安装和 `-e` 两条路拿到同一个入口时，只生效一次 | `packages/omp-soroi` |
+| P2 | `LocalChild` 的 host call 承载 spawn 与 capture 交回 | 现有 `soroi-host` 机制能承载 `spawn`、`spawn_capture`、`abort_turn`、`batch_of` 这几种 host call，以及它们的长时回复 | `packages/omp-soroi` |
 | P3 | 复活时按 sidecar 里的契约重新 `set_host_tools` | RPC 允许在启动时注册带任意 JSON schema 的 host tool | omp RPC（`subagent.md:74`） |
 | P4 | 远程启动 subagent，并连回主侧 | `launchRemote(spec, template)` 返回一个和本机一样能驱动的 RPC 会话 | D4-05/08/09/11/12、D3 |
 | P5 | 远程文件拷入拷出 | 交回路径随 copy-out 进 store，中间件能按 `{ path, placement }` 绑定 | D4、D6-07 |
 | P6 | remote 的模板目录 | 检查器能按名字查到模板 | D4 |
-| P7 | eval 的控制端点挂在 Mux 上 | Lab 后端能读到槽位，并把 `answer`、`takeover` 送回持有这次运行的进程 | D2-08、D3 |
+| P7 | eval 的控制端点 `WS /endpoints/eval:<根会话>` 挂在 Mux 上 | Lab 后端能读到槽位，并把 `answer`、`takeover` 送回持有这次运行的进程 | D2-08、D3-12 |
 | P8 | store 服务的运行流 | eval 插件能订阅它拥有的运行的提交 | D6-09 |
-| P9 | 唤醒空闲会话 | 插件能向空闲会话投递一条带人类来源的 IRC，开启新的一轮 | 本仓库 + omp IRC |
+| P9 | 唤醒空闲会话 | 插件能向空闲会话投递一条带人类来源的 IRC，开启新的一轮 | `packages/omp-soroi` + omp IRC |
 | P10 | 代码以原始文本输入 | 沿用 `eval.md:186` 的占位 | 不变 |
 | P11 | 发行包带技能、规则和默认设置 | 安装后这些随包生效（agent 目录已有依据，`inv/o-placement.md:34-40`） | D2-25 |
 
@@ -344,7 +346,7 @@ sequenceDiagram
 
 | 文档与位置 | 改动 | 依据行 |
 | --- | --- | --- |
-| `eval.md:3` | 插件名随 D5-01 的裁决；交回工具的定义与执行位置 | D5-01、D5-04 |
+| `eval.md:3` | 插件改为 `Pepgent/soroi` 的 `packages/omp-soroi`；同一个插件提供 eval、交回工具、未消费提醒和 subagent | D5-01、D5-04 |
 | `eval.md:5` 与流程图 | “或者 `fork` 出分身”改成“或者经 `soroi_task` 派出中心 worker” | D5-07、D5-19 |
 | `eval.md`“节点函数”（`:66-79`） | `human` 显式写出 `A`；`A` 限定为 `Atomic` 或扁平对象；`template` 是 omp agent 定义名；“调用时可以换用另一个”指向 `soroi_eval.env` | D5-10、D5-14、D5-17 |
 | `eval.md`“捕获的三种来源”（`:83-87`） | `Agent` 行：soroi subagent、capture 契约、文件交回为路径。`Human` 行：主动调用与槽位接管 | D5-03、D5-04、D5-14、D5-15 |
@@ -353,8 +355,8 @@ sequenceDiagram
 | `eval.md`“存储”（`:164-168`） | “主 agent 和它 `fork` 出的分身”改为“主 agent 和它经 `soroi_task` 派出的中心 worker”；加“eval 不能嵌套” | D5-06、D5-19 |
 | `eval.md`“接口”与“占位”（`:170-186`） | subagent 行改为 `Subagents` 接口；store 行改为 store 服务；“执行前的检查”“未消费提醒的注入方式”两条占位改写成正文；新增 P7–P9 | D5-03、D5-11、D5-13 |
 | `subagent.md:20-21` | 交回工具按契约生成 schema；不发最后一条回复，IRC 唤醒回执保留；“中心主机上的主 agent 和它 fork 出的分身”改为“写 eval 的中心 agent” | D5-04、D5-05、D5-06 |
-| `subagent.md:26-37`“实现” | sidecar 含角色、放置、契约、`writesEval` 和批次；轮次增加 `capture`；`soroi_task` 增加 `purpose` | D5-04、D5-06、D5-12 |
+| `subagent.md:26-37`“实现” | 实现位置改为 `Pepgent/soroi` 的 `packages/omp-soroi`；本机子进程由插件以 `omp-rpc-mux dial … -- omp --mode rpc` 启动，监管者经 Mux 写方驱动（D3）；sidecar 含角色、放置、契约、`writesEval` 和批次；轮次增加 `capture` 和 `human`；`soroi_task` 增加 `purpose` | D5-01、D5-04、D5-06、D5-12 |
 | `subagent.md:47-52`“未覆盖” | 删去“中心分身再开 soroi subagent 还没有做”；改写为角色闸门 | D5-06 |
-| `soroi.md:13-14` | 宿主插件两行随 D5-01 的裁决合并或保留 | D5-01 |
+| `soroi.md:13-14` | 宿主插件两行合为一行：`packages/omp-soroi` 提供 eval、交回工具、未消费提醒和 subagent | D5-01 |
 | `intervention.md:11-17` | “改值”的中止与 `Human` 捕获，指向 eval 的槽位接管与控制端点；交回形状是 capture 契约 | D5-14、D5-15 |
 | `argon/rulings-C.md` C-4（argon 改） | “中心 `fork` 分身”改为“写 eval 的中心 agent”（U24） | D5-06、D5-07 |
