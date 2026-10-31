@@ -1,9 +1,9 @@
 # Soroi & Pepgent 全流程清单（Flow Catalog — D8 E2E 验收依据）
 
-> **目的与合规声明（依 U20 / D1-16、U23 / R54–R57）：**
+> **目的与合规声明（依 U20 / D1-16、U23 / R54–R57、U24）：**
 > 1. 本文档响应 **U23**（“对于soroi的最小功能合集，一定是一个完整的omp定制，并且能走通我说的所有流程，并且能作为pepgent的agent核心，并且最后能在这个基础上知道pepgent和soroi之间缺失的点，线，面”），汇总用户在历史会话中说过的全部流程（共 **32 条，F01–F32**），作为 D8 端到端（e2e）验收依据。
-> 2. 只写用户说过的流程，不凭空发明。每条流程包含：**编号与标题**、**定案状态（`【定】` 或 `【暂定】`）**、**一句话的用户可观察结果**、**从触发到结束的步骤（主路径）**、**涉及的组件**、**依据的 `(U)` 原文（会话 id + entry，或 `LEDGER.md` 的 `U` 编号）**。
-> 3. 凡有直接 `(U)` 原话支撑的标为 **`【定】`**；凡总体业务目标有 `(U)` 支撑但具体子机制来自 AI4S 原型 `(D)` 或助手 `(A)` 展开而无用户逐字单列原话的，显式区分并标为 **`【暂定】`**。
+> 2. **依 U24（“不要混淆soroi和omomp，soroi并不是完全基于omomp的，他提出的fork在soroi根本不应该存在，soroi是独立的omp定制”）：** 本文档所有流程均基于 `soroi` 作为独立的 `omp` 定制（仅依赖 `omp` 本体公开扩展点），彻底剔除任何 `omomp` 机制（如 `fork` / `fork_task` 分身、`todo-more`、`omp-peers`、`tern`、`playbook` 等）。
+> 3. 只写用户说过的流程，不凭空发明。每条流程包含：**编号与标题**、**定案状态（`【定】` 或 `【暂定】`）**、**一句话的用户可观察结果**、**从触发到结束的步骤（主路径）**、**涉及的组件**、**依据的 `(U)` 原文（会话 id + entry，或 `LEDGER.md` 的 `U` 编号）**。
 
 ---
 
@@ -11,7 +11,7 @@
 
 | 编号 | 所属分组 | 流程名称 | 状态 |
 | --- | --- | --- | --- |
-| **F01** | 1. 完整定制与逐步 `eval` | 完整 omp 定制加载与 `soroi_eval` 根 atom 定义及 `stop` 结束运行 | **【定】** |
+| **F01** | 1. 完整定制与逐步 `eval` | 完整独立 soroi omp 定制加载与 `soroi_eval` 根 atom 定义及 `stop` 结束运行 | **【定】** |
 | **F02** | 1. 完整定制与逐步 `eval` | 未消费 atom 系统提醒推动 AI 逐步写出程序（被动消费流） | **【定】** |
 | **F03** | 1. 完整定制与逐步 `eval` | 单步三语句、扁平 atom、禁 loop/map/object/array/魔法值/重名与多输出对象解构 | **【定】（强制穷尽解构子项为【暂定】）** |
 | **F04** | 2. 两阶段运行 | `dry run` 真实试跑与外部钉住（Pin）昂贵调用且零 Store 写入 | **【定】（`pins` 参数格式为【暂定】）** |
@@ -32,7 +32,7 @@
 | **F19** | 6. Subagent 与 IRC | 独立 RPC Subagent 进程启动、父子/兄弟/广播 IRC 往返与忙时 Steer / 排队 | **【定】** |
 | **F20** | 6. Subagent 与 IRC | Subagent 空闲超时停驻（Park）、唤醒死 Session、Kill（Tombstone）与复活 | **【定】** |
 | **F21** | 6. Subagent 与 IRC | 主进程重启（`--resume`）后找回并唤醒历史 Subagent，以及不唤醒地只读查看 Transcript | **【定】** |
-| **F22** | 7. 并发 `fork` 批次 | 主 Agent `fork` 分身并发跑多路算法（含调用 `Agent` 节点）、同批全齐提醒与汇总 | **【定】（同批屏障与转交目的说明为【暂定】）** |
+| **F22** | 7. 单步多路并发 | 一步 `eval` 内平铺多条调用并发执行多路算法/验证实例、来源提醒与下一步汇总比较 | **【定】** |
 | **F23** | 8. 人类介入 | 人类在 GUI 改值：中止在途捕获 → `Human` 捕获产出新 Atom → 通知 AI 并触发下游消费 | **【定】** |
 | **F24** | 8. 人类介入 | 人类在 GUI 修改正在运行的节点函数体或参数：派生新的正式运行并按身份复用上游 | **【定】** |
 | **F25** | 8. 人类介入 | 人类在 GUI 经 IRC 接管 Subagent（带来源标记、排队与人类编辑） | **【定】（撤回未投递消息重发细则为【暂定】）** |
@@ -46,19 +46,20 @@
 
 ---
 
-## 一、完整 omp 定制安装与 AI 逐步 `eval` 消费循环（F01–F03）
+## 一、完整独立 omp 定制安装与 AI 逐步 `eval` 消费循环（F01–F03）
 
-### F01：完整 omp 定制加载与 `soroi_eval` 根 atom 定义及 `stop` 结束运行【定】
-- **一句话的用户可观察结果：** 在不修改 omp 宿主源码的前提下加载完整 soroi omp 定制（插件、扩展、设置、agent 定义、技能、规则），主 agent 调用 `soroi_eval` 正式运行一步定义根 atom 并调用 `stop`，store 创建运行记录、写入 atom 与停止记录，所有末端 atom 停止后运行标记为 `run_end`。
+### F01：完整独立 soroi omp 定制加载与 `soroi_eval` 根 atom 定义及 `stop` 结束运行【定】
+- **一句话的用户可观察结果：** 在不修改 omp 宿主源码且不依赖 `omomp` 的前提下加载完整独立的 soroi omp 定制（插件、扩展、设置、agent 定义、技能、规则），主 agent 调用 `soroi_eval` 正式运行一步定义根 atom 并调用 `stop`，store 创建运行记录、写入 atom 与停止记录，所有末端 atom 停止后运行标记为 `run_end`。
 - **从触发到结束的步骤（主路径）：**
-  1. 启动加载了完整 soroi 定制包（含 `omp-soroi-eval` 与 `omp-soroi-subagent`）的中心主机 `omp` 会话。
+  1. 启动加载了完整独立 soroi 定制包（含 `omp-soroi-eval` 与 `omp-soroi-subagent`）的中心主机 `omp` 会话。
   2. 主 agent 调用 `soroi_eval`（`mode: "formal"`），提交包含 `const temp_2200c = 2200` 与 `stop(temp_2200c)` 的代码步。
   3. 宿主执行前检查器校验语法与类型通过，引擎计算字面量内容哈希作为值身份。
   4. 中心主机将本次运行（`run`）、步（`step`）、值（`val`）、名字（`name`）、停止（`stop`）及事件（`run_start`、`step_formal`、`stop`、`run_end`）一次提交写入中心 store。
   5. `soroi_eval` 向主 agent 返回该步正式运行成功及运行已结束的结果。
-- **涉及的组件：** `omp` 宿主、soroi omp 定制包、`omp-soroi-eval`、`store`（DuckLake）。
+- **涉及的组件：** `omp` 宿主、独立 soroi omp 定制包、`omp-soroi-eval`、`store`（DuckLake）。
 - **依据的 `(U)` 原文：**
   - **(U) LEDGER.md U23**：“对于soroi的最小功能合集，一定是一个完整的omp定制，并且能走通我说的所有流程，并且能作为pepgent的agent核心，并且最后能在这个基础上知道pepgent和soroi之间缺失的点，线，面”
+  - **(U) LEDGER.md U24**：“我需要你转交给argon，不要混淆soroi和omomp，soroi并不是完全基于omomp的，他提出的fork在soroi根本不应该存在，soroi是独立的omp定制”
   - **(U) LEDGER.md U13**：“但是对于核心的ai harness，不能偏离以omp为核心，不修改omp的宿主代码”
   - **(U)** `session://01a18dd4-e638-75ad-a5f3-f0537daf3896/entry/46e29915`（2026-10-31 02:50:10）：“那么，我们能不能指定一种规则，atom必须被消费，也就是pure类型必须再一次被消费，而这个消费只有两种可能，一种是捕获，一种是停止。而为什么会有捕获，是因为，运行了一段程序”
   - **(U)** `session://01a18ed5-5798-704f-aa9f-c28be4023631/entry/276d1776`（2026-10-31 07:33:14）：“如果考虑语法检查，实际上还有一个限制，是禁止任何魔法值，永远只有atom，就比如说，我现在跑到一半，我要临时补一个2200度的回火模拟，那这2200直接传进去吗”
@@ -73,7 +74,6 @@
 - **涉及的组件：** `omp` 宿主、`omp-soroi-eval`（`soroi_eval` 工具 + 未消费提醒 hook）、`store`。
 - **依据的 `(U)` 原文：**
   - **(U)** `session://01a18ed5-5798-704f-aa9f-c28be4023631/entry/4986c617`（2026-10-31 07:08:25）：“但是为什么我一开始想要eval，的核心，是模型可以不要一下子把所有东西全写了，而是一点一点写出来，所以有atom提醒，他完全可以一次只写一个值的消费”
-  - **(U)** `session://01a18dd4-e638-75ad-a5f3-f0537daf3896/entry/2c08aa6d`（2026-10-31 02:56:20）：“未消费的atom会触发系统警告，并且可以通过fork self开分身去处理”
   - **(U)** `session://01a18dd4-e638-75ad-a5f3-f0537daf3896/entry/d01f7a32`（2026-10-31 02:51:49）：“所以，atom被捕获后又产生新的atom……atom要么被永久消费下去，要么停止”
 
 ### F03：单步三语句与类型约束校验（多输出对象解构、平铺并发、禁 loop/map/object/array/魔法值/重名）【定（强制穷尽解构子项为【暂定】）】
@@ -146,8 +146,8 @@
 - **一句话的用户可观察结果：** 正式运行调用 `agent(...)` 构造的节点函数时，通过 `omp-soroi-subagent` 启动独立的 `omp --mode rpc` 子进程（带主 agent 对标定制，且子进程内禁用 `soroi_eval`），子 agent 必须调用宿主侧唯一交回工具 `soroi_return` 提交结构化结果与产物文件路径（未调用则报错，不走 `yield` 或最后回复文本 fallback），中间件取回文件入对象存储并在捕获记录中关联子 agent 的 omp transcript `session id`。
 - **从触发到结束的步骤（主路径）：**
   1. 在 `nodes/<name>.ts` 中用 `agent((...xs) => prompt, { template, env })` 定义 `Agent` 节点函数。
-  2. 主 agent（或中心 `fork` 分身）在 `soroi_eval` 中调用该 `Agent` 节点函数。
-  3. 中间件通过 `omp-soroi-subagent` 启动独立 `omp --mode rpc` 进程，加载指定 agent 模板与同主侧对标的定制，并通过 `set_host_tools` 注册匹配该节点返回类型的宿主工具 `soroi_return`。
+  2. 中心主机的主 agent 在 `soroi_eval` 中调用该 `Agent` 节点函数。
+  3. 中间件通过 `omp-soroi-subagent` 启动独立 `omp --mode rpc` 进程，加载指定 agent 模板与同主侧对标的 soroi 定制，并通过 `set_host_tools` 注册匹配该节点返回类型的宿主工具 `soroi_return`。
   4. 子 agent 执行任务、生成产物文件，调用 `soroi_return` 传入返回标量与产物文件路径。
   5. `soroi_return` 在宿主侧执行，收到路径后由中间件读取/取回文件存入 `store` 对象存储；若子 agent 未调用 `soroi_return` 即结束回合，该次调用判定为失败。
   6. 正式运行时，中心 `store` 写入体种类为 `Agent` 的捕获记录（含子 agent 的 omp transcript `session id`），对话历史本身留在 omp transcript 中不重复复制到 store。
@@ -274,10 +274,10 @@
   - **(U) LEDGER.md U4**：“对于slurm和komodo的测试，如果可以，我推荐你在homelab tf里启动vm创建小型测试环境。”
 
 ### F16：远程运行 `Agent` 节点：对标主 agent 定制、经中心化 RPC Mux 连回、单层远程限制与本机 Parquet 批次落盘写回【定】
-- **一句话的用户可观察结果：** 正式运行带远程环境模板的 `Agent` 节点时，远端容器启动带主 agent 同等定制的 `omp --mode rpc` 进程，通过独立网络层的中心化 omp RPC 多路复用器连回主侧（远端 `Agent` 禁止运行 `soroi_eval` 且禁止再开远程 `Agent`）；运行期间数据写在本机独立 Parquet 批次目录，调用 `soroi_return` 结束后随 volume 拷回，由中心一次提交汇入中心 DuckLake 副本。
+- **一句话的用户可观察结果：** 正式运行带远程环境模板的 `Agent` 节点时，远端容器启动带主 agent 同等 soroi 定制的 `omp --mode rpc` 进程，通过独立网络层的中心化 omp RPC 多路复用器连回主侧（远端 `Agent` 禁止运行 `soroi_eval` 且禁止再开远程 `Agent`）；运行期间数据写在本机独立 Parquet 批次目录，调用 `soroi_return` 结束后随 volume 拷回，由中心一次提交汇入中心 DuckLake 副本。
 - **从触发到结束的步骤（主路径）：**
   1. 中心主机 `soroi_eval`（`formal`）调用声明了远程 `env` 模板的 `Agent` 节点函数。
-  2. 中间件与 `omp-soroi-subagent` 通过服务发现与 `remote run` 在目标环境启动预置了对标 omp 定制（插件、扩展、设置、agent 定义、技能、规则）的容器，注入 `REMOTE_MUX` 地址与输入文件。
+  2. 中间件与 `omp-soroi-subagent` 通过服务发现与 `remote run` 在目标环境启动预置了对标 soroi omp 定制（插件、扩展、设置、agent 定义、技能、规则）的容器，注入 `REMOTE_MUX` 地址与输入文件。
   3. 远端容器内的 `omp --mode rpc` 进程经独立网络层的中心化 omp RPC 多路复用器（Mux）与中心主侧建立连接，登记进主侧 `AgentRegistry`；远端进程内禁用 `soroi_eval` 且禁止再启动远程 `Agent`。
   4. 远端 `Agent` 运行期间，其本地记录以“先写临时文件再改名”的 Parquet 批次文件写入临时 volume 内的本地批次目录。
   5. 远端 `Agent` 调用宿主工具 `soroi_return` 交回结果与产物路径后退出；`remote` 的 `copy-out` 步骤将整个临时 volume（含产物文件、本地 Parquet 批次目录与 transcript/blob）打包拷回中心。
@@ -320,7 +320,7 @@
 ### F19：独立 RPC Subagent 进程启动、父子/兄弟/广播 IRC 往返与忙时 Steer / 排队【定】
 - **一句话的用户可观察结果：** 通过 `omp-soroi-subagent` 启动的每个 subagent 都是独立 `omp --mode rpc` 进程，登记进主进程 `AgentRegistry`；父子、子父、兄弟间可通过 `write agent://<id>` 与 `agent://all` 发送带来源的 IRC 消息并用 `wait` 等待回复；收件方忙时父消息作为 steer 注入当前轮、同辈消息排队到步边界。
 - **从触发到结束的步骤（主路径）：**
-  1. 主 agent 调用 `soroi_task`（或在 `soroi_eval` 中调用 `Agent` 节点）启动子 agent `Alpha` 与 `Beta`，各自拉起独立 `omp --mode rpc` 进程。
+  1. 主 agent 调用 `soroi_task`（或在 `soroi_eval` 中并发调用多个 `Agent` 节点）启动子 agent `Alpha` 与 `Beta`，各自拉起独立 `omp --mode rpc` 进程。
   2. `Alpha` 通过 `write agent://Beta` 发送 IRC 消息并调用 `wait`；请求经 `soroi-host://` RPC 回调主进程 `InternalUrlRouter` 投递给 `Beta`，`Beta` 回复后唤醒 `Alpha` 的 `wait`。
   3. 当 `Alpha` 正在执行长任务（`running`）时，主 agent 向 `Alpha` 发送 IRC 消息，该消息带 `fromParent` 标记作为 steer 立即并入 `Alpha` 当前回合；兄弟发来的消息则进入队列。
   4. 主 agent 或子 agent 向 `agent://all` 发送广播，所有存活的 agent 均收到该广播消息。
@@ -356,22 +356,24 @@
 
 ---
 
-## 七、并发 `fork` 批次与下游汇总（F22）
+## 七、单步多路平铺并发与下游汇总比较（F22）
 
-### F22：主 Agent `fork` 分身并发跑多路算法（含调用 `Agent` 节点）、同批全齐提醒与汇总【定（同批屏障与转交目的说明为【暂定】）】
-- **一句话的用户可观察结果：** 主 agent 通过 `fork` 派生多个中心分身，各自写一步 `soroi_eval` 消费同一批输入 atom 并调用不同算法/参数的节点函数（包括调用 `Agent` 节点函数启动 soroi subagent），产出各自唯一命名的 atom；全部正式运行完后，这批输出连同来源调用（如 `svm_score ← run_svm(p1, p2)`）一起出现在汇总 agent 的未消费提醒中，由汇总 agent 写一步 `soroi_eval` 完成比较与汇总。
+### F22：一步 `eval` 内平铺多条调用并发执行多路算法/多验证实例、来源提醒与下一步汇总比较【定】
+- **一句话的用户可观察结果：** 当需要对多个输入参数并发跑五种不同算法（各有不同参数子集）或对同一目标并发跑五个验证实例时，中心主 agent 在一步 `soroi_eval` 内平铺写出多条无数据依赖的调用语句，并为每路结果起不重名、有语义的 atom 名（如 `svm_score`、`rf_score`，禁止 `loop`/`map`/`object`/`array`、禁止传递注释、无 `fork` 分身）；求值引擎自然并发执行各路调用（`Program` 或 `Agent` subagent），整步全部完成后一次提交进 `store`，所有产出连同来源签名（如 `svm_score ← run_svm(p1, p2)`）一起出现在未消费提醒中，主 agent 在下一步 `soroi_eval` 中将它们一并传入比较/汇总函数消费。
 - **从触发到结束的步骤（主路径）：**
-  1. 中心 store 中存在未消费输入 atom（如 `p1`、`p2`）。
-  2. 主 agent `fork` 出多个中心分身（如 5 个分身验证 5 种不同算法），每个分身在中心主机上先 `dry run` 再 `formal` 调用 `soroi_eval` 写自己那一路的一步（其中分身可调用 `Program` 节点，也可调用 `Agent` 节点启动 soroi subagent）。
-  3. 各分身产出的 atom 使用互不相同的语义名字（如 `svm_score`、`rf_score` 等），中心 store 记录各步所属的并发批次（`batch`）。
-  4. （`【暂定】`：在同一批所有分身均完成正式运行前，先跑完的分身产出不单独进入下游提醒；全部正式运行完成后）所有产出的 atom 连同各自来源调用 `name ← fn(args...)`（及转交其他分身汇总时附带的批次目的说明）一起注入汇总方（默认发起这批并发的父 agent）的未消费提醒。
-  5. 汇总 agent 在 `soroi_eval`（`formal`）中写一步消费这批 atom，产出最终比较/汇总结果并 `stop` 掉中间项。
-- **涉及的组件：** `omp`（`fork_task`）、`omp-soroi-eval`（`batch.ts`、未消费提醒、`soroi_eval`）、`omp-soroi-subagent`、`store`。
+  1. 中心 `store` 中存在未消费输入 atom（如 `p1..p5`）。
+  2. 中心主 agent 在同一步 `soroi_eval`（先 `dry_run` 再 `formal`）中平铺写出 5 条无相互依赖的调用语句（如 `const svm_score = run_svm(p1, p2)`、`const rf_score = run_rf(p1, p3, p4)` 等；或 5 次不同参数/种子的验证调用），每条语句的左值赋予全局唯一、自带语义的变量名。
+  3. 求值器（`execute.ts`）识别这 5 条语句互不依赖，同时并发启动 5 个节点调用（可为本地/远程 `Program` 或 `omp-soroi-subagent` 进程）。
+  4. 待该步内全部 5 条并发调用执行完毕后，中心主机在一个事务中将整步及 5 个新 atom 一次提交写入 `store`（先跑完的单路不会提前单独进入 store 或提醒）。
+  5. 下一轮请求模型前，未消费提醒列出全部 5 个新 atom 的名字、值预览与产出调用来源（如 `svm_score ← run_svm(p1, p2)`）。
+  6. 主 agent 在下一步 `soroi_eval`（`formal`）中写 `const best = compare_scores(svm_score, rf_score, ...)`，将 5 个结果汇总消费。
+- **涉及的组件：** `omp-soroi-eval`（AST 检查器 `check.ts`、并发求值器 `execute.ts`、未消费提醒）、`omp-soroi-subagent`、`store`。
 - **依据的 `(U)` 原文：**
-  - **(U)** `session://01a18dd4-e638-75ad-a5f3-f0537daf3896/entry/2c08aa6d`（2026-10-31 02:56:20）：“未消费的atom会触发系统警告，并且可以通过fork self开分身去处理”
+  - **(U) LEDGER.md U24**：“我需要你转交给argon，不要混淆soroi和omomp，soroi并不是完全基于omomp的，他提出的fork在soroi根本不应该存在，soroi是独立的omp定制”
   - **(U)** `session://01a18e8a-ba9d-76af-acd2-8e12765ec3e4/entry/4da22ab4`（2026-10-31 06:43:16）：“因为要拿到多个实例很正常，我并发开五个验证同一个东西，然后我要比较这五个，这怎么写？”
   - **(U)** `session://01a18ed5-5798-704f-aa9f-c28be4023631/entry/ea638181`（2026-10-31 07:22:25）：“接下来还有更复杂的问题，假设，我输入五个参数，中间并发五个不同的步骤，他们的核心意义是，使用了五种不同的算法，去处理这些东西，而其中这五种算法各自需要的参数都不一样，最后产生了五个同名结果，如何指代谁是谁？下游如何看见这些值知道我要干什么”
-  - *注：同批全齐才提醒及附批次目的说明转交汇总出自 `(A) 01a18ed5 #766ebed5`（经 `(U) 01a18e8a #e0de24df` 概括吸收），标为 `【暂定】`。*
+  - **(U)** `session://01a18ed5-5798-704f-aa9f-c28be4023631/entry/b7357c72`（2026-10-31 07:24:59）：“我觉得与其引入步骤名，不如一开始产生的结构就不能同名，这也反应到loop”
+  - **(U)** `session://01a18ed5-5798-704f-aa9f-c28be4023631/entry/13abc2a1`（2026-10-31 07:30:31）：“想了想不对，应该是，不允许写loop也不允许写map，也不允许定义object和array，否则处理一个语义上有意义的名字，要么是很麻烦的在函数里拼名字，要么是要传递注释，前者要求小垃圾模型意识的到这件事，后者是一个灾难性的工程问题”
 
 ---
 
@@ -492,12 +494,12 @@
 - **一句话的用户可观察结果：** `pepgent/pepgent` 的 AI4S Lab 前端通过真实后端接口（替换纯内存静态 `LAB_SNAPSHOT`）将 `soroi` 作为其 agent 核心调用：用户在讨论页装载历史数据集产物、与 AI 讨论并发起实验，Pepgent 后端驱动中心 `omp`（含 `soroi_eval`、`omp-soroi-subagent`、`store`、`intervention`）与独立 `remote` 执行本地/远程节点，前端实时渲染运行 DAG、容器状态与产物，支持中途人类介入，并在结束后归档产物、触发复盘。
 - **从触发到结束的步骤（主路径）：**
   1. 用户在 `pepgent/pepgent` 的讨论页（`Discussions`）选择历史实验产物（来自 `store` 的 `Datasets`）装载进当前讨论上下文，向讨论 AI 发送研究目标。
-  2. 从讨论或实验页发起一次新实验运行：Pepgent Lab 后端调用加载了完整 soroi 定制的 `omp` 会话作为其 agent 核心。
+  2. 从讨论或实验页发起一次新实验运行：Pepgent Lab 后端调用加载了完整独立 soroi 定制的 `omp` 会话作为其 agent 核心。
   3. 中心 AI 通过 `soroi_eval` 先 `dry run` 验证步骤，再 `formal` 正式运行，调用节点库中的 `Program` 节点与 `Agent` 节点（本地或经 `remote` 在 Komodo/Slurm 上执行）。
   4. 实验运行期间，Pepgent 前端实验详情页（`Experiment Flow`）与算力页（`Sandbox Clusters`）通过后端订阅 `store`、中心化 RPC Mux 与 `remote status/tail`，实时展示 DAG 节点进展、subagent 对话流、容器 stdout 尾部与写入中产物。
   5. 用户在实验详情页执行一次人类介入（F23 改值或 F24 改参数/函数体派生新运行，或 F25 经 IRC 接管 subagent），系统生成新 atom 或派生正式运行并继续推进至所有末端 atom `stop`（`run_end`）。
   6. 运行结束后，全部拷回的产物与来源链路出现在 `Datasets` 页，Runner Workspace 可浏览（F18），且 `run_end` 事件触发自动化规则将复盘草稿写回原讨论（F30）。
-- **涉及的组件：** `pepgent/pepgent`（AI4S Lab 前端 + 新增真实 Lab 后端服务）、`omp` 宿主 + 完整 soroi 定制（`omp-soroi-eval`、`omp-soroi-subagent`、`store`、`intervention`）、独立网络层中心化 omp RPC Mux、`Pepgent/remote`（Komodo / Slurm）。
+- **涉及的组件：** `pepgent/pepgent`（AI4S Lab 前端 + 新增真实 Lab 后端服务）、`omp` 宿主 + 完整独立 soroi 定制（`omp-soroi-eval`、`omp-soroi-subagent`、`store`、`intervention`）、独立网络层中心化 omp RPC Mux、`Pepgent/remote`（Komodo / Slurm）。
 - **依据的 `(U)` 原文：**
   - **(U) LEDGER.md U23**：“对于soroi的最小功能合集，一定是一个完整的omp定制，并且能走通我说的所有流程，并且能作为pepgent的agent核心，并且最后能在这个基础上知道pepgent和soroi之间缺失的点，线，面”
   - **(U) LEDGER.md U1**（`01a193fd #57d9d58b`）：“对于soroi的的业务，在pepgent/pepgent目录，并且已有agent在制作纯前端，目前soroi的设计对于完整的pepgent是不够的，另外，soroi本身相当于只是omp的扩展组件，离真正的pepgent还很远”
@@ -505,9 +507,9 @@
   - **(U)** `session://01a18e1f-5cf2-7281-bf9a-03d102b315ba/entry/e818d410`、`#e3692177`（2026-10-31 03:54–04:03）：AI4S 原型即业务层。
 
 ### F32：基于真实运行识别并交付 Pepgent 与 soroi 之间缺失的“点、线、面”差距报告（D9 验收流）【定】
-- **一句话的用户可观察结果：** 在完成完整 soroi omp 定制、走通 F01–F31 并把 soroi 作为 Pepgent 的 agent 核心真实跑起来之后，基于真实运行证据与 `pepgent/pepgent` 的 17 个页面（`LabSnapshot` 18 个顶层领域字段）逐一比对，产出一份明确列出 Pepgent 与 soroi 之间缺失的“点、线、面”的完整分析报告。
+- **一句话的用户可观察结果：** 在完成完整独立 soroi omp 定制、走通 F01–F31 并把 soroi 作为 Pepgent 的 agent 核心真实跑起来之后，基于真实运行证据与 `pepgent/pepgent` 的 17 个页面（`LabSnapshot` 18 个顶层领域字段）逐一比对，产出一份明确列出 Pepgent 与 soroi 之间缺失的“点、线、面”的完整分析报告。
 - **从触发到结束的步骤（主路径）：**
-  1. 完成 soroi 最小功能合集（完整 omp 定制）的安装部署，并作为 Pepgent 的 agent 核心跑通 F01–F31 的真实 e2e 路径。
+  1. 完成 soroi 最小功能合集（完整独立 omp 定制）的安装部署，并作为 Pepgent 的 agent 核心跑通 F01–F31 的真实 e2e 路径。
   2. 对照 `pepgent/pepgent` 前端 `LabSnapshot` 的 18 个顶层领域契约（`labs`、`account`、`members`、`projects`、`experiments`、`aiModels`、`home`、`experimentsPage`、`experimentFlows`、`flowEditor`、`nodeLibrary`、`automation`、`datasets`、`discussions`、`clusters`、`connectCluster`、`containers`、`settings`）与真实运行观测记录：
      - **缺失的“点”：** 识别单个数据结构字段、节点元数据属性、工具参数、算子或状态枚举上的缺口；
      - **缺失的“线”：** 识别跨组件调用链路（如前端动作 → Lab 后端 → soroi / remote / RPC Mux → Store 订阅回推 → 自动化触发）中尚未闭环的数据流、事件流与控制流；

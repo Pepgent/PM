@@ -69,14 +69,14 @@
 | **D4-05** | 串联 | 缺 | **反对** | **反例见第三节 R-1：** `inputs` 固定走 `/objects/{hash}`、`output` 走 `PUT /volumes/{run}/{step}/{call}` 在 `dry_run` 及步提交前失效，且与 D6-07 的 `/transfers/{t}` 暂存区契约不一致。按 R-1 修改后改投赞成。 |
 | **D4-06** | 实现 | 缺 | **赞成** | 标量按位置原样传、`File` 映射为容器卷内可读路径 `{ kind: "file", path: "<mount>/in/<hash>" }`，节点函数无需感知执行位置，满足 `layers.md:12` 与 `(U)` `01a18e3a #09e1cc92`。 |
 | **D4-07** | 串联 | 缺 | **赞成** | 拷出整个 volume 到 store 暂存区、中间件执行 `toOutputs`、正式运行随步提交入库而 `dry run` 返回即删暂存区并 `remote remove`，完整落实 `(U)` `01a18e3a #09e1cc92` 与 `01a18e1f #7ffcea0c`。 |
-| **D4-08** | 技术 | 补 | **反对** | **反例见第三节 R-2：** `agent` 分支调用 `pepgent-mux dial --batch-dir soroi-batch` 与 D3-04 / D3-13 的 `dial --root ${REMOTE_MOUNT}` 参数契约不一致，会导致 `dial` 参数失败且读方无法经 Mux 读取远程文件。按 R-2 修改后改投赞成。 |
+| **D4-08** | 技术 | 补 | **反对** | **反例见第三节 R-2：** `agent` 分支调用 `pepgent-mux dial --batch-dir soroi-batch` 与 D3-04 / D3-13 的 `dial --root ${REMOTE_MOUNT} --expose soroi-batch [--expose work]` 参数契约不一致，会导致 `dial` 参数失败且读方无法经 Mux 读取远程文件。按 R-2 修改后改投赞成。 |
 | **D4-09** | 意图 + 技术 | 缺 | **赞成** | **【意图确认 · 定】** 见第一节裁决 1；每次启动随 copy-in 拷入中心安装的同一份 `Pepgent/soroi` 定制 tar 解到 `HOME=<mount>/soroi/home`，满足 `(U)` `01a18e1f #9c291fe2`、`01a18f4a #f488be08`、U23、U24。 |
 | **D4-10** | 技术 | 补 | **赞成** | 长期凭据由模板部署拥有方注入，不入定制 tar 与 `RunRequest.env`（避免落入 `runs/<run>.json`），符合凭据规则与 `subagent.md:128`（注：单次启动环境参数同步包含 D3-04 的 `MUX_GENERATION`）。 |
 | **D4-11** | 串联 | 缺 | **赞成** | 远程与本机 subagent 均经 `pepgent-mux dial` 连入中心 Mux，原样转发 omp RPC JSONL，满足 `(U)` `01a18e3a #09e1cc92`、`01a18e1f #9c291fe2` 与 leader 裁决 D（连接路径参数按条文声明以 D3 为准）。 |
 | **D4-12** | 串联 | 缺 | **赞成** | 明确区分 `AgentRegistry` 的四态身份权威与 `remote` 的单次作业生命周期权威，停驻即结束远程作业并拷回释放资源，唤醒死 session 时再开新 generation 与新作业，符合 `(U)` `01a18e1f #678fe41a, #9c291fe2`。 |
 | **D4-13** | 技术 | 缺 | **赞成** | 明确远程 `Agent` 的 transcript 与 blob“唤醒时打成 `agent.tar` 拷入 → 运行中以 `<mount>/soroi/agent/` 为唯一写权威 → 拷出后写回中心 `<主 session>/`”，闭环解决冷复活与 `history://` 读取（`(U)` `01a18e1f #678fe41a, #8e0a7e8f`）。 |
 | **D4-14** | 串联 | 缺 | **赞成** | 交回工具作为唯一结果通道在中心收下 `{ 字段, 路径 }`，随后停驻远程进程、等 volume 拷出到达暂存区后解析 `work/` 下文件完成捕获，落实 `(U)` `01a18dd4 #49e6867a` 与 C-5。 |
-| **D4-15** | 技术 | 补 | **反对** | **反例见第三节 R-3：** 条文写“`pepgent-mux dial --batch-dir` 监视这个目录，经多路复用器推送给读方（D3）”，与 D3-13 及 D6-P5 已定稿的“不推送 Parquet 字节，由 `dial --root ${REMOTE_MOUNT}` 响应 `mux_list_files` / `mux_read_file` 拉取”直接冲突。按 R-3 修改后改投赞成。 |
+| **D4-15** | 技术 | 补 | **反对** | **反例见第三节 R-3：** 条文写“`pepgent-mux dial --batch-dir` 监视这个目录，经多路复用器推送给读方（D3）”，与 D3-13 及 D6-P5 已定稿的“不推送 Parquet 字节，由 `dial --root ${REMOTE_MOUNT} --expose soroi-batch` 响应 `mux_list_files` / `mux_read_file` 拉取”直接冲突。按 R-3 修改后改投赞成。 |
 | **D4-16** | 意图 + 技术 | — | **赞成** | **【意图确认 · 定】** 见第一节裁决 2；由 `SOROI_ROLE` 与 `writesEval` 从结构上保证单层远程与 `eval` 仅中心运行、禁止递归嵌套（`(U)` `01a18e1f #5a37a640, #3dbd0473`、U24）。 |
 | **D4-17** | 技术 | 缺 | **赞成** | 以 `Pepgent/remote` 的模板目录作为唯一服务发现权威，不另建第二份机器清单，满足 `(U)` `01a18e1f #9c291fe2` 与 D2-11、D3-14。 |
 | **D4-18** | 技术 | 补 | **赞成** | `生效 env = 覆盖 ?? 默认 ?? central` 纳入捕获身份，并在捕获记录中保存模板名与 `remoteRun` 来源，满足 `eval.md:79`、`store.md:16,31` 与 `layers.md:22`。 |
@@ -105,17 +105,17 @@
 ### R-2：针对 `D4-08`（及关联的 4.7）的反对票
 1. **失效场景与证据（具体反例）：**
    - **场景：** 远程 `Agent` 启动时，`boot.js` 执行 `D4-08` 规定的 `pepgent-mux dial --batch-dir soroi-batch -- omp --mode rpc --session …`。
-   - **失效原因：** 在 `D3-network-mux.md`（D3-04、D3-13，第 58、67、143–144 行）中，`pepgent-mux dial` 的命令行契约是 `[--mux $REMOTE_MUX] [--agent $SOROI_SUBAGENT_ID] [--generation $MUX_GENERATION] [--token $MUX_TOKEN] [--root $REMOTE_MOUNT] -- omp --mode rpc …`，并不存在 `--batch-dir` 参数；且若不传 `--root ${REMOTE_MOUNT}`，读方按 D3-13 调用 `GET /agents/{id}/files?dir=soroi-batch`（或按 `layers.md:23` 读取 `<mount>/work/` 下仍在写入的产物文件）将被 `dial` 拒绝。
+   - **失效原因：** 在 `D3-network-mux.md`（D3-04、D3-13，第 58、67 行）中，`pepgent-mux dial` 的命令行契约是 `--root ${REMOTE_MOUNT} --expose soroi-batch [--expose work] -- omp --mode rpc …`（配合 `--mux`、`--agent`、`--generation`、`--token`），并不存在 `--batch-dir` 参数；且若不传 `--root ${REMOTE_MOUNT} --expose soroi-batch --expose work`，读方按 D3-13 调用 `GET /agents/{id}/files?dir=soroi-batch`（或按 `layers.md:23` 读取 `<mount>/work/` 下仍在写入的产物文件）将被 `dial` 拒绝。
 2. **能赢得赞成的修改：**
-   - 将 `D4-08` 中 `agent` 分支的命令改为：`exec pepgent-mux dial --root ${REMOTE_MOUNT} -- omp --mode rpc --session …`（环境变量包含 D3-04 规定的 `SOROI_SUBAGENT_ID`、`SOROI_SUBAGENT_PARENT`、`MUX_GENERATION`、`MUX_TOKEN` 及 remote 注入的 `REMOTE_MUX`、`REMOTE_RUN`、`REMOTE_MOUNT`），去掉 `--batch-dir soroi-batch`。
+   - 将 `D4-08` 中 `agent` 分支的命令改为：`exec pepgent-mux dial --root ${REMOTE_MOUNT} --expose soroi-batch --expose work -- omp --mode rpc --session …`（环境变量包含 D3-04 规定的 `SOROI_SUBAGENT_ID`、`SOROI_SUBAGENT_PARENT`、`MUX_GENERATION`、`MUX_TOKEN` 及 remote 注入的 `REMOTE_MUX`、`REMOTE_RUN`、`REMOTE_MOUNT`），去掉 `--batch-dir soroi-batch`。
 
 ### R-3：针对 `D4-15`（及关联的 4.7、5.2 第 232 行）的反对票
 1. **失效场景与证据（具体反例）：**
    - **场景：** 远程 `Agent` 运行过程中，中心读方（Lab 后端 / GUI）读取远程运行中的进度与批次。
-   - **失效原因：** `D4-15` 写“`pepgent-mux dial --batch-dir` 监视这个目录，经多路复用器推送给读方（D3）”，4.7 写“`--batch-dir` 推送 `mux_batch` 帧”。但 **D3-13**（`D3-network-mux.md:67`）与 **D6-P5**（`D6-store-service.md:229`）已明确否决由 `dial` 主动推送 `mux_batch` 二进制帧，改为：读方收到 RPC 事件后，调用 Mux 的 `GET /agents/{id}/files?dir=soroi-batch` 与 `GET /agents/{id}/files/{path}`，由 Mux 转成 `mux_list_files` 和 `mux_read_file` 从 `dial --root ${REMOTE_MOUNT}` 拉取已改名的 Parquet 批次文件。两边帧协议不一致会导致运行中批次进度不可见。
+   - **失效原因：** `D4-15` 写“`pepgent-mux dial --batch-dir` 监视这个目录，经多路复用器推送给读方（D3）”，4.7 写“`--batch-dir` 推送 `mux_batch` 帧”。但 **D3-13**（`D3-network-mux.md:67`）与 **D6-P5**（`D6-store-service.md:229`）已明确否决由 `dial` 主动推送 `mux_batch` 二进制帧，改为：读方收到 RPC 事件后，调用 Mux 的 `GET /agents/{id}/files?dir=soroi-batch` 与 `GET /agents/{id}/files/{path}`，由 Mux 转成 `mux_list_files` 和 `mux_read_file` 从 `dial --root ${REMOTE_MOUNT} --expose soroi-batch --expose work` 拉取已改名的 Parquet 批次文件。两边帧协议不一致会导致运行中批次进度不可见。
 2. **能赢得赞成的修改：**
    - 保留 `D4-15` 中远程角色在 `<mount>/soroi-batch/` 先写临时名再改名写出 Parquet 批次、正式运行在步提交同一事务内 `INSERT … SELECT * FROM read_parquet(…)` 汇入、`dry run` 不汇入的设计；
-   - 将运行中读方的可见机制改为对齐 D3-13 与 D6-P5：由 `pepgent-mux dial --root ${REMOTE_MOUNT}` 开放挂载目录只读访问，读方根据 RPC 事件经 Mux 的 `GET /agents/{id}/files?dir=soroi-batch` 与 `GET /agents/{id}/files/{path}`（`mux_list_files` / `mux_read_file`）拉取已改名的 Parquet 批次（同步删去 4.7 的“`--batch-dir` 推送 `mux_batch` 帧”并更新 5.2 第 232 行说明）。
+   - 将运行中读方的可见机制改为对齐 D3-13 与 D6-P5：由 `pepgent-mux dial --root ${REMOTE_MOUNT} --expose soroi-batch --expose work` 开放白名单目录只读访问（`soroi-batch` 只列已完成改名的文件），读方根据 RPC 事件经 Mux 的 `GET /agents/{id}/files?dir=soroi-batch` 与 `GET /agents/{id}/files/{path}`（`mux_list_files` / `mux_read_file`）拉取已改名的 Parquet 批次（同步删去 4.7 的“`--batch-dir` 推送 `mux_batch` 帧”并更新 5.2 第 232 行说明）。
 
 ---
 
