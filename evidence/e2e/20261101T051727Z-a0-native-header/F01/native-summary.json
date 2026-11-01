@@ -1,0 +1,707 @@
+[
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 1,
+    "type": "session",
+    "id": "01a1958a-c879-72d2-89a0-5944e41c77df",
+    "parentSession": "/tmp/soroi-a0/proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "cwd": "/tmp/soroi-a0/work"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 2,
+    "type": "model_change",
+    "model": "opencode-go/deepseek-v4.1-flash",
+    "runtime": {
+      "version": "18.14.2"
+    }
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 3,
+    "type": "thinking_level_change"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 4,
+    "type": "custom",
+    "customType": "soroi-install-check",
+    "observation": {
+      "role": "LocalChild",
+      "agentId": "InstallCheckWorker",
+      "sessionId": "01a1958a-c879-72d2-89a0-5944e41c77df",
+      "model": {
+        "provider": "opencode-go",
+        "id": "deepseek-v4.1-flash"
+      },
+      "settings": {
+        "personality": "none",
+        "approval": "yolo",
+        "idleTtlMs": 2000
+      }
+    }
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 5,
+    "type": "message",
+    "role": "user",
+    "content": [
+      {
+        "type": "text",
+        "text": "Read-only installation check; no source edits or formal eval.\n\n# Assignment\n\nRead-only installation check. Do not edit files or call soroi_eval. Call soroi_return once with result install-check-complete, then end your turn."
+      }
+    ]
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 6,
+    "type": "custom",
+    "customType": "system-prompt-digest"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 7,
+    "type": "message",
+    "role": "assistant",
+    "toolCalls": [
+      {
+        "id": "call_00_0btmbvvbdpl4p6iefz67fq7q",
+        "name": "read",
+        "arguments": {
+          "path": ".",
+          "i": "Listing working directory"
+        }
+      },
+      {
+        "id": "call_01_gnptas3tefxxws0cb7c64hbd",
+        "name": "bash",
+        "arguments": {
+          "command": "pwd; ls -la; ls -la .. 2>/dev/null | head -40",
+          "i": "Inspecting workspace layout"
+        }
+      }
+    ]
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 8,
+    "type": "custom",
+    "customType": "tool_execution_start"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 9,
+    "type": "custom",
+    "customType": "tool_execution_start"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 10,
+    "type": "message",
+    "role": "toolResult",
+    "toolName": "read",
+    "toolCallId": "call_00_0btmbvvbdpl4p6iefz67fq7q",
+    "isError": false
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 11,
+    "type": "message",
+    "role": "toolResult",
+    "toolName": "bash",
+    "toolCallId": "call_01_gnptas3tefxxws0cb7c64hbd",
+    "isError": false
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 12,
+    "type": "message",
+    "role": "assistant",
+    "toolCalls": [
+      {
+        "id": "call_00_eqsgcjr4kqinoh053mj565b3",
+        "name": "read",
+        "arguments": {
+          "i": "Reading input config",
+          "path": "../input.json"
+        }
+      },
+      {
+        "id": "call_01_kl3r3fs41712qcdashlejkql",
+        "name": "read",
+        "arguments": {
+          "i": "Reading build manifest",
+          "path": "../build.json"
+        }
+      },
+      {
+        "id": "call_02_wzurcfp6zzg2qefiouch8yru",
+        "name": "read",
+        "arguments": {
+          "i": "Reading node source",
+          "path": "nodes/install_check_double.ts"
+        }
+      },
+      {
+        "id": "call_03_2eic0sgiuduv2qbb4n74etae",
+        "name": "read",
+        "arguments": {
+          "i": "Reading bootstrap script",
+          "path": "../a0-bootstrap.ts"
+        }
+      }
+    ]
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 13,
+    "type": "custom",
+    "customType": "tool_execution_start"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 14,
+    "type": "custom",
+    "customType": "tool_execution_start"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 15,
+    "type": "custom",
+    "customType": "tool_execution_start"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 16,
+    "type": "custom",
+    "customType": "tool_execution_start"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 17,
+    "type": "message",
+    "role": "toolResult",
+    "toolName": "read",
+    "toolCallId": "call_00_eqsgcjr4kqinoh053mj565b3",
+    "isError": false
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 18,
+    "type": "message",
+    "role": "toolResult",
+    "toolName": "read",
+    "toolCallId": "call_01_kl3r3fs41712qcdashlejkql",
+    "isError": false
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 19,
+    "type": "message",
+    "role": "toolResult",
+    "toolName": "read",
+    "toolCallId": "call_02_wzurcfp6zzg2qefiouch8yru",
+    "isError": false
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 20,
+    "type": "message",
+    "role": "toolResult",
+    "toolName": "read",
+    "toolCallId": "call_03_2eic0sgiuduv2qbb4n74etae",
+    "isError": false
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 21,
+    "type": "message",
+    "role": "assistant",
+    "toolCalls": [
+      {
+        "id": "call_00_8hbxc0kk1hyg77lm6d1bs6lu",
+        "name": "bash",
+        "arguments": {
+          "command": "ls -la ../proof ../release | head -60; echo ---; ls -la /home/agent/.local/bin /home/agent/.omp/agent 2>&1 | head -40; echo ---; ls -la node_modules/omp-soroi",
+          "i": "Checking installed artifacts"
+        }
+      },
+      {
+        "id": "call_01_vc0g4lvwtui8u5snamoujltv",
+        "name": "bash",
+        "arguments": {
+          "command": "head -c 400 ../input.json; echo; echo ---; ls ../proof/sessions 2>/dev/null | head",
+          "i": "Reading run config head"
+        }
+      }
+    ]
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 22,
+    "type": "custom",
+    "customType": "tool_execution_start"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 23,
+    "type": "custom",
+    "customType": "tool_execution_start"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 24,
+    "type": "message",
+    "role": "toolResult",
+    "toolName": "bash",
+    "toolCallId": "call_00_8hbxc0kk1hyg77lm6d1bs6lu",
+    "isError": false
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 25,
+    "type": "message",
+    "role": "toolResult",
+    "toolName": "bash",
+    "toolCallId": "call_01_vc0g4lvwtui8u5snamoujltv",
+    "isError": false
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 26,
+    "type": "message",
+    "role": "assistant",
+    "toolCalls": [
+      {
+        "id": "call_00_3ihj3srajw6i38n92w4dntwd",
+        "name": "bash",
+        "arguments": {
+          "command": "cat ../proof/prepared.json; echo ---; cat ../release/manifest.json; echo ---; cat ../proof/check.yml; echo ---; ls -la ../release/install-check",
+          "i": "Reading proof and manifest"
+        }
+      },
+      {
+        "id": "call_01_54hsuefzu31r9t8qjs89m8k9",
+        "name": "bash",
+        "arguments": {
+          "command": "HOME=/home/agent /home/agent/.local/bin/soroi --version 2>&1; echo \"exit=$?\"; echo ---; head -20 /home/agent/.local/bin/soroi",
+          "i": "Checking soroi launcher version"
+        }
+      }
+    ]
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 27,
+    "type": "custom",
+    "customType": "tool_execution_start"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 28,
+    "type": "custom",
+    "customType": "tool_execution_start"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 29,
+    "type": "message",
+    "role": "toolResult",
+    "toolName": "bash",
+    "toolCallId": "call_00_3ihj3srajw6i38n92w4dntwd",
+    "isError": false
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 30,
+    "type": "message",
+    "role": "toolResult",
+    "toolName": "bash",
+    "toolCallId": "call_01_54hsuefzu31r9t8qjs89m8k9",
+    "isError": false
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 31,
+    "type": "message",
+    "role": "assistant",
+    "toolCalls": [
+      {
+        "id": "call_00_h17wxk8dkgd3rj0c1z6rwtev",
+        "name": "bash",
+        "arguments": {
+          "command": "sed -n '1,120p' ../release/install-check/verify.js",
+          "i": "Reading verifier head"
+        }
+      },
+      {
+        "id": "call_01_o35yx8rwayy9evfp4r28vng8",
+        "name": "bash",
+        "arguments": {
+          "command": "sed -n '1,80p' ../release/install-check/prepare.js; echo ===; sed -n '1,40p' ../release/install-check/observe.ts",
+          "i": "Reading prepare and observer"
+        }
+      }
+    ]
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 32,
+    "type": "custom",
+    "customType": "tool_execution_start"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 33,
+    "type": "custom",
+    "customType": "tool_execution_start"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 34,
+    "type": "message",
+    "role": "toolResult",
+    "toolName": "bash",
+    "toolCallId": "call_00_h17wxk8dkgd3rj0c1z6rwtev",
+    "isError": false
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 35,
+    "type": "message",
+    "role": "toolResult",
+    "toolName": "bash",
+    "toolCallId": "call_01_o35yx8rwayy9evfp4r28vng8",
+    "isError": false
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 36,
+    "type": "message",
+    "role": "assistant",
+    "toolCalls": [
+      {
+        "id": "call_00_fmgceri3l5fh59t0jfgt5zri",
+        "name": "bash",
+        "arguments": {
+          "command": "HOME=/home/agent /home/agent/.local/bin/soroi plugin list --json 2>&1 | head -30; echo \"exit=$?\"; echo ---; ls -la /home/agent/.omp/soroi/e31244635631196c2599f675bb6e8e55105d816b11c20b46ca09f00919f12ea2/packages/omp-soroi | head",
+          "i": "Verifying plugin registration"
+        }
+      }
+    ]
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 37,
+    "type": "custom",
+    "customType": "tool_execution_start"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 38,
+    "type": "message",
+    "role": "toolResult",
+    "toolName": "bash",
+    "toolCallId": "call_00_fmgceri3l5fh59t0jfgt5zri",
+    "isError": false
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 39,
+    "type": "message",
+    "role": "assistant",
+    "toolCalls": [
+      {
+        "id": "call_00_zts22pwr9wscfrsb6t98svr0",
+        "name": "soroi_return",
+        "arguments": {
+          "i": "Returning install check result",
+          "result": "install-check-complete"
+        }
+      }
+    ]
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 40,
+    "type": "custom",
+    "customType": "tool_execution_start"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 41,
+    "type": "message",
+    "role": "toolResult",
+    "toolName": "soroi_return",
+    "toolCallId": "call_00_zts22pwr9wscfrsb6t98svr0",
+    "isError": false,
+    "details": {},
+    "content": [
+      {
+        "type": "text",
+        "text": "Result delivered to Main. End your turn now."
+      }
+    ]
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 42,
+    "type": "message",
+    "role": "assistant",
+    "toolCalls": []
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f/InstallCheckWorker.jsonl",
+    "line": 43,
+    "type": "custom",
+    "customType": "session_exit"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 1,
+    "type": "title"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 2,
+    "type": "session",
+    "id": "01a1958a-a89c-76cb-8944-e4fe4c5e2a1f",
+    "parentSession": null,
+    "cwd": "/tmp/soroi-a0/work"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 3,
+    "type": "model_change",
+    "model": "opencode-go/deepseek-v4.1-flash",
+    "runtime": {
+      "version": "18.14.2"
+    }
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 4,
+    "type": "thinking_level_change"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 5,
+    "type": "custom",
+    "customType": "soroi-install-check",
+    "observation": {
+      "role": "Main",
+      "agentId": "Main",
+      "sessionId": "01a1958a-a89c-76cb-8944-e4fe4c5e2a1f",
+      "model": {
+        "provider": "opencode-go",
+        "id": "deepseek-v4.1-flash"
+      },
+      "settings": {
+        "personality": "pragmatic",
+        "approval": "yolo",
+        "idleTtlMs": 2000
+      }
+    }
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 6,
+    "type": "message",
+    "role": "user",
+    "content": [
+      {
+        "type": "text",
+        "text": "This is a bounded installation check, not a source-editing task. Read skill://soroi-eval first. Then call soroi_eval exactly with {\"mode\":\"dry_run\",\"code\":\"const install_input = 21\\nconst install_output = install_check_double(install_input)\\nstop(install_output)\"}. Do not use formal mode, pins or env. Next call soroi_task with {\"context\":\"Read-only installation check; no source edits or formal eval.\",\"tasks\":[{\"name\":\"InstallCheckWorker\",\"agent\":\"soroi-worker\",\"task\":\"Read-only installation check. Do not edit files or call soroi_eval. Call soroi_return once with result install-check-complete, then end your turn.\"}]}. Wait for the actual worker handback before reporting the real tool results. Do not edit files."
+      }
+    ]
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 7,
+    "type": "custom",
+    "customType": "system-prompt-digest"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 8,
+    "type": "message",
+    "role": "assistant",
+    "toolCalls": [
+      {
+        "id": "call_14fdaa9f310f40c6a3b7914b",
+        "name": "read",
+        "arguments": {
+          "i": "Reading soroi-eval skill",
+          "path": "skill://soroi-eval"
+        }
+      }
+    ]
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 9,
+    "type": "custom",
+    "customType": "tool_execution_start"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 10,
+    "type": "message",
+    "role": "toolResult",
+    "toolName": "read",
+    "toolCallId": "call_14fdaa9f310f40c6a3b7914b",
+    "isError": false
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 11,
+    "type": "message",
+    "role": "assistant",
+    "toolCalls": [
+      {
+        "id": "call_24b8e6a5f470412da6918c1f",
+        "name": "soroi_eval",
+        "arguments": {
+          "mode": "dry_run",
+          "code": "const install_input = 21\nconst install_output = install_check_double(install_input)\nstop(install_output)",
+          "i": "Dry-running installation check step"
+        }
+      }
+    ]
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 12,
+    "type": "custom",
+    "customType": "tool_execution_start"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 13,
+    "type": "message",
+    "role": "toolResult",
+    "toolName": "soroi_eval",
+    "toolCallId": "call_24b8e6a5f470412da6918c1f",
+    "isError": false,
+    "details": {
+      "mode": "dry_run",
+      "calls": [
+        {
+          "call": "const install_output = install_check_double(install_input)",
+          "outcome": "ran",
+          "env": "central",
+          "outputs": {
+            "install_output": "42"
+          }
+        }
+      ]
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "dry run，没有写 store：\ninstall_input = 21\ninstall_output = 42 ← install_check_double(install_input) [运行] @central\nstop(install_output)"
+      }
+    ]
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 14,
+    "type": "message",
+    "role": "assistant",
+    "toolCalls": [
+      {
+        "id": "call_34810d3bd9694e7ab10fe2f0",
+        "name": "soroi_task",
+        "arguments": {
+          "i": "Spawning worker for installation check",
+          "context": "Read-only installation check; no source edits or formal eval.",
+          "tasks": [
+            {
+              "name": "InstallCheckWorker",
+              "agent": "soroi-worker",
+              "task": "Read-only installation check. Do not edit files or call soroi_eval. Call soroi_return once with result install-check-complete, then end your turn."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 15,
+    "type": "custom",
+    "customType": "tool_execution_start"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 16,
+    "type": "title_change"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 17,
+    "type": "message",
+    "role": "toolResult",
+    "toolName": "soroi_task",
+    "toolCallId": "call_34810d3bd9694e7ab10fe2f0",
+    "isError": false,
+    "details": {
+      "agents": [
+        {
+          "id": "InstallCheckWorker",
+          "pid": 214
+        }
+      ]
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "Spawned 1 soroi subagent; results arrive automatically.\n- `InstallCheckWorker` (pid 214)"
+      }
+    ]
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 18,
+    "type": "message",
+    "role": "assistant",
+    "toolCalls": [
+      {
+        "id": "call_f0e55e7eeeda429796ae8e9d",
+        "name": "wait",
+        "arguments": {
+          "i": "Waiting for worker handback"
+        }
+      }
+    ]
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 19,
+    "type": "custom",
+    "customType": "tool_execution_start"
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 20,
+    "type": "message",
+    "role": "toolResult",
+    "toolName": "wait",
+    "toolCallId": "call_f0e55e7eeeda429796ae8e9d",
+    "isError": false
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 21,
+    "type": "message",
+    "role": "assistant",
+    "toolCalls": []
+  },
+  {
+    "file": "proof/sessions/2026-11-01T05-17-34-748Z_01a1958a-a89c-76cb-8944-e4fe4c5e2a1f.jsonl",
+    "line": 22,
+    "type": "custom",
+    "customType": "session_exit"
+  }
+]

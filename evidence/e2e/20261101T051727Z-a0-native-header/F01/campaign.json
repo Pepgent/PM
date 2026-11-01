@@ -1,0 +1,87 @@
+{
+  "evidenceDir": "/tmp/soroi-full-a0-r3-ct7etnon/evidence",
+  "image": "pepgent-registry.orb.local:5000/pepgent/omp-agent:latest",
+  "network": "pepgent-soroi-e2e",
+  "releaseTar": "/Users/mouriya/Ext/work/orbstack/pepgent-soroi-e2e/releases/soroi-b2ad3470e334eed4b89b6b51d25426e333fcaaf0de1e739fb42be647767fd4c8.tar",
+  "build": {
+    "commits": {
+      "soroi": "c05de99fc98fbb9155da01cb585064323b8bfb4c",
+      "e2e-driver": "cf4a47face2a0f5d94e55bf9b6ae02830bdb9c15"
+    },
+    "release": "b2ad3470e334eed4b89b6b51d25426e333fcaaf0de1e739fb42be647767fd4c8",
+    "images": {
+      "omp-agent": "sha256:3e9e97d1dad3fefa6173474c3b48472e7d89edcd5fd7197be72187c1feb7c5ab",
+      "store": "sha256:43d075bbdd507e733164d8c08e04fad826761a8744292f7dbe3b40fcd5ec78ed",
+      "mux": "sha256:6a88295275988f2b96f74c34761903ff16023ff1caabecbb0453556336b26fcc"
+    },
+    "omp": "18.14.2",
+    "model": "opencode-go/deepseek-v4.1-flash"
+  },
+  "modelsFile": "/Users/mouriya/Ext/work/orbstack/pepgent-gateway/a0/models.yml",
+  "settingsFile": "/Users/mouriya/Ext/work/orbstack/pepgent-gateway/a0/config.yml",
+  "gatewayTokenFile": "/Users/mouriya/Ext/work/orbstack/pepgent-gateway/a0/token",
+  "env": {
+    "SOROI_STORE_URL": "http://pepgent-soroi-e2e-store.orb.local:3001",
+    "SOROI_MUX_URL": "ws://pepgent-soroi-e2e-mux.orb.local:8080"
+  },
+  "installer": [
+    "bun",
+    "/tmp/soroi-a0/release/install.ts",
+    "--home",
+    "/home/agent"
+  ],
+  "prepare": [
+    "bun",
+    "/tmp/soroi-a0/release/install-check/prepare.js",
+    "--home",
+    "/home/agent",
+    "--proof",
+    "/tmp/soroi-a0/proof",
+    "--work",
+    "/tmp/soroi-a0/work"
+  ],
+  "verifier": [
+    "bun",
+    "/tmp/soroi-a0/release/install-check/verify.js",
+    "--home",
+    "/home/agent",
+    "--proof",
+    "/tmp/soroi-a0/proof",
+    "--build",
+    "/tmp/soroi-a0/build.json"
+  ],
+  "ompArgs": [
+    "--model",
+    "opencode-go/deepseek-v4.1-flash",
+    "--no-context-files",
+    "--no-lsp",
+    "--max-time",
+    "180",
+    "--cwd",
+    "/tmp/soroi-a0/work",
+    "--config",
+    "/tmp/soroi-a0/proof/check.yml",
+    "--",
+    "This is a bounded installation check, not a source-editing task. Read skill://soroi-eval first. Then call soroi_eval exactly with {\"mode\":\"dry_run\",\"code\":\"const install_input = 21\\nconst install_output = install_check_double(install_input)\\nstop(install_output)\"}. Do not use formal mode, pins or env. Next call soroi_task with {\"context\":\"Read-only installation check; no source edits or formal eval.\",\"tasks\":[{\"name\":\"InstallCheckWorker\",\"agent\":\"soroi-worker\",\"task\":\"Read-only installation check. Do not edit files or call soroi_eval. Call soroi_return once with result install-check-complete, then end your turn.\"}]}. Wait for the actual worker handback before reporting the real tool results. Do not edit files."
+  ],
+  "steps": [
+    {
+      "kind": "expect",
+      "pattern": "soroi-install-check:turn-end"
+    },
+    {
+      "kind": "send",
+      "text": "/exit"
+    },
+    {
+      "kind": "expect",
+      "pattern": "/exit"
+    },
+    {
+      "kind": "send",
+      "text": "\r"
+    }
+  ],
+  "timeoutMs": 240000,
+  "ledgerFile": "/Users/mouriya/Ext/work/orbstack/pepgent-e2e-pty.jsonl"
+}

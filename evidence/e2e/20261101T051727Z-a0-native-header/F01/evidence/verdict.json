@@ -1,0 +1,127 @@
+{
+  "flow": "F01",
+  "segment": "A0",
+  "env": "L",
+  "startedAt": "2026-11-01T05:17:33.439Z",
+  "endedAt": "2026-11-01T05:18:05.406Z",
+  "build": {
+    "commits": {
+      "soroi": "c05de99fc98fbb9155da01cb585064323b8bfb4c",
+      "e2e-driver": "cf4a47face2a0f5d94e55bf9b6ae02830bdb9c15"
+    },
+    "images": {
+      "omp-agent": "sha256:3e9e97d1dad3fefa6173474c3b48472e7d89edcd5fd7197be72187c1feb7c5ab",
+      "store": "sha256:43d075bbdd507e733164d8c08e04fad826761a8744292f7dbe3b40fcd5ec78ed",
+      "mux": "sha256:6a88295275988f2b96f74c34761903ff16023ff1caabecbb0453556336b26fcc"
+    },
+    "release": "b2ad3470e334eed4b89b6b51d25426e333fcaaf0de1e739fb42be647767fd4c8",
+    "omp": "18.14.2",
+    "model": "opencode-go/deepseek-v4.1-flash"
+  },
+  "runs": [],
+  "agents": [],
+  "remoteRuns": [],
+  "assertions": [
+    {
+      "id": "extension",
+      "claim": "Required native installation observations are available",
+      "source": {
+        "kind": "transcript",
+        "file": "proof/install-check-error.txt",
+        "lines": [
+          1,
+          3
+        ]
+      },
+      "expected": "\"complete native evidence\"",
+      "observed": "\"Error: Missing native session header\\n    at readTranscript (/tmp/soroi-a0/release/install-check/verify.js:318:20)\\n    at async main (/tmp/soroi-a0/release/install-check/verify.js:388:42)\"",
+      "pass": false
+    },
+    {
+      "id": "agent",
+      "claim": "Required native installation observations are available",
+      "source": {
+        "kind": "transcript",
+        "file": "proof/install-check-error.txt",
+        "lines": [
+          1,
+          3
+        ]
+      },
+      "expected": "\"complete native evidence\"",
+      "observed": "\"Error: Missing native session header\\n    at readTranscript (/tmp/soroi-a0/release/install-check/verify.js:318:20)\\n    at async main (/tmp/soroi-a0/release/install-check/verify.js:388:42)\"",
+      "pass": false
+    },
+    {
+      "id": "skill",
+      "claim": "Required native installation observations are available",
+      "source": {
+        "kind": "transcript",
+        "file": "proof/install-check-error.txt",
+        "lines": [
+          1,
+          3
+        ]
+      },
+      "expected": "\"complete native evidence\"",
+      "observed": "\"Error: Missing native session header\\n    at readTranscript (/tmp/soroi-a0/release/install-check/verify.js:318:20)\\n    at async main (/tmp/soroi-a0/release/install-check/verify.js:388:42)\"",
+      "pass": false
+    },
+    {
+      "id": "rule",
+      "claim": "Required native installation observations are available",
+      "source": {
+        "kind": "transcript",
+        "file": "proof/install-check-error.txt",
+        "lines": [
+          1,
+          3
+        ]
+      },
+      "expected": "\"complete native evidence\"",
+      "observed": "\"Error: Missing native session header\\n    at readTranscript (/tmp/soroi-a0/release/install-check/verify.js:318:20)\\n    at async main (/tmp/soroi-a0/release/install-check/verify.js:388:42)\"",
+      "pass": false
+    },
+    {
+      "id": "settings",
+      "claim": "Required native installation observations are available",
+      "source": {
+        "kind": "transcript",
+        "file": "proof/install-check-error.txt",
+        "lines": [
+          1,
+          3
+        ]
+      },
+      "expected": "\"complete native evidence\"",
+      "observed": "\"Error: Missing native session header\\n    at readTranscript (/tmp/soroi-a0/release/install-check/verify.js:318:20)\\n    at async main (/tmp/soroi-a0/release/install-check/verify.js:388:42)\"",
+      "pass": false
+    },
+    {
+      "id": "a0-driver-cleanup",
+      "claim": "Docker, PTY and temporary-input lifecycles ended",
+      "source": {
+        "kind": "transcript",
+        "file": "cleanup.json",
+        "lines": [
+          1,
+          1
+        ]
+      },
+      "expected": "[]",
+      "observed": "[]",
+      "pass": true
+    }
+  ],
+  "deviations": [],
+  "result": {
+    "kind": "fail",
+    "failed": [
+      "extension",
+      "agent",
+      "skill",
+      "rule",
+      "settings"
+    ]
+  }
+}
