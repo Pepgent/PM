@@ -122,3 +122,13 @@
 - A、B 都确认不越界的项，在 #26 写结论评论并引用正文原文，由 Pepgent 片区经理（`AreaMgrPepgent`）送达 W-10。
 - 任一闸门认定越界的项，合为一张 P0 议案（每行一个主案，备选写进取舍栏，`notify` 含 `AreaMgrPepgent`），由本实例用 `council propose --seat Coordination --as DeskPepgent26Questions` 立案。
 - 闸门结论写入 `PM/evidence/gates/pepgent26-web03-gate-a.md`（Argon）与 `PM/evidence/gates/pepgent26-web03-gate-b.md`（ArgonGovernance）。
+
+## 五、处置结果
+
+- **闸门结论：** 闸门 A 见 `pepgent26-web03-gate-a.md`（PM `003c75e`），闸门 B 见 `pepgent26-web03-gate-b.md`（PM `46bb432`）。
+- **两道闸门都判不越界，按正文作答，不立案：** Q1（K1）、Q2（K1：独立 `aborted` 状态，`NODE_TONE` 映射已有色调，图例不着色）、①（K3）、④（K3）、⑥（K1）、③ 的过渡做法（K1）。⑤ 的工人方案被两道闸门驳回，改按 D12-03/04 由客户端持有 `selectedLabId`（K1）。结论评论：[Pepgent#26 issuecomment-6562796849](https://github.com/Pepgent/Pepgent/issues/26#issuecomment-6562796849)。
+- **立案：** D35（[Pepgent/PM#54](https://github.com/Pepgent/PM/issues/54)，P0），由 `DeskPepgent26Questions` 以 Coordination 席发起。
+  - D35-01：Q3，`packages/ui/src/lab/time-axis.tsx` 与 `time-axis-model.ts` 划给 W-10，治理领域。
+  - D35-02：②，`experiments.definitions` 与计划条投影规则。
+  - D35-03：③，`experiment.versionedDefinitions`。
+- **送达：** 由 AreaMgrPepgent 把结论评论送达 W-10；D35 各行通过后，再送达 W-09（线协议与服务端）与 W-10。
