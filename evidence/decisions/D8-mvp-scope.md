@@ -332,6 +332,7 @@ type Verdict = {
 | LAB-11a | 讨论的读取与装载：停驻会话的 transcript 读取（P2）、`discussion.load`、附件（D7:67） | LAB-04、LAB-05 | F09、F31 | 读停驻会话不会唤醒它；`discussion.load` 写入 `discussion_context` | low |
 | LAB-11b | 草稿与启动：`draft.save`、`experiment.start`、`experiment.approve`；启动意图与审批状态记在 `pending_launch`，运行绑定记在 `experiment_ext.draft`，不往草稿写 `launched`（D7:66、161-162；D6:40） | LAB-04、LAB-06 | F27、F31 | 草稿只在 `lab.sqlite`，不进 store；免审批时 `pending_launch` 为 `sent`、会话收到含草稿的 prompt；`run_started` 后 `experiment_ext.draft` 指向该草稿，`pending_launch` 已删除 | low |
 | LAB-12 | 算力页的只读读取（D7-12、D7-18；D8-16）：`lab.page.read{lab, page:'clusters'}` 返回 `templates`、`jobs: {run: RemoteRunSummary; status: RunStatus}[]`、`presence`；日志尾部另由只读 SSE `GET /api/lab/jobs/{run}/tail` 提供（`remote tail` 快照，有订阅者时定期取）。有订阅者时定期调用 `remote runs`、`remote status`，变化经 `/api/lab/events` 的 `compute` 频道通知重读；作业最新事实为 `Removed` 时不开 tail 流（D7:72、78、145-146）。第一版无命令 | REM-05、REM-06、REM-07、REM-02、MUX-04 | F17、F31 | 一个运行中的远程作业出现在页面线数据里，带模板与状态；tail SSE 推送它的日志尾部；作业结束后 `compute` 通知触发重读、状态更新；排队中被取消的作业显示终态 `EndedUnstarted`（PM#4）；`remove` 之后不再开 tail 流 | low |
+| LAB-13 | [Pepgent#80](https://github.com/Pepgent/Pepgent/issues/80)，owner W-09；承载 `home`、`containers`、`settings` 三页完整读取与 P15 镜像定义导出，以及 `member.invite`、`member.role`、`member.quota`、`member.remove`、`conclusion.confirm`、`agentTemplate.saveVersion`、`panel.prompt` 七个命令（D42-01/02/03 v1）。页面形状、精确空值、本人本页 Panel、命令结果、逐命令权限及 `human_irc_queue` 语义按 D12；只写 `apps/web/src/server/lab/**`，不改 protocol、RPC 或 wire。活动写入、`home.activity` 与 `settings.repoActivity` 取行及 `ImageDefinition.name` 取值仍归 [Pepgent#78](https://github.com/Pepgent/Pepgent/issues/78)，#78 依赖本切片代码合入 main | LAB-04、LAB-07a、LAB-10、LAB-12 | F29、F31 | 只做本仓编译、类型检查和基础检查；跨组件结果在 [Pepgent#30](https://github.com/Pepgent/Pepgent/issues/30) 与阶段 C 统一验收（[D42 定稿](https://github.com/Pepgent/PM/issues/61)） | 未指定 |
 | WEB-01 | 阶段 A：`readSnapshot` 改为异步，loader 构造服务（D7:76） | — | S2 | 13 个 controller 没有改动，页面照常渲染 | low |
 | WEB-02 | 阶段 B 的基础：`src/protocol/lab`、新的 `LabBridge`、`subscribe`、`send`、`watchAgent`（D7:77、117-123） | LAB-07a、WEB-01 | S2 | 页面 loader 读取线数据，事件使它失效后重读 | mid |
 | WEB-03 | 投影：catalog、实验列表、实验详情（`RunGraph` 到 `ExperimentFlowFixture`，含时间轴、对比、派生导航、runner workspace 与交回地址）。目录投影在本切片交付；所选 Lab 的持有与重读、详情页回看/派生/对比/workspace/交回五项真实页面接线归 WEB-07（D36-01 v1、D36-02 v2），不作为 WEB-03 关闭条件。D35-01 v3 的共享组件受控位置/回调属性与 model 内时刻→`k` 纯映射可在本切片交付，关闭时未交付的部分随 WEB-07 回看接线承接 | WEB-02、LAB-07b | F08、F10、F13、F18、F23–F26 的投影；页面接线在 WEB-07 | 纯函数投影的单元测试，输入是真实录制的线数据；录制中含 `Aborted` 变体的调用（不带 `version`、`body`、`env`，`outputs = []`），投影出被中止的节点（PM#5 第 2 项） | mid |
@@ -383,7 +384,7 @@ type Verdict = {
 | D9-02 | 每叶子来源类别、投影位置与录制值 | D9-01、E2E-20 | F32 | 类别与证据路径齐全 | low | 必须已有真实线数据录制 |
 | D9-03 | 点线面归类与报告，交领导层表决 | D9-02、全部verdict | F32 | §5逐条执行，报告表决 | high | A0/F01–31全部统一运行结果 |
 
-**合计：** 108 个切片。
+**合计：** 109 个切片。
 
 | 分组 | 数量 |
 | --- | --- |
@@ -396,7 +397,7 @@ type Verdict = {
 | DIST | 4 |
 | REM | 7 |
 | LIB | 1 |
-| LAB | 14 |
+| LAB | 15 |
 | WEB | 7 |
 | DEP | 3 |
 | E2E | 15 |

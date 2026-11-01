@@ -2,7 +2,7 @@
 
 来源：[D8 决策](https://github.com/Pepgent/PM/issues/8)、[D8 §4 实现计划](https://github.com/Pepgent/PM/blob/main/evidence/decisions/D8-mvp-scope.md#4-实现计划)、[D16（PM#25）](https://github.com/Pepgent/PM/issues/25) D16-01/06/09/10。
 
-108 个切片的原建单映射：新建 88 个，复用 20 个，不据此推断当前代码或运行状态。依赖链接与业务范围保留；开发期依赖改为代码合入 main，跨组件义务由统一 E2E/A0/S1/S2 正文承接，不缩减。
+109 个切片的实现 issue 映射；LAB-13 按 [D42](https://github.com/Pepgent/PM/issues/61)新增为 [Pepgent#80](https://github.com/Pepgent/Pepgent/issues/80)。不据本表推断当前代码或运行状态。依赖链接与业务范围保留；开发期依赖为代码合入 main，跨组件义务由统一 E2E/A0/S1/S2 正文承接，不缩减。
 
 归属按代码路径：ENV/D9 在 PM；soroi `e2e/**`（含 DIST-02/#224）归 W-08；`apps/web/tests/e2e-lab/**` 的 E2E-20/21 归 W-10（所测代码全部合入后编写，阶段 B 不执行）。其余席位完整路径按 D16-09。表中的 VS1/VS2/W1–W7 仅原切片标识，不再是波次、排期或 runtime 开工门禁；W-08/W-10 为 D16 的实际执行席。Project 列仅建单时记录，当前状态向 [Project #1](https://github.com/orgs/Pepgent/projects/1) 查询。
 
@@ -88,6 +88,7 @@
 | LAB-11a | `Pepgent/Pepgent` | [Pepgent/Pepgent#22](https://github.com/Pepgent/Pepgent/issues/22) | 新建 | low | W6 | Todo |
 | LAB-11b | `Pepgent/Pepgent` | [Pepgent/Pepgent#18](https://github.com/Pepgent/Pepgent/issues/18) | 新建 | low | W6 | Todo |
 | LAB-12 | `Pepgent/Pepgent` | [Pepgent/Pepgent#11](https://github.com/Pepgent/Pepgent/issues/11) | 新建 | low | W6 | Todo |
+| LAB-13 | `Pepgent/Pepgent` | [Pepgent/Pepgent#80](https://github.com/Pepgent/Pepgent/issues/80) | 按 D42 新建 | 未指定 | **W-09**；依赖 LAB-04、LAB-07a、LAB-10、LAB-12；解锁 F29、F31 | 取回时未登记 |
 | WEB-01 | `Pepgent/Pepgent` | [Pepgent/Pepgent#9](https://github.com/Pepgent/Pepgent/issues/9) | 新建 | low | W6 | Todo |
 | WEB-02 | `Pepgent/Pepgent` | [Pepgent/Pepgent#21](https://github.com/Pepgent/Pepgent/issues/21) | 新建 | mid | W6 | Todo |
 | WEB-03 | `Pepgent/Pepgent` | [Pepgent/Pepgent#26](https://github.com/Pepgent/Pepgent/issues/26) | 新建 | mid | W6 | Todo |
