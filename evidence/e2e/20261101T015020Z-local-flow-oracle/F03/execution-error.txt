@@ -1,0 +1,2 @@
+Error: ENOENT: no such file or directory, open '/tmp/soroi-local-flow-proof-Xlt1tt/missing-real-a0.json'
+    at async runFlow (/Users/mouriya/Ext/worktrees/test-218-pty-a0-ff0716f/e2e/s1/scenario.ts:202:60)

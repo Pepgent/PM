@@ -1,0 +1,223 @@
+{
+  "liveFlow": false,
+  "observations": [
+    {
+      "scenario": "real-identifiers-not-comment-or-string",
+      "expected": [
+        "other",
+        "out"
+      ],
+      "observed": [
+        "other",
+        "out"
+      ]
+    },
+    {
+      "scenario": "semantic-stop-whitespace",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "scenario": "stop-text-in-string-is-not-stop",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "scenario": "non-stop-statement-is-not-cleanup",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "scenario": "formatted-reminder",
+      "expected": {
+        "names": [
+          "score"
+        ],
+        "formatted": true
+      },
+      "observed": {
+        "names": [
+          "score"
+        ],
+        "formatted": true
+      }
+    },
+    {
+      "scenario": "reminder-without-provenance-is-rejected",
+      "expected": {
+        "names": [
+          "score"
+        ],
+        "formatted": false
+      },
+      "observed": {
+        "names": [
+          "score"
+        ],
+        "formatted": false
+      }
+    },
+    {
+      "scenario": "documented-indented-reminder-list",
+      "expected": {
+        "names": [
+          "curve_svm",
+          "score"
+        ],
+        "formatted": true
+      },
+      "observed": {
+        "names": [
+          "curve_svm",
+          "score"
+        ],
+        "formatted": true
+      }
+    },
+    {
+      "scenario": "host-schema-error-is-distinct",
+      "expected": "schema_error",
+      "observed": "schema_error"
+    },
+    {
+      "scenario": "runtime-error-is-not-schema-rejection",
+      "expected": "tool_error",
+      "observed": "tool_error"
+    },
+    {
+      "scenario": "synthetic-unexecuted-is-not-schema-rejection",
+      "expected": "tool_error",
+      "observed": "tool_error"
+    },
+    {
+      "scenario": "unstructured-error-is-not-schema-rejection",
+      "expected": "tool_error",
+      "observed": "tool_error"
+    },
+    {
+      "scenario": "edge-from-prior-commit",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "scenario": "edge-from-future-output-is-rejected",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "scenario": "interval-intersection",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "scenario": "touching-intervals-are-not-concurrent",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "scenario": "zero-duration-is-not-concurrent",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "scenario": "reversed-interval-is-invalid",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "scenario": "file-preview-only-locates-path",
+      "expected": "/tmp/a (b).log",
+      "observed": "/tmp/a (b).log"
+    },
+    {
+      "scenario": "original-tool-args-survive-host-repair",
+      "expected": {
+        "mode": "formal",
+        "code": "const x = 1",
+        "pins": {
+          "x": 1
+        }
+      },
+      "observed": {
+        "mode": "formal",
+        "code": "const x = 1",
+        "pins": {
+          "x": 1
+        }
+      }
+    },
+    {
+      "scenario": "reminder-binds-same-assistant-request",
+      "expected": [
+        "call"
+      ],
+      "observed": [
+        "call"
+      ]
+    },
+    {
+      "scenario": "off-branch-reminder-is-not-current",
+      "expected": [
+        "reminder"
+      ],
+      "observed": [
+        "reminder"
+      ]
+    },
+    {
+      "scenario": "late-record-does-not-prove-earlier-request",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "scenario": "request-ordinal-cannot-repeat",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "scenario": "F02-missing-A0-never-passes",
+      "expected": {
+        "kind": "fail",
+        "failed": [
+          "execution"
+        ]
+      },
+      "observed": {
+        "kind": "fail",
+        "failed": [
+          "execution"
+        ]
+      }
+    },
+    {
+      "scenario": "F03-missing-A0-never-passes",
+      "expected": {
+        "kind": "fail",
+        "failed": [
+          "execution"
+        ]
+      },
+      "observed": {
+        "kind": "fail",
+        "failed": [
+          "execution"
+        ]
+      }
+    },
+    {
+      "scenario": "F04-missing-A0-never-passes",
+      "expected": {
+        "kind": "fail",
+        "failed": [
+          "execution"
+        ]
+      },
+      "observed": {
+        "kind": "fail",
+        "failed": [
+          "execution"
+        ]
+      }
+    }
+  ]
+}

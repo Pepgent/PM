@@ -1,0 +1,38 @@
+{"scenario":"valid-formal-tool-failure-is-nonretriable","liveFlow":false,"errorType":"Error","failed":["continuation-outcome-0"]}
+{"scenario":"mixed-mode-cannot-hide-formal-failure","reverse":false,"liveFlow":false,"errorType":"Error","failed":["continuation-outcome-0"]}
+{"scenario":"mixed-mode-cannot-hide-formal-failure","reverse":true,"liveFlow":false,"errorType":"Error","failed":["continuation-outcome-1"]}
+{"scenario":"two-tool-calls-share-pre-request-state","liveFlow":false,"assertions":18,"reminderComparisons":1,"failed":[]}
+{"scenario":"continuation-boundary-retains-formal-failure","disruption":"other-tool","liveFlow":false,"errorType":"Error","failed":["continuation-outcome-0"]}
+{"scenario":"continuation-boundary-retains-formal-failure","disruption":"malformed-eval","liveFlow":false,"errorType":"Error","failed":["continuation-outcome-0"]}
+{"scenario":"continuation-boundary-retains-formal-failure","disruption":"provider-failure","liveFlow":false,"errorType":"Error","failed":["continuation-outcome-0"]}
+{"scenario":"rejected-model-input-remains-deviation","rejection":"check_error","liveFlow":false,"errorType":"ScriptDeviation","failed":[]}
+{"scenario":"rejected-model-input-remains-deviation","rejection":"schema_error","liveFlow":false,"errorType":"ScriptDeviation","failed":[]}
+[0m[2m[35m$[0m [2m[1mbun run s1/local-smoke.ts[0m
+{"scenario":"real-identifiers-not-comment-or-string","observed":["other","out"],"liveFlow":false}
+{"scenario":"semantic-stop-whitespace","observed":true,"liveFlow":false}
+{"scenario":"stop-text-in-string-is-not-stop","observed":false,"liveFlow":false}
+{"scenario":"non-stop-statement-is-not-cleanup","observed":false,"liveFlow":false}
+{"scenario":"formatted-reminder","observed":{"names":["score"],"formatted":true},"liveFlow":false}
+{"scenario":"reminder-without-provenance-is-rejected","observed":{"names":["score"],"formatted":false},"liveFlow":false}
+{"scenario":"documented-indented-reminder-list","observed":{"names":["curve_svm","score"],"formatted":true},"liveFlow":false}
+{"scenario":"host-schema-error-is-distinct","observed":"schema_error","liveFlow":false}
+{"scenario":"runtime-error-is-not-schema-rejection","observed":"tool_error","liveFlow":false}
+{"scenario":"synthetic-unexecuted-is-not-schema-rejection","observed":"tool_error","liveFlow":false}
+{"scenario":"unstructured-error-is-not-schema-rejection","observed":"tool_error","liveFlow":false}
+{"scenario":"edge-from-prior-commit","observed":true,"liveFlow":false}
+{"scenario":"edge-from-future-output-is-rejected","observed":false,"liveFlow":false}
+{"scenario":"interval-intersection","observed":true,"liveFlow":false}
+{"scenario":"touching-intervals-are-not-concurrent","observed":false,"liveFlow":false}
+{"scenario":"zero-duration-is-not-concurrent","observed":false,"liveFlow":false}
+{"scenario":"reversed-interval-is-invalid","observed":false,"liveFlow":false}
+{"scenario":"file-preview-only-locates-path","observed":"/tmp/a (b).log","liveFlow":false}
+{"scenario":"original-tool-args-survive-host-repair","observed":{"mode":"formal","code":"const x = 1","pins":{"x":1}},"liveFlow":false}
+{"scenario":"reminder-binds-same-assistant-request","observed":["call"],"liveFlow":false}
+{"scenario":"off-branch-reminder-is-not-current","observed":["reminder"],"liveFlow":false}
+{"scenario":"late-record-does-not-prove-earlier-request","observed":false,"liveFlow":false}
+{"scenario":"request-ordinal-cannot-repeat","observed":true,"liveFlow":false}
+{"scenario":"F02-missing-A0-never-passes","observed":{"kind":"fail","failed":["execution"]},"liveFlow":false}
+{"scenario":"F03-missing-A0-never-passes","observed":{"kind":"fail","failed":["execution"]},"liveFlow":false}
+{"scenario":"F04-missing-A0-never-passes","observed":{"kind":"fail","failed":["execution"]},"liveFlow":false}
+{"evidence":"/tmp/soroi-local-flow-proof-Xlt1tt","liveF02F03F04":"not-run"}
+[0m[2m[35m$[0m [2m[1mtsc --noEmit[0m
