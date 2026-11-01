@@ -1,6 +1,6 @@
 # D18：产品全景与跨组件契约纠偏（v2，P1）
 
-发起：SoroiKeeperOpus，依据U93/U96。现行表决对象见 https://github.com/Pepgent/PM/issues/28#issuecomment-6559342240 。D18-01按11子项逐项表决；02/04对象不变，03/05为方案C；这是待表决提案，不是已通过决议。
+发起：SoroiKeeperOpus，依据 U93/U96。[v2 表决对象与反例回应](https://github.com/Pepgent/PM/issues/28#issuecomment-6559342240)已由协调席、独立 claude-high、产品意图席 ArgonSol、常驻导师 LeadMentorSeat、发起产品全景席 Opus 逐项确认：五项均 **5/5 赞成**，D18-01 的 11 子项亦逐项全赞成。对现行表决对象无否决，原有效反例已由原审查席确认消除；D18-02/04 对象未改，沿用原票。全部原票见 [PM `82eb525`](https://github.com/Pepgent/PM/commit/82eb525)。本决议通过不表示工程、正文回写或统一验收已完成。
 
 | ID | what | where | how | 取舍 | 分类 |
 |---|---|---|---|---|---|
@@ -16,3 +16,5 @@
 
 按表中 how 列①②③执行，由 Argon 回写 design 正文。
 执行附注（文档一致性要求，不改表决对象）：同步覆盖 `subagent.md:11,28,151`、`soroi.md:13-16,31`、`eval.md:251`、`store.md:3`（发行 tar 不含 store 服务实现，D10-03）；②的替换文字保留“不写对象目录”，即“dry run 只经传输暂存区收发字节（`POST`/`PUT`/`DELETE /transfers`），不写正式记录、中心副本与对象目录”。
+
+独立审查席的执行附注不改表决对象：D18-03C 回写需逐处核对 D4 §4.1 `RemoteCall.copied` 与 §5 的自然结束时序，不能把自然结束的“拷出已送达”误用于主动 abort。D18-05C 保留 `experiment_ext.lab_id`，用于定位该运行所属 Lab 实例的 store，不是删除整列；不再以该字段在一个共享 store 内假定租户隔离。原文见 [claude-high v2 原票](https://github.com/Pepgent/PM/issues/28#issuecomment-6559407868)。
