@@ -308,6 +308,8 @@ interface EvalControl {
 // 只有根会话的端点 eval:<根会话 id> 另外回答：
 interface RootEvalControl extends EvalControl {
   writers(runId: string): readonly string[]   // 本运行下所有写 eval 的会话 id，取自监管者的启动配方（Subagents.writers）
+  derive(parent: string, at: Committed | { kind: "InFlight"; writerSession: string; slot: SlotId }, changes: readonly Change[]): void   // D6-16；由持有运行的根会话执行（D7-09）
+  abort(run: string): void   // D6-05；由持有运行的根会话执行（D7-09）
 }
 
 type CaptureBody = "Program" | "Agent" | "Human"
