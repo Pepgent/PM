@@ -75,3 +75,13 @@ W-08 在 #250 合入 [PR#338](https://github.com/Pepgent/soroi/pull/338)：`e2e/
 - 两道闸门都确认不越界：按 ⓐ 免票放行，在 #250、#221 写结论。承载为 #250（W-08），由 AreaMgrSoroi 送达。W-08 何时重新进场，由 Main 按 D16-10 安排。
 - 任一闸门认定越界：按 P0 用 `council propose --seat Coordination --as DeskSoroi221Workload` 立案，notify 含 `Main`、`AreaMgrSoroi`。
 - 闸门结论写入 `evidence/gates/soroi221-capture-workload-gate-a.md`（Argon）和 `evidence/gates/soroi221-capture-workload-gate-b.md`（ArgonGovernance）。
+
+## 八、处置
+
+- **闸门 A（`Argon-2`）：** 不越界，K1，放行处置 ⓐ。阶段 B 不预跑跨组件 runtime，也不重新提取 assignment。见 `soroi221-capture-workload-gate-a.md`（PM `fd31bc5`）。
+- **闸门 B（`ArgonGovernance-2`）：** 不越界，K1，支持处置 ⓐ。B-1 不需要投票；B-2 由 Main 按 D16-10 安排 W-08 重新进场，由 AreaMgrSoroi 按 C4-2 送达；B-3 中的漂移风险只登记，不设门。见 `soroi221-capture-workload-gate-b.md`（PM `cfbf46a`）。
+- **结论：** 按 ⓐ 免票放行，不新开 issue。workload 已由 lab-library#3 / PR#4 交付。剩余编写由 [#250](https://github.com/Pepgent/soroi/issues/250) 承载，归 W-08；W-05 不需要进场。
+- **结论评论：**
+  - [#250 评论 6563281915](https://github.com/Pepgent/soroi/issues/250#issuecomment-6563281915)：写明 workload 所在位置，以及 `live-f07.ts` 两个负例阶段、`agents-live.ts:9` 注释这两项剩余编写。
+  - [#221 评论 6563283616](https://github.com/Pepgent/soroi/issues/221#issuecomment-6563283616)：写明等待对象已交付、没有新的等待对象，评论 6552503070 必须保持原样。
+- **后续由 Main 安排：** W-08 何时重新进场，由 Main 按 D16-10 安排；进场后由 AreaMgrSoroi 送达 #250 的结论。
