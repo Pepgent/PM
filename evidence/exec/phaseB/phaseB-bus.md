@@ -1,6 +1,6 @@
 # 阶段 B 席位异步总线汇总
 
-GitHub 取回基点：2026-11-01T13:20:32Z（UTC），随后按 Main 维护的 `local://exec/phaseB/rolling-record.md` 及本轮原 PR 补录状态。当前活跃四席为 **lab、plugin、images、deploy**；store、mux、remote、library 已退役。各行注明来源，未重新取回的工程实现进度不推断。本文是工作副本，不替代 issue/PR；秘书未派工、未改业务代码、未运行测试。
+GitHub 取回基点：2026-11-01T13:20:32Z（UTC），随后按 Main 维护的 `local://exec/phaseB/rolling-record.md` 及本轮原 PR 补录状态。当前活跃四席为 **lab、plugin、deploy、e2e**；store、mux、remote、library、images 已退役。各行注明来源，未重新取回的工程实现进度不推断。本文是工作副本，不替代 issue/PR；秘书未派工、未改业务代码、未运行测试。
 
 ## 席位状态
 
@@ -12,8 +12,9 @@ GitHub 取回基点：2026-11-01T13:20:32Z（UTC），随后按 Main 维护的 `
 | W-02 `pepgent-remote` | [remote#16](https://github.com/Pepgent/remote/issues/16)（A2-01） | [PR#17](https://github.com/Pepgent/remote/pull/17) MERGED，关闭 #16 | **已合入／已退役**：GitHub OPEN issue 列表已返回无匹配；Main 滚动记录报告执行 `tern kill session pepgent-remote`。真实 registry、Slurm、Apptainer 集成结果仍由阶段 C 承担，不冒称验收完成 | 2026-11-01T13:21:02Z（PR 更新）；退役见滚动源记录 |
 | W-09 `pepgent-lab` | 首项 [Pepgent#43](https://github.com/Pepgent/Pepgent/issues/43)（A2-12），随后 LAB-10、[Pepgent#44](https://github.com/Pepgent/Pepgent/issues/44)、LAB-04..12，按已发派工稿 | 本轮未见对应实现 PR 记录，不以启动推定 PR 或代码完成 | 🔄 **已发车（Main 运行报告）**：tern `663117180698627`；peer `01a19743-a0be`；pid `25147`。独立克隆 `pepgent-backend-clone`，home 分支 `pepgent-lab-home`，不访问无关根 checkout；首次取回 #43 仍 OPEN 无评论，不替工程师补报 STARTED | 本轮 Main 发车通知；GitHub #43 取回于 2026-11-01T13:20:32Z |
 | W-07 `pepgent-plugin` | 首项 [soroi#283](https://github.com/Pepgent/soroi/issues/283)（A2-05）；本次范围冲突上报在 [PR#290](https://github.com/Pepgent/soroi/pull/290)（关联 #215） | [PR#290](https://github.com/Pepgent/soroi/pull/290) 已 MERGED；本行不据此推定席位全部任务完成 | 🔄 **推进中；LeaderCompliance 范围冲突 BLOCKED 已解除**：ArgonGovernance 在 [bf19aee](https://github.com/Pepgent/soroi/commit/bf19aee641d53b476e683175d85a8261c5f5e1ae) 明确只监督共享根的 Main，排除 `/Users/mouriya/Ext/worktrees/pepgent-*`、`issue-*` 下的 tern 工程席位。秘书已在[原 PR 回复解除](https://github.com/Pepgent/soroi/pull/290#issuecomment-6558717336)；其他既有授权边界不变 | 2026-11-01T13:36:37Z（原上报）、13:36:46Z（PR 更新）；解除回复时间见链接 |
-| W-03 `pepgent-images` | [images#6](https://github.com/Pepgent/images/issues/6)，接着 [#3](https://github.com/Pepgent/images/issues/3) | 本轮未取回对应实现 PR，不作推断 | 🔄 **已发车（Main 滚动记录）**：tern `663263209586691`，peer `01a19748-1206`，home `pepgent-images-home`，基点 images `f66e655`；接续 `issue-6-lab-web-live` 的合法 `d40585f`。旧 DONE 已被 D15 作废，不作为本轮完成依据 | 发车见滚动源记录；GitHub 状态为本轮取回副本 |
+| W-03 `pepgent-images` | [images#6](https://github.com/Pepgent/images/issues/6)、[#3](https://github.com/Pepgent/images/issues/3) | [PR#12](https://github.com/Pepgent/images/pull/12) 已 MERGED，正文关闭 #6/#3 | **已合入／已退役**：本轮 GitHub OPEN issue 列表返回无匹配，Main 滚动记录报告已执行 `tern kill session pepgent-images`，由 W-08 补位。镜像本仓证据不代替发行安装、真实浏览器会话和部署顺序的阶段 C 验收 | 2026-11-01T13:41:04Z（PR 更新）；退役见滚动源记录 |
 | W-04 `pepgent-deploy` | 首项 [deploy#16](https://github.com/Pepgent/deploy/issues/16)（A2-07），随后 [#8](https://github.com/Pepgent/deploy/issues/8)、[#1](https://github.com/Pepgent/deploy/issues/1) | 本轮未取回对应实现 PR，不作推断 | 🔄 **已发车（Main 滚动记录）**：tern `663671231479811`，peer `01a19756-6aae`，home `pepgent-deploy-home`，基点 deploy `e4f16cc`；#8 在新路径 `pepgent-deploy-issue8` 接续合法 `56eaff7`，不复用冻结目录 | 发车见滚动源记录；未把发车代报为工程师 STARTED |
+| W-08 `pepgent-e2e` | 首项 [soroi#285](https://github.com/Pepgent/soroi/issues/285)（A2-08），随后 [DIST-02 #224](https://github.com/Pepgent/soroi/issues/224)、[A0 #235](https://github.com/Pepgent/soroi/issues/235) 及已合入组件的 E2E spec | 本轮未取回对应实现 PR，不作推断 | 🔄 **已发车（Main 滚动记录）**：tern `663739950956547`，peer `01a19758-9781`，home `pepgent-e2e-home`，基点 soroi `8a764ea`；接续 PR260 的 e2e 部分与 PR266。阶段 B 只按被测代码合入时点编写 spec，不执行跨组件测试，不把发车等同阶段 C 开始或通过 | 发车见滚动源记录；未代报工程师 STARTED |
 
 ## 依赖解除与证据
 
@@ -26,7 +27,7 @@ GitHub 取回基点：2026-11-01T13:20:32Z（UTC），随后按 Main 维护的 `
 - W-05 的 D11-F12、D12-15 普通承载依赖已由 [lab-library#13](https://github.com/Pepgent/lab-library/issues/13) 补齐；据 Main 确认，通知已到达 W-05。解除事实已回复到 [PM#25 原 BLOCKED 所在 issue](https://github.com/Pepgent/PM/issues/25#issuecomment-6558437925)。后续 **所有 BLOCKED 解除一律回写到原 issue 或 PR**，不以主会话私下记忆或 `peer_send` 通知替代总线解除记录。
 - W-07 的 [LeaderCompliance 范围冲突上报](https://github.com/Pepgent/soroi/pull/290#issuecomment-6558686798) 已因 [bf19aee](https://github.com/Pepgent/soroi/commit/bf19aee641d53b476e683175d85a8261c5f5e1ae) 的适用范围修订解除，已回写[原 PR 评论](https://github.com/Pepgent/soroi/pull/290#issuecomment-6558717336)。该 watchdog 不再约束上述 worktree 中的 tern 工程席位；这里只登记本项解除，不宣称 W-07 整体完成或已独立验证后续不再误报。
 - 后续常规发车、退役由 Main 直接维护 `local://exec/phaseB/rolling-record.md`，秘书据此归档并替换本总线对应行，不再要求 Main 为每次常规轮换发送 IRC；源记录归档为 PM `evidence/exec/phaseB/rolling-record.md`。
-- 台账已按 C4-3 直接替换：R8/R13 的最新四席与退役情况见 [soroi `8e7bb5e`](https://github.com/Pepgent/soroi/commit/8e7bb5e)，R14/R15 的 store 已合入与 W-09 发车见 [soroi `1cd2716`](https://github.com/Pepgent/soroi/commit/1cd2716)。不升级为产品验收 ✅。
+- 台账已按 C4-3 直接替换：R8/R13/R14 的最新四席、images 退役与 W-08 发车见 [soroi `16820b9`](https://github.com/Pepgent/soroi/commit/16820b9)；该提交与并发远端改动整合后已推送 main（[f0dad02](https://github.com/Pepgent/soroi/commit/f0dad02)）。不升级为产品验收 ✅。
 
 ## 首轮哨兵巡检：写入白名单纠正
 
