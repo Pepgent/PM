@@ -106,7 +106,16 @@
     - 同一 `minute` 的提交合为一个标记，取最大 seq（维持 v1 第 2 条）。标记按 seq 升序排列，每个标记的位置取 `μᵢ = max(minuteᵢ, μᵢ₋₁ + 4px / pixelsPerMinute)`。
     - 游标取 `μ ≤ max(T, μ₁)` 的最后一个标记的 seq；T 处在或晚于最后一个标记时为 live。回看时游标画在所选标记的 `μ` 上。
     - 每次提交（含只有根值的提交）都占至少 4px 的拖动区间；相邻提交相距 4px 以上时，映射与 v3 逐点相同。
-    - 只改 W-10 白名单内的 `replay-at.ts`、`experiment-detail-view-model.ts` 游标位置与 `lab-replay-at.test.ts`，由 WEB-07（[Pepgent#29](https://github.com/Pepgent/Pepgent/issues/29)）在接 `onCursor` 的同一 PR 内承载。`packages/ui`、`commits` wire、`FlowCommit` 与 D20-01 白名单都不改。
+    - 由 WEB-07（[Pepgent#29](https://github.com/Pepgent/Pepgent/issues/29)）在接 `onCursor` 的同一 PR 内改 `replay-at.ts`、`experiment-detail-view-model.ts` 游标位置与 `lab-replay-at.test.ts`；`packages/ui`、`commits` wire 与 `FlowCommit` 不改。
     - 分类改为“串联”，缺失设计补充记为“是”。行文与理由见 PM#58 的 v2 行与修订记录。v1 票作废，四席重投。
-  - **闸门：** v2 没有改变切片归属（WEB-07，同闸门 B B-2 已有结论）、白名单与公开契约，所以不重新送闸门 A、闸门 B。v2 改的是 D35-01 v3 正文中的映射公式，与闸门 A“不需修订 v3”的判定不同，由 Argon 席在 v2 表决中裁定。
+  - **v2 表决：** Coordination、Argon 赞成；ClaudeHigh、LeadMentor 反对，各附反例：
+    - ClaudeHigh：`lab-replay-at.test.ts` 不匹配 D20-01 W-10 白名单中唯一的测试 glob `apps/web/tests/vitest/lab-*-view-model.test.ts`（`DEC/D20-w10-path-boundary.md:31`），v2 一面要求 W-10 更新它，一面自述“白名单不改”，承载不成立。推荐方案 A：新增 model 纯函数生成标记，交给现有 `replayAt`。
+    - LeadMentor：store 每次提交各取一次毫秒时刻（soroi `store.ts:291`），没有不同提交 `at` 唯一的约束；同一 minute 的两次串行提交是不同的已提交状态，按 minute 合并会永久丢掉较早的 seq。只有非派生运行的首事务 seq 1 有代码实据可单独处理。
+  - **v3 修订（governance-desk 实例 `DeskD39Revise3`，2026-11-02）：** 两个反例经复读源码与决策正文均成立，不需 rebut；4px 标记设计不变。
+    - 每次提交一个标记，按 seq 区分，同刻提交进入同一 4px 右移规则。唯一例外：非派生运行（`FlowBase.derivedFrom === null`）的 seq 1 与 seq 2 同事务同 `at`（`store.ts:291-309`），按 `design/store.md:137` 不单列 seq 1；派生运行的 seq 1 物化锚点照常单列。
+    - 标记由新增的 `features/lab-experiment-detail/model/commit-markers.ts` 中的 `commitMarkers(commits, derivedFrom, pixelsPerMinute)` 生成，controller 交给现有 `replayAt`。`μ` 随 seq 严格递增，`replay-at.ts:14-21` 作用在标记上即得 v2 的选取规则，所以 `replay-at.ts` 与 `lab-replay-at.test.ts` 都不改。回看游标画在所选标记的 `μ` 上。
+    - WEB-07 写入的文件为 `model/commit-markers.ts`、`model/experiment-detail-view-model.ts`、`controller/**` 与 `tests/vitest/lab-experiment-detail-view-model.test.ts`，全部在 D20-01 W-10 白名单的 glob 内。
+    - 分类维持“串联”，缺失设计补充维持“是”。行文与理由见 PM#58 的 v3 行与修订记录（`council revise D39-01`）。v2 票作废，四席重投。
+  - **闸门：** v3 不改 D20-01 白名单、不进治理领域，切片仍为 WEB-07（同闸门 B B-2 已有结论），公开契约（wire、`FlowCommit`、`derivedFrom`、`packages/ui` 属性）不变，所以不重新送闸门 A、闸门 B。行文改的是 D35-01 v3 正文中的映射公式，与闸门 A“不需修订 v3”的判定不同，由 Argon 席在表决中裁定。
+  - **范围外的观察：** Pepgent main 上现有的 `apps/web/tests/vitest/lab-replay-at.test.ts` 同样不匹配 D20-01 的测试 glob。它不在 D39 议程范围内，本实例不处置，留给 ArgonGovernance 的事后检查。
 - **送达：** 定案后，由新开的 AreaMgrPepgent 在 #29 登记，把结论送达 W-10，并在 WEB-07 的 PR 正文注明。本实例不联系工人。
