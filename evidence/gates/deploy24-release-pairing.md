@@ -93,3 +93,10 @@
 - 两道闸门都确认不越界：按 ③ 免票放行，在 omp-rpc-mux、images 各开承载 issue，在 deploy#24 写结论与等待对象，由片区经理送达 W-04；W-01、W-03 进场由 Main 按 D16-10 安排。
 - 任一闸门认定越界：按 P0 用 `council propose --seat Coordination` 立案，notify 含 `Main`、`AreaMgrDeploy`。
 - 闸门结论写入 `evidence/gates/deploy24-release-pairing-gate-a.md`（Argon）、`evidence/gates/deploy24-release-pairing-gate-b.md`（ArgonGovernance）。
+
+## 八、处置
+
+- 闸门 A（`Argon-2`）：不越界，K1，采用候选 ③，反对 ①②；见 `deploy24-release-pairing-gate-a.md`。
+- 闸门 B（`ArgonGovernance-2`）：候选 ③ 不越界，①②④ 越界；要求在 #24 结论中更正 F13 的出处；见 `deploy24-release-pairing-gate-b.md`。
+- 免票放行，承载：[omp-rpc-mux#20](https://github.com/Pepgent/omp-rpc-mux/issues/20)（W-01 发布 Mux）→ [images#13](https://github.com/Pepgent/images/issues/13)（W-03 重建 omp-agent、central、lab-web）→ [deploy#24](https://github.com/Pepgent/deploy/issues/24) / [PR#25](https://github.com/Pepgent/deploy/pull/25)（W-04 更新引用、补结果 3 记录）。
+- 结论评论：[deploy#24 评论 6562724894](https://github.com/Pepgent/deploy/issues/24#issuecomment-6562724894)。由 AreaMgrDeploy 送达 W-04；W-01、W-03 的进场由 Main 按 D16-10 安排。
