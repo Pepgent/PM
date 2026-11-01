@@ -49,3 +49,24 @@
 ## 步骤 9：归档与台账
 - 对照：C2-3（PM issue 计票）、C4-3（定稿与证据归档 PM；台账直接替换）、U14、R19、D15-14。
 - 动作：派秘书开 PM D15 decision issue、归档全部材料、替换 LEDGER R19 与决策索引中 D15 的状态。本分身不执行任何丢弃、回退或派工。
+- 结果：PM [#23](https://github.com/Pepgent/PM/issues/23) 关闭；PM `0909dbf`；LEDGER `4455170`（R19、D15 索引）。
+
+## 步骤 10：D15-10② 只读盘点
+- 对照：LEDGER `4455170` C1–C5、R18–R21（R19 🏗、R20 待执行、R21 ⏳）；D15-10、D15-02、D15-12②（解释权属 argon 族）；主会话转达执行方为本分身（C5-4.1）。
+- 动作：写执行契约 `local://exec/d15/CONTRACT.md`；派 8 名只读 task:mid（soroi、pm、pepgent、deploy、images、lablibrary、remote、mux），产出 `local://exec/d15/<仓>.md`。ClaudeHighD15 第 1、2 条非阻断意见写入契约作为提议，标明以双核预审结论为准。预审通过前不做写操作。
+- 结果：8 份盘点齐（`local://exec/d15/`），汇总与 9 项需双核裁决事项在 `PREREVIEW.md`。已交 Argon；ArgonGovernance 因 gemini-4-argon 配额耗尽（10:35:24Z 重置），重置后唤醒提交。不改换 argon 族模型（C2-2）。
+
+## 步骤 11：双核预审结论与 D15-10③ 派发
+- 对照：LEDGER `4455170` C2-2（双核）、C2-1（解释权）、C3-4（一仓一进程）、C5-3、C5-4；D15-10③；OS 看门狗内存压力（主会话转达：一次只派一名）与 ArgonGovernance 并发上限（每波最多 2–3 名）——取更严者，一次一名。
+- 结果：Argon `PREREVIEW-argon.md`、ArgonGovernance `PREREVIEW-argon-governance.md` 均【通过】，9 项裁决一致（PM 归档 `evidence/argon/D15-10-prereview-*.md`）。
+- 动作：按 mux → remote → lab-library → images → deploy → PM → Pepgent → soroi 顺序，逐个唤醒原盘点执行者执行本仓回退（同一执行者，契约要求），每仓完成并 wait 接应后再启下一仓；D15-08(2)(3) 文本替换由 soroi 执行者按 `D15-08-replacements.md` 执行；跨仓父子边由父方仓库执行者执行。
+- 结果（D15-10③）：8 仓执行产出 `local://exec/d15/<仓>-exec.md`。revert PR：mux [PR15](https://github.com/Pepgent/omp-rpc-mux/pull/15)、lab-library [PR12](https://github.com/Pepgent/lab-library/pull/12)、images [PR11](https://github.com/Pepgent/images/pull/11)、deploy [PR15](https://github.com/Pepgent/deploy/pull/15)、PM [PR24](https://github.com/Pepgent/PM/pull/24)、Pepgent [PR42](https://github.com/Pepgent/Pepgent/pull/42)、soroi [PR281](https://github.com/Pepgent/soroi/pull/281)；remote main 本就在会话前位置。Pepgent 五棵注册在禁触根 `.git` 下的 worktree 经双核裁决（`RULING-pepgent-worktrees.md`）原地冻结、永不使用。其余冻结项按预审裁决不动。
+
+## 步骤 12：D15-10④ 独立核验
+- 对照：LEDGER C1–C5、R20；D15-10④；OS 看门狗内存约束（一次一个）。
+- 动作：派一名 task:low 只读核验者，逐仓核对 main 内容与会话前基线、issue 正文与快照、保护名单与冻结项未动。
+- 结果：`local://exec/d15/VERIFY.md`。首轮 soroi、deploy、images 不通过；补核验确认：soroi `eng-store-home` index 与盘点 37 条一致（差异来自 HEAD 前移）；deploy 本地 `deploy-8` 为裁决 9 规定的冻结如期未动；images#3/#6、deploy#1/#8 正文与会话记录中改写前原文逐字一致。最终 8 仓全部通过。
+
+## 步骤 13：D15-10⑤ 台账与归档
+- 对照：LEDGER C4-3、R4、R8、R9、R18–R21；D15-07、D15-14。
+- 动作：派秘书归档 D15-10 全部材料到 PM、在 PM#23 登记执行结果、按 C4-3 直接替换 LEDGER 状态行。
