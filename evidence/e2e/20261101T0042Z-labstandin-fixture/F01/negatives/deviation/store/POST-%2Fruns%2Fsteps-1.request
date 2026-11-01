@@ -1,0 +1,1 @@
+{"run":{"kind":"open","session":"fixture-root-session"},"session":"fixture-root-session","code":"const seed = 1","roots":[{"name":"seed","value":{"kind":"scalar","scalar":{"kind":"number","v":1}}}],"calls":[],"stops":[],"versions":[],"transfer":"fixture-transfer"}

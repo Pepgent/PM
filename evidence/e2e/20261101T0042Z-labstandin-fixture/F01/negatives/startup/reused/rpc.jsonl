@@ -1,0 +1,6 @@
+{"at":"2026-11-01T00:42:35.988Z","direction":"send","channel":"startup-proof","raw":"{\"type\":\"mux_open_generation\"}"}
+{"at":"2026-11-01T00:42:35.988Z","direction":"receive","channel":"startup-proof","raw":"{\"type\":\"mux_generation\",\"generation\":\"c96a4793-acd6-4004-892e-2c1ccfaef164\",\"token\":\"[REDACTED]\"}"}
+{"at":"2026-11-01T00:42:35.995Z","direction":"receive","channel":"startup-proof","raw":"{\"type\":\"mux_attached\",\"generation\":\"c96a4793-acd6-4004-892e-2c1ccfaef164\",\"where\":{\"kind\":\"local\",\"host\":\"MouriyadeMac-mini.local\"}}"}
+{"at":"2026-11-01T00:42:36.004Z","direction":"receive","channel":"startup-proof","raw":"{\"type\":\"ready\"}"}
+{"at":"2026-11-01T00:42:36.004Z","direction":"send","channel":"startup-proof","raw":"{\"type\":\"mux_close_stdin\",\"generation\":\"c96a4793-acd6-4004-892e-2c1ccfaef164\"}"}
+{"at":"2026-11-01T00:42:36.008Z","direction":"receive","channel":"startup-proof","raw":"{\"type\":\"mux_exited\",\"generation\":\"c96a4793-acd6-4004-892e-2c1ccfaef164\",\"code\":0}"}

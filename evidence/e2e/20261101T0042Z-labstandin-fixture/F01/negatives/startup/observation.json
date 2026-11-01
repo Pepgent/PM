@@ -1,0 +1,6 @@
+{
+  "failure": "Error: RPC frame deadline exceeded",
+  "reusedAgent": "startup-proof",
+  "result": "new writer and ready generation succeeded after failed startup; orderly EOF exit0",
+  "evidence": "/tmp/soroi-startup-proof-UbOcLL"
+}

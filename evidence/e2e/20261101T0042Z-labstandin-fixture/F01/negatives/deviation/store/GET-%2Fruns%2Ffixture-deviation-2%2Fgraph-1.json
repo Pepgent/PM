@@ -1,0 +1,19 @@
+{
+  "method": "GET",
+  "path": "/runs/fixture-deviation-2/graph",
+  "status": 200,
+  "headers": [
+    [
+      "content-length",
+      "239"
+    ],
+    [
+      "content-type",
+      "application/json;charset=utf-8"
+    ],
+    [
+      "date",
+      "Sun, 01 Nov 2026 00:43:41 GMT"
+    ]
+  ]
+}

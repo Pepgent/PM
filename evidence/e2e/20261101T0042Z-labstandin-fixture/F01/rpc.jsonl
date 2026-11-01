@@ -1,0 +1,16 @@
+{"at":"2026-11-01T00:43:41.916Z","direction":"send","channel":"fixture-valid","raw":"{\"type\":\"mux_open_generation\"}"}
+{"at":"2026-11-01T00:43:41.917Z","direction":"receive","channel":"fixture-valid","raw":"{\"type\":\"mux_generation\",\"generation\":\"bf4a68d3-214d-4521-b3a5-7f5524598dc0\",\"token\":\"[REDACTED]\"}"}
+{"at":"2026-11-01T00:43:41.923Z","direction":"receive","channel":"fixture-valid","raw":"{\"type\":\"mux_attached\",\"generation\":\"bf4a68d3-214d-4521-b3a5-7f5524598dc0\",\"where\":{\"kind\":\"local\",\"host\":\"MouriyadeMac-mini.local\"}}"}
+{"at":"2026-11-01T00:43:41.936Z","direction":"receive","channel":"fixture-valid","raw":"{\"type\":\"ready\"}"}
+{"at":"2026-11-01T00:43:41.937Z","direction":"send","channel":"fixture-valid","raw":"{\"type\":\"get_state\",\"id\":\"standin-1\"}"}
+{"at":"2026-11-01T00:43:41.937Z","direction":"receive","channel":"fixture-valid","raw":"{\"type\":\"response\",\"command\":\"get_state\",\"id\":\"standin-1\",\"success\":true,\"data\":{\"sessionId\":\"fixture-root-session\"}}"}
+{"at":"2026-11-01T00:43:41.938Z","direction":"send","channel":"fixture-valid","raw":"{\"provider\":\"fixture\",\"modelId\":\"deterministic\",\"type\":\"set_model\",\"id\":\"standin-2\"}"}
+{"at":"2026-11-01T00:43:41.938Z","direction":"receive","channel":"fixture-valid","raw":"{\"type\":\"response\",\"command\":\"set_model\",\"id\":\"standin-2\",\"success\":true,\"data\":{\"provider\":\"fixture\",\"id\":\"deterministic\"}}"}
+{"at":"2026-11-01T00:43:41.938Z","direction":"send","channel":"fixture-valid","raw":"{\"message\":\"Call soroi_eval exactly once with these exact JSON arguments: {\\\"mode\\\":\\\"formal\\\",\\\"code\\\":\\\"const temp_2200c = 2200\\\\nstop(temp_2200c)\\\"}. Do not call other tools. Do not rewrite or combine the code. After the result, finish.\",\"type\":\"prompt\",\"id\":\"standin-3\"}"}
+{"at":"2026-11-01T00:43:41.939Z","direction":"receive","channel":"fixture-valid","raw":"{\"type\":\"response\",\"command\":\"prompt\",\"id\":\"standin-3\",\"success\":true}"}
+{"at":"2026-11-01T00:43:41.939Z","direction":"receive","channel":"fixture-valid","raw":"{\"type\":\"tool_execution_start\",\"toolName\":\"soroi_eval\",\"toolCallId\":\"fixture-eval-1\",\"args\":{\"code\":\"const temp_2200c = 2200\\nstop(temp_2200c)\",\"mode\":\"formal\"}}"}
+{"at":"2026-11-01T00:43:41.941Z","direction":"receive","channel":"fixture-valid","raw":"{\"type\":\"tool_execution_end\",\"toolName\":\"soroi_eval\",\"toolCallId\":\"fixture-eval-1\",\"isError\":false,\"result\":{\"content\":[],\"details\":{\"mode\":\"formal\",\"runId\":\"fixture-valid-1\",\"runStarted\":true,\"runEnded\":true,\"calls\":[]}}}"}
+{"at":"2026-11-01T00:43:41.942Z","direction":"receive","channel":"fixture-valid","raw":"{\"type\":\"prompt_result\",\"id\":\"standin-3\",\"agentInvoked\":true,\"status\":\"completed\",\"sessionSettled\":false}"}
+{"at":"2026-11-01T00:43:41.967Z","direction":"receive","channel":"fixture-valid","raw":"{\"type\":\"session_settled\"}"}
+{"at":"2026-11-01T00:43:41.970Z","direction":"send","channel":"fixture-valid","raw":"{\"type\":\"mux_close_stdin\",\"generation\":\"bf4a68d3-214d-4521-b3a5-7f5524598dc0\"}"}
+{"at":"2026-11-01T00:43:41.972Z","direction":"receive","channel":"fixture-valid","raw":"{\"type\":\"mux_exited\",\"generation\":\"bf4a68d3-214d-4521-b3a5-7f5524598dc0\",\"code\":0}"}

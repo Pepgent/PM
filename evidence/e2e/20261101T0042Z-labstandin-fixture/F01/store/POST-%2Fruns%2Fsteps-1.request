@@ -1,0 +1,1 @@
+{"run":{"kind":"open","session":"fixture-root-session"},"session":"fixture-root-session","code":"const temp_2200c = 2200\nstop(temp_2200c)","roots":[{"name":"temp_2200c","value":{"kind":"scalar","scalar":{"kind":"number","v":2200}}}],"calls":[],"stops":["temp_2200c"],"versions":[],"transfer":"fixture-transfer"}

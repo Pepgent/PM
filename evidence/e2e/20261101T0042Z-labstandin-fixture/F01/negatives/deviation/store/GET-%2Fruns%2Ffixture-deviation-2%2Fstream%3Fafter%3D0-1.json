@@ -1,0 +1,19 @@
+{
+  "method": "GET",
+  "path": "/runs/fixture-deviation-2/stream?after=0",
+  "status": 200,
+  "headers": [
+    [
+      "content-type",
+      "text/event-stream"
+    ],
+    [
+      "date",
+      "Sun, 01 Nov 2026 00:43:41 GMT"
+    ],
+    [
+      "transfer-encoding",
+      "chunked"
+    ]
+  ]
+}
