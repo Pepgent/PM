@@ -1,0 +1,58 @@
+{
+  "flow": "F01",
+  "segment": "A0",
+  "env": "L",
+  "startedAt": "2026-11-01T01:02:17.219Z",
+  "endedAt": "2026-11-01T01:02:18.145Z",
+  "build": {
+    "commits": {
+      "soroi": "fixture"
+    },
+    "release": "fixture",
+    "images": {},
+    "omp": "fixture",
+    "model": "fixture"
+  },
+  "runs": [],
+  "agents": [],
+  "remoteRuns": [],
+  "deviations": [],
+  "assertions": [
+    {
+      "id": "a0-driver",
+      "claim": "The ordered A0 path and category verifier complete",
+      "source": {
+        "kind": "transcript",
+        "file": "a0-error.txt",
+        "lines": [
+          1,
+          4
+        ]
+      },
+      "expected": "complete installer, PTY probes and same-release Verdict",
+      "observed": "Error: docker cp failed (1): lstat /private/tmp/soroi-a0-negative-fAVHdv/missing-models.yml: no such file or directory\n\n    at checked (/Users/mouriya/Ext/worktrees/test-218-pty-a0-ff0716f/e2e/pty/a0.ts:22:35)\n    at async runA0 (/Users/mouriya/Ext/worktrees/test-218-pty-a0-ff0716f/e2e/pty/a0.ts:104:10)",
+      "pass": false
+    },
+    {
+      "id": "a0-driver-cleanup",
+      "claim": "Docker, PTY and temporary-input lifecycles ended",
+      "source": {
+        "kind": "transcript",
+        "file": "cleanup.json",
+        "lines": [
+          1,
+          1
+        ]
+      },
+      "expected": "[]",
+      "observed": "[]",
+      "pass": true
+    }
+  ],
+  "result": {
+    "kind": "fail",
+    "failed": [
+      "a0-driver"
+    ]
+  }
+}

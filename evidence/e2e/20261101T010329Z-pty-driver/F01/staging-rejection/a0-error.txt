@@ -1,0 +1,4 @@
+Error: docker cp failed (1): lstat /private/tmp/soroi-a0-negative-fAVHdv/missing-models.yml: no such file or directory
+
+    at checked (/Users/mouriya/Ext/worktrees/test-218-pty-a0-ff0716f/e2e/pty/a0.ts:22:35)
+    at async runA0 (/Users/mouriya/Ext/worktrees/test-218-pty-a0-ff0716f/e2e/pty/a0.ts:104:10)

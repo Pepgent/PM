@@ -1,0 +1,11 @@
+{
+  "kind": "empty-home-precondition",
+  "fullA0": false,
+  "image": "pepgent-registry.orb.local:5000/pepgent/omp-agent:latest",
+  "result": {
+    "code": 0,
+    "terminalStatus": 0,
+    "terminalClosed": true,
+    "bytes": 211
+  }
+}
