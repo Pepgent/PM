@@ -133,3 +133,47 @@
   - Lab 自有活动行的分类与入口；
   - 容器页的 `nodeBindingCount`、`resources`、模板挂载、`liveContainers`。
 - **送达：** 由 AreaMgrPepgent 把结论评论送达 W-10。D38 各行有结果后，再在 #28 登记并送达 W-10。
+
+## 六、D38 表决中的反例与措辞问题处置
+
+编制：governance-desk 实例 `DeskD38Revise`（总协调席，与 Main 合计 1 票）。本实例从 `gh api repos/Pepgent/<repo>/tarball/main` 取 Pepgent、soroi 的 main 快照并解到 `/tmp/desk38r/`，取 lab-library main 的 `nodes/*.ts` 原文，只读；没有读 git 历史或 session，没有运行构建或测试。
+
+### 6.1 D38-02 v1 的 ClaudeHigh 反例：成立，修订为 v2
+
+**反例要点（A）：** “节点合入”有 `library.merge`、`library.apply`、`agentTemplate.saveVersion` 三个入口命令，v1 只收 `library.merge`，F29 S2 主路径上的合入不产生 activity。
+
+**复核（D）：**
+- `W/protocol/lab/command.ts:74-75`：`agentTemplate.saveVersion`，注释“= library.merge of the template's path (D7:71)”，结果 `{kind:'merged', commit, paths}`（`:152`）；`:110` 为 `library.apply`，结果 `{kind:'applied', commit, paths, staging}`（`:174-178`）；`:112` 为 `library.merge`。
+- `W/server/lab/library.ts:315-353`：`library.apply` 把暂存源码写进 nodes 页 Panel worktree 后，在 `:345` 调 `this.merge`；`:354-357` 的 `library.merge` 调同一个 `this.merge`；`:379-380`：`git apply --3way`、commit、push，再快进中心检出。
+- D7-11（`DEC/D7-lab-backend.md:71`）：“library.apply……再同一路 merge”；D12-10（`DEC/D12-lab-wire.md:436`）：saveVersion“= library.merge 该模板的路径”；D7-02（`DEC/D7-lab-backend.md:62`）记“节点合入”；F29 S2（`DEC/D8-mvp-scope.md:148`）的合入走 `library.apply`。
+
+v1 照字面会漏写两个入口的合入；若写 `kind = library.apply`，又落在封闭词表外，W-10 无法穷尽映射。反例成立。
+
+**v2 与 v1 的差异：**
+1. 节点合入族改为三个命令名，`kind` 仍取命令名；`text` 取结果中的 `paths`；`project` 在命令会话是讨论时取该讨论的项目，Panel 会话为 null；`settings.repoActivity` 取三个值的行；首页三者同一映射。
+2. 采纳 ClaudeHigh 建议一：D12-17 失效表 `library` 频道（`DEC/D12-lab-wire.md:611`）的失效读取加 `home`，W-10 在 `W/client/services/lab/invalidation.ts` 的 `library` 分支实现。
+3. 采纳 ClaudeHigh 建议二，入口改为 `dataset`：`sources` 弹窗标题 copy 是“Sources / 文献”（`W/client/services/lab-fixture/home.ts:254-257`），原型中与 `literature` 图标成对；`dataset` 弹窗在原型中与 `data` 类、`database` 图标成对（`home.ts:121-131`）。`HomeDialogId` 只有五个固定值（`C/lab-home.ts:16`），新增合入专属弹窗会扩大视图结构（D20-02、U59），不取；“弹窗标题是‘数据集’”写进代价。
+
+**闸门：** v2 扩大了 W-09 的写入范围（多两个命令），重送两道闸门。闸门 A（`Argon-2`）：三处差异符合 D7-02、D7-11、D12-10、D12-17 原意，无新的意图或公开契约问题，见 `pepgent28-web06-gate-a.md` 第三节。闸门 B（`ArgonGovernance-2`）：仍在 W-09（`server/lab/**`）与 W-10（`client/**`、`features/lab-home/model/**`）既有白名单内，不改 D16-09/D20 与 WEB-06 切片归属，维持 4 席参投、不加 `governance`，见 `pepgent28-web06-gate-b.md` 第三节。
+
+**修订：** `council revise D38-02 --as DeskD38Revise --file /tmp/desk38r/D38-02-v2.yaml --reasons @/tmp/desk38r/D38-02-why.md` → “D38-02 revised to v2; votes on v1 no longer count.” 四个资格席重投 v2。
+
+### 6.2 D38-03 `nodeBindingCount` 的字段：改变语义，另立 D40 表决
+
+**问题（A）：** ClaudeHigh 在 D38-03 v1 的赞成票中指出，`nodeBindingCount` 一项写的 `template` 应为 `NodeDefinition.defaultEnvironment`，提请回写时改正。
+
+**复核（D）：**
+- `P/library.ts:29-31`：`NodeDefinition` 同时有 `defaultEnvironment: string | null`（“Exact source expression, or null when the constructor declares no environment”）与 `template: TemplateName | null`；D12 同形（`DEC/D12-lab-wire.md:239`）。
+- `W/server/lab/library-definition.ts:113-125`：`defaultEnvironment` 取节点构造 `env` 选项的源码原文；`template` 只在 Agent 节点取 `template` 选项。
+- soroi main `packages/omp-soroi/src/eval/node.ts:19-20,25,36-37`：`env?: Template` 是“Name of an environment template registered in remote”；Agent 的 `template` 是“omp agent definition the subagent runs as”。lab-library main `nodes/review.ts` 写 `{ template: "review" }`。
+- D7-13（`DEC/D7-lab-backend.md:73`）：“`nodeBindingCount`：默认环境是用这个镜像的模板的节点函数个数”。
+
+**判定：不是不改语义的笔误。** v1 照字面按 `template` 计：Program 节点恒为 null、从不计入，Agent 节点以 agent 定义名与 remote 模板名比较，统计的是另一种关系。改成默认环境后，读取的字段和计入的节点集合都变了，还要新增一条取值规则（`defaultEnvironment` 是源码原文，字符串字面量取其值作模板名）。这改变 W-10 照文实现的结果，按 `SOR/AGENTS.md:123` 不能在回写时单方改正，须表决；因此不走回写，不需闸门 B 对回写的同意。
+
+**程序：** `council revise D38-03 …` 被拒（“D38-03 is already decided: **通过** 4/4（门槛 3）”），已定行不能修订。改以新议程表决：`council propose --seat Coordination --as DeskD38Revise --file /tmp/desk38r/D-d38-03-nodebinding.yaml` → D40（[Pepgent/PM#59](https://github.com/Pepgent/PM/issues/59)，P0），单行 D40-01：`nodeBindingCount` 按 `NodeDefinition.defaultEnvironment` 计，取代 D38-03 v1 的该项，其余不变；D38 归档回写 D7-13 时按 D40-01 写。写方、读方、白名单与切片归属不变；两道闸门在 D38-02 v2 复核中已就该更正告知项表示同意（闸门 A：符合 D7-13 原意；闸门 B：走表决、不出 W-10 白名单、不加 `governance`）。
+
+### 6.3 表决期暂停范围的调整
+
+- Lab 自有活动行的分类与入口：继续暂停，待 D38-02 v2 有结果。
+- 容器页 `nodeBindingCount`：继续暂停，待 D40-01 有结果；`resources`、模板挂载、`liveContainers` 已随 D38-03 通过解除暂停。
+- D38-02 v2、D40-01 有结果后，由 AreaMgrPepgent 在 #28 登记并送达 W-10。
