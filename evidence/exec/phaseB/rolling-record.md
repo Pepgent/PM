@@ -40,6 +40,8 @@
 9. **W-04 deploy 第三次进场，承接 deploy#20（D21 与 D22，注入两个卷路径变量）。** 发车前用 `tern ls` 核对过在跑席位为 lab、plugin、e2e 三席，W-04 补上后共 4 席，没有超过上限。本次 tern id 为 666080708132867，peer 为 01a197aa-8615，片区经理为 AreaMgrDeploy2。另外，W-07、W-08 的 home 已快进到 origin/main 380ab02，避免 watchdog 读到旧版规则后对工人误报。
 10. **W-04 第三次进场交付后退役。** (R) Main 提供：[deploy PR#21](https://github.com/Pepgent/deploy/pull/21) 已合入，[deploy#20](https://github.com/Pepgent/deploy/issues/20) 已关闭并留有 ALL_DONE 评论，`gh issue list -R Pepgent/deploy --state open` 返回 0，已执行 `tern kill session pepgent-deploy`；AreaMgrDeploy2 核实 `tern capture` 已返回 `no block is called`。最近一次源头观察为 lab、plugin、e2e 三席。W-10 等 LAB-07a（[Pepgent#17](https://github.com/Pepgent/Pepgent/issues/17)，Main 本次报告为 OPEN）合入后，以原会话名、原目录重新进场；D20 已通过，不再作为待投票条件。未提供精确退役UTC，不补造。
 11. **W-06 pepgent-store 承接 D23-02 重新进场（Main 本次报告称“第二次进场”）。** (R) 发车前 `tern ls` 为 lab、plugin、e2e 三席；`pepgent-store-home` 的 `status` 干净，`merge --ff-only origin/main` 从 `28dcb24` 快进到 `6fc3c95`。`tern new session pepgent-store ...` 返回 `666428600483843`，`peer_list` 显示 peer `01a197b6-b735`、cwd `pepgent-store-home`。承载为 [soroi#315](https://github.com/Pepgent/soroi/issues/315)，片区经理 AreaMgrSoroi。当前在跑 lab、plugin、e2e、store 四席；发车只记录进程启动，不等于schema修正已合入。另据Main报告，W-07/W-08的home已从`380ab02`快进到`6fc3c95`，用于watchdog cwd限定的验收；不据快进动作宣称验收通过。
+12. **W-06本次D23交付后退役。** (R) Main提供的 `gh pr view` 确认[soroi PR#316](https://github.com/Pepgent/soroi/pull/316)为MERGED，合并提交`5ad9b4b`，关闭[soroi#315](https://github.com/Pepgent/soroi/issues/315)；之后执行 `tern kill session pepgent-store`，当前在跑lab、plugin、e2e三席。本仓合入与退役不替代阶段C跨组件验收。
+13. **watchdog修复的本窗口执行证据与治理交接。** (R) Main报告修复为omp-config `20330d7`与soroi `6fc3c95`（LeaderCompliance增加cwd限定）；主会话于15:28:14Z重启harness。AreaMgrSoroi核实W-07、W-08、W-06在15:28:32–45Z重启，该观察窗口后这三席未新增LeaderCompliance告警。仅记录经理报告，不推断未来永久无告警。GovClone_55b0的fork快照随重启失效，Main已新fork GovClone_2dcf接替。
 ## LEDGER 核对
 
 | 条款 | 核对结果 |
@@ -47,7 +49,7 @@
 | C1-2 | 每个域一个席位；Pepgent 使用独立克隆 |
 | C1-3 | 同域切片可合并 PR，不设每步验收锁；W-08 在所测代码合入后编写 spec，阶段 C 统一全流程验收尚未开始。开发期异步非阻塞接缝金丝雀依 U96 / C1-3 执行，不作为工人开工、合并或轮换门禁 |
 | C3-4 | 切片 worktree 用 `-b` 建；不检出 main |
-| 当前席位 | W-04第三次交付退役后，W-06已承接D23-02重新进场；最近一次Main源头观察为lab、plugin、e2e、store，共4席。store承载soroi#315，经理AreaMgrSoroi。十席全部至少发车一次；实时状态以tern ls及原issue/PR为准。本记录不以退役纠错抹去此前五席违例，不以发车或合入代替阶段C统一验收。W-10等待LAB-07a（Pepgent#17，本次已知OPEN）合入后重新进场 |
+| 当前席位 | W-06的D23修正已由PR#316（5ad9b4b）合入、关闭#315并退役，最近一次Main观察为lab、plugin、e2e，共3席。十席全部至少发车一次；实时状态以tern ls及原issue/PR为准。不以退役纠错抹去此前五席违例，不以合入或watchdog本窗口无告警替代持续合规或阶段C验收。W-10等待LAB-07a（Pepgent#17，最近已知OPEN）合入后重新进场 |
 
 ## W-10 重新进场前置
 
