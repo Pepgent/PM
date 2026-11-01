@@ -1,0 +1,8 @@
+{
+  "roles": [
+    "example:deploy#1"
+  ],
+  "canonical_context": "deploy-1",
+  "metadata": "issue.json contains full REST metadata including body",
+  "body": "issue.json.body"
+}

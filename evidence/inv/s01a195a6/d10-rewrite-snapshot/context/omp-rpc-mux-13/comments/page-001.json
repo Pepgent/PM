@@ -1,0 +1,49 @@
+[
+  {
+    "url": "https://api.github.com/repos/Pepgent/omp-rpc-mux/issues/comments/6553861442",
+    "html_url": "https://github.com/Pepgent/omp-rpc-mux/issues/13#issuecomment-6553861442",
+    "issue_url": "https://api.github.com/repos/Pepgent/omp-rpc-mux/issues/13",
+    "id": 6553861442,
+    "node_id": "IC_kwDOVelF788AAAABhqP9Qg",
+    "user": {
+      "login": "RiriAgent",
+      "id": 39219425,
+      "node_id": "MDQ6VXNlcjM5MjE5NDI1",
+      "avatar_url": "https://avatars.githubusercontent.com/u/39219425?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/RiriAgent",
+      "html_url": "https://github.com/RiriAgent",
+      "followers_url": "https://api.github.com/users/RiriAgent/followers",
+      "following_url": "https://api.github.com/users/RiriAgent/following{/other_user}",
+      "gists_url": "https://api.github.com/users/RiriAgent/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/RiriAgent/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/RiriAgent/subscriptions",
+      "organizations_url": "https://api.github.com/users/RiriAgent/orgs",
+      "repos_url": "https://api.github.com/users/RiriAgent/repos",
+      "events_url": "https://api.github.com/users/RiriAgent/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/RiriAgent/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "created_at": "2026-11-01T05:20:52Z",
+    "updated_at": "2026-11-01T05:20:52Z",
+    "body": "STARTED：主执行者已完整读过当前README、D3全文/PM3定稿、D8-09完整TUI补充及相关Soroi边界；steady/divergent与mentor均已核对方案。内容分工按含义迁移：CLI/env、凭据来源校验、TLS/mesh、Compose与跨平台发行操作留README；角色/API/帧、ready、生命周期、raw广播、human、presence、endpoint、文件能力、背压/故障进入design/mux.md。TUI根例外在设计前部明确并归因D8-09，消费者业务义务不写成已部署事实。D3旧时序不复制，按实际process先连后spawn、原始ready后内部mux_ready细化。AGENTS.md不改，因其已要求遵守D3，而D3本身明确要求新建此设计；不增加新的agent指令或多处权威声明。仅两份Markdown变更，复用PR8–12仍有效的运行证据。",
+    "author_association": "MEMBER",
+    "pin": null,
+    "reactions": {
+      "url": "https://api.github.com/repos/Pepgent/omp-rpc-mux/issues/comments/6553861442/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": null,
+    "minimized": null
+  }
+]

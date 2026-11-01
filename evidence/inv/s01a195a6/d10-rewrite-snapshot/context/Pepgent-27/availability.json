@@ -1,0 +1,87 @@
+{
+  "captured_at": "2026-11-01T07:08:27.758145+00:00",
+  "owner": "Pepgent",
+  "repo": "Pepgent",
+  "number": 27,
+  "inventory_sources": [
+    "Pepgent.json"
+  ],
+  "roles": [],
+  "inventory_title": "WEB-04 讨论、数据集与编辑器投影",
+  "rest_state": "open",
+  "issue": {
+    "endpoint": "repos/Pepgent/Pepgent/issues/27",
+    "status": 200,
+    "captured": "Pepgent-27/issue.json"
+  },
+  "comments": {
+    "endpoint": "repos/Pepgent/Pepgent/issues/27/comments",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/Pepgent/issues/27/comments?per_page=100&page=1",
+        "status": 200,
+        "captured": "Pepgent-27/comments/page-001.json",
+        "count": 0
+      }
+    ],
+    "page_count": 1,
+    "item_count": 0,
+    "unavailable": false
+  },
+  "timeline": {
+    "endpoint": "repos/Pepgent/Pepgent/issues/27/timeline",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/Pepgent/issues/27/timeline?per_page=100&page=1",
+        "status": 200,
+        "captured": "Pepgent-27/timeline/page-001.json",
+        "count": 3
+      }
+    ],
+    "page_count": 1,
+    "item_count": 3,
+    "unavailable": false
+  },
+  "parent": {
+    "endpoint": "repos/Pepgent/Pepgent/issues/27/parent",
+    "status": 404,
+    "unavailable": true,
+    "error": "gh: No parent issue found (HTTP 404)",
+    "error_body": {
+      "message": "No parent issue found",
+      "documentation_url": "https://docs.github.com/rest/issues/sub-issues#get-parent-issue",
+      "status": "404"
+    }
+  },
+  "sub_issues": {
+    "endpoint": "repos/Pepgent/Pepgent/issues/27/sub_issues",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/Pepgent/issues/27/sub_issues?per_page=100&page=1",
+        "status": 200,
+        "captured": "Pepgent-27/sub_issues/page-001.json",
+        "count": 0
+      }
+    ],
+    "page_count": 1,
+    "item_count": 0,
+    "unavailable": false
+  },
+  "api_unavailable": [
+    {
+      "resource": "parent",
+      "endpoint": "repos/Pepgent/Pepgent/issues/27/parent",
+      "status": 404,
+      "unavailable": true,
+      "error": "gh: No parent issue found (HTTP 404)",
+      "error_body": {
+        "message": "No parent issue found",
+        "documentation_url": "https://docs.github.com/rest/issues/sub-issues#get-parent-issue",
+        "status": "404"
+      }
+    }
+  ]
+}

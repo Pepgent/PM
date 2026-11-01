@@ -1,0 +1,24 @@
+[
+  {
+    "resource": "inventory-state-assumption",
+    "count": 2,
+    "statuses": [
+      {
+        "status": null,
+        "count": 2,
+        "error": null
+      }
+    ]
+  },
+  {
+    "resource": "parent",
+    "count": 54,
+    "statuses": [
+      {
+        "status": 404,
+        "count": 54,
+        "error": "gh: No parent issue found (HTTP 404)"
+      }
+    ]
+  }
+]

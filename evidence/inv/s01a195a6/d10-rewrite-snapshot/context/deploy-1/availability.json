@@ -1,0 +1,89 @@
+{
+  "captured_at": "2026-11-01T07:07:24.014439+00:00",
+  "owner": "Pepgent",
+  "repo": "deploy",
+  "number": 1,
+  "inventory_sources": [
+    "deploy.json"
+  ],
+  "roles": [
+    "example:deploy#1"
+  ],
+  "inventory_title": "DEP-03 中心 store 发行初始化",
+  "rest_state": "open",
+  "issue": {
+    "endpoint": "repos/Pepgent/deploy/issues/1",
+    "status": 200,
+    "captured": "deploy-1/issue.json"
+  },
+  "comments": {
+    "endpoint": "repos/Pepgent/deploy/issues/1/comments",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/deploy/issues/1/comments?per_page=100&page=1",
+        "status": 200,
+        "captured": "deploy-1/comments/page-001.json",
+        "count": 7
+      }
+    ],
+    "page_count": 1,
+    "item_count": 7,
+    "unavailable": false
+  },
+  "timeline": {
+    "endpoint": "repos/Pepgent/deploy/issues/1/timeline",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/deploy/issues/1/timeline?per_page=100&page=1",
+        "status": 200,
+        "captured": "deploy-1/timeline/page-001.json",
+        "count": 15
+      }
+    ],
+    "page_count": 1,
+    "item_count": 15,
+    "unavailable": false
+  },
+  "parent": {
+    "endpoint": "repos/Pepgent/deploy/issues/1/parent",
+    "status": 404,
+    "unavailable": true,
+    "error": "gh: No parent issue found (HTTP 404)",
+    "error_body": {
+      "message": "No parent issue found",
+      "documentation_url": "https://docs.github.com/rest/issues/sub-issues#get-parent-issue",
+      "status": "404"
+    }
+  },
+  "sub_issues": {
+    "endpoint": "repos/Pepgent/deploy/issues/1/sub_issues",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/deploy/issues/1/sub_issues?per_page=100&page=1",
+        "status": 200,
+        "captured": "deploy-1/sub_issues/page-001.json",
+        "count": 0
+      }
+    ],
+    "page_count": 1,
+    "item_count": 0,
+    "unavailable": false
+  },
+  "api_unavailable": [
+    {
+      "resource": "parent",
+      "endpoint": "repos/Pepgent/deploy/issues/1/parent",
+      "status": 404,
+      "unavailable": true,
+      "error": "gh: No parent issue found (HTTP 404)",
+      "error_body": {
+        "message": "No parent issue found",
+        "documentation_url": "https://docs.github.com/rest/issues/sub-issues#get-parent-issue",
+        "status": "404"
+      }
+    }
+  ]
+}

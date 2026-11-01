@@ -1,0 +1,87 @@
+{
+  "captured_at": "2026-11-01T07:08:40.455391+00:00",
+  "owner": "Pepgent",
+  "repo": "PM",
+  "number": 15,
+  "inventory_sources": [
+    "PM.json"
+  ],
+  "roles": [],
+  "inventory_title": "D9-03 点线面缺口报告与表决",
+  "rest_state": "open",
+  "issue": {
+    "endpoint": "repos/Pepgent/PM/issues/15",
+    "status": 200,
+    "captured": "PM-15/issue.json"
+  },
+  "comments": {
+    "endpoint": "repos/Pepgent/PM/issues/15/comments",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/PM/issues/15/comments?per_page=100&page=1",
+        "status": 200,
+        "captured": "PM-15/comments/page-001.json",
+        "count": 0
+      }
+    ],
+    "page_count": 1,
+    "item_count": 0,
+    "unavailable": false
+  },
+  "timeline": {
+    "endpoint": "repos/Pepgent/PM/issues/15/timeline",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/PM/issues/15/timeline?per_page=100&page=1",
+        "status": 200,
+        "captured": "PM-15/timeline/page-001.json",
+        "count": 2
+      }
+    ],
+    "page_count": 1,
+    "item_count": 2,
+    "unavailable": false
+  },
+  "parent": {
+    "endpoint": "repos/Pepgent/PM/issues/15/parent",
+    "status": 404,
+    "unavailable": true,
+    "error": "gh: No parent issue found (HTTP 404)",
+    "error_body": {
+      "message": "No parent issue found",
+      "documentation_url": "https://docs.github.com/rest/issues/sub-issues#get-parent-issue",
+      "status": "404"
+    }
+  },
+  "sub_issues": {
+    "endpoint": "repos/Pepgent/PM/issues/15/sub_issues",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/PM/issues/15/sub_issues?per_page=100&page=1",
+        "status": 200,
+        "captured": "PM-15/sub_issues/page-001.json",
+        "count": 0
+      }
+    ],
+    "page_count": 1,
+    "item_count": 0,
+    "unavailable": false
+  },
+  "api_unavailable": [
+    {
+      "resource": "parent",
+      "endpoint": "repos/Pepgent/PM/issues/15/parent",
+      "status": 404,
+      "unavailable": true,
+      "error": "gh: No parent issue found (HTTP 404)",
+      "error_body": {
+        "message": "No parent issue found",
+        "documentation_url": "https://docs.github.com/rest/issues/sub-issues#get-parent-issue",
+        "status": "404"
+      }
+    }
+  ]
+}

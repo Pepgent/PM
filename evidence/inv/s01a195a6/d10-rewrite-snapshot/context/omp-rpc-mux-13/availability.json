@@ -1,0 +1,68 @@
+{
+  "captured_at": "2026-11-01T07:07:32.651200+00:00",
+  "owner": "Pepgent",
+  "repo": "omp-rpc-mux",
+  "number": 13,
+  "inventory_sources": [
+    "omp-rpc-mux.json"
+  ],
+  "roles": [],
+  "inventory_title": "补齐已实现的 Mux 架构与协议设计",
+  "rest_state": "open",
+  "issue": {
+    "endpoint": "repos/Pepgent/omp-rpc-mux/issues/13",
+    "status": 200,
+    "captured": "omp-rpc-mux-13/issue.json"
+  },
+  "comments": {
+    "endpoint": "repos/Pepgent/omp-rpc-mux/issues/13/comments",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/omp-rpc-mux/issues/13/comments?per_page=100&page=1",
+        "status": 200,
+        "captured": "omp-rpc-mux-13/comments/page-001.json",
+        "count": 1
+      }
+    ],
+    "page_count": 1,
+    "item_count": 1,
+    "unavailable": false
+  },
+  "timeline": {
+    "endpoint": "repos/Pepgent/omp-rpc-mux/issues/13/timeline",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/omp-rpc-mux/issues/13/timeline?per_page=100&page=1",
+        "status": 200,
+        "captured": "omp-rpc-mux-13/timeline/page-001.json",
+        "count": 4
+      }
+    ],
+    "page_count": 1,
+    "item_count": 4,
+    "unavailable": false
+  },
+  "parent": {
+    "endpoint": "repos/Pepgent/omp-rpc-mux/issues/13/parent",
+    "status": 200,
+    "captured": "omp-rpc-mux-13/parent.json"
+  },
+  "sub_issues": {
+    "endpoint": "repos/Pepgent/omp-rpc-mux/issues/13/sub_issues",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/omp-rpc-mux/issues/13/sub_issues?per_page=100&page=1",
+        "status": 200,
+        "captured": "omp-rpc-mux-13/sub_issues/page-001.json",
+        "count": 0
+      }
+    ],
+    "page_count": 1,
+    "item_count": 0,
+    "unavailable": false
+  },
+  "api_unavailable": []
+}

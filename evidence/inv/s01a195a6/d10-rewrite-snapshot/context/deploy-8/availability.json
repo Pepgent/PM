@@ -1,0 +1,74 @@
+{
+  "captured_at": "2026-11-01T07:07:26.194492+00:00",
+  "owner": "Pepgent",
+  "repo": "deploy",
+  "number": 8,
+  "inventory_sources": [],
+  "roles": [
+    "example:deploy#8"
+  ],
+  "inventory_title": null,
+  "rest_state": "closed",
+  "issue": {
+    "endpoint": "repos/Pepgent/deploy/issues/8",
+    "status": 200,
+    "captured": "deploy-8/issue.json"
+  },
+  "comments": {
+    "endpoint": "repos/Pepgent/deploy/issues/8/comments",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/deploy/issues/8/comments?per_page=100&page=1",
+        "status": 200,
+        "captured": "deploy-8/comments/page-001.json",
+        "count": 3
+      }
+    ],
+    "page_count": 1,
+    "item_count": 3,
+    "unavailable": false
+  },
+  "timeline": {
+    "endpoint": "repos/Pepgent/deploy/issues/8/timeline",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/deploy/issues/8/timeline?per_page=100&page=1",
+        "status": 200,
+        "captured": "deploy-8/timeline/page-001.json",
+        "count": 13
+      }
+    ],
+    "page_count": 1,
+    "item_count": 13,
+    "unavailable": false
+  },
+  "parent": {
+    "endpoint": "repos/Pepgent/deploy/issues/8/parent",
+    "status": 200,
+    "captured": "deploy-8/parent.json"
+  },
+  "sub_issues": {
+    "endpoint": "repos/Pepgent/deploy/issues/8/sub_issues",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/deploy/issues/8/sub_issues?per_page=100&page=1",
+        "status": 200,
+        "captured": "deploy-8/sub_issues/page-001.json",
+        "count": 0
+      }
+    ],
+    "page_count": 1,
+    "item_count": 0,
+    "unavailable": false
+  },
+  "api_unavailable": [
+    {
+      "resource": "inventory-state-assumption",
+      "rest_state": "closed",
+      "note": "Inventory row had no state field; REST state was not open"
+    }
+  ]
+}

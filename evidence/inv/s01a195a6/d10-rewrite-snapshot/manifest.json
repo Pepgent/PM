@@ -1,0 +1,491 @@
+[
+  {
+    "repo": "soroi",
+    "number": 190,
+    "url": "https://github.com/Pepgent/soroi/issues/190",
+    "path": "/tmp/d10-rewrite/drafts/soroi-190.md",
+    "receivers": [
+      "https://github.com/Pepgent/soroi/issues/220",
+      "https://github.com/Pepgent/soroi/issues/259"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "soroi",
+    "number": 203,
+    "url": "https://github.com/Pepgent/soroi/issues/203",
+    "path": "/tmp/d10-rewrite/drafts/soroi-203.md",
+    "receivers": [
+      "https://github.com/Pepgent/soroi/issues/182",
+      "https://github.com/Pepgent/Pepgent/issues/30"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "soroi",
+    "number": 196,
+    "url": "https://github.com/Pepgent/soroi/issues/196",
+    "path": "/tmp/d10-rewrite/drafts/soroi-196.md",
+    "receivers": [
+      "https://github.com/Pepgent/soroi/issues/250",
+      "https://github.com/Pepgent/soroi/issues/226"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "soroi",
+    "number": 205,
+    "url": "https://github.com/Pepgent/soroi/issues/205",
+    "path": "/tmp/d10-rewrite/drafts/soroi-205.md",
+    "receivers": [
+      "https://github.com/Pepgent/soroi/issues/250"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "soroi",
+    "number": 207,
+    "url": "https://github.com/Pepgent/soroi/issues/207",
+    "path": "/tmp/d10-rewrite/drafts/soroi-207.md",
+    "receivers": [
+      "https://github.com/Pepgent/soroi/issues/227"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "soroi",
+    "number": 209,
+    "url": "https://github.com/Pepgent/soroi/issues/209",
+    "path": "/tmp/d10-rewrite/drafts/soroi-209.md",
+    "receivers": [
+      "https://github.com/Pepgent/soroi/issues/227"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "soroi",
+    "number": 211,
+    "url": "https://github.com/Pepgent/soroi/issues/211",
+    "path": "/tmp/d10-rewrite/drafts/soroi-211.md",
+    "receivers": [
+      "https://github.com/Pepgent/soroi/issues/250"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "soroi",
+    "number": 214,
+    "url": "https://github.com/Pepgent/soroi/issues/214",
+    "path": "/tmp/d10-rewrite/drafts/soroi-214.md",
+    "receivers": [
+      "https://github.com/Pepgent/soroi/issues/231",
+      "https://github.com/Pepgent/soroi/issues/232"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "soroi",
+    "number": 215,
+    "url": "https://github.com/Pepgent/soroi/issues/215",
+    "path": "/tmp/d10-rewrite/drafts/soroi-215.md",
+    "receivers": [
+      "https://github.com/Pepgent/soroi/issues/231",
+      "https://github.com/Pepgent/soroi/issues/232"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "soroi",
+    "number": 216,
+    "url": "https://github.com/Pepgent/soroi/issues/216",
+    "path": "/tmp/d10-rewrite/drafts/soroi-216.md",
+    "receivers": [
+      "https://github.com/Pepgent/soroi/issues/227",
+      "https://github.com/Pepgent/soroi/issues/231",
+      "https://github.com/Pepgent/soroi/issues/233"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "soroi",
+    "number": 217,
+    "url": "https://github.com/Pepgent/soroi/issues/217",
+    "path": "/tmp/d10-rewrite/drafts/soroi-217.md",
+    "receivers": [
+      "https://github.com/Pepgent/soroi/issues/227"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "soroi",
+    "number": 222,
+    "url": "https://github.com/Pepgent/soroi/issues/222",
+    "path": "/tmp/d10-rewrite/drafts/soroi-222.md",
+    "receivers": [
+      "https://github.com/Pepgent/soroi/issues/233"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "soroi",
+    "number": 223,
+    "url": "https://github.com/Pepgent/soroi/issues/223",
+    "path": "/tmp/d10-rewrite/drafts/soroi-223.md",
+    "receivers": [
+      "https://github.com/Pepgent/soroi/issues/231",
+      "https://github.com/Pepgent/soroi/issues/232"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "soroi",
+    "number": 224,
+    "url": "https://github.com/Pepgent/soroi/issues/224",
+    "path": "/tmp/d10-rewrite/drafts/soroi-224.md",
+    "receivers": [
+      "https://github.com/Pepgent/soroi/issues/235"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "soroi",
+    "number": 228,
+    "url": "https://github.com/Pepgent/soroi/issues/228",
+    "path": "/tmp/d10-rewrite/drafts/soroi-228.md",
+    "receivers": [
+      "https://github.com/Pepgent/soroi/issues/233",
+      "https://github.com/Pepgent/soroi/issues/232",
+      "https://github.com/Pepgent/soroi/issues/231"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "soroi",
+    "number": 229,
+    "url": "https://github.com/Pepgent/soroi/issues/229",
+    "path": "/tmp/d10-rewrite/drafts/soroi-229.md",
+    "receivers": [
+      "https://github.com/Pepgent/soroi/issues/233"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "Pepgent",
+    "number": 9,
+    "url": "https://github.com/Pepgent/Pepgent/issues/9",
+    "path": "/tmp/d10-rewrite/drafts/Pepgent-9.md",
+    "receivers": [
+      "https://github.com/Pepgent/Pepgent/issues/30"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "Pepgent",
+    "number": 11,
+    "url": "https://github.com/Pepgent/Pepgent/issues/11",
+    "path": "/tmp/d10-rewrite/drafts/Pepgent-11.md",
+    "receivers": [
+      "https://github.com/Pepgent/Pepgent/issues/30"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "Pepgent",
+    "number": 13,
+    "url": "https://github.com/Pepgent/Pepgent/issues/13",
+    "path": "/tmp/d10-rewrite/drafts/Pepgent-13.md",
+    "receivers": [
+      "https://github.com/Pepgent/Pepgent/issues/30",
+      "https://github.com/Pepgent/Pepgent/issues/23"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "Pepgent",
+    "number": 14,
+    "url": "https://github.com/Pepgent/Pepgent/issues/14",
+    "path": "/tmp/d10-rewrite/drafts/Pepgent-14.md",
+    "receivers": [
+      "https://github.com/Pepgent/Pepgent/issues/30",
+      "https://github.com/Pepgent/Pepgent/issues/23"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "Pepgent",
+    "number": 15,
+    "url": "https://github.com/Pepgent/Pepgent/issues/15",
+    "path": "/tmp/d10-rewrite/drafts/Pepgent-15.md",
+    "receivers": [
+      "https://github.com/Pepgent/Pepgent/issues/30"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "Pepgent",
+    "number": 16,
+    "url": "https://github.com/Pepgent/Pepgent/issues/16",
+    "path": "/tmp/d10-rewrite/drafts/Pepgent-16.md",
+    "receivers": [
+      "https://github.com/Pepgent/Pepgent/issues/30"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "Pepgent",
+    "number": 17,
+    "url": "https://github.com/Pepgent/Pepgent/issues/17",
+    "path": "/tmp/d10-rewrite/drafts/Pepgent-17.md",
+    "receivers": [
+      "https://github.com/Pepgent/Pepgent/issues/30",
+      "https://github.com/Pepgent/Pepgent/issues/23"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "Pepgent",
+    "number": 18,
+    "url": "https://github.com/Pepgent/Pepgent/issues/18",
+    "path": "/tmp/d10-rewrite/drafts/Pepgent-18.md",
+    "receivers": [
+      "https://github.com/Pepgent/Pepgent/issues/30"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "Pepgent",
+    "number": 19,
+    "url": "https://github.com/Pepgent/Pepgent/issues/19",
+    "path": "/tmp/d10-rewrite/drafts/Pepgent-19.md",
+    "receivers": [
+      "https://github.com/Pepgent/Pepgent/issues/30"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "Pepgent",
+    "number": 20,
+    "url": "https://github.com/Pepgent/Pepgent/issues/20",
+    "path": "/tmp/d10-rewrite/drafts/Pepgent-20.md",
+    "receivers": [
+      "https://github.com/Pepgent/Pepgent/issues/30"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "Pepgent",
+    "number": 21,
+    "url": "https://github.com/Pepgent/Pepgent/issues/21",
+    "path": "/tmp/d10-rewrite/drafts/Pepgent-21.md",
+    "receivers": [
+      "https://github.com/Pepgent/Pepgent/issues/30"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "Pepgent",
+    "number": 22,
+    "url": "https://github.com/Pepgent/Pepgent/issues/22",
+    "path": "/tmp/d10-rewrite/drafts/Pepgent-22.md",
+    "receivers": [
+      "https://github.com/Pepgent/Pepgent/issues/30"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "Pepgent",
+    "number": 24,
+    "url": "https://github.com/Pepgent/Pepgent/issues/24",
+    "path": "/tmp/d10-rewrite/drafts/Pepgent-24.md",
+    "receivers": [
+      "https://github.com/Pepgent/Pepgent/issues/30"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "Pepgent",
+    "number": 25,
+    "url": "https://github.com/Pepgent/Pepgent/issues/25",
+    "path": "/tmp/d10-rewrite/drafts/Pepgent-25.md",
+    "receivers": [
+      "https://github.com/Pepgent/Pepgent/issues/30"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "Pepgent",
+    "number": 26,
+    "url": "https://github.com/Pepgent/Pepgent/issues/26",
+    "path": "/tmp/d10-rewrite/drafts/Pepgent-26.md",
+    "receivers": [
+      "https://github.com/Pepgent/Pepgent/issues/30"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "Pepgent",
+    "number": 27,
+    "url": "https://github.com/Pepgent/Pepgent/issues/27",
+    "path": "/tmp/d10-rewrite/drafts/Pepgent-27.md",
+    "receivers": [
+      "https://github.com/Pepgent/Pepgent/issues/30"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "Pepgent",
+    "number": 28,
+    "url": "https://github.com/Pepgent/Pepgent/issues/28",
+    "path": "/tmp/d10-rewrite/drafts/Pepgent-28.md",
+    "receivers": [
+      "https://github.com/Pepgent/Pepgent/issues/30"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "Pepgent",
+    "number": 29,
+    "url": "https://github.com/Pepgent/Pepgent/issues/29",
+    "path": "/tmp/d10-rewrite/drafts/Pepgent-29.md",
+    "receivers": [
+      "https://github.com/Pepgent/Pepgent/issues/30"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "soroi",
+    "number": 219,
+    "url": "https://github.com/Pepgent/soroi/issues/219",
+    "path": "/tmp/d10-rewrite/drafts/soroi-219.md",
+    "receivers": [],
+    "kind": "e2e"
+  },
+  {
+    "repo": "soroi",
+    "number": 220,
+    "url": "https://github.com/Pepgent/soroi/issues/220",
+    "path": "/tmp/d10-rewrite/drafts/soroi-220.md",
+    "receivers": [],
+    "kind": "e2e"
+  },
+  {
+    "repo": "soroi",
+    "number": 226,
+    "url": "https://github.com/Pepgent/soroi/issues/226",
+    "path": "/tmp/d10-rewrite/drafts/soroi-226.md",
+    "receivers": [],
+    "kind": "e2e"
+  },
+  {
+    "repo": "soroi",
+    "number": 227,
+    "url": "https://github.com/Pepgent/soroi/issues/227",
+    "path": "/tmp/d10-rewrite/drafts/soroi-227.md",
+    "receivers": [],
+    "kind": "e2e"
+  },
+  {
+    "repo": "soroi",
+    "number": 231,
+    "url": "https://github.com/Pepgent/soroi/issues/231",
+    "path": "/tmp/d10-rewrite/drafts/soroi-231.md",
+    "receivers": [],
+    "kind": "e2e"
+  },
+  {
+    "repo": "soroi",
+    "number": 232,
+    "url": "https://github.com/Pepgent/soroi/issues/232",
+    "path": "/tmp/d10-rewrite/drafts/soroi-232.md",
+    "receivers": [],
+    "kind": "e2e"
+  },
+  {
+    "repo": "soroi",
+    "number": 233,
+    "url": "https://github.com/Pepgent/soroi/issues/233",
+    "path": "/tmp/d10-rewrite/drafts/soroi-233.md",
+    "receivers": [],
+    "kind": "e2e"
+  },
+  {
+    "repo": "Pepgent",
+    "number": 30,
+    "url": "https://github.com/Pepgent/Pepgent/issues/30",
+    "path": "/tmp/d10-rewrite/drafts/Pepgent-30.md",
+    "receivers": [],
+    "kind": "e2e"
+  },
+  {
+    "repo": "Pepgent",
+    "number": 23,
+    "url": "https://github.com/Pepgent/Pepgent/issues/23",
+    "path": "/tmp/d10-rewrite/drafts/Pepgent-23.md",
+    "receivers": [],
+    "kind": "e2e"
+  },
+  {
+    "repo": "soroi",
+    "number": 182,
+    "url": "https://github.com/Pepgent/soroi/issues/182",
+    "path": "/tmp/d10-rewrite/drafts/soroi-182.md",
+    "receivers": [],
+    "kind": "live"
+  },
+  {
+    "repo": "soroi",
+    "number": 245,
+    "url": "https://github.com/Pepgent/soroi/issues/245",
+    "path": "/tmp/d10-rewrite/drafts/soroi-245.md",
+    "receivers": [],
+    "kind": "live"
+  },
+  {
+    "repo": "soroi",
+    "number": 250,
+    "url": "https://github.com/Pepgent/soroi/issues/250",
+    "path": "/tmp/d10-rewrite/drafts/soroi-250.md",
+    "receivers": [],
+    "kind": "live"
+  },
+  {
+    "repo": "soroi",
+    "number": 259,
+    "url": "https://github.com/Pepgent/soroi/issues/259",
+    "path": "/tmp/d10-rewrite/drafts/soroi-259.md",
+    "receivers": [],
+    "kind": "live"
+  },
+  {
+    "repo": "soroi",
+    "number": 235,
+    "url": "https://github.com/Pepgent/soroi/issues/235",
+    "path": "/tmp/d10-rewrite/drafts/soroi-235.md",
+    "receivers": [],
+    "kind": "live"
+  },
+  {
+    "repo": "PM",
+    "number": 13,
+    "url": "https://github.com/Pepgent/PM/issues/13",
+    "path": "/tmp/d10-rewrite/drafts/PM-13.md",
+    "receivers": [],
+    "kind": "D9"
+  },
+  {
+    "repo": "PM",
+    "number": 14,
+    "url": "https://github.com/Pepgent/PM/issues/14",
+    "path": "/tmp/d10-rewrite/drafts/PM-14.md",
+    "receivers": [],
+    "kind": "D9"
+  },
+  {
+    "repo": "PM",
+    "number": 15,
+    "url": "https://github.com/Pepgent/PM/issues/15",
+    "path": "/tmp/d10-rewrite/drafts/PM-15.md",
+    "receivers": [],
+    "kind": "D9"
+  }
+]

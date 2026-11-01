@@ -1,0 +1,87 @@
+{
+  "captured_at": "2026-11-01T07:08:50.552587+00:00",
+  "owner": "Pepgent",
+  "repo": "soroi",
+  "number": 203,
+  "inventory_sources": [
+    "soroi.json"
+  ],
+  "roles": [],
+  "inventory_title": "STO-12 store 镜像与发行导入",
+  "rest_state": "open",
+  "issue": {
+    "endpoint": "repos/Pepgent/soroi/issues/203",
+    "status": 200,
+    "captured": "soroi-203/issue.json"
+  },
+  "comments": {
+    "endpoint": "repos/Pepgent/soroi/issues/203/comments",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/soroi/issues/203/comments?per_page=100&page=1",
+        "status": 200,
+        "captured": "soroi-203/comments/page-001.json",
+        "count": 4
+      }
+    ],
+    "page_count": 1,
+    "item_count": 4,
+    "unavailable": false
+  },
+  "timeline": {
+    "endpoint": "repos/Pepgent/soroi/issues/203/timeline",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/soroi/issues/203/timeline?per_page=100&page=1",
+        "status": 200,
+        "captured": "soroi-203/timeline/page-001.json",
+        "count": 12
+      }
+    ],
+    "page_count": 1,
+    "item_count": 12,
+    "unavailable": false
+  },
+  "parent": {
+    "endpoint": "repos/Pepgent/soroi/issues/203/parent",
+    "status": 404,
+    "unavailable": true,
+    "error": "gh: No parent issue found (HTTP 404)",
+    "error_body": {
+      "message": "No parent issue found",
+      "documentation_url": "https://docs.github.com/rest/issues/sub-issues#get-parent-issue",
+      "status": "404"
+    }
+  },
+  "sub_issues": {
+    "endpoint": "repos/Pepgent/soroi/issues/203/sub_issues",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/soroi/issues/203/sub_issues?per_page=100&page=1",
+        "status": 200,
+        "captured": "soroi-203/sub_issues/page-001.json",
+        "count": 0
+      }
+    ],
+    "page_count": 1,
+    "item_count": 0,
+    "unavailable": false
+  },
+  "api_unavailable": [
+    {
+      "resource": "parent",
+      "endpoint": "repos/Pepgent/soroi/issues/203/parent",
+      "status": 404,
+      "unavailable": true,
+      "error": "gh: No parent issue found (HTTP 404)",
+      "error_body": {
+        "message": "No parent issue found",
+        "documentation_url": "https://docs.github.com/rest/issues/sub-issues#get-parent-issue",
+        "status": "404"
+      }
+    }
+  ]
+}

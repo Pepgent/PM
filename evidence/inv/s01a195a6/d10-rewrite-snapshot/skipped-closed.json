@@ -1,0 +1,21 @@
+[
+  {
+    "repo": "soroi",
+    "number": 196,
+    "url": "https://github.com/Pepgent/soroi/issues/196",
+    "path": "/tmp/d10-rewrite/drafts/soroi-196.md",
+    "receivers": [
+      "https://github.com/Pepgent/soroi/issues/250",
+      "https://github.com/Pepgent/soroi/issues/226"
+    ],
+    "kind": "implementation"
+  },
+  {
+    "repo": "soroi",
+    "number": 219,
+    "url": "https://github.com/Pepgent/soroi/issues/219",
+    "path": "/tmp/d10-rewrite/drafts/soroi-219.md",
+    "receivers": [],
+    "kind": "e2e"
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "issues": 57,
+  "parent_available": 3,
+  "parent_unavailable": 54,
+  "subissues_nonempty": [
+    {
+      "key": "images-3",
+      "sub_count": 3
+    }
+  ],
+  "subissues_empty": 56
+}

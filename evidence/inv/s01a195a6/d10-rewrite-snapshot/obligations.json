@@ -1,0 +1,267 @@
+[
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/190",
+    "receiver": "https://github.com/Pepgent/soroi/issues/220",
+    "original": "从任意 seq 续订，事件不重不漏"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/190",
+    "receiver": "https://github.com/Pepgent/soroi/issues/259",
+    "original": "从任意 seq 续订，事件不重不漏"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/203",
+    "receiver": "https://github.com/Pepgent/soroi/issues/182",
+    "original": "冷启动后 init 返回 `ReleaseRecord`；`GET /releases` 有这条记录，它引用的 boot、runner、定制 tar 都能 `GET /objects/<哈希>`；哈希不符时不写任何记录"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/203",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "冷启动后 init 返回 `ReleaseRecord`；`GET /releases` 有这条记录，它引用的 boot、runner、定制 tar 都能 `GET /objects/<哈希>`；哈希不符时不写任何记录"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/196",
+    "receiver": "https://github.com/Pepgent/soroi/issues/250",
+    "original": "子 agent 出现在 `/agents`；停驻和唤醒按 D3-07 开、关代"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/196",
+    "receiver": "https://github.com/Pepgent/soroi/issues/226",
+    "original": "子 agent 出现在 `/agents`；停驻和唤醒按 D3-07 开、关代"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/205",
+    "receiver": "https://github.com/Pepgent/soroi/issues/250",
+    "original": "`review` 完成捕获，并记录 transcript sessionId"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/207",
+    "receiver": "https://github.com/Pepgent/soroi/issues/227",
+    "original": "编辑后的消息被投递，撤回的不投递"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/209",
+    "receiver": "https://github.com/Pepgent/soroi/issues/227",
+    "original": "经 Mux 能读到槽位，`answer` 能结束槽位"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/211",
+    "receiver": "https://github.com/Pepgent/soroi/issues/250",
+    "original": "worker 能写步；Agent 体没有 eval；同批全部交回后才释放；未释放批次的产出只对产出它的 worker 子树可见，主 agent 的提醒里没有；批次未释放时根 supervisor 不发 `/end`（D5:86-88；D6:33）"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/214",
+    "receiver": "https://github.com/Pepgent/soroi/issues/231",
+    "original": "在 Komodo 上跑通一次 formal：结果随步提交，Stack 与卷已删除。`EndedUnstarted` 分支在 Slurm 上由 E2E-17 验证（排队中取消，中间件不读暂存区，`remove` 在终态之后成功）"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/214",
+    "receiver": "https://github.com/Pepgent/soroi/issues/232",
+    "original": "在 Komodo 上跑通一次 formal：结果随步提交，Stack 与卷已删除。`EndedUnstarted` 分支在 Slurm 上由 E2E-17 验证（排队中取消，中间件不读暂存区，`remove` 在终态之后成功）"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/215",
+    "receiver": "https://github.com/Pepgent/soroi/issues/231",
+    "original": "同一调用先正式运行一次；然后把模板换到一个已确认 digest 不同的镜像（或改动计入 `config` 身份的模板配置）。先断言 `remote templates` 返回的 `identity` 前后不同，再以相同输入正式运行同一调用：第二次在 stream 中是 `call_started`/`call_ended` 而不是 `call_adopted`，graph 状态不是 `Adopted`，`/compare` 中这一对不是 `SameCapture`"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/215",
+    "receiver": "https://github.com/Pepgent/soroi/issues/232",
+    "original": "同一调用先正式运行一次；然后把模板换到一个已确认 digest 不同的镜像（或改动计入 `config` 身份的模板配置）。先断言 `remote templates` 返回的 `identity` 前后不同，再以相同输入正式运行同一调用：第二次在 stream 中是 `call_started`/`call_ended` 而不是 `call_adopted`，graph 状态不是 `Adopted`，`/compare` 中这一对不是 `SameCapture`"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/216",
+    "receiver": "https://github.com/Pepgent/soroi/issues/227",
+    "original": "runner 进程消失；子 agent 仍可唤醒"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/216",
+    "receiver": "https://github.com/Pepgent/soroi/issues/231",
+    "original": "runner 进程消失；子 agent 仍可唤醒"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/216",
+    "receiver": "https://github.com/Pepgent/soroi/issues/233",
+    "original": "runner 进程消失；子 agent 仍可唤醒"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/217",
+    "receiver": "https://github.com/Pepgent/soroi/issues/227",
+    "original": "F24 的两种变体都成立"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/222",
+    "receiver": "https://github.com/Pepgent/soroi/issues/233",
+    "original": "远程那一代能连回 Mux，并完成交回"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/223",
+    "receiver": "https://github.com/Pepgent/soroi/issues/231",
+    "original": "在 Komodo 上跑通一次 dry run：store 的 seq 不变，暂存区文件返回 404"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/223",
+    "receiver": "https://github.com/Pepgent/soroi/issues/232",
+    "original": "在 Komodo 上跑通一次 dry run：store 的 seq 不变，暂存区文件返回 404"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/224",
+    "receiver": "https://github.com/Pepgent/soroi/issues/235",
+    "original": "五类全部通过（EP0）"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/228",
+    "receiver": "https://github.com/Pepgent/soroi/issues/233",
+    "original": "远程 Agent 中止后，transcript 回到中心。中止一个仍在排队的作业得到 `EndedUnstarted` 的分支由 E2E-17 在 Slurm 上验证"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/228",
+    "receiver": "https://github.com/Pepgent/soroi/issues/232",
+    "original": "远程 Agent 中止后，transcript 回到中心。中止一个仍在排队的作业得到 `EndedUnstarted` 的分支由 E2E-17 在 Slurm 上验证"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/228",
+    "receiver": "https://github.com/Pepgent/soroi/issues/231",
+    "original": "远程 Agent 中止后，transcript 回到中心。中止一个仍在排队的作业得到 `EndedUnstarted` 的分支由 E2E-17 在 Slurm 上验证"
+  },
+  {
+    "source": "https://github.com/Pepgent/soroi/issues/229",
+    "receiver": "https://github.com/Pepgent/soroi/issues/233",
+    "original": "`soroi-batch/` 中只有已改名的文件"
+  },
+  {
+    "source": "https://github.com/Pepgent/Pepgent/issues/9",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "13 个 controller 没有改动，页面照常渲染"
+  },
+  {
+    "source": "https://github.com/Pepgent/Pepgent/issues/11",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "一个运行中的远程作业出现在页面线数据里，带模板与状态；tail SSE 推送它的日志尾部；作业结束后 `compute` 通知触发重读、状态更新；排队中被取消的作业显示终态 `EndedUnstarted`（PM#4）；`remove` 之后不再开 tail 流"
+  },
+  {
+    "source": "https://github.com/Pepgent/Pepgent/issues/13",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "一条 prompt 到达根会话，会话停驻后能唤醒"
+  },
+  {
+    "source": "https://github.com/Pepgent/Pepgent/issues/13",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/23",
+    "original": "一条 prompt 到达根会话，会话停驻后能唤醒"
+  },
+  {
+    "source": "https://github.com/Pepgent/Pepgent/issues/14",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "收到 `run_started` 后分配 `R-0xx` 编号"
+  },
+  {
+    "source": "https://github.com/Pepgent/Pepgent/issues/14",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/23",
+    "original": "收到 `run_started` 后分配 `R-0xx` 编号"
+  },
+  {
+    "source": "https://github.com/Pepgent/Pepgent/issues/15",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "导出与源码一致；apply 生成 commit"
+  },
+  {
+    "source": "https://github.com/Pepgent/Pepgent/issues/16",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "`lab_open_artifact` 把产物拷进本会话 worktree 的 `inputs/`，字节与 store 对象哈希一致；`lab_save_artifact` 在 worktree 里生成不可变快照 `artifacts/<hash>/<文件名>` 并登记 `artifact_meta`，不写 store（D7:65、67、219）"
+  },
+  {
+    "source": "https://github.com/Pepgent/Pepgent/issues/17",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "运行变更时推送 `run` 频道"
+  },
+  {
+    "source": "https://github.com/Pepgent/Pepgent/issues/17",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/23",
+    "original": "运行变更时推送 `run` 频道"
+  },
+  {
+    "source": "https://github.com/Pepgent/Pepgent/issues/18",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "草稿只在 `lab.sqlite`，不进 store；免审批时 `pending_launch` 为 `sent`、会话收到含草稿的 prompt；`run_started` 后 `experiment_ext.draft` 指向该草稿，`pending_launch` 已删除"
+  },
+  {
+    "source": "https://github.com/Pepgent/Pepgent/issues/19",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "A-01 规则写入 `automation_run`；`waiting` 状态的运行批准后才开会话"
+  },
+  {
+    "source": "https://github.com/Pepgent/Pepgent/issues/20",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "页面线数据中带有在途槽位，SSE 转发读方帧"
+  },
+  {
+    "source": "https://github.com/Pepgent/Pepgent/issues/21",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "页面 loader 读取线数据，事件使它失效后重读"
+  },
+  {
+    "source": "https://github.com/Pepgent/Pepgent/issues/22",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "读停驻会话不会唤醒它；`discussion.load` 写入 `discussion_context`"
+  },
+  {
+    "source": "https://github.com/Pepgent/Pepgent/issues/24",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "每条命令的结论都由拥有方返回"
+  },
+  {
+    "source": "https://github.com/Pepgent/Pepgent/issues/25",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "同上"
+  },
+  {
+    "source": "https://github.com/Pepgent/Pepgent/issues/26",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "纯函数投影的单元测试，输入是真实录制的线数据；录制中含 `Aborted` 变体的调用（不带 `version`、`body`、`env`，`outputs = []`），投影出被中止的节点（PM#5 第 2 项）"
+  },
+  {
+    "source": "https://github.com/Pepgent/Pepgent/issues/27",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "同上"
+  },
+  {
+    "source": "https://github.com/Pepgent/Pepgent/issues/28",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "同上"
+  },
+  {
+    "source": "https://github.com/Pepgent/Pepgent/issues/29",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "构建好的 host 在浏览器中走完 13 个页面，数据都来自后端（SMOKE:22-54）"
+  },
+  {
+    "source": "https://github.com/Pepgent/deploy/issues/1",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "D8 原验收——真实 `pepgent-central` store 上 `GET /releases` 有这条 `ReleaseRecord`，它引用的对象都能 `GET /objects/<哈希>`——在全部组件开发完成后的统一 e2e 阶段（S2）以真实 store 执行并留证，范围不减。不得将 hash 验证作为证据，须用真实运行行为与下游结果证明。"
+  },
+  {
+    "source": "https://github.com/Pepgent/images/issues/3",
+    "receiver": "https://github.com/Pepgent/soroi/issues/235",
+    "original": "容器启动后，`/api/auth/*` 有响应；`omp`、`omp-rpc-mux`、`remote` 都可执行；按 A0 第 ① 项的办法检查，lab-web 里 `omp` 的工具清单含 `soroi_eval`、`soroi_task`"
+  },
+  {
+    "source": "https://github.com/Pepgent/images/issues/3",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "容器启动后，`/api/auth/*` 有响应；`omp`、`omp-rpc-mux`、`remote` 都可执行；按 A0 第 ① 项的办法检查，lab-web 里 `omp` 的工具清单含 `soroi_eval`、`soroi_task`"
+  },
+  {
+    "source": "https://github.com/Pepgent/images/issues/6",
+    "receiver": "https://github.com/Pepgent/soroi/issues/235",
+    "original": "IMG-04 原验收中的跨组件部分——真实部署入口 `bun /release/install.ts --home /home/agent` 后 exec Node、浏览器真实登录与刷新保持会话、无会话拒绝、同容器 omp 工具清单含 `soroi_eval`/`soroi_task` 并可调用——不在开发期执行，由全部组件开发完成后的统一 e2e 阶段（A0 与 S2）执行并留证。范围不缩减；parent #3 在该阶段验证后关闭。"
+  },
+  {
+    "source": "https://github.com/Pepgent/images/issues/6",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "IMG-04 原验收中的跨组件部分——真实部署入口 `bun /release/install.ts --home /home/agent` 后 exec Node、浏览器真实登录与刷新保持会话、无会话拒绝、同容器 omp 工具清单含 `soroi_eval`/`soroi_task` 并可调用——不在开发期执行，由全部组件开发完成后的统一 e2e 阶段（A0 与 S2）执行并留证。范围不缩减；parent #3 在该阶段验证后关闭。"
+  },
+  {
+    "source": "https://github.com/Pepgent/deploy/issues/8",
+    "receiver": "https://github.com/Pepgent/Pepgent/issues/30",
+    "original": "真实浏览器路径——Yab `/sign-in` 邮箱密码登录→进入 Lab→刷新后 `/api/auth/get-session` 仍有效、无会话访问 Lab 被拒绝、重复部署后登录会话仍有效——属于跨组件（deploy + Pepgent + images）验收，不在开发期执行，由全部组件开发完成后的统一 e2e 阶段（S2）执行并留证，写回 parent [images #3](https://github.com/Pepgent/images/issues/3)。范围不缩减。"
+  }
+]

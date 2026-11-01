@@ -1,0 +1,87 @@
+{
+  "captured_at": "2026-11-01T07:07:34.499779+00:00",
+  "owner": "Pepgent",
+  "repo": "Pepgent",
+  "number": 3,
+  "inventory_sources": [
+    "Pepgent.json"
+  ],
+  "roles": [],
+  "inventory_title": "用 Keycloak OIDC 登录取代 web 静态访问令牌（认证部分）",
+  "rest_state": "open",
+  "issue": {
+    "endpoint": "repos/Pepgent/Pepgent/issues/3",
+    "status": 200,
+    "captured": "Pepgent-3/issue.json"
+  },
+  "comments": {
+    "endpoint": "repos/Pepgent/Pepgent/issues/3/comments",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/Pepgent/issues/3/comments?per_page=100&page=1",
+        "status": 200,
+        "captured": "Pepgent-3/comments/page-001.json",
+        "count": 0
+      }
+    ],
+    "page_count": 1,
+    "item_count": 0,
+    "unavailable": false
+  },
+  "timeline": {
+    "endpoint": "repos/Pepgent/Pepgent/issues/3/timeline",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/Pepgent/issues/3/timeline?per_page=100&page=1",
+        "status": 200,
+        "captured": "Pepgent-3/timeline/page-001.json",
+        "count": 1
+      }
+    ],
+    "page_count": 1,
+    "item_count": 1,
+    "unavailable": false
+  },
+  "parent": {
+    "endpoint": "repos/Pepgent/Pepgent/issues/3/parent",
+    "status": 404,
+    "unavailable": true,
+    "error": "gh: No parent issue found (HTTP 404)",
+    "error_body": {
+      "message": "No parent issue found",
+      "documentation_url": "https://docs.github.com/rest/issues/sub-issues#get-parent-issue",
+      "status": "404"
+    }
+  },
+  "sub_issues": {
+    "endpoint": "repos/Pepgent/Pepgent/issues/3/sub_issues",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/Pepgent/issues/3/sub_issues?per_page=100&page=1",
+        "status": 200,
+        "captured": "Pepgent-3/sub_issues/page-001.json",
+        "count": 0
+      }
+    ],
+    "page_count": 1,
+    "item_count": 0,
+    "unavailable": false
+  },
+  "api_unavailable": [
+    {
+      "resource": "parent",
+      "endpoint": "repos/Pepgent/Pepgent/issues/3/parent",
+      "status": 404,
+      "unavailable": true,
+      "error": "gh: No parent issue found (HTTP 404)",
+      "error_body": {
+        "message": "No parent issue found",
+        "documentation_url": "https://docs.github.com/rest/issues/sub-issues#get-parent-issue",
+        "status": "404"
+      }
+    }
+  ]
+}

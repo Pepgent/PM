@@ -1,0 +1,74 @@
+{
+  "captured_at": "2026-11-01T07:07:30.677281+00:00",
+  "owner": "Pepgent",
+  "repo": "images",
+  "number": 6,
+  "inventory_sources": [],
+  "roles": [
+    "example:images#6"
+  ],
+  "inventory_title": null,
+  "rest_state": "closed",
+  "issue": {
+    "endpoint": "repos/Pepgent/images/issues/6",
+    "status": 200,
+    "captured": "images-6/issue.json"
+  },
+  "comments": {
+    "endpoint": "repos/Pepgent/images/issues/6/comments",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/images/issues/6/comments?per_page=100&page=1",
+        "status": 200,
+        "captured": "images-6/comments/page-001.json",
+        "count": 4
+      }
+    ],
+    "page_count": 1,
+    "item_count": 4,
+    "unavailable": false
+  },
+  "timeline": {
+    "endpoint": "repos/Pepgent/images/issues/6/timeline",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/images/issues/6/timeline?per_page=100&page=1",
+        "status": 200,
+        "captured": "images-6/timeline/page-001.json",
+        "count": 18
+      }
+    ],
+    "page_count": 1,
+    "item_count": 18,
+    "unavailable": false
+  },
+  "parent": {
+    "endpoint": "repos/Pepgent/images/issues/6/parent",
+    "status": 200,
+    "captured": "images-6/parent.json"
+  },
+  "sub_issues": {
+    "endpoint": "repos/Pepgent/images/issues/6/sub_issues",
+    "pages": [
+      {
+        "page": 1,
+        "endpoint": "repos/Pepgent/images/issues/6/sub_issues?per_page=100&page=1",
+        "status": 200,
+        "captured": "images-6/sub_issues/page-001.json",
+        "count": 0
+      }
+    ],
+    "page_count": 1,
+    "item_count": 0,
+    "unavailable": false
+  },
+  "api_unavailable": [
+    {
+      "resource": "inventory-state-assumption",
+      "rest_state": "closed",
+      "note": "Inventory row had no state field; REST state was not open"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "roles": [
+    "example:images#3"
+  ],
+  "canonical_context": "images-3",
+  "metadata": "issue.json contains full REST metadata including body",
+  "body": "issue.json.body"
+}

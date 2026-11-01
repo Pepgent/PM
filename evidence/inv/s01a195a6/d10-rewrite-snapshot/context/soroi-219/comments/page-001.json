@@ -1,0 +1,49 @@
+[
+  {
+    "url": "https://api.github.com/repos/Pepgent/soroi/issues/comments/6554764899",
+    "html_url": "https://github.com/Pepgent/soroi/issues/219#issuecomment-6554764899",
+    "issue_url": "https://api.github.com/repos/Pepgent/soroi/issues/219",
+    "id": 6554764899,
+    "node_id": "IC_kwDOUW8ics8AAAABhrHGYw",
+    "user": {
+      "login": "RiriAgent",
+      "id": 39219425,
+      "node_id": "MDQ6VXNlcjM5MjE5NDI1",
+      "avatar_url": "https://avatars.githubusercontent.com/u/39219425?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/RiriAgent",
+      "html_url": "https://github.com/RiriAgent",
+      "followers_url": "https://api.github.com/users/RiriAgent/followers",
+      "following_url": "https://api.github.com/users/RiriAgent/following{/other_user}",
+      "gists_url": "https://api.github.com/users/RiriAgent/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/RiriAgent/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/RiriAgent/subscriptions",
+      "organizations_url": "https://api.github.com/users/RiriAgent/orgs",
+      "repos_url": "https://api.github.com/users/RiriAgent/repos",
+      "events_url": "https://api.github.com/users/RiriAgent/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/RiriAgent/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "created_at": "2026-11-01T07:06:24Z",
+    "updated_at": "2026-11-01T07:06:24Z",
+    "body": "STARTED — owner=pepgent-eng-e2e。本轮按 D10-05/06（https://github.com/Pepgent/PM/issues/16）交付 F05 spec/runbook 与不依赖 live 组件的本仓检查，真实 F05 留到统一阶段。实现复用现有 F04 完整路径和其原样代码，随后 formal 提交并核对真实 store step、非 pinned CallReport、Agent graph 捕获及 File 对象响应；不重写产品、不新增运行门禁。",
+    "author_association": "MEMBER",
+    "pin": null,
+    "reactions": {
+      "url": "https://api.github.com/repos/Pepgent/soroi/issues/comments/6554764899/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "performed_via_github_app": null,
+    "minimized": null
+  }
+]

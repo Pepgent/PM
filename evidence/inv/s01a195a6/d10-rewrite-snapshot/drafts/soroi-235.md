@@ -1,0 +1,85 @@
+## 统一 e2e 阶段工作项
+
+依据：[D10 决策结果](https://github.com/Pepgent/PM/issues/16)、[D10-05 / D10-06](https://github.com/Pepgent/PM/blob/91dd67e059a14e85195ee67ba741a2ba67fde03e/evidence/decisions/D10-repo-delivery.md#L17-L18)；发行导入接入时点按 [D10-14](https://github.com/Pepgent/PM/blob/91dd67e059a14e85195ee67ba741a2ba67fde03e/evidence/decisions/D10-repo-delivery.md#L26)。
+
+开发期先完成各组件实现与本仓检查，不执行跨组件 e2e。依赖切片的代码已合入其仓 `main` 即可开工；只对编译、类型、构建或调用契约确实需要先存在的代码/产物保留依赖，不等待前置切片的 runtime 通过、live issue 关闭或波次验收。
+
+统一阶段入口为全部实现代码与 E2E-* 的 spec、runbook、check 脚本已合入各自仓 `main`，实现切片已有本仓真实入口的局部运行观察，镜像、release tar、ENV/DEP 环境声明已具备；E2E-* 只豁免开发期执行。执行顺序：A0 → S1（F01–F30）→ E2E-21 server-function 核对 → S2（F08–F31）→ D9（F32）。入口看代码、产物和局部观察事实，不看 issue/Project 状态。
+
+范围不减，D8-01 至 D8-12 的真实入口与归档要求保留；commit、release 名、镜像引用只记录组装身份，hash/digest 比对不得作为通过证据。
+
+本 issue 本身就是 A0 / E2E-02 / 五类 PTY 安装验收 的统一执行承接项：[soroi#235](https://github.com/Pepgent/soroi/issues/235)。本项及其 full A0/live 证据不再是任何实现切片的开发前置；开发期完成 driver/spec/runbook 并合入 main，测试者只在统一阶段执行。原结果、checkpoint、真实入口和证据归档义务全部保留。统一阶段 A0 由 [soroi#235](https://github.com/Pepgent/soroi/issues/235) 执行，S1 由各 E2E-* / 本项执行，随后 [Pepgent#23](https://github.com/Pepgent/Pepgent/issues/23)，再由 [Pepgent#30](https://github.com/Pepgent/Pepgent/issues/30) 完成 S2。
+
+## 目标
+
+在新建 IMG-01 容器内，从空 HOME 开始，经真实 CI 发行 installer、公开 launcher 与真实 PTY 完成 D8 的 A0 五类探针，归档完整 A0 Verdict。本 issue 完整继承 [E2E-02](https://github.com/Pepgent/soroi/issues/218) 尚未完成的真实 A0 验收义务，驱动与探针代码开发期合入；本统一执行项只有完整 runtime 通过及清理、归档到位才能关闭，不能再次延期。
+
+## 上下文与责任
+
+- 设计来源：[D8 MVP 验收定义](https://github.com/Pepgent/PM/blob/main/evidence/decisions/D8-mvp-scope.md)（D8-03、D8-09、E2E-02）。原驱动的 gate-only/shell runtime 不代表完整 A0。
+- 开发期 e2e 工程师负责 `e2e/pty/*` 驱动代码；独立测试者在统一阶段负责 campaign 配置、真实 A0 执行、凭据消费、证据脱敏与最终清理；驱动接线由本仓 e2e/pty 代码承担，统一执行使用已合入 main 的驱动与当次发行。不得修改 verifier、产品、settings 或 rules 来迁就测试。
+- DIST-01 提供真实发行 installer；[DIST-02](https://github.com/Pepgent/soroi/issues/224) 的 release owner 通过 [verifier PR260](https://github.com/Pepgent/soroi/pull/260) 维护 prepare、observer 和五类判定。gateway 部署方拥有 A0 client token 与配置，测试者仅按既定路径消费。
+- 按 D10-05/06，DIST-02/verifier 与本 issue 的驱动代码在开发期完成并合入；实现 PR 不为等待统一 A0 保持 open。本 issue 由测试者在统一阶段首先执行完整 A0；开发期可在定制仓独立运行 A0 本仓检查，但不能替代本次统一阶段执行。
+
+## 预期结果
+
+1. 新建无定制的 `pepgent-registry.orb.local:5000/pepgent/omp-agent:latest` 容器，加入已有 `pepgent-soroi-e2e`；在任何 env、models、client token 注入前，记录 `ls -A $HOME` 为空且没有 `.omp`。
+2. 仅在空 HOME 门禁通过后，注入与 central 同配置的 models/settings、SOROI 地址和 A0 独占 client token，使用真实 CI release installer，经公开 launcher 启动；不得以 source link、bare omp、fixture 或本地重建安装替代。
+3. 在真实 PTY 中逐类验证扩展（含非空 dry-run CallReport）、agent 定义及实际模型/系统提示、skill 正文、rule 注入原文、child `personality:none`；消费 DIST-02 基于 native 事实的判定，而非模型措辞。
+4. 将同一 release 的 D8 A0 Verdict、raw PTY、root/child transcript、原始来源及复现命令归档并 push 到 PM；结束本次进程/容器及临时输入，由 Docker 确认本次资源不存在，最终 cleanup assertion 成功后才可得到整体 pass。既有共享网络、store、mux、central 不属于本次清理对象。
+
+## 当前已发布的安装与探针契约
+
+完整 argv、PTY steps 与 proof 字段见 release owner 的[本轮正式契约](https://github.com/Pepgent/soroi/issues/235#issuecomment-6553021595)，逐项消费该契约，不猜测脚本或另造判定。
+
+- 统一阶段使用当时默认分支产出的正式 CI tar，由 campaign 记录实际来源、release 名与获取路径；不固定旧 campaign 的 CI run、source 或本机 tar 路径。身份仅定位工件，不作为通过证据。
+- 解包后 installer argv：`["bun","install.ts","--home","/home/agent"]`。
+- 必需的 `prepare:string[]`：`["bun","/tmp/soroi-a0/release/install-check/prepare.js","--home","/home/agent","--proof","/tmp/soroi-a0/proof","--work","/tmp/soroi-a0/work"]`。
+- 公开用户启动入口：`/home/agent/.local/bin/soroi`；`PI_CODING_AGENT_DIR=/home/agent/.omp/agent`。使用正式契约中的完整 `ompArgs` 与 PTY `steps`，不是 bare omp。
+- 将已解析的实际 campaign `config.build` 写入 `/tmp/soroi-a0/build.json`；verifier argv：`["bun","/tmp/soroi-a0/release/install-check/verify.js","--home","/home/agent","--proof","/tmp/soroi-a0/proof","--build","/tmp/soroi-a0/build.json"]`。Build 的环境字段由 campaign owner 记录，不从文件名推导。
+- 顺序为注入前空 HOME 门禁 → 注入 A0 配置/env/token → real installer → prepare 完成并观察 prepared barrier → 公开 launcher 的真实 PTY → verifier → 证据复制脱敏与全部 driver cleanup → 最终整体结果。
+- PTY recipe 先读 `skill://soroi-eval`，真实执行 `install_check_double(21)` 得到 `42` 的非空 dry-run Program/CallReport，再派发具名 `InstallCheckWorker`（`soroi-worker`），等待其真实 `soroi_return` 交回 `install-check-complete`。`soroi-install-check:turn-end` 仅用于 PTY 同步，不作为通过证据。
+- prepare 的 `prepared.json` 是实际注册查询等观测的副本，`recipe.json` 仅表示意图；两者不等于五类通过。root/child 原始 transcript 保留在 `proof/sessions/`，native `before_agent_start` observer 的 `soroi-install-check` entry 提供实际 model、settings、tools、agent discovery 和 systemPrompt 等事实。verify 再请求 live 注册根，输出 `proof/verified-registration.json` 和 D8 `proof/verdict.json`；五类 assertion ID 为 `extension`、`agent`、`skill`、`rule`、`settings`，来源定位最终 campaign 内真实记录。缺证或任一类别失败须非零退出。
+
+## 统一阶段使用的环境与产物
+
+- Installer：[DIST-01](https://github.com/Pepgent/soroi/issues/199) 的 [PR239](https://github.com/Pepgent/soroi/pull/239) 已合并；[公开入口及既有 runtime 证据](https://github.com/Pepgent/soroi/issues/235#issuecomment-6552732641)已发布。当前本轮 CI tar 与 prepare 的依据采用上节正式契约。
+- S1 网络：[DIST-03](https://github.com/Pepgent/soroi/issues/210) 的 [PR247](https://github.com/Pepgent/soroi/pull/247) 已合并；独立测试者已通过 `docker network inspect pepgent-soroi-e2e` 观察到该网络，既有 store/mux/central 已运行。复用现有资源，不另建一套共享依赖。
+- 设置：[CUS-04](https://github.com/Pepgent/soroi/issues/186) 已由 [PR234](https://github.com/Pepgent/soroi/pull/234) 合并。child settings 的判定消费本轮 verifier 的 native 观测，不捏造 personality 字段。
+- 五类 verifier 的代码来源为 [PR260](https://github.com/Pepgent/soroi/pull/260)；[既有 installer→prepare 观察](https://github.com/Pepgent/soroi/pull/260#issuecomment-6553105958)不证明完整五类 A0。代码合入后，本 issue 在统一阶段使用当次正式发行完整执行，不要求 verifier PR 等待本执行项。
+- Gateway：[ENV-02](https://github.com/Pepgent/PM/issues/10) 的 A0 独占 consumer 已由[部署方交付](https://github.com/Pepgent/soroi/issues/235#issuecomment-6551524999)。消费 `~/Ext/work/orbstack/pepgent-gateway/a0/` 下现有 `token`、`models.yml`、`config.yml`，不读取或公开凭据值作记录。注入语义按[最新版配置契约](https://github.com/Pepgent/soroi/issues/235#issuecomment-6551616541)：`transport: pi-native`、gateway baseUrl、`auth: none`，command-resolved `Authorization` 从 `PEPGENT_GATEWAY_TOKEN` 生成 bearer；这不是关闭 gateway 鉴权。不要采用旧 provider `apiKey` 写法、`--api-key` 或 provider credential env。token 只在门禁后经既定 stdin/env 路径注入，不复用 central token，不复制 provider/broker 凭据，不挂载 host HOME，不进入命令行、镜像、Verdict、transcript 或 copy-out。
+
+## 验收与关闭条件
+
+| Dimension | Check | Command | Env | Expect |
+|---|---|---|---|---|
+| integration | 完整覆盖上述结果 1–4，不削减继承的 full A0 | `e2e/pty/a0-install.sh /absolute/path/to/a0.json`，配置使用上述正式 tar、installer、prepare、launcher、Build、verifier 与完整 PTY recipe | 新 IMG-01 + 现有 S1 网络与 gateway + A0 独占配置/token + 本轮真实 CI 发行及 DIST-02 | exit0；完整 D8 A0 Verdict pass；五类均有真实原始来源；PM 已 push 原始证据与复现命令；本次资源清理确认且最终 cleanup assertion 成功 |
+
+原驱动的空 HOME gate、installer→prepare smoke、typecheck、构建、文件存在、模型文本、marker 或 root-only `calls:[]` 均不能满足本表。本 issue 在完整 A0 结果到位前保持 open，不以再次拆分或转移义务关闭。若真实运行发现产品、installer 或 verifier 缺陷，由对应 owner 修复并从新 CI 下载发行物，重跑完整相关 A0 路径；不用 fake fallback 或 source install 绕过。
+
+## 范围边界
+
+不实现产品功能、不改变模型凭据拓扑、不改 verifier/产品/settings/rules；测试者仅维护既有驱动接线和执行证据。本次 A0 不表示任何 S1 流程已通过；尤其 F26–F30 的 automatic driver 与完整 live 验收仍由 [独立 live issue](https://github.com/Pepgent/soroi/issues/259) 承担。
+
+
+## 承接来源与原验收义务
+
+下列各项由本统一阶段执行项完整承接；原文为范围快照，不恢复开发期门禁。涉及 hash/digest 的值只用于对象寻址或组装身份，禁止以比对作为任何通过证据。多个承接项覆盖同一来源时，各自执行本阶段适用部分，合计覆盖全部原义务，不相互替代。
+
+### 来源 [soroi#224](https://github.com/Pepgent/soroi/issues/224)
+
+原义务原文：
+
+> 五类全部通过（EP0）
+
+### 来源 [images#3](https://github.com/Pepgent/images/issues/3)
+
+原义务原文：
+
+> 容器启动后，`/api/auth/*` 有响应；`omp`、`omp-rpc-mux`、`remote` 都可执行；按 A0 第 ① 项的办法检查，lab-web 里 `omp` 的工具清单含 `soroi_eval`、`soroi_task`
+
+### 来源 [images#6](https://github.com/Pepgent/images/issues/6)
+
+原义务原文：
+
+> IMG-04 原验收中的跨组件部分——真实部署入口 `bun /release/install.ts --home /home/agent` 后 exec Node、浏览器真实登录与刷新保持会话、无会话拒绝、同容器 omp 工具清单含 `soroi_eval`/`soroi_task` 并可调用——不在开发期执行，由全部组件开发完成后的统一 e2e 阶段（A0 与 S2）执行并留证。范围不缩减；parent #3 在该阶段验证后关闭。
