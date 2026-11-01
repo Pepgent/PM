@@ -71,3 +71,9 @@ git -C /Users/mouriya/Ext/worktrees/pepgent-web-05 stash pop
 - **B-1：** 第三节第 1–3 点的读法（`wt` 说明只管会话工作树；C3-4.4 的“不用 omp wt”涵盖本次迁移；两条可同时满足）是否成立？是否构成给 system 规则开例外（F2 “规则只有两个来源”）？
 - **B-2：** 处置的迁移步骤是否符合 C3-4.4 的 home 纪律（不提交、回到命名分支后不再切换）与切片建立方式（检出既有遗产分支）？本处置是否属于必须投票的事项，还是 C2-4 下直接执行现行规则？
 - **B-3：** 结论写回 [#25](https://github.com/Pepgent/Pepgent/issues/25)，由 `AreaMgrPepgent` 按 C4-2 送达 W-10，是否足够？
+
+## 六、处置结论
+
+- 闸门 A（`Argon-2`，[`w10-worktree-rule-gate-a.md`](w10-worktree-rule-gate-a.md)，PM `821dfba`）：不越界，K1，不触及产品意图与公开契约。
+- 闸门 B（`ArgonGovernance-2`，[`w10-worktree-rule-gate-b.md`](w10-worktree-rule-gate-b.md)，PM `8f7b3da`）：不越界，K1；B-1 读法成立，不构成给 system 规则开例外；B-2 迁移步骤符合 C3-4.4，属 C2-4 直接执行，无需投票；B-3 送达方式成立。
+- 按第三节处置免票放行，结论写回 [#25 评论 6563492271](https://github.com/Pepgent/Pepgent/issues/25#issuecomment-6563492271)，由 `AreaMgrPepgent` 按 C4-2 送达 W-10。
