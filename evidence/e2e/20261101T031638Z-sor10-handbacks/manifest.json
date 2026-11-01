@@ -52,31 +52,31 @@
       "path": "before.txt",
       "source": "/tmp/soroi-197-runtime/before.txt",
       "phase": "initial",
-      "purpose": "Raw initial pre-run terminal/state capture."
+      "purpose": "Executed acceptance input prompt for the initial pre-run case."
     },
     {
       "path": "after.txt",
       "source": "/tmp/soroi-197-runtime/after.txt",
       "phase": "initial",
-      "purpose": "Raw initial post-run terminal/state capture."
+      "purpose": "Executed acceptance input prompt for the initial post-run case."
     },
     {
       "path": "resume.txt",
       "source": "/tmp/soroi-197-runtime/resume.txt",
       "phase": "initial",
-      "purpose": "Raw initial cold-revival/resume terminal capture."
+      "purpose": "Executed acceptance input prompt for the initial cold-revival/resume case."
     },
     {
       "path": "final.txt",
       "source": "/tmp/soroi-197-runtime/final.txt",
       "phase": "initial",
-      "purpose": "Raw initial final terminal capture."
+      "purpose": "Executed acceptance input prompt for the initial final case."
     },
     {
       "path": "rebase.txt",
       "source": "/tmp/soroi-197-runtime/rebase.txt",
       "phase": "initial",
-      "purpose": "Raw initial rebase/source-setup terminal capture."
+      "purpose": "Executed acceptance input prompt for the initial rebase case."
     },
     {
       "path": "probe.ts",
@@ -94,7 +94,7 @@
       "path": "capture197.txt",
       "source": "/tmp/soroi-197-runtime/capture197.txt",
       "phase": "initial",
-      "purpose": "Raw initial capture note."
+      "purpose": "Agent-written File output bytes from the initial capture."
     },
     {
       "path": "nodes/capture_probe.ts",
@@ -184,7 +184,7 @@
       "path": "wire-final.txt",
       "source": "/tmp/soroi-197-runtime/wire-final.txt",
       "phase": "final",
-      "purpose": "Raw final49f complete-path terminal capture."
+      "purpose": "Executed acceptance input prompt for the final49f complete path."
     },
     {
       "path": "nodes/prototype_probe.ts",
