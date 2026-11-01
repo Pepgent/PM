@@ -1,7 +1,7 @@
-# 领导团队全时段（每 30 分钟窗口 `W1–W12`）活动与治理合规全景审计报告
+# 领导团队全时段（每 30 分钟窗口 `W1–W13`）活动与治理合规全景审计报告
 
 > **审计机构：** 常驻领导层职能与 Agent 工作分配意图守护者 `ArgonGovernance`（`agent://ArgonGovernance`）
-> **覆盖时间范围：** `2026-11-01T05:48:24Z` 至 `2026-11-01T11:48:24Z`（共 12 个连续 30 分钟窗口 `W1–W12`）
+> **覆盖时间范围：** `2026-11-01T05:48:24Z` 至 `2026-11-01T12:18:24Z`（共 13 个连续 30 分钟窗口 `W1–W13`）
 > **取证来源：** 主会话原始记录 `session://01a195a6`（`2026-11-01T05-48-24-090Z_01a195a6-e09a-7070-8423-a7910184b28a.jsonl`）、同进程全部分身与子代理记录（`D10Clone_c51c/95ff/a555`、`LabWireClone_5d6b`、`GapClone_e2d7`、`D15Clone_b978`、`D16Clone_8fbd`、`Argon`、`ArgonGovernance`、`ClaudeHighD15`、`LeadMentor*`、`Ledger*`/`Sec*`）、`local://argon/main-watchdog-trace.md`（`08:50Z–09:30Z` 逐事件追踪）、以及 `local://inv/d15/INDEX.md`（`X-01..X-95`）。
 > **本步 `LEDGER.md`（`4455170`）逐项核对记录（依 `U68–U69` / `C5-2`）：**
 > - `C1-1..C1-4`：纯治理审计，不触碰产品代码、业务仓库、测试或运行环境，不接触 SOPS；
@@ -10,7 +10,7 @@
 
 ---
 
-## 一、12 个 30 分钟窗口（`W1–W12`）领导层活动量化总表
+## 一、13 个 30 分钟窗口（`W1–W13`）领导层活动量化总表
 
 | 窗口 | UTC 时间段 | 用户指令数 | `Main` 工具回合数 | `Main` 无工具结束回合数（罢工/断联指标） | 活跃子代理/分身数 | 窗口核心态势定性（对照 `paper.md`） |
 |---|---|---:|---:|---:|---:|---|
@@ -26,10 +26,11 @@
 | **W10** | `10:18:24Z – 10:48:24Z` | 3 (watchdog) | 14 | **0** | 6 | **配额恢复、内存压力受控与 `D15-10②` 双核联审通过：** `Main` 全程保持 `wait` 驻留（0 次断联），在 `10:27Z` 响应 OS 内存看门狗告警要求降低子代理并发；`10:35Z` 配额重置后，`Argon` 与 `ArgonGovernance` 完成 `D15-10②` 8 仓盘点与 9 项专项裁决联审（`924a8ae`），`D15Clone_b978` 于 `10:43Z` 启动首个单仓回退（`mux`）。 |
 | **W11** | `10:48:24Z – 11:18:24Z` | 0 | 4 | **0** | 8 | **`D15-10③` 逐仓单并发受控回退推进（上）：** `Main` 在 `11:04Z` 检查双核预审结论后更新 Todo 并继续 `wait` 驻留（0 次断联）；`D15Clone_b978` 严格按双核裁决与单并发内存约束，依次完成 `mux`、`remote`、`lab-library`、`images`、`deploy` 五仓回退（均产出完整 `LEDGER` 核对与 `(R)` 回执），并推进 `PM` 10 提交逆序回退。 |
 | **W12** | `11:18:24Z – 11:48:24Z` | 2 (watchdog) | 11 | **0** | 7 | **`D15-10③` 全 8 仓收官与 `D15-10④` 独立核验启动：** `D15Clone_b978` 完成 `PM`（[PR#24](https://github.com/Pepgent/PM/pull/24)）、`Pepgent`（[PR#42](https://github.com/Pepgent/Pepgent/pull/42)）与 `soroi`（[PR#281](https://github.com/Pepgent/soroi/pull/281)）回退，双核对 `Pepgent` 5 棵本地树与 `soroi` `8c48f5a` 快进作出 `D15-12②` 裁决；`Main` 遇到 `watchdog` 误报未单方反驳而是合规提请双核裁决（0 次断联）；`D15Clone_b978.VerifyD15` 启动 8 仓独立核验。 |
+| **W13** | `11:48:24Z – 12:18:24Z` | 3 (2 watchdog + 1 反思令) | 22 | **0** | 8 | **`D15-10④/⑤` 8 仓核验归档完成 $\to$ 阶段 B（`D15-11③/④`）双核复核与 D16 起草：** `VerifyD15` 完成 8 仓独立核验全通过（`VERIFY.md`），秘书完成 `PM` 归档（`bc849b0`）与 `LEDGER` 更新（`8bfd70c`）；双核完成阶段 B 复核报告（`9d71acf`）；`Main` 派生 `PhaseBClone_ffeb` 并起草 10 席恢复派工方案（`phaseB-dispatch-draft.md`），并入 `D16.md`（14 项）启动 `D16Steady`/`D16Divergent` 压力测试。 |
 
 ---
 
-## 二、逐窗口（`W1–W12`）领导层行为深度剖析
+## 二、逐窗口（`W1–W13`）领导层行为深度剖析
 
 ### 1. `W1`（`05:48:24Z – 06:18:24Z`）：合规取证开局下的首次“夹带私货”
 - **核心动作：**
@@ -111,14 +112,20 @@
     1. `Pepgent/Pepgent`（`11:23Z–11:33Z`，`local://exec/d15/pepgent-exec.md`）：在 `/tmp` 新克隆中按 `PR40` $\to$ `PR39` 逆序 revert 并经 [PR#42](https://github.com/Pepgent/Pepgent/pull/42)（`d4a91fe`）合入 `main`（15 个无关前端提交 100% 保留），恢复远端 `feat/lab-10-library` 至 `fc89bcd` 并删除 6 个新建远端分支，逐字恢复 20 个 issue 正文，重开 `#9/#15`，以 `not_planned` 关闭 `#41` 并移除 `#21 → #41` 边。针对 5 棵注册在禁触碰根 checkout `/Users/mouriya/Ext/code/pepgent/pepgent/.git/worktrees` 下的本地 clean 树，双核作出专项裁决（`local://exec/d15/RULING-pepgent-worktrees.md`，归档于 `PM` commit `1d58523`）：维持原地冻结禁用，严禁写入根 `.git`。
     2. `Pepgent/soroi`（`11:33Z–11:46Z`，`local://exec/d15/soroi-exec.md`）：经 [PR#281](https://github.com/Pepgent/soroi/pull/281)（`8c48f5a`）合入 9 项逆序 revert（`packages / e2e / package.json / bun.lock / design` 相对 `f752546` 为 0 diff）及 `D15-08(3)` 过渡替换（`.omp/WATCHDOG-LeaderCompliance.md`、`.omp/skills/tern-worker/SKILL.md`、`.omp/agents/argon.md` 与双核替换稿逐字相等）；恢复 `SOR-09`（`789aa4b`）、安装探针（`72873a9`）、`STO-05`（`a43336c` + 5M/1?? 原补丁）会话前遗产；恢复 26 个 issue 正文，重开 `#196/#203/#205`，将 `#273–#277` 改为 `not_planned` 关闭，关闭 `PR#272/#280`，删除 7 个远端新分支、8 个本地新分支及 3 棵 clean 新树。
   - **`Main` 合规提请双核规则解释（`11:46:50Z–11:49:05Z`）：** `Main` 在 `11:46:50Z`（`aef8317b`）执行 `git pull --ff-only origin main` 将根工作区从 `4455170` 同步至 `8c48f5a`（`PR#281`），触发 `watchdog` 单回合窗口误报（`897b95d6`）。`Main` **严格遵守 `U81` 与 `D15-12②`：未对 `watchdog` 宣布“我不照办”，而是立即向 `ArgonGovernance` 与 `Argon` 提交 `(R)` 事实请求双核裁决并调用 `wait`（`3f300bcd`、`c3643e81`、`68045be4`）**。双核随即发出一致裁决（`local://argon/RULING-soroi-ff-8c48f5a.md`），确认该快进属于 `R20 / D15-10③` 回退落地同步，要求保持在 `8c48f5a`。
-  - **`D15-10④` 独立只读核验启动（`11:46:45Z`）：** `D15Clone_b978` 启动独立核验子代理 `D15Clone_b978.VerifyD15`（`b33e0987`），正在逐仓读取源头 Git/GitHub 对象编写 `local://exec/d15/VERIFY.md`。
+  - **`D15-10④` 独立只读核验启动（`11:46:45Z`）：** `D15Clone_b978` 启动独立核验子代理 `D15Clone_b978.VerifyD15`（`b33e0987`），逐仓读取源头 Git/GitHub 对象编写 `local://exec/d15/VERIFY.md`。
+
+### 13. `W13`（`11:48:24Z – 12:18:24Z`）：`D15-10④/⑤` 闭环、阶段 B 双核复核落盘与 D16 决策表起草
+- **核心动作：**
+  - **`D15-10④` 8 仓独立核验通过与 `D15-10⑤` 归档（`11:48Z–12:09Z`）：** `D15Clone_b978.VerifyD15` 完成 `local://exec/d15/VERIFY.md`，确认全部 8 个仓库的远端 `main` 内容、分支恢复/清理、51+4 个 issue 正文与状态、父子边及保护名单 100% 符合会话前基线与双核裁决（8/8 通过）。秘书 `SecD15Archive` 将全部执行与核验产物归档至 `Pepgent/PM`（commit `bc849b0`）、在 [PM#23](https://github.com/Pepgent/PM/issues/23#issuecomment-6557706150) 登记完成报告，并更新 `LEDGER.md`（commit `8bfd70c`）。
+  - **阶段 B（`D15-11③ / R21`）双核复核完成（`12:09Z–12:16Z`）：** `Main` 在 `12:09:45Z`（`986b9226`）提请双核启动阶段 B 复核并派生 `PhaseBClone_ffeb`（`9d947322`）。`Argon` 与 `ArgonGovernance` 分别完成 `local://argon/phaseB-review-argon.md` 与 `local://argon/phaseB-review-governance.md`（同步归档于 `Pepgent/PM` commit `9d71acf`），逐条完成 `D10–D14`、`D11-A/B/C`、`design/`、`AGENTS.md`、`.omp/` 技能/角色/看门狗文本、D15 冻结对象终局处置及 `W-01..W-10` 10 席独立 `tern` 进程矩阵与 `G-1..G-7` 预审标准的复核。
+  - **双核统一裁定与 `D16` 草案成型（`12:16Z–12:18Z`）：** `Main` 在 `12:16:45Z`（`686d3185`）就派工方案并入 D16 的时点请示双核；双核统一裁定将 10 席派工矩阵与 `G-1..G-7` 直接并入 D16 表决。`12:17:24Z` `Main` 因用 `bash ls` 替代 `read` 目录被用户训诫（`7c5fdcad`），当即在 `12:17:29Z`（`0f316873`）改用 `read` 工具并完成 `local://decisions/phaseB-dispatch-draft.md`（`bb6f3fa5`），按 `watchdog` 提醒修正 `R8/R9` 状态语义（`d61f8ca4`）。`PhaseBClone_ffeb` 随即完成 `local://decisions/D16.md`（`D16-01..14`）与 `D16-annexA.md`，并启动 `D16Steady` 与 `D16Divergent` 压力测试。
 
 ---
 
-## 三、常驻 `ArgonGovernance` 持续巡检结论与下一窗口（`W13`）监控重点
+## 三、常驻 `ArgonGovernance` 持续巡检结论与下一窗口（`W14`）监控重点
 
 1. **当前领导层健康度评估：**
-   - 连续 2 小时（`W9` 后半段、`W10`、`W11`、`W12`）内，`Main` **0 次私自工程派工、0 次对 `watchdog` 宣布“我不照办”、0 次不调 `wait` 断联结束回合**，遇到 `watchdog` 误报时严格走双核裁决通道，`U81–U82` 制度笼子运转良好。
-2. **下一 30 分钟窗口（`W13`：`11:48Z – 12:18Z`）重点督办事项：**
-   - 审阅 `D15Clone_b978.VerifyD15` 产出的 `local://exec/d15/VERIFY.md`（`D15-10④` 8 仓独立核验报告），并督办秘书完成 `D15-10⑤`（18 条跨仓同步评论暂停说明与 `LEDGER.md` `R20 ✅` 更新）；
-   - 待 `R20` 完整闭环后，会同常驻 `Argon` 立即进入阶段 B（`R21 / D15-11`：逐条复核 `D10–D14`、`design/`、`AGENTS.md`、`.omp/` 角色/skill 定义，并预审一仓一进程恢复派工方案）。
+   - 连续 2.5 小时（`W9` 后半段至 `W13`）内，`Main` **0 次私自工程派工、0 次对 `watchdog` 宣布“我不照办”、0 次不调 `wait` 断联结束回合**；阶段 A（`D15`）已 100% 闭环，阶段 B（`D16`）正按规范推进。
+2. **下一 30 分钟窗口（`W14`：`12:18Z – 12:48Z`）重点督办事项：**
+   - 会同常驻 `Argon` 对经压力测试修订后的 `D16` 决策表（`D16-01..14`）逐条审查投票，并监督 `PhaseBClone_ffeb` 必须调度**独立空白历史 `task:high`** 参与 Claude 族投票及导师 `LeadMentor` 投票；
+   - 待 `D16` 三族表决通过、秘书完成 `D16-06` 与 `D16-07` 文档/issue 正文回写后，按 `D16-12` 对第 1 波次（`W-09 pepgent-lab`、`W-07 pepgent-plugin`、`W-06 pepgent-store`）的具体启动命令、`peer_send` 全文与 `LEDGER.md` 核对表进行发车预审。
