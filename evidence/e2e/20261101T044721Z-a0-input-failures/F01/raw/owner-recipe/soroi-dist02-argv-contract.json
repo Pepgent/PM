@@ -1,0 +1,55 @@
+{
+  "releaseTar": "/Users/mouriya/Ext/work/orbstack/pepgent-soroi-e2e/releases/soroi-621607dfe57f576be0e07bad19fbdaf0299d6f7beb024cea9f4de63947597b3a.tar",
+  "installer": [
+    "bun",
+    "install.ts",
+    "--home",
+    "/home/agent"
+  ],
+  "prepare": [
+    "bun",
+    "/tmp/soroi-a0/release/install-check/prepare.js",
+    "--home",
+    "/home/agent",
+    "--proof",
+    "/tmp/soroi-a0/proof",
+    "--work",
+    "/tmp/soroi-a0/work"
+  ],
+  "verifier": [
+    "bun",
+    "/tmp/soroi-a0/release/install-check/verify.js",
+    "--home",
+    "/home/agent",
+    "--proof",
+    "/tmp/soroi-a0/proof",
+    "--build",
+    "/tmp/soroi-a0/build.json"
+  ],
+  "ompArgs": [
+    "--model",
+    "opencode-go/deepseek-v4.1-flash",
+    "--no-context-files",
+    "--no-lsp",
+    "--max-time",
+    "180",
+    "--cwd",
+    "/tmp/soroi-a0/work",
+    "--config",
+    "/tmp/soroi-a0/proof/check.yml"
+  ],
+  "steps": [
+    {
+      "kind": "send",
+      "text": "This is a bounded installation check, not a source-editing task. Read skill://soroi-eval first. Then call soroi_eval exactly with {\"mode\":\"dry_run\",\"code\":\"const install_input = 21\\nconst install_output = install_check_double(install_input)\\nstop(install_output)\"}. Do not use formal mode, pins or env. Next call soroi_task with {\"context\":\"Read-only installation check; no source edits or formal eval.\",\"tasks\":[{\"name\":\"InstallCheckWorker\",\"agent\":\"soroi-worker\",\"task\":\"Read-only installation check. Do not edit files or call soroi_eval. Call soroi_return once with result install-check-complete, then end your turn.\"}]}. Wait for the actual worker handback before reporting the real tool results. Do not edit files.\r"
+    },
+    {
+      "kind": "expect",
+      "pattern": "soroi-install-check:turn-end"
+    },
+    {
+      "kind": "send",
+      "text": "/exit\r"
+    }
+  ]
+}

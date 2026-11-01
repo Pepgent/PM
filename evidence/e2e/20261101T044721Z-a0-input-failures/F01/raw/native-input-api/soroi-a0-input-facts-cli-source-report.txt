@@ -1,0 +1,2311 @@
+bundled:1: // packages/tui/src/chat/user-message.ts
+bundled:2: var que = "\x1B]133;A\x07";
+bundled:3: var Jue = "\x1B]133;B\x07";
+bundled:4: var Xue = "\x1B]133;C\x07";
+bundled:5: var Yue = "\x1B]133;D;0\x07";
+bundled:6: var Que = Jue + Xue + Yue;
+bundled:7: function aee(u = {}, p = N$) {
+bundled:8:   const { imageLinks: S, synthetic: M = false, skillPath: E } = u;
+bundled:9:   const _ = e.getFgOnBgAnsi("userMessageText", "userMessageBg");
+bundled:10:   const F = `${_}${e.getBgAnsi("userMessageBg")}`;
+bundled:11:   const W = M ? (z) => e.fg("dim", z) : (z) => e.fgOnBg("userMessageText", "userMessageBg", bne(z, _));
+bundled:12:   return (z) => m6(z, {
+bundled:13:     renderText: W,
+bundled:14:     renderSkill: (V, J) => {
+bundled:15:       const Y = p6(V, F);
+bundled:16:       const ne = E?.(J);
+bundled:17:       return ne ? mr(ne, Y, { line: 1 }) : Y;
+bundled:18:     },
+bundled:19:     renderMention: (V) => Wye(V, F),
+bundled:20:     renderReference: (V, J, Y, ne) => {
+bundled:21:       const re = ne === "chip" ? `${P$(J, Y)}\x1B[1m${V}\x1B[22m${_}` : e.fg("accent", `\x1B[1m${V}\x1B[22m`);
+bundled:22:       return J === "image" || J === "video" ? xj(V, Y, S, () => re) : re;
+bundled:23:     }
+bundled:24:   }, p);
+bundled:25: }
+bundled:26: class wv extends oe {
+bundled:27:   #e = Number.POSITIVE_INFINITY;
+bundled:28:   #t;
+bundled:29:   #n;
+bundled:30:   #r;
+bundled:31:   #o;
+bundled:32:   #i;
+bundled:33:   #l;
+bundled:34:   #a;
+bundled:35:   #s;
+bundled:36:   #c;
+bundled:37:   #d;
+bundled:38:   #f;
+bundled:39:   #g;
+bundled:40:   #v;
+bundled:41:   #p = false;
+bundled:42:   constructor(u, p = {}) {
+bundled:43:     super();
+bundled:44:     Es();
+bundled:45:     u = qye(u, Number.POSITIVE_INFINITY, () => {});
+bundled:46:     const S = [];
+bundled:47:     Gye.lastIndex = 0;
+bundled:48:     u = u.replace(Gye, (_, F, W) => {
+bundled:49:       const z = d6(W);
+bundled:50:       S.push(z);
+bundled:51:       return z;
+bundled:52:     });
+bundled:53:     const M = (_) => e.bg("userMessageBg", _);
+bundled:54:     this.#r = M;
+bundled:55:     this.#o = p.liveSteered === true;
+bundled:56:     this.#i = p.synthetic === true;
+bundled:57:     this.#l = p.timestamp;
+bundled:58:     this.#a = p.images ?? [];
+bundled:59:     this.#s = p.imageLinks;
+bundled:60:     this.#c = u;
+bundled:61:     this.#d = $ye(S);
+bundled:62:     const E = new Jt(u, 1, 1, St(), {
+bundled:63:       bgColor: M,
+bundled:64:       color: aee(p, this.#d)
+bundled:65:     });
+bundled:66:     E.setIgnoreTight(true);
+bundled:67:     this.addChild(E);
+bundled:68:   }
+bundled:69:   releaseRenderCaches() {
+bundled:70:     this.#t = undefined;
+bundled:71:     this.#n = undefined;
+bundled:72:     super.releaseRenderCaches();
+bundled:73:   }
+bundled:74:   setReaction(u) {
+bundled:75:     if (this.#f === u)
+bundled:76:       return;
+bundled:77:     this.#f = u;
+bundled:78:     this.#n = undefined;
+bundled:79:     this.#g = undefined;
+bundled:80:   }
+bundled:81:   describe(u) {
+bundled:82:     const p = u?.hour12;
+bundled:83:     const S = Xb();
+bundled:84:     if (this.#g && this.#v === p && this.#p === S)
+bundled:85:       return this.#g;
+bundled:86:     this.#v = p;
+bundled:87:     this.#p = S;
+bundled:88:     const M = [];
+bundled:89:     if (!this.#i && hhe()) {
+bundled:90:       const W = [
+bundled:91:         s("icon", {
+bundled:92:           name: "copy",
+bundled:93:           role: "omp.user.tool",
+bundled:94:           title: "Copy message",
+bundled:95:           aria: "Copy message",
+bundled:96:           actions: { click: "copy-message" }
+bundled:97:         }, undefined, "copy"),
+bundled:98:         s("icon", {
+bundled:99:           name: "rewind",
+bundled:100:           role: "omp.user.tool",
+bundled:101:           title: "Rewind the conversation to an earlier message",
+bundled:102:           aria: "Rewind",
+bundled:103:           actions: { click: "rewind" }
+bundled:104:         }, undefined, "rewind")
+bundled:105:       ];
+bundled:106:       if (this.#l !== undefined) {
+bundled:107:         const z = new Date(this.#l);
+bundled:108:         W.push(s("text", { text: "\xB7" }, undefined, "dot"), c([t(z.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: p }), "dim mono")], {
+bundled:109:           role: "omp.user.time",
+bundled:110:           title: z.toLocaleString([], { hour12: p })
+bundled:111:         }));
+bundled:112:       }
+bundled:113:       M.push(s("row", { gap: "xs", align: "center", role: "omp.user.tools" }, W, "tools"));
+bundled:114:     }
+bundled:115:     const E = [];
+bundled:116:     if (!this.#i) {
+bundled:117:       this.#a.forEach((W, z) => {
+bundled:118:         if (!W.mimeType.startsWith("image/"))
+bundled:119:           return;
+bundled:120:         const V = `#${z + 1}`;
+bundled:121:         const J = X3(S ? this.#s?.[z] : undefined);
+bundled:122:         E.push(V3(W.data, W.mimeType, { alt: V, title: V, ...J }, V));
+bundled:123:       });
+bundled:124:     }
+bundled:125:     if (E.length > 0) {
+bundled:126:       M.push(X(E, { gap: "sm", wrap: true, align: "start", role: "omp.user.images" }));
+bundled:127:     }
+bundled:128:     const _ = this.#i ? [] : Zue(this.#c, this.#d, this.#s);
+bundled:129:     M.push(nt(this.#c, _.length > 0 ? { marks: _ } : undefined));
+bundled:130:     const F = [];
+bundled:131:     if (this.#o) {
+bundled:132:       F.push(s("badge", {
+bundled:133:         text: "steered",
+bundled:134:         tone: "accent",
+bundled:135:         title: "Delivered into the response that was streaming"
+bundled:136:       }));
+bundled:137:     }
+bundled:138:     if (this.#f !== undefined)
+bundled:139:       F.push(s("badge", { text: this.#f, role: "omp.reaction" }));
+bundled:140:     if (F.length > 0)
+bundled:141:       M.push(s("row", { gap: "xs", justify: "end", role: "omp.user.badges" }, F, "badges"));
+bundled:142:     this.#g = Un({ role: this.#i ? "omp.user.synthetic" : "omp.user", tone: this.#i ? "muted" : "user" }, M);
+bundled:143:     return this.#g;
+bundled:144:   }
+bundled:145:   handleNativeEvent(u) {
+bundled:146:     if (u.type !== "action")
+bundled:147:       return;
+bundled:148:     if (u.act === "copy-message")
+bundled:149:       sW({ act: "copy", text: this.#c });
+bundled:150:     else if (u.act === "rewind")
+bundled:151:       sW({ act: "rewind" });
+bundled:152:   }
+bundled:153:   #w(u) {
+bundled:154:     const p = this.#o ? e.fg("accent", "*") : "";
+bundled:155:     const S = this.#f ?? "";
+bundled:156:     const M = Math.max(0, u - 2 - f(p) - f(S));
+bundled:157:     return ox(` ${p}${se(M)}${S}`, u, this.#r);
+bundled:158:   }
+bundled:159:   setTranscriptAllocation(u, p) {
+bundled:160:     this.#e = Math.max(0, Math.trunc(u));
+bundled:161:   }
+bundled:162:   isTranscriptBlockFinalized() {
+bundled:163:     return true;
+bundled:164:   }
+bundled:165:   renderTranscriptBlockEmergencyRow(u) {
+bundled:166:     return this.#h(super.render(u));
+bundled:167:   }
+bundled:168:   #h(u) {
+bundled:169:     if (u.length === 0)
+bundled:170:       return;
+bundled:171:     if (u.length >= 3) {
+bundled:172:       for (let p = 1;p < u.length - 1; p++) {
+bundled:173:         if (ove(u[p]).trim().length > 0) {
+bundled:174:           return u[p];
+bundled:175:         }
+bundled:176:       }
+bundled:177:       return u[1];
+bundled:178:     }
+bundled:179:     return u[0];
+bundled:180:   }
+bundled:181:   render(u) {
+bundled:182:     const p = super.render(u);
+bundled:183:     if (p.length === 0) {
+bundled:184:       return p;
+bundled:185:     }
+bundled:186:     if (this.#e === 1) {
+bundled:187:       const M = this.#h(p);
+bundled:188:       if (M !== undefined)
+bundled:189:         return [M];
+bundled:190:     }
+bundled:191:     if (this.#t === p && this.#n !== undefined) {
+bundled:192:       return this.#n;
+bundled:193:     }
+bundled:194:     const S = p.slice();
+bundled:195:     if (this.#f !== undefined || this.#o)
+bundled:196:       S[0] = this.#w(u);
+bundled:197:     S[0] = que + S[0];
+bundled:198:     S[S.length - 1] = S[S.length - 1] + Que;
+bundled:199:     this.#t = p;
+bundled:200:     this.#n = S;
+bundled:201:     return S;
+bundled:202:   }
+bundled:203: }
+bundled:204: function Zue(u, p, S) {
+bundled:205:   const M = new Map;
+bundled:206:   const E = (_) => (F) => {
+bundled:207:     M.set(F, { t: F, s: _ });
+bundled:208:     return "";
+bundled:209:   };
+bundled:210:   m6(u, {
+bundled:211:     renderText: () => "",
+bundled:212:     renderSkill: E("customMessageLabel strong"),
+bundled:213:     renderMention: E("statusLineModel strong"),
+bundled:214:     renderReference: (_, F, W) => {
+bundled:215:       const z = "accent strong";
+bundled:216:       const V = F === "image" || F === "video" ? S?.[W - 1] : undefined;
+bundled:217:       M.set(_, V ? V1(V, _, z) : { t: _, s: z });
+bundled:218:       return "";
+bundled:219:     }
+bundled:220:   }, p);
+bundled:221:   return [...M.values()];
+bundled:222: }
+bundled:223: class RB {
+bundled:224:   #e;
+bundled:225:   #t;
+bundled:226:   constructor(u) {
+bundled:227:     this.#e = u;
+bundled:228:   }
+bundled:229:   releaseRenderCaches() {
+bundled:230:     this.#t = undefined;
+bundled:231:   }
+bundled:232:   invalidate() {
+bundled:233:     this.#t = undefined;
+bundled:234:   }
+bundled:235:   render(u) {
+bundled:236:     u = Math.max(1, u);
+bundled:237:     if (this.#t?.width === u)
+bundled:238:       return this.#t.lines;
+bundled:239:     const p = `${e.sep.dot.trim()} ${Nr()}`;
+bundled:240:     const S = [` ${e.fg("dim", epe(`${this.#e} ${p}`, Math.max(10, u - 1)))}`];
+bundled:241:     this.#t = { width: u, lines: S };
+bundled:242:     return S;
+bundled:243:   }
+bundled:244: }
+bundled:245: class lee {
+bundled:246:   #e;
+bundled:247:   #t = false;
+bundled:248:   #n = new Ze;
+bundled:249:   #r;
+bundled:250:   #o;
+bundled:251:   constructor(u, p) {
+bundled:252:     this.#r = u;
+bundled:253:     this.#o = p;
+bundled:254:     this.#e = new ry({
+bundled:255:       summary: new RB(xB(u)),
+bundled:256:       body: () => new wv(this.#r, { synthetic: true, imageLinks: this.#o })
+bundled:257:     });
+bundled:258:   }
+bundled:259:   setExpanded(u) {
+bundled:260:     this.#t = u;
+bundled:261:     this.#e.setExpanded(u);
+bundled:262:   }
+bundled:263:   describe() {
+bundled:264:     return this.#n.get([this.#t], () => Un({
+bundled:265:       role: "omp.user.synthetic",
+bundled:266:       tone: "muted",
+bundled:267:       head: [t(xB(this.#r), "dim")],
+bundled:268:       collapsible: true,
+bundled:269:       collapsed: !this.#t
+bundled:270:     }, this.#t ? [nt(this.#r)] : []));
+bundled:271:   }
+bundled:272:   handleNativeEvent(u) {
+bundled:273:     const p = Oc(u);
+bundled:274:     if (p !== undefined)
+bundled:275:       this.setExpanded(p);
+bundled:276:   }
+bundled:277:   setIgnoreTight(u) {
+bundled:278:     this.#e.setIgnoreTight(u);
+bundled:279:     return this;
+bundled:280:   }
+bundled:281:   invalidate() {
+bundled:282:     this.#e.invalidate();
+bundled:283:   }
+bundled:284:   releaseRenderCaches() {
+bundled:285:     this.#e.releaseRenderCaches();
+bundled:286:   }
+bundled:287:   dispose() {
+bundled:288:     this.#e.dispose();
+bundled:289:   }
+bundled:290:   render(u) {
+bundled:291:     return this.#e.render(u);
+bundled:292:   }
+bundled:293: }
+bundled:294: function epe(u, p) {
+bundled:295:   if (Bun.stringWidth(u, { countAnsiEscapeCodes: false }) <= p)
+bundled:296:     return u;
+bundled:297:   let S = "";
+bundled:298:   let M = 0;
+bundled:299:   for (const E of u) {
+bundled:300:     const _ = Bun.stringWidth(E, { countAnsiEscapeCodes: false });
+bundled:301:     if (M + _ > p - 1)
+bundled:302:       break;
+bundled:303:     S += E;
+bundled:304:     M += _;
+bundled:305:   }
+bundled:306:   return `${S}\u2026`;
+bundled:307: }
+bundled:308: function xB(u) {
+bundled:309:   const p = G(Buffer.byteLength(u, "utf-8"));
+bundled:310:   const S = u === "" ? 0 : u.split(`
+bundled:311: `).length;
+bundled:312:   const M = e.sep.dot.trim();
+bundled:313:   return `${tpe(u)} ${M} ${p} ${M} ${S} line${S === 1 ? "" : "s"}`;
+bundled:314: }
+bundled:315: function tpe(u) {
+bundled:316:   for (const p of u.split(`
+bundled:317: `)) {
+bundled:318:     const S = p.trim();
+bundled:319:     if (!S)
+bundled:320:       continue;
+bundled:321:     const M = /^#{1,6}\s+(.*)$/.exec(S);
+bundled:322:     return M ? M[1].trim() || "Synthetic input" : "Synthetic input";
+bundled:323:   }
+bundled:324:   return "Synthetic input";
+bundled:325: }
+bundled:1: // packages/coding-agent/src/cli/args.ts
+bundled:2: import * as m from "path";
+bundled:3: function yVe(i, r) {
+bundled:4:   if (i.goal === undefined)
+bundled:5:     return;
+bundled:6:   if (!r) {
+bundled:7:     throw new Ln("--goal requires an interactive terminal (not --print or --mode).");
+bundled:8:   }
+bundled:9:   if (i.continue || i.resume || i.fork || i.fromClaude || i.fromCodex) {
+bundled:10:     throw new Ln("--goal requires a fresh session (no resume, continue, fork, or import).");
+bundled:11:   }
+bundled:12: }
+bundled:13: function bVe(i, r) {
+bundled:14:   if (!i.restore)
+bundled:15:     return;
+bundled:16:   if (!r) {
+bundled:17:     throw new Ln("--restore requires an interactive terminal (not --print or --mode).");
+bundled:18:   }
+bundled:19:   if (i.continue || i.fork || i.fromClaude || i.fromCodex || i.noSession || i.goal !== undefined) {
+bundled:20:     throw new Ln("--restore resumes one existing session (no continue, fork, import, goal, or --no-session).");
+bundled:21:   }
+bundled:22: }
+bundled:23: function wVe(i) {
+bundled:24:   if (i.restore && (i.messages.length > 0 || i.fileArgs.length > 0)) {
+bundled:25:     throw new Ln("--restore takes no prompt: the session goes on with its interrupted turn.");
+bundled:26:   }
+bundled:27: }
+bundled:28: function vVe(i, r, o, l = false) {
+bundled:29:   if (i.goal === undefined)
+bundled:30:     return;
+bundled:31:   if (i.messages.length > 0 || i.fileArgs.length > 0 || o !== undefined) {
+bundled:32:     throw new Ln("--goal cannot be combined with a positional message, @file, or stdin prompt.");
+bundled:33:   }
+bundled:34:   if (i.planYolo || i.noTools) {
+bundled:35:     throw new Ln("--goal cannot be combined with --plan-yolo or --no-tools.");
+bundled:36:   }
+bundled:37:   if (l) {
+bundled:38:     throw new Ln("--goal cannot be combined with plan.defaultOnStartup; disable startup plan mode first.");
+bundled:39:   }
+bundled:40:   if (!r) {
+bundled:41:     throw new Ln("--goal requires goal.enabled to be enabled.");
+bundled:42:   }
+bundled:43: }
+bundled:44: var v = {
+bundled:45:   parseThinking: Xle,
+bundled:46:   normalizeToolNames: kc,
+bundled:47:   thinkingEfforts: II
+bundled:48: };
+bundled:49: var A = new Set(["--extension", "-e", "--hook", "--trusted-extension"]);
+bundled:50: var k = /^(?:[A-Za-z]:[\\/]|\\\\[?]\\(?:[A-Za-z]:[\\/]|UNC[\\/])|\\\\[^\\/]+[\\/][^\\/]+[\\/]|\/\/[?]\/(?:[A-Za-z]:\/|UNC\/)|\/\/[^/]+\/[^/]+\/)/;
+bundled:51: var c = /\.(?:[cm]?[jt]sx?)$/i;
+bundled:52: function T(i, r, o) {
+bundled:53:   const l = r[o];
+bundled:54:   if (l === undefined || !A.has(i) || !k.test(l) || c.test(l)) {
+bundled:55:     return { value: l ?? "", index: o };
+bundled:56:   }
+bundled:57:   let n = l;
+bundled:58:   for (let u = o + 1;u < r.length; u++) {
+bundled:59:     const f = r[u];
+bundled:60:     if (f === RI || f.startsWith("-"))
+bundled:61:       break;
+bundled:62:     n += ` ${f}`;
+bundled:63:     if (c.test(n)) {
+bundled:64:       return { value: n, index: u };
+bundled:65:     }
+bundled:66:   }
+bundled:67:   return { value: l, index: o };
+bundled:68: }
+bundled:69: function bf(i, r) {
+bundled:70:   const o = [...i];
+bundled:71:   const l = v;
+bundled:72:   const n = {
+bundled:73:     messages: [],
+bundled:74:     fileArgs: [],
+bundled:75:     unknownFlags: new Map,
+bundled:76:     unrecognizedFlags: [],
+bundled:77:     invalidFlagValues: [],
+bundled:78:     sessionDir: x.PI_CODING_AGENT_SESSION_DIR || undefined
+bundled:79:   };
+bundled:80:   let u = false;
+bundled:81:   let f = 0;
+bundled:82:   for (let t = 0;t < o.length; t++) {
+bundled:83:     let e = o[t];
+bundled:84:     if (u) {
+bundled:85:       n.messages.push(e);
+bundled:86:       continue;
+bundled:87:     }
+bundled:88:     if (e === RI) {
+bundled:89:       continue;
+bundled:90:     }
+bundled:91:     const w = t;
+bundled:92:     let p = -1;
+bundled:93:     if (e.startsWith("--") && e.includes("=")) {
+bundled:94:       const s = e.indexOf("=");
+bundled:95:       const d = e.slice(s + 1);
+bundled:96:       e = e.slice(0, s);
+bundled:97:       o.splice(t + 1, 0, d);
+bundled:98:       p = t + 1;
+bundled:99:     }
+bundled:100:     const h = e.startsWith("--") ? r?.get(e.slice(2)) : undefined;
+bundled:101:     if (h) {
+bundled:102:       const s = e.slice(2);
+bundled:103:       if (h.type === "boolean") {
+bundled:104:         n.unknownFlags.set(s, true);
+bundled:105:       } else if (h.type === "string" && t + 1 < o.length) {
+bundled:106:         if (p !== -1 || !o[t + 1].startsWith("-")) {
+bundled:107:           n.unknownFlags.set(s, o[++t]);
+bundled:108:         }
+bundled:109:       }
+bundled:110:     } else if (V_.has(e)) {
+bundled:111:       if (e === "--trusted-extension")
+bundled:112:         f++;
+bundled:113:       if (e === "--goal" && (t + 1 >= o.length || o[t + 1] === RI || p === -1 && o[t + 1].startsWith("-"))) {
+bundled:114:         n.invalidFlagValues.push("--goal requires an objective.");
+bundled:115:         if (t + 1 < o.length && o[t + 1] !== RI)
+bundled:116:           t++;
+bundled:117:         continue;
+bundled:118:       }
+bundled:119:       if (t + 1 < o.length && o[t + 1] !== RI) {
+bundled:120:         const s = T(e, o, t + 1);
+bundled:121:         t = s.index;
+bundled:122:         i6e[e](n, s.value, l);
+bundled:123:       }
+bundled:124:     } else if (WA.has(e)) {
+bundled:125:       const s = Uq[e];
+bundled:126:       const d = o[t + 1];
+bundled:127:       const b = d !== undefined && !d.startsWith("-") && !(s.rejectEmpty === true && d.length === 0);
+bundled:128:       s.set(n, b ? o[++t] : undefined);
+bundled:129:     } else if (e === "--help" || e === "-h") {
+bundled:130:       n.help = true;
+bundled:131:     } else if (e === "--version" || e === "-v") {
+bundled:132:       n.version = true;
+bundled:133:     } else if (e === "--allow-home") {
+bundled:134:       n.allowHome = true;
+bundled:135:     } else if (e === "--profile" && t + 1 < o.length) {
+bundled:136:       n.profile = o[++t];
+bundled:137:     } else if (e.startsWith("--profile=")) {
+bundled:138:       n.profile = e.slice("--profile=".length);
+bundled:139:     } else if (e === "--alias" && t + 1 < o.length) {
+bundled:140:       n.alias = o[++t];
+bundled:141:     } else if (e.startsWith("--alias=")) {
+bundled:142:       n.alias = e.slice("--alias=".length);
+bundled:143:     } else if (e === "--continue" || e === "-c") {
+bundled:144:       n.continue = true;
+bundled:145:     } else if (e === "--from-claude") {
+bundled:146:       n.fromClaude = true;
+bundled:147:     } else if (e === "--from-codex") {
+bundled:148:       n.fromCodex = true;
+bundled:149:     } else if (e === "--no-session") {
+bundled:150:       n.noSession = true;
+bundled:151:     } else if (e === "--no-tools") {
+bundled:152:       n.noTools = true;
+bundled:153:     } else if (e === "--no-lsp") {
+bundled:154:       n.noLsp = true;
+bundled:155:     } else if (e === "--no-pty") {
+bundled:156:       n.noPty = true;
+bundled:157:     } else if (e === "--hide-thinking") {
+bundled:158:       n.hideThinking = true;
+bundled:159:     } else if (e === "--advisor") {
+bundled:160:       n.advisor = true;
+bundled:161:     } else if (e === "--wait-async") {
+bundled:162:       n.waitAsync = true;
+bundled:163:     } else if (e === "--external-thinking") {
+bundled:164:       n.externalThinking = true;
+bundled:165:     } else if (e === "--prewalk") {
+bundled:166:       n.prewalk = true;
+bundled:167:     } else if (e === "--no-prewalk") {
+bundled:168:       n.noPrewalk = true;
+bundled:169:     } else if (e === "--plan-yolo") {
+bundled:170:       n.planYolo = true;
+bundled:171:     } else if (e === "--print" || e === "-p") {
+bundled:172:       n.print = true;
+bundled:173:     } else if (e === "--print-thoughts") {
+bundled:174:       n.printThoughts = true;
+bundled:175:     } else if (e === "--no-extensions") {
+bundled:176:       n.noExtensions = true;
+bundled:177:     } else if (e === "--no-skills") {
+bundled:178:       n.noSkills = true;
+bundled:179:     } else if (e === "--no-rules") {
+bundled:180:       n.noRules = true;
+bundled:181:     } else if (e === "--no-context-files") {
+bundled:182:       n.noContextFiles = true;
+bundled:183:     } else if (e === "--no-title") {
+bundled:184:       n.noTitle = true;
+bundled:185:     } else if (e === "--no-ui") {
+bundled:186:       n.noUi = true;
+bundled:187:     } else if (e === "--auto-approve" || e === "--yolo") {
+bundled:188:       n.autoApprove = true;
+bundled:189:     } else if (e.startsWith("@")) {
+bundled:190:       let s = e.slice(1);
+bundled:191:       if (s.startsWith('"') && s.endsWith('"') && s.length > 1) {
+bundled:192:         s = s.slice(1, -1);
+bundled:193:       } else if (s.startsWith("'") && s.endsWith("'") && s.length > 1) {
+bundled:194:         s = s.slice(1, -1);
+bundled:195:       }
+bundled:196:       n.fileArgs.push(s);
+bundled:197:     } else if (!e.startsWith("-") || e === "-") {
+bundled:198:       n.messages.push(e);
+bundled:199:     } else if (e === "--") {
+bundled:200:       u = true;
+bundled:201:     } else {
+bundled:202:       n.unrecognizedFlags.push(e);
+bundled:203:     }
+bundled:204:     if (p !== -1 && t === w) {
+bundled:205:       o.splice(p, 1);
+bundled:206:     }
+bundled:207:   }
+bundled:208:   const g = [...n.extensions ?? [], ...n.hooks ?? []].some((t) => t === "--trusted-extension" || t.startsWith("--trusted-extension="));
+bundled:209:   if ((n.trustedExtensions?.length ?? 0) !== f || g) {
+bundled:210:     throw new Ln("--trusted-extension requires a non-empty, non-flag value");
+bundled:211:   }
+bundled:212:   if (f > 0 && ((n.extensions?.length ?? 0) > 0 || (n.hooks?.length ?? 0) > 0)) {
+bundled:213:     throw new Ln("--trusted-extension cannot be combined with --extension, -e, or --hook");
+bundled:214:   }
+bundled:215:   for (const t of n.trustedExtensions ?? []) {
+bundled:216:     if (t.length === 0) {
+bundled:217:       throw new Ln("--trusted-extension requires a non-empty, non-flag value");
+bundled:218:     }
+bundled:219:     if (!m.isAbsolute(t)) {
+bundled:220:       throw new Ln(`--trusted-extension requires an absolute path: ${t}`);
+bundled:221:     }
+bundled:222:   }
+bundled:223:   if (n.systemPrompt !== undefined && n.systemPromptTemplate !== undefined) {
+bundled:224:     throw new Ln("--system-prompt and --system-prompt-template cannot be combined");
+bundled:225:   }
+bundled:226:   return n;
+bundled:227: }
+bundled:228: function KCe(i, r) {
+bundled:229:   if (!i)
+bundled:230:     return;
+bundled:231:   const o = new Set(r);
+bundled:232:   const l = i.filter((t) => !o.has(t));
+bundled:233:   if (l.length === 0)
+bundled:234:     return;
+bundled:235:   const n = new Set(Rb);
+bundled:236:   const u = l.filter((t) => n.has(t));
+bundled:237:   const f = l.filter((t) => !n.has(t));
+bundled:238:   const g = [];
+bundled:239:   if (f.length > 0) {
+bundled:240:     g.push(`Unknown tool${f.length === 1 ? "" : "s"} in --tools: ${f.join(", ")}.`);
+bundled:241:     const t = r.filter((e) => !n.has(e));
+bundled:242:     g.push(`Built-in tools: ${Rb.join(", ")}.` + (t.length > 0 ? ` Other registered tools: ${t.join(", ")}.` : ""));
+bundled:243:   }
+bundled:244:   if (u.length > 0) {
+bundled:245:     g.push(`Built-in tool${u.length === 1 ? "" : "s"} unavailable in this session: ${u.join(", ")}.`);
+bundled:246:   }
+bundled:247:   throw new Ln(g.join(`
+bundled:248: `));
+bundled:249: }
+bundled:250: function xVe(i, r = (o) => process.stderr.write(o)) {
+bundled:251:   if (i.unrecognizedFlags.length === 0)
+bundled:252:     return false;
+bundled:253:   const o = i.unrecognizedFlags;
+bundled:254:   const l = o.length === 1 ? "" : "s";
+bundled:255:   r(`${a.red(`Error: unknown flag${l}: ${o.join(", ")}`)}
+bundled:256: `);
+bundled:257:   r(`Run \`${F} --help\` for available flags.
+bundled:258: `);
+bundled:259:   return true;
+bundled:260: }
+bundled:261: function ade(i, r = (o) => process.stderr.write(o)) {
+bundled:262:   for (const o of i.invalidFlagValues)
+bundled:263:     r(`${a.red(`Error: ${o}`)}
+bundled:264: `);
+bundled:265:   return i.invalidFlagValues.length > 0;
+bundled:266: }
+bundled:267: function hE(i, r = (o) => process.stderr.write(o)) {
+bundled:268:   if (!(i instanceof Ln))
+bundled:269:     return false;
+bundled:270:   r(`${a.red(`Error: ${i.message}`)}
+bundled:271: `);
+bundled:272:   r(`Run \`${F} --help\` for available flags.
+bundled:273: `);
+bundled:274:   return true;
+bundled:275: }
+bundled:276: function qXt() {
+bundled:277:   process.stdout.write(`${a.bold(F)} - AI coding assistant
+bundled:278: ` + `Run ${F} --help for full command and option details.
+bundled:279: ` + `Run ${F} <command> --help for command-specific help.
+bundled:280: ` + `${YCe()}
+bundled:281: `);
+bundled:282: }
+bundled:283: export { yVe, bVe, wVe, vVe, bf, KCe, xVe, ade, hE, qXt };
+bundled:1: // packages/coding-agent/src/cli/initial-message.ts
+bundled:2: function pVe({
+bundled:3:   parsed: t,
+bundled:4:   fileText: s,
+bundled:5:   fileImages: e,
+bundled:6:   stdinContent: i
+bundled:7: }) {
+bundled:8:   const a = i !== undefined || s !== undefined || (e?.length ?? 0) > 0;
+bundled:9:   if (!a) {
+bundled:10:     return {
+bundled:11:       initialImages: undefined
+bundled:12:     };
+bundled:13:   }
+bundled:14:   let n = "";
+bundled:15:   if (s !== undefined) {
+bundled:16:     n += s;
+bundled:17:   }
+bundled:18:   if (t.messages.length > 0) {
+bundled:19:     n += t.messages[0];
+bundled:20:     t.messages.shift();
+bundled:21:   }
+bundled:22:   const g = i !== undefined ? n.length > 0 ? `${i}
+bundled:23: ${n}` : i : n.length > 0 ? n : e && e.length > 0 ? "" : undefined;
+bundled:24:   return {
+bundled:25:     initialMessage: g,
+bundled:26:     initialImages: e && e.length > 0 ? e : undefined
+bundled:27:   };
+bundled:28: }
+bundled:29: export { pVe };
+bundled:1: // packages/coding-agent/src/main.ts
+bundled:2: import * as ee from "fs";
+bundled:3: import * as ge from "os";
+bundled:1: // packages/coding-agent/src/main.ts
+bundled:2: async function ut() {
+bundled:3:   return (await import("/$bunfs/root/chunks/interactive-mode-k16yamn7.js")).InteractiveMode;
+bundled:4: }
+bundled:5: async function _e(e) {
+bundled:6:   const [{ selectSession: n }, { HistoryStorage: i }, { loadPinnedSessionIds: t, setSessionPinned: r }, { FileSessionStorage: s }] = await Promise.all([
+bundled:7:     import("/$bunfs/root/chunks/session-picker-2ngpq5pn.js"),
+bundled:8:     import("/$bunfs/root/chunks/history-storage-m41na5nd.js"),
+bundled:9:     import("/$bunfs/root/chunks/session-pins-7rdaaxpn.js"),
+bundled:10:     import("/$bunfs/root/chunks/session-storage-6hqr4xgw.js")
+bundled:11:   ]);
+bundled:12:   return (l, y) => {
+bundled:13:     const E = new s;
+bundled:14:     ym.create();
+bundled:15:     return n(l, y, {
+bundled:16:       loadPinnedIds: t,
+bundled:17:       loadHistoryMatcher: () => {
+bundled:18:         const g = i.open();
+bundled:19:         return (P) => g.matchingSessionIds(P);
+bundled:20:       },
+bundled:21:       deleteSession: async (g) => {
+bundled:22:         await E.deleteSessionWithArtifacts(g.path);
+bundled:23:         return true;
+bundled:24:       },
+bundled:25:       ...e?.foreign ? {} : {
+bundled:26:         renameSession: (g, P) => Se.renameSessionTitle(g.path, P, { cwd: g.cwd }),
+bundled:27:         setSessionPinned: (g, P) => r(g.id, P)
+bundled:28:       },
+bundled:29:       loadAllSessions: () => Se.listAllForPicker(E)
+bundled:30:     });
+bundled:31:   };
+bundled:32: }
+bundled:33: async function mt() {
+bundled:34:   return (await import("/$bunfs/root/chunks/builtin-registry-fr4jr04c.js")).executeBuiltinSlashCommand;
+bundled:35: }
+bundled:36: async function gt() {
+bundled:37:   return (await import("readline/promises")).createInterface;
+bundled:38: }
+bundled:39: function mE(e, n) {
+bundled:40:   (e.mode === "json" ? process.stderr : process.stdout).write(n);
+bundled:41: }
+bundled:42: function He(e) {
+bundled:43:   process.stderr.write(`${a.yellow(`Warning: ${e}`)}
+bundled:44: `);
+bundled:45: }
+bundled:46: async function ft(e) {
+bundled:47:   if (!zhe.get(D)) {
+bundled:48:     return;
+bundled:49:   }
+bundled:50:   try {
+bundled:51:     if (sVe() || await $Ce(process.execPath))
+bundled:52:       return;
+bundled:53:     const n = SW.get(D);
+bundled:54:     const { version: i } = oi() ? await nF({ channel: n }, { timeoutMs: 5000, fromVersion: e }) : await qCe({ timeoutMs: 5000, channel: n });
+bundled:55:     return Bun.semver.order(i, e) > 0 ? i : undefined;
+bundled:56:   } catch {
+bundled:57:     return;
+bundled:58:   }
+bundled:59: }
+bundled:60: function Be(e, n = D) {
+bundled:61:   for (const i of Yp()) {
+bundled:62:     if (i.definition.protocolDefault?.includes(e))
+bundled:63:       i.pinDefault(n);
+bundled:64:   }
+bundled:65: }
+bundled:66: function Ye(e) {
+bundled:67:   if (!e.noUi || e.mode === "rpc" || e.mode === "rpc-ui")
+bundled:68:     return;
+bundled:69:   process.stderr.write(`${a.red("Error: --no-ui requires --mode rpc or --mode rpc-ui")}
+bundled:70: `);
+bundled:71:   process.exit(1);
+bundled:72: }
+bundled:73: function Ve() {
+bundled:74:   process.stderr.write(`${a.red("Error: interactive mode requires a terminal, but stdin is not a TTY.")}
+bundled:75: Pass a prompt (\`${F} -p "\u2026"\`), pipe one on stdin, or use \`--mode rpc\`.
+bundled:76: `);
+bundled:77:   process.exit(2);
+bundled:78: }
+bundled:79: async function qYe() {
+bundled:80:   if (process.stdin.isTTY === true)
+bundled:81:     return;
+bundled:82:   const e = Dn() ? undefined : setTimeout(() => {
+bundled:83:     process.stderr.write(`${a.dim(`Reading prompt from piped stdin (waiting for EOF; ${T("ctrl+c")} to abort)\u2026`)}
+bundled:84: `);
+bundled:85:   }, 1000);
+bundled:86:   e?.unref?.();
+bundled:87:   try {
+bundled:88:     const n = await Bun.stdin.text();
+bundled:89:     if (n.trim().length === 0)
+bundled:90:       return;
+bundled:91:     return n;
+bundled:92:   } catch {
+bundled:93:     return;
+bundled:94:   } finally {
+bundled:95:     clearTimeout(e);
+bundled:96:   }
+bundled:97: }
+bundled:98: var pt = 1e4;
+bundled:99: var ie;
+bundled:100: var Ce = false;
+bundled:101: var qe = 0;
+bundled:102: function Ge() {
+bundled:103:   if (Dn())
+bundled:104:     return;
+bundled:105:   if (ie)
+bundled:106:     return;
+bundled:107:   ie = setInterval(() => {
+bundled:108:     const e = Math.round((Date.now() - qe) / 1000);
+bundled:109:     const n = vxt().join(" > ") || "module load / pre-phase work";
+bundled:110:     process.stderr.write(`${a.yellow(`Still starting after ${e}s`)}${a.dim(` \u2014 phase: ${n}`)}
+bundled:111: ${a.dim(`  logs: ${QI()} \xB7 re-run with PI_DEBUG_STARTUP=1 for streaming phase markers`)}
+bundled:112: `);
+bundled:113:   }, pt);
+bundled:114:   ie.unref?.();
+bundled:115: }
+bundled:116: function Je() {
+bundled:117:   if (!ie)
+bundled:118:     return;
+bundled:119:   clearInterval(ie);
+bundled:120:   ie = undefined;
+bundled:121: }
+bundled:122: function ht() {
+bundled:123:   if (Dn())
+bundled:124:     return;
+bundled:125:   Ce = true;
+bundled:126:   qe = Date.now();
+bundled:127:   Ge();
+bundled:128: }
+bundled:129: function H() {
+bundled:130:   Ce = false;
+bundled:131:   Je();
+bundled:132: }
+bundled:133: function ke() {
+bundled:134:   Je();
+bundled:135: }
+bundled:136: function xe() {
+bundled:137:   if (Dn())
+bundled:138:     return;
+bundled:139:   if (Ce)
+bundled:140:     Ge();
+bundled:141: }
+bundled:142: function UYe(e, n) {
+bundled:143:   if (n || e.length === 0) {
+bundled:144:     return null;
+bundled:145:   }
+bundled:146:   const i = e.map((t) => {
+bundled:147:     const r = t.explicitThinkingLevel && t.thinkingLevel ? `:${t.thinkingLevel}` : "";
+bundled:148:     return `${t.model.id}${r}`;
+bundled:149:   }).join(", ");
+bundled:150:   return { kind: "info", message: `Model scope: ${i} (${T("ctrl+p")} to cycle)` };
+bundled:151: }
+bundled:152: async function zYe(e, n, i) {
+bundled:153:   if (i.cancelled) {
+bundled:154:     return;
+bundled:155:   }
+bundled:156:   try {
+bundled:157:     const t = i.streamingBehavior ?? "followUp";
+bundled:158:     if (!i.started && !e.markPendingSubmissionStarted(i)) {
+bundled:159:       return;
+bundled:160:     }
+bundled:161:     const r = {
+bundled:162:       skillCommands: e.skillCommands,
+bundled:163:       session: n,
+bundled:164:       showError: e.showError.bind(e),
+bundled:165:       renderOptimisticSkillMessage: e.renderOptimisticSkillMessage.bind(e),
+bundled:166:       clearOptimisticSkillMessage: e.clearOptimisticSkillMessage.bind(e),
+bundled:167:       get optimisticSkillMessagePending() {
+bundled:168:         return e.optimisticSkillMessagePending;
+bundled:169:       }
+bundled:170:     };
+bundled:171:     if (i.customType) {
+bundled:172:       const s = {
+bundled:173:         customType: i.customType,
+bundled:174:         content: i.text,
+bundled:175:         display: i.display ?? false,
+bundled:176:         attribution: "agent"
+bundled:177:       };
+bundled:178:       i.dispatched = await n.promptCustomMessage(s, { streamingBehavior: t });
+bundled:179:     } else if (i.resume) {
+bundled:180:       await n.resume();
+bundled:181:     } else if (Um(r, i.text)) {
+bundled:182:       await Pw(r, i.text, t, {
+bundled:183:         images: i.images,
+bundled:184:         imageLinks: i.imageLinks,
+bundled:185:         optimistic: true,
+bundled:186:         propagateErrors: true
+bundled:187:       });
+bundled:188:     } else {
+bundled:189:       let s = false;
+bundled:190:       try {
+bundled:191:         s = await n.prompt(i.text, { images: i.images, streamingBehavior: t });
+bundled:192:       } catch (l) {
+bundled:193:         e.showError(l instanceof Error ? l.message : "Unknown error occurred");
+bundled:194:       }
+bundled:195:       if (!s && e.loopPrompt === i.text)
+bundled:196:         e.pauseLoop?.();
+bundled:197:     }
+bundled:198:   } catch (t) {
+bundled:199:     const r = t instanceof Error ? t.message : "Unknown error occurred";
+bundled:200:     e.showError(r);
+bundled:201:   } finally {
+bundled:202:     e.finishPendingSubmission(i);
+bundled:203:     await e.checkShutdownRequested();
+bundled:204:   }
+bundled:205: }
+bundled:206: async function Qe(e, n, i) {
+bundled:207:   const t = e.additionalExtensionPaths ?? [];
+bundled:208:   for (const r of t) {
+bundled:209:     let s;
+bundled:210:     try {
+bundled:211:       s = ee.statSync(r);
+bundled:212:     } catch {
+bundled:213:       throw new Error(`Trusted extension must be an existing module file: ${r}`);
+bundled:214:     }
+bundled:215:     if (!s.isFile()) {
+bundled:216:       throw new Error(`Trusted extension must be a module file, not a directory: ${r}`);
+bundled:217:     }
+bundled:218:   }
+bundled:219:   return hp(t, n, i);
+bundled:220: }
+bundled:221: function HYe(e) {
+bundled:222:   return async (n, i) => {
+bundled:223:     const t = await e.settings.cloneForCwd(n);
+bundled:224:     const r = Se.create(n, e.sessionDir);
+bundled:225:     const s = `acp:${r.getSessionId()}`;
+bundled:226:     const l = BM(n);
+bundled:227:     const y = await qw(l, "title system prompt");
+bundled:228:     const E = new Gl;
+bundled:229:     const g = e.parsedArgs.trustedExtensions && e.parsedArgs.trustedExtensions.length > 0 ? await Qe(e.baseOptions, n, E) : undefined;
+bundled:230:     if (g && g.errors.length > 0) {
+bundled:231:       throw new Error(`Trusted extension failed to load: ${g.errors.map((N) => N.error).join("; ")}`);
+bundled:232:     }
+bundled:233:     const { session: P, setToolUIContext: R } = await e.createSession({
+bundled:234:       ...e.baseOptions,
+bundled:235:       cwd: n,
+bundled:236:       sessionManager: r,
+bundled:237:       settings: t,
+bundled:238:       authStorage: e.authStorage,
+bundled:239:       modelRegistry: e.modelRegistry,
+bundled:240:       agentId: s,
+bundled:241:       interactivePrompts: i?.interactivePrompts,
+bundled:242:       deferUsageReserveConfirmation: true,
+bundled:243:       enableMCP: false,
+bundled:244:       titleSystemPrompt: y,
+bundled:245:       eventBus: E,
+bundled:246:       preloadedExtensions: g
+bundled:247:     });
+bundled:248:     if (e.parsedArgs.apiKey && !e.baseOptions.model && P.model) {
+bundled:249:       e.authStorage.keys.setRuntime(P.model.provider, e.parsedArgs.apiKey);
+bundled:250:     }
+bundled:251:     const Y = P.extensionRunner;
+bundled:252:     const j = jCe(Y ? {
+bundled:253:       getFlags: () => Y.getFlags(),
+bundled:254:       setFlagValue: (N, G) => {
+bundled:255:         Y.setFlagValue(N, G);
+bundled:256:       }
+bundled:257:     } : undefined, e.rawArgs);
+bundled:258:     const S = j ?? e.parsedArgs;
+bundled:259:     if (S.invalidFlagValues.length > 0) {
+bundled:260:       await P.dispose();
+bundled:261:       throw new Ln(S.invalidFlagValues.join(`
+bundled:262: `));
+bundled:263:     }
+bundled:264:     const q = j?.tools ?? e.parsedArgs.tools;
+bundled:265:     if (q) {
+bundled:266:       try {
+bundled:267:         KCe(q, P.getAllToolNames());
+bundled:268:       } catch (N) {
+bundled:269:         await P.dispose();
+bundled:270:         throw N;
+bundled:271:       }
+bundled:272:     }
+bundled:273:     return { session: P, setToolUIContext: R };
+bundled:274:   };
+bundled:275: }
+bundled:276: async function wt(e, n, i, t, r, s, l, y, E, g, P, R, Y, j, S, q, N, G, U, c, k, te) {
+bundled:277:   const re = await ut();
+bundled:278:   let v;
+bundled:279:   try {
+bundled:280:     v = new re(e, n, i, l, y, E, Y, U?.composer, j, te);
+bundled:281:     U?.adopt();
+bundled:282:   } catch (u) {
+bundled:283:     U?.dispose();
+bundled:284:     throw u;
+bundled:285:   }
+bundled:286:   let V;
+bundled:287:   let z = [];
+bundled:288:   let m = false;
+bundled:289:   try {
+bundled:290:     const u = q8.get(D);
+bundled:291:     V = P || u < oC || R ? await import("/$bunfs/root/chunks/setup-fy8ear7g.js") : undefined;
+bundled:292:     z = V ? await V.selectSetupScenes(u, V.ALL_SCENES, v, {
+bundled:293:       resuming: g,
+bundled:294:       isTTY: process.stdin.isTTY && process.stdout.isTTY,
+bundled:295:       setupWizardEnabled: HLe.get(D),
+bundled:296:       force: P
+bundled:297:     }) : [];
+bundled:298:     m = R && z.length === 0;
+bundled:299:     await ve("InteractiveMode.init", () => v.init({
+bundled:300:       suppressWelcomeIntro: g || z.length > 0 || m,
+bundled:301:       clearInitialTerminalHistory: true,
+bundled:302:       autoStartCollab: N === undefined
+bundled:303:     }));
+bundled:304:     G?.();
+bundled:305:     if (V && m) {
+bundled:306:       await V.runStartupSplash(v);
+bundled:307:     }
+bundled:308:     if (V && z.length > 0) {
+bundled:309:       await V.runSetupWizard(v, z);
+bundled:310:     }
+bundled:311:     const f = r.catch(() => {
+bundled:312:       return;
+bundled:313:     });
+bundled:314:     await ve("InteractiveMode.renderInitialMessages", () => v.renderInitialMessages({ preserveExistingChat: true }));
+bundled:315:     f.then((M) => {
+bundled:316:       if (!zhe.get(D)) {
+bundled:317:         return;
+bundled:318:       }
+bundled:319:       if (M) {
+bundled:320:         v.showNewVersionNotification(M);
+bundled:321:       }
+bundled:322:     });
+bundled:323:     const C = e.getAdvisorConfigWarnings();
+bundled:324:     if (C.length > 0) {
+bundled:325:       v.showWarning(`WATCHDOG.yml: ${wm(C).join("; ")}`);
+bundled:326:     }
+bundled:327:     for (const M of t) {
+bundled:328:       if (!M) {
+bundled:329:         continue;
+bundled:330:       }
+bundled:331:       if (M.kind === "warn") {
+bundled:332:         v.showWarning(M.message);
+bundled:333:       } else if (M.kind === "error") {
+bundled:334:         v.showError(M.message);
+bundled:335:       } else if (M.kind === "info") {
+bundled:336:         v.showStatus(M.message);
+bundled:337:       }
+bundled:338:     }
+bundled:339:     if (!g && N === undefined) {
+bundled:340:       await v.maybeAutoCreateWorktree();
+bundled:341:     }
+bundled:342:     if (N !== undefined) {
+bundled:343:       const M = await mt();
+bundled:344:       await M(`/join ${N}`, { ctx: v });
+bundled:345:       v.collabController.autoStart();
+bundled:346:     }
+bundled:347:     v.collabController.startupComplete();
+bundled:348:   } catch (u) {
+bundled:349:     try {
+bundled:350:       await v.collabController.shutdown("startup failed");
+bundled:351:     } catch (f) {
+bundled:352:       o("Failed to stop collaboration after startup failure", { error: String(f) });
+bundled:353:     } finally {
+bundled:354:       v.stop();
+bundled:355:     }
+bundled:356:     throw u;
+bundled:357:   }
+bundled:358:   if (c !== undefined) {
+bundled:359:     try {
+bundled:360:       await v.startGoalAtStartup(c);
+bundled:361:     } catch (u) {
+bundled:362:       v.showError(u instanceof Error ? u.message : "Unknown error occurred");
+bundled:363:     }
+bundled:364:   }
+bundled:365:   if (k) {
+bundled:366:     try {
+bundled:367:       const { turn: u, subagents: f } = await k();
+bundled:368:       const C = f.length === 1 ? "1 subagent" : `${f.length} subagents`;
+bundled:369:       v.showStatus(u && f.length > 0 ? `Restored: going on with the interrupted turn and ${C}.` : u ? "Restored: going on with the interrupted turn." : f.length > 0 ? `Restored: ${C} going on with their interrupted turns.` : "Restored: nothing was left unfinished.");
+bundled:370:     } catch (u) {
+bundled:371:       v.showError(u instanceof Error ? u.message : "Unknown error occurred");
+bundled:372:     }
+bundled:373:   }
+bundled:374:   if (S !== undefined) {
+bundled:375:     try {
+bundled:376:       await e.prompt(S, { images: q, streamingBehavior: "steer" });
+bundled:377:     } catch (u) {
+bundled:378:       const f = u instanceof Error ? u.message : "Unknown error occurred";
+bundled:379:       v.showError(f);
+bundled:380:     }
+bundled:381:   }
+bundled:382:   for (const u of s) {
+bundled:383:     try {
+bundled:384:       await e.prompt(u, { streamingBehavior: "steer" });
+bundled:385:     } catch (f) {
+bundled:386:       const C = f instanceof Error ? f.message : "Unknown error occurred";
+bundled:387:       v.showError(C);
+bundled:388:     }
+bundled:389:   }
+bundled:390:   while (true) {
+bundled:391:     const u = await v.getUserInput();
+bundled:392:     await zYe(v, e, u);
+bundled:393:   }
+bundled:394: }
+bundled:395: async function Xe(e) {
+bundled:396:   if (!process.stdin.isTTY) {
+bundled:397:     return "unavailable";
+bundled:398:   }
+bundled:399:   const n = `Session's directory no longer exists (${e.cwd}). Move (re-root) it into the current directory? [Y/n] `;
+bundled:400:   ke();
+bundled:401:   const i = await gt();
+bundled:402:   const t = i({ input: process.stdin, output: process.stdout });
+bundled:403:   try {
+bundled:404:     const r = (await t.question(n)).trim().toLowerCase();
+bundled:405:     return r === "" || r === "y" || r === "yes" ? "accepted" : "declined";
+bundled:406:   } finally {
+bundled:407:     t.close();
+bundled:408:     xe();
+bundled:409:   }
+bundled:410: }
+bundled:411: class ll extends Error {
+bundled:412:   hint;
+bundled:413:   constructor(e, n) {
+bundled:414:     super(e);
+bundled:415:     this.name = "SessionResolutionError";
+bundled:416:     this.hint = n;
+bundled:417:   }
+bundled:418: }
+bundled:419: function Pe(e) {
+bundled:420:   process.stderr.write(`${a.red(`Error: ${e.message}`)}
+bundled:421: `);
+bundled:422:   if (e.hint) {
+bundled:423:     process.stderr.write(`${a.dim(e.hint)}
+bundled:424: `);
+bundled:425:   }
+bundled:426:   process.exit(1);
+bundled:427: }
+bundled:428: function St(e) {
+bundled:429:   if (e.fromClaude && e.fromCodex) {
+bundled:430:     throw new ll("--from-claude and --from-codex cannot be used together");
+bundled:431:   }
+bundled:432:   const n = e.fromClaude ? "claude" : e.fromCodex ? "codex" : undefined;
+bundled:433:   if (!n)
+bundled:434:     return;
+bundled:435:   if (e.noSession) {
+bundled:436:     throw new ll(`--from-${n} requires session persistence`);
+bundled:437:   }
+bundled:438:   if (e.continue || e.resume || e.fork) {
+bundled:439:     throw new ll(`--from-${n} cannot be combined with --continue, --resume, or --fork`);
+bundled:440:   }
+bundled:441:   return n;
+bundled:442: }
+bundled:443: function Me(e) {
+bundled:444:   return e.fromClaude === true || e.fromCodex === true;
+bundled:445: }
+bundled:446: async function yt(e, n, i, t, r) {
+bundled:447:   const s = n.cwd;
+bundled:448:   if (!s || ee.existsSync(s)) {
+bundled:449:     return { status: "not-needed" };
+bundled:450:   }
+bundled:451:   if (!await Se.isFromRemovedWorktree(n, i, t)) {
+bundled:452:     const l = await r(n);
+bundled:453:     if (l === "unavailable") {
+bundled:454:       throw new ll(`Session "${e}" belongs to a directory that no longer exists (${s}); run interactively to move it into the current project.`);
+bundled:455:     }
+bundled:456:     if (l === "declined") {
+bundled:457:       return { status: "declined" };
+bundled:458:     }
+bundled:459:   }
+bundled:460:   return { status: "moved", manager: await Ze(n, i, t) };
+bundled:461: }
+bundled:462: async function Ze(e, n, i) {
+bundled:463:   try {
+bundled:464:     return await Se.openRelocated(e.path, e.cwd, n, i);
+bundled:465:   } catch (t) {
+bundled:466:     if (!(t instanceof Hv))
+bundled:467:       throw t;
+bundled:468:     throw new ll(t.message, "Close the session in the other omp process, then resume it again.");
+bundled:469:   }
+bundled:470: }
+bundled:471: async function je(e, n, i, t) {
+bundled:472:   const r = I();
+bundled:473:   if (!e || It(e) === It(r) || await Lce(e)) {
+bundled:474:     return { cwd: r };
+bundled:475:   }
+bundled:476:   await i.catch(() => {});
+bundled:477:   try {
+bundled:478:     mf(e);
+bundled:479:   } catch (l) {
+bundled:480:     o("Could not switch to resumed project directory", { cwd: e, error: String(l) });
+bundled:481:     t.setCwdWithoutRelocation(r);
+bundled:482:     return { cwd: r, chdirFailed: e };
+bundled:483:   }
+bundled:484:   js();
+bundled:485:   _i();
+bundled:486:   const s = I();
+bundled:487:   try {
+bundled:488:     await nne(ge.homedir(), s);
+bundled:489:     await n.reloadForCwd(s);
+bundled:490:     if (It(t.getCwd()) !== It(s)) {
+bundled:491:       t.adoptRecordedCwd();
+bundled:492:     }
+bundled:493:   } catch (l) {
+bundled:494:     o("Could not rescope to resumed project directory", { cwd: s, error: String(l) });
+bundled:495:     try {
+bundled:496:       mf(r);
+bundled:497:       t.setCwdWithoutRelocation(r);
+bundled:498:       js();
+bundled:499:       await nne(ge.homedir(), r);
+bundled:500:       await n.reloadForCwd(r);
+bundled:501:     } catch (y) {
+bundled:502:       throw new ll(`Could not switch to resumed project ${e} (${l instanceof Error ? l.message : String(l)}); failed to restore launch directory ${r}: ${y instanceof Error ? y.message : String(y)}`);
+bundled:503:     }
+bundled:504:     return { cwd: r, chdirFailed: e };
+bundled:505:   }
+bundled:506:   return { cwd: s };
+bundled:507: }
+bundled:508: function ze(e, n, i, t) {
+bundled:509:   if (!n.chdirFailed)
+bundled:510:     return;
+bundled:511:   const r = `Could not switch to resumed project ${n.chdirFailed}; staying in ${i}.`;
+bundled:512:   if (t)
+bundled:513:     t.push({ kind: "warn", message: r });
+bundled:514:   else
+bundled:515:     mE(e, `${a.yellow(r)}
+bundled:516: `);
+bundled:517: }
+bundled:518: async function ode(e, n, i) {
+bundled:519:   const t = e.models ?? Wu.get(i);
+bundled:520:   if (!t || t.length === 0) {
+bundled:521:     return [];
+bundled:522:   }
+bundled:523:   const r = qt(i);
+bundled:524:   const s = await j9(t, n, r, i);
+bundled:525:   if (s.length > 0 || n.getDiscoverableProviders().length === 0) {
+bundled:526:     return s;
+bundled:527:   }
+bundled:528:   await n.refresh("online-if-uncached");
+bundled:529:   return await j9(t, n, r, i);
+bundled:530: }
+bundled:531: function ide(e, n) {
+bundled:532:   if (e.length === 0)
+bundled:533:     return [];
+bundled:534:   const i = Kr(ti(zo.get(n)));
+bundled:535:   return e.map((t) => {
+bundled:536:     const r = Aw(t.model, i);
+bundled:537:     return {
+bundled:538:       model: t.model,
+bundled:539:       thinkingLevel: t.explicitThinkingLevel ? t.thinkingLevel ?? r : r
+bundled:540:     };
+bundled:541:   });
+bundled:542: }
+bundled:543: function et(e, n) {
+bundled:544:   if (e.length !== n.length)
+bundled:545:     return false;
+bundled:546:   const i = new Set(e.map((t) => `${t.model.provider}/${t.model.id}`));
+bundled:547:   return n.every((t) => i.has(`${t.model.provider}/${t.model.id}`));
+bundled:548: }
+bundled:549: async function jYe(e, n, i, t) {
+bundled:550:   await i.awaitBackgroundRefresh();
+bundled:551:   await sde(e, n, i, t);
+bundled:552: }
+bundled:553: async function sde(e, n, i, t) {
+bundled:554:   const r = n.models ?? Wu.get(t);
+bundled:555:   if (!r || r.length === 0)
+bundled:556:     return;
+bundled:557:   if (e.isDisposed)
+bundled:558:     return;
+bundled:559:   const s = await j9(r, i, qt(t), t);
+bundled:560:   if (e.isDisposed)
+bundled:561:     return;
+bundled:562:   const l = ide(s, t);
+bundled:563:   if (l.length === 0 || et(e.scopedModels, l))
+bundled:564:     return;
+bundled:565:   e.setScopedModels(l);
+bundled:566:   return s;
+bundled:567: }
+bundled:568: var vt = Rn({ enabledModels: Wu, disabledProviders: qr });
+bundled:569: function KYe(e, n, i, t) {
+bundled:570:   const r = vt.listen(t, async (s, l) => {
+bundled:571:     const y = !Bun.deepEquals(s.disabledProviders, l.disabledProviders);
+bundled:572:     if (n.models && !y)
+bundled:573:       return;
+bundled:574:     if (y)
+bundled:575:       await i.reapplyModelPolicies();
+bundled:576:     if (e.isDisposed)
+bundled:577:       return;
+bundled:578:     const E = n.models ?? Wu.get(t);
+bundled:579:     const g = E.length === 0 ? [] : await j9(E, i, qt(t), t);
+bundled:580:     const P = ide(g, t);
+bundled:581:     if (et(e.scopedModels, P))
+bundled:582:       return;
+bundled:583:     e.setScopedModels(P);
+bundled:584:   });
+bundled:585:   e.addDisposer(r);
+bundled:586: }
+bundled:587: async function Pt(e, n) {
+bundled:588:   if (e.continue || e.resume || Me(e)) {
+bundled:589:     return;
+bundled:590:   }
+bundled:591:   return zJe({
+bundled:592:     mode: n,
+bundled:593:     currentVersion: Ie,
+bundled:594:     changelogPath: PP()
+bundled:595:   });
+bundled:596: }
+bundled:597: var kt = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+bundled:598: function lY(e, n) {
+bundled:599:   if (!e.continue || e.resume || e.fork)
+bundled:600:     return;
+bundled:601:   let i;
+bundled:602:   if (e.unrecognizedFlags.length === 0 && e.messages.length === 1) {
+bundled:603:     i = e.messages[0]?.trim();
+bundled:604:   } else if (n) {
+bundled:605:     const r = n.findIndex((s) => s === "--continue" || s === "-c");
+bundled:606:     i = n[r + 1]?.trim();
+bundled:607:   }
+bundled:608:   if (!i || !kt.test(i))
+bundled:609:     return;
+bundled:610:   const t = e.messages.indexOf(i);
+bundled:611:   if (t === -1)
+bundled:612:     return;
+bundled:613:   e.resume = i;
+bundled:614:   e.continue = false;
+bundled:615:   e.messages.splice(t, 1);
+bundled:616: }
+bundled:617: var de = "Run `omp --resume` without an argument to pick from recent sessions, or `omp` to start a new one.";
+bundled:618: function tt(e) {
+bundled:619:   if (!e.noSession)
+bundled:620:     return;
+bundled:621:   if (e.resume !== undefined) {
+bundled:622:     throw new ll("--resume requires session persistence");
+bundled:623:   }
+bundled:624:   if (e.continue) {
+bundled:625:     throw new ll("--continue requires session persistence");
+bundled:626:   }
+bundled:627: }
+bundled:628: async function YYe(e, n, i = D, t = Xe, r = {}) {
+bundled:629:   if (e.fork) {
+bundled:630:     if (e.noSession) {
+bundled:631:       throw new ll("--fork requires session persistence");
+bundled:632:     }
+bundled:633:     const s = e.fork;
+bundled:634:     if (s.includes("/") || s.includes("\\") || s.endsWith(".jsonl")) {
+bundled:635:       try {
+bundled:636:         return await Se.forkFrom(s, n, e.sessionDir, undefined, {
+bundled:637:           repairInterruptedTail: true
+bundled:638:         });
+bundled:639:       } catch (y) {
+bundled:640:         if (y instanceof b3) {
+bundled:641:           throw new ll(y.message, de);
+bundled:642:         }
+bundled:643:         throw y;
+bundled:644:       }
+bundled:645:     }
+bundled:646:     const l = await ey(s, n, e.sessionDir);
+bundled:647:     if (!l) {
+bundled:648:       throw new ll(`Session "${s}" not found.`, de);
+bundled:649:     }
+bundled:650:     try {
+bundled:651:       return await Se.forkFrom(l.session.path, n, e.sessionDir, undefined, {
+bundled:652:         repairInterruptedTail: true
+bundled:653:       });
+bundled:654:     } catch (y) {
+bundled:655:       if (y instanceof b3) {
+bundled:656:         throw new ll(`Session "${s}" not found.`, de);
+bundled:657:       }
+bundled:658:       throw y;
+bundled:659:     }
+bundled:660:   }
+bundled:661:   if (e.noSession) {
+bundled:662:     lY(e);
+bundled:663:     if (r.nativeFlagOwnership !== "preliminary") {
+bundled:664:       tt(e);
+bundled:665:     }
+bundled:666:     return Se.inMemory();
+bundled:667:   }
+bundled:668:   lY(e);
+bundled:669:   if (typeof e.resume === "string") {
+bundled:670:     const s = e.resume;
+bundled:671:     if (s.includes("/") || s.includes("\\") || s.endsWith(".jsonl")) {
+bundled:672:       const P = await Wb(s);
+bundled:673:       if (P)
+bundled:674:         r.onSessionContinuation?.(P);
+bundled:675:       let R;
+bundled:676:       try {
+bundled:677:         R = await Se.open(P?.session.path ?? s, e.sessionDir, undefined, {
+bundled:678:           throwIfMissing: true
+bundled:679:         });
+bundled:680:       } catch (Y) {
+bundled:681:         if (h(Y) || bs(Y)) {
+bundled:682:           throw new ll(`Session "${s}" not found.`, de);
+bundled:683:         }
+bundled:684:         throw Y;
+bundled:685:       }
+bundled:686:       return await tF(R, e.sessionDir);
+bundled:687:     }
+bundled:688:     const l = await h3(s, n, e.sessionDir);
+bundled:689:     if (!l) {
+bundled:690:       throw new ll(`Session "${s}" not found.`, de);
+bundled:691:     }
+bundled:692:     const { session: y, continuation: E } = l;
+bundled:693:     if (E)
+bundled:694:       r.onSessionContinuation?.(E);
+bundled:695:     const g = await yt(s, y, n, e.sessionDir, t);
+bundled:696:     if (g.status === "moved") {
+bundled:697:       return await tF(g.manager, e.sessionDir);
+bundled:698:     }
+bundled:699:     if (g.status === "declined") {
+bundled:700:       return;
+bundled:701:     }
+bundled:702:     return await tF(await Se.open(y.path, e.sessionDir), e.sessionDir);
+bundled:703:   }
+bundled:704:   if (e.continue) {
+bundled:705:     return await tF(await Se.continueRecent(n, e.sessionDir, undefined, {
+bundled:706:       onSessionContinuation: r.onSessionContinuation
+bundled:707:     }), e.sessionDir);
+bundled:708:   }
+bundled:709:   if (e.sessionDir) {
+bundled:710:     return Se.create(n, e.sessionDir);
+bundled:711:   }
+bundled:712:   if (e.goal === undefined && PLe.get(i)) {
+bundled:713:     const s = await tF(await Se.continueRecent(n, e.sessionDir, undefined, {
+bundled:714:       onSessionContinuation: r.onSessionContinuation
+bundled:715:     }), e.sessionDir);
+bundled:716:     if (s.getEntries().length > 0) {
+bundled:717:       e.continue = true;
+bundled:718:     }
+bundled:719:     return s;
+bundled:720:   }
+bundled:721:   return;
+bundled:722: }
+bundled:723: function xt() {
+bundled:724:   const e = jH("APPEND_SYSTEM.md", { user: false });
+bundled:725:   if (e) {
+bundled:726:     return e;
+bundled:727:   }
+bundled:728:   const n = jH("APPEND_SYSTEM.md", { user: true });
+bundled:729:   if (n) {
+bundled:730:     return n;
+bundled:731:   }
+bundled:732:   return;
+bundled:733: }
+bundled:734: function VYe(e, n, i) {
+bundled:735:   if (n !== undefined) {
+bundled:736:     e.customSystemPrompt = n;
+bundled:737:   }
+bundled:738:   if (i) {
+bundled:739:     e.appendSystemPrompt = i;
+bundled:740:   }
+bundled:741: }
+bundled:742: async function XYe(e, n, i, t, r, s = He) {
+bundled:743:   const l = {
+bundled:744:     cwd: e.cwd ?? I(),
+bundled:745:     autoApprove: e.autoApprove ?? false
+bundled:746:   };
+bundled:747:   const y = Boolean(e.continue || e.resume || Me(e));
+bundled:748:   if (e.serviceTier !== undefined) {
+bundled:749:     l.openAIServiceTier = cf(e.serviceTier) ?? null;
+bundled:750:   }
+bundled:751:   const E = e.addDir ?? [];
+bundled:752:   const g = GS.get(r);
+bundled:753:   if (E.length > 0 || g.length > 0) {
+bundled:754:     l.additionalDirectories = [...new Set([...E, ...g])];
+bundled:755:   }
+bundled:756:   if (e.maxTime !== undefined) {
+bundled:757:     l.deadline = Date.now() + e.maxTime * 1000;
+bundled:758:   }
+bundled:759:   if (e.systemPrompt !== undefined && e.systemPromptTemplate !== undefined) {
+bundled:760:     throw new Error("--system-prompt and --system-prompt-template cannot be combined");
+bundled:761:   }
+bundled:762:   const P = l.cwd;
+bundled:763:   const R = e.systemPrompt === undefined && e.systemPromptTemplate === undefined ? await ott(P) : undefined;
+bundled:764:   const Y = e.systemPrompt ?? (R?.kind === "text" ? R.path : undefined);
+bundled:765:   const j = e.systemPromptTemplate ?? (R?.kind === "template" ? R.path : undefined);
+bundled:766:   const S = e.appendSystemPrompt ?? xt();
+bundled:767:   const q = BM(P);
+bundled:768:   const [N, G, U, c] = await Promise.all([
+bundled:769:     R?.kind === "text" ? Promise.resolve(R.content) : qw(Y, "system prompt"),
+bundled:770:     qw(S, "append system prompt"),
+bundled:771:     qw(q, "title system prompt"),
+bundled:772:     R?.kind === "template" && e.systemPromptTemplate === undefined ? Promise.resolve(R.content) : j === undefined ? Promise.resolve(undefined) : NAt(j)
+bundled:773:   ]);
+bundled:774:   if (i) {
+bundled:775:     l.sessionManager = i;
+bundled:776:   }
+bundled:777:   if (e.providerSessionId) {
+bundled:778:     l.providerSessionId = e.providerSessionId;
+bundled:779:   }
+bundled:780:   if (e.providerPromptCacheKey) {
+bundled:781:     l.providerPromptCacheKey = e.providerPromptCacheKey;
+bundled:782:     l.providerPromptCacheKeySource = "explicit";
+bundled:783:   } else {
+bundled:784:     const m = i?.getHeader();
+bundled:785:     const u = n.length > 0 && !y;
+bundled:786:     const f = u || e.model !== undefined || e.thinking !== undefined || e.systemPrompt !== undefined || e.systemPromptTemplate !== undefined || e.appendSystemPrompt !== undefined || e.tools !== undefined || e.noTools === true;
+bundled:787:     if (!f && m?.providerPromptCacheKey) {
+bundled:788:       l.providerPromptCacheKey = m.providerPromptCacheKey;
+bundled:789:       l.providerPromptCacheKeySource = "fork";
+bundled:790:     }
+bundled:791:   }
+bundled:792:   const k = qt(r);
+bundled:793:   const te = _T(r);
+bundled:794:   const re = r.getModelRole("default");
+bundled:795:   let v = false;
+bundled:796:   if (e.model) {
+bundled:797:     const m = xs({
+bundled:798:       cliProvider: e.provider,
+bundled:799:       cliModel: e.model,
+bundled:800:       modelRegistry: t,
+bundled:801:       availableModels: t.getAvailable(),
+bundled:802:       settings: r,
+bundled:803:       preferences: k
+bundled:804:     });
+bundled:805:     if (m.warning)
+bundled:806:       s(m.warning);
+bundled:807:     if (m.disabledProvider !== undefined) {
+bundled:808:       process.stderr.write(`${a.red(m.error ?? `Provider "${m.disabledProvider}" is disabled.`)}
+bundled:809: `);
+bundled:810:       process.exit(1);
+bundled:811:     }
+bundled:812:     const u = (m.configuredPatternIndex ?? 0) > 0;
+bundled:813:     if (u) {
+bundled:814:       l.modelPattern = e.model;
+bundled:815:     } else if (m.error) {
+bundled:816:       if (e.provider && !e.model.includes(":") && (t.hasProvider(e.provider) || t.hasProvider(e.provider.toLowerCase()))) {
+bundled:817:         l.modelPattern = e.model.toLowerCase().startsWith(`${e.provider.toLowerCase()}/`) ? e.model : `${e.provider}/${e.model}`;
+bundled:818:       } else if (!e.provider && ((m.configuredPatterns?.length ?? 0) > 0 || !e.model.includes(":"))) {
+bundled:819:         l.modelPattern = e.model;
+bundled:820:       } else {
+bundled:821:         process.stderr.write(`${a.red(m.error)}
+bundled:822: `);
+bundled:823:         process.exit(1);
+bundled:824:       }
+bundled:825:     } else if (m.model) {
+bundled:826:       l.model = m.model;
+bundled:827:       l.rebindModelAfterDiscovery = true;
+bundled:828:       r.overrideModelRoles({
+bundled:829:         default: to(m.selector ?? `${m.model.provider}/${m.model.id}`, e.thinking ?? m.thinkingLevel)
+bundled:830:       });
+bundled:831:       if (!e.thinking && m.thinkingLevel) {
+bundled:832:         l.thinkingLevel = m.thinkingLevel;
+bundled:833:       }
+bundled:834:     }
+bundled:835:   } else if (n.length > 0 && !y) {
+bundled:836:     const m = r.getModelRole("default");
+bundled:837:     if (m) {
+bundled:838:       const u = Dt(m, n.map((M) => M.model), {
+bundled:839:         settings: r,
+bundled:840:         matchPreferences: k
+bundled:841:       });
+bundled:842:       const f = u.model;
+bundled:843:       const C = f ? n.find((M) => M.model.provider === f.provider && M.model.id === f.id) : n.find((M) => M.model.id.toLowerCase() === m.toLowerCase());
+bundled:844:       if (C) {
+bundled:845:         l.model = C.model;
+bundled:846:         l.rebindModelAfterDiscovery = true;
+bundled:847:         if (!e.thinking && u.explicitThinkingLevel && u.thinkingLevel) {
+bundled:848:           l.thinkingLevel = u.thinkingLevel;
+bundled:849:         }
+bundled:850:       }
+bundled:851:     }
+bundled:852:     v = !l.model && Boolean(m) && !((e.models?.length ?? 0) > 0);
+bundled:853:     if (!l.model && !v) {
+bundled:854:       l.model = n[0].model;
+bundled:855:       l.rebindModelAfterDiscovery = true;
+bundled:856:     }
+bundled:857:   } else if ((e.models?.length ?? 0) > 0 && !y) {
+bundled:858:     l.modelPattern = e.models;
+bundled:859:   }
+bundled:860:   if (e.noPrewalk && (e.prewalk || e.prewalkInto !== undefined)) {
+bundled:861:     throw new Error("--no-prewalk cannot be combined with --prewalk or --prewalk-into");
+bundled:862:   }
+bundled:863:   l.suppressAutoPrewalk = e.noPrewalk;
+bundled:864:   const V = e.prewalk === true || e.prewalkInto !== undefined;
+bundled:865:   const z = e.noPrewalk ? false : V ? true : !y && ZW.get(r);
+bundled:866:   if (z) {
+bundled:867:     const m = e.prewalkInto ?? l0.get(r);
+bundled:868:     const u = e.prewalkInto === undefined ? r : {
+bundled:869:       getModelRole: (Q) => Q === "default" ? re : r.getModelRole(Q)
+bundled:870:     };
+bundled:871:     const f = m.trim() === "default" ? qg(m, u) : m;
+bundled:872:     const C = Ti(f, u);
+bundled:873:     const M = C.length > 0 ? C : [f];
+bundled:874:     const oe = await Lue(M, m, t, k, te, { deferUnregistered: true });
+bundled:875:     if (oe.deferred) {
+bundled:876:       l.deferredPrewalk = { target: m, patterns: M };
+bundled:877:     } else {
+bundled:878:       l.prewalk = oe.prewalk;
+bundled:879:       for (const Q of oe.warnings)
+bundled:880:         s(Q);
+bundled:881:     }
+bundled:882:   }
+bundled:883:   if (e.planYoloInto !== undefined && !e.planYolo) {
+bundled:884:     throw new Error("--plan-yolo-into requires --plan-yolo");
+bundled:885:   }
+bundled:886:   if (e.planYolo) {
+bundled:887:     const m = qg(e.planYoloInto ?? "@smol", r);
+bundled:888:     const u = xs({ cliModel: m, modelRegistry: t, preferences: k });
+bundled:889:     if (u.warning)
+bundled:890:       s(u.warning);
+bundled:891:     if (u.error || !u.model) {
+bundled:892:       throw new Error(u.error ?? `Model "${e.planYoloInto ?? "@smol"}" not found`);
+bundled:893:     }
+bundled:894:     if (te.has(u.model.provider)) {
+bundled:895:       throw new Error(`Provider "${u.model.provider}" is disabled. Remove it from disabledProviders to hand off to "${m}".`);
+bundled:896:     }
+bundled:897:     if (!t.hasConfiguredAuth(u.model)) {
+bundled:898:       throw new Error(`No API key for ${u.model.provider}/${u.model.id}`);
+bundled:899:     }
+bundled:900:     l.planYolo = { target: u.model, thinkingLevel: u.thinkingLevel };
+bundled:901:   }
+bundled:902:   if (e.thinking) {
+bundled:903:     l.thinkingLevel = e.thinking;
+bundled:904:   } else if (n.length > 0 && n[0].explicitThinkingLevel === true && !v && !y) {
+bundled:905:     l.thinkingLevel = n[0].thinkingLevel;
+bundled:906:   }
+bundled:907:   if (n.length > 0) {
+bundled:908:     l.scopedModels = ide(n, r);
+bundled:909:   }
+bundled:910:   VYe(l, N, G);
+bundled:911:   if (c !== undefined) {
+bundled:912:     l.systemPromptTemplate = c;
+bundled:913:   }
+bundled:914:   if (U) {
+bundled:915:     l.titleSystemPrompt = U;
+bundled:916:   }
+bundled:917:   if (e.noTools) {
+bundled:918:     l.toolNames = e.tools && e.tools.length > 0 ? e.tools : [];
+bundled:919:   } else if (e.tools) {
+bundled:920:     l.toolNames = e.tools;
+bundled:921:   }
+bundled:922:   if (e.noLsp) {
+bundled:923:     l.enableLsp = false;
+bundled:924:   }
+bundled:925:   if (e.noSkills) {
+bundled:926:     l.skills = [];
+bundled:927:   } else if (e.skills && e.skills.length > 0) {
+bundled:928:     _ye.override(r, e.skills);
+bundled:929:   }
+bundled:930:   if (e.noRules) {
+bundled:931:     l.rules = [];
+bundled:932:   }
+bundled:933:   if (e.noContextFiles) {
+bundled:934:     l.noContextFiles = true;
+bundled:935:   }
+bundled:936:   if (e.trustedExtensions && e.trustedExtensions.length > 0) {
+bundled:937:     const m = e.trustedExtensions.map((u) => {
+bundled:938:       let f;
+bundled:939:       let C;
+bundled:940:       try {
+bundled:941:         f = ee.realpathSync.native(u);
+bundled:942:         C = ee.statSync(f);
+bundled:943:       } catch {
+bundled:944:         throw new Error(`Trusted extension must be an existing module file: ${u}`);
+bundled:945:       }
+bundled:946:       if (!C.isFile()) {
+bundled:947:         throw new Error(`Trusted extension must be a module file, not a directory: ${u}`);
+bundled:948:       }
+bundled:949:       return f;
+bundled:950:     });
+bundled:951:     l.disableExtensionDiscovery = true;
+bundled:952:     l.additionalExtensionPaths = m;
+bundled:953:   } else {
+bundled:954:     const m = [...e.extensions ?? [], ...e.hooks ?? []];
+bundled:955:     if (m.length > 0) {
+bundled:956:       l.additionalExtensionPaths = m;
+bundled:957:     }
+bundled:958:     if (e.noExtensions) {
+bundled:959:       l.disableExtensionDiscovery = true;
+bundled:960:     }
+bundled:961:   }
+bundled:962:   return l;
+bundled:963: }
+bundled:964: var Ke = {};
+bundled:965: async function QYe(e) {
+bundled:966:   await e.dispose().catch(() => {
+bundled:967:     return;
+bundled:968:   });
+bundled:969: }
+bundled:970: async function YA(e, n, i = Ke) {
+bundled:971:   wxt();
+bundled:972:   ht();
+bundled:973:   try {
+bundled:974:     await ve("initTheme:initial", c7);
+bundled:975:     const t = e;
+bundled:976:     try {
+bundled:977:       await ve("applyStartupCwd", iVe, t);
+bundled:978:     } catch (d) {
+bundled:979:       const p = d instanceof Error ? d.message : String(d);
+bundled:980:       process.stderr.write(`${a.red(`Error: ${p}`)}
+bundled:981: `);
+bundled:982:       process.exit(1);
+bundled:983:     }
+bundled:984:     const r = [];
+bundled:985:     if (t.version) {
+bundled:986:       mE(t, `${Ie}
+bundled:987: `);
+bundled:988:       process.exit(0);
+bundled:989:     }
+bundled:990:     if (t.export) {
+bundled:991:       if (ade(t)) {
+bundled:992:         process.exit(2);
+bundled:993:       }
+bundled:994:       let d;
+bundled:995:       try {
+bundled:996:         const p = t.messages.length > 0 ? t.messages[0] : undefined;
+bundled:997:         const { exportFromFile: L } = await import("/$bunfs/root/chunks/index-r18aat61.js");
+bundled:998:         d = await L(t.export, p);
+bundled:999:       } catch (p) {
+bundled:1000:         const L = p instanceof Error ? p.message : "Failed to export session";
+bundled:1001:         process.stderr.write(`${a.red(`Error: ${L}`)}
+bundled:1002: `);
+bundled:1003:         process.exit(1);
+bundled:1004:       }
+bundled:1005:       mE(t, `Exported to: ${d}
+bundled:1006: `);
+bundled:1007:       process.exit(0);
+bundled:1008:     }
+bundled:1009:     if ((t.mode === "rpc" || t.mode === "rpc-ui") && t.fileArgs.length > 0) {
+bundled:1010:       process.stderr.write(`${a.red("Error: @file arguments are not supported in RPC mode")}
+bundled:1011: `);
+bundled:1012:       process.exit(1);
+bundled:1013:     }
+bundled:1014:     if (t.invalidFlagValues.length === 0) {
+bundled:1015:       Ye(t);
+bundled:1016:     }
+bundled:1017:     const s = t.mode || "text";
+bundled:1018:     const l = s === "rpc" || s === "rpc-ui" ? oM() : undefined;
+bundled:1019:     const y = ge.homedir();
+bundled:1020:     const E = t.pluginDirs && t.pluginDirs.length > 0 ? ve("injectPluginDirRoots", Aut, y, t.pluginDirs, I()) : ve("preloadPluginRoots", nne, y, I());
+bundled:1021:     E.catch(() => {});
+bundled:1022:     if (!t.trustedExtensions?.length) {
+bundled:1023:       const d = [...t.extensions ?? [], ...t.hooks ?? []];
+bundled:1024:       Wdt(d, y, I(), {
+bundled:1025:         mode: t.noExtensions ? "explicit-only" : "merge",
+bundled:1026:         replace: true
+bundled:1027:       });
+bundled:1028:     }
+bundled:1029:     let g = I();
+bundled:1030:     const P = s === "rpc" || s === "rpc-ui" || s === "acp";
+bundled:1031:     const R = P ? undefined : await ve("readPipedInput", qYe);
+bundled:1032:     const Y = process.stdin.isTTY === true;
+bundled:1033:     const j = (R !== undefined || !Y) && !t.print && t.mode === undefined;
+bundled:1034:     const S = !t.print && !j && t.mode === undefined;
+bundled:1035:     yVe(t, S);
+bundled:1036:     bVe(t, S);
+bundled:1037:     const q = j && R === undefined;
+bundled:1038:     if (q && t.messages.length === 0 && t.fileArgs.length === 0 && t.unrecognizedFlags.length === 0 && t.invalidFlagValues.length === 0) {
+bundled:1039:       Ve();
+bundled:1040:     }
+bundled:1041:     mxt(S);
+bundled:1042:     if (!S) {
+bundled:1043:       BCe();
+bundled:1044:     }
+bundled:1045:     const N = i.settings ? Promise.resolve(i.settings) : ve("settings:init", Z.init, { cwd: g, configFiles: t.config });
+bundled:1046:     N.catch(() => {});
+bundled:1047:     const G = ve("discoverAuthStorage", async () => (i.discoverAuthStorage ?? on)(undefined, { settings: await N }));
+bundled:1048:     G.catch(() => {});
+bundled:1049:     let U;
+bundled:1050:     try {
+bundled:1051:       U = await G;
+bundled:1052:     } catch (d) {
+bundled:1053:       const p = await fnt(d);
+bundled:1054:       if (p === null)
+bundled:1055:         throw d;
+bundled:1056:       process.stderr.write(`${a.red(`Error: ${p}`)}
+bundled:1057: `);
+bundled:1058:       process.exit(1);
+bundled:1059:     }
+bundled:1060:     const c = await N;
+bundled:1061:     hQ(c, U);
+bundled:1062:     if (t.approvalMode) {
+bundled:1063:       Bf.override(c, t.approvalMode);
+bundled:1064:     } else if (t.autoApprove) {
+bundled:1065:       Bf.override(c, "yolo");
+bundled:1066:     }
+bundled:1067:     if (t.warnCost !== undefined)
+bundled:1068:       a$.override(c, t.warnCost);
+bundled:1069:     if (t.maxCost !== undefined)
+bundled:1070:       WN.override(c, t.maxCost);
+bundled:1071:     if (t.mode === "rpc" || t.mode === "rpc-ui") {
+bundled:1072:       Be("rpc", c);
+bundled:1073:     } else if (t.mode === "acp") {
+bundled:1074:       Be("acp", c);
+bundled:1075:     }
+bundled:1076:     const k = ve("modelRegistry:init", () => new Kt(U, undefined, { settings: c }));
+bundled:1077:     const te = ve("hydrateCredentialScopedModelCaches", () => k.hydrateCredentialScopedModelCaches());
+bundled:1078:     const re = ve("loadRuntimeIdentity", dre);
+bundled:1079:     if (t.noPty || t.mode === "rpc-ui") {
+bundled:1080:       Bun.env.PI_NO_PTY = "1";
+bundled:1081:     }
+bundled:1082:     if (t.noTitle || t.mode === "rpc" || t.mode === "rpc-ui" || t.mode === "acp") {
+bundled:1083:       Bun.env.PI_NO_TITLE = "1";
+bundled:1084:     }
+bundled:1085:     ve("initializeWithSettings", Qf, c);
+bundled:1086:     const v = t.smol ?? x.PI_SMOL_MODEL;
+bundled:1087:     const V = t.slow ?? x.PI_SLOW_MODEL;
+bundled:1088:     const z = t.plan ?? x.PI_PLAN_MODEL;
+bundled:1089:     if (v || V || z) {
+bundled:1090:       c.overrideModelRoles({
+bundled:1091:         smol: v,
+bundled:1092:         slow: V,
+bundled:1093:         plan: z
+bundled:1094:       });
+bundled:1095:     }
+bundled:1096:     if (t.printThoughts && !P && !S) {
+bundled:1097:       t$.override(c, false);
+bundled:1098:     }
+bundled:1099:     if (t.hideThinking) {
+bundled:1100:       vk.override(c, true);
+bundled:1101:     }
+bundled:1102:     if (t.advisor) {
+bundled:1103:       Iv.override(c, true);
+bundled:1104:     }
+bundled:1105:     if (t.waitAsync) {
+bundled:1106:       g8.override(c, true);
+bundled:1107:     }
+bundled:1108:     if (t.externalThinking) {
+bundled:1109:       Bg.override(c, true);
+bundled:1110:     }
+bundled:1111:     await ve("initTheme:final", ln, S, Nu.get(c), oh.get(c), Cp.get(c), Tp.get(c));
+bundled:1112:     tVe({
+bundled:1113:       quiet: tu.get(c),
+bundled:1114:       composerShape: Lg.get(c),
+bundled:1115:       showHardwareCursor: vW.get(c),
+bundled:1116:       maxInlineImages: gW.get(c),
+bundled:1117:       resizeScrollback: yW.get(c),
+bundled:1118:       completeScrollback: bW.get(c),
+bundled:1119:       imeSafeCursor: cN.get(c),
+bundled:1120:       autocompleteMaxVisible: dN.get(c),
+bundled:1121:       spellingTypoDetection: uN.get(c),
+bundled:1122:       spellingAutocomplete: Sv.get(c),
+bundled:1123:       spellingAutocorrect: pN.get(c),
+bundled:1124:       theme: {
+bundled:1125:         symbolPreset: Nu.get(c),
+bundled:1126:         colorBlindMode: oh.get(c),
+bundled:1127:         darkTheme: Cp.get(c),
+bundled:1128:         lightTheme: Tp.get(c)
+bundled:1129:       }
+bundled:1130:     });
+bundled:1131:     await te;
+bundled:1132:     let m = await ve("resolveModelScope", ode, t, k, c);
+bundled:1133:     lY(t, n);
+bundled:1134:     await re;
+bundled:1135:     const u = Boolean(t.continue || t.resume || t.fork || t.restore || Me(t));
+bundled:1136:     let f;
+bundled:1137:     let C;
+bundled:1138:     const M = [];
+bundled:1139:     try {
+bundled:1140:       C = St(t);
+bundled:1141:       if (C) {
+bundled:1142:         if (P) {
+bundled:1143:           throw new ll(`--from-${C} is not supported in ${s} mode`);
+bundled:1144:         }
+bundled:1145:         const d = _Y(C);
+bundled:1146:         const p = (i.createForeignSessionStore ?? TY)(C);
+bundled:1147:         let L;
+bundled:1148:         try {
+bundled:1149:           L = await ve(`list${d}Sessions`, () => p.list());
+bundled:1150:         } catch (W) {
+bundled:1151:           const X = W instanceof Error ? W.message : String(W);
+bundled:1152:           throw new ll(`Failed to list ${d} sessions: ${X}`);
+bundled:1153:         }
+bundled:1154:         if (L.length === 0) {
+bundled:1155:           mE(t, `${a.dim(`No ${d} sessions found`)}
+bundled:1156: `);
+bundled:1157:           H();
+bundled:1158:           process.exit(0);
+bundled:1159:         }
+bundled:1160:         const _ = L.map(EY);
+bundled:1161:         ke();
+bundled:1162:         let K;
+bundled:1163:         try {
+bundled:1164:           const W = i.selectSession ?? await _e({ foreign: true });
+bundled:1165:           K = await ve(`select${d}Session`, W, _, {
+bundled:1166:             title: `Import ${d} Session`,
+bundled:1167:             scopeLabel: false,
+bundled:1168:             showCwd: true,
+bundled:1169:             allowDelete: false,
+bundled:1170:             allowGlobalScope: false,
+bundled:1171:             historySearch: false
+bundled:1172:           });
+bundled:1173:         } finally {
+bundled:1174:           xe();
+bundled:1175:         }
+bundled:1176:         if (!K) {
+bundled:1177:           mE(t, `${a.dim(`No ${d} session selected`)}
+bundled:1178: `);
+bundled:1179:           H();
+bundled:1180:           process.exit(0);
+bundled:1181:         }
+bundled:1182:         const A = L.find((W) => W.id === K.id && W.path === K.path);
+bundled:1183:         if (!A) {
+bundled:1184:           throw new ll(`Selected ${d} session is no longer available`);
+bundled:1185:         }
+bundled:1186:         try {
+bundled:1187:           f = await ve(`import${d}Session`, RY, p, A, { fallbackCwd: g, sessionDir: t.sessionDir });
+bundled:1188:         } catch (W) {
+bundled:1189:           const X = W instanceof Error ? W.message : String(W);
+bundled:1190:           throw new ll(`Failed to import ${d} session: ${X}`);
+bundled:1191:         }
+bundled:1192:       } else {
+bundled:1193:         f = await ve("createSessionManager", YYe, t, g, c, Xe, {
+bundled:1194:           nativeFlagOwnership: "preliminary",
+bundled:1195:           onSessionContinuation: (d) => M.push(d)
+bundled:1196:         });
+bundled:1197:       }
+bundled:1198:     } catch (d) {
+bundled:1199:       if (d instanceof ll) {
+bundled:1200:         Pe(d);
+bundled:1201:       }
+bundled:1202:       throw d;
+bundled:1203:     }
+bundled:1204:     const oe = !u && t.continue === true;
+bundled:1205:     if ((typeof t.resume === "string" || C) && f && !t.noSession) {
+bundled:1206:       const d = g;
+bundled:1207:       const p = f.getRecordedCwd() ?? f.getCwd();
+bundled:1208:       const L = await je(p, c, E, f);
+bundled:1209:       g = L.cwd;
+bundled:1210:       ze(t, L, g, S ? r : undefined);
+bundled:1211:       if (g !== d) {
+bundled:1212:         t.cwd = g;
+bundled:1213:         m = await ode(t, k, c);
+bundled:1214:       }
+bundled:1215:     }
+bundled:1216:     if (typeof t.resume === "string" && !f) {
+bundled:1217:       mE(t, `${a.dim("Resume cancelled: session was not moved.")}
+bundled:1218: `);
+bundled:1219:       H();
+bundled:1220:       process.exit(0);
+bundled:1221:     }
+bundled:1222:     if (t.resume === true && !t.fork && !t.noSession) {
+bundled:1223:       const d = await ve("SessionManager.listForPicker", Se.listForPicker, g, t.sessionDir, undefined, T9.get(c));
+bundled:1224:       let p;
+bundled:1225:       if (d.length === 0) {
+bundled:1226:         p = await ve("SessionManager.listAllForPicker", Se.listAllForPicker);
+bundled:1227:         if (p.length === 0) {
+bundled:1228:           mE(t, `${a.dim("No sessions found")}
+bundled:1229: `);
+bundled:1230:           H();
+bundled:1231:           process.exit(0);
+bundled:1232:         }
+bundled:1233:       }
+bundled:1234:       ke();
+bundled:1235:       const L = i.selectSession ?? await _e();
+bundled:1236:       const _ = await ve("selectSession", L, d, {
+bundled:1237:         allSessions: p
+bundled:1238:       });
+bundled:1239:       xe();
+bundled:1240:       if (!_) {
+bundled:1241:         mE(t, `${a.dim("No session selected")}
+bundled:1242: `);
+bundled:1243:         H();
+bundled:1244:         process.exit(0);
+bundled:1245:       }
+bundled:1246:       const K = await Wb(_.path);
+bundled:1247:       if (K)
+bundled:1248:         M.push(K);
+bundled:1249:       const A = K?.session ?? _;
+bundled:1250:       try {
+bundled:1251:         f = await tF(await Se.isFromRemovedWorktree(A, g, t.sessionDir) ? await Ze(A, g, t.sessionDir) : await Se.open(A.path), t.sessionDir);
+bundled:1252:       } catch (ne) {
+bundled:1253:         if (ne instanceof ll)
+bundled:1254:           Pe(ne);
+bundled:1255:         throw ne;
+bundled:1256:       }
+bundled:1257:       const W = g;
+bundled:1258:       const X = A.cwd || f.getRecordedCwd() || f.getCwd();
+bundled:1259:       const se = await je(X, c, E, f);
+bundled:1260:       g = se.cwd;
+bundled:1261:       ze(t, se, g, S ? r : undefined);
+bundled:1262:       if (g !== W) {
+bundled:1263:         t.cwd = g;
+bundled:1264:         m = await ode(t, k, c);
+bundled:1265:       }
+bundled:1266:     }
+bundled:1267:     for (const d of M) {
+bundled:1268:       const p = MY(d);
+bundled:1269:       if (S)
+bundled:1270:         r.push({ kind: "warn", message: p });
+bundled:1271:       else
+bundled:1272:         process.stderr.write(`${a.yellow(p)}
+bundled:1273: `);
+bundled:1274:     }
+bundled:1275:     if (f && (t.continue || t.resume || t.fork || C)) {
+bundled:1276:       const d = Ypt(f.getBranch());
+bundled:1277:       if (d) {
+bundled:1278:         o("Resumed session has pending tool calls", {
+bundled:1279:           sessionId: f.getSessionId(),
+bundled:1280:           sessionFile: f.getSessionFile()
+bundled:1281:         });
+bundled:1282:         if (S) {
+bundled:1283:           r.push({ kind: "warn", message: d });
+bundled:1284:         } else {
+bundled:1285:           process.stderr.write(`${a.yellow(`${d}
+bundled:1286: `)}`);
+bundled:1287:         }
+bundled:1288:       }
+bundled:1289:     }
+bundled:1290:     await E;
+bundled:1291:     const Q = i === Ke ? ve("registerDaemonProjectPresence", USt, g) : undefined;
+bundled:1292:     Q?.catch(() => {});
+bundled:1293:     let Ae;
+bundled:1294:     let be;
+bundled:1295:     const Te = (d) => {
+bundled:1296:       if (S)
+bundled:1297:         r.push({ kind: "warn", message: d });
+bundled:1298:       else
+bundled:1299:         He(d);
+bundled:1300:     };
+bundled:1301:     const Ee = async (d) => {
+bundled:1302:       const p = await ve("buildSessionOptions", XYe, t, m, d, k, c, Te);
+bundled:1303:       p.authStorage = U;
+bundled:1304:       p.modelRegistry = k;
+bundled:1305:       p.hasUI = S || s === "rpc-ui";
+bundled:1306:       p.allowSessionModelFallback = S;
+bundled:1307:       p.settingsApproval = S;
+bundled:1308:       p.tuiTranscript = S;
+bundled:1309:       p.autoTitle = S;
+bundled:1310:       p.settings = c;
+bundled:1311:       p.telemetry = Ae;
+bundled:1312:       p.extensions = be;
+bundled:1313:       p.onPrewalkWarning = Te;
+bundled:1314:       return p;
+bundled:1315:     };
+bundled:1316:     let b = await Ee(f);
+bundled:1317:     const $e = {
+bundled:1318:       autoUpdate: jLe.get(c),
+bundled:1319:       resolveActiveProjectRegistryPath: Xl,
+bundled:1320:       clearPluginRootsCache: js
+bundled:1321:     };
+bundled:1322:     await ve("initTelemetryExport", MSt, Ndt.get(c));
+bundled:1323:     if (OSt()) {
+bundled:1324:       b.telemetry = ISt(b.telemetry, (d, p) => {
+bundled:1325:         const L = k.find(d, p);
+bundled:1326:         return L !== undefined && Hx(L) !== "unknown";
+bundled:1327:       });
+bundled:1328:       Ae = b.telemetry;
+bundled:1329:     }
+bundled:1330:     await Q;
+bundled:1331:     if (t.apiKey) {
+bundled:1332:       if (!b.model && !b.modelPattern) {
+bundled:1333:         process.stderr.write(`${a.red("--api-key requires a model to be specified via --model, --provider/--model, or --models")}
+bundled:1334: `);
+bundled:1335:         process.exit(1);
+bundled:1336:       }
+bundled:1337:       if (b.model) {
+bundled:1338:         U.keys.setRuntime(b.model.provider, t.apiKey);
+bundled:1339:       }
+bundled:1340:     }
+bundled:1341:     const ot = i.createAgentSession ?? oa;
+bundled:1342:     const fe = async (d) => {
+bundled:1343:       const p = await ve("createAgentSession", ot, d);
+bundled:1344:       if (!S)
+bundled:1345:         k.refreshInBackground();
+bundled:1346:       return p;
+bundled:1347:     };
+bundled:1348:     if (s === "acp") {
+bundled:1349:       if (b.disableExtensionDiscovery && (b.additionalExtensionPaths?.length ?? 0) === 0 && ade(t)) {
+bundled:1350:         process.exit(2);
+bundled:1351:       }
+bundled:1352:       const d = HYe({
+bundled:1353:         baseOptions: b,
+bundled:1354:         settings: c,
+bundled:1355:         sessionDir: t.sessionDir,
+bundled:1356:         authStorage: U,
+bundled:1357:         modelRegistry: k,
+bundled:1358:         parsedArgs: t,
+bundled:1359:         rawArgs: n,
+bundled:1360:         createSession: fe
+bundled:1361:       });
+bundled:1362:       const p = i.runAcpMode ?? (await import("/$bunfs/root/chunks/acp-mode-mgdxy154.js")).runAcpMode;
+bundled:1363:       GCe($e);
+bundled:1364:       H();
+bundled:1365:       Mce();
+bundled:1366:       await p(d);
+bundled:1367:     } else {
+bundled:1368:       if (S && !t.trustedExtensions?.length) {
+bundled:1369:         be = b.extensions = [
+bundled:1370:           ...b.extensions ?? [],
+bundled:1371:           NXe()
+bundled:1372:         ];
+bundled:1373:       }
+bundled:1374:       const d = new Gl;
+bundled:1375:       const p = new Gl;
+bundled:1376:       const L = S && t.unrecognizedFlags.length === 0 && !t.tools?.length && !(t.continue || t.resume || t.fork || t.restore || C);
+bundled:1377:       const _ = t.trustedExtensions?.length ? { ...await Qe(b, g, d), deferredPaths: [] } : await Nue(b, g, c, d, {
+bundled:1378:         deferStartupSafe: L
+bundled:1379:       });
+bundled:1380:       const K = {
+bundled:1381:         getFlags: () => yg.aggregateFlags(_.extensions),
+bundled:1382:         setFlagValue: (w, B) => {
+bundled:1383:           _.runtime.flagValues.set(w, B);
+bundled:1384:         }
+bundled:1385:       };
+bundled:1386:       const A = jCe(K, n) ?? t;
+bundled:1387:       lY(A, n);
+bundled:1388:       try {
+bundled:1389:         tt(A);
+bundled:1390:       } catch (w) {
+bundled:1391:         if (w instanceof ll) {
+bundled:1392:           Pe(w);
+bundled:1393:         }
+bundled:1394:         throw w;
+bundled:1395:       }
+bundled:1396:       if ((t.trustedExtensions?.length ?? 0) > 0 && _.errors.length > 0) {
+bundled:1397:         throw new Error(`Trusted extension failed to load: ${_.errors.map((w) => w.error).join("; ")}`);
+bundled:1398:       }
+bundled:1399:       for (const w of XX(_.errors)) {
+bundled:1400:         if (S) {
+bundled:1401:           r.push({ kind: "warn", message: w });
+bundled:1402:         } else {
+bundled:1403:           process.stderr.write(`${a.yellow(`${w}
+bundled:1404: `)}`);
+bundled:1405:         }
+bundled:1406:       }
+bundled:1407:       const W = ade(A);
+bundled:1408:       const X = xVe(A);
+bundled:1409:       if (W || X) {
+bundled:1410:         process.exit(2);
+bundled:1411:       }
+bundled:1412:       Ye(t);
+bundled:1413:       wVe(A);
+bundled:1414:       if (A.goal !== undefined) {
+bundled:1415:         vVe(A, Yl.get(c), R, m0.get(c) && Da.get(c));
+bundled:1416:       }
+bundled:1417:       if (q && A.messages.length === 0 && A.fileArgs.length === 0) {
+bundled:1418:         Ve();
+bundled:1419:       }
+bundled:1420:       const se = A.fileArgs.length > 0 ? await ve("processFileArguments", () => gVe(A.fileArgs, {
+bundled:1421:         autoResizeImages: ih.get(c)
+bundled:1422:       })) : undefined;
+bundled:1423:       const { initialMessage: ne, initialImages: Re } = pVe({
+bundled:1424:         parsed: A,
+bundled:1425:         fileText: se?.text,
+bundled:1426:         fileImages: se?.images,
+bundled:1427:         stdinContent: R
+bundled:1428:       });
+bundled:1429:       const nt = Ne({
+bundled:1430:         configured: zLe.get(c),
+bundled:1431:         isInteractive: S,
+bundled:1432:         resuming: Boolean(t.continue || t.resume || t.fork || C),
+bundled:1433:         quiet: tu.get(c),
+bundled:1434:         timing: Boolean(x.PI_TIMING),
+bundled:1435:         stdinIsTTY: process.stdin.isTTY,
+bundled:1436:         stdoutIsTTY: process.stdout.isTTY
+bundled:1437:       });
+bundled:1438:       let pe;
+bundled:1439:       if (S) {
+bundled:1440:         const w = new AbortController;
+bundled:1441:         const B = Gt("python-eval-startup-probe", () => w.abort(), { exitOnly: true });
+bundled:1442:         pe = Ue({
+bundled:1443:           args: t,
+bundled:1444:           lastChangelogVersion: await BEe(),
+bundled:1445:           cwd: b.cwd ?? I(),
+bundled:1446:           settings: c,
+bundled:1447:           signal: w.signal
+bundled:1448:         }).finally(B);
+bundled:1449:       }
+bundled:1450:       const it = S ? ve("main:getChangelogForDisplay", Pt, t, kW.get(c)) : undefined;
+bundled:1451:       const rt = S && oe ? _.runtime.pendingProviderRegistrations.slice() : [];
+bundled:1452:       const Fe = {
+bundled:1453:         eventBus: d,
+bundled:1454:         subagentEventBus: p,
+bundled:1455:         preloadedExtensions: _,
+bundled:1456:         deferredExtensionPaths: _.deferredPaths,
+bundled:1457:         deferRetryFallbackValidation: true
+bundled:1458:       };
+bundled:1459:       let he;
+bundled:1460:       try {
+bundled:1461:         he = await fe({ ...b, ...Fe });
+bundled:1462:       } catch (w) {
+bundled:1463:         if (!S || !oe || !f || !(w instanceof iX)) {
+bundled:1464:           throw w;
+bundled:1465:         }
+bundled:1466:         await f.close();
+bundled:1467:         f = undefined;
+bundled:1468:         t.continue = false;
+bundled:1469:         _.runtime.pendingProviderRegistrations.unshift(...rt);
+bundled:1470:         const B = b.deadline;
+bundled:1471:         b = await Ee(undefined);
+bundled:1472:         b.deadline = B;
+bundled:1473:         he = await fe({ ...b, ...Fe });
+bundled:1474:         r.push({
+bundled:1475:           kind: "warn",
+bundled:1476:           message: `Auto resume skipped: ${wm([w.message])[0]}. Started a new session without the saved history.`
+bundled:1477:         });
+bundled:1478:       }
+bundled:1479:       const {
+bundled:1480:         session: O,
+bundled:1481:         setToolUIContext: De,
+bundled:1482:         modelFallbackMessage: ae,
+bundled:1483:         lspServers: st,
+bundled:1484:         mcpManager: ye,
+bundled:1485:         startBackgroundModelDiscovery: at
+bundled:1486:       } = he;
+bundled:1487:       if (!S)
+bundled:1488:         O.validateRetryFallbackChains();
+bundled:1489:       const Oe = O.getAllToolNames();
+bundled:1490:       try {
+bundled:1491:         KCe(A.tools, Oe);
+bundled:1492:       } catch (w) {
+bundled:1493:         await O.dispose();
+bundled:1494:         const B = Oe.includes("eval") ? undefined : await pe;
+bundled:1495:         if (B && w instanceof Ln) {
+bundled:1496:           throw new Ln(`${w.message}
+bundled:1497: ${B}`);
+bundled:1498:         }
+bundled:1499:         throw w;
+bundled:1500:       }
+bundled:1501:       GCe($e);
+bundled:1502:       rr.global().setPersistedSubagentReviverFactory(ZYe({
+bundled:1503:         session: O,
+bundled:1504:         authStorage: U,
+bundled:1505:         modelRegistry: k,
+bundled:1506:         settings: c,
+bundled:1507:         enableLsp: b.enableLsp ?? true,
+bundled:1508:         eventBus: d,
+bundled:1509:         subagentEventBus: p
+bundled:1510:       }), () => Math.trunc(Number(a8.get(c)) || 0));
+bundled:1511:       if (t.apiKey && !b.model && O.model) {
+bundled:1512:         U.keys.setRuntime(O.model.provider, t.apiKey);
+bundled:1513:       }
+bundled:1514:       const Le = t.models ?? Wu.get(c);
+bundled:1515:       if (Le.length > 0) {
+bundled:1516:         const w = await ve("rebuildScopedModels", sde, O, t, k, c);
+bundled:1517:         if (w)
+bundled:1518:           m = w;
+bundled:1519:       }
+bundled:1520:       const lt = () => {
+bundled:1521:         O.loadDeferredExtensions();
+bundled:1522:         k.refreshInBackground();
+bundled:1523:         O.validateRetryFallbackChains();
+bundled:1524:         if (Le.length > 0) {
+bundled:1525:           jYe(O, t, k, c).catch((w) => o("Scoped model rebuild after discovery failed", { error: String(w) }));
+bundled:1526:         }
+bundled:1527:         at?.();
+bundled:1528:         if (XBe.get(c)) {
+bundled:1529:           fVe(we()).catch((w) => o("Background session compression failed to start", { error: String(w) }));
+bundled:1530:         }
+bundled:1531:       };
+bundled:1532:       const ct = async () => {
+bundled:1533:         await sde(O, t, k, c);
+bundled:1534:       };
+bundled:1535:       KYe(O, t, k, c);
+bundled:1536:       if (ae) {
+bundled:1537:         r.push({ kind: "warn", message: ae });
+bundled:1538:         if (!S && O.model) {
+bundled:1539:           process.stderr.write(`${a.yellow(`Warning: ${ae}`)}
+bundled:1540: `);
+bundled:1541:         }
+bundled:1542:       }
+bundled:1543:       const ue = k.getError();
+bundled:1544:       for (const w of k.drainConfigWarnings()) {
+bundled:1545:         if (S)
+bundled:1546:           r.push({ kind: "warn", message: w });
+bundled:1547:         else
+bundled:1548:           process.stderr.write(`${a.yellow(`Warning: ${w}`)}
+bundled:1549: `);
+bundled:1550:       }
+bundled:1551:       if (ue) {
+bundled:1552:         r.push({ kind: "error", message: ue.message });
+bundled:1553:       }
+bundled:1554:       if (!S && !O.model) {
+bundled:1555:         if (ue) {
+bundled:1556:           process.stderr.write(`${a.red(ue.message)}
+bundled:1557: `);
+bundled:1558:         }
+bundled:1559:         if (ae) {
+bundled:1560:           process.stderr.write(`${a.red(ae)}
+bundled:1561: `);
+bundled:1562:         } else {
+bundled:1563:           process.stderr.write(`${a.red("No models available.")}
+bundled:1564: `);
+bundled:1565:         }
+bundled:1566:         const w = k.getAvailable();
+bundled:1567:         if (t.model && w.length > 0) {
+bundled:1568:           const B = t.model.indexOf("/");
+bundled:1569:           const le = B === -1 ? undefined : t.model.slice(0, B).toLowerCase();
+bundled:1570:           const me = Boolean(t.provider) || le !== undefined && k.getAll().some((J) => J.provider.toLowerCase() === le);
+bundled:1571:           const ce = me ? [] : ly(w.map((J) => `${J.provider}/${J.id}`), t.model, (J) => J).slice(0, 5);
+bundled:1572:           if (ce.length > 0) {
+bundled:1573:             process.stderr.write(`${a.yellow(`
+bundled:1574: Did you mean:`)}
+bundled:1575: `);
+bundled:1576:             for (const J of ce)
+bundled:1577:               process.stderr.write(`  ${J}
+bundled:1578: `);
+bundled:1579:           }
+bundled:1580:           process.stderr.write(`
+bundled:1581: Run \`${F} models find <pattern>\` to search, or \`${F} models\` to list all.
+bundled:1582: `);
+bundled:1583:           process.exit(1);
+bundled:1584:         }
+bundled:1585:         process.stderr.write(`${a.yellow(`
+bundled:1586: Set an API key environment variable:`)}
+bundled:1587: `);
+bundled:1588:         process.stderr.write(`  ANTHROPIC_API_KEY, OPENAI_API_KEY, GEMINI_API_KEY, etc.
+bundled:1589: `);
+bundled:1590:         process.stderr.write(`${a.yellow(`
+bundled:1591: Or create ${Zfe.path()}`)}
+bundled:1592: `);
+bundled:1593:         process.exit(1);
+bundled:1594:       }
+bundled:1595:       if (s === "rpc" || s === "rpc-ui" || S) {
+bundled:1596:         c.startWatching();
+bundled:1597:         Gt("settings-file-watcher", () => c.stopWatching(), { exitOnly: true });
+bundled:1598:       }
+bundled:1599:       if (s === "rpc" || s === "rpc-ui") {
+bundled:1600:         const w = (await import("/$bunfs/root/chunks/rpc-mode-54n5x6tm.js")).runRpcMode;
+bundled:1601:         H();
+bundled:1602:         Mce();
+bundled:1603:         await w(O, {
+bundled:1604:           setToolUIContext: s === "rpc-ui" ? De : undefined,
+bundled:1605:           headless: t.noUi === true,
+bundled:1606:           subagentEventBus: p,
+bundled:1607:           mcpManager: ye,
+bundled:1608:           input: l
+bundled:1609:         });
+bundled:1610:       } else if (S) {
+bundled:1611:         const w = ft(Ie).catch(() => {
+bundled:1612:           return;
+bundled:1613:         });
+bundled:1614:         const B = await it;
+bundled:1615:         const le = UYe(m, tu.get(c));
+bundled:1616:         if (le) {
+bundled:1617:           r.push(le);
+bundled:1618:         }
+bundled:1619:         const me = await pe;
+bundled:1620:         if (me) {
+bundled:1621:           r.push({ kind: "warn", message: me });
+bundled:1622:         }
+bundled:1623:         if (x.PI_TIMING) {
+bundled:1624:           Qje();
+bundled:1625:           if (bxt()) {
+bundled:1626:             process.exit(0);
+bundled:1627:           }
+bundled:1628:         }
+bundled:1629:         const ce = eVe();
+bundled:1630:         try {
+bundled:1631:           H();
+bundled:1632:           Mce();
+bundled:1633:           await wt(O, Ie, B, r, w, A.messages, De, st, ye, Boolean(t.continue || t.resume || t.fork || C), i.forceSetupWizard === true, nt, d, p, ne, Re, t.join, lt, ce, A.goal, t.restore ? () => JYe(O, { eventBus: d, subagentEventBus: p }) : undefined, ct);
+bundled:1634:         } finally {
+bundled:1635:           ce?.dispose();
+bundled:1636:         }
+bundled:1637:       } else {
+bundled:1638:         H();
+bundled:1639:         if (!x.PI_TIMING)
+bundled:1640:           Mce();
+bundled:1641:         const w = (await import("/$bunfs/root/chunks/print-mode-xy7316v4.js")).runPrintMode;
+bundled:1642:         const B = await w(O, {
+bundled:1643:           mode: s,
+bundled:1644:           messages: A.messages,
+bundled:1645:           initialMessage: ne,
+bundled:1646:           initialImages: Re,
+bundled:1647:           printThoughts: A.printThoughts,
+bundled:1648:           planYolo: t.planYolo,
+bundled:1649:           mcpManager: ye,
+bundled:1650:           deadline: b.deadline
+bundled:1651:         });
+bundled:1652:         if (x.PI_TIMING) {
+bundled:1653:           Qje();
+bundled:1654:         }
+bundled:1655:         await QYe(O);
+bundled:1656:         RO();
+bundled:1657:         await ta(B);
+bundled:1658:       }
+bundled:1659:     }
+bundled:1660:   } catch (t) {
+bundled:1661:     BCe();
+bundled:1662:     H();
+bundled:1663:     throw t;
+bundled:1664:   }
+bundled:1665: }
+bundled:1666: async function ESt(e) {
+bundled:1667:   GRe();
+bundled:1668:   const { runCli: n } = await import("/$bunfs/root/omp-darwin-arm64");
+bundled:1669:   await n(e.length === 0 ? ["launch"] : e);
+bundled:1670: }
+bundled:1671: export { mE, qYe, UYe, zYe, HYe, ll, ode, ide, jYe, sde, KYe, lY, YYe, VYe, XYe, QYe, YA, ESt };

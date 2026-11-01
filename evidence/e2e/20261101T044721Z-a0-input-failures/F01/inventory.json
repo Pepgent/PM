@@ -1,0 +1,821 @@
+{
+  "createdAt": "2026-11-01T04:48:54.728827+00:00",
+  "groups": [
+    {
+      "group": "r1-failed-a0",
+      "source": "/tmp/soroi-full-a0-88i7tuvp",
+      "entries": [
+        {
+          "source": "/tmp/soroi-full-a0-88i7tuvp",
+          "member": "soroi-full-a0-88i7tuvp",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o700",
+          "mtime_ns": 1793506738026847437
+        },
+        {
+          "source": "/tmp/soroi-full-a0-88i7tuvp/campaign.json",
+          "member": "soroi-full-a0-88i7tuvp/campaign.json",
+          "kind": "file",
+          "bytes": 3097,
+          "mode": "0o644",
+          "mtime_ns": 1793506504675670431
+        },
+        {
+          "source": "/tmp/soroi-full-a0-88i7tuvp/during-run-observation.json",
+          "member": "soroi-full-a0-88i7tuvp/during-run-observation.json",
+          "kind": "file",
+          "bytes": 185,
+          "mode": "0o644",
+          "mtime_ns": 1793506641796798440
+        },
+        {
+          "source": "/tmp/soroi-full-a0-88i7tuvp/during-run-permissions.json",
+          "member": "soroi-full-a0-88i7tuvp/during-run-permissions.json",
+          "kind": "file",
+          "bytes": 383,
+          "mode": "0o644",
+          "mtime_ns": 1793506738026952853
+        },
+        {
+          "source": "/tmp/soroi-full-a0-88i7tuvp/during-run-stage.json",
+          "member": "soroi-full-a0-88i7tuvp/during-run-stage.json",
+          "kind": "file",
+          "bytes": 324,
+          "mode": "0o644",
+          "mtime_ns": 1793506692176374530
+        },
+        {
+          "source": "/tmp/soroi-full-a0-88i7tuvp/evidence",
+          "member": "soroi-full-a0-88i7tuvp/evidence",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o755",
+          "mtime_ns": 1793506751908608453
+        },
+        {
+          "source": "/tmp/soroi-full-a0-88i7tuvp/evidence/README.md",
+          "member": "soroi-full-a0-88i7tuvp/evidence/README.md",
+          "kind": "file",
+          "bytes": 199,
+          "mode": "0o644",
+          "mtime_ns": 1793506751908693786
+        },
+        {
+          "source": "/tmp/soroi-full-a0-88i7tuvp/evidence/a0-error.txt",
+          "member": "soroi-full-a0-88i7tuvp/evidence/a0-error.txt",
+          "kind": "file",
+          "bytes": 210,
+          "mode": "0o644",
+          "mtime_ns": 1793506751907793576
+        },
+        {
+          "source": "/tmp/soroi-full-a0-88i7tuvp/evidence/cleanup.json",
+          "member": "soroi-full-a0-88i7tuvp/evidence/cleanup.json",
+          "kind": "file",
+          "bytes": 76,
+          "mode": "0o644",
+          "mtime_ns": 1793506751907907701
+        },
+        {
+          "source": "/tmp/soroi-full-a0-88i7tuvp/evidence/pty",
+          "member": "soroi-full-a0-88i7tuvp/evidence/pty",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o755",
+          "mtime_ns": 1793506751906353197
+        },
+        {
+          "source": "/tmp/soroi-full-a0-88i7tuvp/evidence/pty/a0.txt",
+          "member": "soroi-full-a0-88i7tuvp/evidence/pty/a0.txt",
+          "kind": "file",
+          "bytes": 1686,
+          "mode": "0o644",
+          "mtime_ns": 1793506751906524948
+        },
+        {
+          "source": "/tmp/soroi-full-a0-88i7tuvp/evidence/store",
+          "member": "soroi-full-a0-88i7tuvp/evidence/store",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o755",
+          "mtime_ns": 1793506510561843445
+        },
+        {
+          "source": "/tmp/soroi-full-a0-88i7tuvp/evidence/verdict.json",
+          "member": "soroi-full-a0-88i7tuvp/evidence/verdict.json",
+          "kind": "file",
+          "bytes": 1872,
+          "mode": "0o644",
+          "mtime_ns": 1793506751908434369
+        },
+        {
+          "source": "/tmp/soroi-full-a0-88i7tuvp/provenance.json",
+          "member": "soroi-full-a0-88i7tuvp/provenance.json",
+          "kind": "file",
+          "bytes": 1226,
+          "mode": "0o644",
+          "mtime_ns": 1793506504675765889
+        }
+      ]
+    },
+    {
+      "group": "r2-failed-a0",
+      "source": "/tmp/soroi-full-a0-r2-36qhq4ut",
+      "entries": [
+        {
+          "source": "/tmp/soroi-full-a0-r2-36qhq4ut",
+          "member": "soroi-full-a0-r2-36qhq4ut",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o700",
+          "mtime_ns": 1793507342412860513
+        },
+        {
+          "source": "/tmp/soroi-full-a0-r2-36qhq4ut/campaign.json",
+          "member": "soroi-full-a0-r2-36qhq4ut/campaign.json",
+          "kind": "file",
+          "bytes": 3100,
+          "mode": "0o644",
+          "mtime_ns": 1793506989387187794
+        },
+        {
+          "source": "/tmp/soroi-full-a0-r2-36qhq4ut/evidence",
+          "member": "soroi-full-a0-r2-36qhq4ut/evidence",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o755",
+          "mtime_ns": 1793507242436405463
+        },
+        {
+          "source": "/tmp/soroi-full-a0-r2-36qhq4ut/evidence/README.md",
+          "member": "soroi-full-a0-r2-36qhq4ut/evidence/README.md",
+          "kind": "file",
+          "bytes": 199,
+          "mode": "0o644",
+          "mtime_ns": 1793507242436459420
+        },
+        {
+          "source": "/tmp/soroi-full-a0-r2-36qhq4ut/evidence/a0-error.txt",
+          "member": "soroi-full-a0-r2-36qhq4ut/evidence/a0-error.txt",
+          "kind": "file",
+          "bytes": 220,
+          "mode": "0o644",
+          "mtime_ns": 1793507242435321141
+        },
+        {
+          "source": "/tmp/soroi-full-a0-r2-36qhq4ut/evidence/cleanup.json",
+          "member": "soroi-full-a0-r2-36qhq4ut/evidence/cleanup.json",
+          "kind": "file",
+          "bytes": 76,
+          "mode": "0o644",
+          "mtime_ns": 1793507242435427515
+        },
+        {
+          "source": "/tmp/soroi-full-a0-r2-36qhq4ut/evidence/pty",
+          "member": "soroi-full-a0-r2-36qhq4ut/evidence/pty",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o755",
+          "mtime_ns": 1793507242434210653
+        },
+        {
+          "source": "/tmp/soroi-full-a0-r2-36qhq4ut/evidence/pty/a0.txt",
+          "member": "soroi-full-a0-r2-36qhq4ut/evidence/pty/a0.txt",
+          "kind": "file",
+          "bytes": 15513,
+          "mode": "0o644",
+          "mtime_ns": 1793507242434322444
+        },
+        {
+          "source": "/tmp/soroi-full-a0-r2-36qhq4ut/evidence/store",
+          "member": "soroi-full-a0-r2-36qhq4ut/evidence/store",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o755",
+          "mtime_ns": 1793506992671364086
+        },
+        {
+          "source": "/tmp/soroi-full-a0-r2-36qhq4ut/evidence/verdict.json",
+          "member": "soroi-full-a0-r2-36qhq4ut/evidence/verdict.json",
+          "kind": "file",
+          "bytes": 1883,
+          "mode": "0o644",
+          "mtime_ns": 1793507242436221048
+        },
+        {
+          "source": "/tmp/soroi-full-a0-r2-36qhq4ut/provenance.json",
+          "member": "soroi-full-a0-r2-36qhq4ut/provenance.json",
+          "kind": "file",
+          "bytes": 622,
+          "mode": "0o644",
+          "mtime_ns": 1793506989387293836
+        },
+        {
+          "source": "/tmp/soroi-full-a0-r2-36qhq4ut/terminal-plain.txt",
+          "member": "soroi-full-a0-r2-36qhq4ut/terminal-plain.txt",
+          "kind": "file",
+          "bytes": 8495,
+          "mode": "0o644",
+          "mtime_ns": 1793507342413471514
+        }
+      ]
+    },
+    {
+      "group": "deliberate-prepare-failure",
+      "source": "/tmp/soroi-a0-diagnostic-rejection-c0p2vox6",
+      "entries": [
+        {
+          "source": "/tmp/soroi-a0-diagnostic-rejection-c0p2vox6",
+          "member": "soroi-a0-diagnostic-rejection-c0p2vox6",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o700",
+          "mtime_ns": 1793508123875521948
+        },
+        {
+          "source": "/tmp/soroi-a0-diagnostic-rejection-c0p2vox6/campaign.json",
+          "member": "soroi-a0-diagnostic-rejection-c0p2vox6/campaign.json",
+          "kind": "file",
+          "bytes": 2121,
+          "mode": "0o644",
+          "mtime_ns": 1793508120134424838
+        },
+        {
+          "source": "/tmp/soroi-a0-diagnostic-rejection-c0p2vox6/evidence",
+          "member": "soroi-a0-diagnostic-rejection-c0p2vox6/evidence",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o755",
+          "mtime_ns": 1793508153183538226
+        },
+        {
+          "source": "/tmp/soroi-a0-diagnostic-rejection-c0p2vox6/evidence/README.md",
+          "member": "soroi-a0-diagnostic-rejection-c0p2vox6/evidence/README.md",
+          "kind": "file",
+          "bytes": 199,
+          "mode": "0o644",
+          "mtime_ns": 1793508153183566518
+        },
+        {
+          "source": "/tmp/soroi-a0-diagnostic-rejection-c0p2vox6/evidence/a0-error.txt",
+          "member": "soroi-a0-diagnostic-rejection-c0p2vox6/evidence/a0-error.txt",
+          "kind": "file",
+          "bytes": 282,
+          "mode": "0o644",
+          "mtime_ns": 1793508153182962933
+        },
+        {
+          "source": "/tmp/soroi-a0-diagnostic-rejection-c0p2vox6/evidence/cleanup.json",
+          "member": "soroi-a0-diagnostic-rejection-c0p2vox6/evidence/cleanup.json",
+          "kind": "file",
+          "bytes": 76,
+          "mode": "0o644",
+          "mtime_ns": 1793508153183070142
+        },
+        {
+          "source": "/tmp/soroi-a0-diagnostic-rejection-c0p2vox6/evidence/diagnostic-proof",
+          "member": "soroi-a0-diagnostic-rejection-c0p2vox6/evidence/diagnostic-proof",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o755",
+          "mtime_ns": 1793508150206292697
+        },
+        {
+          "source": "/tmp/soroi-a0-diagnostic-rejection-c0p2vox6/evidence/diagnostic-proof/check.yml",
+          "member": "soroi-a0-diagnostic-rejection-c0p2vox6/evidence/diagnostic-proof/check.yml",
+          "kind": "file",
+          "bytes": 224,
+          "mode": "0o644",
+          "mtime_ns": 1793508150206874449
+        },
+        {
+          "source": "/tmp/soroi-a0-diagnostic-rejection-c0p2vox6/evidence/diagnostic-proof/prepared.json",
+          "member": "soroi-a0-diagnostic-rejection-c0p2vox6/evidence/diagnostic-proof/prepared.json",
+          "kind": "file",
+          "bytes": 824,
+          "mode": "0o644",
+          "mtime_ns": 1793508150203856109
+        },
+        {
+          "source": "/tmp/soroi-a0-diagnostic-rejection-c0p2vox6/evidence/diagnostic-proof/recipe.json",
+          "member": "soroi-a0-diagnostic-rejection-c0p2vox6/evidence/diagnostic-proof/recipe.json",
+          "kind": "file",
+          "bytes": 1076,
+          "mode": "0o644",
+          "mtime_ns": 1793508150204763819
+        },
+        {
+          "source": "/tmp/soroi-a0-diagnostic-rejection-c0p2vox6/evidence/diagnostic-proof/sessions",
+          "member": "soroi-a0-diagnostic-rejection-c0p2vox6/evidence/diagnostic-proof/sessions",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o755",
+          "mtime_ns": 1793508150205361487
+        },
+        {
+          "source": "/tmp/soroi-a0-diagnostic-rejection-c0p2vox6/evidence/diagnostic-proof-note.txt",
+          "member": "soroi-a0-diagnostic-rejection-c0p2vox6/evidence/diagnostic-proof-note.txt",
+          "kind": "file",
+          "bytes": 131,
+          "mode": "0o644",
+          "mtime_ns": 1793508150207423117
+        },
+        {
+          "source": "/tmp/soroi-a0-diagnostic-rejection-c0p2vox6/evidence/pty",
+          "member": "soroi-a0-diagnostic-rejection-c0p2vox6/evidence/pty",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o755",
+          "mtime_ns": 1793508153181568347
+        },
+        {
+          "source": "/tmp/soroi-a0-diagnostic-rejection-c0p2vox6/evidence/pty/a0.txt",
+          "member": "soroi-a0-diagnostic-rejection-c0p2vox6/evidence/pty/a0.txt",
+          "kind": "file",
+          "bytes": 2642,
+          "mode": "0o644",
+          "mtime_ns": 1793508153181782597
+        },
+        {
+          "source": "/tmp/soroi-a0-diagnostic-rejection-c0p2vox6/evidence/store",
+          "member": "soroi-a0-diagnostic-rejection-c0p2vox6/evidence/store",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o755",
+          "mtime_ns": 1793508123875585490
+        },
+        {
+          "source": "/tmp/soroi-a0-diagnostic-rejection-c0p2vox6/evidence/verdict.json",
+          "member": "soroi-a0-diagnostic-rejection-c0p2vox6/evidence/verdict.json",
+          "kind": "file",
+          "bytes": 1920,
+          "mode": "0o644",
+          "mtime_ns": 1793508153183492143
+        },
+        {
+          "source": "/tmp/soroi-a0-diagnostic-rejection-c0p2vox6/purpose.txt",
+          "member": "soroi-a0-diagnostic-rejection-c0p2vox6/purpose.txt",
+          "kind": "file",
+          "bytes": 217,
+          "mode": "0o644",
+          "mtime_ns": 1793508120134539505
+        }
+      ]
+    },
+    {
+      "group": "version-only-identity",
+      "source": "/tmp/soroi-a0-runtime-identity-kbfQf0",
+      "entries": [
+        {
+          "source": "/tmp/soroi-a0-runtime-identity-kbfQf0",
+          "member": "soroi-a0-runtime-identity-kbfQf0",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o700",
+          "mtime_ns": 1793506459344685659
+        },
+        {
+          "source": "/tmp/soroi-a0-runtime-identity-kbfQf0/observation.json",
+          "member": "soroi-a0-runtime-identity-kbfQf0/observation.json",
+          "kind": "file",
+          "bytes": 381,
+          "mode": "0o644",
+          "mtime_ns": 1793506459344765492
+        }
+      ]
+    },
+    {
+      "group": "prepare-parse-rejections",
+      "source": "/tmp/soroi-a0-prepare-rejections-orjrj5pp",
+      "entries": [
+        {
+          "source": "/tmp/soroi-a0-prepare-rejections-orjrj5pp",
+          "member": "soroi-a0-prepare-rejections-orjrj5pp",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o700",
+          "mtime_ns": 1793506555069710181
+        },
+        {
+          "source": "/tmp/soroi-a0-prepare-rejections-orjrj5pp/empty.json",
+          "member": "soroi-a0-prepare-rejections-orjrj5pp/empty.json",
+          "kind": "file",
+          "bytes": 2943,
+          "mode": "0o644",
+          "mtime_ns": 1793506555043467868
+        },
+        {
+          "source": "/tmp/soroi-a0-prepare-rejections-orjrj5pp/empty.stderr",
+          "member": "soroi-a0-prepare-rejections-orjrj5pp/empty.stderr",
+          "kind": "file",
+          "bytes": 1148,
+          "mode": "0o644",
+          "mtime_ns": 1793506555069310264
+        },
+        {
+          "source": "/tmp/soroi-a0-prepare-rejections-orjrj5pp/empty.stdout",
+          "member": "soroi-a0-prepare-rejections-orjrj5pp/empty.stdout",
+          "kind": "file",
+          "bytes": 0,
+          "mode": "0o644",
+          "mtime_ns": 1793506555069142972
+        },
+        {
+          "source": "/tmp/soroi-a0-prepare-rejections-orjrj5pp/missing.json",
+          "member": "soroi-a0-prepare-rejections-orjrj5pp/missing.json",
+          "kind": "file",
+          "bytes": 2928,
+          "mode": "0o644",
+          "mtime_ns": 1793506554997495381
+        },
+        {
+          "source": "/tmp/soroi-a0-prepare-rejections-orjrj5pp/missing.stderr",
+          "member": "soroi-a0-prepare-rejections-orjrj5pp/missing.stderr",
+          "kind": "file",
+          "bytes": 669,
+          "mode": "0o644",
+          "mtime_ns": 1793506555043146367
+        },
+        {
+          "source": "/tmp/soroi-a0-prepare-rejections-orjrj5pp/missing.stdout",
+          "member": "soroi-a0-prepare-rejections-orjrj5pp/missing.stdout",
+          "kind": "file",
+          "bytes": 0,
+          "mode": "0o644",
+          "mtime_ns": 1793506555042977450
+        },
+        {
+          "source": "/tmp/soroi-a0-prepare-rejections-orjrj5pp/observations.json",
+          "member": "soroi-a0-prepare-rejections-orjrj5pp/observations.json",
+          "kind": "file",
+          "bytes": 386,
+          "mode": "0o644",
+          "mtime_ns": 1793506555069750181
+        }
+      ]
+    },
+    {
+      "group": "auxiliary-pty-smoke",
+      "source": "/tmp/soroi-pty-proof-R6SetD",
+      "entries": [
+        {
+          "source": "/tmp/soroi-pty-proof-R6SetD",
+          "member": "soroi-pty-proof-R6SetD",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o700",
+          "mtime_ns": 1793508296781048204
+        },
+        {
+          "source": "/tmp/soroi-pty-proof-R6SetD/image-gate",
+          "member": "soroi-pty-proof-R6SetD/image-gate",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o755",
+          "mtime_ns": 1793508296735417271
+        },
+        {
+          "source": "/tmp/soroi-pty-proof-R6SetD/image-gate/gate.json",
+          "member": "soroi-pty-proof-R6SetD/image-gate/gate.json",
+          "kind": "file",
+          "bytes": 233,
+          "mode": "0o644",
+          "mtime_ns": 1793508296735453105
+        },
+        {
+          "source": "/tmp/soroi-pty-proof-R6SetD/image-gate/pty",
+          "member": "soroi-pty-proof-R6SetD/image-gate/pty",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o755",
+          "mtime_ns": 1793508296735238104
+        },
+        {
+          "source": "/tmp/soroi-pty-proof-R6SetD/image-gate/pty/empty-home.txt",
+          "member": "soroi-pty-proof-R6SetD/image-gate/pty/empty-home.txt",
+          "kind": "file",
+          "bytes": 211,
+          "mode": "0o644",
+          "mtime_ns": 1793508296735327896
+        },
+        {
+          "source": "/tmp/soroi-pty-proof-R6SetD/image-gate/store",
+          "member": "soroi-pty-proof-R6SetD/image-gate/store",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o755",
+          "mtime_ns": 1793508295724057776
+        },
+        {
+          "source": "/tmp/soroi-pty-proof-R6SetD/local",
+          "member": "soroi-pty-proof-R6SetD/local",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o755",
+          "mtime_ns": 1793508295472087686
+        },
+        {
+          "source": "/tmp/soroi-pty-proof-R6SetD/local/pty",
+          "member": "soroi-pty-proof-R6SetD/local/pty",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o755",
+          "mtime_ns": 1793508295723605150
+        },
+        {
+          "source": "/tmp/soroi-pty-proof-R6SetD/local/pty/interactive.txt",
+          "member": "soroi-pty-proof-R6SetD/local/pty/interactive.txt",
+          "kind": "file",
+          "bytes": 29,
+          "mode": "0o644",
+          "mtime_ns": 1793508295491031186
+        },
+        {
+          "source": "/tmp/soroi-pty-proof-R6SetD/local/pty/nonzero.txt",
+          "member": "soroi-pty-proof-R6SetD/local/pty/nonzero.txt",
+          "kind": "file",
+          "bytes": 0,
+          "mode": "0o644",
+          "mtime_ns": 1793508295723638275
+        },
+        {
+          "source": "/tmp/soroi-pty-proof-R6SetD/local/pty/timeout.txt",
+          "member": "soroi-pty-proof-R6SetD/local/pty/timeout.txt",
+          "kind": "file",
+          "bytes": 9,
+          "mode": "0o644",
+          "mtime_ns": 1793508295708449492
+        },
+        {
+          "source": "/tmp/soroi-pty-proof-R6SetD/local/store",
+          "member": "soroi-pty-proof-R6SetD/local/store",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o755",
+          "mtime_ns": 1793508295471946436
+        },
+        {
+          "source": "/tmp/soroi-pty-proof-R6SetD/staging-rejection",
+          "member": "soroi-pty-proof-R6SetD/staging-rejection",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o755",
+          "mtime_ns": 1793508298070556389
+        },
+        {
+          "source": "/tmp/soroi-pty-proof-R6SetD/staging-rejection/README.md",
+          "member": "soroi-pty-proof-R6SetD/staging-rejection/README.md",
+          "kind": "file",
+          "bytes": 199,
+          "mode": "0o644",
+          "mtime_ns": 1793508298070581014
+        },
+        {
+          "source": "/tmp/soroi-pty-proof-R6SetD/staging-rejection/a0-error.txt",
+          "member": "soroi-pty-proof-R6SetD/staging-rejection/a0-error.txt",
+          "kind": "file",
+          "bytes": 316,
+          "mode": "0o644",
+          "mtime_ns": 1793508298070259764
+        },
+        {
+          "source": "/tmp/soroi-pty-proof-R6SetD/staging-rejection/cleanup.json",
+          "member": "soroi-pty-proof-R6SetD/staging-rejection/cleanup.json",
+          "kind": "file",
+          "bytes": 76,
+          "mode": "0o644",
+          "mtime_ns": 1793508298070339806
+        },
+        {
+          "source": "/tmp/soroi-pty-proof-R6SetD/staging-rejection/pty",
+          "member": "soroi-pty-proof-R6SetD/staging-rejection/pty",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o755",
+          "mtime_ns": 1793508298069683013
+        },
+        {
+          "source": "/tmp/soroi-pty-proof-R6SetD/staging-rejection/pty/a0.txt",
+          "member": "soroi-pty-proof-R6SetD/staging-rejection/pty/a0.txt",
+          "kind": "file",
+          "bytes": 211,
+          "mode": "0o644",
+          "mtime_ns": 1793508298069756388
+        },
+        {
+          "source": "/tmp/soroi-pty-proof-R6SetD/staging-rejection/store",
+          "member": "soroi-pty-proof-R6SetD/staging-rejection/store",
+          "kind": "directory",
+          "bytes": 0,
+          "mode": "0o755",
+          "mtime_ns": 1793508296781097371
+        },
+        {
+          "source": "/tmp/soroi-pty-proof-R6SetD/staging-rejection/verdict.json",
+          "member": "soroi-pty-proof-R6SetD/staging-rejection/verdict.json",
+          "kind": "file",
+          "bytes": 1475,
+          "mode": "0o644",
+          "mtime_ns": 1793508298070522723
+        }
+      ]
+    },
+    {
+      "group": "runtime-identity.ts",
+      "source": "/tmp/soroi-a0-runtime-identity.ts",
+      "entries": [
+        {
+          "source": "/tmp/soroi-a0-runtime-identity.ts",
+          "member": "soroi-a0-runtime-identity.ts",
+          "kind": "file",
+          "bytes": 1571,
+          "mode": "0o644",
+          "mtime_ns": 1793506454473868605
+        }
+      ]
+    },
+    {
+      "group": "native-input-api/soroi-a0-input-facts-report.md",
+      "source": "/tmp/soroi-a0-input-facts-report.md",
+      "entries": [
+        {
+          "source": "/tmp/soroi-a0-input-facts-report.md",
+          "member": "soroi-a0-input-facts-report.md",
+          "kind": "file",
+          "bytes": 14940,
+          "mode": "0o644",
+          "mtime_ns": 1793507962682369796
+        }
+      ]
+    },
+    {
+      "group": "native-input-api/soroi-a0-input-facts-native-source-report.txt",
+      "source": "/tmp/soroi-a0-input-facts-native-source-report.txt",
+      "entries": [
+        {
+          "source": "/tmp/soroi-a0-input-facts-native-source-report.txt",
+          "member": "soroi-a0-input-facts-native-source-report.txt",
+          "kind": "file",
+          "bytes": 415498,
+          "mode": "0o644",
+          "mtime_ns": 1793507548578213132
+        }
+      ]
+    },
+    {
+      "group": "native-input-api/soroi-a0-input-facts-custom-editor-source-report.txt",
+      "source": "/tmp/soroi-a0-input-facts-custom-editor-source-report.txt",
+      "entries": [
+        {
+          "source": "/tmp/soroi-a0-input-facts-custom-editor-source-report.txt",
+          "member": "soroi-a0-input-facts-custom-editor-source-report.txt",
+          "kind": "file",
+          "bytes": 47963,
+          "mode": "0o644",
+          "mtime_ns": 1793507867258398662
+        }
+      ]
+    },
+    {
+      "group": "native-input-api/soroi-a0-input-facts-composer-source-report.txt",
+      "source": "/tmp/soroi-a0-input-facts-composer-source-report.txt",
+      "entries": [
+        {
+          "source": "/tmp/soroi-a0-input-facts-composer-source-report.txt",
+          "member": "soroi-a0-input-facts-composer-source-report.txt",
+          "kind": "file",
+          "bytes": 33851,
+          "mode": "0o644",
+          "mtime_ns": 1793507627230139838
+        }
+      ]
+    },
+    {
+      "group": "native-input-api/soroi-a0-input-facts-interactive-source-report.txt",
+      "source": "/tmp/soroi-a0-input-facts-interactive-source-report.txt",
+      "entries": [
+        {
+          "source": "/tmp/soroi-a0-input-facts-interactive-source-report.txt",
+          "member": "soroi-a0-input-facts-interactive-source-report.txt",
+          "kind": "file",
+          "bytes": 379047,
+          "mode": "0o644",
+          "mtime_ns": 1793507568819377622
+        }
+      ]
+    },
+    {
+      "group": "native-input-api/soroi-a0-input-facts-cli-source-report.txt",
+      "source": "/tmp/soroi-a0-input-facts-cli-source-report.txt",
+      "entries": [
+        {
+          "source": "/tmp/soroi-a0-input-facts-cli-source-report.txt",
+          "member": "soroi-a0-input-facts-cli-source-report.txt",
+          "kind": "file",
+          "bytes": 97319,
+          "mode": "0o644",
+          "mtime_ns": 1793507831452260183
+        }
+      ]
+    },
+    {
+      "group": "owner-recipe/published-recipe-comment.json",
+      "source": "/tmp/soroi-next-slices/a0-priority/published-recipe-comment.json",
+      "entries": [
+        {
+          "source": "/tmp/soroi-next-slices/a0-priority/published-recipe-comment.json",
+          "member": "published-recipe-comment.json",
+          "kind": "file",
+          "bytes": 6298,
+          "mode": "0o644",
+          "mtime_ns": 1793505733019489933
+        }
+      ]
+    },
+    {
+      "group": "owner-recipe/soroi-dist02-argv-contract.json",
+      "source": "/tmp/soroi-dist02-argv-contract.json",
+      "entries": [
+        {
+          "source": "/tmp/soroi-dist02-argv-contract.json",
+          "member": "soroi-dist02-argv-contract.json",
+          "kind": "file",
+          "bytes": 1843,
+          "mode": "0o644",
+          "mtime_ns": 1793504727681874194
+        }
+      ]
+    },
+    {
+      "group": "exec/r1.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-6-1e1f1f93.log",
+      "entries": [
+        {
+          "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-6-1e1f1f93.log",
+          "member": "pi-unified-exec-91915-6-1e1f1f93.log",
+          "kind": "file",
+          "bytes": 40,
+          "mode": "0o644",
+          "mtime_ns": 1793506751909615080
+        }
+      ]
+    },
+    {
+      "group": "exec/r2.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-7-fa40b78e.log",
+      "entries": [
+        {
+          "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-7-fa40b78e.log",
+          "member": "pi-unified-exec-91915-7-fa40b78e.log",
+          "kind": "file",
+          "bytes": 40,
+          "mode": "0o644",
+          "mtime_ns": 1793507242437153538
+        }
+      ]
+    },
+    {
+      "group": "exec/deliberate-prepare-failure.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-8-cfc5a7ec.log",
+      "entries": [
+        {
+          "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-8-cfc5a7ec.log",
+          "member": "pi-unified-exec-91915-8-cfc5a7ec.log",
+          "kind": "file",
+          "bytes": 40,
+          "mode": "0o644",
+          "mtime_ns": 1793508153184219436
+        }
+      ]
+    },
+    {
+      "group": "exec/version-only-identity.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-5-a5b21340.log",
+      "entries": [
+        {
+          "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-5-a5b21340.log",
+          "member": "pi-unified-exec-91915-5-a5b21340.log",
+          "kind": "file",
+          "bytes": 343,
+          "mode": "0o644",
+          "mtime_ns": 1793506459351013924
+        }
+      ]
+    },
+    {
+      "group": "exec/auxiliary-pty-smoke.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-10-05bb4a55.log",
+      "entries": [
+        {
+          "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-10-05bb4a55.log",
+          "member": "pi-unified-exec-91915-10-05bb4a55.log",
+          "kind": "file",
+          "bytes": 880,
+          "mode": "0o644",
+          "mtime_ns": 1793508298070863973
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,881 @@
+bundled:1: // packages/tui/src/prompt/composer.ts
+bundled:2: var N = 500;
+bundled:3: var U = 250;
+bundled:4: var dTe = {
+bundled:5:   quiet: false,
+bundled:6:   composerShape: "band",
+bundled:7:   showHardwareCursor: true,
+bundled:8:   maxInlineImages: 8,
+bundled:9:   resizeScrollback: "rebuild",
+bundled:10:   completeScrollback: false,
+bundled:11:   imeSafeCursor: false,
+bundled:12:   autocompleteMaxVisible: 10,
+bundled:13:   spellingTypoDetection: true,
+bundled:14:   spellingAutocomplete: "auto",
+bundled:15:   spellingAutocorrect: false
+bundled:16: };
+bundled:17: class P {
+bundled:18:   #s;
+bundled:19:   setComponent(t) {
+bundled:20:     this.#s = t;
+bundled:21:   }
+bundled:22:   render(t) {
+bundled:23:     return this.#s?.render(t) ?? [];
+bundled:24:   }
+bundled:25: }
+bundled:26: function uTe(t, i) {
+bundled:27:   if (!Number.isInteger(i) || i < 0)
+bundled:28:     return [];
+bundled:29:   for (const n of t) {
+bundled:30:     if (i < n.start || i >= n.end)
+bundled:31:       continue;
+bundled:32:     return n.candidates(i - n.start);
+bundled:33:   }
+bundled:34:   return [];
+bundled:35: }
+bundled:36: function F(t) {
+bundled:37:   const i = [];
+bundled:38:   let n;
+bundled:39:   for (let r = 0;r < t.length; r++) {
+bundled:40:     const s = Hwe(t[r]);
+bundled:41:     for (const [a, o] of s.entries()) {
+bundled:42:       if (a === 0 && n?.endsRow && n.id === o.id)
+bundled:43:         continue;
+bundled:44:       i.push({ url: o.url, row: r, start: o.start });
+bundled:45:     }
+bundled:46:     n = s.at(-1);
+bundled:47:   }
+bundled:48:   return i;
+bundled:49: }
+bundled:50: var _ = new RegExp(`${String.fromCharCode(27)}\\[(?:4[0-7]|10[0-7]|48;[0-9;]*)m`, "g");
+bundled:51: function G(t) {
+bundled:52:   const i = t;
+bundled:53:   if (typeof i.getClickAgentAtRow !== "function")
+bundled:54:     return;
+bundled:55:   return (n) => {
+bundled:56:     const r = i.getClickAgentAtRow?.(n);
+bundled:57:     return r === undefined ? [] : [r];
+bundled:58:   };
+bundled:59: }
+bundled:60: class yE {
+bundled:61:   ui;
+bundled:62:   #s;
+bundled:63:   #i = new oe;
+bundled:64:   #k = new K(1);
+bundled:65:   #a = new P;
+bundled:66:   #U;
+bundled:67:   #_;
+bundled:68:   #e;
+bundled:69:   #r;
+bundled:70:   #M = "";
+bundled:71:   #$ = [];
+bundled:72:   #G = [];
+bundled:73:   #l = [];
+bundled:74:   #K;
+bundled:75:   #H = [];
+bundled:76:   #d;
+bundled:77:   #c = false;
+bundled:78:   #E = 1;
+bundled:79:   #t;
+bundled:80:   #v = false;
+bundled:81:   #x = false;
+bundled:82:   #V = false;
+bundled:83:   #f = false;
+bundled:84:   #m;
+bundled:85:   #A = [];
+bundled:86:   #g = [];
+bundled:87:   #Q;
+bundled:88:   #h;
+bundled:89:   #j = 0;
+bundled:90:   #F = 0;
+bundled:91:   #y;
+bundled:92:   #J = 0;
+bundled:93:   #u;
+bundled:94:   #P = false;
+bundled:95:   #B = false;
+bundled:96:   #X = new Set;
+bundled:97:   #Y = new Set;
+bundled:98:   #C;
+bundled:99:   #Z;
+bundled:100:   #ee;
+bundled:101:   #te = 0;
+bundled:102:   #R;
+bundled:103:   #T;
+bundled:104:   #I;
+bundled:105:   #W = false;
+bundled:106:   #w;
+bundled:107:   #ie = new Map;
+bundled:108:   #ne = 0;
+bundled:109:   #L = { main: [], dock: [] };
+bundled:110:   #o = false;
+bundled:111:   #n = false;
+bundled:112:   #q = false;
+bundled:113:   constructor(t = {}) {
+bundled:114:     Es();
+bundled:115:     this.#U = t.exit ?? ((i) => Xx(i));
+bundled:116:     this.#_ = t.now ?? Date.now;
+bundled:117:     this.#e = { ...dTe, ...t.preferences };
+bundled:118:     this.#oe(t.welcome ?? {});
+bundled:119:     this.ui = new Ur(t.terminal ?? new wd, this.#e.showHardwareCursor, t.tuiOptions);
+bundled:120:     this.ui.setFrameProvider(this);
+bundled:121:     this.ui.setMaxInlineImages(this.#e.maxInlineImages);
+bundled:122:     this.ui.setResizeScrollback(this.#e.resizeScrollback);
+bundled:123:     this.#s = new Bv(cs());
+bundled:124:     this.editor.disableSubmit = true;
+bundled:125:     this.editor.setUseTerminalCursor(this.ui.getShowHardwareCursor());
+bundled:126:     this.editor.setImeSafeCursorLayout(this.#e.imeSafeCursor);
+bundled:127:     this.editor.setAutocompleteMaxVisible(this.#e.autocompleteMaxVisible);
+bundled:128:     this.editor.setSpellingFeatures({
+bundled:129:       typoDetection: this.#e.spellingTypoDetection,
+bundled:130:       autocomplete: this.#e.spellingAutocomplete,
+bundled:131:       autocorrect: this.#e.spellingAutocorrect
+bundled:132:     });
+bundled:133:     try {
+bundled:134:       this.editor.setBorderStyle(this.#e.composerShape);
+bundled:135:     } catch {}
+bundled:136:     if (t.status) {
+bundled:137:       const { borderColor: i, statusLine: n } = t.status;
+bundled:138:       if (i)
+bundled:139:         this.editor.borderColor = (r) => `${i.prefix}${r}${i.suffix}`;
+bundled:140:       this.#d = IXe(n);
+bundled:141:       this.#a.setComponent(this.#d);
+bundled:142:       this.#d.attachToEditor(this.editor, ny(this.#e.composerShape));
+bundled:143:     }
+bundled:144:     this.editor.setActionKeys("app.clear", ["ctrl+c"]);
+bundled:145:     this.editor.setActionKeys("app.exit", ["ctrl+d"]);
+bundled:146:     this.editor.onClear = () => this.#ye();
+bundled:147:     this.editor.onExit = () => this.#ae(0);
+bundled:148:     this.editor.setShimmerRepaintHandler(() => this.ui.requestComponentRender(this.editor));
+bundled:149:     if (!this.#e.quiet)
+bundled:150:       this.#O();
+bundled:151:     this.#N();
+bundled:152:     this.ui.addChild(this.#i);
+bundled:153:     this.ui.addChild(this.#k);
+bundled:154:     this.ui.addChild(this.editor);
+bundled:155:     this.ui.addChild(this.#a);
+bundled:156:     this.ui.setFocus(this.editor);
+bundled:157:     this.ui.addStartListener(() => this.#b());
+bundled:158:   }
+bundled:159:   rowsBelow(t) {
+bundled:160:     return this.#ie.get(t);
+bundled:161:   }
+bundled:162:   renderFrame(t) {
+bundled:163:     if (!this.#o || this.#n)
+bundled:164:       return { viewport: [] };
+bundled:165:     const i = Math.max(1, t.columns);
+bundled:166:     const n = Math.max(0, t.rows);
+bundled:167:     if (this.#y !== undefined) {
+bundled:168:       this.#F = this.#y;
+bundled:169:       this.#y = undefined;
+bundled:170:     }
+bundled:171:     this.#J = n;
+bundled:172:     const r = this.#c ? [...this.#l, this.#a] : [this.#i, this.#k, this.editor, this.#a];
+bundled:173:     const s = r.findIndex((l) => l instanceof Gp);
+bundled:174:     if (s < 0) {
+bundled:175:       this.#A = [];
+bundled:176:       this.#g = [];
+bundled:177:       this.#z([], 0);
+bundled:178:       const l = [];
+bundled:179:       for (const p of r) {
+bundled:180:         const b = p.render(i);
+bundled:181:         if (!this.#c && p === this.editor)
+bundled:182:           this.#ce(b.length);
+bundled:183:         l.push(...b);
+bundled:184:       }
+bundled:185:       return { viewport: l.slice(-n) };
+bundled:186:     }
+bundled:187:     const a = r[s];
+bundled:188:     const o = this.#S(r.slice(0, s), i);
+bundled:189:     const d = r.slice(s + 1);
+bundled:190:     const u = [];
+bundled:191:     const f = [];
+bundled:192:     const h = [];
+bundled:193:     let c = 0;
+bundled:194:     let m = 0;
+bundled:195:     for (const l of d) {
+bundled:196:       const p = u.length;
+bundled:197:       this.#he(l, i, u, f);
+bundled:198:       if (this.#Y.has(l))
+bundled:199:         m += u.length - p;
+bundled:200:       else if (this.#X.has(l))
+bundled:201:         c += u.length - p;
+bundled:202:       h.push({ root: l, end: u.length });
+bundled:203:     }
+bundled:204:     this.#ie = new Map(h.map(({ root: l, end: p }) => [l, u.length - p]));
+bundled:205:     const S = this.#fe(c);
+bundled:206:     const k = u.length - (c - S) - m;
+bundled:207:     const B = this.#P && k < (this.#u ?? 0);
+bundled:208:     this.#u = Math.min(this.#u ?? k, k);
+bundled:209:     this.#ue(this.#B || a.hasActiveBlock(), k);
+bundled:210:     const I = this.#e.completeScrollback ? u.length : this.#u;
+bundled:211:     const L = performance.now();
+bundled:212:     const M = { now: L, tick: Math.floor(L / 80) };
+bundled:213:     a.beginFrame(M);
+bundled:214:     const y = this.#pe(a, i, n, o.length + I);
+bundled:215:     const W = !this.#f && this.#t?.source !== "header";
+bundled:216:     const q = W ? this.#i.render(i) : [];
+bundled:217:     const C = [...q, ...o];
+bundled:218:     const v = a.renderViewport(i, Math.max(0, n - C.length - I), M);
+bundled:219:     const H = [];
+bundled:220:     for (const l of a.getLastViewportSpans()) {
+bundled:221:       const p = l.component.getClickFocusAgentIds?.();
+bundled:222:       if (!p || p.length === 0)
+bundled:223:         continue;
+bundled:224:       H.push({ start: l.start, end: l.end, candidates: () => p });
+bundled:225:     }
+bundled:226:     const w = Math.max(0, C.length + v.length + u.length - n);
+bundled:227:     const g = [...C, ...v, ...u].slice(w);
+bundled:228:     const E = y?.kind === "replay" || !(y !== undefined || this.ui.hasProviderHistory()) ? undefined : this.ui.getFilledHistoryRows();
+bundled:229:     const x = E === undefined || B ? 0 : Math.max(0, n - Math.min(n, E + (y?.rows.length ?? 0)) - g.length);
+bundled:230:     if (x > 0) {
+bundled:231:       const l = Math.max(0, Math.min(g.length, C.length + v.length - w));
+bundled:232:       g.splice(l, 0, ...Array(x).fill(""));
+bundled:233:     }
+bundled:234:     const z = g.length;
+bundled:235:     const R = [];
+bundled:236:     const V = (l, p) => {
+bundled:237:       const b = l.start + p;
+bundled:238:       const A = Math.min(l.end + p, z);
+bundled:239:       const T = Math.max(0, b);
+bundled:240:       if (A > T) {
+bundled:241:         const D = T - b;
+bundled:242:         R.push({ start: T, end: A, candidates: (O) => l.candidates(O + D) });
+bundled:243:       }
+bundled:244:     };
+bundled:245:     for (const l of H)
+bundled:246:       V(l, C.length - w);
+bundled:247:     for (const l of f)
+bundled:248:       V(l, x + C.length + v.length - w);
+bundled:249:     this.#A = R;
+bundled:250:     this.#g = g;
+bundled:251:     this.#j = i;
+bundled:252:     this.#z(g, i);
+bundled:253:     if (y !== undefined && this.#t?.source === "header") {
+bundled:254:       const l = Math.max(0, n - (g.length + w));
+bundled:255:       this.#F = Math.max(0, y.rows.length - l);
+bundled:256:     }
+bundled:257:     return { history: y, viewport: this.#de(this.#le(g, R), i) };
+bundled:258:   }
+bundled:259:   #z(t, i) {
+bundled:260:     const n = this.#h;
+bundled:261:     if (n === undefined)
+bundled:262:       return;
+bundled:263:     const r = F(t);
+bundled:264:     const s = n.hints;
+bundled:265:     if (s === undefined) {
+bundled:266:       n.hints = M$e(r.length).map((o, d) => ({ tag: o, link: r[d] }));
+bundled:267:       if (n.hints.length === 0) {
+bundled:268:         this.#p();
+bundled:269:         return;
+bundled:270:       }
+bundled:271:     } else {
+bundled:272:       const o = r.length >= s.length && s.every(({ link: d }, u) => d.url === r[u].url && d.start === r[u].start);
+bundled:273:       if (!o) {
+bundled:274:         this.#p();
+bundled:275:         return;
+bundled:276:       }
+bundled:277:       n.hints = s.map(({ tag: d }, u) => ({ tag: d, link: r[u] }));
+bundled:278:     }
+bundled:279:     const a = new Map;
+bundled:280:     for (const { tag: o, link: d } of n.hints)
+bundled:281:       a.set(d.row, (a.get(d.row) ?? 0) + o.length);
+bundled:282:     if ([...a.values()].some((o) => o > i))
+bundled:283:       this.#p("crowded");
+bundled:284:   }
+bundled:285:   #p(t) {
+bundled:286:     const i = this.#h;
+bundled:287:     if (i === undefined)
+bundled:288:       return;
+bundled:289:     this.#h = undefined;
+bundled:290:     i.onEnd(t);
+bundled:291:   }
+bundled:292:   #de(t, i) {
+bundled:293:     const n = this.#h;
+bundled:294:     if (n?.hints === undefined)
+bundled:295:       return t;
+bundled:296:     const r = new Map;
+bundled:297:     for (const { tag: a, link: o } of n.hints) {
+bundled:298:       if (t[o.row] === undefined || !a.startsWith(n.typed))
+bundled:299:         continue;
+bundled:300:       let d = r.get(o.row);
+bundled:301:       if (!d)
+bundled:302:         r.set(o.row, d = []);
+bundled:303:       d.push({ tag: a, col: o.start });
+bundled:304:     }
+bundled:305:     const s = [...t];
+bundled:306:     for (const [a, o] of r) {
+bundled:307:       o.sort((h, c) => h.col - c.col);
+bundled:308:       let d = 0;
+bundled:309:       for (const h of o) {
+bundled:310:         h.col = Math.max(h.col, d);
+bundled:311:         d = h.col + h.tag.length;
+bundled:312:       }
+bundled:313:       let u = i;
+bundled:314:       for (let h = o.length - 1;h >= 0; h--) {
+bundled:315:         const c = o[h];
+bundled:316:         c.col = Math.max(0, Math.min(c.col, u - c.tag.length));
+bundled:317:         u = c.col;
+bundled:318:       }
+bundled:319:       let f = s[a];
+bundled:320:       for (const { tag: h, col: c } of o) {
+bundled:321:         const m = `\x1B[1;7m${e.fg("accent", h)}\x1B[22;27m`;
+bundled:322:         f = e7(f, m, c, h.length, i);
+bundled:323:       }
+bundled:324:       s[a] = f;
+bundled:325:     }
+bundled:326:     return s;
+bundled:327:   }
+bundled:328:   describeSurface() {
+bundled:329:     if (!this.#o || this.#n)
+bundled:330:       return this.#L;
+bundled:331:     const t = [...this.#i.children];
+bundled:332:     const i = [];
+bundled:333:     if (!this.#c) {
+bundled:334:       i.push(this.editor);
+bundled:335:     } else {
+bundled:336:       const a = this.#l;
+bundled:337:       const o = a.findIndex((d) => d instanceof Gp);
+bundled:338:       if (o < 0) {
+bundled:339:         i.push(...a);
+bundled:340:       } else {
+bundled:341:         const d = a[o];
+bundled:342:         t.push(...a.slice(0, o), ...d.nativeBlocks());
+bundled:343:         for (const f of this.#H)
+bundled:344:           t.push(...f.children);
+bundled:345:         const u = this.#H;
+bundled:346:         i.push(...this.#K ?? a.slice(o + 1).filter((f) => !u.includes(f)));
+bundled:347:       }
+bundled:348:     }
+bundled:349:     const n = this.#L;
+bundled:350:     const r = lo(n.main, t) ? n.main : t;
+bundled:351:     const s = lo(n.dock, i) ? n.dock : i;
+bundled:352:     if (r !== n.main || s !== n.dock) {
+bundled:353:       this.#L = { main: r, dock: s };
+bundled:354:     }
+bundled:355:     return this.#L;
+bundled:356:   }
+bundled:357:   #he(t, i, n, r) {
+bundled:358:     const s = n.length;
+bundled:359:     const a = t instanceof oe && t.render === oe.prototype.render;
+bundled:360:     const o = t instanceof oe ? t.children : [t];
+bundled:361:     const d = o.map(G);
+bundled:362:     const u = d.findLastIndex((h) => h !== undefined);
+bundled:363:     if (a) {
+bundled:364:       let h = s;
+bundled:365:       for (let c = 0;c < o.length; c++) {
+bundled:366:         const m = o[c].render(i);
+bundled:367:         n.push(...m);
+bundled:368:         if (c > u)
+bundled:369:           continue;
+bundled:370:         const S = d[c];
+bundled:371:         if (S !== undefined && m.length > 0) {
+bundled:372:           r.push({ start: h, end: h + m.length, candidates: S });
+bundled:373:         }
+bundled:374:         h += m.length;
+bundled:375:       }
+bundled:376:       return;
+bundled:377:     }
+bundled:378:     n.push(...t.render(i));
+bundled:379:     if (u === -1)
+bundled:380:       return;
+bundled:381:     let f = s;
+bundled:382:     for (let h = 0;h <= u; h++) {
+bundled:383:       const c = o[h] === t ? n.length - s : o[h].render(i).length;
+bundled:384:       const m = d[h];
+bundled:385:       if (m !== undefined && c > 0) {
+bundled:386:         r.push({ start: f, end: f + c, candidates: m });
+bundled:387:       }
+bundled:388:       f += c;
+bundled:389:     }
+bundled:390:   }
+bundled:391:   #le(t, i) {
+bundled:392:     const n = this.#Q;
+bundled:393:     if (n === undefined)
+bundled:394:       return t;
+bundled:395:     let r = false;
+bundled:396:     const s = t.map((a, o) => {
+bundled:397:       for (const d of i) {
+bundled:398:         if (o < d.start || o >= d.end)
+bundled:399:           continue;
+bundled:400:         if (!d.candidates(o - d.start).includes(n))
+bundled:401:           continue;
+bundled:402:         r = true;
+bundled:403:         return e.bgFill("selectedBg", a.replace(_, ""));
+bundled:404:       }
+bundled:405:       return a;
+bundled:406:     });
+bundled:407:     return r ? s : t;
+bundled:408:   }
+bundled:409:   viewportClickCandidates(t) {
+bundled:410:     return uTe(this.#A, t);
+bundled:411:   }
+bundled:412:   viewportLinkAt(t, i) {
+bundled:413:     const n = this.#g[t];
+bundled:414:     if (n === undefined || i < 0)
+bundled:415:       return;
+bundled:416:     const r = Hwe(n).find((s) => i >= s.start && i < s.end);
+bundled:417:     return r && { url: r.url, row: t, start: r.start };
+bundled:418:   }
+bundled:419:   setHoveredClickId(t) {
+bundled:420:     this.#Q = t;
+bundled:421:   }
+bundled:422:   viewportLinkCount() {
+bundled:423:     return F(this.#g).length;
+bundled:424:   }
+bundled:425:   startLinkHints(t) {
+bundled:426:     this.#p();
+bundled:427:     this.#h = { hints: undefined, typed: "", onEnd: t };
+bundled:428:   }
+bundled:429:   get linkHintsActive() {
+bundled:430:     return this.#h !== undefined;
+bundled:431:   }
+bundled:432:   typeLinkHint(t) {
+bundled:433:     const i = this.#h;
+bundled:434:     if (i === undefined)
+bundled:435:       return false;
+bundled:436:     if (i.hints === undefined)
+bundled:437:       this.#z(this.#g, this.#j);
+bundled:438:     const n = this.#h?.hints;
+bundled:439:     if (n === undefined)
+bundled:440:       return false;
+bundled:441:     const r = i.typed + t.toLowerCase();
+bundled:442:     const s = n.filter((o) => o.tag.startsWith(r));
+bundled:443:     const a = s.length === 1 && s[0].tag === r ? s[0].link : undefined;
+bundled:444:     if (s.length === 0 || a !== undefined) {
+bundled:445:       this.#p();
+bundled:446:       return a ?? false;
+bundled:447:     }
+bundled:448:     i.typed = r;
+bundled:449:     return true;
+bundled:450:   }
+bundled:451:   cancelLinkHints() {
+bundled:452:     this.#p();
+bundled:453:   }
+bundled:454:   acknowledgeHistory(t) {
+bundled:455:     const i = this.#t;
+bundled:456:     if (i === undefined || i.id !== t)
+bundled:457:       return;
+bundled:458:     if (i.source === "header") {
+bundled:459:       this.#f = true;
+bundled:460:       this.#m = i.rows;
+bundled:461:     } else {
+bundled:462:       if (i.source.transcriptId !== undefined) {
+bundled:463:         i.source.transcript.acknowledgeFinalizedBatch(i.source.transcriptId);
+bundled:464:       }
+bundled:465:       if (i.source.header === "replay") {
+bundled:466:         this.#x = false;
+bundled:467:         if (i.source.headerRows !== undefined)
+bundled:468:           this.#m = i.source.headerRows;
+bundled:469:       }
+bundled:470:     }
+bundled:471:     this.#t = undefined;
+bundled:472:     if (this.#v)
+bundled:473:       this.#re();
+bundled:474:     if (i.kind === "replay") {
+bundled:475:       this.ui.requestRender();
+bundled:476:     }
+bundled:477:   }
+bundled:478:   renderResizeFrame(t) {
+bundled:479:     if (!this.#o || this.#n)
+bundled:480:       return [];
+bundled:481:     const i = Math.max(1, t.columns);
+bundled:482:     const n = Math.max(0, t.rows);
+bundled:483:     const r = this.#c ? this.#ge(i, n) : this.#S([this.#k, this.editor, this.#a], i);
+bundled:484:     let s;
+bundled:485:     if (this.#f) {
+bundled:486:       this.#y ??= Math.max(0, this.#F - Math.max(0, n - this.#J));
+bundled:487:       s = this.#D(i, this.#y);
+bundled:488:     } else {
+bundled:489:       s = this.#i.render(i);
+bundled:490:     }
+bundled:491:     const a = [...s, ...r];
+bundled:492:     return a.length <= n ? a : a.slice(a.length - n);
+bundled:493:   }
+bundled:494:   beginHistoryReplay() {
+bundled:495:     if (this.#t !== undefined) {
+bundled:496:       this.#v = true;
+bundled:497:       return;
+bundled:498:     }
+bundled:499:     this.#re();
+bundled:500:   }
+bundled:501:   beginHistoryFlush() {
+bundled:502:     this.#V = true;
+bundled:503:     this.#v = false;
+bundled:504:     this.#x = false;
+bundled:505:     for (const t of this.#l) {
+bundled:506:       if (t instanceof Gp)
+bundled:507:         t.cancelReplay();
+bundled:508:     }
+bundled:509:   }
+bundled:510:   #re() {
+bundled:511:     this.#x = this.#f && (this.#m?.length ?? 0) > 0;
+bundled:512:     this.#v = false;
+bundled:513:     for (const t of this.#l) {
+bundled:514:       if (t instanceof Gp)
+bundled:515:         t.beginReplay();
+bundled:516:     }
+bundled:517:   }
+bundled:518:   #ue(t, i) {
+bundled:519:     if (t || i <= (this.#u ?? i)) {
+bundled:520:       this.#b();
+bundled:521:       return;
+bundled:522:     }
+bundled:523:     if (this.#W && this.#I === i) {
+bundled:524:       this.#P = true;
+bundled:525:       this.#u = i;
+bundled:526:       this.#b();
+bundled:527:       return;
+bundled:528:     }
+bundled:529:     if (this.#I === i && this.#w !== undefined)
+bundled:530:       return;
+bundled:531:     this.#b();
+bundled:532:     this.#I = i;
+bundled:533:     this.#w = this.ui.scheduleAfter(U, () => {
+bundled:534:       this.#w = undefined;
+bundled:535:       this.#W = true;
+bundled:536:       this.ui.requestRender();
+bundled:537:     });
+bundled:538:   }
+bundled:539:   #b() {
+bundled:540:     this.#w?.cancel();
+bundled:541:     this.#w = undefined;
+bundled:542:     this.#I = undefined;
+bundled:543:     this.#W = false;
+bundled:544:   }
+bundled:545:   #ce(t) {
+bundled:546:     const i = this.editor.getBorderStyle();
+bundled:547:     this.#R = i === this.#T ? Math.min(this.#R ?? t, t) : t;
+bundled:548:     this.#T = i;
+bundled:549:   }
+bundled:550:   #fe(t) {
+bundled:551:     const i = this.editor;
+bundled:552:     const n = i.getBorderStyle();
+bundled:553:     let r;
+bundled:554:     if (this.#C === undefined) {
+bundled:555:       const s = this.#T === n ? this.#R : undefined;
+bundled:556:       r = s === undefined ? t : Math.min(t, s);
+bundled:557:     } else if (i !== this.#Z || n !== this.#ee) {
+bundled:558:       r = Math.max(0, Math.min(t, this.#C + t - this.#te));
+bundled:559:     } else {
+bundled:560:       r = Math.min(this.#C, t);
+bundled:561:     }
+bundled:562:     this.#C = r;
+bundled:563:     this.#R = undefined;
+bundled:564:     this.#T = undefined;
+bundled:565:     this.#Z = i;
+bundled:566:     this.#ee = n;
+bundled:567:     this.#te = t;
+bundled:568:     return r;
+bundled:569:   }
+bundled:570:   #pe(t, i, n, r) {
+bundled:571:     if (this.#t !== undefined) {
+bundled:572:       this.#me(i);
+bundled:573:       return {
+bundled:574:         id: this.#t.id,
+bundled:575:         rows: this.#t.rows,
+bundled:576:         kind: this.#t.kind
+bundled:577:       };
+bundled:578:     }
+bundled:579:     if (this.#x) {
+bundled:580:       const a = t.peekReplayBatch(i);
+bundled:581:       const o = this.#i.render(i);
+bundled:582:       const d = o.length > 0 ? [...o, ""] : this.#D(i, 0);
+bundled:583:       this.#t = {
+bundled:584:         id: this.#E++,
+bundled:585:         rows: [...d, ...a?.rows ?? []],
+bundled:586:         kind: "replay",
+bundled:587:         source: {
+bundled:588:           transcript: t,
+bundled:589:           transcriptId: a?.id,
+bundled:590:           header: "replay",
+bundled:591:           headerRows: d
+bundled:592:         }
+bundled:593:       };
+bundled:594:       return {
+bundled:595:         id: this.#t.id,
+bundled:596:         rows: this.#t.rows,
+bundled:597:         kind: this.#t.kind
+bundled:598:       };
+bundled:599:     }
+bundled:600:     if (!this.#f) {
+bundled:601:       const a = this.#r;
+bundled:602:       if (a !== undefined && !a.isTranscriptBlockFinalized())
+bundled:603:         return;
+bundled:604:       const o = this.#i.render(i);
+bundled:605:       if (o.length > 0) {
+bundled:606:         const d = t.liveRowCount(i, Math.max(0, n - o.length - r));
+bundled:607:         if (!this.#V && o.length + r + d <= n)
+bundled:608:           return;
+bundled:609:         this.#t = {
+bundled:610:           id: this.#E++,
+bundled:611:           rows: [...o, ""],
+bundled:612:           kind: "append",
+bundled:613:           source: "header"
+bundled:614:         };
+bundled:615:         return {
+bundled:616:           id: this.#t.id,
+bundled:617:           rows: this.#t.rows,
+bundled:618:           kind: this.#t.kind
+bundled:619:         };
+bundled:620:       }
+bundled:621:       this.#f = true;
+bundled:622:       this.#m = [];
+bundled:623:     }
+bundled:624:     const s = this.#V ? t.peekFlushBatch(i) : t.peekFinalizedBatch(i, Math.max(0, n - r));
+bundled:625:     if (s === undefined)
+bundled:626:       return;
+bundled:627:     this.#t = {
+bundled:628:       id: this.#E++,
+bundled:629:       rows: s.rows,
+bundled:630:       kind: s.kind ?? "append",
+bundled:631:       source: { transcript: t, transcriptId: s.id, header: "none" }
+bundled:632:     };
+bundled:633:     return {
+bundled:634:       id: this.#t.id,
+bundled:635:       rows: this.#t.rows,
+bundled:636:       kind: this.#t.kind
+bundled:637:     };
+bundled:638:   }
+bundled:639:   #me(t) {
+bundled:640:     const i = this.#t;
+bundled:641:     if (i === undefined)
+bundled:642:       return;
+bundled:643:     if (i.source === "header") {
+bundled:644:       const a = this.#i.render(t);
+bundled:645:       i.rows = a.length > 0 ? [...a, ""] : [];
+bundled:646:       return;
+bundled:647:     }
+bundled:648:     const n = i.source.transcript.rerenderOfferedBatch(t);
+bundled:649:     if (i.source.header === "none") {
+bundled:650:       if (n !== undefined)
+bundled:651:         i.rows = n.rows;
+bundled:652:       return;
+bundled:653:     }
+bundled:654:     const r = this.#i.render(t);
+bundled:655:     const s = r.length > 0 ? [...r, ""] : this.#D(t, 0);
+bundled:656:     i.source.headerRows = s;
+bundled:657:     i.rows = [...s, ...n?.rows ?? []];
+bundled:658:   }
+bundled:659:   #S(t, i) {
+bundled:660:     const n = [];
+bundled:661:     for (const r of t)
+bundled:662:       n.push(...r.render(i));
+bundled:663:     return n;
+bundled:664:   }
+bundled:665:   #ge(t, i) {
+bundled:666:     const n = [...this.#l, this.#a];
+bundled:667:     const r = n.findIndex((u) => u instanceof Gp);
+bundled:668:     if (r < 0)
+bundled:669:       return this.#S(n, t);
+bundled:670:     const s = n[r];
+bundled:671:     const a = this.#S(n.slice(r + 1), t);
+bundled:672:     const o = s.renderTail(t, Math.max(0, i - a.length));
+bundled:673:     const d = o.length + a.length >= i ? [] : this.#S(n.slice(0, r), t);
+bundled:674:     return [...d, ...o, ...a];
+bundled:675:   }
+bundled:676:   #D(t, i) {
+bundled:677:     const n = this.#m;
+bundled:678:     if (!n)
+bundled:679:       return [];
+bundled:680:     if (di())
+bundled:681:       return n.slice(i);
+bundled:682:     const r = [];
+bundled:683:     for (let s = i;s < n.length; s++) {
+bundled:684:       r.push(...Z1(n[s], t));
+bundled:685:     }
+bundled:686:     return r;
+bundled:687:   }
+bundled:688:   get editor() {
+bundled:689:     return this.#s;
+bundled:690:   }
+bundled:691:   get welcome() {
+bundled:692:     return this.#r;
+bundled:693:   }
+bundled:694:   get started() {
+bundled:695:     return this.#o && !this.#n;
+bundled:696:   }
+bundled:697:   start(t = {}) {
+bundled:698:     if (this.#o || this.#n)
+bundled:699:       return;
+bundled:700:     this.#o = true;
+bundled:701:     this.#s.nativeTypeahead = t.deferInput === true;
+bundled:702:     this.ui.start({ clearScrollback: t.clearScrollback === true, deferInput: t.deferInput === true });
+bundled:703:     if (t.playWelcomeIntro !== false)
+bundled:704:       this.playWelcomeIntro();
+bundled:705:     if (t.deferInput === true)
+bundled:706:       this.ui.renderNow({ clearScrollback: t.clearScrollback === true });
+bundled:707:   }
+bundled:708:   enableInput() {
+bundled:709:     if (this.#n)
+bundled:710:       return;
+bundled:711:     this.ui.enableInput();
+bundled:712:   }
+bundled:713:   setPreferences(t) {
+bundled:714:     if (this.#n)
+bundled:715:       return;
+bundled:716:     const i = this.#e.quiet;
+bundled:717:     this.#e = { ...this.#e, ...t };
+bundled:718:     this.editor.setTheme(cs());
+bundled:719:     try {
+bundled:720:       this.editor.setBorderStyle(this.#e.composerShape);
+bundled:721:     } catch {}
+bundled:722:     this.ui.setShowHardwareCursor(this.#e.showHardwareCursor);
+bundled:723:     this.editor.setUseTerminalCursor(this.ui.getShowHardwareCursor());
+bundled:724:     this.ui.setMaxInlineImages(this.#e.maxInlineImages);
+bundled:725:     if (t.resizeScrollback !== undefined)
+bundled:726:       this.ui.setResizeScrollback(t.resizeScrollback);
+bundled:727:     this.editor.setImeSafeCursorLayout(this.#e.imeSafeCursor);
+bundled:728:     this.editor.setAutocompleteMaxVisible(this.#e.autocompleteMaxVisible);
+bundled:729:     this.editor.setSpellingFeatures({
+bundled:730:       typoDetection: this.#e.spellingTypoDetection,
+bundled:731:       autocomplete: this.#e.spellingAutocomplete,
+bundled:732:       autocorrect: this.#e.spellingAutocorrect
+bundled:733:     });
+bundled:734:     this.#d?.attachToEditor(this.editor, ny(this.#e.composerShape));
+bundled:735:     if (this.#e.quiet) {
+bundled:736:       this.#r?.stopIntro();
+bundled:737:       this.#r = undefined;
+bundled:738:     } else {
+bundled:739:       this.#O();
+bundled:740:       this.#r?.invalidate();
+bundled:741:       if (i && this.#o)
+bundled:742:         this.playWelcomeIntro();
+bundled:743:     }
+bundled:744:     if (i !== this.#e.quiet)
+bundled:745:       this.#N();
+bundled:746:     this.ui.requestRender();
+bundled:747:   }
+bundled:748:   updateWelcome(t) {
+bundled:749:     if (this.#n)
+bundled:750:       return;
+bundled:751:     this.#oe(t);
+bundled:752:     if (this.#e.quiet)
+bundled:753:       return;
+bundled:754:     this.#O();
+bundled:755:     const i = this.#r;
+bundled:756:     if (!i)
+bundled:757:       return;
+bundled:758:     if (t.version !== undefined)
+bundled:759:       i.setVersion(this.#M);
+bundled:760:     this.ui.requestRender();
+bundled:761:   }
+bundled:762:   setRunActive(t) {
+bundled:763:     if (this.#B === t)
+bundled:764:       return;
+bundled:765:     this.#B = t;
+bundled:766:     this.ui.requestRender();
+bundled:767:   }
+bundled:768:   setHeaderExtras(t, i) {
+bundled:769:     if (this.#n)
+bundled:770:       return;
+bundled:771:     this.#$ = t;
+bundled:772:     this.#G = i;
+bundled:773:     this.#N();
+bundled:774:     this.ui.requestRender();
+bundled:775:   }
+bundled:776:   setEditor(t) {
+bundled:777:     this.ui.replaceHeldFocus(this.#s, t);
+bundled:778:     t.nativeTypeahead = this.#s.nativeTypeahead;
+bundled:779:     this.#s = t;
+bundled:780:   }
+bundled:781:   releaseHeldInput() {
+bundled:782:     if (this.#s.nativeTypeahead) {
+bundled:783:       this.#s.nativeTypeahead = false;
+bundled:784:       this.ui.requestRender();
+bundled:785:     }
+bundled:786:     this.ui.releaseHeldInput();
+bundled:787:   }
+bundled:788:   setStatusComponent(t) {
+bundled:789:     if (this.#d)
+bundled:790:       t.adoptGitStatus(this.#d);
+bundled:791:     this.#se();
+bundled:792:     this.#a.setComponent(t);
+bundled:793:     this.editor.setTopBorderProvider(undefined);
+bundled:794:     this.editor.composerFacts = t;
+bundled:795:   }
+bundled:796:   #se() {
+bundled:797:     this.#d?.dispose();
+bundled:798:     this.#d = undefined;
+bundled:799:   }
+bundled:800:   setRuntimeChildren(t, i = {}) {
+bundled:801:     if (this.#n)
+bundled:802:       return;
+bundled:803:     this.#u = undefined;
+bundled:804:     this.#P = false;
+bundled:805:     this.#b();
+bundled:806:     this.#K = i.nativeDock;
+bundled:807:     this.#H = i.nativeTail ?? [];
+bundled:808:     this.#X = new Set(i.transientChrome);
+bundled:809:     this.#Y = new Set(i.selfClearingChrome);
+bundled:810:     this.#C = undefined;
+bundled:811:     this.ui.removeChild(this.#a);
+bundled:812:     if (this.#c) {
+bundled:813:       for (const n of this.#l)
+bundled:814:         this.ui.removeChild(n);
+bundled:815:     } else {
+bundled:816:       this.ui.removeChild(this.#k);
+bundled:817:       this.ui.removeChild(this.editor);
+bundled:818:       this.#c = true;
+bundled:819:     }
+bundled:820:     this.#l = t;
+bundled:821:     for (const n of t)
+bundled:822:       this.ui.addChild(n);
+bundled:823:     this.ui.addChild(this.#a);
+bundled:824:     this.ui.requestRender();
+bundled:825:   }
+bundled:826:   playWelcomeIntro() {
+bundled:827:     this.#r?.playIntro(() => this.ui.requestComponentRender(this.#i));
+bundled:828:   }
+bundled:829:   transfer() {
+bundled:830:     if (!this.#o || this.#n || this.#q) {
+bundled:831:       throw new Error("Composer is not available for transfer");
+bundled:832:     }
+bundled:833:     this.#q = true;
+bundled:834:   }
+bundled:835:   stop() {
+bundled:836:     if (!this.#o || this.#n || this.#q)
+bundled:837:       return;
+bundled:838:     this.#r?.stopIntro();
+bundled:839:     this.#se();
+bundled:840:     this.ui.stop();
+bundled:841:     this.#n = true;
+bundled:842:   }
+bundled:843:   #oe(t) {
+bundled:844:     if (t.version !== undefined)
+bundled:845:       this.#M = t.version;
+bundled:846:   }
+bundled:847:   #O() {
+bundled:848:     this.#r ??= new yU(this.#M);
+bundled:849:   }
+bundled:850:   #N() {
+bundled:851:     this.#i.clear();
+bundled:852:     for (const t of this.#$)
+bundled:853:       this.#i.addChild(t);
+bundled:854:     if (this.#r) {
+bundled:855:       this.#i.addChild(new K(1));
+bundled:856:       this.#i.addChild(this.#r);
+bundled:857:       this.#i.addChild(new K(1));
+bundled:858:     }
+bundled:859:     for (const t of this.#G)
+bundled:860:       this.#i.addChild(t);
+bundled:861:   }
+bundled:862:   #ye() {
+bundled:863:     const t = this.#_();
+bundled:864:     if (t - this.#ne < N) {
+bundled:865:       this.#ae(130);
+bundled:866:       return;
+bundled:867:     }
+bundled:868:     this.editor.setText("");
+bundled:869:     this.#ne = t;
+bundled:870:   }
+bundled:871:   #ae(t) {
+bundled:872:     if (this.#n)
+bundled:873:       return;
+bundled:874:     this.#r?.stopIntro();
+bundled:875:     if (this.#o)
+bundled:876:       this.ui.stop();
+bundled:877:     this.#n = true;
+bundled:878:     this.#U(t);
+bundled:879:   }
+bundled:880: }
+bundled:881: export { dTe, uTe, yE };

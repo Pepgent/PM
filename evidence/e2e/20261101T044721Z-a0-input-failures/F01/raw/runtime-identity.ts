@@ -1,0 +1,13 @@
+import { appendFile, mkdtemp } from 'node:fs/promises';
+import { join } from 'node:path';
+const root=await mkdtemp('/tmp/soroi-a0-runtime-identity-');
+const name=`pepgent-a0-version-${crypto.randomUUID()}`,image='pepgent-registry.orb.local:5000/pepgent/omp-agent:latest',ledger='/Users/mouriya/Ext/work/orbstack/pepgent-e2e-pty.jsonl';
+const argv=['docker','run','--rm','--init','--network','none','--name',name,image,'omp','--version'];
+await appendFile(ledger,JSON.stringify({at:new Date().toISOString(),container:name,image,phase:'declared',purpose:'actual base CLI identity only; not A0',command:argv,evidence:root})+'\n');
+const child=Bun.spawn(argv,{stdin:'ignore',stdout:'pipe',stderr:'pipe',timeout:20000,killSignal:'SIGKILL'});
+const[code,stdout,stderr]=await Promise.all([child.exited,new Response(child.stdout).text(),new Response(child.stderr).text()]);
+const found=Bun.spawn(['docker','ps','-a','--filter',`name=^/${name}$`,'--format','{{.Names}}'],{stdin:'ignore',stdout:'pipe',stderr:'pipe'});const remaining=await new Response(found.stdout).text();const queryExit=await found.exited;
+const observation={argv,code,stdout,stderr,remaining,queryExit,fullA0:false};await Bun.write(join(root,'observation.json'),JSON.stringify(observation,null,2));
+if(remaining.trim()||queryExit)throw Error('Version-only container cleanup not confirmed');
+await appendFile(ledger,JSON.stringify({at:new Date().toISOString(),container:name,image,phase:'absent-confirmed',evidence:root})+'\n');
+console.log(JSON.stringify({root,...observation}));if(code)process.exitCode=code;

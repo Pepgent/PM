@@ -1,0 +1,6 @@
+[0m[2m[35m$[0m [2m[1mbun run pty/smoke.ts[0m
+{"scenario":"real-pty-input-output","result":{"code":0,"terminalStatus":0,"terminalClosed":true,"bytes":65},"evidence":"/tmp/soroi-pty-proof-R6SetD/local"}
+{"scenario":"bounded-missing-observation","observed":"Error: PTY observation deadline: will-not-arrive"}
+{"scenario":"process-exit-versus-pty-eof","result":{"code":7,"terminalStatus":0,"terminalClosed":true,"bytes":0}}
+{"scenario":"new-img01-empty-home-before-injection","fullA0":false,"image":"pepgent-registry.orb.local:5000/pepgent/omp-agent:latest","evidence":"/tmp/soroi-pty-proof-R6SetD/image-gate","ledger":"/Users/mouriya/Ext/work/orbstack/pepgent-e2e-pty.jsonl"}
+{"scenario":"reject-before-credential-injection","fullA0":false,"result":{"kind":"fail","failed":["a0-driver"]},"cleanup":"confirmed","evidence":"/tmp/soroi-pty-proof-R6SetD/staging-rejection"}

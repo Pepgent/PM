@@ -1,0 +1,1 @@
+{"root":"/tmp/soroi-a0-runtime-identity-kbfQf0","argv":["docker","run","--rm","--init","--network","none","--name","pepgent-a0-version-6c7af31a-99a5-4922-8066-12a2993192e1","pepgent-registry.orb.local:5000/pepgent/omp-agent:latest","omp","--version"],"code":0,"stdout":"omp/18.14.2\n","stderr":"","remaining":"","queryExit":0,"fullA0":false}

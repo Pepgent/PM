@@ -1,0 +1,59 @@
+{
+  "originalFiles": 61,
+  "originalBytes": 1059965,
+  "publishedRawFiles": 61,
+  "publishedRawBytes": 1059965,
+  "metadataFiles": 4,
+  "metadataBytes": 54229,
+  "findings": [],
+  "createdAt": "2026-11-01T04:50:36.541166+00:00",
+  "maxIndividualFileBytes": 33554432,
+  "categories": [
+    "github-token",
+    "aws-access-id",
+    "private-key-header",
+    "bearer-token",
+    "jwt",
+    "credential-url",
+    "provider-key",
+    "long-credential-literal"
+  ],
+  "patterns": [
+    {
+      "category": "github-token",
+      "regex": "\\b(?:gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,})\\b"
+    },
+    {
+      "category": "aws-access-id",
+      "regex": "\\b(?:AKIA|ASIA)[A-Z0-9]{16}\\b"
+    },
+    {
+      "category": "private-key-header",
+      "regex": "-----BEGIN (?:RSA |EC |DSA |OPENSSH |ENCRYPTED )?PRIVATE KEY-----"
+    },
+    {
+      "category": "bearer-token",
+      "regex": "(?i)\\bbearer[ \\t]+[A-Za-z0-9_~+./=-]{24,}"
+    },
+    {
+      "category": "jwt",
+      "regex": "\\beyJ[A-Za-z0-9_-]{12,}\\.[A-Za-z0-9_-]{12,}\\.[A-Za-z0-9_-]{12,}\\b"
+    },
+    {
+      "category": "credential-url",
+      "regex": "[a-zA-Z][a-zA-Z0-9+.-]*://[^\\s/:<>\\\"']{1,128}:[^\\s/@<>\\\"']{8,128}@"
+    },
+    {
+      "category": "provider-key",
+      "regex": "\\bsk-(?:ant-[A-Za-z0-9_-]{20,}|[A-Za-z0-9_-]{24,})\\b"
+    },
+    {
+      "category": "long-credential-literal",
+      "regex": "(?i)[\\\"']?(?:api[_-]?key|access[_-]?token|auth[_-]?token|gateway[_-]?token|password|client[_-]?secret|secret[_-]?key)[\\\"']?[ \\t]*[:=][ \\t]*[\\\"'][A-Za-z0-9_+./=-]{24,}[\\\"']"
+    }
+  ],
+  "interpretation": "Bounded byte-pattern scan only, not a guarantee of no secrets. No source referenced by config was followed. No credential stores, SOPS, keychain, model config or token values inspected.",
+  "findingValuesRecorded": false,
+  "scanReportSelfScan": "Metadata totals include the in-memory report snapshot before its self-result counters and zeroFindings were added; they are not the final report byte size.",
+  "zeroFindings": true
+}

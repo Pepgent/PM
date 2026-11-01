@@ -1,0 +1,1170 @@
+bundled:1: // packages/tui/src/prompt/custom-editor.ts
+bundled:2: import * as G from "url";
+bundled:1: // packages/tui/src/prompt/custom-editor.ts
+bundled:2: var ze = /^\s*(?:!!?|\$\$?)[ \t]?/;
+bundled:3: var Xe = "What are we cooking?";
+bundled:4: var O = "focus:";
+bundled:5: var je = { running: false };
+bundled:6: function U(i) {
+bundled:7:   return i === "recording" || i === "transcribing";
+bundled:8: }
+bundled:9: var Qe = {
+bundled:10:   off: 0,
+bundled:11:   minimal: 1,
+bundled:12:   low: 1,
+bundled:13:   medium: 2,
+bundled:14:   high: 3,
+bundled:15:   xhigh: 4,
+bundled:16:   max: 4
+bundled:17: };
+bundled:18: var he = {
+bundled:19:   "app.interrupt": ["escape"],
+bundled:20:   "app.clear": ["ctrl+c"],
+bundled:21:   "app.exit": ["ctrl+d"],
+bundled:22:   "app.suspend": ["ctrl+z"],
+bundled:23:   "app.display.reset": ["alt+l"],
+bundled:24:   "app.thinking.cycle": ["shift+tab"],
+bundled:25:   "app.model.cycleForward": ["ctrl+p"],
+bundled:26:   "app.model.cycleBackward": ["shift+ctrl+p"],
+bundled:27:   "app.model.select": ["alt+m"],
+bundled:28:   "app.model.selectTemporary": ["alt+p"],
+bundled:29:   "app.message.dequeue": ["alt+up", "shift+up"],
+bundled:30:   "app.retry": ["f5", "alt+r"],
+bundled:31:   "app.clipboard.pasteImage": ["ctrl+v"],
+bundled:32:   "app.clipboard.pasteTextRaw": ["ctrl+shift+v", "alt+shift+v"],
+bundled:33:   "app.clipboard.copyPrompt": ["alt+shift+c"]
+bundled:34: };
+bundled:35: function z(i) {
+bundled:36:   const r = new Set;
+bundled:37:   for (const a of i) {
+bundled:38:     xA(r, a);
+bundled:39:   }
+bundled:40:   return r;
+bundled:41: }
+bundled:42: function pe(i) {
+bundled:43:   const r = new Set;
+bundled:44:   for (const a of i.values()) {
+bundled:45:     for (const d of a)
+bundled:46:       r.add(d);
+bundled:47:   }
+bundled:48:   return r;
+bundled:49: }
+bundled:50: var Ye = /\.(?:png|jpe?g|gif|webp)$/i;
+bundled:51: var Ze = /\\([\\\s'"()[\]{}&;<>|?*!$`])/g;
+bundled:52: var Je = /^[a-z][a-z0-9+.-]*:/i;
+bundled:53: var et = /^file:\/\//i;
+bundled:54: var fe = String.raw`(?:\/|~\/|file:\/\/|\\\\|[A-Za-z]:[\\/])`;
+bundled:55: var me = new RegExp(`^${fe}`);
+bundled:56: var tt = new RegExp(String.raw`(?<!\\)\s(?:${fe}|\.\.?[\\/])`);
+bundled:57: function nt(i) {
+bundled:58:   return i === undefined || i === " " || i === "\t" || i === "\r" || i === `
+bundled:59: `;
+bundled:60: }
+bundled:61: function ge(i) {
+bundled:62:   const r = i.trim();
+bundled:63:   const a = r[0];
+bundled:64:   const d = r[r.length - 1];
+bundled:65:   const l = r.length > 1 && (a === '"' || a === "'") && d === a ? r.slice(1, -1) : r;
+bundled:66:   if (et.test(l)) {
+bundled:67:     try {
+bundled:68:       return G.fileURLToPath(l);
+bundled:69:     } catch {
+bundled:70:       try {
+bundled:71:         return G.fileURLToPath(l, { windows: false });
+bundled:72:       } catch {}
+bundled:73:     }
+bundled:74:   }
+bundled:75:   return (l.startsWith("\\~/") ? l.slice(1) : l).replace(Ze, "$1");
+bundled:76: }
+bundled:77: function be(i) {
+bundled:78:   if (me.test(i) || /^\.\.?[\\/]/.test(i))
+bundled:79:     return true;
+bundled:80:   if (Je.test(i))
+bundled:81:     return false;
+bundled:82:   return i.includes("\\");
+bundled:83: }
+bundled:84: function q(i) {
+bundled:85:   return Ye.test(i) || Ac(i);
+bundled:86: }
+bundled:87: function it(i) {
+bundled:88:   const r = [];
+bundled:89:   let a = "";
+bundled:90:   let d;
+bundled:91:   let l = false;
+bundled:92:   for (let c = 0;c < i.length; c++) {
+bundled:93:     const u = i[c];
+bundled:94:     if (l) {
+bundled:95:       a += u;
+bundled:96:       l = false;
+bundled:97:       continue;
+bundled:98:     }
+bundled:99:     if (u === "\\") {
+bundled:100:       a += u;
+bundled:101:       l = true;
+bundled:102:       continue;
+bundled:103:     }
+bundled:104:     if (d) {
+bundled:105:       a += u;
+bundled:106:       if (u === d)
+bundled:107:         d = undefined;
+bundled:108:       continue;
+bundled:109:     }
+bundled:110:     if (u === '"' || u === "'") {
+bundled:111:       a += u;
+bundled:112:       d = u;
+bundled:113:       continue;
+bundled:114:     }
+bundled:115:     if (nt(u)) {
+bundled:116:       if (a) {
+bundled:117:         r.push(a);
+bundled:118:         a = "";
+bundled:119:       }
+bundled:120:       continue;
+bundled:121:     }
+bundled:122:     a += u;
+bundled:123:   }
+bundled:124:   if (l || d)
+bundled:125:     return;
+bundled:126:   if (a)
+bundled:127:     r.push(a);
+bundled:128:   return r.length > 0 ? r : undefined;
+bundled:129: }
+bundled:130: function ye(i) {
+bundled:131:   const r = i.trim();
+bundled:132:   if (!r)
+bundled:133:     return;
+bundled:134:   const a = it(r);
+bundled:135:   if (!a)
+bundled:136:     return;
+bundled:137:   const d = [];
+bundled:138:   for (const l of a) {
+bundled:139:     const c = ge(l);
+bundled:140:     if (!c || !be(c))
+bundled:141:       return;
+bundled:142:     d.push(c);
+bundled:143:   }
+bundled:144:   return d;
+bundled:145: }
+bundled:146: function Uye(i) {
+bundled:147:   return ye(i);
+bundled:148: }
+bundled:149: function xe(i) {
+bundled:150:   const r = i.trim();
+bundled:151:   if (!r || /[\r\n]/.test(r) || !me.test(r))
+bundled:152:     return;
+bundled:153:   if (tt.test(r))
+bundled:154:     return;
+bundled:155:   const a = ge(r);
+bundled:156:   return a && be(a) && q(a) ? a : undefined;
+bundled:157: }
+bundled:158: function LT(i) {
+bundled:159:   const r = Uye(i);
+bundled:160:   if (r !== undefined)
+bundled:161:     return r.every(q) ? r : undefined;
+bundled:162:   const a = xe(i);
+bundled:163:   return a ? [a] : undefined;
+bundled:164: }
+bundled:165: function ve(i) {
+bundled:166:   if (!i.startsWith(nx))
+bundled:167:     return;
+bundled:168:   const r = i.indexOf(Jb, nx.length);
+bundled:169:   if (r === -1 || r + Jb.length !== i.length)
+bundled:170:     return;
+bundled:171:   return i.slice(nx.length, r);
+bundled:172: }
+bundled:173: function Put(i) {
+bundled:174:   const r = ve(i);
+bundled:175:   return r === undefined ? undefined : ye(r);
+bundled:176: }
+bundled:177: function BGe(i) {
+bundled:178:   const r = ve(i);
+bundled:179:   return r === undefined ? undefined : LT(r);
+bundled:180: }
+bundled:181: function Nut(i) {
+bundled:182:   const r = BGe(i);
+bundled:183:   return r?.length === 1 ? r[0] : undefined;
+bundled:184: }
+bundled:185: function h6(i) {
+bundled:186:   const r = Uye(i);
+bundled:187:   if (r?.length === 1 && q(r[0]))
+bundled:188:     return r[0];
+bundled:189:   if (r !== undefined)
+bundled:190:     return;
+bundled:191:   return xe(i);
+bundled:192: }
+bundled:193: function rt(i) {
+bundled:194:   for (const r of i) {
+bundled:195:     if (st(r))
+bundled:196:       return r;
+bundled:197:   }
+bundled:198:   return i[0];
+bundled:199: }
+bundled:200: function st(i) {
+bundled:201:   if (typeof i !== "object" || i === null)
+bundled:202:     return false;
+bundled:203:   const r = i;
+bundled:204:   return typeof r.borderColor === "function" && typeof r.symbols === "object" && r.symbols !== null;
+bundled:205: }
+bundled:206: class Bv extends vl {
+bundled:207:   #e = new Rut;
+bundled:208:   #t = new Out;
+bundled:209:   #b = new y6;
+bundled:210:   imageLinks;
+bundled:211:   pendingImages = [];
+bundled:212:   pendingImageLinks = [];
+bundled:213:   pendingTexts = [];
+bundled:214:   #n = 0;
+bundled:215:   #r;
+bundled:216:   draftImageLinkMaterializer;
+bundled:217:   tui;
+bundled:218:   constructor(...i) {
+bundled:219:     super(rt(i));
+bundled:220:     const r = () => {
+bundled:221:       this.invalidate();
+bundled:222:       this.#x?.();
+bundled:223:     };
+bundled:224:     this.#e.onUpdate = r;
+bundled:225:     this.#b.onUpdate = r;
+bundled:226:     this.onTextAssistApplied = r;
+bundled:227:     this.setTextAssistProvider({
+bundled:228:       getWordCompletion: (a, d, l) => this.#b.getWordCompletion(a, d, l),
+bundled:229:       wordCompletionFeedback: (a, d, l, c, u) => this.#b.wordCompletionFeedback(a, d, l, c, u),
+bundled:230:       tryAutocorrect: (a, d, l) => this.#e.tryAutocorrect(a, d, l),
+bundled:231:       getWordReplacements: (a, d, l) => this.#e.getWordReplacements(a, d, l)
+bundled:232:     });
+bundled:233:     if (i[0] instanceof Ur)
+bundled:234:       this.tui = i[0];
+bundled:235:   }
+bundled:236:   setSpellingFeatures(i) {
+bundled:237:     this.#e.setFeatures({ typoDetection: i.typoDetection, autocorrect: i.autocorrect });
+bundled:238:     this.#b.setMethod(i.autocomplete);
+bundled:239:   }
+bundled:240:   clearDraft(i) {
+bundled:241:     if (i !== undefined)
+bundled:242:       this.addToHistory(i);
+bundled:243:     this.setText("");
+bundled:244:     this.clearPasteState();
+bundled:245:     this.imageLinks = undefined;
+bundled:246:     this.pendingImages = [];
+bundled:247:     this.pendingImageLinks = [];
+bundled:248:     this.pendingTexts = [];
+bundled:249:     this.#n = 0;
+bundled:250:   }
+bundled:251:   clearDraftForRecall() {
+bundled:252:     if (!this.getText().trim()) {
+bundled:253:       this.clearDraft();
+bundled:254:       return;
+bundled:255:     }
+bundled:256:     const i = [...this.pendingImages];
+bundled:257:     const r = [...this.pendingImageLinks];
+bundled:258:     const a = this.imageLinks;
+bundled:259:     const d = [...this.pendingTexts];
+bundled:260:     const l = this.#n;
+bundled:261:     this.rememberDraft(() => {
+bundled:262:       this.pendingImages = [...i];
+bundled:263:       this.pendingImageLinks = [...r];
+bundled:264:       this.imageLinks = a;
+bundled:265:       this.pendingTexts = [...d];
+bundled:266:       this.#n = l;
+bundled:267:       if (this.pendingImages.length > 0 && this.pendingImageLinks.some((c) => c === undefined)) {
+bundled:268:         this.#u();
+bundled:269:       }
+bundled:270:     });
+bundled:271:     this.clearDraft();
+bundled:272:   }
+bundled:273:   restoreHistoryState(i) {
+bundled:274:     this.imageLinks = undefined;
+bundled:275:     this.pendingImages = [];
+bundled:276:     this.pendingImageLinks = [];
+bundled:277:     this.pendingTexts = [];
+bundled:278:     this.#n = 0;
+bundled:279:     super.restoreHistoryState(i);
+bundled:280:   }
+bundled:281:   setDraft(i, r) {
+bundled:282:     this.clearPasteState();
+bundled:283:     this.pendingTexts = [];
+bundled:284:     this.#n = 0;
+bundled:285:     this.imageLinks = undefined;
+bundled:286:     this.pendingImages = r ? [...r] : [];
+bundled:287:     this.pendingImageLinks = r ? r.map(() => {
+bundled:288:       return;
+bundled:289:     }) : [];
+bundled:290:     this.setCollapsedText(i);
+bundled:291:     this.#u();
+bundled:292:   }
+bundled:293:   setCollapsedText(i) {
+bundled:294:     const r = (a, d) => this.registerAtom(a, d);
+bundled:295:     this.setText(kIt(dne(qye(SIt(i, this.modelMentionSelector), this.pendingImages.length, r), (a) => this.skillFilePath(a) !== undefined, r), (a) => this.#c(a), r));
+bundled:296:     this.#f();
+bundled:297:   }
+bundled:298:   skillFilePath = () => {
+bundled:299:     return;
+bundled:300:   };
+bundled:301:   modelMentionLabel = () => {
+bundled:302:     return;
+bundled:303:   };
+bundled:304:   modelMentionSelector = () => {
+bundled:305:     return;
+bundled:306:   };
+bundled:307:   #c(i) {
+bundled:308:     const r = this.modelMentionLabel(i);
+bundled:309:     if (r === undefined)
+bundled:310:       return;
+bundled:311:     const a = cne(i);
+bundled:312:     const d = this.atoms.get(r);
+bundled:313:     return d !== undefined && d !== a ? undefined : r;
+bundled:314:   }
+bundled:315:   fileHyperlink = (i, r) => r;
+bundled:316:   #a() {
+bundled:317:     const i = this.getLines();
+bundled:318:     if (!i.some((r) => r.includes("/skill:")) || !I0(this.getText()))
+bundled:319:       return;
+bundled:320:     for (let r = 0;r < i.length; r++) {
+bundled:321:       let a = i[r];
+bundled:322:       if (!a.includes("/skill:"))
+bundled:323:         continue;
+bundled:324:       for (;; ) {
+bundled:325:         Ob.lastIndex = 0;
+bundled:326:         let d = false;
+bundled:327:         for (let l = Ob.exec(a);l !== null; l = Ob.exec(a)) {
+bundled:328:           const c = l[2];
+bundled:329:           const u = l.index + l[1].length;
+bundled:330:           const p = l.index + l[0].length;
+bundled:331:           if (p === a.length && r === i.length - 1)
+bundled:332:             break;
+bundled:333:           if (this.skillFilePath(c) === undefined)
+bundled:334:             continue;
+bundled:335:           this.collapseToAtom(r, u, p, c6(c), u6(c));
+bundled:336:           d = true;
+bundled:337:           break;
+bundled:338:         }
+bundled:339:         if (!d)
+bundled:340:           break;
+bundled:341:         a = this.getLines()[r];
+bundled:342:       }
+bundled:343:     }
+bundled:344:   }
+bundled:345:   #d() {
+bundled:346:     const i = this.getLines();
+bundled:347:     if (!i.some((a) => a.includes("^")) || !DGe(this.getText()))
+bundled:348:       return;
+bundled:349:     let r = false;
+bundled:350:     for (let a = 0;a < i.length; a++) {
+bundled:351:       let d = i[a];
+bundled:352:       if (!d.includes("^"))
+bundled:353:         continue;
+bundled:354:       for (;; ) {
+bundled:355:         M0.lastIndex = 0;
+bundled:356:         let l = false;
+bundled:357:         for (let c = M0.exec(d);c !== null; c = M0.exec(d)) {
+bundled:358:           const u = c[2];
+bundled:359:           const p = c.index + c[1].length;
+bundled:360:           const m = c.index + c[0].length;
+bundled:361:           if (m === d.length && a === i.length - 1)
+bundled:362:             break;
+bundled:363:           const f = this.#c(u);
+bundled:364:           if (f === undefined)
+bundled:365:             continue;
+bundled:366:           this.collapseToAtom(a, p, m, f, cne(u));
+bundled:367:           l = true;
+bundled:368:           r = true;
+bundled:369:           break;
+bundled:370:         }
+bundled:371:         if (!l)
+bundled:372:           break;
+bundled:373:         d = this.getLines()[a];
+bundled:374:       }
+bundled:375:     }
+bundled:376:     if (r)
+bundled:377:       this.#f();
+bundled:378:   }
+bundled:379:   insertTextAttachment(i, r = i) {
+bundled:380:     this.#n++;
+bundled:381:     const a = this.#n;
+bundled:382:     const d = une("paste", a);
+bundled:383:     this.pendingTexts.push({
+bundled:384:       n: a,
+bundled:385:       label: d,
+bundled:386:       content: i,
+bundled:387:       lineCount: i.split(`
+bundled:388: `).length,
+bundled:389:       charCount: i.length
+bundled:390:     });
+bundled:391:     this.insertAtom(d, r);
+bundled:392:   }
+bundled:393:   composerChips() {
+bundled:394:     const i = this.#r;
+bundled:395:     if (i?.textRevision === this.textRevision && i.images === this.pendingImages && i.imageCount === this.pendingImages.length && i.imageLinks === this.pendingImageLinks && i.imageLinkCount === this.pendingImageLinks.length && i.texts === this.pendingTexts && i.textCount === this.pendingTexts.length) {
+bundled:396:       return i.chips;
+bundled:397:     }
+bundled:398:     const r = new Map;
+bundled:399:     if (this.pendingImages.length > 0) {
+bundled:400:       for (const [l, c] of this.atoms) {
+bundled:401:         const u = c.startsWith("[Image #") ? "image" : c.startsWith("[Video #") ? "video" : undefined;
+bundled:402:         if (u !== undefined && c.match(f6)?.[0] === c) {
+bundled:403:           r.set(l, u);
+bundled:404:         }
+bundled:405:       }
+bundled:406:     }
+bundled:407:     for (const l of this.pendingTexts) {
+bundled:408:       if (!r.has(l.label))
+bundled:409:         r.set(l.label, "paste");
+bundled:410:     }
+bundled:411:     const a = AIt(this.getText(), r);
+bundled:412:     const d = [];
+bundled:413:     for (let l = 0;l < this.pendingImages.length; l++) {
+bundled:414:       const c = l + 1;
+bundled:415:       const u = a.video.has(c);
+bundled:416:       const p = a.image.has(c);
+bundled:417:       if (!u && !p)
+bundled:418:         continue;
+bundled:419:       d.push({
+bundled:420:         kind: u ? "video" : "image",
+bundled:421:         n: c,
+bundled:422:         image: this.pendingImages[l],
+bundled:423:         link: this.pendingImageLinks[l]
+bundled:424:       });
+bundled:425:     }
+bundled:426:     for (const l of this.pendingTexts) {
+bundled:427:       if (!a.paste.has(l.n))
+bundled:428:         continue;
+bundled:429:       d.push({ kind: "paste", n: l.n, text: l });
+bundled:430:     }
+bundled:431:     this.#r = {
+bundled:432:       textRevision: this.textRevision,
+bundled:433:       images: this.pendingImages,
+bundled:434:       imageCount: this.pendingImages.length,
+bundled:435:       imageLinks: this.pendingImageLinks,
+bundled:436:       imageLinkCount: this.pendingImageLinks.length,
+bundled:437:       texts: this.pendingTexts,
+bundled:438:       textCount: this.pendingTexts.length,
+bundled:439:       chips: d
+bundled:440:     };
+bundled:441:     return d;
+bundled:442:   }
+bundled:443:   async#u() {
+bundled:444:     const i = this.draftImageLinkMaterializer;
+bundled:445:     const r = this.pendingImages;
+bundled:446:     if (!i || r.length === 0)
+bundled:447:       return;
+bundled:448:     const a = await i(r);
+bundled:449:     if (!a || this.pendingImages !== r)
+bundled:450:       return;
+bundled:451:     this.pendingImageLinks = a;
+bundled:452:     this.imageLinks = this.pendingImageLinks;
+bundled:453:     this.#x?.();
+bundled:454:   }
+bundled:455:   atomicTokenPattern = N$;
+bundled:456:   #s = -1;
+bundled:457:   #p;
+bundled:458:   #f() {
+bundled:459:     if (this.#s === this.atomsRevision && this.#p === this.atomicTokenPattern) {
+bundled:460:       return;
+bundled:461:     }
+bundled:462:     const i = [];
+bundled:463:     for (const [a, d] of this.atoms)
+bundled:464:       if (d.startsWith("^"))
+bundled:465:         i.push(a);
+bundled:466:     const r = $ye(i);
+bundled:467:     if (r.source !== this.atomicTokenPattern.source)
+bundled:468:       this.atomicTokenPattern = r;
+bundled:469:     this.#s = this.atomsRevision;
+bundled:470:     this.#p = this.atomicTokenPattern;
+bundled:471:   }
+bundled:472:   static SHIMMER_FRAME_MS = 70;
+bundled:473:   static SHIMMER_PERIOD_MS = 1800;
+bundled:474:   #l;
+bundled:475:   #x;
+bundled:476:   #R = -1;
+bundled:477:   #w = "";
+bundled:478:   #y = [""];
+bundled:479:   #S = false;
+bundled:480:   #v = false;
+bundled:481:   decorateText = (i, r) => {
+bundled:482:     this.#f();
+bundled:483:     if (this.#R !== this.textRevision) {
+bundled:484:       this.#R = this.textRevision;
+bundled:485:       const f = this.getText();
+bundled:486:       if (this.#w !== f) {
+bundled:487:         this.#w = f;
+bundled:488:         this.#y = this.getLines();
+bundled:489:         const h = pne(f);
+bundled:490:         this.#S = h !== undefined;
+bundled:491:         this.#v = h !== undefined && Iut(h);
+bundled:492:       }
+bundled:493:     }
+bundled:494:     const a = this.#w;
+bundled:495:     const d = this.getCursor();
+bundled:496:     this.#t.update(this.textRevision, this.#y, d.line, d.col, this.focused);
+bundled:497:     const l = this.#t.word;
+bundled:498:     const c = this.focused && this.#_() && Hut(a);
+bundled:499:     const u = c ? Date.now() % Bv.SHIMMER_PERIOD_MS / Bv.SHIMMER_PERIOD_MS : 0;
+bundled:500:     if (c)
+bundled:501:       this.#A();
+bundled:502:     let p = 0;
+bundled:503:     const m = (f) => {
+bundled:504:       const h = i.indexOf(f, p);
+bundled:505:       if (h === -1)
+bundled:506:         return p;
+bundled:507:       p = h + f.length;
+bundled:508:       return h;
+bundled:509:     };
+bundled:510:     return m6(i, {
+bundled:511:       renderText: (f) => {
+bundled:512:         const h = m(f);
+bundled:513:         const g = this.#e.decorateTypos(f, {
+bundled:514:           editorText: a,
+bundled:515:           lines: this.#y,
+bundled:516:           line: r.line,
+bundled:517:           startCol: r.startCol + h,
+bundled:518:           typing: l
+bundled:519:         }, (y) => bne(y, undefined, u));
+bundled:520:         if (this.#S && (f.startsWith("->") || f.startsWith("=>"))) {
+bundled:521:           const y = typeof e === "undefined" ? "\u27A4" : e.nav.selected;
+bundled:522:           return `${Ot("dim", `Queueing ${y}`)}${g.slice(2)}`;
+bundled:523:         }
+bundled:524:         if (this.#v) {
+bundled:525:           const y = FGe.exec(f);
+bundled:526:           if (y) {
+bundled:527:             const x = y[1] ?? "";
+bundled:528:             const k = y[0].length;
+bundled:529:             return `${x}${Ot("accent", f.slice(x.length, k))}${g.slice(k)}`;
+bundled:530:           }
+bundled:531:         }
+bundled:532:         return g;
+bundled:533:       },
+bundled:534:       renderSkill: (f, h) => {
+bundled:535:         m(f);
+bundled:536:         const g = p6(f);
+bundled:537:         const y = this.skillFilePath(h);
+bundled:538:         return y === undefined ? g : this.fileHyperlink(y, g);
+bundled:539:       },
+bundled:540:       renderMention: (f) => {
+bundled:541:         m(f);
+bundled:542:         return Wye(f);
+bundled:543:       },
+bundled:544:       renderReference: (f, h, g, y) => {
+bundled:545:         m(f);
+bundled:546:         if (y === "chip") {
+bundled:547:           const x = `${P$(h, g)}\x1B[1m${f}\x1B[22m\x1B[39m`;
+bundled:548:           return h === "image" || h === "video" ? this.imageReferenceHyperlink(f, g, this.imageLinks, () => x) : x;
+bundled:549:         }
+bundled:550:         return h === "image" || h === "video" ? this.imageReferenceHyperlink(f, g, this.imageLinks, (x) => Ot("accent", x, `\x1B[1m\x1B[4m${x}\x1B[24m\x1B[22m`)) : Ot("accent", f, `\x1B[1m${f}\x1B[22m`);
+bundled:551:       }
+bundled:552:     }, this.atomicTokenPattern);
+bundled:553:   };
+bundled:554:   describe(i) {
+bundled:555:     const r = this.getCursor();
+bundled:556:     if (this.#t.update(this.textRevision, this.getLines(), r.line, r.col, this.focused)) {
+bundled:557:       this.invalidate();
+bundled:558:     }
+bundled:559:     return super.describe(i);
+bundled:560:   }
+bundled:561:   describeDecorations = (i) => {
+bundled:562:     const r = i.join(`
+bundled:563: `);
+bundled:564:     if (this.composerState().shell) {
+bundled:565:       const h = ze.exec(r)?.[0].length ?? 0;
+bundled:566:       return h > 0 ? [{ from: 0, to: h, s: "hide" }] : [];
+bundled:567:     }
+bundled:568:     this.#f();
+bundled:569:     const a = [];
+bundled:570:     let d = 0;
+bundled:571:     const l = (h, g) => {
+bundled:572:       a.push({ from: d, to: d + h, s: g });
+bundled:573:       d += h;
+bundled:574:       return "";
+bundled:575:     };
+bundled:576:     m6(r, {
+bundled:577:       renderText: (h) => {
+bundled:578:         d += h.length;
+bundled:579:         return "";
+bundled:580:       },
+bundled:581:       renderSkill: (h) => l(h.length, "customMessageLabel strong"),
+bundled:582:       renderMention: (h) => l(h.length, "statusLineModel strong"),
+bundled:583:       renderReference: (h) => l(h.length, "accent strong")
+bundled:584:     }, this.atomicTokenPattern);
+bundled:585:     const c = this.#_() ? "shimmer" : undefined;
+bundled:586:     for (const h of zut(r))
+bundled:587:       a.push({ ...h, s: "accent", fx: c });
+bundled:588:     const u = pne(r);
+bundled:589:     const p = u !== undefined && Iut(u);
+bundled:590:     const m = this.#t.word;
+bundled:591:     let f = 0;
+bundled:592:     for (let h = 0;h < i.length; h++) {
+bundled:593:       const g = i[h] ?? "";
+bundled:594:       if (u !== undefined && (g.startsWith("->") || g.startsWith("=>"))) {
+bundled:595:         a.push({ from: f, to: f + 2, s: "dim" });
+bundled:596:       }
+bundled:597:       if (p) {
+bundled:598:         const x = FGe.exec(g);
+bundled:599:         if (x) {
+bundled:600:           const k = x[1]?.length ?? 0;
+bundled:601:           a.push({ from: f + k, to: f + x[0].length, s: "accent" });
+bundled:602:         }
+bundled:603:       }
+bundled:604:       const y = { editorText: r, lines: i, line: h, startCol: 0, typing: m };
+bundled:605:       for (const x of this.#e.typoRanges(g, y)) {
+bundled:606:         a.push({ from: f + x.start, to: f + x.start + x.length, s: "typo" });
+bundled:607:       }
+bundled:608:       f += g.length + 1;
+bundled:609:     }
+bundled:610:     return a.sort((h, g) => h.from - g.from);
+bundled:611:   };
+bundled:612:   magicKeywordsEnabledOverride;
+bundled:613:   magicKeywordsEnabled = () => true;
+bundled:614:   imageReferenceHyperlink = (i, r, a, d) => d(i);
+bundled:615:   #_() {
+bundled:616:     return this.magicKeywordsEnabledOverride ?? this.magicKeywordsEnabled();
+bundled:617:   }
+bundled:618:   setShimmerRepaintHandler(i) {
+bundled:619:     this.#x = i;
+bundled:620:     if (!i && this.#l) {
+bundled:621:       clearTimeout(this.#l);
+bundled:622:       this.#l = undefined;
+bundled:623:     }
+bundled:624:   }
+bundled:625:   #A() {
+bundled:626:     if (this.#l || !this.#x || We())
+bundled:627:       return;
+bundled:628:     this.#l = setTimeout(() => {
+bundled:629:       this.#l = undefined;
+bundled:630:       this.#x?.();
+bundled:631:     }, Bv.SHIMMER_FRAME_MS);
+bundled:632:     this.#l.unref?.();
+bundled:633:   }
+bundled:634:   get nativeSendable() {
+bundled:635:     return !this.nativeKeyPassthrough && this.onSubmit !== undefined && !this.disableSubmit && !U(this.composerState().dictation);
+bundled:636:   }
+bundled:637:   #k;
+bundled:638:   describePlaceholder = () => {
+bundled:639:     const { viewing: i, title: r } = this.composerState();
+bundled:640:     const a = i?.at(-1);
+bundled:641:     if (a !== undefined)
+bundled:642:       return `Message ${a}`;
+bundled:643:     if (!r)
+bundled:644:       return Xe;
+bundled:645:     if (this.#k?.title !== r) {
+bundled:646:       this.#k = { title: r, text: [{ t: `\u201C${r}\u201D`, s: "em" }] };
+bundled:647:     }
+bundled:648:     return this.#k.text;
+bundled:649:   };
+bundled:650:   describeLanguage = () => this.composerState().shell?.kind;
+bundled:651:   composerState = () => je;
+bundled:652:   attachmentChips;
+bundled:653:   composerFacts;
+bundled:654:   #B;
+bundled:655:   describeLayout = (i, r) => {
+bundled:656:     const a = r.supports("effort");
+bundled:657:     const d = this.composerState();
+bundled:658:     const l = d.shell;
+bundled:659:     const c = this.composerFacts?.describeComposerFacts();
+bundled:660:     const u = this.#g.get("app.thinking.cycle")?.[0];
+bundled:661:     const p = this.#g.get("app.model.selectTemporary")?.[0];
+bundled:662:     const m = this.#g.get("app.interrupt")?.[0] ?? "escape";
+bundled:663:     const f = [
+bundled:664:       l?.kind,
+bundled:665:       l?.excluded,
+bundled:666:       d.thinking,
+bundled:667:       d.running,
+bundled:668:       d.dictation,
+bundled:669:       u,
+bundled:670:       p,
+bundled:671:       m,
+bundled:672:       d.viewing?.join("\x01"),
+bundled:673:       a,
+bundled:674:       d.thinkingInModel
+bundled:675:     ].join("\x00");
+bundled:676:     const h = d.rate;
+bundled:677:     const g = this.attachmentChips;
+bundled:678:     const y = this.#B;
+bundled:679:     if (y && y.key === f && y.rate === h && y.facts === c && y.input === i && y.chips === g) {
+bundled:680:       return y.layout;
+bundled:681:     }
+bundled:682:     const x = y?.key === f && y.facts === c ? y.controls : this.#O(d, c, u, p, m, a);
+bundled:683:     const k = y?.controls === x && y.rate === h ? y.bar : H(X(ee([
+bundled:684:       x.model,
+bundled:685:       x.effort,
+bundled:686:       h !== undefined && s("rate", { value: h, unit: "tok/s", role: "omp.composer.rate", title: "Generation rate" }, undefined, "rate"),
+bundled:687:       c?.extras ?? s("row", { grow: 1 }, [], "gap"),
+bundled:688:       c?.usage,
+bundled:689:       x.dictation,
+bundled:690:       x.submit
+bundled:691:     ]), { role: "omp.composer.bar", gap: "sm", align: "center" }), "bar");
+bundled:692:     const C = H(X(ee([x.mode, i]), { role: "omp.composer.line", align: "start", gap: "sm" }), "line");
+bundled:693:     const b = {
+bundled:694:       role: l ? `omp.editor.${l.kind}` : "omp.editor",
+bundled:695:       tone: d.running ? "pending" : undefined,
+bundled:696:       children: ee([c?.context, x.focus, g, C, k]),
+bundled:697:       caret: "line/input"
+bundled:698:     };
+bundled:699:     this.#B = { key: f, facts: c, chips: g, input: i, rate: h, controls: x, bar: k, layout: b };
+bundled:700:     return b;
+bundled:701:   };
+bundled:702:   #W(i, r) {
+bundled:703:     const a = i.at(-1);
+bundled:704:     if (a === undefined)
+bundled:705:       return;
+bundled:706:     const d = Hn(r);
+bundled:707:     const l = i.slice(0, -1).map((c) => s("text", {
+bundled:708:       role: "omp.composer.crumb",
+bundled:709:       text: c,
+bundled:710:       wrap: "none",
+bundled:711:       title: `View ${c}`,
+bundled:712:       actions: { click: `${O}${c}` }
+bundled:713:     }, undefined, `crumb:${c}`));
+bundled:714:     return H(X([
+bundled:715:       s("icon", { name: "eye" }, undefined, "icon"),
+bundled:716:       s("text", { text: "Viewing", wrap: "none" }, undefined, "label"),
+bundled:717:       ...l,
+bundled:718:       s("text", { role: "omp.composer.agent", text: a, wrap: "none" }, undefined, "agent"),
+bundled:719:       s("row", {
+bundled:720:         role: "omp.composer.exit",
+bundled:721:         gap: "xs",
+bundled:722:         align: "center",
+bundled:723:         title: `Back to the main session  ${d}`,
+bundled:724:         actions: { click: `${O}${qe}` }
+bundled:725:       }, [
+bundled:726:         s("kbd", { keys: [r] }, undefined, "key"),
+bundled:727:         s("text", { text: "main", wrap: "none" }, undefined, "label")
+bundled:728:       ], "exit")
+bundled:729:     ], {
+bundled:730:       role: "omp.composer.focus",
+bundled:731:       gap: "xs",
+bundled:732:       align: "center",
+bundled:733:       title: `Viewing subagent ${a}: what you send goes to it`
+bundled:734:     }), "focus");
+bundled:735:   }
+bundled:736:   #O(i, r, a, d, l, c) {
+bundled:737:     const u = i.shell;
+bundled:738:     const p = i.viewing && this.#W(i.viewing, l);
+bundled:739:     const m = i.thinking;
+bundled:740:     const f = a ? `  ${Hn(a)}` : "";
+bundled:741:     const h = r && m !== undefined && c && i.thinkingInModel ? s("effort", {
+bundled:742:       level: m,
+bundled:743:       role: "omp.composer.model.effort",
+bundled:744:       title: `Thinking effort: ${m}${f}`,
+bundled:745:       actions: { click: "thinking.cycle" }
+bundled:746:     }, undefined, "effort") : undefined;
+bundled:747:     const g = r && s("row", {
+bundled:748:       role: "omp.composer.model",
+bundled:749:       gap: "xs",
+bundled:750:       align: "center",
+bundled:751:       tone: r.model.tone,
+bundled:752:       title: d ? `Switch model  ${Hn(d)}` : "Switch model",
+bundled:753:       actions: { click: "status.model" }
+bundled:754:     }, [
+bundled:755:       h ?? s("icon", { name: "model" }, undefined, "icon"),
+bundled:756:       s("text", { spans: r.model.spans, wrap: "none" }, undefined, "name"),
+bundled:757:       s("icon", { name: "chev" }, undefined, "chev")
+bundled:758:     ], "model");
+bundled:759:     const y = m === undefined ? undefined : Qe[m];
+bundled:760:     const x = m !== undefined && !h ? s("row", {
+bundled:761:       role: "omp.composer.effort",
+bundled:762:       gap: "xs",
+bundled:763:       align: "center",
+bundled:764:       title: `Thinking effort${f}`,
+bundled:765:       actions: { click: "thinking.cycle" }
+bundled:766:     }, [
+bundled:767:       c ? s("effort", { level: m }, undefined, "glyph") : s("meter", { value: y === undefined ? null : y / 4, style: "blocks", steps: 4 }, undefined, "meter"),
+bundled:768:       s("text", { text: m, wrap: "none" }, undefined, "level")
+bundled:769:     ], "effort") : undefined;
+bundled:770:     const k = i.dictation === "recording";
+bundled:771:     const C = i.dictation === "starting";
+bundled:772:     const b = i.dictation === "transcribing";
+bundled:773:     const S = i.dictation === undefined ? undefined : s("row", {
+bundled:774:       role: "omp.composer.dictation",
+bundled:775:       gap: "xs",
+bundled:776:       align: "center",
+bundled:777:       tone: k ? "error" : C || b ? "pending" : undefined,
+bundled:778:       title: k ? "Stop recording and transcribe" : C ? "Cancel dictation" : b ? "Transcribing dictation" : "Start dictation",
+bundled:779:       actions: b ? undefined : { click: "dictation.toggle" }
+bundled:780:     }, C || b ? [s("spinner", { label: C ? "Starting\u2026" : "Transcribing\u2026" }, undefined, "pending")] : ee([
+bundled:781:       s("icon", { name: k ? "stop" : "mic" }, undefined, "icon"),
+bundled:782:       k && s("text", { text: "Recording \xB7 Stop", wrap: "none" }, undefined, "label")
+bundled:783:     ]), "dictation");
+bundled:784:     const v = U(i.dictation);
+bundled:785:     const T = i.running ? s("text", {
+bundled:786:       role: "omp.composer.stop",
+bundled:787:       text: "Stop",
+bundled:788:       tone: "error",
+bundled:789:       title: `Stop  ${Hn(l)}`,
+bundled:790:       actions: { click: "interrupt" }
+bundled:791:     }, undefined, "stop") : s("kbd", {
+bundled:792:       role: "omp.composer.send",
+bundled:793:       keys: ["enter"],
+bundled:794:       title: v ? "Finish dictation before sending" : `Send  ${Hn("enter")}`,
+bundled:795:       tone: v ? "muted" : undefined,
+bundled:796:       actions: v ? undefined : { click: "submit" }
+bundled:797:     }, undefined, "send");
+bundled:798:     if (!u)
+bundled:799:       return { focus: p, mode: undefined, model: g, effort: x, dictation: S, submit: T };
+bundled:800:     const E = u.kind === "bash" ? "Runs in your shell" : "Runs in Python";
+bundled:801:     const w = H(X(ee([
+bundled:802:       u.excluded && s("icon", { name: "eye-off", title: "Not sent to the model" }, undefined, "excluded"),
+bundled:803:       s("text", { spans: [t(u.kind, u.kind === "bash" ? "bashMode" : "pythonMode")], wrap: "none" }, undefined, "label")
+bundled:804:     ]), {
+bundled:805:       role: "omp.composer.mode",
+bundled:806:       gap: "xs",
+bundled:807:       align: "center",
+bundled:808:       title: u.excluded ? `${E} \xB7 not sent to the model` : E
+bundled:809:     }), "mode");
+bundled:810:     return { focus: p, mode: w, model: g, effort: x, dictation: S, submit: T };
+bundled:811:   }
+bundled:812:   handleNativeEvent(i) {
+bundled:813:     if (i.type === "send") {
+bundled:814:       if (!i.text.trim() || !this.nativeSendable)
+bundled:815:         return;
+bundled:816:       if (this.#o > 0) {
+bundled:817:         this.#m.push(i);
+bundled:818:         return;
+bundled:819:       }
+bundled:820:       this.clearDraftForRecall();
+bundled:821:       this.setCollapsedText(i.text);
+bundled:822:       this.submit();
+bundled:823:       return;
+bundled:824:     }
+bundled:825:     if (i.type !== "action") {
+bundled:826:       super.handleNativeEvent(i);
+bundled:827:       return;
+bundled:828:     }
+bundled:829:     switch (i.act) {
+bundled:830:       case "thinking.cycle":
+bundled:831:         this.onCycleThinkingLevel?.();
+bundled:832:         return;
+bundled:833:       case "dictation.toggle": {
+bundled:834:         const { dictation: r } = this.composerState();
+bundled:835:         if (r !== undefined && r !== "transcribing")
+bundled:836:           this.onToggleDictation?.();
+bundled:837:         return;
+bundled:838:       }
+bundled:839:       case "submit":
+bundled:840:         if (this.nativeSendable)
+bundled:841:           this.submit();
+bundled:842:         return;
+bundled:843:       case "interrupt":
+bundled:844:         this.onEscape?.();
+bundled:845:         return;
+bundled:846:       default:
+bundled:847:         if (i.act.startsWith(O))
+bundled:848:           this.onFocusAgent?.(i.act.slice(O.length));
+bundled:849:         else
+bundled:850:           this.composerFacts?.handleNativeEvent(i);
+bundled:851:     }
+bundled:852:   }
+bundled:853:   onEscape;
+bundled:854:   onClear;
+bundled:855:   onExit;
+bundled:856:   onDisplayReset;
+bundled:857:   onCycleThinkingLevel;
+bundled:858:   onCycleModelForward;
+bundled:859:   onCycleModelBackward;
+bundled:860:   onSelectModel;
+bundled:861:   onSuspend;
+bundled:862:   onSelectModelTemporary;
+bundled:863:   onCopyPrompt;
+bundled:864:   onPasteImage;
+bundled:865:   onPasteImagePath;
+bundled:866:   onPasteTextRaw;
+bundled:867:   onDequeue;
+bundled:868:   onRetry;
+bundled:869:   onCapsLock;
+bundled:870:   onToggleDictation;
+bundled:871:   onLeftAtStart;
+bundled:872:   onFocusAgent;
+bundled:873:   #I;
+bundled:874:   spaceHold = new loe((i) => {
+bundled:875:     this.#I = undefined;
+bundled:876:     if (i > 0)
+bundled:877:       this.deleteBeforeCursor(i);
+bundled:878:   }, () => this.vimMode === "insert" && !this.isShowingAutocomplete() && !this.isJumpPending);
+bundled:879:   #P = new Map;
+bundled:880:   #T = new Map;
+bundled:881:   #G = new cy;
+bundled:882:   #o = 0;
+bundled:883:   #m = [];
+bundled:884:   #g = new Map(Object.entries(he).map(([i, r]) => [i, [...r]]));
+bundled:885:   #C = new Map(Object.entries(he).map(([i, r]) => [
+bundled:886:     i,
+bundled:887:     z(r)
+bundled:888:   ]));
+bundled:889:   #L = pe(this.#C);
+bundled:890:   setActionKeys(i, r) {
+bundled:891:     this.#g.set(i, [...r]);
+bundled:892:     this.#C.set(i, z(r));
+bundled:893:     this.#L = pe(this.#C);
+bundled:894:   }
+bundled:895:   #N() {
+bundled:896:     this.#T.clear();
+bundled:897:     for (const [i, r] of this.#P) {
+bundled:898:       for (const a of z([i])) {
+bundled:899:         if (!this.#T.has(a))
+bundled:900:           this.#T.set(a, r);
+bundled:901:       }
+bundled:902:     }
+bundled:903:   }
+bundled:904:   #i(i, r) {
+bundled:905:     return i !== undefined && (this.#C.get(r)?.has(i) ?? false);
+bundled:906:   }
+bundled:907:   #X(i) {
+bundled:908:     if (i === `
+bundled:909: `)
+bundled:910:       return true;
+bundled:911:     const r = ba(i);
+bundled:912:     return r !== undefined && Ge().matchesCanonical(Il(r), "tui.input.submit");
+bundled:913:   }
+bundled:914:   setCustomKeyHandler(i, r) {
+bundled:915:     this.#P.set(i, r);
+bundled:916:     this.#N();
+bundled:917:   }
+bundled:918:   removeCustomKeyHandler(i) {
+bundled:919:     this.#P.delete(i);
+bundled:920:     this.#N();
+bundled:921:   }
+bundled:922:   clearCustomKeyHandlers() {
+bundled:923:     this.#P.clear();
+bundled:924:     this.#N();
+bundled:925:   }
+bundled:926:   #V = () => {
+bundled:927:     this.#o--;
+bundled:928:     if (this.#o > 0)
+bundled:929:       return;
+bundled:930:     this.#U();
+bundled:931:   };
+bundled:932:   #U() {
+bundled:933:     const i = this.#m.splice(0);
+bundled:934:     for (const r of i) {
+bundled:935:       if (typeof r === "string")
+bundled:936:         this.handleInput(r);
+bundled:937:       else if ("draft" in r)
+bundled:938:         this.handleDraftEdit(r.draft);
+bundled:939:       else
+bundled:940:         this.handleNativeEvent(r);
+bundled:941:     }
+bundled:942:   }
+bundled:943:   #M(i) {
+bundled:944:     this.#o++;
+bundled:945:     i.then(this.#V, this.#V);
+bundled:946:   }
+bundled:947:   get pasteInFlight() {
+bundled:948:     return this.#o > 0;
+bundled:949:   }
+bundled:950:   capturesInput(i) {
+bundled:951:     return this.spaceHold.shouldRoute(i);
+bundled:952:   }
+bundled:953:   handleInput(i) {
+bundled:954:     if (this.#o > 0) {
+bundled:955:       this.#m.push(i);
+bundled:956:       return;
+bundled:957:     }
+bundled:958:     const r = this.textEquals("->") || this.textEquals("=>");
+bundled:959:     const a = i.charCodeAt(0) === 27 ? h_(i) : null;
+bundled:960:     if (a && (a.modifier & 64) !== 0 && this.onCapsLock) {
+bundled:961:       this.onCapsLock();
+bundled:962:       return;
+bundled:963:     }
+bundled:964:     if (this.#F(i, false))
+bundled:965:       return;
+bundled:966:     const d = ba(i);
+bundled:967:     const l = d !== undefined ? Il(d) : undefined;
+bundled:968:     if (l !== undefined && Ge().matchesCanonical(l, "tui.input.submit") && U(this.composerState().dictation)) {
+bundled:969:       return;
+bundled:970:     }
+bundled:971:     const c = aoe(i, l);
+bundled:972:     const u = this.#I;
+bundled:973:     if (u) {
+bundled:974:       const p = this.getCursor();
+bundled:975:       if (this.textRevision !== u.revision || p.line !== u.line || p.col !== u.col) {
+bundled:976:         this.spaceHold.process(undefined);
+bundled:977:         this.#I = undefined;
+bundled:978:       }
+bundled:979:     }
+bundled:980:     switch (this.spaceHold.process(l, c?.length ?? 0)) {
+bundled:981:       case "type": {
+bundled:982:         const p = c;
+bundled:983:         const m = this.getCursor();
+bundled:984:         const f = this.getLines()[m.line] ?? "";
+bundled:985:         const h = this.textRevision;
+bundled:986:         this.typeCharacter(p);
+bundled:987:         this.#a();
+bundled:988:         this.#d();
+bundled:989:         this.#$(r);
+bundled:990:         const g = this.getCursor();
+bundled:991:         const y = this.getLines()[g.line] ?? "";
+bundled:992:         const x = this.textRevision === h && g.line === m.line && g.col === m.col && y === f;
+bundled:993:         const k = g.line === m.line && g.col === m.col + p.length && y === f.slice(0, m.col) + p + f.slice(m.col);
+bundled:994:         if (x) {
+bundled:995:           this.spaceHold.recordTyped(0);
+bundled:996:         } else if (k) {
+bundled:997:           this.spaceHold.recordTyped(p.length);
+bundled:998:         } else {
+bundled:999:           this.spaceHold.process(undefined);
+bundled:1000:           this.#I = undefined;
+bundled:1001:           return;
+bundled:1002:         }
+bundled:1003:         const C = this.getCursor();
+bundled:1004:         this.#I = {
+bundled:1005:           revision: this.textRevision,
+bundled:1006:           line: C.line,
+bundled:1007:           col: C.col
+bundled:1008:         };
+bundled:1009:         return;
+bundled:1010:       }
+bundled:1011:       case "swallow":
+bundled:1012:         return;
+bundled:1013:     }
+bundled:1014:     this.#I = undefined;
+bundled:1015:     if (l === "left" && this.onLeftAtStart && this.getText().trim() === "") {
+bundled:1016:       this.onLeftAtStart();
+bundled:1017:       return;
+bundled:1018:     }
+bundled:1019:     if (l !== undefined && (this.#L.has(l) || this.#T.has(l))) {
+bundled:1020:       if (this.#i(l, "app.clipboard.pasteImage") && this.onPasteImage) {
+bundled:1021:         this.#M(Promise.resolve(this.onPasteImage()));
+bundled:1022:         return;
+bundled:1023:       }
+bundled:1024:       if (this.#i(l, "app.clipboard.pasteTextRaw") && this.onPasteTextRaw) {
+bundled:1025:         this.onPasteTextRaw();
+bundled:1026:         return;
+bundled:1027:       }
+bundled:1028:       if (this.#i(l, "app.model.selectTemporary") && this.onSelectModelTemporary) {
+bundled:1029:         this.onSelectModelTemporary();
+bundled:1030:         return;
+bundled:1031:       }
+bundled:1032:       if (this.#i(l, "app.display.reset") && this.onDisplayReset) {
+bundled:1033:         this.onDisplayReset();
+bundled:1034:         return;
+bundled:1035:       }
+bundled:1036:       if (this.#i(l, "app.suspend") && this.onSuspend) {
+bundled:1037:         this.onSuspend();
+bundled:1038:         return;
+bundled:1039:       }
+bundled:1040:       if (this.#i(l, "app.model.select") && this.onSelectModel) {
+bundled:1041:         this.onSelectModel();
+bundled:1042:         return;
+bundled:1043:       }
+bundled:1044:       if (this.#i(l, "app.model.cycleBackward") && this.onCycleModelBackward) {
+bundled:1045:         this.onCycleModelBackward();
+bundled:1046:         return;
+bundled:1047:       }
+bundled:1048:       if (this.#i(l, "app.model.cycleForward") && this.onCycleModelForward) {
+bundled:1049:         this.onCycleModelForward();
+bundled:1050:         return;
+bundled:1051:       }
+bundled:1052:       if (this.#i(l, "app.thinking.cycle") && this.onCycleThinkingLevel) {
+bundled:1053:         this.onCycleThinkingLevel();
+bundled:1054:         return;
+bundled:1055:       }
+bundled:1056:       if (this.#i(l, "app.interrupt") && this.onEscape && !this.isShowingAutocomplete() && !this.vimConsumesEscape()) {
+bundled:1057:         this.onEscape();
+bundled:1058:         return;
+bundled:1059:       }
+bundled:1060:       if (this.#i(l, "app.clear") && this.onClear) {
+bundled:1061:         this.onClear();
+bundled:1062:         return;
+bundled:1063:       }
+bundled:1064:       if (this.#i(l, "app.exit")) {
+bundled:1065:         const m = l !== undefined && Ge().matchesCanonical(l, "tui.editor.deleteCharForward");
+bundled:1066:         if (m && !this.textEquals("")) {
+bundled:1067:           this.deleteCharForward();
+bundled:1068:           this.#$(r);
+bundled:1069:           return;
+bundled:1070:         }
+bundled:1071:         this.onExit?.();
+bundled:1072:         return;
+bundled:1073:       }
+bundled:1074:       if (this.#i(l, "app.message.dequeue") && this.onDequeue) {
+bundled:1075:         this.onDequeue();
+bundled:1076:         return;
+bundled:1077:       }
+bundled:1078:       if (this.#i(l, "app.clipboard.copyPrompt") && this.onCopyPrompt) {
+bundled:1079:         this.onCopyPrompt();
+bundled:1080:         return;
+bundled:1081:       }
+bundled:1082:       if (this.#i(l, "app.retry") && this.onRetry) {
+bundled:1083:         const m = this.#T.get(l);
+bundled:1084:         if (m) {
+bundled:1085:           m();
+bundled:1086:           return;
+bundled:1087:         }
+bundled:1088:         this.onRetry();
+bundled:1089:         return;
+bundled:1090:       }
+bundled:1091:       const p = this.#T.get(l);
+bundled:1092:       if (p) {
+bundled:1093:         p();
+bundled:1094:         return;
+bundled:1095:       }
+bundled:1096:     }
+bundled:1097:     this.#K(i);
+bundled:1098:     this.#$(r);
+bundled:1099:   }
+bundled:1100:   #F(i, r) {
+bundled:1101:     const a = this.#G.process(i);
+bundled:1102:     if (!a.handled)
+bundled:1103:       return false;
+bundled:1104:     if (a.pasteContent === undefined)
+bundled:1105:       return true;
+bundled:1106:     const d = a.pasteContent;
+bundled:1107:     const l = a.remaining;
+bundled:1108:     if (l.length > 0)
+bundled:1109:       this.#m.push(r ? { draft: l } : l);
+bundled:1110:     if (d.length === 0 && this.onPasteImage) {
+bundled:1111:       this.#M(Promise.resolve(this.onPasteImage()));
+bundled:1112:       return true;
+bundled:1113:     }
+bundled:1114:     const c = LT(d);
+bundled:1115:     if (c && this.onPasteImagePath) {
+bundled:1116:       this.#M((async () => {
+bundled:1117:         for (const u of c)
+bundled:1118:           await this.onPasteImagePath?.(u);
+bundled:1119:       })());
+bundled:1120:       return true;
+bundled:1121:     }
+bundled:1122:     if (this.#X(l))
+bundled:1123:       this.pasteText(d, { submitAfterPaste: true });
+bundled:1124:     else
+bundled:1125:       this.pasteText(d);
+bundled:1126:     this.#a();
+bundled:1127:     this.#d();
+bundled:1128:     this.#U();
+bundled:1129:     return true;
+bundled:1130:   }
+bundled:1131:   #$(i) {
+bundled:1132:     if (i || !(this.textEquals("->") || this.textEquals("=>")))
+bundled:1133:       return;
+bundled:1134:     const r = this.getCursor();
+bundled:1135:     if (r.line === 0 && r.col === 2) {
+bundled:1136:       this.insertText(`
+bundled:1137: `);
+bundled:1138:     }
+bundled:1139:   }
+bundled:1140:   handleDraftEdit(i) {
+bundled:1141:     if (this.#o > 0) {
+bundled:1142:       this.#m.push({ draft: i });
+bundled:1143:       return;
+bundled:1144:     }
+bundled:1145:     if (this.#F(i, true))
+bundled:1146:       return;
+bundled:1147:     const r = ba(i);
+bundled:1148:     const a = r !== undefined ? Il(r) : undefined;
+bundled:1149:     if (a !== undefined && this.#i(a, "app.clear")) {
+bundled:1150:       if (this.onClear)
+bundled:1151:         this.onClear();
+bundled:1152:       else
+bundled:1153:         this.setText("");
+bundled:1154:       return;
+bundled:1155:     }
+bundled:1156:     if (a !== undefined && this.#i(a, "app.clipboard.pasteImage") && this.onPasteImage) {
+bundled:1157:       this.#M(Promise.resolve(this.onPasteImage()));
+bundled:1158:       return;
+bundled:1159:     }
+bundled:1160:     this.#K(i);
+bundled:1161:   }
+bundled:1162:   #K(i) {
+bundled:1163:     super.handleInput(i);
+bundled:1164:     this.#a();
+bundled:1165:     this.#d();
+bundled:1166:   }
+bundled:1167: }
+bundled:1168: export { sne, NT, Ac, ane, yZt, lne, R0, O0, ZN, Gp, ma, Ob, I0, DGe, M0, Gye, cne, Eut, P0, SIt, c6, d6, u6, p6, Wye, dne, kIt, une, d2t, u2t, P$, f6, N$, AIt, $ye, e1, Ib, qye, t1, m6, Rut, Out, FGe, pne, Iut, Mut, Uye, LT, Put, BGe, Nut, h6, Bv };

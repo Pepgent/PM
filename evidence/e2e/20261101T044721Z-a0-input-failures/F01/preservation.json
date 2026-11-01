@@ -1,0 +1,229 @@
+{
+  "createdAt": "2026-11-01T04:48:54.730053+00:00",
+  "campaign": "/Users/mouriya/Ext/code/pepgent/pepgent-pm/evidence/e2e/20261101T044721Z-a0-input-failures/F01",
+  "method": "Direct original-file versus decompressed tar-member or loose-copy byte equality; exact ordered member lists and entry modes compared. No hashes computed or used.",
+  "scope": "Preservation only; not runtime or product correctness evidence.",
+  "groups": [
+    {
+      "group": "r1-failed-a0",
+      "source": "/tmp/soroi-full-a0-88i7tuvp",
+      "published": "raw/r1-failed-a0.tar.gz",
+      "files": 10,
+      "directories": 4,
+      "emptyDirectories": 1,
+      "bytes": 9258,
+      "membershipEqual": true,
+      "fileBytesEqual": true,
+      "entryModesEqual": true
+    },
+    {
+      "group": "r2-failed-a0",
+      "source": "/tmp/soroi-full-a0-r2-36qhq4ut",
+      "published": "raw/r2-failed-a0.tar.gz",
+      "files": 8,
+      "directories": 4,
+      "emptyDirectories": 1,
+      "bytes": 30108,
+      "membershipEqual": true,
+      "fileBytesEqual": true,
+      "entryModesEqual": true
+    },
+    {
+      "group": "deliberate-prepare-failure",
+      "source": "/tmp/soroi-a0-diagnostic-rejection-c0p2vox6",
+      "published": "raw/deliberate-prepare-failure.tar.gz",
+      "files": 11,
+      "directories": 6,
+      "emptyDirectories": 2,
+      "bytes": 9712,
+      "membershipEqual": true,
+      "fileBytesEqual": true,
+      "entryModesEqual": true
+    },
+    {
+      "group": "version-only-identity",
+      "source": "/tmp/soroi-a0-runtime-identity-kbfQf0",
+      "published": "raw/version-only-identity.tar.gz",
+      "files": 1,
+      "directories": 1,
+      "emptyDirectories": 0,
+      "bytes": 381,
+      "membershipEqual": true,
+      "fileBytesEqual": true,
+      "entryModesEqual": true
+    },
+    {
+      "group": "prepare-parse-rejections",
+      "source": "/tmp/soroi-a0-prepare-rejections-orjrj5pp",
+      "published": "raw/prepare-parse-rejections.tar.gz",
+      "files": 7,
+      "directories": 1,
+      "emptyDirectories": 0,
+      "bytes": 8074,
+      "membershipEqual": true,
+      "fileBytesEqual": true,
+      "entryModesEqual": true
+    },
+    {
+      "group": "auxiliary-pty-smoke",
+      "source": "/tmp/soroi-pty-proof-R6SetD",
+      "published": "raw/auxiliary-pty-smoke.tar.gz",
+      "files": 10,
+      "directories": 10,
+      "emptyDirectories": 3,
+      "bytes": 2759,
+      "membershipEqual": true,
+      "fileBytesEqual": true,
+      "entryModesEqual": true
+    },
+    {
+      "group": "runtime-identity.ts",
+      "source": "/tmp/soroi-a0-runtime-identity.ts",
+      "published": "raw/runtime-identity.ts",
+      "files": 1,
+      "directories": 0,
+      "emptyDirectories": 0,
+      "bytes": 1571,
+      "fileBytesEqual": true
+    },
+    {
+      "group": "native-input-api/soroi-a0-input-facts-report.md",
+      "source": "/tmp/soroi-a0-input-facts-report.md",
+      "published": "raw/native-input-api/soroi-a0-input-facts-report.md",
+      "files": 1,
+      "directories": 0,
+      "emptyDirectories": 0,
+      "bytes": 14940,
+      "fileBytesEqual": true
+    },
+    {
+      "group": "native-input-api/soroi-a0-input-facts-native-source-report.txt",
+      "source": "/tmp/soroi-a0-input-facts-native-source-report.txt",
+      "published": "raw/native-input-api/soroi-a0-input-facts-native-source-report.txt",
+      "files": 1,
+      "directories": 0,
+      "emptyDirectories": 0,
+      "bytes": 415498,
+      "fileBytesEqual": true
+    },
+    {
+      "group": "native-input-api/soroi-a0-input-facts-custom-editor-source-report.txt",
+      "source": "/tmp/soroi-a0-input-facts-custom-editor-source-report.txt",
+      "published": "raw/native-input-api/soroi-a0-input-facts-custom-editor-source-report.txt",
+      "files": 1,
+      "directories": 0,
+      "emptyDirectories": 0,
+      "bytes": 47963,
+      "fileBytesEqual": true
+    },
+    {
+      "group": "native-input-api/soroi-a0-input-facts-composer-source-report.txt",
+      "source": "/tmp/soroi-a0-input-facts-composer-source-report.txt",
+      "published": "raw/native-input-api/soroi-a0-input-facts-composer-source-report.txt",
+      "files": 1,
+      "directories": 0,
+      "emptyDirectories": 0,
+      "bytes": 33851,
+      "fileBytesEqual": true
+    },
+    {
+      "group": "native-input-api/soroi-a0-input-facts-interactive-source-report.txt",
+      "source": "/tmp/soroi-a0-input-facts-interactive-source-report.txt",
+      "published": "raw/native-input-api/soroi-a0-input-facts-interactive-source-report.txt",
+      "files": 1,
+      "directories": 0,
+      "emptyDirectories": 0,
+      "bytes": 379047,
+      "fileBytesEqual": true
+    },
+    {
+      "group": "native-input-api/soroi-a0-input-facts-cli-source-report.txt",
+      "source": "/tmp/soroi-a0-input-facts-cli-source-report.txt",
+      "published": "raw/native-input-api/soroi-a0-input-facts-cli-source-report.txt",
+      "files": 1,
+      "directories": 0,
+      "emptyDirectories": 0,
+      "bytes": 97319,
+      "fileBytesEqual": true
+    },
+    {
+      "group": "owner-recipe/published-recipe-comment.json",
+      "source": "/tmp/soroi-next-slices/a0-priority/published-recipe-comment.json",
+      "published": "raw/owner-recipe/published-recipe-comment.json",
+      "files": 1,
+      "directories": 0,
+      "emptyDirectories": 0,
+      "bytes": 6298,
+      "fileBytesEqual": true
+    },
+    {
+      "group": "owner-recipe/soroi-dist02-argv-contract.json",
+      "source": "/tmp/soroi-dist02-argv-contract.json",
+      "published": "raw/owner-recipe/soroi-dist02-argv-contract.json",
+      "files": 1,
+      "directories": 0,
+      "emptyDirectories": 0,
+      "bytes": 1843,
+      "fileBytesEqual": true
+    },
+    {
+      "group": "exec/r1.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-6-1e1f1f93.log",
+      "published": "raw/exec/r1.log",
+      "files": 1,
+      "directories": 0,
+      "emptyDirectories": 0,
+      "bytes": 40,
+      "fileBytesEqual": true
+    },
+    {
+      "group": "exec/r2.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-7-fa40b78e.log",
+      "published": "raw/exec/r2.log",
+      "files": 1,
+      "directories": 0,
+      "emptyDirectories": 0,
+      "bytes": 40,
+      "fileBytesEqual": true
+    },
+    {
+      "group": "exec/deliberate-prepare-failure.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-8-cfc5a7ec.log",
+      "published": "raw/exec/deliberate-prepare-failure.log",
+      "files": 1,
+      "directories": 0,
+      "emptyDirectories": 0,
+      "bytes": 40,
+      "fileBytesEqual": true
+    },
+    {
+      "group": "exec/version-only-identity.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-5-a5b21340.log",
+      "published": "raw/exec/version-only-identity.log",
+      "files": 1,
+      "directories": 0,
+      "emptyDirectories": 0,
+      "bytes": 343,
+      "fileBytesEqual": true
+    },
+    {
+      "group": "exec/auxiliary-pty-smoke.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-10-05bb4a55.log",
+      "published": "raw/exec/auxiliary-pty-smoke.log",
+      "files": 1,
+      "directories": 0,
+      "emptyDirectories": 0,
+      "bytes": 880,
+      "fileBytesEqual": true
+    }
+  ],
+  "totals": {
+    "files": 61,
+    "directories": 26,
+    "emptyDirectories": 7,
+    "bytes": 1059965
+  },
+  "symlinks": 0,
+  "rawEdited": false,
+  "nativeBinariesCopied": false
+}
