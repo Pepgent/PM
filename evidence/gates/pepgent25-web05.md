@@ -95,4 +95,7 @@
 
 ## 五、处置结果
 
-（闸门判定后填写。）
+- **闸门结论：** 闸门 A 见 `pepgent25-web05-gate-a.md`（PM `821dfba`），闸门 B 见 `pepgent25-web05-gate-b.md`（PM `8f7b3da`）。两道闸门对 Q1–Q4 的初分类全部同意。
+- **两道闸门都判不越界，按正文作答，不立案：** Q1（K1，采用候选 (d)）、Q2（K1，留在 WEB-05，真实数据随 WEB-07 生效）、Q4（K3，一个按钮位依次交回）。结论评论：[Pepgent#25 issuecomment-6563509086](https://github.com/Pepgent/Pepgent/issues/25#issuecomment-6563509086)。
+- **立案：** Q3 两道闸门都判 K4。由 `DeskPepgent25Blocked` 以 Coordination 席发起 D37（[Pepgent/PM#56](https://github.com/Pepgent/PM/issues/56)，P0）：D37-01 v1 让文件型字段用已有 `text` 字段接收 `ArtifactRef`，自动化页（WEB-05）与详情页（WEB-07）合为一行。分类为串联，4 席参投，门槛 3，不加 `governance`。表决前 W-10 只暂停文件型分支。
+- **送达：** 由 AreaMgrPepgent 把结论评论送达 W-10；D37-01 有结果后，再在 #25、#29 登记并送达 W-10。
