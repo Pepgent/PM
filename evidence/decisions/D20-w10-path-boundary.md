@@ -19,8 +19,8 @@ v1–v3 的票作废，五席全部重投。
 - **来源：** Pepgent#9 的 BLOCKED B 组：https://github.com/Pepgent/Pepgent/issues/9#issuecomment-6559285723 。A 组 5 个文件已放行（issuecomment-6559372684），本表在 D20-01 中放宽其用途约束。
 - **意图依据：** U1“已有 agent 在制作纯前端”、U2“全流程不收缩”、U59“不得联系无关 agent”、C5-3.2“严禁破坏或回滚其成果”；以及 U7、U30、U32、U83、U84（不制造无解的 block 和互等）。
 - **契约依据：** D7:52、D7:76、D7:95、D7:104、D7-16、D7-17（“页面改动：各页本地 reducer 的动作改为命令”“每个页面路由的 loader 调用 readPage”）；D12:563、568（不得造数，缺失字段在投影中留空）。
-- **代码事实：** [代码事实归档](https://github.com/Pepgent/PM/blob/main/evidence/inv/d20-code-facts.md)（PM `evidence/inv/d20-code-facts.md`），以及 claude-high 选票中的逐行反例。
-- **U59 会话自有改动范围：** D15 盘点 [D15盘点](https://github.com/Pepgent/PM/blob/main/evidence/exec/d15/pepgent.md) 第二父差集，第 533–617 行。
+- **代码事实：** `local://inv/d20-code-facts.md`（PM `evidence/inv/d20-code-facts.md`），以及 claude-high 选票中的逐行反例。
+- **U59 会话自有改动范围：** D15 盘点 `local://exec/d15/pepgent.md` 第二父差集，第 533–617 行。
 
 **计票：** 依 LEDGER C2-3（U95），五席投票，即总协调席（Main+GovClone）、claude-high、Argon（意图否决）、ArgonGovernance（治理否决）、LeadMentor。至少 4 席赞成、无专责否决、有效反例清零即为通过。
 
