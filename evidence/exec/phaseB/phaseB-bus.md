@@ -1,8 +1,8 @@
 # 阶段 B 席位异步总线汇总
 
-本轮按Main提供的(R)事实更新：**W-06的D23修正已合入并退役，当前在跑lab、plugin、e2e共3席**，十席均已至少发车一次。W-10等待LAB-07a（[Pepgent#17](https://github.com/Pepgent/Pepgent/issues/17)，Main最近报告为OPEN）合入。滚动记录由秘书维护归档，Main只提供事实与(R)证据。未取回的新进度不推断；秘书不启停工人、不改业务代码、不运行测试。
+本轮按 Main 提供的 (R) 事实更新：**W-07 `pepgent-plugin` 已于 `2026-11-01 17:0xZ` 退役，Main 的 `tern ls` 观察已无该席，不再计入在跑**；AreaMgrSoroi-3 已核实其 ALL_DONE 所列 18 个 PR 全部合入 main。十席均已至少发车一次。W-10 仍等 LAB-07a（[Pepgent#17](https://github.com/Pepgent/Pepgent/issues/17)，最近报告为 OPEN）合入，本轮无新进场事实。其他席位状态不由本次单席退役推断；实时向 tern 查询。秘书不启停工人、不改业务代码、不运行测试，也不以本仓合入或退役代替阶段 C 统一验收。
 
-**并发纠错已发生，不追溯抹除违例：** Main在已有4席时启动deploy，曾形成5席，超过D16-10硬上限4且没有抢占令；治理席裁定退役W-10，Main完成交接退役纠错。此后W-06正常补入形成4席，本次D23交付后退役回3席。R8已由治理席降级（soroi `380ab02`）；后续正常进退场及watchdog本窗口无新增告警，不等同持续约束永久合规。
+**并发纠错已发生，不追溯抹除违例：** Main 在已有 4 席时启动 deploy，曾形成 5 席，超过 D16-10 硬上限 4 且没有抢占令；治理席裁定退役 W-10，Main 完成交接退役纠错。此后 W-06 正常补入形成 4 席，D23 交付后退役回 3 席；这些是当时快照，不是当前进程盘点。R8 已由治理席降级（soroi `380ab02`）；W-07 本次正常退役不等同持续约束永久合规，本次不因轮换改写 LEDGER R8/R13/R14。
 
 ## 席位状态
 
@@ -13,7 +13,7 @@
 | W-01 `pepgent-mux` | [omp-rpc-mux#13](https://github.com/Pepgent/omp-rpc-mux/issues/13)、[#17](https://github.com/Pepgent/omp-rpc-mux/issues/17) | [PR#16](https://github.com/Pepgent/omp-rpc-mux/pull/16)、[PR#18](https://github.com/Pepgent/omp-rpc-mux/pull/18) 均 MERGED，分别关闭 #13、#17 | **已合入／已退役**：合并状态已从 GitHub 取回；Main 滚动记录报告 OPEN issue 数为 0，已执行 `tern kill session pepgent-mux`。不再列作活跃席位，不冒称阶段 C 已通过 | 2026-11-01T13:14:00Z、13:16:42Z（两 PR 更新）；退役见滚动源记录 |
 | W-02 `pepgent-remote` | 本次 [remote#18](https://github.com/Pepgent/remote/issues/18)，前批 #16 已结束 | 本次 [PR#19](https://github.com/Pepgent/remote/pull/19)，前批 PR#17 | **已合入／二次进场已退役**：Main 的 rolling-record 确认 remote#18 已关闭、PR#19 合入，OPEN=0 后执行 `tern kill session pepgent-remote`。不再因 Argon 早先报告的 idle 等待状态将其计入在跑席位 | 2026-11-01T14:10:05Z（工人结束，Argon 报告）；本次退役以 Main 最新滚动记录为准 |
 | W-09 `pepgent-lab` | 当前LAB-05；[LAB-10 #15](https://github.com/Pepgent/Pepgent/issues/15)、[#44](https://github.com/Pepgent/Pepgent/issues/44)、控制端点 [#24](https://github.com/Pepgent/Pepgent/issues/24)；新增[文档 #51](https://github.com/Pepgent/Pepgent/issues/51)、[集成检出修正 #52](https://github.com/Pepgent/Pepgent/issues/52) | [PR#45](https://github.com/Pepgent/Pepgent/pull/45) 已合入 #43；LAB-04 [PR#48](https://github.com/Pepgent/Pepgent/pull/48) 已合入（GovClone转交） | **推进中／新承载已实际消费**：AreaMgrPepgent已用tern paste+Enter送达#51/#52，并从JSONL观察W-09纳入todo、继续当前LAB-05；[文档owner生命周期送达](https://github.com/Pepgent/Pepgent/issues/51#issuecomment-6559750589)、[cacheHome修正送达](https://github.com/Pepgent/Pepgent/issues/52#issuecomment-6559750631)。[D19](https://github.com/Pepgent/PM/issues/29)已通过，不再列决策等待，但控制端点本项完成动作未取回。D21/D22部署注入由另一承载交付，不冒称应用临时检出偏差已修复 | 最新新增承载观察取两条经理送达评论；未提供精确UTC，不补造；此前#44送达2026-11-01T14:36:07Z |
-| W-07 `pepgent-plugin` | 当前 [SOR-13 #209](https://github.com/Pepgent/soroi/issues/209)，随后SOR-14 #216、SOR-15 #217；其他切片按原帖 | File根PR#304等前批成果保留；本项实现PR尚未取回 | **STARTED／D19已实际被工人消费**：D19 v3已4/4通过，工人于[#209登记按定稿恢复实现](https://github.com/Pepgent/soroi/issues/209#issuecomment-6559532128)，worktree `issue-209-eval-endpoint`。不再列为等控制端点表决；不以恢复或决策通过当作实现完成 | 2026-11-01T14:49:59Z（工人STARTED） |
+| W-07 `pepgent-plugin` | [soroi#228 ALL_DONE](https://github.com/Pepgent/soroi/issues/228#issuecomment-6560689530)，经理核实时该 issue 为 CLOSED/COMPLETED | AreaMgrSoroi-3 核实所列全部 18 个 PR 均 MERGED、base main；完整链接清单见 [rolling-record 第 14 项](https://github.com/Pepgent/PM/blob/main/evidence/exec/phaseB/rolling-record.md) | **本仓已合入／已退役**：(R，Main 提供) 已执行 `tern kill session pepgent-plugin`，`tern ls` 已无该席；秘书只登记，不重复启停。经理记录中的 `Human.site` 契约疑点、根锁文件范围、凭据副本自述及遗产 [PR260](https://github.com/Pepgent/soroi/pull/260) 去留仍由管理层承接，不因退役自动清零；不标阶段 C 完成 | Main 退役观察为 `2026-11-01 17:0xZ`，精确分秒未提供；AreaMgrSoroi-3 本轮命令取时 `2026-11-02T01:59:53+09:00`，不代表全部观察同时发生 |
 | W-03 `pepgent-images` | [images#6](https://github.com/Pepgent/images/issues/6)、[#3](https://github.com/Pepgent/images/issues/3) | [PR#12](https://github.com/Pepgent/images/pull/12) 已 MERGED，正文关闭 #6/#3 | **已合入／已退役**：本轮 GitHub OPEN issue 列表返回无匹配，Main 滚动记录报告已执行 `tern kill session pepgent-images`，由 W-08 补位。镜像本仓证据不代替发行安装、真实浏览器会话和部署顺序的阶段 C 验收 | 2026-11-01T13:41:04Z（PR 更新）；退役见滚动源记录 |
 | W-04 `pepgent-deploy` | 第三次 [deploy#20](https://github.com/Pepgent/deploy/issues/20) 已关闭；第二次 [#18](https://github.com/Pepgent/deploy/issues/18) 及前轮#16/#8/#1已交付 | 第三次 [PR#21](https://github.com/Pepgent/deploy/pull/21) 已合入；第二次PR#19、前轮PR#17已合入（Main提供） | **第三次交付已合入／已退役**：(R) Main确认#20 CLOSED、PR#21合入、OPEN=0，已执行 `tern kill session pepgent-deploy`；AreaMgrDeploy2确认 `tern capture` 返回 `no block is called`。D21/D22两变量承载已交付，不再写作待重新进场；本仓合入不等于真实卷路径及阶段C统一验收完成 | 最新依据Main本次(R)报告及AreaMgrDeploy2 capture观察；未提供精确UTC，不补造 |
 | W-08 `pepgent-e2e` | [E2E-12 #220](https://github.com/Pepgent/soroi/issues/220)、[E2E-14 #226](https://github.com/Pepgent/soroi/issues/226)、DIST-02/A0 | 沿用既有PR#266/#260分工；经理观察F05、F21驱动已有提交，不据此推断全部统一验收完成 | **推进中／File根依赖已解锁并送达**：#299由PR#304合入，经理已终端送达；工人[#220确认](https://github.com/Pepgent/soroi/issues/220#issuecomment-6559271276)接续F12、采用片区协议。F12后续具体编辑结果待观察，不以接续声明当完成。统一阶段全流程验收未开始；异步非阻塞接缝金丝雀依C1-3/U96，不作为工人门禁 | 2026-11-01T14:29Z（AreaSoroi） |
@@ -71,7 +71,7 @@ W-09 本次以命名分支 `pepgent-lab-home` 发车；Main 已确认并修正�
 来源：Main 转交的用户直接指令、已就位报告及 rolling-record 第34行。原话已登记 LEDGER U98；本节直接替换旧的工人 peer_send 方案，不将其保留为并行执行口径。
 
 - 每个 repo 设一名独立常驻 task:mid 专门片区经理（U98、U99）：当前岗位为 AreaMgrPepgent、AreaMgrSoroi、AreaMgrDeploy，分别负责对应仓工人。原 AreaPepgent/AreaSoroi 已交接退出；下文14:29Z记录仍保留当时真实观察者名称。片区经理写 `local://state/area-*.md` 与 issue 评论，不改业务代码、不裁决契约。
-- 工人把 STARTED/PR/BLOCKED/DONE/ALL_DONE 与停工等待写原 issue/PR，不再 peer_send 管理层。经理以 `tern capture` 观察现场、收集停工/前置合入/全部完成，向管理层上报；收到处置后以 `tern send` 送达并观察恢复。
+- 工人把 STARTED/PR/BLOCKED/DONE/ALL_DONE 与停工等待写原 issue/PR，不 peer_send 管理层或片区经理。经理依 U107 用 `peer_ask` 单向主动巡查并亲自查看工作空间；处置用 `peer_send` 送达并观察恢复，只有 peer 不可达或答复与工作空间不符时，才用 `tern capture` 或会话 JSONL 备选取证，不用 `tern send` 代替 peer 送达。
 - Main 保留首次派活、全局排期和席位轮换；首次之后的日常工人通信交经理，不再由常规管理人员主动 peer 对接。秘书汇总 issue/PR 与经理记录，不替经理接管工人，不把评论已写等同实际送达。
 - 已取得首轮经理送达与响应证据：AreaPepgent 的14:29Z记录确认W-09恢复推进、#43合入、W-10收到协议但因新白名单缺口停工；AreaSoroi 的14:29Z记录确认W-07/W-08收到并处理协议，W-07继续独立切片、W-08接续F12。这里只登记该窗口的实际观察，不泛化为后续通信永久合规。源记录分别为 `local://state/area-pepgent.md` 与 `local://state/area-soroi.md`。
 
@@ -80,7 +80,7 @@ W-09 本次以命名分支 `pepgent-lab-home` 发车；Main 已确认并修正�
 - C1：只记录既定席位及授权范围；不改代码、design/、生产环境，不编写或运行测试，不以 hash 比对作证据。
 - C2：当前投票依 U95 / LEDGER C2-3 按职能席位与专责权重计票；D15/D16 的三族数字只作为当时历史事实保留，不追溯改票。秘书不投票、不判断设计。
 - C3：沿用十席矩阵，本轮不派工、不跨仓操作工程师工作树。
-- C4：工程事实沿用 issue/PR，进程与停工观察标明片区经理/Main/Argon 等报告来源；实际送达交每仓片区经理用 tern capture/send 负责。工人不再 peer_send 管理层，秘书不以评论已写替代工人已收到。
+- C4：工程事实沿用 issue/PR，进程与停工观察标明具名片区经理或 Main 等拥有方及观察时间；实际巡查、送达与恢复确认由每仓片区经理依 U107 用 peer 单向负责，秘书不接管工人、不以评论已写或消息投递替代实际收到。
 - C5：不触碰冻结目录、不接触无关前端会话；不因本记录另设审批或验收门禁。
 
 后续刷新直接替换对应行，标明源头与观察时间；运行状态取 issue/PR 和具名拥有方的进程观察，轮换取 Main 的 rolling-record，不从“消息已投递”推断工人已恢复或完成。
