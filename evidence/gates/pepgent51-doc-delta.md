@@ -73,3 +73,9 @@
 |---|---|---|
 | a | 两闸门均不越界：免票放行；在 #51 写明上表分工与 W-09 等待对象；AreaMgrPepgent 按上表送达。 | 不改 |
 | b | 任一闸门认定越界：按 P0 立案，议题为越界项。 | 视越界项而定 |
+
+## 六、闸门结论与处置
+
+- **闸门 A（`Argon-2`）：** 不越界，[`pepgent51-doc-delta-gate-a.md`](pepgent51-doc-delta-gate-a.md)（PM `68a14e1`）。
+- **闸门 B（`ArgonGovernance-2`）：** 不越界，[`pepgent51-doc-delta-gate-b.md`](pepgent51-doc-delta-gate-b.md)（PM `40f6faf`）。F5 只记录：PR#65 正文不回写，由片区经理提醒 W-10 以后的 WEB 切片 PR 按 D20-03 把原文同时贴进 PR 正文和 #51 评论。
+- **处置 a：** 免投票放行。已在 #51 写明分工和 W-09 的等待对象：[评论 6562696758](https://github.com/Pepgent/Pepgent/issues/51#issuecomment-6562696758)。之后由 AreaMgrPepgent 送达 W-09；BLOCKED 要等 W-09 收到送达后才解除。
