@@ -39,7 +39,7 @@
 | D12-07 | **节点库与自动化页** | LabPageWire；Library 基线 `feat/lab-10-library`（fc89bcd）；automation_rule/run | nodes={library,usage,draftReferences,templates,version,panels}；library 沿该基线 LibrarySnapshot 并按 D12-03 修订，staged 带服务端静态导出的 definition 与 reason；usage 为逐定义函数使用查询，草稿引用归 LAB-11b（D10-11(a)）。automation={rules,runs,conversations,panels}，规则与运行结构 D12-09。`conversations: ConversationWire[]` 携带 `runs` 中 `conversation` 非 null 的各运行对应的完整 Automation 会话头，每个会话一项，对本 Lab 全体成员可见、不按 owner 过滤（D31-01）。其 `slots` 按 D12-04 挂载：无运行时带该会话在线一代全部在途槽位，有 Open 运行时为 `[]`、槽位在运行项；不改变 `panels` 的本人本页 Panel 选择范围 | 沿合法基线形状，不把 TS AST 导出搬浏览器；Automation 会话头由自动化页携带，不重复放入目录、运行 wire 或会话详情 | 串联 | 否 |
 | D12-08 | **讨论、数据集、算力、容器、设置、首页** | LabPageWire | discussions={activity,selected}，activity 为最后消息时刻/角色/正文与当前成员 readAt，selected 取目录创建最新讨论，无则null；discussion={activity,selected}，selected 来自参数。正文只经 conversation.read，讨论 loader 按 selected 读详情，Panel 同一路读。详情含 messages、attachments、conclusions、context、artifacts、ircQueue；头、运行关系、pending 在目录或页面，不重复。datasets={artifacts,contexts,references,objectSizes,valueRuns,volumes,templates,panels}，store File 来自目录图，卷为结束远程调用清单，valueRuns 读 store。clusters={templates,jobs,presence,panels}；connectCluster={templates}只读；containers={images,templates,jobs,definitions,panels}，images 按 P15 从检出导出含文本，definitions 统计绑定数；构建记录与标签按 D8-16 不进第一版。settings={members,roles,invitations,repos,repoActivity,library,agentTemplates,ompVersion,discussionActivity,panels}；home={reports,activity,milestones,templates,jobs,discussionActivity,panels}。各页 panels 只选本人本页会话头 | 来源按 D7 权威表与本条；正文只有 D12-03 一个读取位置，消息变化在页面由 conversation 失效；目录/页面去重独立于 RunEvent 的 D11-C1/C2 | 串联 | 否 |
 | D12-09 | **自动化规则的结构与运行事实** | `automation_rule`、`automation_run`；LAB-09；D7-10 | 规则：`{ name, enabled, scope, trigger, when, conditions, then, creator }`。`trigger` 是 `event{run_started \| run_ended \| run_aborted} \| schedule{cron}`；**cron 显式按 UTC 解释，croner 传 `timezone: "UTC"`，schedule.at 为同一 UTC 时刻的 ISO 8601 串（D30-03 v2）**，不增加时区字段或部署变量。仪器触发（P8）按 D8-16 不进第一版，列入 D9，公开类型不含该变体。`scope` 的三个 variant 不变；`focused_project` 在每次匹配或命名时读规则创建者当前 `member_profile.main_project_id`，事件匹配与 `project{p}` 相同，开出的 ext 项目取该项目；创建者无主项目时按 Lab 范围、ext 项目为 null，不在规则保存项目副本（D30-01）。`when`、`conditions`、`then` 是作者写的步骤 `{ text, detail, actor }`，`actor` 为 `automatic`、`agent{template}`（Lab 库 `.omp/agents` 的定义名）或 `approval`。事件触发按 D7-10 / D30-02 的每 Lab 落库生命周期 cursor 续读，不改 store cursor 语义。then 含 approval 时运行停 waiting，action 是规则步骤与触发事实填好的 prompt，批准后开 Automation 会话。**该会话与其他 Lab 会话一样是装着 soroi 定制的 Main 根会话（D7-04）**；owner 取批准者，手动开出取 manual.by，无审批的事件/定时开出取规则 creator；后续授权沿既有规则以此 owner 判定，权限表不变（D30-04）。首条 prompt（审批时为 waiting.action，其余为同样填好的文本）按既定 human_irc_queue 语义入队，principal 取该 owner 对应的 user.id，含既有 human:<principal> 前缀、投递时机和 conversation 通知，不新增通道（D30-05）。conditions 由 Main 判断，agent 步由它用模板派子 agent（D5-17）。首条投递后第一次 session_settled 或 prompt_result.sessionSettled 为真时，同次受理将 running 改为 ok、endedAt 记该时刻并发 automation；条件不满足时说明原因并结束首轮，也为 ok，续写不再改变该运行。skipped 仅由 automation.dismiss 产生，failed 判定由工程师自定，不新增状态、字段或 host tool（D30-06）。运行 trigger 事实 event{run,event,at} / schedule{at} / manual{by,at} 与会话关联形状不变。规则删除按 D12-10 / D30-07。批准权限按 D11-29A：approval:any 可批任意；approval:ownExperiments 只可批事件触发、触发运行 owner 为本人 | **选定：** 条件交给 Main 判断，不另造条件语言；步骤是用户内容，原型步骤、执行者名称有来源（COV G51）。UTC cron 的当地时间由规则作者换算，ok 表示首轮结束，不区分是否实际执行条件动作。**备选：** 用模板直接作为根会话：失去 soroi_eval 与 Lab host tools（D12Divergent）。**备选：** 审批放进会话、在条件判断之后：要新增 host tool 并改变状态顺序，审批人看到的是填好的 prompt。**备选：** 保留 instrument：把 D8-16 排除的能力重新引入契约 | 串联 | 是：规则结构与 D30 自动化语义 |
-| D12-10 | **命令联合、结果与权限（B21 ③）** | protocol/lab/command.ts；lab.command | 完整联合、逐 kind 结果与权限按下文；`LabCommandResult<C> = LabCommandOutput[C['kind']]`，无兜底。结果为拥有方受理并记录，不是后续执行完成；discussion.create 写行返 id，首 prompt 才起根；discussion/panel.prompt 入 human_irc_queue 即返回，投递回复经 conversation；intervene/abort 返端点结论。模板文件写设置 agents Panel worktree，writeFile/removeFile，saveVersion{conversation,id}=library.merge `.omp/agents/<id>`；Library 基线 `feat/lab-10-library`（fc89bcd）的合入路径由 nodes 放宽含 `.omp/agents/**`。Lab 由 seed 建，没有 lab.create。Better Auth 新增 lab:write 授 owner/researcher/student，不授 guest；discussion create/prompt 按 D11-49；lab.update 需 organization:update；member 需 manageMembers；library/agentTemplate/repo 需 editLibrary；审批按 D11-29A；其余 write。会话写还需 member.id 等于 conversation.owner；project 只需 write。报告由 host tool 写、GUI 只读。第一版不含 image.build/template.bind、cluster.connect、sandbox.create、job.restart/destroy、shell、预检查，按 D8-16 列 D9 | guest 只读、会话写限 owner；不上传整套模板覆盖已合入修改 | 串联 | 是：补命令/结果与write权限 |
+| D12-10 | **命令联合、结果与权限（B21 ③）** | protocol/lab/command.ts；lab.command | 完整联合、逐 kind 结果与权限按下文；`LabCommandResult<C> = LabCommandOutput[C['kind']]`，无兜底。结果为拥有方受理并记录，不是后续执行完成；discussion.create 写行返 id，首 prompt 才起根；discussion/panel.prompt 入 human_irc_queue 即返回，投递回复经 conversation；intervene/abort 返端点结论。模板文件写设置 agents Panel worktree，writeFile/removeFile，saveVersion{conversation,id}=library.merge `.omp/agents/<id>.md`（D46-05）；Library 基线 `feat/lab-10-library`（fc89bcd）的合入路径由 nodes 放宽含 `.omp/agents/**`。Lab 由 seed 建，没有 lab.create。Better Auth 新增 lab:write 授 owner/researcher/student，不授 guest；discussion create/prompt 按 D11-49；lab.update 需 organization:update；member 需 manageMembers；library/agentTemplate/repo 需 editLibrary；审批按 D11-29A；其余 write。会话写还需 member.id 等于 conversation.owner；project 只需 write。报告由 host tool 写、GUI 只读。第一版不含 image.build/template.bind、cluster.connect、sandbox.create、job.restart/destroy、shell、预检查，按 D8-16 列 D9 | guest 只读、会话写限 owner；不上传整套模板覆盖已合入修改 | 串联 | 是：补命令/结果与write权限 |
 | D12-11 | **GUI 介入的交回** | `intervene.takeover`、`intervene.answer`；D5 §3.6 | 命令带 `conversation: ConversationId`、`writerSession: SessionId`、`slot: SlotId` 与 `GuiHandback = { fields: Record<string, GuiReturned> }`，`GuiReturned` 为数值、字符串、布尔或 `file{artifact: ArtifactRef}`。Lab 按 `conversation.owner` 授权，直接把它转成 D5 的 `HumanHandback{slot, by: 当前 UserId, fields: Record<string, Returned>}`，发到 `eval:<writerSession>` 的持有槽位会话；在线根会话的 writers/slots 读取不唤醒 parked 会话。文件值按 P16 落到该会话可读的路径。store 的 `Handback` 由 eval 插件在提交时生成，不出现在 GUI 线上 | **选定：** 每层用拥有方的形状：GUI 输入、端点请求（D5）、store 提交（D6）；介入按 conversation 与 writerSession 直接送持有槽位的会话，不让 Lab 按运行猜端点。**备选：** GUI 直接发 store `Handback`：越过 eval 插件这一拥有方 | 串联 | 否 |
 | D12-12 | **讨论已读** | 新表 `conversation_read{conversation, member, readAt}`；`lab.conversation.markRead{conversation}` | 未读是当前查看成员自己的状态：成员打开一个讨论时，前端调 `lab.conversation.markRead`，Lab 记下该成员读到的时刻。它不是 `LabCommand`，只要求有效会话与目标 Lab 的成员身份，**guest 也可调用**：它只记录调用者本人的阅读位置，不改变任何共享的 Lab 事实。`discussions`、`discussion`、首页与设置页的 `activity` 带当前成员的 `readAt` 与最后一条消息时刻，未读由投影比较 | **选定：** 按成员记已读，任何能读讨论的成员（含 guest）都有自己的未读状态。argon 依 (U)（`01a18e1f #e818d410`、`#e3692177`；`01a192a2 #ed4570ad`）裁定：个人阅读位置不属于 V-6 禁止的领域写入（`evidence/votes/D12-argon.md`）。**备选：** guest 不持久化已读：guest 的未读没有来源（导师提议）。**备选：** 只记所有者的已读：其他成员看到的是所有者的状态（D12Steady）。**备选：** 浏览器本地存储：换设备即丢失，不是权威事实 | 串联 | 是：原型字段此前无权威源 |
 | D12-13 | **字节与上传面** | `src/app/routes/api/lab/*` | 各路由的方法、参数、请求体、响应与媒体类型见“HTTP 路由”一节（下文）。要点：`GET /api/lab/objects/{sha}`、`GET /api/lab/artifacts/{id}` 不变（D7-18）；**`artifact.upload` 改为 `POST /api/lab/conversations/{conversation}/artifacts?name=&role=`**，请求体是原始字节，返回 `ArtifactMetaWire`，其 `id` 就是之后在 `GuiHandback`、`discussion.load` 中使用的 `ArtifactRef`；新增 Mux 文件代理两条（列目录、读文件，D3:89-90）与 store 卷文件代理一条（D6:152），都只读。认证同 D7-18 | **选定：** 字节走 HTTP，命令联合只带结构化数据。**备选：** D7 原写的 `artifact.upload{bytes: Blob}`：JSON 载荷不适合大文件 | 技术 | 是：files 与 Runner Workspace 的浏览器入口 |
@@ -211,9 +211,9 @@ export type LibraryRepoWire = { id: LibraryRepoId; remoteUrl: string; branch: st
 export type HumanIrcQueueWire = { msg: string; principal: UserId; body: string; queuedAt: Instant }
 ```
 
-#### Lab 自有活动的读取与首页投影（D38-02 v2；写入时机按 D43-01 v1）
+#### Lab 自有活动的读取与首页投影（D38-02 v2；写入时机按 D43-01 v1、D46-01 v1）
 
-**写入（W-09）：** 成员与结论确认两族命令成功落库时，在同一事务写一行 activity。节点合入族三命令的成功是合入提交 push 到 Lab 库默认分支（D7-11）；W-09 在 push 成功之后于 `lab.sqlite` 写一行 activity：
+**写入（W-09）：** `member.quota` 与 `conclusion.confirm` 成功落库时，在同一事务写一行 activity。`member.invite`、`member.role`、`member.remove` 的成功是 Better Auth organization 端点完成写库（D7-03）；W-09 在端点成功返回之后，以单独一个 SQLite 事务写一行 activity。节点合入族三命令的成功是合入提交 push 到 Lab 库默认分支（D7-11）；W-09 在 push 成功之后于 `lab.sqlite` 写一行 activity：
 - `library.merge`、`agentTemplate.saveVersion`：push 成功后，单独一个 SQLite 事务写该行；
 - `library.apply`：push 成功后，该行与删除所选 `library_staging` 行在同一个 SQLite 事务。
 
@@ -264,11 +264,12 @@ export type LibrarySnapshot = {
   drafts: { conversation: ConversationId; paths: string[]; behind: number }[]   // 含 .omp/agents/** 的未合入改动
 }
 export type LibraryVersionDetails = { record: NodeVersionRecord; display: { kind: 'commit_sequence'; sequence: number } }
-export type AgentTemplateWire = {                                     // D7-11：Lab 库 .omp/agents 的 omp agent 定义
-  id: string; harness: 'omp'; description: string; models: string[]  // models 取自 frontmatter
-  files: { path: string; contents: string }[]                         // 默认分支（中心检出）上的文件
-  lastCommit: { commit: string; sequence: number; at: Instant }
-  drafts: { conversation: ConversationId; paths: string[] }[]        // 各会话未合入的该模板文件改动
+export type AgentTemplateWire = {                                     // D46-05：默认分支 .omp/agents/<id>.md 单文件，顶层、不递归
+  id: string; harness: 'omp'; description: string; models: string[]  // id = frontmatter name = 文件名主干；description 取 frontmatter description
+  // models 取 frontmatter model：字符串按逗号切分并去首尾空白，YAML 列表原样取，未声明为 []
+  files: { path: string; contents: string }[]                         // 仅 [{path: '.omp/agents/<id>.md', contents}]，内容取默认分支中心检出
+  lastCommit: { commit: string; sequence: number; at: Instant }        // 默认分支最近改动该路径的提交，sequence 按 D7-11
+  drafts: { conversation: ConversationId; paths: string[] }[]        // 各会话对该路径未合入的改动，判据按 D7-11
 }
 ```
 
@@ -366,11 +367,13 @@ export type TemplateMetadata = {                                             // 
 }
 export type TemplateWire = TemplateInfo & { metadata: TemplateMetadata }
 export type JobWire = { run: RemoteRunSummary; status: RunStatus }
-export type ImageDefinition = {                                               // P15
-  name: string; path: string; base: string // name = 发布的 OCI repository 路径，不含 registry 主机、tag 或 digest，例如 pepgent/omp-agent（D38-03）
-  dependencies: { name: string; version: string; kind: 'base' | 'sdk' | 'python_package' | 'internal_library' | 'files' | 'runtime_config' }[]
-  files: { path: string; size: number; contents: string | null }[]           // contents：文本文件全文，二进制为 null
+export type ImageDefinition = {                                               // D46-03 v2 / P15：images 根 images.json 每个发布目标一项
+  name: string; path: string; base: string // name = 无 registry/tag/digest 的发布 repository；path = Dockerfile 相对路径；base = 最近已发布祖先，无则链顶外部引用原文，非直接 FROM
+  dependencies: { name: string; version: string; kind: 'base' | 'sdk' | 'python_package' | 'internal_library' | 'files' | 'runtime_config' }[] // 原样取清单，包括跨过的内部 stage 装入内容
+  files: { path: string; size: number; contents: string | null }[]           // path 取清单；size 为检出文件字节数；UTF-8 文本全文，二进制 null；清单 target 不出线
 }
+// D46-04：online = 该成员在本 Lab 至少一个 GET /api/lab/events 订阅；lastActiveAt = 本进程启动后最近接纳该成员的本 Lab 已认证 lab.* / /api/lab/* 调用时刻，无则 null。
+// 两项仅为 Lab 进程内观察事实，不取 Better Auth session，不落库、不加表列迁移，wire 不变。
 export type MemberStatusWire = { member: MemberId; grants: LabGrants; lastActiveAt: Instant | null; online: boolean
                                  gpuHoursUsed: number | null }               // P9：无来源时 null，D9 判为 U
 export type VolumeWire = { run: RunId; step: Seq; position: number; manifest: VolumeManifest }
@@ -449,7 +452,7 @@ export type LabCommand =
   | { kind: 'repo.disconnect'; repo: LibraryRepoId }
   | { kind: 'agentTemplate.writeFile'; conversation: ConversationId; path: string; contents: string }   // 写进该 Panel 会话 worktree 的 .omp/agents/**
   | { kind: 'agentTemplate.removeFile'; conversation: ConversationId; path: string }
-  | { kind: 'agentTemplate.saveVersion'; conversation: ConversationId; id: string }   // = library.merge 该模板的路径（D7:71）
+  | { kind: 'agentTemplate.saveVersion'; conversation: ConversationId; id: string }   // = 对该 Panel 会话 library.merge，paths = ['.omp/agents/<id>.md']（D46-05）
   | { kind: 'discussion.create'; lab: LabId; project: ProjectId | null; name: string }
   | { kind: 'discussion.prompt'; conversation: ConversationId; msg: string; text: string }   // = 根会话 human_irc enqueue（D7-09）
   | { kind: 'discussion.load'; conversation: ConversationId; artifacts: ArtifactRef[] }
@@ -656,7 +659,7 @@ export type JobTailFrame = { observedAt: Instant; text: string }
 | --- | --- |
 | P3（展开） | remote 模板能返回 `TemplateMetadata`（见类型定义），即 D2-09 的“GUI 展示所需字段” |
 | P14 对象大小 | store `GET /objects/{sha}` 响应带 `Content-Length`，Lab 读响应头即可得到大小 |
-| P15 镜像定义导出 | Lab 能从 images 检出读出每个镜像的 `ImageDefinition`（D7-13）；`name` 导出发布的 OCI repository 路径，不含 registry 主机、tag 或 digest，模板引用按 D7-13 / D38-03 归一关联，假定能工作 |
+| P15 镜像定义导出 | 按 D46-02/03 v2，Lab 后端是 images 检出的唯一写方：从部署注入的 `PEPGENT_LAB_IMAGES_HOME`（`/var/lib/pepgent/images`）与 `PEPGENT_LAB_IMAGES_REMOTE` 取路径和远端，不存在时 clone，每次读 `containers` 前快进远端默认分支；私有仓库只读凭据由 deploy 既有 Komodo Variables 注入路径交给 Lab 容器 git，假定能工作，不让用户粘贴、不进镜像。镜像定义的权威为 images 仓库根 `images.json`，W-03 维护，Lab 不解析 Dockerfile。清单为 JSON 数组、每个发布目标一项，现有 `omp-agent`、`central`、`lab-web`：`name` 为 `pepgent/omp-agent`、`pepgent/central`、`pepgent/lab-web`，`target` 为构建 stage（不出线），`path` 为 Dockerfile 相对路径；`base` 沿 FROM 链取最近已发布祖先的 name，无则链顶外部镜像引用原文，故 central/lab-web 为 `pepgent/omp-agent`、omp-agent 为 `debian:stable-slim`，不是直接 FROM。跨过内部 stage 的内容仍列入 dependencies；六类为 base（base 所指镜像）、sdk（工具链/可执行文件）、python_package（pip 包）、internal_library（内部源码载荷）、files（构建上下文复制文件）、runtime_config（USER/HOME/WORKDIR/ENV/CMD 等）。version 取 Dockerfile 引用或标签原文，浮动引用写 latest；files 为定义文件相对路径，至少含 path 所指 Dockerfile。Lab 原样导出 name/path/base/dependencies，files 的 path 取清单、size 取检出文件字节数，contents 为 UTF-8 全文或二进制 null。wire 不变，缺源字段表中其余视图字段仍不出线；模板引用仍按 D7-13 / D38-03 归一关联 |
 | P16 GUI 交回中的文件 | Lab 把 `ArtifactRef` 的字节放进持有槽位会话可读的位置，以 D5 `Returned.file{path, placement}` 交给端点 |
 | P17 智能体模板使用次数 | 设置页“使用次数”能从会话记录统计；第一版投影不显示 |
 | P18 omp 版本 | Lab 能读出所装 omp 的版本（D7-11“`harnessVersion` 取容器里 omp 的版本”） |
