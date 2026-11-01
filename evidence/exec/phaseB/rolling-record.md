@@ -12,6 +12,7 @@
 | W-02 pepgent-remote | `gh issue list -R Pepgent/remote --state open` 返回 0（remote#17 已合入） | `tern kill session pepgent-remote` |
 | W-03 pepgent-images | `gh issue list -R Pepgent/images --state open` 返回 0（images#12 合入，关闭 #6 与 #3） | `tern kill session pepgent-images` |
 | W-04 pepgent-deploy | `gh issue list -R Pepgent/deploy --state open` 返回 0（deploy#17 合入，关闭 #16、#8、#1） | `tern kill session pepgent-deploy` |
+| W-06 pepgent-store（D16-15 临时重新进场） | [soroi#294](https://github.com/Pepgent/soroi/pull/294) 已合入；`store-contract` 分支已生成；W-06 已在 [Pepgent#43 原帖登记解锁](https://github.com/Pepgent/Pepgent/issues/43#issuecomment-6558903750) | Main 报告已执行 `tern kill session pepgent-store` |
 
 ## 发车
 
@@ -26,11 +27,10 @@
 | W-03 pepgent-images | 663263209586691 | 01a19748-1206 | pepgent-images-home（images f66e655） | images#6（issue-6-lab-web-live，d40585f），接着做 #3 |
 
 
-## 待补入（优先级）
+## 重新进场与当前状态
 
-1. **W-06 pepgent-store 已重新进场（D16-15）。** 依据 ArgonGovernance 关键路径抢占令，临时开第 5 席：tern 663838735204355，peer 01a1975b-ea4f。该席只做一个 D16-15 切片：contract/identity 改为 node:crypto、store-contract CI、撤回根 exports。切片合入并在 Pepgent#43 发出解锁评论后即退役。
-2. **W-02 pepgent-remote 已重新进场。** 为 remote#18（C7 `TemplateMetadata`）重开该席，tern id 663967584223235。W-04 deploy 已退役：deploy 仓 OPEN=0，deploy#17 一次性关闭了 #16、#8、#1，已执行 `tern kill session pepgent-deploy`。当前在跑 lab、plugin、e2e、remote，外加临时席 store。
-2. **W-10 web。** 在 Pepgent#43 合入后补入。
+1. **W-06 pepgent-store 的 D16-15 临时切片已完成并退役。** 本次临时 tern 为 `663838735204355`，peer `01a1975b-ea4f`，按源记录中的 ArgonGovernance 关键路径抢占令重新进场。实现已由 [PR#294](https://github.com/Pepgent/soroi/pull/294) 合入，CI 生成 `store-contract` 分支（首次提交 `8a23e213c03b`）；W-06 已在 [Pepgent#43](https://github.com/Pepgent/Pepgent/issues/43#issuecomment-6558903750) 登记可安装地址 `git+https://github.com/Pepgent/soroi.git#store-contract`，秘书未重复发评论。Main 已报告结束该临时席。
+2. **W-02 pepgent-remote 仍在重新进场任务中。** 为 remote#18（C7 `TemplateMetadata`）承接任务，tern `663967584223235`；此前 deploy#17 已合入，W-04 已退役。当前在跑 lab、plugin、e2e、remote，共 4 席。
 ## LEDGER 核对
 
 | 条款 | 核对结果 |
@@ -38,7 +38,7 @@
 | C1-2 | 每个域一个席位；Pepgent 使用独立克隆 |
 | C1-3 | 同域切片可以合进同一个 PR；只做本仓检查；W-08 按被测代码已合入的时点编写 spec，阶段 B 不执行跨组件测试 |
 | C3-4 | 切片 worktree 用 `-b` 建；不检出 main |
-| 当前席位 | 在跑 lab、plugin、e2e、remote，外加临时 store（源记录中的 ArgonGovernance 关键路径抢占令）；已退役 mux、library、images、deploy。store、remote 的前次退役与本次重新进场分开记录，不把旧退役当当前状态 |
+| 当前席位 | 在跑 lab、plugin、e2e、remote，共 4 席；store（含 D16-15 临时席）、mux、library、images、deploy 已退役。各次重新进场与结束分开记录，启动、退役不等同阶段 C 统一验收通过 |
 
 ## 待补入
 
