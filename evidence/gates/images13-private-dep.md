@@ -94,3 +94,10 @@ W-03 按 README 导出 Pepgent `origin/main` 构建 `--target lab-web`，`web-bu
 - 两道闸门都确认 ④ 不越界：免票放行。在 images 新开承载 issue，在 images#13 写结论和等待对象；由 images 片区经理送达 W-03。
 - 任一闸门认定越界：按 P0 用 `council propose --seat Coordination --as DeskImages13Blocked` 立案，notify 含 `Main` 和 images 片区经理。
 - 闸门结论分别写入 `evidence/gates/images13-private-dep-gate-a.md`（Argon）和 `evidence/gates/images13-private-dep-gate-b.md`（ArgonGovernance）。
+
+## 八、处置
+
+- 闸门 A（`Argon-2`）：不越界，属 K3，支持候选 ④，反对 ①②③；见 `images13-private-dep-gate-a.md`（PM `4c29101`）。
+- 闸门 B（`ArgonGovernance-2`）：候选 ④ 不越界，在 images 另开同席位承载、由在席 W-03 接着做，不派 W-06、W-09；B-4 合规；见 `images13-private-dep-gate-b.md`（PM `301171c`）。
+- 免票放行。承载：[images#14](https://github.com/Pepgent/images/issues/14)（W-03 修 lab-web 构建）→ [images#13](https://github.com/Pepgent/images/issues/13)（W-03 重建 lab-web，完成验收）→ [deploy#24](https://github.com/Pepgent/deploy/issues/24) / [PR#25](https://github.com/Pepgent/deploy/pull/25)（W-04 先更新已发布镜像的引用，lab-web 的引用与配对记录后补）。
+- 结论评论：[images#13 评论 6563145457](https://github.com/Pepgent/images/issues/13#issuecomment-6563145457)。由 images 片区经理送达 W-03。
