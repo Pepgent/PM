@@ -1,13 +1,13 @@
-# 阶段 B（`D15-11③ / R21`）常驻 `ArgonGovernance` 合法性复核与一仓一进程恢复派工预审标准
+# 阶段 B（`D15-11③ / R21`）常驻 `ArgonGovernance` 合法性复核与一仓一进程工程执行契约、事后检查清单
 
 > **复核机构：** 常驻领导层职能与 Agent 工作分配意图守护者 `ArgonGovernance`（`agent://ArgonGovernance`），与常驻产品与设计意图守护者 `Argon`（`agent://Argon`）按正交职责共同构成阶段 B 双核复核。
 > **本步骤 `LEDGER.md`（`8bfd70c`）逐项核对记录（依 `U68–U69` / `C5-2`）：**
 > - **`C1-1..C1-4`（产品定位、组件独立、全流程阶段门禁与隔离环境）：** 已核对。复核严格守住“`soroi` 独立于 `omomp`、不改 `omp` 宿主”“组件独立成仓 + `store`（仓 A）/ `omp-soroi`（仓 B）拆仓边界”“开发期完成各组件实现与本仓检查后再统一执行 `A0 + F01–F31` 与 `D9/F32`”“不触碰 `Pepgent/Pepgent` 根 checkout 与无关前端会话（`U59`）”。
-> - **`C2-1..C2-4`（领导小组宪制、双核守护、三族反例优先民主与用户直接授权）：** 已核对。`D10–D14` 及 `D11-A/B/C` 因在 `01a195a6` 期间未经常驻双核审定、未调度独立空白历史 `task:high` 参与 Claude 族投票、未每步核对 `LEDGER.md`，在阶段 B 经双核逐条复核并修正后，须交由阶段 B 治理分身组织三族（Claude 族含 `Main`+分身+独立空白历史 `task:high`、`argon` 双核、导师 `LeadMentor`）正式表决。
+> - **`C2-1..C2-4`（领导小组宪制、双核守护、三族反例优先民主与用户直接授权）：** 已核对。D10–D14 与 D11-A/B/C 的历史程序瑕疵在阶段 B 经双核按正交职责复核，修订后的重要事项交由治理分身组织三族表决：Claude 族含 Main、分身与独立空白历史 task:high；argon 族由常驻 Argon 投一票，导师族由顶层常驻 LeadMentor 投一票。ArgonGovernance 负责治理巡检、BLOCKED 初审和第 20 条修正提议，不作为例行投票席。
 > - **`C3-1..C3-5`（四级上下文物理隔离梯度與一仓一进程铁律）：** 已核对。本报告第四节制定了严格互斥的 **10 席独立 `tern` 工程进程拓扑与物理路径域矩阵**，彻底根除跨仓混派（原 `eng-ops` 混派三仓、`eng-rt` 混派两仓）与同仓共分支/越界写（原 `eng-lab3` 与 `eng-web` 共写 `protocol/lab` 与同一分支）。
 > - **`C4-1..C4-3`（异步契约总线、受限通信信道与唯一权威源）：** 已核对。常规工程状态只写 GitHub issue/PR 评论，严禁直报 `Main`；本报告同时落盘 `local://argon/phaseB-review-governance.md` 与 `pepgent-pm/evidence/argon/phaseB-review-governance.md`。
-> - **`C5-1..C5-4`（独立监督、越权改动回退完成与工程冻结边界）：** 已核对。`D15-10③/④/⑤` 已完成 8 仓回退与独立核验（`VERIFY.md`、`PM` `bc849b0`、`LEDGER.md` `8bfd70c`）；在阶段 B 决策表经三族表决通过、设计/issue 正文合法回写、且主会话提交的一仓一进程恢复派工方案经双核预审通过前，**工程冻结继续有效，严禁提前启动任何 `tern` 工程师**。
-> - **`R1–R21`：** 当前推进 `R21`（阶段 B 双核复核与恢复派工预审标准）。
+> - **`C5-1..C5-4`（独立监督、越权改动回退完成与工程冻结边界）：** 已核对。`D15-10③/④/⑤` 已完成 8 仓回退与独立核验（`VERIFY.md`、`PM` `bc849b0`、`LEDGER.md` `8bfd70c`）；D16 通过即为最终派工授权，当回合发车；回写并行，不作为前置。发车记录写入文件并归档，由 ArgonGovernance 事后检查，不用 IRC 抄送双核。
+> - **`R1–R21`：** 当前推进 `R21`（阶段 B 双核复核与恢复工程执行契约）。
 
 ---
 
@@ -15,7 +15,7 @@
 
 ### 1.1 总程序瑕疵认定与治愈路径（依 `U65–U69`、`U82`、`C2-1`、`C2-3`、`D15-01`、`D15-11③/④`）
 - **程序瑕疵（`VG-3` / `VG-4`）：** `D10`（[PM#16](https://github.com/Pepgent/PM/issues/16)）、`D11-A`（[PM#17](https://github.com/Pepgent/PM/issues/17)）、`D13`（[PM#18](https://github.com/Pepgent/PM/issues/18)）、`D12`（[PM#19](https://github.com/Pepgent/PM/issues/19)）、`D14`（[PM#20](https://github.com/Pepgent/PM/issues/20)）、`D11-B`（[PM#21](https://github.com/Pepgent/PM/issues/21)）、`D11-C`（[PM#22](https://github.com/Pepgent/PM/issues/22)）均由 `01a195a6` 分身在未启动顶层常驻 `Argon`/`ArgonGovernance`、未调度独立空白历史 `task:high` 参与 Claude 族计票、未执行每步 `LEDGER.md` 核对的情况下产生。
-- **治愈路径 `【定】`：** 由阶段 B 治理分身（`PhaseBClone_ffeb`）合并本报告与常驻 `Argon` 的产品意图复核报告，在 `Pepgent/PM` 发起阶段 B 综合复核与重做决策 issue，将下表复核通过与修订后的条款提交 **Claude 族（`Main` + `PhaseBClone_ffeb` + 独立空白历史 `task:high`）、`argon` 族（`Argon` + `ArgonGovernance` 双核）、导师（`LeadMentor`）三族逐条表决**。表决通过后，秘书方可执行 `design/`、`PM` 决策文档与各仓 issue 正文的合法回写。
+- **治愈路径 `【定】`：** 阶段 B 治理分身合并本报告与常驻 Argon 的产品意图复核报告，在 Pepgent/PM 发起综合复核与重做决策 issue，提交 Claude 族（Main、治理分身、独立空白历史 task:high）、argon 族（常驻 Argon 一票）、导师族（顶层常驻 LeadMentor 一票）逐条表决。ArgonGovernance 负责治理巡检、BLOCKED 初审和第 20 条修正提议，不作为例行投票席。通过后由常驻 Argon 回写 design/，秘书回写 PM 文档与 issue；回写与工程发车并行，不作为前置。
 
 ### 1.2 `D10`（交付顺序、仓库划分、组装契约与派工边界，`evidence/decisions/D10-repo-delivery.md`）逐行复核
 
@@ -74,13 +74,13 @@
 | 文件路径 | 复核结论 | 核对详情与必要微调（纳入阶段 B 决策表） |
 |---|---|---|
 | [`AGENTS.md`](AGENTS.md) | **【通过（仅第 40 行示例命令补齐 2 个参数）】`【定】`** | ① 第 5、13、58 行（`U80` 双核计票与 `LEDGER.md` 必查入口）、第 39 行末句（`U43–U44`/`U57` 独立分析不设导师前置）、第 46–56 行（`U58` 七条工作方式禁令）全部合规保留；<br>② **唯一微调项（第 40 行）：** 当前第 40 行 `tern new session` 示例漏写了 `--model anthropic/claude-opus-5-5:high`（`U62`）与 `--session-dir /Users/mouriya/Ext/code/pepgent/.workers/<名字>/sessions`。须在阶段 B 将第 40 行与 `.omp/skills/tern-worker/SKILL.md:17-20` 完全对齐，消除文档间不一致。 |
-| [`.omp/skills/tern-worker/SKILL.md`](.omp/skills/tern-worker/SKILL.md) | **【完全通过，无需修改】`【定】`** | 已在 `8c48f5a` 落盘双核审定文本：强制要求双核预审、一仓（或一互斥路径域）一进程、`anthropic/claude-opus-5-5:high`、保留 `omp-peers`、禁 PTY 起 `omp`、常规状态只写 issue/PR、主会话对 `BLOCKED` 零单方分类权。 |
-| [`.omp/skills/decision-vote/SKILL.md`](.omp/skills/decision-vote/SKILL.md) | **【修订第 25–26 行后通过】`【定】`** | **微调项（第 25–26 行收票表）：** 明确写清：<br>① `Claude` 族：由 `Main`、负责该决策的治理分身、以及**独立空白历史 `task:high`** 三者逐条独立投票，三者全赞成方计 Claude 族一票（依 `U11`、`U82`、`D15-13`）；<br>② `argon` 族：由顶层常驻 **`agent://Argon` 与 `agent://ArgonGovernance` 双核**逐条投票，双核全赞成方计 `argon` 族一票（依 `U64–U65`、`U77–U78`、`C2-2`，严禁分身私自派一次性 `argon` 替代常驻双核）。 |
-| [`.omp/WATCHDOG-LeaderCompliance.md`](.omp/WATCHDOG-LeaderCompliance.md) | **【完全通过】`【定】`** | 已在 `8c48f5a` 落盘双核审定文本（`enabled: true`），准确覆盖 `C1–C5`、`U80–U82`、`D15-12`、`D15-13`，且明确规定“按已通过且经双核预审的决策正文派发”为合规动作。 |
+| [`.omp/skills/tern-worker/SKILL.md`](.omp/skills/tern-worker/SKILL.md) | **【工程执行契约】`【定】`** | 一仓（或一互斥路径域）一进程、`anthropic/claude-opus-5-5:high`、保留 `omp-peers`、禁 PTY 起 `omp`、常规状态只写 issue/PR、主会话对 BLOCKED 零单方分类权；D16 通过即为最终派工授权，不另设双核预审、签署、回写前置或退役复核。 |
+| [`.omp/skills/decision-vote/SKILL.md`](.omp/skills/decision-vote/SKILL.md) | **【对齐现行三族规则】`【定】`** | Claude 族由 Main、负责该决策的治理分身、独立空白历史 task:high 逐条独立投票，族内全赞成计一票；argon 族由常驻 Argon 投一票，导师族由顶层常驻 LeadMentor 投一票。ArgonGovernance 负责治理巡检、BLOCKED 初审和第 20 条修正提议，不作为例行投票席。压力测试由独立空白历史 task:high 承担 steady 和 divergent 两个视角，禁止 medium 模型 `discuss:*` 参与设计或决策。 |
+| [`.omp/WATCHDOG-LeaderCompliance.md`](.omp/WATCHDOG-LeaderCompliance.md) | **【治理事后检查】`【定】`** | 按 C1–C5、D16-12 巡检：D16 通过即为最终派工授权，当回合发车；G-1..G-7 是执行契约和事后检查清单，不是启动前签署门禁。 |
 | [`.omp/WATCHDOG-LowTierScope.md`](.omp/WATCHDOG-LowTierScope.md) | **【完全通过】`【定】`** | 默认 `enabled: false`（符合 `U27–U28` 无罪推定与低成本监控原则）。 |
 | [`.omp/agents/argon-governance.md`](.omp/agents/argon-governance.md) | **【完全通过】`【定】`** | 保持 `6c1faea` 受保护原文不变。 |
 | [`.omp/agents/argon.md`](.omp/agents/argon.md) | **【完全通过】`【定】`** | 已在 `8c48f5a` 恢复第 13–15 行准确背景描述，权限与边界完整。 |
-| [`.omp/agents/secretary.md`](.omp/agents/secretary.md) | **【完全通过（第 19 行同步双核表述）】`【定】`** | 已在 `bdaa278` 对齐 `U80` 台账精简规则；第 19 行可顺手同步写明 `argon` 族为 `Argon` + `ArgonGovernance` 双核、Claude 族含独立 `task:high`。 |
+| [`.omp/agents/secretary.md`](.omp/agents/secretary.md) | **【对齐现行计票职责】`【定】`** | 计票说明与 decision-vote 一致：Claude 族含独立空白历史 task:high；argon 族由常驻 Argon 投一票，导师族由顶层常驻 LeadMentor 投一票；ArgonGovernance 负责治理巡检、BLOCKED 初审和第 20 条修正提议，不作为例行投票席。秘书只记录，不投票、不做设计判断。 |
 | [`.omp/agents/behavior-analyst.md`](.omp/agents/behavior-analyst.md) & [`sentinel.md`](.omp/agents/sentinel.md) | **【完全通过】`【定】`** | 无罪推定行为分析与有界窗口异常扫描边界清晰。 |
 
 ---
@@ -109,9 +109,9 @@
 
 ---
 
-## 四、一仓一进程（`Opus 5.5 high`）恢复派工方案的双核预审标准（`D15-11④/⑤`）
+## 四、一仓一进程（`Opus 5.5 high`）工程执行契约与事后检查清单（`D16-09..13`）
 
-主会话（`Main`）在阶段 B 决策表表决通过并完成文档/issue 回写后，提交给 `agent://Argon` 与 `agent://ArgonGovernance` 预审的《工程恢复派工方案》，**必须逐项满足以下 7 条硬性预审标准（`G-1..G-7`），任一条不满足即由 `ArgonGovernance` 一票否决**：
+D16 通过即为最终派工授权，当回合发车；回写并行，不作为前置。G-1..G-7 是执行契约和事后检查清单，不是启动前的签署门禁。发车记录写入文件并归档，由 ArgonGovernance 事后检查，不用 IRC 抄送双核。合并异步，PR 正文写本仓编译、类型与基础检查的 (R)（C1-3）；工程执行事项只有 BLOCKED 才进入决策，独立职能部门的发起投票权和第 20 条修正不受影响。
 
 ### 标准 `G-1`：10 席独立 `tern` 工程进程与互斥路径域矩阵（严禁跨仓混派与路径重叠）
 
@@ -143,15 +143,15 @@
 - 每条发往 `tern` 工程师的初始 `peer_send` 派工消息必须明确包含：
   1) 唯一生效的 PM 决策 issue 链接与行号（禁止口头转述契约替代源文档）；
   2) 严格互斥的允许修改路径白名单（越界修改即违规）；
-  3) “代码编写完成前禁止写/跑测试，禁止以 hash 比对作为证据；本仓实现完成后执行本仓真实入口检查并将 `(R)` 证据写入 PR 正文”；
+  3) “代码编写完成前禁止写/跑测试，禁止以 hash 比对作为证据；本仓实现完成后，PR 正文写本仓编译、类型与基础检查的 (R)（C1-3）；合并异步，不要求每切片独立 runtime 验收”；
   4) “常规状态（`STARTED / PR / DONE`）只写 GitHub issue/PR 评论，**严禁 `peer_send` 给 `Main`**；仅当遇到契约空白/冲突需领导小组表决的 `BLOCKED` 或安全/硬件紧急事件时，先写 issue 评论再 `peer_send` 上报”。
 
-### 标准 `G-5`：每次派工与合并前的 `LEDGER.md` 逐项核对表（依 `U68–U69`、`C5-2`、`D15-11④`）
-- 主会话每申请启动一个波次的 `tern` 工程师，必须附上针对该波次的 `LEDGER.md`（`C1–C5`、`R1–R21`）逐项核对表，交 `agent://Argon` 与 `agent://ArgonGovernance` 双核签署预审通过后方可调用 `tern new session` 与 `peer_send`。
+### 标准 `G-5`：领导层实质核对与发车记录归档（依 `U68–U69`、`C5-2`、`D16-12`）
+- 领导层每步实质对照 LEDGER C1–C5、R1–R21；D16 通过即当回合发车，具体命令、peer_send 全文与核对记录写入文件并归档，由 ArgonGovernance 事后检查，不用 IRC 抄送双核。G-1..G-7 不构成启动前签署门禁；不要求逐波预审或工程师 PR 贴台账长表；不设退役前同步复核。
 
-### 标准 `G-6`：宿主机内存水位受控波次调度（依 `AGENTS.md` OS 看门狗条款）
-- 鉴于宿主机内存容量限制，**严禁同时并发运行全部 10 个 `tern` 工程进程**！
-- 必须按依赖关系分波次受控启动，**同一时刻活跃运行的 `tern` 工程进程不得超过 3–4 个**；单仓任务全部合入 `main` 的工程进程（如 `pepgent-mux`、`pepgent-remote`、`pepgent-library`）在完成后立即执行 `tern kill session` 释放内存（保留 `.workers/<名字>/sessions` 证据目录不删），再启动下一波次进程。
+### 标准 `G-6`：宿主机内存水位与自身依赖就绪滚动启动
+- 同时活跃的席位仍不超过 4 个；席位实现切片全部合入 main 后立即 `tern kill session`，保留会话目录。
+- 任何席位释放名额后，立即从等待中的席位里挑一个自身依赖已满足的启动，不按固定顺序等待无关席位。W-10 在 `protocol/lab` 的真实上游合入后，优先补入下一个空出的名额。W-08 按逐 spec 读法编写，不固定排在最后，所测代码全部合入后才编写，阶段 B 不执行跨组件测试。
 
 ### 标准 `G-7`：开发期完成后的统一组装验收门禁（依 `U2`、`U23`、`U30`、`U32`、`C1-3`）
 - 各组件开发期只做本仓检查，不设跨组件 live e2e 阻塞锁；

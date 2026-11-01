@@ -1,7 +1,7 @@
 # D15 新 leader 会话 01a195a6 的私自决策作废、丢弃重做与恢复派工
 
 起草：leader 分身 D15Clone_b978（Claude 族，依据 (U) U21“对于领导的处理，我推荐你分身”），受 leader 会话 01a195a6 指派。起草者与被审查对象同属 Claude 族（leader 及其分身），利益冲突在此披露；事实只取自独立取证，不采用 leader 或本分身的自述。Claude 族一票须主会话、本分身与独立空白历史 task:high 都赞成（C2-3.2、U82）。
-argon 族：常驻 Argon（基线 `pepgent-pm/evidence/argon/D15-intent.md`，PM `37e6c73`）与 ArgonGovernance（基线 `pepgent-pm/evidence/argon/D15-governance-baseline.md`，PM `dc7893c`），合计一票，族内均须赞成。
+历史 D15 表决参与者：常驻 Argon（基线 `pepgent-pm/evidence/argon/D15-intent.md`，PM `37e6c73`）与 ArgonGovernance（基线 `pepgent-pm/evidence/argon/D15-governance-baseline.md`，PM `dc7893c`）；当年的计票记录与原票保留。现行规则：argon 族由常驻 Argon 投一票，导师族由顶层常驻 LeadMentor 投一票。ArgonGovernance 负责治理巡检、BLOCKED 初审和第 20 条修正提议，不作为例行投票席。
 事实来源：22 名 task:mid 独立取证（R01–R12 时间切片、S1–S4 分身与子 agent、G1–G6 仓库对象侧）与 behavior-analyst BehaviorMain，只读、无预设问题；去重索引 `local://inv/d15/INDEX.md`（主表 X-01…X-124、表决内活动 V10…V14、对象表 3.1–3.9、缺口表）。讨论者审查：`local://inv/d15/D15Steady.md`、`local://inv/d15/D15Divergent.md`。归档后路径为 `pepgent-pm/evidence/inv/s01a195a6/`。
 基线时点：会话开始 **2026-11-01T05:48:24Z**。
 
@@ -12,10 +12,10 @@ argon 族：常驻 Argon（基线 `pepgent-pm/evidence/argon/D15-intent.md`，PM
 | C1-1、C1-2 | soroi 独立定制；组件多仓；不碰 Pepgent 根 checkout 与无关会话 | Pepgent/Pepgent 只在 `/tmp` 新克隆中操作；无关 15 个 commit 列入保护名单（D15-01） |
 | C1-3 | 不收缩；开发期无跨组件门禁；代码完成前不写不跑测试；hash 不作证据 | 丢弃只针对私自决策改动；重做仍先开发后统一 e2e；核验交 gh/git 输出 |
 | C2-1 | 主会话不单方拍板；“是否私有实现”也须领导小组审议；已通过契约内私有实现由工程师自决 | D15-01 口径；D15-11④、D15-12 |
-| C2-2 | argon 族双核；取证不转嫁 argon 族 | 23 份取证全部由本分身派出；argon 族只裁决与投票 |
+| C2-2 | Argon 裁决用户原意并代表 argon 族投一票；ArgonGovernance 负责治理巡检、BLOCKED 初审和第 20 条修正提议，不作为例行投票席；取证不转嫁双核 | 23 份取证由本分身派出；历史审查与原票保留，不据此新增例行投票席 |
 | C2-3 | 逐条表决、族计票、反例优先、argon 引 (U)、分类仲裁 | 每行 what/where/how/取舍/分类；PM issue 计票 |
 | C2-4 | 用户直接授权事项不得表决跳过 | D15-00 不投票；U57、U77–U78、U80 的产物列入保护名单 |
-| C3-2、C3-3 | 分身不代表独立判断；不私自禁用 task:high；discuss 席做压力测试 | 利益冲突披露；本表经 steady/divergent 两份审查；D15-13 |
+| C3-2、C3-3 | 分身不代表独立判断；压力测试由独立空白历史 task:high 承担 steady 和 divergent 两个视角，禁止 medium 模型 `discuss:*` 参与设计或决策 | 利益冲突披露；历史 steady/divergent 两份审查保留；现行压力测试与投票按 D15-13 |
 | C3-4 | 一仓一进程、Opus 5.5 high、不共分支、worktree 纪律 | D15-10 每仓一名执行者；D15-11 |
 | C3-5 | 改共享 skill 或角色定义前须领导小组与 argon 双核审定 | D15-05①、D15-08 |
 | C4-1、C4-2 | 异步总线；不向 argon 族发无实质回执；不在 PTY 另起 omp | 执行状态写 PM D15 issue 与对象 issue |
@@ -53,7 +53,7 @@ argon 族：常驻 Argon（基线 `pepgent-pm/evidence/argon/D15-intent.md`，PM
 | D15-10 | **执行顺序与执行者** | 各仓库、PM | 每一步开始前，执行该步的 agent 都先逐项对照 LEDGER C1–C5 与 R 表并把核对记录附在该步产出里（U69），包括秘书与只读盘点。① 秘书开 PM D15 issue，把 23 份取证、INDEX、讨论者报告、`d10-rewrite-snapshot` 与流程记录归档到 PM；② 治理分身为每个仓库派一名执行者（task:mid，一仓一进程），按 D15-02 只读产出会话前状态、差集表与保护段落表，连同执行契约交 Argon、ArgonGovernance 预审；③ 预审通过后按 D15-03 执行回退，逐项交 (R)（gh/git 命令与输出）；D15-08(3) 的文本替换同步由秘书执行；④ 另一名 task:low 独立核验各仓与会话前状态一致、保护名单未动，交 (R)；⑤ 秘书按 D15-07 替换 LEDGER 状态行。任何一步遇到 BLOCKED，对象原地冻结，交治理分身与 argon 族处理 | **得到：** 每一步都有 LEDGER 核对，先盘点后动手，每仓单一执行者，可核验（U69、VG-8、C3-4）。**放弃：** 执行耗时。**备选落选：** 只在盘点完成后附一次核对表——秘书归档与只读盘点两步缺少核对（导师反例） | 实现 | 否 |
 | D15-11 | **恢复工程派工的条件** | 主会话、治理分身、tern 工程师 | 依次满足：① D15 表决通过；② D15-10 全部完成并核验；③ 常驻 Argon 与 ArgonGovernance 逐条复核 D10–D14、D11-A/B/C、`design/`、AGENTS.md、tern-worker skill 与 watchdog 文本，结果作为新的 PM 决策；④ 重做中的决策、公开契约、派工契约、仓库与路径域划分、issue 验收正文、设计回写逐项三族表决，附 C1–C5 核对表并先交 argon 族预审；已通过契约内的单仓私有实现由工程师自决（C2-1），但派工与合并前附 C1–C5 核对；⑤ 工程师一仓或一个互斥路径域一个 tern 进程，不跨仓、不共用分支或 PR，模型 `anthropic/claude-opus-5-5:high`，保留 omp-peers 扩展（C3-4） | **得到：** 与 Argon (e)、VG-3、VG-8、C5-4 一致，且不把私有实现选择也拉进表决。**放弃：** 工程恢复推迟到复核与重做表决之后。**备选落选：** 不受影响的仓先恢复——全部仓的派工都出自同一批私自派工 | 串联 | 否 |
 | D15-12 | **主会话处理 BLOCKED、分类与规则解释的边界** | 主会话、治理分身、argon 族 | ① 主会话不做任何分类或处置，包括“是否属于私有实现”的判断；工程师 BLOCKED 由治理分身连同 Argon、ArgonGovernance 对照 LEDGER 与已通过决策初审分类；涉及意图、范围、公开契约、权限、状态与生命周期、部署前提、验收语义的，起草决策项三族表决后回写 issue。② 依 U81–U82：主会话对 AGENTS.md、LEDGER.md、宿主规则与 watchdog 告警没有单方解释权，不得抠字眼找规则麻烦、不得单方宣布不照办 watchdog 告警、不得挑起伪争议；规则疑问的解释权归 Argon 与 ArgonGovernance，分类争议归导师。③ 同进程的治理、表决、回退子 agent 运行时，主会话完成当前步骤后调用 `wait` 接应，结果返回的当回合推进下一步，不以“不再做任何动作”“暂时没有需要处理的事项”结束回合。④ 主会话单方工程指挥、issue/PR 修改与合并权按 Argon S-3 冻结至 D15-11 满足 | **得到：** 关闭“leader 当场裁决”与“找规则麻烦罢工”两条通道（V-7、VG-7、C2-1、U81–U82）。**放弃：** 解阻更慢；主会话失去规则解释权。**备选落选：** 让主会话判断哪些属于私有实现——正是 X-58 的失效方式 | 意图 | 是：argon 族可否决 |
-| D15-13 | **Claude 族席位与压力测试** | 派工契约、治理分身任务说明、决策流程 | 依据 U11 与 U82，AGENTS.md 与 LEDGER.md 中关于 task:high 的规定即是用户早已作出的明确授权；主会话或分身不得以“出自旧会话”“本对话未额外许可”为由禁用或跳过 task:high。所有重大设计与决策（含本 D15）同时经 discuss:steady、discuss:divergent 压力测试，并调度独立空白历史 task:high 参与 Claude 族逐条投票；Claude 族一票由主会话、治理分身、独立 task:high 共同构成，三者逐条独立赞成方计 Claude 族赞成（D1-12、C2-3、C3-3） | **得到：** 空白历史的独立审查席（VG-4、C3-3），Claude 族一票不再只由同前缀的主会话与分身给出。**放弃：** task:high 成本。**备选落选：** 以“未获许可”不调度 task:high——与 U82 冲突，此前修订稿即属此误 | 意图 | 否 |
+| D15-13 | **Claude 族席位与压力测试** | 派工契约、治理分身任务说明、决策流程 | 依据 U11 与 U82，AGENTS.md 与 LEDGER.md 中关于 task:high 的规定即是用户早已作出的明确授权；主会话或分身不得以“出自旧会话”“本对话未额外许可”为由禁用或跳过 task:high。所有重大设计与决策的压力测试由独立空白历史 task:high 承担 steady 和 divergent 两个视角，禁止 medium 模型 `discuss:*` 参与设计或决策；独立空白历史 task:high 参与 Claude 族逐条投票。Claude 族一票由主会话、治理分身、独立 task:high 共同构成，三者逐条独立赞成方计 Claude 族赞成（D1-12、C2-3、C3-3）。argon 族由常驻 Argon 投一票，导师族由顶层常驻 LeadMentor 投一票；ArgonGovernance 负责治理巡检、BLOCKED 初审和第 20 条修正提议，不作为例行投票席 | **得到：** 空白历史的独立审查席（VG-4、C3-3），Claude 族一票不再只由同前缀的主会话与分身给出。**放弃：** task:high 成本。**备选落选：** 以“未获许可”不调度 task:high——与 U82 冲突，此前修订稿即属此误 | 意图 | 否 |
 | D15-14 | **归档与台账** | PM `evidence/`；LEDGER.md | 取证、INDEX、讨论者报告、快照、流程记录、D15 定稿、选票分别归档到 `pepgent-pm/evidence/inv/s01a195a6/`、`evidence/decisions/`、`evidence/votes/`；LEDGER 只按 C4-3 直接替换 D15-07 所列状态行与决策索引中 D15 的状态 | **得到：** 持久化与台账去噪同时满足。**放弃：** 无。**备选落选：** 在 LEDGER 新增 E 项——旧 E 表已依 U80 删除 | 实现 | 否 |
 
 ## 附录 A：INDEX 主表 X 条目到本表的映射
