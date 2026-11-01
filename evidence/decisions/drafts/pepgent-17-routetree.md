@@ -1,6 +1,6 @@
 # 决策表草稿：Pepgent#17 BLOCKED-1，`routeTree.gen.ts` 的写入归属
 
-- **状态：** 草稿，未立案、未投票、未提交。议会 daemon 上线后，由它在 Pepgent/PM 创建 decision issue 立案；表决正文以该 issue 为准，本文件不是权威。
+- **状态：** 已由议会 daemon 立案为 D25（[Pepgent/PM#42](https://github.com/Pepgent/PM/issues/42)），只表决 RT-1（D25-01），RT-1 以 5/5 通过并定稿，RT-2 至 RT-4 不再表决。定稿正文见 `PM/evidence/decisions/D25-pepgent-17-routetree.md`，本文件不是权威。
 - **起草：** governance-desk（总协调指挥席，与 `Main` 合计 1 票）。起草者不另投票。
 - **来由：** [Pepgent/Pepgent#17](https://github.com/Pepgent/Pepgent/issues/17)，[BLOCKED-1 评论](https://github.com/Pepgent/Pepgent/issues/17#issuecomment-6560072203)。闸门结论已写回 #17：[评论 6560745517](https://github.com/Pepgent/Pepgent/issues/17#issuecomment-6560745517)。
 - **为什么要投票：** 闸门 A 判定不越界，闸门 B 判定越界（触及 D16-09 / D20-01 的写入授权空白）。按 C2-2，任一闸门认定越界就按 P0 投票。见 `GATE/pepgent-17-gate-a.md:5`、`GATE/pepgent-17-gate-b.md:9`，`SOR/AGENTS.md:60`。
