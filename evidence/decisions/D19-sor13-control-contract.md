@@ -1,6 +1,6 @@
 # D19：SOR-13 控制端点（`eval:<session>`）的线上契约
 
-起草：治理分身 GovClone。优先级：P0，属关键路径解阻。版本 v2：采纳 claude-high 在 `local://votes/D19-claude-high.md` 中对 D19-01、02、05 提出的反例，改用会话寻址方案；D19-03 正文未改；D19-04 措辞调整，按发起人通知重投。
+起草：治理分身 GovClone。优先级 P0，关键路径解阻。v3 定稿已由总协调席（Main＋GovClone 合计一票）、独立 claude-high、产品意图席 ArgonSol、导师席逐项 **4/4 赞成**，D19-01..05 全部通过；对现行对象无否决、无分类争议，原有效反例已回应并由相关席位确认消除。原票与各轮重投归档于 PM `evidence/votes/D19-*.md`。决策通过不代表正文回写、工程实现或统一运行验收已完成。
 
 ## 依据与表决规则
 
@@ -20,7 +20,7 @@
 
 **计票（LEDGER C2-3，U95，产品/契约议案）：** 四席参投，即总协调席（Main 与 GovClone 合计 1 票）、claude-high、Argon、LeadMentor。参投席中至少 3 席赞成、Argon 不行使否决、有效反例全部消除，即为通过。
 
-**表决期间：** W-07 暂停 SOR-13/14/15，SOR-18/19/20 中不依赖本项的部分照常推进。W-09 中消费控制端点的切片（LAB-08 #24 介入等），在端点 JSON 定案之前先只实现与此无关的部分。
+**工程执行：** SOR-13/14/15 与 Lab 控制端点消费切片按本定稿继续；原事项回写结论，由对应片区经理实际送达工人并观察响应，不以本文件已写代替工人已收到。无关切片继续，不新增回写完成或同步验收门禁。
 
 ## 决策表
 
@@ -30,7 +30,7 @@
 | D19-02 | **回复体：成功结果的主路径格式** | 同上；D5:312；D7:205；D12:476 | 成功时回复 `{"ok":true,"value":<V>}`。失败回复的形状先作为占位，按“能工作”处理，本行不作设计（依据 `.claude/rules/design-assumes-it-works.md`：设计阶段只写主路径）。<br>各方法成功时的 `value`：<br>• `answer`、`takeover`、`abort`：`null`。<br>• `derive`：store 确认派生后，返回 `{"run":<新运行 RunId>}`，取自 store 返回的 `Derived.run`。D5:312 的返回类型同步由 `void` 改为 `{ run: RunId }`，以满足 D12:476 的 `{kind:'derived', run}`。<br>• `slots`：`[{slot,fn,state}]`，其中 `state` 就是 D5 的 `SlotState`。Lab 再拼上端点所属的会话，就得到 D12:258 的 `SlotWire`。<br>• `writers`：见 D19-03 | 主路径上 `void` 有了明确的 JSON 表示；Lab 直接从源头拿到新运行的 id，不必到生命周期流里反查。失败分支留到实现时按占位处理 | 串联 | 是：D5 没有定义回复格式 |
 | D19-03 | **`writers` 返回会话及其端点名** | D3-19；D5:311；D7-06、D7-09 | `writers` 的 `value` 为 `[{"session":<SessionId>,"endpoint":"eval:<SessionId>"}]`，包含根会话自身。D5:311 的 `readonly string[]` 改为这个形状，与 D3-19 的“各自的端点名”一致 | D3-19 与 D5 的写法统一；Lab 不必自己拼端点名 | 串联 | 否：只是消除两处已通过正文之间的矛盾 |
 | D19-04 | **Shape 的线上标签沿用 `record`** | D5:113-115；D12:97；`packages/omp-soroi/src/contract.ts:9-15` | 线上的 `Shape` 序列化为 `{"kind":"single","type":FieldKind}` 或 `{"kind":"record","fields":{...}}`，与 D5、D12 一致。插件内部的表示由 W-07 自定：可以在端点出口做转换，也可以按 D5 §3.1 直接把内部标签改为 `record`；后者还能消除 `check.ts:356-363` 中 `Binding` 与 `Shape` 同名标签的歧义 | 两份已通过的正文都不用改 | 技术 | 否 |
-| D19-05 | **槽位与写方按会话寻址，不按运行寻址；介入命令随之改为按会话寻址** | D5-14；D5:304、311；D6-05；D7-04；D7-06；D7-09；D12:258、263、422-423、512、605 | **原则：** D6-05 规定一个根会话同一时刻至多有一个未结束的运行，因此根会话下所有写方的在途步，都属于该会话当前已有或即将建立的那一个运行。用 `run` 过滤槽位不提供任何区分，反而会在并发写方先提交时把其他写方的在途步归错。<br>**① 端点：** `slots` 返回本会话当前全部在途槽位，`writers` 返回本根会话下当前全部写方（含自身）。两者都不带 `run`（D19-01）。D5:304、311 的签名去掉 `runId`。<br>**② Lab 读取：** Lab 只读取自己持有在线一代的根会话：从 `eval:<conversation.session>` 读 `writers`，再逐个读 `slots`。已停驻的会话没有在途的 `soroi_eval`，不用唤醒。读到的槽位按以下规则挂载：该会话有 Open 运行时，挂到该运行的 `ExperimentWire.slots`；没有运行时，Discussion 来源挂到该会话的 `pendingLaunch` 实验项，Panel 和 Automation 来源挂到 `ConversationWire`。D12:263 的注释改为“该运行所属根会话的全部在途槽位”，D12:605 的“Open 运行”改为“在线的根会话”。<br>**③ 介入命令：** D12:422-423 中 `intervene.takeover` 与 `intervene.answer` 的 `run: RunId` 改为 `conversation: ConversationId` 加 `writerSession: SessionId`（取自 `SlotWire`）。Lab 把请求直接发到 `eval:<writerSession>`。D12:512 对这两条命令的权限改为“`write`，且是该会话的 owner”，语义不变。D7-09 的“找端点”补一句：无运行时，取 `conversation.session`。`intervene.derive` 与 `run.abort` 仍按运行寻址 | 首步 Human 的槽位既能被发现，人也能交回，实验不会卡在 `sent`；并发写方的槽位不会丢；D6-05 的运行开始锚点不变，也不提前在 store 建运行 | 串联 | 是：D5-14 与 D6-05 之间、D12 的介入寻址都缺了这一环 |
+| D19-05 | **槽位与写方按会话寻址，不按运行寻址；介入命令随之改为按会话寻址** | D5-14；D5:304、311；D6-05；D7-04；D7-06；D7-09；D12:149-150（`ConversationWire`）、258、263、422-423、512、605 | **原则：** D6-05 规定一个根会话同一时刻至多有一个未结束的运行，因此根会话下所有写方的在途步，都属于该会话当前已有或即将建立的那一个运行。用 `run` 过滤槽位不提供任何区分，反而会在并发写方先提交时把其他写方的在途步归错。<br>**① 端点：** `slots` 返回本会话当前全部在途槽位，`writers` 返回本根会话下当前全部写方（含自身）。两者都不带 `run`（D19-01）。D5:304、311 的签名去掉 `runId`。<br>**② Lab 读取：** Lab 只读取自己持有在线一代的根会话：从 `eval:<conversation.session>` 读 `writers`，再逐个读 `slots`。已停驻的会话没有在途的 `soroi_eval`，不用唤醒。读到的槽位按以下规则挂载：该会话有 Open 运行时，挂到该运行的 `ExperimentWire.slots`；没有运行时，Discussion 来源挂到该会话的 `pendingLaunch` 实验项，Panel 和 Automation 来源挂到该会话的 `ConversationWire.slots`。为此，D12:149-150 的 `ConversationWire` 新增字段 `slots: SlotWire[]`（该会话在线一代当前全部在途槽位；不在线时为空数组）。D12:263 的注释改为“该运行所属根会话的全部在途槽位”，D12:605 的“Open 运行”改为“在线的根会话”。<br>**③ 介入命令：** D12:422-423 中 `intervene.takeover` 与 `intervene.answer` 的 `run: RunId` 改为 `conversation: ConversationId` 加 `writerSession: SessionId`（取自 `SlotWire`）。Lab 把请求直接发到 `eval:<writerSession>`。D12:512 对这两条命令的权限改为“`write`，且是该会话的 owner”，语义不变。D7-09 的“找端点”补一句：无运行时，取 `conversation.session`。`intervene.derive` 与 `run.abort` 仍按运行寻址 | 首步 Human 的槽位既能被发现，人也能交回，实验不会卡在 `sent`；并发写方的槽位不会丢；D6-05 的运行开始锚点不变，也不提前在 store 建运行 | 串联 | 是：D5-14 与 D6-05 之间、D12 的介入寻址都缺了这一环 |
 
 ## 通过后要改的文档
 
@@ -38,7 +38,9 @@
 - **D5：** D5:304、311、312（签名去掉 `runId`；`writers` 返回 `{session,endpoint}[]`；`derive` 返回 `{run}`）。
 - **D6：** D6:127（`InFlight` 补 `writerSession`）。
 - **D7：** D7-09“找端点”补无运行分支。
-- **D12：** D12:263、:422-423、:512、:605、:615。
+- **D12：** D12:149-150（`ConversationWire` 新增 `slots: SlotWire[]`）、:36、:263、:422-423、:512、:605、:614、:615。
+- **D3：** D3:73、:133，以及 **D3:147（`WritersReply` 改为 `{session, endpoint}[]`，去掉外层 `runId`）**。
+- **D5、D6、D7、D8 中残留的按运行寻址写法：** D5:61、89、90、363；D6:33、319；D7:38、68（D7-08 在途叠加层改为按在线根会话读取）、198、200；`D8-mvp-scope.md:276` 的 SOR-13 行和 F08 行。这一组的清单取自 claude-high 第 2 轮选票“替换清单还须补全”一节。
 - **design：** `design/` 中对应段落由 Argon 回写。
 
 非阻断，另行立占位：GUI 派生时，如果用 Lab 持有的 `ArtifactRef` 作新的文件输入，字节如何到达插件可读的位置，现在没有写。这属于与 D12 P16 同形的缺口，不在本议案范围内。
