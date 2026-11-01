@@ -1,0 +1,102 @@
+[
+  {
+    "path": "/home",
+    "method": "GET",
+    "status": 302
+  },
+  {
+    "path": "/experiments/R-021/edit?tab=canvas",
+    "method": "GET",
+    "status": 302
+  },
+  {
+    "path": "/settings/billing",
+    "method": "GET",
+    "status": 302
+  },
+  {
+    "path": "/compute/gpus",
+    "method": "GET",
+    "status": 302
+  },
+  {
+    "path": "/api/lab/missing",
+    "method": "POST",
+    "status": 401
+  },
+  {
+    "path": "/_serverFn/657b87d9a38825cb2d8b05ea1b8d329a2695cf32e5d6560a8153b09ad539c6a0",
+    "method": "POST",
+    "status": 401
+  },
+  {
+    "path": "/sign-in",
+    "method": "GET",
+    "status": 307
+  },
+  {
+    "path": "/sign-in?returnTo=%2Fhome",
+    "method": "GET",
+    "status": 200
+  },
+  {
+    "path": "/api/auth/get-session",
+    "method": "GET",
+    "status": 200
+  },
+  {
+    "path": "/api/authentic",
+    "method": "GET",
+    "status": 401
+  },
+  {
+    "path": "/new",
+    "method": "GET",
+    "status": 200
+  },
+  {
+    "path": "/api/auth/sign-up/email",
+    "method": "POST",
+    "status": 404
+  },
+  {
+    "path": "/api/auth/sign-in/email",
+    "method": "POST",
+    "status": 200
+  },
+  {
+    "path": "/home",
+    "method": "GET",
+    "status": 200
+  },
+  {
+    "path": "/api/lab/missing",
+    "method": "GET",
+    "status": 404
+  },
+  {
+    "path": "/_serverFn/657b87d9a38825cb2d8b05ea1b8d329a2695cf32e5d6560a8153b09ad539c6a0",
+    "method": "POST",
+    "status": 200
+  },
+  {
+    "path": "/api/auth/organization/create",
+    "method": "POST",
+    "status": 404
+  },
+  {
+    "path": "/api/auth/sign-out",
+    "method": "POST",
+    "status": 200
+  },
+  {
+    "path": "/api/auth/get-session",
+    "method": "GET",
+    "status": 200
+  },
+  {
+    "path": "/home",
+    "method": "GET",
+    "status": 302
+  }
+]

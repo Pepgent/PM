@@ -1,0 +1,42 @@
+[
+  {
+    "signal": "SIGTERM",
+    "exit": {
+      "code": 143,
+      "signal": null
+    },
+    "anonymous": 302,
+    "login": 200,
+    "protectedPage": 200,
+    "logout": 200,
+    "ownedPids": [
+      98215,
+      98281,
+      98292,
+      98294,
+      98308
+    ],
+    "remaining": [],
+    "gracefulPaseoLog": true
+  },
+  {
+    "signal": "SIGINT",
+    "exit": {
+      "code": 130,
+      "signal": null
+    },
+    "anonymous": 302,
+    "login": 200,
+    "protectedPage": 200,
+    "logout": 200,
+    "ownedPids": [
+      98464,
+      98671,
+      98686,
+      98736,
+      98751
+    ],
+    "remaining": [],
+    "gracefulPaseoLog": true
+  }
+]

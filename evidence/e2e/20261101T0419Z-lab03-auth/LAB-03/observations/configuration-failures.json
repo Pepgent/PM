@@ -1,0 +1,56 @@
+[
+  {
+    "omitted": "BETTER_AUTH_SECRET",
+    "exit": {
+      "code": 1,
+      "signal": null
+    },
+    "listenerObserved": false,
+    "paseoMarkers": {
+      "/paseo-home/i": false,
+      "/paseo-daemon/i": false,
+      "/supervisor-entrypoint/i": false,
+      "/\\[paseo/i": false,
+      "/daemon/i": false
+    },
+    "seenPids": [
+      84197
+    ],
+    "postExitAlive": [],
+    "homes": {
+      "legacyHome": false,
+      "legacyFallback": false,
+      "webRoot": false,
+      "paseoHomeUnderWebRoot": false,
+      "labHome": false,
+      "paseoOverride": false
+    }
+  },
+  {
+    "omitted": "BETTER_AUTH_URL",
+    "exit": {
+      "code": 1,
+      "signal": null
+    },
+    "listenerObserved": false,
+    "paseoMarkers": {
+      "/paseo-home/i": false,
+      "/paseo-daemon/i": false,
+      "/supervisor-entrypoint/i": false,
+      "/\\[paseo/i": false,
+      "/daemon/i": false
+    },
+    "seenPids": [
+      84487
+    ],
+    "postExitAlive": [],
+    "homes": {
+      "legacyHome": false,
+      "legacyFallback": false,
+      "webRoot": false,
+      "paseoHomeUnderWebRoot": false,
+      "labHome": false,
+      "paseoOverride": false
+    }
+  }
+]

@@ -1,0 +1,27 @@
+▶ Lab migration failure can retry; persisted facts and owner lifetimes survive restart
+  ✔ nullable identities are truthful; empty identities and cross-Lab relationships are rejected (7.54375ms)
+✖ Lab migration failure can retry; persisted facts and owner lifetimes survive restart (69.353917ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 1
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 725.278083
+
+✖ failing tests:
+
+test at apps/web/dist-web-tests/tests/node/lab-runtime.test.js:14:1
+✖ Lab migration failure can retry; persisted facts and owner lifetimes survive restart (69.353917ms)
+  TypeError [Error]: The database connection is not open
+      at Database.prepare (/Users/mouriya/Ext/worktrees/pepgent-lab-32/node_modules/better-sqlite3/lib/methods/wrappers.js:5:21)
+      at BetterSQLiteSession.prepareQuery (file:///Users/mouriya/Ext/worktrees/pepgent-lab-32/node_modules/drizzle-orm/better-sqlite3/session.js:23:30)
+      at BetterSQLiteSession.prepareOneTimeQuery (file:///Users/mouriya/Ext/worktrees/pepgent-lab-32/node_modules/drizzle-orm/sqlite-core/session.js:141:17)
+      at SQLiteSelectBase._prepare (file:///Users/mouriya/Ext/worktrees/pepgent-lab-32/node_modules/drizzle-orm/sqlite-core/query-builders/select.js:615:88)
+      at SQLiteSelectBase.all (file:///Users/mouriya/Ext/worktrees/pepgent-lab-32/node_modules/drizzle-orm/sqlite-core/query-builders/select.js:641:17)
+      at SQLiteSelectBase.execute (file:///Users/mouriya/Ext/worktrees/pepgent-lab-32/node_modules/drizzle-orm/sqlite-core/query-builders/select.js:650:17)
+      at SQLiteSelectBase.then (file:///Users/mouriya/Ext/worktrees/pepgent-lab-32/node_modules/drizzle-orm/query-promise.js:21:17)
+      at async Object.findOne (file:///Users/mouriya/Ext/worktrees/pepgent-lab-32/node_modules/@better-auth/drizzle-adapter/dist/index.mjs:359:17)
+      at async Object.findOne (file:///Users/mouriya/Ext/worktrees/pepgent-lab-32/node_modules/@better-auth/core/dist/db/adapter/factory.mjs:584:16)
+      at async Object.findUserByEmail (file:///Users/mouriya/Ext/worktrees/pepgent-lab-32/node_modules/better-auth/dist/db/internal-adapter.mjs:584:19)
