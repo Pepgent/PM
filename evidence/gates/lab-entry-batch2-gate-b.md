@@ -3,7 +3,7 @@
 - **初审材料：** [`evidence/gates/lab-entry-batch2.md`](lab-entry-batch2.md)、[`evidence/gates/lab-entry-batch2-proposal.yaml`](lab-entry-batch2-proposal.yaml)（`DeskLabEntryBatch2`）
 - **关联议题与前置：** [Pepgent/PM#61](https://github.com/Pepgent/PM/issues/61)（`D42` 定稿，新建 `LAB-13` [Pepgent#80](https://github.com/Pepgent/Pepgent/issues/80)）、[Pepgent/Pepgent#29](https://github.com/Pepgent/Pepgent/issues/29)（`WEB-07` 评论 [`#issuecomment-6564277591`](https://github.com/Pepgent/Pepgent/issues/29#issuecomment-6564277591)）
 - **把关席位：** `ArgonGovernance`（`ArgonGovernance-2`，组织治理与分配守护席）
-- **核对基准：** 已逐项核对 `pepgent-soroi/LEDGER.md`（全文第 1–145 行）与 `pepgent-soroi/AGENTS.md`（全文第 1–129 行；`/Users/mouriya/Ext/work/o1/paper.md` 经核实不存在，按 G8 继续），并独立直读 `evidence/decisions/D16-phaseB-review-restore.md:33-37`（`D16-09`、`D16-11`、`D16-13`）、`evidence/decisions/D8-mvp-scope.md:320-345`（`D8 §4.2` 切片表）、`evidence/decisions/D42-lab-entry-ownership.md` 及 `Pepgent/Pepgent` `apps/web/src/server/lab/operations.ts:259-265,543-569`。
+- **核对基准：** 已在当前窗口显式读取并逐项核对 `pepgent-soroi/LEDGER.md`（全文第 1–147 行，含 `R1–R21`、`D1–D42` 决策索引及 `U1–U111` 用户原话基准）与 `pepgent-soroi/AGENTS.md`（全文第 1–129 行；`/Users/mouriya/Ext/work/o1/paper.md` 经核实不存在，按 G8 继续），并独立直读 `evidence/decisions/D16-phaseB-review-restore.md:33-37`（`D16-09`、`D16-11`、`D16-13`）、`evidence/decisions/D8-mvp-scope.md:320-345`（`D8 §4.2` 切片表）、`evidence/decisions/D42-lab-entry-ownership.md` 及 `Pepgent/Pepgent` `apps/web/src/server/lab/operations.ts:259-265,543-569`。
 
 ---
 
