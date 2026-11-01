@@ -1,6 +1,6 @@
 # Pepgent PR#75（WEB-03）中两处 D35-01 v3 时间轴游标细节 — 非阻塞事后治理检查意见（撤回事前闸门框架）
 
-- **对应材料：** `evidence/gates/pepgent75-d35-cursor.md`（`DeskPr75D35Detail`，PM `14fe7c2`）
+- **对应材料：** `evidence/gates/pepgent75-d35-cursor.md`（`DeskPr75D35Detail`）
 - **检查席位：** `ArgonGovernance`（`ArgonGovernance-2`）
 - **核对基准：** 已逐项核对 `pepgent-soroi/LEDGER.md`（全文第 1–141 行）与 `pepgent-soroi/AGENTS.md`（全文第 1–129 行；`/Users/mouriya/Ext/work/o1/paper.md` 经核实不存在，按 G8 继续），并独立直读 `evidence/decisions/D35-pepgent-26-web03-timeline-plan-defs.md:1-45`、`evidence/decisions/D20-w10-path-boundary.md`、`Pepgent/Pepgent` `apps/web/src/renderer/features/lab-experiment-detail/model/replay-at.ts:1-24`、`packages/ui/src/lab/time-axis.tsx:120-204`、`packages/ui/src/lab/time-axis-model.ts:70-125`。
 
@@ -9,7 +9,7 @@
 ## 零、撤回事前闸门（Gate A/B）与 `P0` 前置审批框架（`.omp/agents/argon-governance.md:19-21`、`AGENTS.md:58-60`、D1-12、C2-3）
 
 1. **已合入非 `BLOCKED` 事项不适用事前双闸门（Gate A/B），转为非阻塞事后治理检查：**
-   - `pepgent75-d35-cursor.md:3-8,74` 明示：`Pepgent/Pepgent PR#75` 已合入 `main`（`7273b26`），性质**“不是正式 `BLOCKED`。PR 已合入，W-10 没有暂停任何工作……本项不阻塞 `WEB-07` 的其他接线”**。
+   - `pepgent75-d35-cursor.md:3-8,74` 明示：`Pepgent/Pepgent PR#75` 已合入 `main`（`2026-11-01T20:54:41Z`），性质**“不是正式 `BLOCKED`。PR 已合入，W-10 没有暂停任何工作……本项不阻塞 `WEB-07` 的其他接线”**。
    - 按 `.omp/agents/argon-governance.md:19-21`（§6）与 `AGENTS.md:58-60`（C2-2.2），正交双闸门（Gate A / Gate B）仅用于**工程师上报 `BLOCKED` 的放行前事前把关**；对已通过契约与路径白名单内的常规开发（含已合入 `PR#75`），**不设事前投票或双闸门前置审批，只由本席做非阻塞事后检查**。
    - 因此，本席**正式撤回将本项纳入事前 Gate A/B 前置放行及 `P0` 阻塞立案的框架**，将本文定性为对已合入 `PR#75` 的**非阻塞事后治理检查意见**，不设任何前置放行锁。
 2. **严禁为非 `BLOCKED` 事项注入 `P0` 门禁（`AGENTS.md` D1-12、C2-3、`.omp/agents/argon-governance.md` §9）：**
