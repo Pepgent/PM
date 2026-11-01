@@ -16,10 +16,10 @@
 
 | ID | what | where | how | 取舍 | 分类 | 缺失部分或设计补充? | 票 | 结果 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| D22-01 | **Lab 中心检出缓存根路径由部署注入** | D7-19 环境变量列表；deploy `stacks/pepgent-central/compose.yaml` Lab 服务的 environment；deploy `README.md` 卷表 | • `PEPGENT_LAB_LIBRARY_HOME` 是部署交给 Lab 后端的配置接口，值为中心检出缓存卷在 Lab 容器内的挂载根路径。Lab 按 D7-11 在这个根下维护库检出和临时集成检出。<br>• deploy 在中心 Stack 的 Lab 服务上注入 `PEPGENT_LAB_LIBRARY_HOME=/var/lib/pepgent/library`，对应已有的 `library-cache` 挂载。<br>• 不新建卷，不另设路径源，卷的权威、写方和生命周期不变。<br>• **承载：** 与 D21-01 共用同一个 deploy issue，即“Lab 卷挂载路径环境变量注入”，由同一个非 draft PR `Fixes`。<br>• **回写：** 秘书在 D7-19 的环境变量列表中写明 `PEPGENT_LAB_LIBRARY_HOME`，以及 D21 的 `PEPGENT_LAB_WORKTREE_HOME`（D7-04 处只引用） | **得到：** 库缓存落在 D2-20 规定的独立卷上，接口有了已通过的正文，同一次部署改动就能补齐。<br>**放弃：** deploy 的 Lab 服务多一行 env。<br>**备选落选：**<br>• 把应用默认值改成 `/var/lib/pepgent/library`：等于在应用里写死 deploy 的挂载点（D2-23）。<br>• 另开 deploy issue：原因和验收都与 D21 相同，都是 Lab 卷挂载路径未注入，拆开只会多一次进场 | 串联 | 是：D7-19 缺少变量名 | **claude-high：赞成；Argon：赞成；LeadMentor：赞成；协调席/Main：待补投** | **通过：3/4 赞成（协调席待 Main 补投，已达门槛）；无否决；无有效反例。** |
+| D22-01 | **Lab 中心检出缓存根路径由部署注入** | D7-19 环境变量列表；deploy `stacks/pepgent-central/compose.yaml` Lab 服务的 environment；deploy `README.md` 卷表 | • `PEPGENT_LAB_LIBRARY_HOME` 是部署交给 Lab 后端的配置接口，值为中心检出缓存卷在 Lab 容器内的挂载根路径。Lab 按 D7-11 在这个根下维护库检出和临时集成检出。<br>• deploy 在中心 Stack 的 Lab 服务上注入 `PEPGENT_LAB_LIBRARY_HOME=/var/lib/pepgent/library`，对应已有的 `library-cache` 挂载。<br>• 不新建卷，不另设路径源，卷的权威、写方和生命周期不变。<br>• **承载：** 与 D21-01 共用同一个 deploy issue，即“Lab 卷挂载路径环境变量注入”，由同一个非 draft PR `Fixes`。<br>• **回写：** 秘书在 D7-19 的环境变量列表中写明 `PEPGENT_LAB_LIBRARY_HOME`，以及 D21 的 `PEPGENT_LAB_WORKTREE_HOME`（D7-04 处只引用） | **得到：** 库缓存落在 D2-20 规定的独立卷上，接口有了已通过的正文，同一次部署改动就能补齐。<br>**放弃：** deploy 的 Lab 服务多一行 env。<br>**备选落选：**<br>• 把应用默认值改成 `/var/lib/pepgent/library`：等于在应用里写死 deploy 的挂载点（D2-23）。<br>• 另开 deploy issue：原因和验收都与 D21 相同，都是 Lab 卷挂载路径未注入，拆开只会多一次进场 | 串联 | 是：D7-19 缺少变量名 | **协调席/Main：赞成；claude-high：赞成；Argon：赞成；LeadMentor：赞成** | **通过：4/4 赞成；无否决；无有效反例。** |
 
 ## 归档结果
 
-- **D22-01：通过。** 三席赞成（3/4），协调席待 Main 补投但已达门槛；无 Argon 否决、无有效反例。
+- **D22-01：通过。** 四席赞成（4/4）；无 Argon 否决、无有效反例。总协调指挥席原票见 [PM#31 原文评论](https://github.com/Pepgent/PM/issues/31#issuecomment-6559817971)，与 GovClone 合计一票。
 - **闸门 B：** 已批准 D21-01 与 D22-01 共用同一个 deploy 实现 issue；本次机械归档不创建 deploy/Pepgent 实现 issue。
-- **原票：** `evidence/votes/D22-ClaudeHigh.md`、`D22-ArgonSol.md`、`D22-LeadMentor.md`；每个文件保留对应原票及理由。协调席/Main 未列入本次用户指定的三票归档。
+- **原票：** `evidence/votes/D22-Coordination.md`、`D22-ClaudeHigh.md`、`D22-ArgonSol.md`、`D22-LeadMentor.md`；每个文件保留对应原票及理由。协调席赞成理由：缓存回到既有独立 `library-cache` 卷，只补与现有挂载对应的变量；与 D21 共用 issue/PR，避免 W-04 再次进场。
