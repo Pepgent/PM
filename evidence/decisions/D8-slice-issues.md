@@ -118,6 +118,12 @@
 | D9-02 | `Pepgent/PM` | [Pepgent/PM#14](https://github.com/Pepgent/PM/issues/14) | 新建 | low | W7 | Todo |
 | D9-03 | `Pepgent/PM` | [Pepgent/PM#15](https://github.com/Pepgent/PM/issues/15) | 新建 | high | W7 | Todo |
 
+## 决策补充承载（不另计 D8 切片数）
+
+| 决策 | 实现 issue | Owner 与路径 | 依赖与边界 | 取回时 Project |
+| --- | --- | --- | --- | --- |
+| [D41-01 v1](https://github.com/Pepgent/PM/issues/60) | [Pepgent#81](https://github.com/Pepgent/Pepgent/issues/81) | W-09；仅 `apps/web/src/protocol/lab/library.ts` | `NodeDefinition.template` 改为 `z.string().nullable()`，两个字段按决议补注释；导出值、wire 形状与运行时校验不变。与 [#78](https://github.com/Pepgent/Pepgent/issues/78)、[LAB-13/#80](https://github.com/Pepgent/Pepgent/issues/80)互不依赖，不扩大其白名单；W-10 四处投影仍由 [WEB-07/#29](https://github.com/Pepgent/Pepgent/issues/29)承载，二者无先后锁 | 未登记 |
+
 ## 执行状态约定
 
 工程师、测试者、操作员只在各自实现 issue/PR 评论中写 STARTED / PR / BLOCKED / DONE 并附事实。开发期开工条件是依赖切片代码已合入其仓 main，不再要求上游跨组件 runtime；本仓真实入口检查保留。E2E spec/runbook 在其所测全部代码合入后编写，统一阶段才执行；issue/Project/本映射不替代运行结论。

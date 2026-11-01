@@ -211,9 +211,11 @@ export type LibraryRepoWire = { id: LibraryRepoId; remoteUrl: string; branch: st
 export type HumanIrcQueueWire = { msg: string; principal: UserId; body: string; queuedAt: Instant }
 ```
 
-#### Lab 自有活动的读取与首页投影（D38-02 v2）
+#### Lab 自有活动的读取与首页投影（D38-02 v2；写入时机按 D43-01 v1）
 
-**写入（W-09）：上述命令成功落库时，在同一事务写一行 activity。**
+**写入（W-09）：** 成员与结论确认两族命令成功落库时，在同一事务写一行 activity。节点合入族三命令的成功是合入提交 push 到 Lab 库默认分支（D7-11）；W-09 在 push 成功之后于 `lab.sqlite` 写一行 activity：
+- `library.merge`、`agentTemplate.saveVersion`：push 成功后，单独一个 SQLite 事务写该行；
+- `library.apply`：push 成功后，该行与删除所选 `library_staging` 行在同一个 SQLite 事务。
 
 `ActivityWire` 的形状不变，`kind` 只取上述三族的原命令名。`actor` 为执行命令的成员；结论事件的 `project` 取其讨论的项目，节点合入事件在命令会话是讨论时取该讨论项目、Panel 会话为 null，成员事件为 null。`text` 为事实摘要：结论正文、合入结果的 `paths` 列表，或成员与角色/配额；不新增关联目标字段。`home.activity` 返回本 Lab 的全部 activity 行；`settings.repoActivity` 仅返回节点合入族三个命令名的行。
 
