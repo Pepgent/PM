@@ -92,4 +92,7 @@ images#13 的依赖条件写的是镜像状态：“已重新发布，且其 ser
 
 ## 八、处置
 
-（待两道闸门判定后填写。）
+- 闸门 A（`Argon-2`）：不越界，K1，放行处置 ⓐ。对 `git.rule.md:51` 的理解属于澄清，不是例外。见 `mux20-release-gate-a.md`。
+- 闸门 B（`ArgonGovernance-2`）：不越界，K1，支持处置 ⓐ。要求在结论中写明 #20 关闭后由 Main 按 D16-10 轮换 W-01。见 `mux20-release-gate-b.md`。
+- 免票放行，不开 PR，不另走真实 RPC 路径。结论评论：[#20 评论 6562887301](https://github.com/Pepgent/omp-rpc-mux/issues/20#issuecomment-6562887301)，写明 W-01 的步骤：复读验收 4 的 digest，读数与 `sha256:98a5a1b2…f837` 一致即写 DONE，然后关闭 #20。由 AreaMgrMux 送达 W-01。
+- images#13 的依赖已经满足，开工不需要等 #20 关闭。W-03 何时进场、W-01 结案后的轮换，由 Main 按 D16-10 安排。
