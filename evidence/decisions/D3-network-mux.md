@@ -70,7 +70,7 @@ argon 已裁定：Mux 独立成仓 `Pepgent/omp-rpc-mux`，由 soroi 发行仓�
 | D3-16 | `Program` 体与网络层 | remote 模板与网络层 | `Program` 体不走 mux。它只经网络层访问 store 的输入来源和拷出目标（`D2-components.md:44,47`）；输出尾部由 `remote tail` 提供，Slurm 的输出转发也只经网络层（`remote.md:169`）。mux 只服务 omp 进程 | mux 就是“omp rpc”多路复用器。`Program` 体即使镜像里有 dial（D4-08 的约定镜像同时带 omp 和 `omp-rpc-mux`）也不调用它。`remote.md:26` 需改为“程序经网络层连回，agent 经多路复用器” | 串联 | 是 |
 | D3-17 | 在完整 omp 定制中的位置（U23） | `Pepgent/soroi` 发行仓、agent 镜像、中心主机 | soroi 定制里的插件带 mux 传输，以及一个配置项 `SOROI_MUX_URL`（中心主机上就是 `REMOTE_MUX`）。发行仓的 compose 把 `omp-rpc-mux serve` 作为外部伴随组件拉起。agent 镜像只含 omp 与 `omp-rpc-mux`（以及环境的系统依赖）；soroi 定制与 Lab 库的 `.omp/` 按 D2-11、D4-09 在每次启动时随 copy-in 带入。e2e 先起 mux | argon 已判为符合 U23（`argon/D2-rulings.md:17-18`）。交付物是“omp 定制 + 一个外部伴随组件”。定制不烤进镜像，远程每一代加载的定制与中心逐字节相同，满足“对标主 agent”（U `#9c291fe2`）。<br>主路径：Lab 后端（即 D2-14 的 Pepgent 后端）声明根写方 → 开一代 → 在本机启动 `omp-rpc-mux dial -- omp --mode rpc` → 后端经写方调用、经读方观察 → 根会话里的 soroi 定制按同一套代契约启动和寻址子 agent。`omp-rpc-mux` 是外部进程边界，不是可选产品，也不是 omomp 或 fork | 串联 | 是 |
 | D3-18 | 依赖边界（U24） | mux 与插件 | mux 只依赖 omp 公开的 `--mode rpc`、RPC 帧，以及成熟的外部开源软件（tokio、WebSocket 库、NetBird）。不依赖 omp-peers、tern 或任何 omomp 插件 | U24：soroi 是独立的 omp 定制 | 意图 | 否 |
-| D3-19 | 控制端点（介入路由） | mux；注册方是 `packages/omp-soroi` 的 eval 模块（裁决 A），调用方是 Lab 后端 | 每个写 eval 的会话（根会话，以及它派出的中心 worker）各注册一个端点：打开 `WS /endpoints/eval:<该会话的 session id>`，并出示所在进程这一代的 `MUX_GENERATION` 与 `MUX_TOKEN`（写方启动 dial 时放进 env）。mux 把端点绑到这个 agent 的写方声明与这一代；同名端点只允许同一会话的新一代接替。根会话的端点另外回答 `writers(runId)`：这次运行里哪些会话在写 eval、各自的端点名。store 的运行记录记下持有该运行的根会话 id（D6 同步）。Lab 后端寻址：从 store 查到根会话 → 向根端点问 `writers(runId)` → `POST /endpoints/{name}/requests`，正文是不透明的 JSON；mux 转给注册方，再把回复原样返回，不解释正文。端点嵌套在注册会话的一代之内：从注册开始，到连接关闭结束。持有者已停驻时，它的写方（根会话由 Lab 后端，中心 worker 由根会话的 subagent 模块）先开新一代，等端点注册后再路由 | D2-06、D2-08 的“控制端点注册与路由”（`D2-components.md:43,45`）和 D6 的替代、派生、在途叠加（D6-11、D6-14、D6-16，P6）都要靠它。每个会话一个名字，根和 worker 不会撞名。人类 IRC 按 agent 寻址走 D3-12，介入请求按写 eval 的会话寻址走这里，二者都不经 store | 串联 | 是 |
+| D3-19 | 控制端点（介入路由） | mux；注册方是 `packages/omp-soroi` 的 eval 模块（裁决 A），调用方是 Lab 后端 | 每个写 eval 的会话（根会话，以及它派出的中心 worker）各注册一个端点：打开 `WS /endpoints/eval:<该会话的 session id>`，并出示所在进程这一代的 `MUX_GENERATION` 与 `MUX_TOKEN`（写方启动 dial 时放进 env）。mux 把端点绑到这个 agent 的写方声明与这一代；同名端点只允许同一会话的新一代接替。每个会话端点接受封闭的请求联合：`{"method":"slots"}`、`{"method":"answer","handback":HumanHandback}`、`{"method":"takeover","handback":HumanHandback}`；根会话端点另外接受 `{"method":"writers"}`、`{"method":"derive","parent":RunId,"at":DeriveAt,"changes":Change[]}`、`{"method":"abort","run":RunId}`。`slots` 返回本会话当前全部在途槽位，不带 `run`；根端点的 `writers()` 返回本根会话当前全部写方，值为 `[{"session":<SessionId>,"endpoint":"eval:<SessionId>"}]`，包含根会话自身，也不带 `run`。成功回复统一为 `{"ok":true,"value":<V>}`：`answer`、`takeover`、`abort` 的 `value` 为 `null`，`derive` 的 `value` 为 store 确认派生后的 `{"run":<新运行 RunId>}`，`slots` 与 `writers` 的 `value` 分别为上述列表；失败回复形状不在本行设计。`DeriveAt` 为 `Committed{step,position} \| {kind:"InFlight",writerSession,slot}`。store 的运行记录记下持有该运行的根会话 id；Lab 后端只读取自己持有在线一代的根会话，从 `eval:<conversation.session>` 请求 `writers()`，再向各返回端点请求 `slots()`，不唤醒 parked 会话。请求正文仍由 mux 原样转发，mux 不解释 JSON。端点嵌套在注册会话的一代之内：从注册开始，到连接关闭结束。持有者已停驻时，它的写方（根会话由 Lab 后端，中心 worker 由根会话的 subagent 模块）先开新一代，等端点注册后再路由 | D2-06、D2-08 的“控制端点注册与路由”（`D2-components.md:43,45`）和 D6 的替代、派生、在途叠加（D6-11、D6-14、D6-16，P6）都要靠它。每个会话一个名字，根和 worker 不会撞名。人类 IRC 按 agent 寻址走 D3-12，介入请求按写 eval 的会话寻址走这里，二者都不经 store | 串联 | 是 |
 
 ## 4. 接口草图（主路径）
 
@@ -130,7 +130,7 @@ type ReaderDown =
   | { type: "mux_generation_started"; generation: Generation; where: Where }
   | { type: "mux_generation_exited"; generation: Generation; code: number };
 
-// 端点名：`eval:<写 eval 的会话 session id>`；根会话的端点另答 writers(runId)
+// 端点名：`eval:<写 eval 的会话 session id>`；根会话的端点另答 `writers()`，值为 `{session, endpoint}[]` 且包含根会话
 // —— 人类 IRC 待投递协议：写方契约（D3-12） ——
 // 根 agent：Lab 后端实现；soroi 子 agent：父进程里的 subagent supervisor 实现。mux 只转帧。
 type HumanIrc = { msg: string; to: AgentId; principal: Principal; body: string };
@@ -144,7 +144,7 @@ interface HumanIrcWriter { apply(op: HumanIrcOp): HumanIrcState | null }   // wi
 
 type EndpointDown = { type: "mux_request"; req: string; body: unknown };
 type EndpointUp = { type: "mux_reply"; req: string; body: unknown };
-type WritersReply = { runId: string; writers: { sessionId: string; endpoint: string }[] };  // 根端点对 writers(runId) 的回复正文
+type WritersReply = { session: string; endpoint: string }[];  // 根端点对 writers() 的成功 value，包含根会话自身
 
 type Presence = { agentId: AgentId; since: string; generation: { id: Generation; where: Where; since: string } | null };  // 条目 = 写方声明 ①–⑦；generation = ④–⑤
 type PresenceEvent =
