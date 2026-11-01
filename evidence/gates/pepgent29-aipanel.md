@@ -54,3 +54,9 @@
   - **Q2（闸门 A）：** 用途清单是否只是兑现 F-5、F-6 已有的契约，不新增公开契约或意图？候选 (b)、(c) 在意图上是否都不成立？
   - **Q3（闸门 A）：** Panel 会话没有名称字段，也没有改名命令（F-13），组件现有的“改名”控件怎么处理：(i) 保留现状，只改本地显示，不接 wire；(ii) 不向 Panel 暴露改名，由 W-10 经最少 props 隐藏；(iii) 其他。另外，“新建会话”按 D12-10 的 `panel.prompt`（`{page, scope}`，存在即复用）接线，是否属于契约内的私有实现（K3）？
 - **不受阻的部分：** W-10 评论“不受阻、照常推进”所列的各项继续推进，与本项无关。
+
+## 四、闸门结论与议程
+
+- **闸门 A（Argon-2）：** [`pepgent29-aipanel-gate-a.md`](pepgent29-aipanel-gate-a.md)。用途清单只兑现已有契约；候选 (b)、(c) 在意图上不成立【定】。Q3 推荐 (ii)；“新建会话”按 `panel.prompt` 接线，属于 K1+K3。
+- **闸门 B（ArgonGovernance-2）：** [`pepgent29-aipanel-gate-b.md`](pepgent29-aipanel-gate-b.md)。越过 D16-09/D20-01/D35-01 v3 白名单（K4），须按 P0 表决，`domains: [governance]`（五席，门槛 4）；表决期间只暂停 AI 面板分支。
+- **议程：** 已按 Q3 (ii) 修订提案行，以 [D45（PM#64）](https://github.com/Pepgent/PM/issues/64)立案，提案见 [`pepgent29-aipanel-proposal.yaml`](pepgent29-aipanel-proposal.yaml)。结果以议会 daemon 发布为准。
