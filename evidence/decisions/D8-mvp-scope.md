@@ -335,18 +335,20 @@ type Verdict = {
 | WEB-01 | 阶段 A：`readSnapshot` 改为异步，loader 构造服务（D7:76） | — | S2 | 13 个 controller 没有改动，页面照常渲染 | low |
 | WEB-02 | 阶段 B 的基础：`src/protocol/lab`、新的 `LabBridge`、`subscribe`、`send`、`watchAgent`（D7:77、117-123） | LAB-07a、WEB-01 | S2 | 页面 loader 读取线数据，事件使它失效后重读 | mid |
 | WEB-03 | 投影：catalog、实验列表、实验详情（`RunGraph` 到 `ExperimentFlowFixture`，含时间轴、对比、派生导航、runner workspace 与交回地址）。目录投影在本切片交付；所选 Lab 的持有与重读、详情页回看/派生/对比/workspace/交回五项真实页面接线归 WEB-07（D36-01 v1、D36-02 v2），不作为 WEB-03 关闭条件。D35-01 v3 的共享组件受控位置/回调属性与 model 内时刻→`k` 纯映射可在本切片交付，关闭时未交付的部分随 WEB-07 回看接线承接 | WEB-02、LAB-07b | F08、F10、F13、F18、F23–F26 的投影；页面接线在 WEB-07 | 纯函数投影的单元测试，输入是真实录制的线数据；录制中含 `Aborted` 变体的调用（不带 `version`、`body`、`env`，`outputs = []`），投影出被中止的节点（PM#5 第 2 项） | mid |
-| WEB-04 | 投影：讨论、数据集、流程编辑器 | WEB-02、LAB-11a、LAB-11b | F09、F12、F27 | 同上 | low |
-| WEB-05 | 投影：节点库、自动化 | WEB-02、LAB-09、LAB-10 | F28–F30 | 同上 | low |
-| WEB-06 | 投影：集群、容器、接入向导、设置、首页 | WEB-02、LAB-12 | F17、F31 | 同上 | low |
-| WEB-07 | 阶段 B 一次落地：放宽 id、把剧情字面量改成数据事实、`AgentTemplate.id` 改为 omp agent 定义名、`AgentTemplate.harness` 收窄为字面量 `'omp'`（D7:71、77）、运行时不再引用 `LAB_SNAPSHOT`；同时交付客户端所选 Lab 的持有与切换重读，以及详情页回看、派生、对比、workspace、交回五项真实页面接线，具体行为见下文（D36-01 v1、D36-02 v2）。D35-01 v3 在 WEB-03 关闭时尚未交付的共享属性与纯映射随回看接线一并承接。W-10 按 D20-01/02 路径与 UI 数据绑定边界实施，保留 U59 合法结构/语义，不联系无关前端会话；文档按 D20-03 交接（D7-17） | WEB-03–06；D35-01 的提交时间轴 wire 按最终通过版本消费 | S2 | 构建好的 host 在浏览器中走完 13 个页面，数据都来自后端（SMOKE:22-54）；切换 Lab 与五项接线均交付，F10 S2 仍以拖动时间轴读取 `at=k` 的真实节点集合统一验收 | mid |
+| WEB-04 | 投影：讨论、数据集、流程编辑器；数据集页详情“来源链路”末尾的“产物”行显示该产物的 `ArtifactRef`（D37-01 v2）：两类产物的 `chain` 均追加 `{ label: copy.columns.artifact, value: artifact.id, mono: true, page: 该产物第一项的 page }`，讨论产物取 `ArtifactMetaWire.id`，运行产物为 `store:<content>`；只改 model，复用已有 UI 与文案 | WEB-02、LAB-11a、LAB-11b | F09、F12、F27；文件型交回引用串的纯投影 | 同上；数据集页引用串由本切片的投影单元测试验收，真实讨论上传接线归 WEB-07 | low |
+| WEB-05 | 投影：节点库、自动化 | WEB-02、LAB-09、LAB-10 | F28–F30 | 同 WEB-03 | low |
+| WEB-06 | 投影：集群、容器、接入向导、设置、首页 | WEB-02、LAB-12 | F17、F31 | 同 WEB-03 | low |
+| WEB-07 | 阶段 B 一次落地：放宽 id、把剧情字面量改成数据事实、`AgentTemplate.id` 改为 omp agent 定义名、`AgentTemplate.harness` 收窄为字面量 `'omp'`（D7:71、77）、运行时不再引用 `LAB_SNAPSHOT`；同时交付客户端所选 Lab 的持有与切换重读，以及详情页回看、派生、对比、workspace、交回五项真实页面接线，具体行为见下文（D36-01 v1、D36-02 v2）。详情页文件型交回用现有 `text` 字段接收 `ArtifactRef`，讨论页现有 `AttachIcon` 按钮接 `uploadArtifact`，两项按 D37-01 v2 交付。D35-01 v3 在 WEB-03 关闭时尚未交付的共享属性与纯映射随回看接线一并承接。W-10 按 D20-01/02 路径与 UI 数据绑定边界实施，保留 U59 合法结构/语义，不联系无关前端会话；文档按 D20-03 交接（D7-17） | WEB-03–06；D35-01 的提交时间轴 wire 按最终通过版本消费 | S2 | 构建好的 host 在浏览器中走完 13 个页面，数据都来自后端（SMOKE:22-54）；切换 Lab 与五项接线均交付，含详情页文件型交回及讨论页附件上传接线；F10 S2 仍以拖动时间轴读取 `at=k` 的真实节点集合统一验收 | mid |
 
 **WEB-07 的切换 Lab 与详情页接线（D36）。** 客户端持有 `selectedLabId: LabId | null`，首次为 `null`；切换时 `readCatalog(selectedLabId)` 重读目录，按新 `catalog.lab` 重读页面并重订阅 events，不写 Better Auth 会话。该行为随去除运行时 `LAB_SNAPSHOT` 一并交付，WEB-03 只交目录投影。
 
 详情页路由 loader 调用 `readPage('experiment')`，五个入口与该页真实数据切换一并接线：
 
 - 回看：“回看到这一步”工具栏动作，以及 D35-01 v3 的游标受控位置/拖动或点选回调接到 `readPage('experiment', {at})`；`at=k` 按 D12-05 读 `rewind`，`at=null` 读实时。不能用工具栏动作替代拖动。
-- 派生、对比、交回：工具栏动作与数据驱动的 `DialogSpecFixture`，调用处传入 `ActionDialog` 已有的 `onDone`。
+- 派生、对比、交回：工具栏动作与数据驱动的 `DialogSpecFixture`，调用处传入 `ActionDialog` 已有的 `onDone`。文件型交回字段用已有 `kind: 'text'`（`mono: true`）接收 `ArtifactRef`，自动化页同样适用（D37-01 v2）；提示接受 `store:<Hash>` 或 `discussion:<DiscussionArtifactId>`，引用串见数据集页详情“来源链路”的“产物”行。model 按 `awaiting_human.shape` 生成字段，提交时按 `ArtifactRefSchema` 解析，组成 `GuiReturned { kind: 'file', artifact }`，与其余字段一起放入 `intervene.answer` / `intervene.takeover` 的 `GuiHandback.fields`。自动化页交回归 WEB-05，详情页交回归 WEB-07，不将文件值当作字符串交回。
 - workspace：卷清单放入节点侧栏已有的 `artifactsAndSignals` 行。
+
+新文件经讨论页已有附件入口上传（D37-01 v2，WEB-07）：`features/lab-discussions/ui/discussions-page.tsx` 的 `AttachIcon` 按钮只补 `onClick={controller.attach}`；controller 以程序化 `input type=file` 打开浏览器文件选择，不渲染新元素，再调用 `LabBridge.uploadArtifact(当前讨论会话, 文件名, 'raw', 文件)`。交回人上传到自己作为 owner 的讨论会话，产物进入 datasets 页 `artifacts`；已有产物可直接在数据集页详情复制引用串，新文件上传后也到该处复制，再粘贴到自动化页或详情页交回框。Lab 依 P16 将字节放入持有槽位会话可读位置，不要求上传会话与交回会话相同。不改 `protocol/lab/**`、`server/lab/**`、`packages/ui` 或 D16-09/D20 白名单；`ui/**` 仅接上述一处 `onClick`，不在对话框中新增文件上传控件。通过后的承接登记与实际送达由 AreaMgrPepgent 在 [WEB-05 / #25](https://github.com/Pepgent/Pepgent/issues/25)、[WEB-04 / #27](https://github.com/Pepgent/Pepgent/issues/27)、[WEB-07 / #29](https://github.com/Pepgent/Pepgent/issues/29)办理，不以本次回写代替送达或实现。
 
 数据投影仍由 WEB-03 交付；上述五项页面接线与切换 Lab 不作为 WEB-03 关闭条件。相关 F 流程的 S2 部分在 WEB-07 合入后的统一 S2 验收，范围不缩减。D35-01 的共享组件属性与时刻→`k` 映射按最终通过版本实施，WEB-03 关闭时未交付部分在 WEB-07 承接。AreaMgrPepgent 在 [WEB-07 / Pepgent#29](https://github.com/Pepgent/Pepgent/issues/29) 评论登记承接 [D36-01、D36-02 v2](https://github.com/Pepgent/PM/issues/55)，逐项列出切换 Lab 及回看、派生、对比、workspace、交回五项接线，回看须含工具栏动作和 D35 游标回调，再送达 W-10；W-10 在 WEB-07 的 PR 正文逐项列出落点。路径仍限 D20-01，详情页 `ui` 只改 D20-02 允许的行。
 
