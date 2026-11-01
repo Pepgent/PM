@@ -1,0 +1,758 @@
+{
+  "scope": "Supplemental internal lazy-root identity and runtime restart integration only; not public RPC/auth-flow/live-service/global completion",
+  "fixtureSnapshot": "lab04-root-identity-persistence",
+  "fixtures": {
+    "mux": "/private/tmp/pepgent-eng-lab3/lab04/mux-failure-fixture.mjs",
+    "dial": "/private/tmp/pepgent-eng-lab3/lab04/dial-failure-fixture.mjs",
+    "omp": "/private/tmp/pepgent-eng-lab3/lab04/omp-persistence-fixture.mjs"
+  },
+  "runHome": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn",
+  "journalFile": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/boundary.jsonl",
+  "sqlite": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/lab/lab.sqlite",
+  "cases": [
+    {
+      "kind": "identity persisted before failed host tools and resumed by new enqueue",
+      "conversation": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+      "pair": {
+        "sessionId": "b133a19b-079d-479b-b94e-ec59801eabdf",
+        "sessionFile": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/sessions/f97ca2d8-607f-43e5-a0ba-a1921cc068c6/fixture-session.jsonl"
+      },
+      "recoveredHead": {
+        "type": "prompt_received",
+        "requestId": "60d6159e-b1e8-4117-a88b-304699c5a7ef",
+        "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+        "body": "persistence:retained head after tools rejection",
+        "message": "human:3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e\npersistence:retained head after tools rejection",
+        "sessionId": "b133a19b-079d-479b-b94e-ec59801eabdf",
+        "generation": "eb475a60-7d02-44d7-b305-355ca878eaf7",
+        "cwd": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+        "fixtureSnapshot": "lab04-root-identity-persistence",
+        "fixtureSequence": 11
+      },
+      "recoveredNext": {
+        "type": "prompt_received",
+        "requestId": "41326294-874c-4453-949c-205f7f0281ea",
+        "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+        "body": "persistence:new enqueue wakes persisted root",
+        "message": "human:3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e\npersistence:new enqueue wakes persisted root",
+        "sessionId": "b133a19b-079d-479b-b94e-ec59801eabdf",
+        "generation": "eb475a60-7d02-44d7-b305-355ca878eaf7",
+        "cwd": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+        "fixtureSnapshot": "lab04-root-identity-persistence",
+        "fixtureSequence": 18
+      }
+    },
+    {
+      "kind": "full runtime restart resumes parked pair, startup wakes valid pending pair, never-prompted stays lazy",
+      "parkedConversation": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+      "parkedPair": {
+        "sessionId": "83989cdb-ef60-4b37-a7d0-6980e61eb1ae",
+        "sessionFile": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/sessions/814d6082-a6db-490a-a2e0-585e73c2fccb/fixture-session.jsonl"
+      },
+      "parkedReceipt": {
+        "type": "prompt_received",
+        "requestId": "56b4509e-f6f2-469d-ae12-5120eb3c3617",
+        "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+        "body": "persistence:before full runtime restart",
+        "message": "human:3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e\npersistence:before full runtime restart",
+        "sessionId": "83989cdb-ef60-4b37-a7d0-6980e61eb1ae",
+        "generation": "a225b64d-b51e-49bb-bfe8-1a61f69b2ece",
+        "cwd": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/814d6082-a6db-490a-a2e0-585e73c2fccb",
+        "fixtureSnapshot": "lab04-root-identity-persistence",
+        "fixtureSequence": 11
+      },
+      "restartedReceipt": {
+        "type": "prompt_received",
+        "requestId": "3e654f60-162b-48f1-ab71-17a6e283248e",
+        "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+        "body": "persistence:after full runtime restart",
+        "message": "human:3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e\npersistence:after full runtime restart",
+        "sessionId": "83989cdb-ef60-4b37-a7d0-6980e61eb1ae",
+        "generation": "6aafd62c-63ae-43ce-a0ff-ddebd71547ad",
+        "cwd": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/814d6082-a6db-490a-a2e0-585e73c2fccb",
+        "fixtureSnapshot": "lab04-root-identity-persistence",
+        "fixtureSequence": 11
+      },
+      "startupConversation": "1c44ac61-77a3-495c-92e8-71db0927e709",
+      "startupPair": {
+        "sessionId": "087fb4fe-f34f-4b15-b227-c29faaa84de3",
+        "sessionFile": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/sessions/1c44ac61-77a3-495c-92e8-71db0927e709/fixture-session.jsonl"
+      },
+      "startupRecovered": {
+        "type": "prompt_received",
+        "requestId": "0fb24078-4ee5-4f7e-902b-5941d7168a78",
+        "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+        "body": "persistence:startup wakes retained pending head",
+        "message": "human:3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e\npersistence:startup wakes retained pending head",
+        "sessionId": "087fb4fe-f34f-4b15-b227-c29faaa84de3",
+        "generation": "acc76573-0fee-454d-8caf-24deabf1b491",
+        "cwd": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/1c44ac61-77a3-495c-92e8-71db0927e709",
+        "fixtureSnapshot": "lab04-root-identity-persistence",
+        "fixtureSequence": 11
+      },
+      "neverPromptedConversation": "3dbf9dac-a83a-4667-a90d-f4c74361491d"
+    },
+    {
+      "kind": "missing mandatory sessionFile rejects generation without publishing partial identity",
+      "conversation": "7b8a5f6f-6272-416e-82c3-e0493a54c6d9",
+      "labPair": {
+        "sessionId": null,
+        "sessionFile": null
+      },
+      "independentlyOwnedSource": {
+        "sessionId": "11f246c0-435e-40b8-aa43-2d8d51a91805",
+        "sessionFile": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/sessions/7b8a5f6f-6272-416e-82c3-e0493a54c6d9/fixture-session.jsonl",
+        "resumed": null,
+        "cwd": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/7b8a5f6f-6272-416e-82c3-e0493a54c6d9",
+        "event": "omp:start",
+        "pid": 81530,
+        "generation": "31e4a842-28ef-4dd2-8584-ddce6e15c123",
+        "conversation": "7b8a5f6f-6272-416e-82c3-e0493a54c6d9",
+        "fixtureSnapshot": "lab04-root-identity-persistence",
+        "fixtureSequence": 2,
+        "at": 1793522052057
+      },
+      "queuedMessage": "001-b86413b5-60b9-4fa8-86f4-151c32d1ce1b"
+    }
+  ],
+  "snapshots": [
+    {
+      "command": "get_state",
+      "requestId": "781c3d58-1efa-44eb-a33c-6d8950b581fd",
+      "agent": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+      "row": {
+        "id": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+        "labId": "2d24417f-09b5-406f-a40f-185accf89222",
+        "ownerId": "b4608e98-1348-44c7-9c6a-fb11f7d82b2b",
+        "originKind": "Discussion",
+        "discussionName": "Persist identity before host tools rejection",
+        "discussionProjectId": "755208e5-e6dd-43a5-8d3d-0396a98c9e2e",
+        "discussionArchived": false,
+        "panelPage": null,
+        "panelScope": null,
+        "automationRuleId": null,
+        "automationRunId": null,
+        "agentId": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+        "sessionId": null,
+        "sessionFile": null,
+        "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+        "createdAt": "2026-11-01T08:34:08.334Z"
+      },
+      "queue": [
+        {
+          "conversationId": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+          "msg": "001-851c60b6-7086-46e3-9bb8-4146d7b973cf",
+          "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+          "body": "persistence:retained head after tools rejection",
+          "queuedAt": "2026-11-01T08:34:08.369Z"
+        }
+      ]
+    },
+    {
+      "command": "set_host_tools",
+      "requestId": "84bfc3a5-729f-4b20-bc3b-3333d67d9bd3",
+      "agent": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+      "row": {
+        "id": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+        "labId": "2d24417f-09b5-406f-a40f-185accf89222",
+        "ownerId": "b4608e98-1348-44c7-9c6a-fb11f7d82b2b",
+        "originKind": "Discussion",
+        "discussionName": "Persist identity before host tools rejection",
+        "discussionProjectId": "755208e5-e6dd-43a5-8d3d-0396a98c9e2e",
+        "discussionArchived": false,
+        "panelPage": null,
+        "panelScope": null,
+        "automationRuleId": null,
+        "automationRunId": null,
+        "agentId": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+        "sessionId": "b133a19b-079d-479b-b94e-ec59801eabdf",
+        "sessionFile": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/sessions/f97ca2d8-607f-43e5-a0ba-a1921cc068c6/fixture-session.jsonl",
+        "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+        "createdAt": "2026-11-01T08:34:08.334Z"
+      },
+      "queue": [
+        {
+          "conversationId": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+          "msg": "001-851c60b6-7086-46e3-9bb8-4146d7b973cf",
+          "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+          "body": "persistence:retained head after tools rejection",
+          "queuedAt": "2026-11-01T08:34:08.369Z"
+        }
+      ]
+    },
+    {
+      "command": "get_state",
+      "requestId": "5e8287f6-b419-4c52-8b0c-28d2f8fd25c3",
+      "agent": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+      "row": {
+        "id": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+        "labId": "2d24417f-09b5-406f-a40f-185accf89222",
+        "ownerId": "b4608e98-1348-44c7-9c6a-fb11f7d82b2b",
+        "originKind": "Discussion",
+        "discussionName": "Persist identity before host tools rejection",
+        "discussionProjectId": "755208e5-e6dd-43a5-8d3d-0396a98c9e2e",
+        "discussionArchived": false,
+        "panelPage": null,
+        "panelScope": null,
+        "automationRuleId": null,
+        "automationRunId": null,
+        "agentId": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+        "sessionId": "b133a19b-079d-479b-b94e-ec59801eabdf",
+        "sessionFile": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/sessions/f97ca2d8-607f-43e5-a0ba-a1921cc068c6/fixture-session.jsonl",
+        "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+        "createdAt": "2026-11-01T08:34:08.334Z"
+      },
+      "queue": [
+        {
+          "conversationId": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+          "msg": "001-851c60b6-7086-46e3-9bb8-4146d7b973cf",
+          "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+          "body": "persistence:retained head after tools rejection",
+          "queuedAt": "2026-11-01T08:34:08.369Z"
+        },
+        {
+          "conversationId": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+          "msg": "002-5fabdc15-f6ca-4815-ac6d-1308c4fd360a",
+          "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+          "body": "persistence:new enqueue wakes persisted root",
+          "queuedAt": "2026-11-01T08:34:08.842Z"
+        }
+      ]
+    },
+    {
+      "command": "set_host_tools",
+      "requestId": "5faf62eb-b0d4-4967-9647-5e2500a99930",
+      "agent": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+      "row": {
+        "id": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+        "labId": "2d24417f-09b5-406f-a40f-185accf89222",
+        "ownerId": "b4608e98-1348-44c7-9c6a-fb11f7d82b2b",
+        "originKind": "Discussion",
+        "discussionName": "Persist identity before host tools rejection",
+        "discussionProjectId": "755208e5-e6dd-43a5-8d3d-0396a98c9e2e",
+        "discussionArchived": false,
+        "panelPage": null,
+        "panelScope": null,
+        "automationRuleId": null,
+        "automationRunId": null,
+        "agentId": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+        "sessionId": "b133a19b-079d-479b-b94e-ec59801eabdf",
+        "sessionFile": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/sessions/f97ca2d8-607f-43e5-a0ba-a1921cc068c6/fixture-session.jsonl",
+        "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+        "createdAt": "2026-11-01T08:34:08.334Z"
+      },
+      "queue": [
+        {
+          "conversationId": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+          "msg": "001-851c60b6-7086-46e3-9bb8-4146d7b973cf",
+          "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+          "body": "persistence:retained head after tools rejection",
+          "queuedAt": "2026-11-01T08:34:08.369Z"
+        },
+        {
+          "conversationId": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+          "msg": "002-5fabdc15-f6ca-4815-ac6d-1308c4fd360a",
+          "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+          "body": "persistence:new enqueue wakes persisted root",
+          "queuedAt": "2026-11-01T08:34:08.842Z"
+        }
+      ]
+    },
+    {
+      "command": "prompt",
+      "requestId": "60d6159e-b1e8-4117-a88b-304699c5a7ef",
+      "agent": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+      "row": {
+        "id": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+        "labId": "2d24417f-09b5-406f-a40f-185accf89222",
+        "ownerId": "b4608e98-1348-44c7-9c6a-fb11f7d82b2b",
+        "originKind": "Discussion",
+        "discussionName": "Persist identity before host tools rejection",
+        "discussionProjectId": "755208e5-e6dd-43a5-8d3d-0396a98c9e2e",
+        "discussionArchived": false,
+        "panelPage": null,
+        "panelScope": null,
+        "automationRuleId": null,
+        "automationRunId": null,
+        "agentId": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+        "sessionId": "b133a19b-079d-479b-b94e-ec59801eabdf",
+        "sessionFile": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/sessions/f97ca2d8-607f-43e5-a0ba-a1921cc068c6/fixture-session.jsonl",
+        "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+        "createdAt": "2026-11-01T08:34:08.334Z"
+      },
+      "queue": [
+        {
+          "conversationId": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+          "msg": "001-851c60b6-7086-46e3-9bb8-4146d7b973cf",
+          "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+          "body": "persistence:retained head after tools rejection",
+          "queuedAt": "2026-11-01T08:34:08.369Z"
+        },
+        {
+          "conversationId": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+          "msg": "002-5fabdc15-f6ca-4815-ac6d-1308c4fd360a",
+          "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+          "body": "persistence:new enqueue wakes persisted root",
+          "queuedAt": "2026-11-01T08:34:08.842Z"
+        }
+      ]
+    },
+    {
+      "command": "prompt",
+      "requestId": "41326294-874c-4453-949c-205f7f0281ea",
+      "agent": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+      "row": {
+        "id": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+        "labId": "2d24417f-09b5-406f-a40f-185accf89222",
+        "ownerId": "b4608e98-1348-44c7-9c6a-fb11f7d82b2b",
+        "originKind": "Discussion",
+        "discussionName": "Persist identity before host tools rejection",
+        "discussionProjectId": "755208e5-e6dd-43a5-8d3d-0396a98c9e2e",
+        "discussionArchived": false,
+        "panelPage": null,
+        "panelScope": null,
+        "automationRuleId": null,
+        "automationRunId": null,
+        "agentId": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+        "sessionId": "b133a19b-079d-479b-b94e-ec59801eabdf",
+        "sessionFile": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/sessions/f97ca2d8-607f-43e5-a0ba-a1921cc068c6/fixture-session.jsonl",
+        "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+        "createdAt": "2026-11-01T08:34:08.334Z"
+      },
+      "queue": [
+        {
+          "conversationId": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+          "msg": "002-5fabdc15-f6ca-4815-ac6d-1308c4fd360a",
+          "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+          "body": "persistence:new enqueue wakes persisted root",
+          "queuedAt": "2026-11-01T08:34:08.842Z"
+        }
+      ]
+    },
+    {
+      "command": "get_state",
+      "requestId": "4b3de81c-e43a-4e69-85b6-913599b21427",
+      "agent": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+      "row": {
+        "id": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+        "labId": "2d24417f-09b5-406f-a40f-185accf89222",
+        "ownerId": "b4608e98-1348-44c7-9c6a-fb11f7d82b2b",
+        "originKind": "Discussion",
+        "discussionName": "Parked root survives full runtime restart",
+        "discussionProjectId": "755208e5-e6dd-43a5-8d3d-0396a98c9e2e",
+        "discussionArchived": false,
+        "panelPage": null,
+        "panelScope": null,
+        "automationRuleId": null,
+        "automationRunId": null,
+        "agentId": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+        "sessionId": null,
+        "sessionFile": null,
+        "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/814d6082-a6db-490a-a2e0-585e73c2fccb",
+        "createdAt": "2026-11-01T08:34:09.377Z"
+      },
+      "queue": [
+        {
+          "conversationId": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+          "msg": "001-f1e5f863-efad-4247-8854-2ee0d198a87a",
+          "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+          "body": "persistence:before full runtime restart",
+          "queuedAt": "2026-11-01T08:34:09.415Z"
+        }
+      ]
+    },
+    {
+      "command": "set_host_tools",
+      "requestId": "4bd38792-ca37-4856-88ea-c70b615a53ac",
+      "agent": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+      "row": {
+        "id": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+        "labId": "2d24417f-09b5-406f-a40f-185accf89222",
+        "ownerId": "b4608e98-1348-44c7-9c6a-fb11f7d82b2b",
+        "originKind": "Discussion",
+        "discussionName": "Parked root survives full runtime restart",
+        "discussionProjectId": "755208e5-e6dd-43a5-8d3d-0396a98c9e2e",
+        "discussionArchived": false,
+        "panelPage": null,
+        "panelScope": null,
+        "automationRuleId": null,
+        "automationRunId": null,
+        "agentId": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+        "sessionId": "83989cdb-ef60-4b37-a7d0-6980e61eb1ae",
+        "sessionFile": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/sessions/814d6082-a6db-490a-a2e0-585e73c2fccb/fixture-session.jsonl",
+        "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/814d6082-a6db-490a-a2e0-585e73c2fccb",
+        "createdAt": "2026-11-01T08:34:09.377Z"
+      },
+      "queue": [
+        {
+          "conversationId": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+          "msg": "001-f1e5f863-efad-4247-8854-2ee0d198a87a",
+          "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+          "body": "persistence:before full runtime restart",
+          "queuedAt": "2026-11-01T08:34:09.415Z"
+        }
+      ]
+    },
+    {
+      "command": "prompt",
+      "requestId": "56b4509e-f6f2-469d-ae12-5120eb3c3617",
+      "agent": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+      "row": {
+        "id": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+        "labId": "2d24417f-09b5-406f-a40f-185accf89222",
+        "ownerId": "b4608e98-1348-44c7-9c6a-fb11f7d82b2b",
+        "originKind": "Discussion",
+        "discussionName": "Parked root survives full runtime restart",
+        "discussionProjectId": "755208e5-e6dd-43a5-8d3d-0396a98c9e2e",
+        "discussionArchived": false,
+        "panelPage": null,
+        "panelScope": null,
+        "automationRuleId": null,
+        "automationRunId": null,
+        "agentId": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+        "sessionId": "83989cdb-ef60-4b37-a7d0-6980e61eb1ae",
+        "sessionFile": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/sessions/814d6082-a6db-490a-a2e0-585e73c2fccb/fixture-session.jsonl",
+        "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/814d6082-a6db-490a-a2e0-585e73c2fccb",
+        "createdAt": "2026-11-01T08:34:09.377Z"
+      },
+      "queue": [
+        {
+          "conversationId": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+          "msg": "001-f1e5f863-efad-4247-8854-2ee0d198a87a",
+          "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+          "body": "persistence:before full runtime restart",
+          "queuedAt": "2026-11-01T08:34:09.415Z"
+        }
+      ]
+    },
+    {
+      "command": "get_state",
+      "requestId": "a2e13fae-d0f7-4003-b452-3f6cd0536894",
+      "agent": "1c44ac61-77a3-495c-92e8-71db0927e709",
+      "row": {
+        "id": "1c44ac61-77a3-495c-92e8-71db0927e709",
+        "labId": "2d24417f-09b5-406f-a40f-185accf89222",
+        "ownerId": "b4608e98-1348-44c7-9c6a-fb11f7d82b2b",
+        "originKind": "Discussion",
+        "discussionName": "Persisted valid pending head wakes only at startup",
+        "discussionProjectId": "755208e5-e6dd-43a5-8d3d-0396a98c9e2e",
+        "discussionArchived": false,
+        "panelPage": null,
+        "panelScope": null,
+        "automationRuleId": null,
+        "automationRunId": null,
+        "agentId": "1c44ac61-77a3-495c-92e8-71db0927e709",
+        "sessionId": null,
+        "sessionFile": null,
+        "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/1c44ac61-77a3-495c-92e8-71db0927e709",
+        "createdAt": "2026-11-01T08:34:10.096Z"
+      },
+      "queue": [
+        {
+          "conversationId": "1c44ac61-77a3-495c-92e8-71db0927e709",
+          "msg": "001-755badaa-1daf-47c9-9569-7d19751bfbfe",
+          "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+          "body": "persistence:startup wakes retained pending head",
+          "queuedAt": "2026-11-01T08:34:10.162Z"
+        }
+      ]
+    },
+    {
+      "command": "set_host_tools",
+      "requestId": "69994477-66e7-4df9-b416-f2959d15605a",
+      "agent": "1c44ac61-77a3-495c-92e8-71db0927e709",
+      "row": {
+        "id": "1c44ac61-77a3-495c-92e8-71db0927e709",
+        "labId": "2d24417f-09b5-406f-a40f-185accf89222",
+        "ownerId": "b4608e98-1348-44c7-9c6a-fb11f7d82b2b",
+        "originKind": "Discussion",
+        "discussionName": "Persisted valid pending head wakes only at startup",
+        "discussionProjectId": "755208e5-e6dd-43a5-8d3d-0396a98c9e2e",
+        "discussionArchived": false,
+        "panelPage": null,
+        "panelScope": null,
+        "automationRuleId": null,
+        "automationRunId": null,
+        "agentId": "1c44ac61-77a3-495c-92e8-71db0927e709",
+        "sessionId": "087fb4fe-f34f-4b15-b227-c29faaa84de3",
+        "sessionFile": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/sessions/1c44ac61-77a3-495c-92e8-71db0927e709/fixture-session.jsonl",
+        "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/1c44ac61-77a3-495c-92e8-71db0927e709",
+        "createdAt": "2026-11-01T08:34:10.096Z"
+      },
+      "queue": [
+        {
+          "conversationId": "1c44ac61-77a3-495c-92e8-71db0927e709",
+          "msg": "001-755badaa-1daf-47c9-9569-7d19751bfbfe",
+          "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+          "body": "persistence:startup wakes retained pending head",
+          "queuedAt": "2026-11-01T08:34:10.162Z"
+        }
+      ]
+    },
+    {
+      "command": "get_state",
+      "requestId": "5f0acbd9-16c7-42b2-a32e-56d37b4256bc",
+      "agent": "1c44ac61-77a3-495c-92e8-71db0927e709",
+      "row": {
+        "id": "1c44ac61-77a3-495c-92e8-71db0927e709",
+        "labId": "2d24417f-09b5-406f-a40f-185accf89222",
+        "ownerId": "b4608e98-1348-44c7-9c6a-fb11f7d82b2b",
+        "originKind": "Discussion",
+        "discussionName": "Persisted valid pending head wakes only at startup",
+        "discussionProjectId": "755208e5-e6dd-43a5-8d3d-0396a98c9e2e",
+        "discussionArchived": false,
+        "panelPage": null,
+        "panelScope": null,
+        "automationRuleId": null,
+        "automationRunId": null,
+        "agentId": "1c44ac61-77a3-495c-92e8-71db0927e709",
+        "sessionId": "087fb4fe-f34f-4b15-b227-c29faaa84de3",
+        "sessionFile": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/sessions/1c44ac61-77a3-495c-92e8-71db0927e709/fixture-session.jsonl",
+        "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/1c44ac61-77a3-495c-92e8-71db0927e709",
+        "createdAt": "2026-11-01T08:34:10.096Z"
+      },
+      "queue": [
+        {
+          "conversationId": "1c44ac61-77a3-495c-92e8-71db0927e709",
+          "msg": "001-755badaa-1daf-47c9-9569-7d19751bfbfe",
+          "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+          "body": "persistence:startup wakes retained pending head",
+          "queuedAt": "2026-11-01T08:34:10.162Z"
+        }
+      ]
+    },
+    {
+      "command": "set_host_tools",
+      "requestId": "99233b09-77b7-4ebe-b635-6c69de4b676e",
+      "agent": "1c44ac61-77a3-495c-92e8-71db0927e709",
+      "row": {
+        "id": "1c44ac61-77a3-495c-92e8-71db0927e709",
+        "labId": "2d24417f-09b5-406f-a40f-185accf89222",
+        "ownerId": "b4608e98-1348-44c7-9c6a-fb11f7d82b2b",
+        "originKind": "Discussion",
+        "discussionName": "Persisted valid pending head wakes only at startup",
+        "discussionProjectId": "755208e5-e6dd-43a5-8d3d-0396a98c9e2e",
+        "discussionArchived": false,
+        "panelPage": null,
+        "panelScope": null,
+        "automationRuleId": null,
+        "automationRunId": null,
+        "agentId": "1c44ac61-77a3-495c-92e8-71db0927e709",
+        "sessionId": "087fb4fe-f34f-4b15-b227-c29faaa84de3",
+        "sessionFile": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/sessions/1c44ac61-77a3-495c-92e8-71db0927e709/fixture-session.jsonl",
+        "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/1c44ac61-77a3-495c-92e8-71db0927e709",
+        "createdAt": "2026-11-01T08:34:10.096Z"
+      },
+      "queue": [
+        {
+          "conversationId": "1c44ac61-77a3-495c-92e8-71db0927e709",
+          "msg": "001-755badaa-1daf-47c9-9569-7d19751bfbfe",
+          "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+          "body": "persistence:startup wakes retained pending head",
+          "queuedAt": "2026-11-01T08:34:10.162Z"
+        }
+      ]
+    },
+    {
+      "command": "prompt",
+      "requestId": "0fb24078-4ee5-4f7e-902b-5941d7168a78",
+      "agent": "1c44ac61-77a3-495c-92e8-71db0927e709",
+      "row": {
+        "id": "1c44ac61-77a3-495c-92e8-71db0927e709",
+        "labId": "2d24417f-09b5-406f-a40f-185accf89222",
+        "ownerId": "b4608e98-1348-44c7-9c6a-fb11f7d82b2b",
+        "originKind": "Discussion",
+        "discussionName": "Persisted valid pending head wakes only at startup",
+        "discussionProjectId": "755208e5-e6dd-43a5-8d3d-0396a98c9e2e",
+        "discussionArchived": false,
+        "panelPage": null,
+        "panelScope": null,
+        "automationRuleId": null,
+        "automationRunId": null,
+        "agentId": "1c44ac61-77a3-495c-92e8-71db0927e709",
+        "sessionId": "087fb4fe-f34f-4b15-b227-c29faaa84de3",
+        "sessionFile": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/sessions/1c44ac61-77a3-495c-92e8-71db0927e709/fixture-session.jsonl",
+        "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/1c44ac61-77a3-495c-92e8-71db0927e709",
+        "createdAt": "2026-11-01T08:34:10.096Z"
+      },
+      "queue": [
+        {
+          "conversationId": "1c44ac61-77a3-495c-92e8-71db0927e709",
+          "msg": "001-755badaa-1daf-47c9-9569-7d19751bfbfe",
+          "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+          "body": "persistence:startup wakes retained pending head",
+          "queuedAt": "2026-11-01T08:34:10.162Z"
+        }
+      ]
+    },
+    {
+      "command": "get_state",
+      "requestId": "0c80e812-1e39-4b54-9a38-7e933a2e73d9",
+      "agent": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+      "row": {
+        "id": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+        "labId": "2d24417f-09b5-406f-a40f-185accf89222",
+        "ownerId": "b4608e98-1348-44c7-9c6a-fb11f7d82b2b",
+        "originKind": "Discussion",
+        "discussionName": "Parked root survives full runtime restart",
+        "discussionProjectId": "755208e5-e6dd-43a5-8d3d-0396a98c9e2e",
+        "discussionArchived": false,
+        "panelPage": null,
+        "panelScope": null,
+        "automationRuleId": null,
+        "automationRunId": null,
+        "agentId": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+        "sessionId": "83989cdb-ef60-4b37-a7d0-6980e61eb1ae",
+        "sessionFile": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/sessions/814d6082-a6db-490a-a2e0-585e73c2fccb/fixture-session.jsonl",
+        "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/814d6082-a6db-490a-a2e0-585e73c2fccb",
+        "createdAt": "2026-11-01T08:34:09.377Z"
+      },
+      "queue": [
+        {
+          "conversationId": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+          "msg": "002-e3a2951b-c3e9-49f0-a388-86f88edfcc55",
+          "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+          "body": "persistence:after full runtime restart",
+          "queuedAt": "2026-11-01T08:34:11.114Z"
+        }
+      ]
+    },
+    {
+      "command": "set_host_tools",
+      "requestId": "d4eeef5e-8a56-4d16-9da8-bea77ed7b249",
+      "agent": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+      "row": {
+        "id": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+        "labId": "2d24417f-09b5-406f-a40f-185accf89222",
+        "ownerId": "b4608e98-1348-44c7-9c6a-fb11f7d82b2b",
+        "originKind": "Discussion",
+        "discussionName": "Parked root survives full runtime restart",
+        "discussionProjectId": "755208e5-e6dd-43a5-8d3d-0396a98c9e2e",
+        "discussionArchived": false,
+        "panelPage": null,
+        "panelScope": null,
+        "automationRuleId": null,
+        "automationRunId": null,
+        "agentId": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+        "sessionId": "83989cdb-ef60-4b37-a7d0-6980e61eb1ae",
+        "sessionFile": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/sessions/814d6082-a6db-490a-a2e0-585e73c2fccb/fixture-session.jsonl",
+        "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/814d6082-a6db-490a-a2e0-585e73c2fccb",
+        "createdAt": "2026-11-01T08:34:09.377Z"
+      },
+      "queue": [
+        {
+          "conversationId": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+          "msg": "002-e3a2951b-c3e9-49f0-a388-86f88edfcc55",
+          "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+          "body": "persistence:after full runtime restart",
+          "queuedAt": "2026-11-01T08:34:11.114Z"
+        }
+      ]
+    },
+    {
+      "command": "prompt",
+      "requestId": "3e654f60-162b-48f1-ab71-17a6e283248e",
+      "agent": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+      "row": {
+        "id": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+        "labId": "2d24417f-09b5-406f-a40f-185accf89222",
+        "ownerId": "b4608e98-1348-44c7-9c6a-fb11f7d82b2b",
+        "originKind": "Discussion",
+        "discussionName": "Parked root survives full runtime restart",
+        "discussionProjectId": "755208e5-e6dd-43a5-8d3d-0396a98c9e2e",
+        "discussionArchived": false,
+        "panelPage": null,
+        "panelScope": null,
+        "automationRuleId": null,
+        "automationRunId": null,
+        "agentId": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+        "sessionId": "83989cdb-ef60-4b37-a7d0-6980e61eb1ae",
+        "sessionFile": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/sessions/814d6082-a6db-490a-a2e0-585e73c2fccb/fixture-session.jsonl",
+        "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/814d6082-a6db-490a-a2e0-585e73c2fccb",
+        "createdAt": "2026-11-01T08:34:09.377Z"
+      },
+      "queue": [
+        {
+          "conversationId": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+          "msg": "002-e3a2951b-c3e9-49f0-a388-86f88edfcc55",
+          "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+          "body": "persistence:after full runtime restart",
+          "queuedAt": "2026-11-01T08:34:11.114Z"
+        }
+      ]
+    },
+    {
+      "command": "get_state",
+      "requestId": "13a544a9-2979-4bac-b164-88ebfa7a7f19",
+      "agent": "7b8a5f6f-6272-416e-82c3-e0493a54c6d9",
+      "row": {
+        "id": "7b8a5f6f-6272-416e-82c3-e0493a54c6d9",
+        "labId": "2d24417f-09b5-406f-a40f-185accf89222",
+        "ownerId": "b4608e98-1348-44c7-9c6a-fb11f7d82b2b",
+        "originKind": "Discussion",
+        "discussionName": "Mandatory source sessionFile omission",
+        "discussionProjectId": "755208e5-e6dd-43a5-8d3d-0396a98c9e2e",
+        "discussionArchived": false,
+        "panelPage": null,
+        "panelScope": null,
+        "automationRuleId": null,
+        "automationRunId": null,
+        "agentId": "7b8a5f6f-6272-416e-82c3-e0493a54c6d9",
+        "sessionId": null,
+        "sessionFile": null,
+        "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/7b8a5f6f-6272-416e-82c3-e0493a54c6d9",
+        "createdAt": "2026-11-01T08:34:11.698Z"
+      },
+      "queue": [
+        {
+          "conversationId": "7b8a5f6f-6272-416e-82c3-e0493a54c6d9",
+          "msg": "001-b86413b5-60b9-4fa8-86f4-151c32d1ce1b",
+          "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+          "body": "persistence:missing mandatory session file",
+          "queuedAt": "2026-11-01T08:34:11.728Z"
+        }
+      ]
+    }
+  ],
+  "persistedRows": [
+    {
+      "id": "1c44ac61-77a3-495c-92e8-71db0927e709",
+      "session_id": "087fb4fe-f34f-4b15-b227-c29faaa84de3",
+      "session_file": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/sessions/1c44ac61-77a3-495c-92e8-71db0927e709/fixture-session.jsonl",
+      "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/1c44ac61-77a3-495c-92e8-71db0927e709"
+    },
+    {
+      "id": "3dbf9dac-a83a-4667-a90d-f4c74361491d",
+      "session_id": null,
+      "session_file": null,
+      "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/3dbf9dac-a83a-4667-a90d-f4c74361491d"
+    },
+    {
+      "id": "7b8a5f6f-6272-416e-82c3-e0493a54c6d9",
+      "session_id": null,
+      "session_file": null,
+      "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/7b8a5f6f-6272-416e-82c3-e0493a54c6d9"
+    },
+    {
+      "id": "814d6082-a6db-490a-a2e0-585e73c2fccb",
+      "session_id": "83989cdb-ef60-4b37-a7d0-6980e61eb1ae",
+      "session_file": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/sessions/814d6082-a6db-490a-a2e0-585e73c2fccb/fixture-session.jsonl",
+      "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/814d6082-a6db-490a-a2e0-585e73c2fccb"
+    },
+    {
+      "id": "f97ca2d8-607f-43e5-a0ba-a1921cc068c6",
+      "session_id": "b133a19b-079d-479b-b94e-ec59801eabdf",
+      "session_file": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/sessions/f97ca2d8-607f-43e5-a0ba-a1921cc068c6/fixture-session.jsonl",
+      "worktree": "/private/tmp/pepgent-eng-lab3/lab04/persistence-run-O0OZOn/worktrees/f97ca2d8-607f-43e5-a0ba-a1921cc068c6"
+    }
+  ],
+  "persistedQueue": [
+    {
+      "conversation_id": "7b8a5f6f-6272-416e-82c3-e0493a54c6d9",
+      "msg": "001-b86413b5-60b9-4fa8-86f4-151c32d1ce1b",
+      "principal": "3aa4f86b-454b-4ffd-a9d0-42b2f4e5400e",
+      "body": "persistence:missing mandatory session file"
+    }
+  ],
+  "watchdogFired": false
+}
