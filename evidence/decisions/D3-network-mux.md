@@ -97,6 +97,7 @@ type WriterUp =
   | OmpLine                                               // RpcCommand / host_tool_result / host_uri_result → 当前这一代的 stdin
   | { type: "mux_open_generation" }
   | { type: "mux_close_stdin"; generation: Generation };
+// dial 托管的 omp 正常退出报告原退出码；因信号结束报告 128 + 信号编号（D11-01）；下列所有退出帧与 PresenceEvent.code 同义。
 type WriterDown =
   | OmpLine                                               // 当前这一代的 stdout，原样，含 ready
   | { type: "mux_generation"; generation: Generation; token: string }

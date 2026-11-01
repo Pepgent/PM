@@ -1,12 +1,12 @@
 # D8 切片 → 实现 issue
 
-来源：[D8 决策](https://github.com/Pepgent/PM/issues/8)；[D8 §4.2 全部 108 个切片](https://github.com/Pepgent/PM/blob/main/evidence/decisions/D8-mvp-scope.md#L219-L391)；[§4.1 波次](https://github.com/Pepgent/PM/blob/main/evidence/decisions/D8-mvp-scope.md#L182-L202)。
+来源：[D8 决策](https://github.com/Pepgent/PM/issues/8)、[D8 §4 实现计划](https://github.com/Pepgent/PM/blob/main/evidence/decisions/D8-mvp-scope.md#4-实现计划)、[D16（PM#25）](https://github.com/Pepgent/PM/issues/25) D16-01/06/09/10。
 
-本次创建 **88** 个 issue，复用已有 issue 覆盖 **20** 个切片，共 **108** 个切片。复用项不重复开 issue、不改已有正文或评论；新 issue 保留原行 what、验收、档位与波次，依赖均为实际 issue 链接。
+108 个切片的原建单映射：新建 88 个，复用 20 个，不据此推断当前代码或运行状态。依赖链接与业务范围保留；开发期依赖改为代码合入 main，跨组件义务由统一 E2E/A0/S1/S2 正文承接，不缩减。
 
-归属按代码所在仓库：ENV 无代码仓库、D9 证据工作在 PM；E2E 第一段/PTY 驱动在 soroi；E2E-20/21 在 Pepgent。Project [Pepgent PM #1](https://github.com/orgs/Pepgent/projects/1) 中新 issue 为 Todo，复用项保留执行事实对应的 In progress / Done。
+归属按代码路径：ENV/D9 在 PM；soroi `e2e/**`（含 DIST-02/#224）归 W-08；`apps/web/tests/e2e-lab/**` 的 E2E-20/21 归 W-10（所测代码全部合入后编写，阶段 B 不执行）。其余席位完整路径按 D16-09。表中的 VS1/VS2/W1–W7 仅原切片标识，不再是波次、排期或 runtime 开工门禁；W-08/W-10 为 D16 的实际执行席。Project 列仅建单时记录，当前状态向 [Project #1](https://github.com/orgs/Pepgent/projects/1) 查询。
 
-| Slice | Repo | Issue | 本次操作 | Tier | Wave | Project Status |
+| Slice | Repo | Issue | 建单方式 | Tier | 执行席或原切片标识 | 建单时 Project Status |
 | --- | --- | --- | --- | --- | --- | --- |
 | ENV-01 | `Pepgent/PM` | [Pepgent/PM#9](https://github.com/Pepgent/PM/issues/9) | 新建 | low | VS1 | Todo |
 | ENV-02 | `Pepgent/PM` | [Pepgent/PM#10](https://github.com/Pepgent/PM/issues/10) | 新建 | mid | VS1 | Todo |
@@ -63,7 +63,7 @@
 | CUS-03 | `Pepgent/soroi` | [Pepgent/soroi#206](https://github.com/Pepgent/soroi/issues/206) | 新建 | high | W1 | Todo |
 | CUS-04 | `Pepgent/soroi` | [Pepgent/soroi#186](https://github.com/Pepgent/soroi/issues/186) | 复用已有 | low | W1 | Todo |
 | DIST-01 | `Pepgent/soroi` | [Pepgent/soroi#199](https://github.com/Pepgent/soroi/issues/199) | 新建 | mid | VS1 | Todo |
-| DIST-02 | `Pepgent/soroi` | [Pepgent/soroi#224](https://github.com/Pepgent/soroi/issues/224) | 新建 | low | W1 | Todo |
+| DIST-02 | `Pepgent/soroi` | [Pepgent/soroi#224](https://github.com/Pepgent/soroi/issues/224) | 新建 | low | **W-08**（e2e/install-check/**；不随仓B迁移） | Todo |
 | DIST-03 | `Pepgent/soroi` | [Pepgent/soroi#210](https://github.com/Pepgent/soroi/issues/210) | 新建 | low | VS1 | Todo |
 | DIST-04 | `Pepgent/soroi` | [Pepgent/soroi#225](https://github.com/Pepgent/soroi/issues/225) | 新建 | low | W4 | Todo |
 | REM-01 | `Pepgent/remote` | [Pepgent/remote#1](https://github.com/Pepgent/remote/issues/1) | 复用已有 | mid | W5 | Todo |
@@ -111,12 +111,12 @@
 | E2E-17 | `Pepgent/soroi` | [Pepgent/soroi#232](https://github.com/Pepgent/soroi/issues/232) | 新建 | low | W5 | Todo |
 | E2E-18 | `Pepgent/soroi` | [Pepgent/soroi#233](https://github.com/Pepgent/soroi/issues/233) | 新建 | low | W4 | Todo |
 | E2E-19 | `Pepgent/soroi` | [Pepgent/soroi#208](https://github.com/Pepgent/soroi/issues/208) | 新建 | low | W3 | Todo |
-| E2E-20 | `Pepgent/Pepgent` | [Pepgent/Pepgent#30](https://github.com/Pepgent/Pepgent/issues/30) | 新建 | low | W6 | Todo |
-| E2E-21 | `Pepgent/Pepgent` | [Pepgent/Pepgent#23](https://github.com/Pepgent/Pepgent/issues/23) | 新建 | low | VS2 | Todo |
+| E2E-20 | `Pepgent/Pepgent` | [Pepgent/Pepgent#30](https://github.com/Pepgent/Pepgent/issues/30) | 新建 | low | **W-10**（apps/web/tests/e2e-lab/**） | Todo |
+| E2E-21 | `Pepgent/Pepgent` | [Pepgent/Pepgent#23](https://github.com/Pepgent/Pepgent/issues/23) | 新建 | low | **W-10**（apps/web/tests/e2e-lab/**） | Todo |
 | D9-01 | `Pepgent/PM` | [Pepgent/PM#13](https://github.com/Pepgent/PM/issues/13) | 新建 | free | W7 | Todo |
 | D9-02 | `Pepgent/PM` | [Pepgent/PM#14](https://github.com/Pepgent/PM/issues/14) | 新建 | low | W7 | Todo |
 | D9-03 | `Pepgent/PM` | [Pepgent/PM#15](https://github.com/Pepgent/PM/issues/15) | 新建 | high | W7 | Todo |
 
 ## 执行状态约定
 
-工程师、测试者、操作员在各自实现 issue 评论中写 `STARTED` / `PR` / `BLOCKED` / `DONE` 并附证据。依赖切片须已有 runtime 验收证据才可开工；issue/Project 状态或映射本身不替代 runtime 结论。
+工程师、测试者、操作员只在各自实现 issue/PR 评论中写 STARTED / PR / BLOCKED / DONE 并附事实。开发期开工条件是依赖切片代码已合入其仓 main，不再要求上游跨组件 runtime；本仓真实入口检查保留。E2E spec/runbook 在其所测全部代码合入后编写，统一阶段才执行；issue/Project/本映射不替代运行结论。

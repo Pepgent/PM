@@ -29,19 +29,19 @@ leader 已就与 D2 草稿的分歧作出技术裁决：D6-08 不建 FTS 派生�
 | D6-01 | **store 服务进程与单写方** | `Pepgent/soroi` 单仓的 `packages/store`（随 soroi 定制同版本发布）；中心主机一个 Bun 常驻进程 `pepgent-store`，进程内用 `@duckdb/node-api` 打开 DuckLake（D2:40,56；argon/D2-rulings.md） | 服务是中心副本唯一的 DuckLake 连接持有者，也是唯一读方入口：eval 插件、Lab 后端、remote 的步骤容器都只经它的 HTTP 接口读写。eval 插件不再在 omp 进程内打开 DuckLake（现状 inv/r-eval.md:99-103）。**权威：** 中心副本（值、名字、步、调用、捕获、停止、运行、事件）和对象目录。**生命周期：** 进程由 Komodo Stack 起停，独立于任何 omp 会话；数据比进程活得久（`design/layers.md:30`） | **选定：** 单写方服务，其余皆客户端。**朴素方案：** 各 omp 进程各自打开同一个 DuckLake。中心主机上并存多个根会话，还有远程汇入和 GUI 读取，多写方要靠锁维持一致，违背“一项状态一个源头”。**实质不同的方案：** 由 Lab 后端进程内嵌 store。把引擎的值权威塞进业务应用，违背组件独立存在（RC:53） | 串联 | 是：PB:76 暂定 1；inv/s-store.md:197-202 |
 | D6-02 | **落盘选型** | 中心主机文件系统：`$STORE_HOME/catalog.sqlite`（DuckLake 目录库）、`$STORE_HOME/data/`（Parquet）、`$STORE_HOME/objects/<sha256>`（文件原始字节） | DuckLake 规格不变（`design/store.md:41-52`），目录库用 SQLite：只有一个写方进程，SQLite 足够，已验证 Bun 可读写（`design/store.md:94`）。对象按内容哈希放本地目录，由 store 服务经 HTTP 提供给远程。小提交走 DuckLake 目录库内联（`design/store.md:95`），定期合并整理见占位 P7 | **选定：** 本地文件系统，不起 S3 服务。DuckDB、DuckLake 为 MIT，SQLite 为公有领域。**朴素方案：** 即选定方案。**实质不同的方案：** S3 兼容对象存储。MinIO 与 Garage 均为 AGPL-3.0，MinIO 社区版已停止发布二进制；SeaweedFS 为 Apache-2.0，协议友好，但只有一台中心主机、远程一律经 store 的 HTTP 取对象时，它只多一个要运维的服务。将来中心拆成多台主机时再换 SeaweedFS，DuckLake 的 `DATA_PATH` 和对象目录换成 S3 前缀即可 | 技术 | 否（store.md 已定方向，本行定具体件） |
 | D6-03 | **记录模型修订：调用与捕获分开，按调用连起名字；远程进度单独一张表** | `Pepgent/soroi` 的 `packages/store` 的表；`design/store.md` 的“存什么” | 身份表（不分区）：`vals`（值）、`releases`（发行导入记录：版本、artifact 内容哈希、boot、runner、定制 tar 各自的哈希、导入时刻，D6-22）、`captures`（捕获：身份、节点函数名、版本、体、运行环境、按位置的输入值身份、产出字段→值身份、agent transcript session id）。运行表（按 `run_id` 分区）：`runs`（运行 id、持有它的根 omp session id、派生自哪次运行与改动列表）、`steps`（代码、写这一步的 omp session id、提交时间）、`calls`（步内位置、函数名、输入 atom 名、产出 atom 名、捕获身份、来历）、`names`、`stops`、`events`、`agent_progress`（运行、步、调用位置、批内序号、时刻、种类 `turn \| tool_call \| file_written`、transcript 条目 id；只引用 transcript 条目，不复制对话，理由同 D6-19）。远程 `Agent` 的 `soroi-batch/` 批次只有 `seq`、`at`、`kind`、`transcript_entry` 四列，`kind` 只允许 `turn \| tool_call \| file_written`；批次不含 `run_id`、`step`、`position`，由 store 在正式步提交汇入时填入。**分工：** 调用、捕获、名字、停止和 `events` 只由中心的一步提交写；远程批次只汇入 `agent_progress`，不往其他表写；捕获开始和交回只由中心 `events` 记录，批次不记录这两类事件，不会出现两份，`events` 的封闭类型集合（D6-20）也不必扩大。`calls.来历` 是 sum type，四个变体各有唯一标签：`Executed{capture, site: central \| remote{transfer}}`（本次运行）、`Adopted{capture}`（身份命中中心副本，采用已有记录）、`Human{capture, event}`（人类交回，`event.replaced` 记被替代的调用及其 transcript）、`Inherited{sourceRun, sourceStep, sourcePosition, capture}`（派生运行从父运行继承，只引用父运行的那个调用与捕获，不复制）。schema、提交、`graph`、事件、`compare` 对四个变体都穷尽处理。消费关系仍不单独存：一个 atom 被哪些 `calls` 的输入名引用，或有没有 `stops` 记录 | **选定：** 调用（运行内、带名字）与捕获（跨运行、带身份）分两层。这回答了“复用在当前运行里怎么记”（inv/s-store.md:225-230）和“捕获只存值身份、消费按名字定义”的断裂（inv/s-store.md:232-236），现有插件已有同名两层表（inv/r-eval.md:99）。远程批次“结束后随拷贝回集中副本”（RC:95，`#8e0a7e8f`），所以它要有一张明确的目标表。**朴素方案：** 捕获行直接带运行 id 和名字。同一个捕获被多个运行复用时要复制，身份不再唯一。远程进度写进 `events`：`graph` 与 `stream` 的穷尽处理失效。**实质不同的方案：** 加一张消费表。是可由 `calls` 推出的派生数据，不需要 | 技术 | 是：S-2（BS:153-158） |
-| D6-04 | **写入粒度：一步一次提交** | eval 插件 → store：`POST /runs/steps` | 正式运行的一步，在它全部调用结束（含远程拷回、人类交回、被中止）后，由 eval 插件一次提交：步、调用、新捕获、新名字、停止、事件（每个调用的开始、结束时刻作为事件带原始时间写入）。远程 `Agent` 的批次在同一个事务里按显式列映射汇入：从每个批次读取 `seq`、`at`、`kind`、`transcript_entry`，由 store 填入本次提交的 `run_id`、`step`、`position` 后写入 `agent_progress`（D6-03、D6-07）。dry run 不调用任何写接口 | **选定：** 一步一事务，与“一个 atom 被消费 = 所在的一步已正式运行”（`design/eval.md:102`）的原子性一致；D4、D5 起草者采用同一粒度。**实质不同的方案：** 每个调用开始、结束各提交一次，让 store 也承载在途状态。在途捕获的权威是 eval 插件（D2:38），提前写进 store 等于先改自己的记录再去对齐。在途状态的读法见 D6-11 | 串联 | 是：inv/s-store.md:265-269 |
+| D6-04 | **写入粒度：一步一次提交** | eval 插件 → store：`POST /runs/steps` | 正式步全部调用结束（含远程拷回、人类交回、中止）后，一次提交步、调用、新捕获、新名字、停止与事件。调用记录保存 `startedAt`、`endedAt`；同一事务先写携带记录的提交级事件，再按位置写调用转变标记，最后写停止。标记 `at` 是转变时刻，形状和携带规则按 D11-C1。远程 Agent 批次同事务按显式列映射汇入：读取 `seq/at/kind/transcript_entry`，store 补 `run_id/step/position` 写入 agent_progress。dry run 不调用正式记录写接口 | 一步一事务，正式提交前在途权威仍是 eval，不把调用开始提前写进 store；活动时间线从已提交调用记录重建 | 串联 | 是：D11-C1、D11-WB3 |
 | D6-05 | **运行的开始与结束锚点** | `runs` 与 `events`；开始由 store 的提交确认，结束由根会话的 eval 插件与 store 先后确认 | **开始：** 一个根 omp 会话没有未结束的运行时，它的第一次正式提交（或 D6-16 的派生请求）由 eval 插件带上 `open: { session }`，store 在同一事务里建运行、写 `run_started`；运行 id 由 store 生成，确认者是 store 的提交。**规则：** 一个根会话同一时刻至多一个未结束的运行；运行记录里的根 session id 就是持有它的会话，Lab 后端据此找到持有会话的 `eval:<session id>` 端点（每个写 eval 的会话各一个，根端点另答 `writers(runId)`，D3-19），把控制请求路由过去。**结束：** 同一运行里可以有多个中心会话并发写 eval（D3-19 的 writers），任何一个写方单独提交后未消费集合恰好为空，都不代表运行已结束。结束要两个权威各自确认：① 根会话的 eval 插件（持有该运行的 supervisor，在途调用的权威）确认这个运行已没有活动的正式 eval、也没有未释放的批次，于是调用 `POST /runs/{run}/end`，不管这个运行的最后一步由哪个会话提交（汇总转交给 worker 时，最后一步由 worker 会话提交）；② store 在这个请求的事务里用自己持有的未消费集合确认为空，为空才写 `run_ended` 并返回 `Ended{seq}`，否则什么也不写、返回 `NotEmpty{unconsumed}`。缺任何一方都不写。步提交本身从不写 `run_ended`。这仍与“所有末端的 atom 都停止了，流程就结束了”（`design/eval.md:120`）同义。**中止：** 派生请求或人类中止整个运行时，eval 插件先中止全部在途调用并得到结论，再请求 store 写 `run_aborted`。**嵌套：** 远程 volume 与批次 ⊂ 调用 ⊂ 步 ⊂ 运行；内层都在一步提交之前结束，所以运行的结束锚点之前没有未收尾的内层 | **选定：** 开始由执行方请求、store 确认；结束由两个状态各自的权威确认：在途状态归根会话的 eval 插件，已提交的未消费集合归 store，谁也不代替对方判断。**朴素方案：** store 单凭未消费集合为空就结束。并发写方中的一个先提交时，别的写方的在途调用还没提交，运行会被提前结束。**另一朴素方案：** 由 AI 或 GUI 显式宣布结束。结束条件已由两个权威持有的事实决定，再让第三方宣布只会多一个判断源。**被否的初稿：** 把结束标记 `mayEnd` 挂在根会话的步提交上。汇总转交给 worker 时，最后一步由 worker 会话提交，根会话不会再提交，标记永远等不到。**实质不同的方案：** 运行与 omp 会话等寿命。一个会话可以先后跑多次运行，派生运行也不必新开会话 | 串联 | 是：S-2（BS:157）；inv/s-gui-read.md:180 G3 |
-| D6-06 | **运行事件对外可见** | store 服务 `GET /stream/lifecycle`（SSE）；消费方是 Lab 后端的自动化（D2:52） | 每次提交后，store 把本次提交写入的 `run_started`、`run_ended`、`run_aborted` 推给全局生命周期流；每条带运行 id、根 session、派生自哪次运行、序号、时间。订阅方带 `after=<全局游标>` 续读。store 不启动任何程序；自动化规则、审批与启动会话都在 Lab 后端 | **选定：** store 只发布事实，由订阅方决定动作，不长出调度器（PB:13；inv/s-gui-read.md:181 G4）。**朴素方案：** Lab 后端轮询运行列表。延迟与无效读取都更多，且仍读同一个源 | 串联 | 是：`design/layers.md:67-69` |
-| D6-07 | **文件端点：传输暂存区、copy-in、copy-out 与提交时转入** | store 服务 HTTP；URL 由开暂存区的一方写进 remote 的 `RunRequest`，remote CLI 不调用 store（D2:45） | **暂存区是一个 ADT，两种都只用于传输**（与 D4-13 对齐）：① `EvalTransfer{evalCall}`：每次 eval 调用（dry run 与正式运行都一样）开始时，eval 中间件 `POST /transfers` 开一个，按调用的 `position` 分卷；② `AgentGenerationTransfer{agent, generation}`：不在 eval 调用里的远程 agent 唤醒（例如人经 IRC 唤醒一个远程 subagent），由 subagent 模块为这一代开一个，只有一卷。store 生成 transfer id，放在 `$STORE_HOME/staging/<transfer>/`；暂存区由 store 持有，不进中心副本，任何查询都看不到它（D2:40）。**所有尚未提交的字节都先进暂存区**，没有提交前的通用对象上传：本机调用产出的文件、节点 bundle 及其源码清单（D6-21）、人类交回的文件、拷入远程的 transcript 包，都由开暂存区的一方 `PUT /transfers/{t}/objects/{sha256}`。远程运行期间的全部文件进出都走 `/transfers/{t}/...`，D4 的 `RunRequest` 示例应同样使用这组路径。**copy-in：** 已在中心副本里的输入 `File` 用 `GET /objects/{sha256}`；暂存区里的字节用 `GET /transfers/{t}/objects/{sha256}`（remote 的 `HttpGet` 源，inv/r-remote.md:105,156）。节点 bundle 的版本是其内容哈希（leader 裁决，argon 无冲突：argon/version-ruling.md）。**copy-out：** `EvalTransfer` 里每个远程调用 `PUT /transfers/{t}/volumes/{position}`；`AgentGenerationTransfer` 用 `PUT /transfers/{t}/volume`；正文都是整个 volume 的 tar（inv/r-remote.md:106），store 解包进暂存区。读回用 `GET /transfers/{t}/volumes/{position}/files/{path}` 或 `GET /transfers/{t}/volume/files/{path}`。**结束锚点：** `EvalTransfer`：dry run 在 eval 调用返回时由中间件 `DELETE /transfers/{t}`；正式运行的一步提交引用该 transfer，store 在同一事务里把被引用的字节按内容哈希转入对象目录，为每个远程调用写清单对象与 `volumes` 行（调用 → 清单），把 `soroi-batch/` 的 Parquet 汇入 `agent_progress`（D6-03），提交确认后删除暂存区；权威在这次提交时从远程批次目录转到中心副本（`design/store.md:68`）。`AgentGenerationTransfer`：subagent 模块把 transcript 与 blob 写回中心 session 目录并确认后，显式 `DELETE /transfers/{t}`；这一代不产生 store 记录，transcript 归 omp（D4-13）。**浏览（提交之后）：** `GET /volumes/{run}/{step}/{position}` 返回清单，`GET /volumes/{run}/{step}/{position}/files/{path}` 返回文件，满足“结束后能浏览工作目录”（`design/layers.md:24`）；`position` 是调用在步内的位置，全文统一这一种写法 | **选定：** 暂存区的生命周期嵌在它服务的那个对象里：eval 调用，或一代远程 agent；开始由那个对象的拥有方请求，结束是 dry run 返回、正式提交确认，或 transcript 写回确认。dry run 的远程试跑（RC:225，`#68d36f55`“在slum里试跑某种算法非常正常”）因此有地方收发文件，又不进 store（RC:229）；对象目录只放已提交记录引用的字节。用 ADT 把两种拥有方和结束锚点分开，不让一种暂存区承担两种生命周期。**朴素方案：** 提交前就把字节 `PUT` 进对象目录。没提交的那一步会留下无人引用的对象；dry run 的字节会混进中心对象目录。**实质不同的方案：** remote 把 volume 拷到中心主机共享目录，再由 store 去扫。多一个共享目录和一份文件状态 | 串联 | 是：PB:76 暂定 1；D2:40 |
+| D6-06 | **运行事件对外可见** | store `GET /stream/lifecycle`（SSE）；Lab 自动化消费 | 每次提交后推送 `run_started/run_ended/run_aborted`，带运行、根 session、派生来源、序号、时刻与 cursor。cursor 是按提交顺序递增的十进制字符串；`after` 缺省 `"0"`，只读严格大于它的事件。store 在提交这些事件的同一事务里分配 cursor 并持久化在 events 表；旧数据首次升级按 `(at, run_id, seq)` 一次性分配，此为首次发布顺序，不代表历史真实跨运行提交顺序。流持续到订阅方断开。store 不启动程序；规则、审批、会话启动归 Lab | 事件与游标同一权威，时间戳不能替代提交游标 | 串联 | 是：D11-47A |
+| D6-07 | **文件端点：暂存区、copy-in/out 与提交转入** | store HTTP；暂存区拥有方构造 remote 请求 URL | 暂存区为 ADT：`EvalTransfer{evalCall}` 每次 eval 开一个、按 position 分卷；`AgentGenerationTransfer{agent,generation}` 为非 eval 的远程唤醒开一卷。store 生成 id、持有 `$STORE_HOME/staging/<transfer>/`；暂存字节不进中心副本，正式查询不可见。所有未提交字节（本机产出、bundle/源码、人类文件、transcript 包）先 PUT `/transfers/{t}/objects/{sha256}`；已提交输入从 `/objects/{sha256}` GET，其余从同一 transfer GET。copy-out 将整个 volume tar PUT 到 EvalTransfer 的 `/volumes/{position}` 或 AgentGenerationTransfer 的 `/volume`，同路径 `/files/{path}` 读回。dry run 返回时中间件 DELETE；正式步引用 transfer，同事务晋升被引用字节、汇入四列 agent_progress、发布 volume，提交确认后删除暂存区。非 eval 唤醒在 transcript/blob 写回中心确认后由 subagent 模块 DELETE，不产生 store 记录。**volume 发布（D11-24）：** 清单只含 regular file，不表示 symlink、空目录；远程 Executed 发布同 transfer、同 position 已接受的卷，Human、Aborted 发布其位置已接受的卷；Inherited 按源坐标只读引用父卷、不复制；中心 Executed、Adopted、无人引用的暂存卷不发布。提交后 `/volumes/{run}/{step}/{position}` 返回清单，`/files/{path}` 返回字节 | 暂存区嵌在 eval 或 agent 一代内；未提交字节不混入对象目录，继承不复制卷，远程 volume 在正式提交时转成中心事实 | 串联 | 是：D6 原传输契约；D11-24 |
 | D6-08 | **检索：不建派生索引** | store 服务 `GET /search?q=…` | 结构化字段直接 SQL。文本检索对 DuckLake 表的文本列做 `ILIKE '%q%'`：字符串标量值（`vals`）、atom 名、步的代码、节点函数名；结果按运行归组。文件只按名字、路径、媒体类型检索，不检索文件内容；这条边界写进 `design/store.md`，让读者知道目前“检索内容”（RC:256）覆盖到哪里。“一个值在哪些运行里出现过”是 `GET /values/{hash}/runs`（`design/layers.md:33`）。删除 `design/store.md:86` 的 FTS 派生表 | **选定：** 不存第二份文本。用户反对“数据本身还要再在数据库里存一遍反向索引”（RC:257，`#543f0ccd`），偏好列存（RC:258）；DuckDB `fts` 的默认 `ignore = '(\\.|[^a-z])+'` 会把中文全部剥掉（R：`curl https://duckdb.org/docs/2.0/core_extensions/full_text_search.html` 输出），实验室文本以中文为主，派生表检索不到。代价：没有相关度排序，全量扫描随数据增长；等有实测的性能需求，再加派生索引并写明来源、失效与刷新。**朴素方案：** 即选定方案。**实质不同的方案：** 保留 `fts` 派生表并在全部写入路径上更新（D2:40、PB:77 暂定 2）。见上，中文不可用 | 意图 + 技术 | 设计补充：S-1（RC:254-259） |
-| D6-09 | **订阅推送** | store 服务 `GET /runs/{run}/stream?after={seq}`（SSE）；读方是 Lab 后端，浏览器只连 Lab 后端（D2:54） | 每次提交后，store 把该运行新增的事件连同它们引用的记录（调用、捕获、名字、停止）按序号推给订阅这个运行的读方；读方先 `GET /runs/{run}/graph` 取快照（带当前序号），再从该序号续订。远程 agent 运行中的进度不经 store，由读方经 Mux 订阅（D2:44；`design/store.md:85`） | **选定：** 提交即推送，序号即游标，和时间轴用同一个权威（事件表）。**朴素方案：** 读方轮询 `graph`。同一个源，只是延迟大。**实质不同的方案：** store 转发远程批次进度。store 会持有一份不归它的副本 | 技术 | 是：PB:76 暂定 1 |
-| D6-10 | **运行图投影与回看；回溯的活动时间线** | store 服务 `GET /runs/{run}/graph?at={seq}`；`GET /runs/{run}/activity?until={time}` | **运行图：** 返回 `RunGraph`（见接口草图）：节点是根 atom 与调用，边是“产出名 → 消费它的调用的第几个输入”，状态取自已提交的事件，产物取自捕获的产出字段；未消费 atom 单列。`at=k` 只投影序号不超过 k 的已提交运行事实，表示“提交到第 k 次时 store 持有的运行状态”，不依赖 DuckLake 快照（`design/store.md:77,80`）。**活动时间线：** 另一个投影，按调用的原始开始、结束时刻（随步提交写入的事件字段，D6-04）列出每个调用的活动区间，`until=t` 截到时刻 t。它是提交之后重建的活动记录：一个 10:00 开始、14:00 才提交的调用，在时间线上显示 10:00 到 14:00 的区间，供时间轴的“现在”线回看（`design/layers.md:41`）；它不是 store 在 12:00 时持有的运行状态，那时 store 里还没有这个调用。两者都是按需计算的视图，不落盘、不是 DSL | **选定：** 运行图只表达 store 持有过的事实；按原始时刻回看的需求由一个明确标为“回溯重建”的时间线满足，两种语义不混在一个投影里，运行图里也不会出现提交前的调用。修正 `design/store.md:84` 把“事件给出体的种类、产物”混为一谈的表述（inv/s-gui-read.md:183 G6）。**朴素方案：** 让 GUI 自己拼表。每个读方各写一份拼装逻辑。**被否的初稿：** 运行图同时接受按时刻过滤。会把提交前的调用画成 store 当时就持有的状态 | 技术 | 设计补充：inv/s-gui-read.md:183-185 |
+| D6-09 | **订阅推送** | store `GET /runs/{run}/stream?after={seq}`（SSE）；Lab 读，浏览器只连 Lab | 提交后按序推新增 RunEvent：`id` 为十进制 seq、`event` 为 kind、`data` 为 RunEvent；after 缺省 0，只读严格大于它的事件；已结束运行发完历史后结束流（D11-47B）。一次提交的节点与入边只由一条提交级事件的 `records: {nodes: GraphNode[], edges: GraphEdge[]}` 携带：step_committed 带本步最终调用、入边、新根；派生 run_started(seq 1) 带继承调用、新根、边。名字随根 name 或 outputs[].name，不另列。六种调用事件仅 `{kind,seq,at,step,position}`；step 是携带节点的提交级事件 seq，派生为 1。同提交先提交级事件、再按调用位置的标记、最后 atom_stopped；消费方仅在提交级事件插入节点与边，不按键合并（D11-C1）。读方先取带当前序号的 graph 再续订。远程运行中进度只经 Mux，不经 store | 序号与图共用事件权威，节点与入边只出现一次；标记保留转变种类和时刻 | 技术 | 是：D11-47B、D11-C1 |
+| D6-10 | **运行图投影与回看；回溯活动时间线** | `/runs/{run}/graph?at={seq}`；`/runs/{run}/activity?until={time}` | RunGraph 节点是根 atom 与调用，边是产出名到调用输入位置，状态来自已提交事实、产物来自捕获，未消费单列。`at=k` 在提交级事件 seq 处使整次提交的记录整体生效；同提交后续调用标记不改图，不依赖 DuckLake 快照。activity 从调用记录 `startedAt/endedAt` 重建，非由标记配对恢复（D11-C1）；until=t 截断区间。10:00 开始、14:00 才提交的调用回溯显示 10:00–14:00，不声称 store 在 12:00 已持有它。两者均按需计算，不落盘、不是 DSL | 区分提交时所持状态与事后重建的实际活动；不让 GUI 自行拼出第二套投影 | 技术 | 设计补充：D11-C1 |
 | D6-11 | **在途状态的读法** | 在途调用、待人类交回的 `Human` 调用：eval 插件经 Mux 注册的控制端点（D2:44,168）；已提交事实：store | Lab 后端画运行中的图 = store 的 `graph` 快照与 `stream`，叠加 eval 插件控制端点上的在途调用（开始时刻、体、环境、远程 run id、是否在等人类交回），再叠加 Mux 上远程批次进度。一步提交后，在途叠加层里的这几个调用由已提交记录取代 | **选定：** 在途状态只从它的权威（eval 插件，D2:38）读，store 只装已提交的事实。**实质不同的方案：** eval 插件把在途变化推给 store 再转发（D5 起草者最初的设想）。store 会持有在途状态的副本，late subscriber 还要 store 自己保存最新快照，这是第二份状态 | 串联 | 是：inv/s-gui-read.md:184 G7 |
 | D6-12 | **草稿与实验索引** | 草稿画布（原型 R-022 流程编辑器）归 Lab 后端的业务库（D2:50）；store 不存草稿 | store 只负责“还没走完的运行”：已正式运行的步与未消费 atom（`design/store.md:84`）。原型里尚未开始的实验画布是 Lab 的业务对象：引用节点库函数名，供讨论和启动实验时作为 agent 的上下文，从不被执行，也不进 store。实验开始正式运行后，Lab 后端从生命周期流（D6-06）收到这次运行的 `run_started`（带根 session id），把 store 生成的 run id 存进业务库作为该实验的索引；同一个 session 先后跑的多个实验各自引用自己的 run id；实验启动后记下的根 session 就是发起它的讨论会话（D7-06），Lab 以 RunId 为键存展示扩展 `experiment_ext` | **选定：** 草稿是业务计划，不是值，不进值的权威；dry run 也就不必为画草稿写 store（RC:269-270）。业务库只存 run id 这一索引，运行状态一律从 store 读（D2:50）。**朴素方案：** 只按 session id 关联。一个 session 可以先后跑多个运行（D6-05），区分不开。**实质不同的方案：** store 存未运行的捕获作为草稿节点。用户已否定（inv/s-gui-read.md:169） | 串联 | 设计补充：S-3（RC:272；inv/s-gui-read.md:178 G1） |
-| D6-13 | **跨运行比较按调用对齐** | store 服务 `GET /compare?a={run}&b={run}[&map={rootA}:{rootB},…]` | 纯查询，自底向上对齐。**根：** 先用请求里显式给出的根映射；没有映射的根，按唯一的值身份对齐（两边各只有一个根 atom 持有同一个值身份时对齐）。**调用：** 一个调用的候选，是对面运行里节点函数名相同、并且每个输入位置上要么两边的 atom 已对齐、要么两边都是根 atom 的调用。候选唯一时自动配对（两边的根 atom 随之对齐，值不同时标 `Changed`）。候选不止一个时，只有值身份、继承来源（`Inherited` 指向的父运行调用）或显式映射能唯一消歧才配对；否则返回 `Ambiguous` 并列出两边的候选，即使两侧候选数量相等也一样。提交顺序（步序号、步内位置）不作为跨运行的身份，不用来配对。**产出：** 对齐调用的产出按字段名对齐，再递归到下游。每对标为 `SameCapture`（身份相同）、`Changed`（对齐但输入或产出不同）、`OnlyA`、`OnlyB`、`Ambiguous`，逐字段给出两边的值。根 atom 的名字不参与对齐 | **选定：** 按输入位置与值身份对齐，两次独立写出的运行（R-014 写 `temp_2200c`、R-018 写 `temp_2300c`）也能对上，覆盖改了参数后身份已变的调用（inv/s-gui-read.md:179 G2）；名字不是身份（`design/store.md:35`），提交顺序也不是。对不准的地方明说 `Ambiguous`，交给人用显式映射，不任意配对。出处是原型“和 R-014 对比”（`design/layers.md:34`）。派生运行用 `Inherited` 引用父运行的调用（D6-03），对齐直接成立。**朴素方案：** 只按捕获身份对齐。只能认出没变的调用。**被否的初稿：** 根 atom 按名字对齐；以及按（步序号, 步内位置）配对多个候选。前者名字带值语义，改了参数就对不上；后者把两次运行里偶然的书写顺序当成同一调用。**实质不同的方案：** 记录一个跨运行的“调用位置 id”。要为比较多存一份状态 | 技术 | 设计补充：S-3（RC:272） |
+| D6-13 | **跨运行比较按调用对齐** | `GET /compare?a={run}&b={run}[&map={URL编码的JSON数组}]`；map 元素为 `[rootA, rootB]`，一一映射（D11-13B） | 自底向上纯查询。根优先显式映射，否则按两边唯一值身份对齐；名字不作身份。调用候选要求函数名相同，且各输入 atom 已对齐或两边都是根；唯一候选配对，根随之对齐，值不同标 Changed。多候选只由值身份、Inherited 来源或显式映射唯一消歧，否则 Ambiguous 列双方候选；不按步序号、位置或数量任意配对。输出按字段名对齐再递归。SameValue 表示根值相同；SameCapture 只用于已完成调用；Aborted{side} 表示中止项；其余 Changed、OnlyA、OnlyB、Ambiguous。Changed.fields 每项是 Both{a,b}、OnlyA{a}、OnlyB{b}（D11-13A） | 显式、值与继承来源对齐能比较独立书写与改参运行；URL 编码 JSON 数组无冒号逗号歧义；不额外存跨运行位置 id | 技术 | 设计补充：D11-13A/B |
 | D6-14 | **改值：中止在途捕获，由 `Human` 交回** | 入口 Lab 后端 → Mux → 持有运行的 eval 插件（D2:42）；记录进 store | 只针对在途调用。插件中止该调用（D6-15），得到结论后，用人类的交回（与交回工具同形：字段值 + 文件）作为这个调用的产出，绑定到原代码里该调用本来要绑定的那些名字，`calls.来历 = Human{event}`，`event.replaced` 指向被替代的调用。同一步里已写好的下游调用照常消费这些名字（“自动触发函数消费”，RC:278）；这一步提交时，eval 工具返回给 AI 的结果和之后的未消费提醒都标明 `名字 ← 人类接入（替代 anneal(film, temp_2200c)）`，AI 由此得知人改了值（“写了以后通知ai改变了”，RC:277）。已提交的调用不能改值，要改走 D6-16 | **选定：** 在途改值与派生运行按“调用是否已提交”划界，回答 I-2 的重叠（inv/s-intervention.md:154-158）。**朴素方案：** GUI 改 store 里的值。用户否定合并写入（RC:278）。**实质不同的方案：** 改值也派生新运行。会让每次改一个在途值都截断整个运行，用户的说法是“将一个运行的程序取消”而非整个运行 | 意图 + 串联 | 设计补充：I-1、I-2（RC:274-280） |
 | D6-15 | **中止的执行路径** | eval 插件（在途调用的拥有方）；store 只记录结论 | 本机 `Program`：结束 runner 进程。远程 `Program`：`remote abort <run>`（inv/r-remote.md:102），再 `remote remove`。本机 `Agent`：取消结果作业，中止 subagent 当前这一轮，agent 仍可唤醒（`design/subagent.md:44` 已验证）。远程 `Agent` 按顺序停止，保住远程 transcript：经 Mux 中止当前轮 → 关闭这一代 agent 进程 → 等远程 omp 退出 → remote 作业照常 copy-out，把 transcript、blob 与批次送进暂存区（D6-07）→ 中心确认收到 → `remote remove`。**被中止的调用同样留下复盘线索：** 它的远程批次照样随这一步提交汇入 `agent_progress`；调用记录的 `Aborted` 结果和替代它的 `HumanEvent.replaced` 都带被中止 agent 的 transcript session id，复盘能查到它在被中止前做了什么。中止时刻与“被谁替代”在该步提交时作为事件写入 | **选定：** 请求拥有方并等结论（D2:42）；远程 `Agent` 的中止嵌在 remote 作业的生命周期里，先结束内层（agent 一代），再结束外层（作业），transcript 不丢（`design/subagent.md:19`）。被中止不等于没发生过，它做过的事仍是运行的一部分历史（RC:262“历史时间轴是个极为重要的功能”）。**朴素方案：** 远程 `Agent` 也直接 `remote abort`。copy-out 不再运行，远程 transcript 随 volume 删除而丢失。**另一朴素方案：** 被中止调用的批次丢弃。复盘时看不到被替代的 agent 做了什么。**实质不同的方案：** store 或 Lab 后端直接调 remote。跳过在途调用的拥有方，插件可能在被替代后才收到交回 | 串联 | 是：I-3（BS:170-171） |
-| D6-16 | **派生运行：改参数或函数体** | 入口同 D6-14；派生请求由 eval 插件执行，store 在一次提交里建新运行 | 请求指向父运行 P 的一个调用 C，`at` 是 sum type：`Committed{step, position}`（C 已提交）或 `InFlight{slot}`（C 还在跑，`slot` 取自 eval 控制端点的在途调用，D6-11）。改动：`ChangeInput{位置, 新值}`（新值成为新根 atom）和/或 `ChangeVersion{函数名, 新版本}`（新函数体先由 Lab 后端在人确认后 commit 进库，D2:48）。**派生执行期间，持有会话算 P 的活动写方：** 从受理派生请求到 P 写下 `run_aborted`，supervisor 不发 P 的结束请求 `POST /runs/{run}/end`（D6-05），所以 P 不会先被写成 `run_ended`。**InFlight 先落成 Committed：** 插件按 D6-15 中止 C 以及同一步 S 中其余在途调用，再把 S 提交进 P：根 atom、已完成的调用、被中止调用的 `call_aborted`；这是新增记录，不改 P 已有的记录。此后 C 有了已提交的地址，走下面同一条路径。**Committed 路径：** 插件中止 P 剩下的在途调用，请求 store 写 P 的 `run_aborted`（P 未结束时），并在同一请求里开新运行 R'：R' 继承 P 中不在 C 下游的全部名字与停止记录（`calls.来历 = Inherited`，按身份复用，不运行；继承停止记录，这些 atom 才不会重新出现在未消费提醒里），新根 atom 绑定改过的输入。插件随即把“新的实例”作为 R' 的第一步正式运行：同一函数（或新版本）、替换后的输入、原来的产出名。之后 R' 的下游由 AI 按未消费提醒一步步写，提醒标明 `来自派生：R-016 在 N-05 改了 temp`；与父运行相同的调用按身份直接复用。R' 记 `derivedFrom = P`、改动列表；P 的已有记录不动。**持有会话：** P 的根会话没有其他未结束的运行时，由它持有 R'；否则由 Lab 后端经 Mux 新开一个根会话作为 R' 的持有者（D2-15），维持 D6-05“一个根会话同一时刻至多一个未结束的运行” | **选定：** 只自动运行被改的那一个调用（“新的实例，新的参数，旧的函数体”，RC:264），下游不按 P 已存的步重新执行，因为“没有重放”（RC:263）。在途的 C 先把它所在的一步落进 P，再派生，满足“人类修改**正在运行的**函数体”（RC:265，`#a0d22b8a`；原型“R-016 在 N-05 被截断重跑”，`design/layers.md:65`），同一步里已跑完的调用也不丢。派生期间 supervisor 不发结束请求，P 的结局只有一个：随派生写 `run_aborted`。**朴素方案：** 按 P 已存的步把受影响的部分全部重跑（`design/intervention.md:24` 的字面理解）。这就是对同一份脚本的重放。**实质不同的方案：** 只建 R'，连 C 也交给 AI 重写。人的改动就停在一个未消费的根 atom 上，“受影响的部分重新运行”一个都没有发生 | 意图 + 串联 | 设计补充：S-2、I-2（RC:260-266）；inv/s-intervention.md:166-170 |
+| D6-16 | **派生运行：改参数或函数体** | Lab → Mux → eval；eval 向 store 一次提交 | 指向父 P 的调用 C，at 为 Committed{step,position} 或 InFlight{slot}；改输入 ChangeInput（新值成新根）或 ChangeVersion（人先确认并 commit 库）。派生执行算 P 的活动写方，supervisor 不先发结束请求。InFlight 先中止 C 与同一步其余在途调用并提交该步到 P，保留根、完成与中止记录，得到 Committed；再中止 P 其余在途调用，请求 store 在同事务中将未结束的 P 写 run_aborted 并开 R'。**DeriveCommit 必带 EvalTransfer**，纯标量也开空 transfer，只晋升新根引用字节（D11-19）。只继承带 capture 的完成调用及不在 C 下游的名字与停止；P 的中止调用留在 P，受改动影响的输入在 R' 重新未消费，不自动 stop。物化提交依次为 run_started(seq 1，records 含继承调用、新根、边) → 每个继承调用 call_inherited → 每条继承停止 atom_stopped，同提交 seq 连续；call_inherited.at 为物化时刻，节点起止时刻来自 P；不写步、不发 step_committed（D11-C1/C2）。随后插件以新输入/版本、原输出名正式执行 C，才是 R' 第一步；下游由 AI 按提醒续写，未变调用按身份复用，不重放。R' 记录来源和改动，P 已有记录不改。P 根会话无其他未结束运行时持有 R'，否则 Lab 经 Mux 新开根会话 | 只自动执行被改调用，不重放下游；物化和正式首步分开，继承标记与 F24 一致；字节只走既有暂存入口 | 意图 + 串联 | 设计补充：D11-19、D11-C1/C2 |
 | D6-17 | **主动 `human(request)` 节点** | 在途请求读自 eval 插件控制端点（D6-11）；交回经 Lab 后端 → Mux → 插件 | `human` 构造器的调用开始后进入“等待人类交回”；GUI 从在途叠加层看到它和 `request` 文本；人交回（与交回工具同形）后，调用结束，`calls.来历 = Human{event}`，`event.replaced` 为空，随这一步提交。与 D6-14 共用一个交回类型 | **选定：** 被动介入与主动请求是同一种 `Human` 调用，只差有没有被替代的调用。交回形状同交回工具为【暂定】（RC:280） | 技术 | 设计补充：I-2（BS:169） |
 | D6-18 | **`Human` 捕获的身份** | `captures`；身份由 eval 插件在提交前算出 | 身份 = human-event 的哈希，只用插件提交前已有的字段：transfer id、调用位置、principal（交回的人）、交回内容、`replaced`（被替代的调用，含被中止 agent 的 transcript session id；主动请求时为空）。运行 id 与步序号由 store 在提交时填入，受理时刻由插件记下，三者都只作事实字段，不进身份。每次介入都是新身份，不会被复用（保留 `design/store.md:32` 的方向） | **选定：** 人的回答不是输入的函数，按输入算身份会让下次同样输入时错误复用一次人类回答；transfer id 每次 eval 调用都不同，所以同一次介入的身份稳定、不同介入的身份必然不同；身份只依赖提交前就确定的字段，插件不必等 store 返回才能算。该规则来自 assistant 的补充，用户未单独确认（RC:266；inv/s-store.md:252-257），交投票 | 技术 | 否（保留现文方向，改为投票确认） |
 | D6-19 | **接管 agent 不经 store** | Lab 后端 → Mux → subagent 插件 → omp IRC（D2:42） | 人发出的 IRC 带人类来源，可排队（RC:173，`#7bfe3696`）；对话只在 omp transcript 里。store 不为一条 IRC 建 `Human` 捕获；那个 agent 之后经交回工具交回时，是一次普通的 `Agent` 捕获，捕获记录里的 transcript session id 可回看人的消息 | **选定：** IRC 不等于交回结果（inv/s-intervention.md:184-188）。**实质不同的方案：** 每条人类 IRC 记一个 store 事件。是 transcript 的第二份副本 | 串联 | 是：I-3（BS:171） |
@@ -127,9 +127,9 @@ type Derive = {                                    // Lab 后端 → Mux → 控
   at: Committed | { kind: 'InFlight'; slot: string }  // InFlight：插件先把在途的那一步落进 P，得到 Committed
   changes: Change[]
 }
-type DeriveCommit = { parent: RunId; at: Committed; changes: Change[]; holder: SessionId } // eval 插件 → store；holder 见 D6-05
+type DeriveCommit = { parent: RunId; at: Committed; changes: Change[]; holder: SessionId; transfer: TransferId } // 必为 EvalTransfer，纯标量也开空 transfer；只晋升新根引用字节
 type Derived = { run: RunId; seq: Seq; parentAborted: boolean }
-// POST /runs/derive       body: DeriveCommit → Derived   （P 的 run_aborted、R' 的继承名字与停止记录、新根 atom 同一事务写入）
+// POST /runs/derive body: DeriveCommit → Derived；同事务写 P 的 run_aborted 与 R' 物化：run_started(seq1, records) → call_inherited → atom_stopped；不写步、不发 step_committed
 // POST /runs/{run}/abort  → { seq: Seq }
 
 type Handback = { fields: { field: string; value: Value }[] } // 与交回工具同形（【暂定】RC:280）
@@ -148,6 +148,7 @@ type TransferKind =                               // 两种都只是传输暂存
 // PUT    /transfers/{t}/volume                              ← application/x-tar（AgentGenerationTransfer 的 copy-out）
 // GET    /transfers/{t}/volume/files/{path}                 → bytes（subagent 模块取回 transcript 与 blob）
 // DELETE /transfers/{t}                                     （EvalTransfer：dry run 返回时；AgentGenerationTransfer：transcript 写回确认后）
+// 清单仅 regular file：不表示 symlink、空目录；发布来历按 D6-07（Executed 远程/Human/Aborted/Inherited），Inherited 只读引用父卷
 // GET    /volumes/{run}/{step}/{position}                   → { files: { path: string; content: Hash; size: number }[] }
 // GET    /volumes/{run}/{step}/{position}/files/{path}      → bytes
 
@@ -170,13 +171,15 @@ type AgentProgress = {
 
 // ---- 读取（D6-09、D6-10、D6-13、D6-08、D6-21） ----
 type CallStatus =                                 // 只描述已提交的事实；没有“运行中”
-  | { kind: 'Ended' } | { kind: 'Adopted' } | { kind: 'Human' } | { kind: 'Aborted' }
+  | { kind: 'Ended' } | { kind: 'Adopted' } | { kind: 'Human' }
   | { kind: 'Inherited'; sourceRun: RunId; sourceStep: Seq; sourcePosition: number }
 type GraphNode =
   | { kind: 'Root'; name: AtomName; value: Value }
-  | { kind: 'Call'; step: Seq; position: number; fn: FnName; version: Version; body: Body; env: Env
+  | { kind: 'Call'; step: Seq; position: number; fn: FnName; version: Version; body: Body; env: Env; capture: Hash
       status: CallStatus; startedAt: string; endedAt: string
-      outputs: { field: string; name: AtomName; value: Value }[]; transcript: SessionId | null }
+      outputs: { field: string; name: AtomName; value: Value }[]; transcript: SessionId | null } // field 可为空字符串，atom name 仍非空
+  | { kind: 'AbortedCall'; step: Seq; position: number; fn: FnName; startedAt: string; endedAt: string
+      outputs: []; transcript: SessionId | null } // 不带 version、body、env、capture
 type GraphEdge = { from: AtomName; to: { step: Seq; position: number; input: number } }
 type RunGraph = {                                 // 提交到第 at 次时 store 持有的运行状态
   run: RunId; holder: SessionId; derivedFrom: { run: RunId; changes: Change[] } | null
@@ -185,8 +188,10 @@ type RunGraph = {                                 // 提交到第 at 次时 stor
 }
 type Activity = {                                 // 提交后按原始时刻重建的活动记录，不是当时的运行状态
   run: RunId; until: string
-  intervals: { step: Seq; position: number; fn: FnName; body: Body; startedAt: string
-               endedAt: string | null }[]        // endedAt 为空：到 until 时这个调用的原始活动尚未结束
+  intervals: (
+    | { kind: 'Call'; step: Seq; position: number; fn: FnName; body: Body; startedAt: string; endedAt: string | null }
+    | { kind: 'AbortedCall'; step: Seq; position: number; fn: FnName; startedAt: string; endedAt: string | null }
+  )[] // 中止调用不带 body；endedAt 为空表示到 until 尚未结束
 }
 // GET /runs?state=Open|Ended|Aborted               → { run: RunId; holder: SessionId; state; startedAt; endedAt }[]
 // GET /runs/{run}/graph?at={seq}                   → RunGraph
@@ -194,27 +199,42 @@ type Activity = {                                 // 提交后按原始时刻重
 // GET /runs/{run}/state                            → { unconsumed: { name; value; origin: string }[] }  （未消费提醒用）
 // GET /runs/{run}/progress?step=&position=          → AgentProgress[]
 // GET /captures/{identity}                         → CaptureRecord | 404   （复用查找）
-// GET /compare?a={run}&b={run}[&map={rootA}:{rootB},…] → RunComparison
+// GET /compare?a={run}&b={run}[&map={encodeURIComponent(JSON.stringify([[rootA,rootB],…]))}] → RunComparison；map 一一映射
 // GET /search?q={text}                             → { run: RunId; hits: { kind: 'value'|'name'|'code'|'fn'|'file'; text: string }[] }[]
 // GET /values/{hash}/runs                          → { run: RunId; names: AtomName[] }[]
 // GET /functions/{name}/usage                      → { version: Version; runs: { run: RunId; state; calls: number }[] }[]
 // GET /versions/{version}                          → NodeVersionRecord
+type RootNode = Extract<GraphNode, { kind: 'Root' }>
+type CompletedNode = Extract<GraphNode, { kind: 'Call' }>
+type AbortedNode = Extract<GraphNode, { kind: 'AbortedCall' }>
+type ComparisonField = { field: string } & (
+  { kind: 'Both'; a: Value; b: Value } | { kind: 'OnlyA'; a: Value } | { kind: 'OnlyB'; b: Value }
+)
 type Pair =
-  | { kind: 'SameCapture'; a: GraphNode; b: GraphNode }
-  | { kind: 'Changed'; a: GraphNode; b: GraphNode; fields: { field: string; a: Value; b: Value }[] }
+  | { kind: 'SameValue'; a: RootNode; b: RootNode }
+  | { kind: 'SameCapture'; a: CompletedNode; b: CompletedNode }
+  | { kind: 'Aborted'; side: 'a'; a: AbortedNode; b: CompletedNode }
+  | { kind: 'Aborted'; side: 'b'; a: CompletedNode; b: AbortedNode }
+  | { kind: 'Aborted'; side: 'both'; a: AbortedNode; b: AbortedNode }
+  | { kind: 'Changed'; a: RootNode; b: RootNode; fields: ComparisonField[] }
+  | { kind: 'Changed'; a: CompletedNode; b: CompletedNode; fields: ComparisonField[] }
   | { kind: 'OnlyA'; a: GraphNode } | { kind: 'OnlyB'; b: GraphNode }
-  | { kind: 'Ambiguous'; fn: FnName; a: GraphNode[]; b: GraphNode[] }
+  | { kind: 'Ambiguous'; fn: FnName; a: (CompletedNode | AbortedNode)[]; b: (CompletedNode | AbortedNode)[] }
 type RunComparison = { a: RunId; b: RunId; pairs: Pair[] }
 
 // ---- 推送（SSE） ----
+type Records = { nodes: GraphNode[]; edges: GraphEdge[] } // 名字随 Root.name / Call.outputs[].name 携带
 type RunEvent =
-  | { kind: 'run_started' | 'run_ended' | 'run_aborted'; seq: Seq; at: string }
-  | { kind: 'step_committed'; seq: Seq; at: string; step: { session: SessionId; code: string } }
+  | { kind: 'run_started'; seq: Seq; at: string; records: Records } // 派生 seq1 携带物化记录
+  | { kind: 'run_ended' | 'run_aborted'; seq: Seq; at: string }
+  | { kind: 'step_committed'; seq: Seq; at: string; step: { session: SessionId; code: string }; records: Records }
   | { kind: 'call_started' | 'call_ended' | 'call_adopted' | 'call_inherited' | 'call_aborted' | 'human_handback'
-      seq: Seq; at: string; call: GraphNode }
+      seq: Seq; at: string; step: Seq; position: number } // step = 携带该节点的提交级事件 seq；只标转变
   | { kind: 'atom_stopped'; seq: Seq; at: string; name: AtomName }
-// GET /runs/{run}/stream?after={seq}   → SSE，data: RunEvent
+// 同提交：提交级事件 → 按调用位置的标记 → atom_stopped；只在提交级事件插入 nodes/edges，不按键合并
+// GET /runs/{run}/stream?after={seq} → SSE：id=十进制seq，event=kind，data=RunEvent；after默认0，严格大于；结束运行历史发完后关流
 // GET /stream/lifecycle?after={cursor} → SSE，data: { run: RunId; holder: SessionId; derivedFrom: RunId | null; event: 'run_started'|'run_ended'|'run_aborted'; at: string; cursor: string }
+// cursor 按提交序递增的十进制字符串，after默认"0"且严格大于；与事件同事务分配持久化；流至断开，旧库首次发布顺序见D6-06
 ```
 
 ## 主路径时序
@@ -271,7 +291,7 @@ sequenceDiagram
   EV->>ST: PUT /transfers/{t}/objects/{hash}（交回里的文件）
   EV->>EV: 交回值绑定到 C 原本的产出名，同一步的下游调用继续
   EV->>ST: POST /runs/steps（C 的来历 = Human{event}）
-  ST-->>LAB: stream：call_aborted、human_handback、step_committed
+  ST-->>LAB: stream：step_committed(records) → call_started → call_aborted → human_handback
   EV-->>MUX: 结论
   MUX-->>LAB: 结论
   Note over EV: eval 工具结果与提醒标明“由人类接入替代”
@@ -281,8 +301,8 @@ sequenceDiagram
   EV->>EV: 中止 C 与同一步其余在途调用，等结论
   EV->>ST: POST /runs/steps（这一步进 P：根 atom、已完成的调用、call_aborted）
   ST-->>EV: StepCommitted{seq}，C 得到 Committed{step, position}
-  EV->>ST: POST /runs/derive（DeriveCommit，holder）
-  ST->>ST: 一个事务：P 写 run_aborted；开 R'，Inherited 引用 C 上游的调用与停止记录，绑定新根 atom
+  EV->>ST: POST /runs/derive（DeriveCommit，holder，EvalTransfer）
+  ST->>ST: 同事务：P 的 run_aborted；R' run_started(seq1,records) → call_inherited → atom_stopped，不写步
   EV->>ST: POST /runs/steps（R' 第一步：重新调用 C）
   EV->>EV: 唤醒持有会话（占位 P3），提醒标明派生来源
 ```
