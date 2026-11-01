@@ -1,0 +1,13 @@
+{
+	"parentId": "Main",
+	"cwd": "/tmp/soroi-196-runtime",
+	"launch": {
+		"model": "opencode-go/deepseek-v4.1-flash"
+	},
+	"placement": {
+		"kind": "central"
+	},
+	"contract": {
+		"kind": "report"
+	}
+}

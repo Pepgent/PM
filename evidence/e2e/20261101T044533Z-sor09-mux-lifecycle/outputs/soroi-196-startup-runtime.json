@@ -1,0 +1,6 @@
+{
+  "command": "PATH=/tmp/omp-mux-main-1f7f9ff:$PATH bun /tmp/soroi-196-transport-smoke.ts",
+  "returncode": 0,
+  "stdout": "[\n  {\n    \"scenario\": \"connecting-close\",\n    \"closed\": true\n  },\n  {\n    \"scenario\": \"startup-end\",\n    \"end\": {\n      \"kind\": \"exited\",\n      \"code\": 1\n    }\n  },\n  {\n    \"scenario\": \"startup-refusal\",\n    \"elapsedMs\": 538,\n    \"diagnostic\": \"Mux generation 39c041e2-e9a9-4842-9c34-209341f486e4 exited with code 1. Dial exit 1.\\nModel \\\"invalid-provider-196/invalid-model-196\\\" not found\\n\\nRun `omp models find <pattern>` to search, or `omp models` to list all.\\n\"\n  },\n  {\n    \"scenario\": \"presence-after-close\",\n    \"presence\": []\n  }\n]\n",
+  "stderr": ""
+}

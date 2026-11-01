@@ -1,0 +1,14 @@
+{"type":"session_start","id":"root","sessionId":"01a19571-7b86-76ab-a26c-20f54edcfc13","pid":27322,"file":"/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13.jsonl","staticBearerPresent":true,"generationPresent":false,"generationTokenPresent":false}
+{"type":"session_start","id":"MuxWorker196","sessionId":"01a19571-b3f9-735a-844d-3e266b41d67f","pid":27555,"file":"/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13/MuxWorker196.jsonl","staticBearerPresent":false,"generationPresent":true,"generationTokenPresent":true}
+{"type":"agent_end","id":"MuxWorker196","pid":27555,"at":1793508632242}
+{"type":"agent_end","id":"root","pid":27322,"at":1793508641099}
+{"type":"session_start","id":"MuxWorker196","sessionId":"01a19571-b3f9-735a-844d-3e266b41d67f","pid":31520,"file":"/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13/MuxWorker196.jsonl","staticBearerPresent":false,"generationPresent":true,"generationTokenPresent":true}
+{"type":"agent_end","id":"MuxWorker196","pid":31520,"at":1793508715547}
+{"type":"agent_end","id":"root","pid":27322,"at":1793508722375}
+{"type":"session_start","id":"LossWorker196","sessionId":"01a19574-17b9-771e-8477-df6b3e60347f","pid":33382,"file":"/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13/LossWorker196.jsonl","staticBearerPresent":false,"generationPresent":true,"generationTokenPresent":true}
+{"type":"agent_end","id":"root","pid":27322,"at":1793508784460}
+{"type":"agent_end","id":"root","pid":27322,"at":1793508794334}
+{"type":"agent_end","id":"root","pid":27322,"at":1793508826483}
+{"type":"session_start","id":"LossWorker196","sessionId":"01a19574-17b9-771e-8477-df6b3e60347f","pid":38473,"file":"/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13/LossWorker196.jsonl","staticBearerPresent":false,"generationPresent":true,"generationTokenPresent":true}
+{"type":"agent_end","id":"LossWorker196","pid":38473,"at":1793508876091}
+{"type":"agent_end","id":"root","pid":27322,"at":1793508884159}

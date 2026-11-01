@@ -1,0 +1,70 @@
+{
+  "label": "recovery-after196",
+  "session": "01a19571-7b86-76ab-a26c-20f54edcfc13",
+  "rows": [
+    {
+      "id": "MuxWorker196",
+      "status": "parked",
+      "lifecycle": {
+        "responseAt": 1793508714579,
+        "acceptedAt": 1793508714579,
+        "terminalAt": 1793508715547
+      },
+      "sessionFile": "/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13/MuxWorker196.jsonl",
+      "process": null,
+      "job": null,
+      "artifact": {
+        "exists": true,
+        "text": "MUX_WAKE_SAME_SESSION_196"
+      }
+    },
+    {
+      "id": "LossWorker196",
+      "status": "idle",
+      "lifecycle": {
+        "responseAt": 1793508875088,
+        "acceptedAt": 1793508875088,
+        "terminalAt": 1793508876091
+      },
+      "sessionFile": "/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13/LossWorker196.jsonl",
+      "process": {
+        "generation": "3e169ddc-a91a-4d98-9332-7ec9d8d0d40b",
+        "where": {
+          "kind": "local",
+          "host": "MouriyadeMac-mini.local"
+        }
+      },
+      "job": {
+        "status": "completed",
+        "resultText": "MUX_LOSS_RECOVERED196\n\nAgent `LossWorker196` stays reachable: message it with write agent://LossWorker196."
+      },
+      "artifact": {
+        "exists": true,
+        "text": "MUX_LOSS_RECOVERED196"
+      }
+    }
+  ],
+  "mux": {
+    "status": 200,
+    "ok": true,
+    "agents": [
+      {
+        "agentId": "MuxWorker196",
+        "since": "2026-11-01T04:50:19.259Z",
+        "generation": null
+      },
+      {
+        "agentId": "LossWorker196",
+        "since": "2026-11-01T04:52:55.866Z",
+        "generation": {
+          "id": "3e169ddc-a91a-4d98-9332-7ec9d8d0d40b",
+          "where": {
+            "kind": "local",
+            "host": "MouriyadeMac-mini.local"
+          },
+          "since": "2026-11-01T04:54:28.815Z"
+        }
+      }
+    ]
+  }
+}

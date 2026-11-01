@@ -1,0 +1,6 @@
+{
+  "command": "bun /tmp/soroi-196-runtime/host-cancel.ts",
+  "returncode": 0,
+  "stdout": "[\n  {\n    \"kind\": \"tool_execution_start\",\n    \"toolName\": \"read\"\n  },\n  {\n    \"kind\": \"host-read-started\",\n    \"url\": \"soroi-cancel196://resource\"\n  },\n  {\n    \"kind\": \"owner-close-started\"\n  },\n  {\n    \"kind\": \"host-signal-aborted\"\n  },\n  {\n    \"kind\": \"source-end\",\n    \"end\": {\n      \"kind\": \"exited\",\n      \"code\": 0\n    }\n  },\n  {\n    \"kind\": \"owner-close-finished\",\n    \"closed\": true\n  }\n]\n",
+  "stderr": ""
+}

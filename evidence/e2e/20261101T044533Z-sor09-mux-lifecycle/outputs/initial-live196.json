@@ -1,0 +1,43 @@
+{
+  "label": "initial-live196",
+  "session": "01a19571-7b86-76ab-a26c-20f54edcfc13",
+  "rows": [
+    {
+      "id": "MuxWorker196",
+      "status": "running",
+      "sessionFile": "/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13/MuxWorker196.jsonl",
+      "process": {
+        "generation": "dc753030-56d2-4e1a-badb-0f53ee6b5973",
+        "where": {
+          "kind": "local",
+          "host": "MouriyadeMac-mini.local"
+        }
+      },
+      "job": {
+        "status": "running"
+      },
+      "artifact": {
+        "exists": false,
+        "text": null
+      }
+    }
+  ],
+  "mux": {
+    "status": 200,
+    "ok": true,
+    "agents": [
+      {
+        "agentId": "MuxWorker196",
+        "since": "2026-11-01T04:50:19.259Z",
+        "generation": {
+          "id": "dc753030-56d2-4e1a-badb-0f53ee6b5973",
+          "where": {
+            "kind": "local",
+            "host": "MouriyadeMac-mini.local"
+          },
+          "since": "2026-11-01T04:50:22.713Z"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "command": "bun /tmp/soroi-196-runtime/pre-ready-close.ts",
+  "returncode": 0,
+  "stdout": "[\n  {\n    \"kind\": \"real-child-exec-started\"\n  },\n  {\n    \"kind\": \"source-end\",\n    \"end\": {\n      \"kind\": \"exited\",\n      \"code\": 0\n    }\n  },\n  {\n    \"kind\": \"writer-closed\",\n    \"closed\": true,\n    \"start\": {\n      \"ok\": false,\n      \"error\": \"Error: Generation 440b75eb-327b-49fd-8abf-2078556d3aac was closed before startup completed. Dial exit 0.\"\n    }\n  }\n]\n",
+  "stderr": ""
+}

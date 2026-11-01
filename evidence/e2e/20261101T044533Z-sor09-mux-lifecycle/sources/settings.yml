@@ -1,0 +1,6 @@
+extensions:
+  - /tmp/soroi-196-runtime/probe.ts
+tools:
+  approvalMode: yolo
+task:
+  agentIdleTtlMs: 2000

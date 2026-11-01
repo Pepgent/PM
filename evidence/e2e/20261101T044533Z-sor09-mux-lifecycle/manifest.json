@@ -1,0 +1,276 @@
+{
+  "schemaVersion": 1,
+  "issue": "https://github.com/Pepgent/soroi/issues/196",
+  "repository": "Pepgent/soroi",
+  "sourceCommit": "d1e9dd1",
+  "archive": "SOR09 mux lifecycle",
+  "artifactCount": 35,
+  "facts": {
+    "qualifications": [
+      "The first-turn child wait returned Main finished without replying; the child then issued a bounded sleep 600. SIGTERM occurred during that command, not during a pending host wait. The separate host-cancel-result.json is the evidence for pending host callback cancellation.",
+      "The failed job was observed in loss-killed196.json. A later snapshot shows job:null after native consumption/pruning; this is not a new failure.",
+      "Child and root assistant prose in native transcripts/terminal are agent interpretation, not authority. Structured observations and Mux source SSE establish lifecycle results.",
+      "The first startup-driver attempt failed because omp-rpc-mux was not on PATH; it is not a passing scenario. The configured rerun recorded startup refusal and final empty presence.",
+      "No remote launcher, human IRC business delivery, capture dispatch, nested worker eval/batches, or root prompt injection is claimed by this slice."
+    ],
+    "checks": {
+      "typescript": {
+        "command": "bun run check",
+        "cwd": "packages/omp-soroi",
+        "exitCode": 0
+      },
+      "regression": {
+        "command": "bun test",
+        "cwd": "packages/omp-soroi",
+        "pass": 31,
+        "fail": 0,
+        "expect": 76
+      }
+    },
+    "startupRefusal": {
+      "scenario": "startup-refusal",
+      "elapsedMs": 538,
+      "source": "outputs/soroi-196-startup-runtime.json"
+    },
+    "shutdown": {
+      "rootExitCode": 0,
+      "observerExitCode": 0,
+      "storeExitCode": 0,
+      "muxStop": "SIGINT; no exit0 assertion"
+    },
+    "hostCancel": "The host-cancel scenario deliberately unresponsive external operation confirms signalabort and realexit0 but not reversal of external actions.",
+    "publicProcessRef": {
+      "fields": [
+        "generation",
+        "where"
+      ],
+      "pidInterpretation": "PIDs in observations prove process changed, not public address."
+    },
+    "authority": {
+      "structured": "Structured JSON and source SSE establish lifecycle results.",
+      "assistantProse": "Native root/child assistant prose is A interpretation, not authority."
+    }
+  },
+  "artifacts": [
+    {
+      "path": "inputs/initial-prompt.txt",
+      "source": "/tmp/soroi-196-runtime/initial-prompt.txt",
+      "category": "input",
+      "purpose": "Initial runtime prompt; input, not output."
+    },
+    {
+      "path": "outputs/runtime-evidence.json",
+      "source": "/tmp/soroi-196-runtime/runtime-evidence.json",
+      "category": "output",
+      "purpose": "Recorded runtime evidence summary and qualifications."
+    },
+    {
+      "path": "outputs/events.jsonl",
+      "source": "/tmp/soroi-196-runtime/events.jsonl",
+      "category": "output",
+      "purpose": "Structured lifecycle event observations."
+    },
+    {
+      "path": "outputs/after-root-exit.json",
+      "source": "/tmp/soroi-196-runtime/after-root-exit.json",
+      "category": "output",
+      "purpose": "Post-root-exit observation."
+    },
+    {
+      "path": "outputs/presence.sse",
+      "source": "/tmp/soroi-196-runtime/presence.sse",
+      "category": "output",
+      "purpose": "Mux source SSE observation."
+    },
+    {
+      "path": "outputs/host-cancel-result.json",
+      "source": "/tmp/soroi-196-runtime/host-cancel-result.json",
+      "category": "output",
+      "purpose": "Pending host callback cancellation result."
+    },
+    {
+      "path": "outputs/pre-ready-result.json",
+      "source": "/tmp/soroi-196-runtime/pre-ready-result.json",
+      "category": "output",
+      "purpose": "Pre-ready close result."
+    },
+    {
+      "path": "outputs/initial-live196.json",
+      "source": "/tmp/soroi-196-runtime/initial-live196.json",
+      "category": "output",
+      "purpose": "Initial lifecycle snapshot."
+    },
+    {
+      "path": "outputs/after-report196.json",
+      "source": "/tmp/soroi-196-runtime/after-report196.json",
+      "category": "output",
+      "purpose": "Post-report lifecycle snapshot."
+    },
+    {
+      "path": "outputs/wake-live196.json",
+      "source": "/tmp/soroi-196-runtime/wake-live196.json",
+      "category": "output",
+      "purpose": "Wake lifecycle snapshot."
+    },
+    {
+      "path": "outputs/after-wake196.json",
+      "source": "/tmp/soroi-196-runtime/after-wake196.json",
+      "category": "output",
+      "purpose": "Post-wake lifecycle snapshot."
+    },
+    {
+      "path": "outputs/loss-before196.json",
+      "source": "/tmp/soroi-196-runtime/loss-before196.json",
+      "category": "output",
+      "purpose": "Loss scenario pre-termination snapshot."
+    },
+    {
+      "path": "outputs/fixture-observed196.json",
+      "source": "/tmp/soroi-196-runtime/fixture-observed196.json",
+      "category": "output",
+      "purpose": "Fixture observation snapshot."
+    },
+    {
+      "path": "outputs/loss-killed196.json",
+      "source": "/tmp/soroi-196-runtime/loss-killed196.json",
+      "category": "output",
+      "purpose": "Observed failed-job snapshot."
+    },
+    {
+      "path": "outputs/loss-after196.json",
+      "source": "/tmp/soroi-196-runtime/loss-after196.json",
+      "category": "output",
+      "purpose": "Post-loss lifecycle snapshot."
+    },
+    {
+      "path": "outputs/recovery-live196.json",
+      "source": "/tmp/soroi-196-runtime/recovery-live196.json",
+      "category": "output",
+      "purpose": "Recovery lifecycle snapshot."
+    },
+    {
+      "path": "outputs/recovery-after196.json",
+      "source": "/tmp/soroi-196-runtime/recovery-after196.json",
+      "category": "output",
+      "purpose": "Post-recovery lifecycle snapshot."
+    },
+    {
+      "path": "outputs/soroi-196-startup-runtime.json",
+      "source": "/tmp/soroi-196-startup-runtime.json",
+      "category": "output",
+      "purpose": "Configured startup refusal and final presence result."
+    },
+    {
+      "path": "sources/launch.py",
+      "source": "/tmp/soroi-196-runtime/launch.py",
+      "category": "source",
+      "purpose": "Fixture/driver source; not runtime output."
+    },
+    {
+      "path": "sources/settings.yml",
+      "source": "/tmp/soroi-196-runtime/settings.yml",
+      "category": "source",
+      "purpose": "Fixture configuration source; not runtime output."
+    },
+    {
+      "path": "sources/probe.ts",
+      "source": "/tmp/soroi-196-runtime/probe.ts",
+      "category": "source",
+      "purpose": "Fixture/driver source; not runtime output."
+    },
+    {
+      "path": "sources/observe-presence.ts",
+      "source": "/tmp/soroi-196-runtime/observe-presence.ts",
+      "category": "source",
+      "purpose": "Observer source; not runtime output."
+    },
+    {
+      "path": "sources/pre-ready-close.ts",
+      "source": "/tmp/soroi-196-runtime/pre-ready-close.ts",
+      "category": "source",
+      "purpose": "Pre-ready fixture/driver source; not runtime output."
+    },
+    {
+      "path": "sources/host-cancel.ts",
+      "source": "/tmp/soroi-196-runtime/host-cancel.ts",
+      "category": "source",
+      "purpose": "Host-cancel fixture/driver source; not runtime output."
+    },
+    {
+      "path": "sources/soroi-196-transport-smoke.ts",
+      "source": "/tmp/soroi-196-transport-smoke.ts",
+      "category": "source",
+      "purpose": "Transport fixture/driver source; not runtime output."
+    },
+    {
+      "path": "native-transcripts/root/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13.jsonl",
+      "source": "/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13.jsonl",
+      "category": "native-transcript",
+      "role": "root"
+    },
+    {
+      "path": "native-transcripts/workers/MuxWorker196.jsonl",
+      "source": "/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13/MuxWorker196.jsonl",
+      "category": "native-transcript",
+      "role": "child worker"
+    },
+    {
+      "path": "native-transcripts/workers/LossWorker196.jsonl",
+      "source": "/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13/LossWorker196.jsonl",
+      "category": "native-transcript",
+      "role": "child worker"
+    },
+    {
+      "path": "native-transcripts/recipes/MuxWorker196.soroi.json",
+      "source": "/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13/MuxWorker196.soroi.json",
+      "category": "native-transcript",
+      "role": "child recipe"
+    },
+    {
+      "path": "native-transcripts/recipes/LossWorker196.soroi.json",
+      "source": "/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13/LossWorker196.soroi.json",
+      "category": "native-transcript",
+      "role": "child recipe"
+    },
+    {
+      "path": "native-transcripts/host-cancel/2026-11-01T04-54-51-464Z_01a19575-db48-7318-a704-96aab363572e.jsonl",
+      "source": "/tmp/soroi-196-runtime/host-cancel-sessions/2026-11-01T04-54-51-464Z_01a19575-db48-7318-a704-96aab363572e.jsonl",
+      "category": "native-transcript",
+      "role": "host-cancel"
+    },
+    {
+      "path": "terminal/pi-unified-exec-6335-3-68a4635a.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-6335-3-68a4635a.log",
+      "category": "terminal",
+      "role": "root"
+    },
+    {
+      "path": "terminal/pi-unified-exec-6335-4-88e9aede.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-6335-4-88e9aede.log",
+      "category": "terminal",
+      "role": "observer"
+    },
+    {
+      "path": "terminal/pi-unified-exec-6335-2-832998af.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-6335-2-832998af.log",
+      "category": "terminal",
+      "role": "store"
+    },
+    {
+      "path": "terminal/pi-unified-exec-6335-1-abfe0b17.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-6335-1-abfe0b17.log",
+      "category": "terminal",
+      "role": "mux"
+    }
+  ],
+  "excluded": [
+    {
+      "source": "/tmp/soroi-196-runtime/pre-ready-sessions",
+      "reason": "No .jsonl files were present; no placeholder was created."
+    },
+    {
+      "source": "/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13",
+      "reason": "Lock files and non-requested database/blob artifacts were not copied."
+    }
+  ]
+}

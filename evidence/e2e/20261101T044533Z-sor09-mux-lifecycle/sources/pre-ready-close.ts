@@ -1,0 +1,17 @@
+import { readFileSync, watch } from 'node:fs';
+import { MuxWriter, muxConfiguration } from '/Users/mouriya/Ext/worktrees/issue-196-mux-writer-ff0716f/packages/omp-soroi/src/subagent/main/mux-writer.ts';
+const marker='/tmp/soroi-196-runtime/pre-ready-entered';
+const childEnv=Object.fromEntries(Object.entries({...process.env, PATH:'/tmp/omp-mux-main-1f7f9ff:'+process.env.PATH, PI_CODING_AGENT_DIR:'/tmp/soroi-185-runtime/agent'}).filter((entry):entry is [string,string]=>entry[1]!==undefined));
+const config=muxConfiguration({...process.env,SOROI_MUX_URL:'ws://127.0.0.1:18464',MUX_AUTH_TOKEN:readFileSync('/Users/mouriya/Ext/work/orbstack/pepgent-mux/token','utf8').trimEnd()});
+const entered=Promise.withResolvers<void>();
+const watcher=watch('/tmp/soroi-196-runtime',(_,name)=>{if(name==='pre-ready-entered')entered.resolve();});
+const timeline:unknown[]=[];
+const writer=new MuxWriter('PreReadyClose196',config,()=>{throw new Error('Unexpected human frame');});
+const starting=writer.start({argv:['sh','-c',`printf entered > '${marker}'; exec omp --mode rpc --no-extensions --no-context-files --session-dir /tmp/soroi-196-runtime/pre-ready-sessions`],cwd:'/tmp/soroi-196-runtime',env:childEnv,handlers:{onEvent(){},onEnd(end){timeline.push({kind:'source-end',end});},async onHostToolCall(){throw new Error('Unexpected host call');},async onHostRead(){throw new Error('Unexpected host read');}}}).then(()=>({ok:true as const}),error=>({ok:false as const,error:String(error)}));
+await entered.promise;
+watcher.close();
+timeline.push({kind:'real-child-exec-started'});
+await writer.close();
+timeline.push({kind:'writer-closed',closed:writer.isClosed,start:await starting});
+if(!timeline.some(row=> typeof row==='object' && row!==null && 'kind'in row && row.kind==='source-end' && 'end'in row && typeof row.end==='object' && row.end!==null && 'kind'in row.end && row.end.kind==='exited' && 'code'in row.end && row.end.code===0))throw new Error('Shutdown did not preserve authoritative clean exit: '+JSON.stringify(timeline));
+console.log(JSON.stringify(timeline,null,2));

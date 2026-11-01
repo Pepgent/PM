@@ -1,0 +1,42 @@
+Source SSE connected
+data: {"kind":"writer_up","agentId":"MuxWorker196"}
+
+data: {"kind":"generation_up","agentId":"MuxWorker196","generation":"dc753030-56d2-4e1a-badb-0f53ee6b5973","where":{"kind":"local","host":"MouriyadeMac-mini.local"}}
+
+data: {"kind":"generation_down","agentId":"MuxWorker196","generation":"dc753030-56d2-4e1a-badb-0f53ee6b5973","code":0}
+
+data: {"kind":"generation_up","agentId":"MuxWorker196","generation":"0f70a642-e401-47c8-8a72-eb543f2fa044","where":{"kind":"local","host":"MouriyadeMac-mini.local"}}
+
+data: {"kind":"generation_down","agentId":"MuxWorker196","generation":"0f70a642-e401-47c8-8a72-eb543f2fa044","code":0}
+
+data: {"kind":"writer_up","agentId":"PreReadyClose196"}
+
+data: {"kind":"generation_up","agentId":"PreReadyClose196","generation":"440b75eb-327b-49fd-8abf-2078556d3aac","where":{"kind":"local","host":"MouriyadeMac-mini.local"}}
+
+data: {"kind":"generation_down","agentId":"PreReadyClose196","generation":"440b75eb-327b-49fd-8abf-2078556d3aac","code":0}
+
+data: {"kind":"writer_down","agentId":"PreReadyClose196"}
+
+data: {"kind":"writer_up","agentId":"LossWorker196"}
+
+data: {"kind":"generation_up","agentId":"LossWorker196","generation":"674049c3-8e57-4fc9-9154-df545ae8e684","where":{"kind":"local","host":"MouriyadeMac-mini.local"}}
+
+data: {"kind":"generation_down","agentId":"LossWorker196","generation":"674049c3-8e57-4fc9-9154-df545ae8e684","code":143}
+
+data: {"kind":"generation_up","agentId":"LossWorker196","generation":"3e169ddc-a91a-4d98-9332-7ec9d8d0d40b","where":{"kind":"local","host":"MouriyadeMac-mini.local"}}
+
+data: {"kind":"generation_down","agentId":"LossWorker196","generation":"3e169ddc-a91a-4d98-9332-7ec9d8d0d40b","code":0}
+
+data: {"kind":"writer_up","agentId":"HostCancel196"}
+
+data: {"kind":"generation_up","agentId":"HostCancel196","generation":"973cf630-8eb0-4472-b79f-e41c222e0140","where":{"kind":"local","host":"MouriyadeMac-mini.local"}}
+
+data: {"kind":"generation_down","agentId":"HostCancel196","generation":"973cf630-8eb0-4472-b79f-e41c222e0140","code":0}
+
+data: {"kind":"writer_down","agentId":"HostCancel196"}
+
+data: {"kind":"writer_down","agentId":"MuxWorker196"}
+
+data: {"kind":"writer_down","agentId":"LossWorker196"}
+
+^CSource SSE observer stopped

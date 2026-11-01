@@ -1,0 +1,64 @@
+{
+  "label": "loss-before196",
+  "session": "01a19571-7b86-76ab-a26c-20f54edcfc13",
+  "rows": [
+    {
+      "id": "MuxWorker196",
+      "status": "parked",
+      "lifecycle": {
+        "responseAt": 1793508714579,
+        "acceptedAt": 1793508714579,
+        "terminalAt": 1793508715547
+      },
+      "sessionFile": "/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13/MuxWorker196.jsonl",
+      "process": null,
+      "job": null,
+      "artifact": {
+        "exists": true,
+        "text": "MUX_WAKE_SAME_SESSION_196"
+      }
+    },
+    {
+      "id": "LossWorker196",
+      "status": "running",
+      "sessionFile": "/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13/LossWorker196.jsonl",
+      "process": {
+        "generation": "674049c3-8e57-4fc9-9154-df545ae8e684",
+        "where": {
+          "kind": "local",
+          "host": "MouriyadeMac-mini.local"
+        }
+      },
+      "job": {
+        "status": "running"
+      },
+      "artifact": {
+        "exists": false,
+        "text": null
+      }
+    }
+  ],
+  "mux": {
+    "status": 200,
+    "ok": true,
+    "agents": [
+      {
+        "agentId": "MuxWorker196",
+        "since": "2026-11-01T04:50:19.259Z",
+        "generation": null
+      },
+      {
+        "agentId": "LossWorker196",
+        "since": "2026-11-01T04:52:55.866Z",
+        "generation": {
+          "id": "674049c3-8e57-4fc9-9154-df545ae8e684",
+          "where": {
+            "kind": "local",
+            "host": "MouriyadeMac-mini.local"
+          },
+          "since": "2026-11-01T04:52:57.736Z"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "label": "after-report196",
+  "session": "01a19571-7b86-76ab-a26c-20f54edcfc13",
+  "rows": [
+    {
+      "id": "MuxWorker196",
+      "status": "parked",
+      "lifecycle": {
+        "responseAt": 1793508628888,
+        "acceptedAt": 1793508628888,
+        "terminalAt": 1793508632244
+      },
+      "sessionFile": "/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13/MuxWorker196.jsonl",
+      "process": null,
+      "job": {
+        "status": "completed",
+        "resultText": "MUX_PACKAGE_SKILL_196\n\nAgent `MuxWorker196` stays reachable: message it with write agent://MuxWorker196."
+      },
+      "artifact": {
+        "exists": true,
+        "text": "MUX_PACKAGE_SKILL_196"
+      }
+    }
+  ],
+  "mux": {
+    "status": 200,
+    "ok": true,
+    "agents": [
+      {
+        "agentId": "MuxWorker196",
+        "since": "2026-11-01T04:50:19.259Z",
+        "generation": null
+      }
+    ]
+  }
+}

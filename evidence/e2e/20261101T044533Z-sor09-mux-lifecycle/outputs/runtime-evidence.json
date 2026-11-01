@@ -1,0 +1,105 @@
+{
+  "issue": "https://github.com/Pepgent/soroi/issues/196",
+  "sourceCommit": "d1e9dd1",
+  "runtime": {
+    "omp": "18.14.2",
+    "model": "opencode-go/deepseek-v4.1-flash",
+    "muxOwnerConfirmedBuild": "1f7f9ff07f47e45130d498b12b3604fb2a99e3e3",
+    "muxBinary": "/tmp/omp-mux-main-1f7f9ff/omp-rpc-mux",
+    "muxListen": "127.0.0.1:18464",
+    "storeURL": "http://127.0.0.1:19688",
+    "storeHome": "/tmp/soroi201-runtime/store"
+  },
+  "commands": {
+    "mux": "/tmp/omp-mux-main-1f7f9ff/omp-rpc-mux serve --listen 127.0.0.1:18464 --token-file /Users/mouriya/Ext/work/orbstack/pepgent-mux/token",
+    "store": "STORE_HOME=/tmp/soroi201-runtime/store STORE_PORT=19688 bun packages/store/src/main.ts",
+    "root": "python3 /tmp/soroi-196-runtime/launch.py",
+    "startup": "PATH=/tmp/omp-mux-main-1f7f9ff:$PATH bun /tmp/soroi-196-transport-smoke.ts",
+    "preReady": "bun /tmp/soroi-196-runtime/pre-ready-close.ts",
+    "hostCancel": "bun /tmp/soroi-196-runtime/host-cancel.ts",
+    "unexpectedChildTermination": "kill -TERM 33382",
+    "rootShutdown": "/exit"
+  },
+  "rootSession": "01a19571-7b86-76ab-a26c-20f54edcfc13",
+  "childStarts": [
+    {
+      "type": "session_start",
+      "id": "root",
+      "sessionId": "01a19571-7b86-76ab-a26c-20f54edcfc13",
+      "pid": 27322,
+      "file": "/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13.jsonl",
+      "staticBearerPresent": true,
+      "generationPresent": false,
+      "generationTokenPresent": false
+    },
+    {
+      "type": "session_start",
+      "id": "MuxWorker196",
+      "sessionId": "01a19571-b3f9-735a-844d-3e266b41d67f",
+      "pid": 27555,
+      "file": "/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13/MuxWorker196.jsonl",
+      "staticBearerPresent": false,
+      "generationPresent": true,
+      "generationTokenPresent": true
+    },
+    {
+      "type": "session_start",
+      "id": "MuxWorker196",
+      "sessionId": "01a19571-b3f9-735a-844d-3e266b41d67f",
+      "pid": 31520,
+      "file": "/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13/MuxWorker196.jsonl",
+      "staticBearerPresent": false,
+      "generationPresent": true,
+      "generationTokenPresent": true
+    },
+    {
+      "type": "session_start",
+      "id": "LossWorker196",
+      "sessionId": "01a19574-17b9-771e-8477-df6b3e60347f",
+      "pid": 33382,
+      "file": "/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13/LossWorker196.jsonl",
+      "staticBearerPresent": false,
+      "generationPresent": true,
+      "generationTokenPresent": true
+    },
+    {
+      "type": "session_start",
+      "id": "LossWorker196",
+      "sessionId": "01a19574-17b9-771e-8477-df6b3e60347f",
+      "pid": 38473,
+      "file": "/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13/LossWorker196.jsonl",
+      "staticBearerPresent": false,
+      "generationPresent": true,
+      "generationTokenPresent": true
+    }
+  ],
+  "checks": {
+    "typescript": {
+      "command": "bun run check",
+      "cwd": "packages/omp-soroi",
+      "exitCode": 0
+    },
+    "regression": {
+      "command": "bun test",
+      "cwd": "packages/omp-soroi",
+      "pass": 31,
+      "fail": 0,
+      "expect": 76
+    }
+  },
+  "shutdown": {
+    "rootExitCode": 0,
+    "observerExitCode": 0,
+    "storeExitCode": 0,
+    "storeStoppedAt": "2026-11-01T04:55:29Z",
+    "muxStop": "SIGINT; no exit0 assertion",
+    "finalAgents": []
+  },
+  "qualifications": [
+    "The first-turn child wait returned Main finished without replying; the child then issued a bounded sleep 600. SIGTERM occurred during that command, not during a pending host wait. The separate host-cancel-result.json is the evidence for pending host callback cancellation.",
+    "The failed job was observed in loss-killed196.json. A later snapshot shows job:null after native consumption/pruning; this is not a new failure.",
+    "Child and root assistant prose in native transcripts/terminal are agent interpretation, not authority. Structured observations and Mux source SSE establish lifecycle results.",
+    "The first startup-driver attempt failed because omp-rpc-mux was not on PATH; it is not a passing scenario. The configured rerun recorded startup refusal and final empty presence.",
+    "No remote launcher, human IRC business delivery, capture dispatch, nested worker eval/batches, or root prompt injection is claimed by this slice."
+  ]
+}
