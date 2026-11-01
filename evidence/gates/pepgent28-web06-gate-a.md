@@ -45,3 +45,14 @@
 - **答复：** **是，属未定的跨仓/跨席位公开契约（K4），须并入 P0 议案表决。**
   - `DEC/D7-lab-backend.md:73`（`D7-13`）与 `DEC/D12-lab-wire.md:40,353-357,384,642`（`D12-08`、`P15`）要求按“用这个镜像的模板”统计容器页的 `nodeBindingCount`、资源默认值、挂载与 `liveContainers`，但现有正文未规定 `ImageDefinition.name`（`P15`）的取值格式以及如何与带 registry 主机和 `:tag`/`@digest` 的 `TemplateMetadata.image`（`P3`）匹配。
   - 同意初审材料提出的候选主案方向：规定 `ImageDefinition.name` 为镜像发布时的 OCI repository 路径（不含 registry 主机、`:tag` 与 `@digest`，如 `pepgent/omp-agent`），当且仅当 `TemplateMetadata.image` 去掉首段 registry 主机（含 `.`、`:` 或为 `localhost`）及末尾 `:tag`、`@digest` 后与 `ImageDefinition.name` 相等时判定该模板使用该镜像。表决前 `W-10` 按 `D10-08` 只暂停容器页依赖该关联键的字段，容器定义、依赖、文件与 Panel 头照常交付。
+
+---
+
+## 三、D38-02 v2（及 D38-03 v2）修订稿闸门 A 复核
+
+- **复核结论：** **同意 `D38-02 v2`（及 `D38-03 v2`）修订稿，三处差异完全符合 `D7-02`、`D7-11`、`D7-13`、`D12-10` 与 `D12-17` 的产品原意，不触及任何新的意图或公开契约问题，同意进入 v2 重投。**
+- **逐项依据：**
+  1. **节点合入族补齐 `library.merge`、`library.apply`、`agentTemplate.saveVersion` 三个命令名：** 按 `DEC/D7-lab-backend.md:71`（`D7-11`）与 `DEC/D12-lab-wire.md:42,547-557`（`D12-10`），这三条命令均在 Lab 库默认分支产生合入提交（返回 `{ commit, paths }`），将三者一并纳入 `D7-02`“节点合入”族并由 `settings.repoActivity` 完整返回，消除了 `F29 S2`（`nodes` 页 `library.apply`）与智能体模板保存版本不写 `activity` 的遗漏。
+  2. **`D12-17` 失效表 `library` 频道补 `home`：** 节点合入写入 `activity` 后改变 `home.activity`，在 `library` 频道失效读取集合中加入 `home`（`client/services/lab/invalidation.ts`，属 `D20-01` 白名单）使首页即时重读，与 `D12-17` 失效语义完全一致。
+  3. **合入事件入口弹窗由 `sources` 改为 `dataset`：** 原型 `client/services/lab-fixture/home.ts:121-131` 中 `category: 'data'`、`glyph: 'database'` 本就与 `dialog: 'dataset'` 成对（`sources` 对应 `literature`），不新增弹窗、不改 `ui/**`，符合 `D20-02` 与 `U59`。
+  4. **附注（`D38-03 v2`）：** 将 `nodeBindingCount` 引用的字段名由 `NodeDefinition.template` 修正为 `D7-13` 默认环境字段 `NodeDefinition.defaultEnvironment`，符合 `D7-13` 原意。
