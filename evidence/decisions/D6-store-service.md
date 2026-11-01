@@ -126,7 +126,7 @@ type Derive = {                                    // Lab 后端 → Mux → 控
   parent: RunId
   at: Committed | { kind: 'InFlight'; writerSession: SessionId; slot: string }  // InFlight：由持有槽位的会话先把在途的那一步落进 P，得到 Committed
   changes: Change[]
-}
+  by: string
 type DeriveCommit = { parent: RunId; at: Committed; changes: Change[]; holder: SessionId; transfer: TransferId } // 必为 EvalTransfer，纯标量也开空 transfer；只晋升新根引用字节
 type Derived = { run: RunId; seq: Seq; parentAborted: boolean }
 // POST /runs/derive body: DeriveCommit → Derived；同事务写 P 的 run_aborted 与 R' 物化：run_started(seq1, records) → call_inherited → atom_stopped；不写步、不发 step_committed
@@ -296,7 +296,7 @@ sequenceDiagram
   MUX-->>LAB: 结论
   Note over EV: eval 工具结果与提醒标明“由人类接入替代”
   GUI->>LAB: 派生：在仍在运行的调用 C 处改参数 temp
-  LAB->>MUX: Derive{parent P, at InFlight{writerSession, slot}, ChangeInput}
+  LAB->>MUX: Derive{parent P, at InFlight{writerSession, slot}, ChangeInput, by UserId}
   MUX->>EV: Derive
   EV->>EV: 中止 C 与同一步其余在途调用，等结论
   EV->>ST: POST /runs/steps（这一步进 P：根 atom、已完成的调用、call_aborted）

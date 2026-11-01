@@ -309,10 +309,10 @@ interface EvalControl {
 // 只有根会话的端点 eval:<根会话 id> 另外回答：
 interface RootEvalControl extends EvalControl {
   writers(): readonly { session: string; endpoint: string }[]   // 根端点返回本根会话下当前全部写 eval 会话，包含根会话自身
-  derive(parent: string, at: Committed | { kind: "InFlight"; writerSession: string; slot: SlotId }, changes: readonly Change[]): { run: string }   // D6-16；store 确认派生后返回新运行 id，由持有运行的根会话执行（D7-09）
+  derive(parent: string, at: Committed | { kind: "InFlight"; writerSession: string; slot: SlotId }, changes: readonly Change[], by: string): { run: string }   // D6-16；store 确认派生后返回新运行 id，由持有运行的根会话执行（D7-09）
   abort(run: string): void   // D6-05；由持有运行的根会话执行（D7-09）
 }
-// 控制端点的线上请求体是封闭的 method 联合：{"method":"slots"}、{"method":"answer","handback":HumanHandback}、{"method":"takeover","handback":HumanHandback}；根端点另外接受 {"method":"writers"}、{"method":"derive","parent":RunId,"at":DeriveAt,"changes":Change[]}、{"method":"abort","run":RunId}。
+// 控制端点的线上请求体是封闭的 method 联合：{"method":"slots"}、{"method":"answer","handback":HumanHandback}、{"method":"takeover","handback":HumanHandback}；根端点另外接受 {"method":"writers"}、{"method":"derive","parent":RunId,"at":DeriveAt,"changes":Change[],"by":UserId}、{"method":"abort","run":RunId}。eval 拿到 store 成功提交后的结论后，以 `from = human:<by>` 投递 D5-16 情形二的 IRC。
 // 成功回复统一为 {"ok":true,"value":V}：answer、takeover、abort 的 value 为 null，derive 的 value 为 {run: RunId}（store 确认的新运行）；slots 与 writers 的 value 为各自列表。失败回复形状不在设计中。
 
 type CaptureBody = "Program" | "Agent" | "Human"
