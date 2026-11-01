@@ -9,8 +9,8 @@
 | W-06 `pepgent-store` | [D16-15 / PM#26](https://github.com/Pepgent/PM/issues/26)；实现 [soroi#293](https://github.com/Pepgent/soroi/issues/293)，消费方 [Pepgent#43](https://github.com/Pepgent/Pepgent/issues/43)；前批 #282/#190/#203 已交付 | 本次 [PR#294](https://github.com/Pepgent/soroi/pull/294) 已 MERGED；前批 PR#286/#287 已合入 | **临时任务已合入／已退役**：W-06 已在[消费方原帖发出解锁评论](https://github.com/Pepgent/Pepgent/issues/43#issuecomment-6558903750)，CI 已生成 `store-contract` 分支；Main 提供的 `git ls-remote` 观察指向 `8a23e213`，并报告已执行 `tern kill session pepgent-store`。秘书未重复发解锁评论，不再计为第五席 | 2026-11-01T13:55:56Z（解锁及 CI 观察评论）；退役按 Main 本轮报告 |
 | W-05 `pepgent-library` | [lab-library#5](https://github.com/Pepgent/lab-library/issues/5)、[#13](https://github.com/Pepgent/lab-library/issues/13) | [PR#14](https://github.com/Pepgent/lab-library/pull/14) 已 MERGED，正文关闭 #5/#13 | **已合入／已退役**：Main 滚动记录报告 OPEN issue 数为 0，已执行 `tern kill session pepgent-library`，由 W-04 补位。此前承载缺口已在[原 issue 回复解除](https://github.com/Pepgent/PM/issues/25#issuecomment-6558437925)。真实 File 根装载与 Lab 元数据投影仍留阶段 C，不把本仓合入当成组装可用 | 2026-11-01T13:38:53Z（PR 更新）；退役见滚动源记录 |
 | W-01 `pepgent-mux` | [omp-rpc-mux#13](https://github.com/Pepgent/omp-rpc-mux/issues/13)、[#17](https://github.com/Pepgent/omp-rpc-mux/issues/17) | [PR#16](https://github.com/Pepgent/omp-rpc-mux/pull/16)、[PR#18](https://github.com/Pepgent/omp-rpc-mux/pull/18) 均 MERGED，分别关闭 #13、#17 | **已合入／已退役**：合并状态已从 GitHub 取回；Main 滚动记录报告 OPEN issue 数为 0，已执行 `tern kill session pepgent-mux`。不再列作活跃席位，不冒称阶段 C 已通过 | 2026-11-01T13:14:00Z、13:16:42Z（两 PR 更新）；退役见滚动源记录 |
-| W-02 `pepgent-remote` | 本次 [remote#18](https://github.com/Pepgent/remote/issues/18)（C7 TemplateMetadata）；前批 [#16](https://github.com/Pepgent/remote/issues/16) 已结束 | 前批 [PR#17](https://github.com/Pepgent/remote/pull/17) 已 MERGED；本次实现 PR 未取回 | 🔄 **重新进场／STARTED**：Main 滚动记录给出 tern `663967584223235`；工程师已在[#18 原 issue 发布 STARTED](https://github.com/Pepgent/remote/issues/18#issuecomment-6558849520)，分支 `w02-remote-18-template-metadata`，基于 `origin/main 695a1a7`。前次退役保留为历史事实，不作当前状态 | 2026-11-01T13:50:52Z（本次 STARTED） |
-| W-09 `pepgent-lab` | 首项 [Pepgent#43](https://github.com/Pepgent/Pepgent/issues/43)（A2-12），随后 LAB-10、[Pepgent#44](https://github.com/Pepgent/Pepgent/issues/44)、LAB-04..12 | 本轮未取回对应实现 PR，不以依赖解锁推定 PR 已合入 | 🔄 **STARTED；C5/C6 上游已解锁**：W-09 的[STARTED](https://github.com/Pepgent/Pepgent/issues/43#issuecomment-6558512637) 已在原 issue；W-06 已通知按 D16-15 使用 `git+https://github.com/Pepgent/soroi.git#store-contract` 安装 `pepgent-store`，导入 `pepgent-store/contract`、`pepgent-store/identity`。Main 指定可在本仓交付后合入 #43；不再消费已撤销的 soroi 根 exports，不把可安装通知当作 #43 已完成 | 2026-11-01T13:20:36Z（STARTED）、13:55:56Z（W-06 解锁） |
+| W-02 `pepgent-remote` | 本次 [remote#18](https://github.com/Pepgent/remote/issues/18)，前批 #16 已结束 | 本次 [PR#19](https://github.com/Pepgent/remote/pull/19)，前批 PR#17 | **ALL_DONE 报告／待 Main 确认退役**：Argon 本轮已查实 #18/PR#19 于 14:09:38Z–14:09:43Z 合入 main；工人 14:10:05Z 结束后 idle，因旧协议未发送常规完成通知而占槽。此为 Argon 的源头调查报告；秘书未重查日志，尚无 Main 的本次退役确认，不把完成等同进程结束 | 2026-11-01T14:10:05Z（工人结束，Argon 报告）；生命周期待 Main 更新 |
+| W-09 `pepgent-lab` | [Pepgent#43](https://github.com/Pepgent/Pepgent/issues/43)，后续 LAB 队列 | 本轮未取回对应实现 PR | **WAITING_FOR_RULING／须由 Main 唤醒**：Argon 已查实工人 13:58:05Z 将 C1..C8 列为阻塞并结束为 idle；其中 C1–C4/C8 已放行、C5/C6 已交付、C7 现已由 remote PR#19 合入。GitHub 评论未唤醒 idle 进程；用户已直接要求 Main peer_send 送达解除依据和双向消息协议。秘书已将相关 issue 评论链接交 Main，不把“通知已交管理层”记作“工人已恢复” | 2026-11-01T13:58:05Z（等待开始，Argon 查实）；实际唤醒待 Main 结果 |
 | W-07 `pepgent-plugin` | 当前 [SOR-12 #211](https://github.com/Pepgent/soroi/issues/211)；新承载 [D11-F12 #299](https://github.com/Pepgent/soroi/issues/299)；构建项 [#284](https://github.com/Pepgent/soroi/issues/284) 按原帖推进 | 已观察 PR#290、PR#295 合入；当前 #211/#299 实现 PR 未取回，不推定完成 | 🔄 **STARTED**：[#211 原帖](https://github.com/Pepgent/soroi/issues/211#issuecomment-6559039705) 已登记 worktree `issue-211-batches`、writesEval/批次接入；#299 按既有初审补齐插件 File 根承载，已在[#211](https://github.com/Pepgent/soroi/issues/211#issuecomment-6559101325)及[#299](https://github.com/Pepgent/soroi/issues/299#issuecomment-6559101537)登记既定队列，不新增派工。#284 的等待 install-check 裁决已回写已有解除依据 | 2026-11-01T14:07:32Z（#211 STARTED）；#299 承载登记时间见评论 |
 | W-03 `pepgent-images` | [images#6](https://github.com/Pepgent/images/issues/6)、[#3](https://github.com/Pepgent/images/issues/3) | [PR#12](https://github.com/Pepgent/images/pull/12) 已 MERGED，正文关闭 #6/#3 | **已合入／已退役**：本轮 GitHub OPEN issue 列表返回无匹配，Main 滚动记录报告已执行 `tern kill session pepgent-images`，由 W-08 补位。镜像本仓证据不代替发行安装、真实浏览器会话和部署顺序的阶段 C 验收 | 2026-11-01T13:41:04Z（PR 更新）；退役见滚动源记录 |
 | W-04 `pepgent-deploy` | [deploy#16](https://github.com/Pepgent/deploy/issues/16)、[#8](https://github.com/Pepgent/deploy/issues/8)、[#1](https://github.com/Pepgent/deploy/issues/1) | [PR#17](https://github.com/Pepgent/deploy/pull/17) 已 MERGED，正文一次关闭三项 | **已合入／已退役**：GitHub OPEN issue 列表返回无匹配，Main 滚动记录报告已执行 `tern kill session pepgent-deploy`。本仓基础检查不代表阶段 C 的真实 store 导入、seed/Web 顺序、登录及安装后工具验收完成 | 2026-11-01T13:47:17Z（PR 更新）；退役见滚动源记录 |
@@ -57,12 +57,21 @@ W-09 本次以命名分支 `pepgent-lab-home` 发车；Main 已确认并修正�
 - Main 转交自报中的消息原文：“仍在执行本轮调查的子代理现在收束并提交最终报告；不要扩展范围”。该消息是任务催收，不含事实、记忆或观点；误入事件本身仍已发生。
 - SoroiKeeperGpt **称没有读取对方任何内容**，并表示今后只定向发送给自己的子代理。未读取声明及后续改正均按自报记录，秘书未据此声称双模全程隔离已验证。
 
+## 用户直接整改：工人消息渠道与唤醒断点
+
+来源：Argon 向管理层广播的用户直接指令及其 `.workers/*/sessions/*.jsonl`、`tern ls` 调查报告。报告指出：W-09 在 C1..C8 已有处置或上游就绪后仍 idle 等待；W-02 已完成却没有完成唤醒消息、未释放槽位。秘书不把广播中的报告冒充自己独立重查的结果。
+
+- 新协议直接替代“常规工程状态一律不得 peer_send”的旧限制：工人写 issue/PR 后，BLOCKED（停工时标 WAITING_FOR_RULING）、关键跨席前置合入、ALL_DONE 三类事件必须同时通知 Main；处置仍在原 issue/PR 留存。
+- 对工人的 BLOCKED 裁决、白名单放行、新承载分配或上游就绪，必须 GitHub 评论 + Main 的 peer_send 双送达。只有 Main 持有跨进程工具权限，秘书不能以写评论代替 Main 唤醒。
+- 秘书已向 Main 交付 #284、#220/#299、#211/#226 的原评论链接；Main 实际 peer_send、W-09 恢复及 remote 退役/补位结果须由拥有方写入 rolling-record 后记录，不预先宣布完成。
+- 该整改是用户直接指令，不等 D18 或任何投票；不得用“无常规 IRC”旧条款继续让工人静默等待。角色/skill/watchdog 修改由各自拥有方执行，秘书不改其实现。
+
 ## 核对 C1–C5
 
 - C1：只记录既定席位及授权范围；不改代码、design/、生产环境，不编写或运行测试，不以 hash 比对作证据。
 - C2：当前投票依 U95 / LEDGER C2-3 按职能席位与专责权重计票；D15/D16 的三族数字只作为当时历史事实保留，不追溯改票。秘书不投票、不判断设计。
 - C3：沿用十席矩阵，本轮不派工、不跨仓操作工程师工作树。
-- C4：常规状态只读 issue/PR；保留观察时间，区分本轮记录与已作废历史，不把本汇总作为状态源。
+- C4：工程事实沿用 issue/PR，进程与停工观察标明 Main/Argon 等拥有方报告来源；保留观察时间，不把本汇总作为源头。需唤醒时由 Main 按新协议双送达，不以评论已写替代工人已收到。
 - C5：不触碰冻结目录、不接触无关前端会话；不因本记录另设审批或验收门禁。
 
-后续刷新应直接替换本文件相应行；只有工程师在原 issue/PR 发布新的 STARTED / PR / BLOCKED / DONE，才更新其运行状态。
+后续刷新直接替换对应行，标明源头与观察时间；运行状态取 issue/PR 和具名拥有方的进程观察，轮换取 Main 的 rolling-record，不从“消息已投递”推断工人已恢复或完成。
