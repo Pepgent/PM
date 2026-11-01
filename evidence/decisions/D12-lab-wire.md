@@ -50,15 +50,17 @@
 
 ### D12-06 实验页面投影与版本来源
 
-**提交时间轴（D35-01 v3）。** W-09 在 `experiment` 页带出 `commits: { seq: Seq; at: Instant }[]`，`ref` 为草稿时为 `[]`。服务端先取 `GET /runs/{run}/graph` 得到其 `at`，再读 `GET /runs/{run}/stream?after=0` 直到该序号，按序收集每个携带 `records` 的提交级事件 `run_started` 与 `step_committed` 的 `seq`、`at`；只有根值、没有调用的提交同样在列。W-10 model 将游标时刻 T 映射为 `k = max{ seq ∈ commits | at(seq) ≤ T }`，以 `at=k` 按 D12-05 读取 `rewind`；游标处在或晚于最后一项提交时刻时，`at=null`、读取实时状态。不从 `Call` / `AbortedCall` 的 `step` 或 `endedAt` 反推提交。详情页只接受控位置及拖动/点选回调，“回看到这一步”工具栏动作不能代替拖动；交付切片按 D8 的 WEB-03/WEB-07（D36-02 v2）。
+**提交时间轴（D35-01 v3、D39-01 v3）。** W-09 在 `experiment` 页带出 `commits: { seq: Seq; at: Instant }[]`，`ref` 为草稿时为 `[]`。服务端先取 `GET /runs/{run}/graph` 得到其 `at`，再读 `GET /runs/{run}/stream?after=0` 直到该序号，按序收集每个携带 `records` 的提交级事件 `run_started` 与 `step_committed` 的 `seq`、`at`；只有根值、没有调用的提交同样在列。W-10 model 依 D39-01 v3 生成 `commitMarkers(commits, derivedFrom, pixelsPerMinute)`：每次提交按 seq 各有一个标记，同一 minute 不合并；仅非派生运行的 seq 1 不单列，派生运行的 seq 1 照常单列。第一个 `μ₁ = minute₁`，之后 `μᵢ = max(minuteᵢ, μᵢ₋₁ + 4px / pixelsPerMinute)`，每项至少 4px。controller 把标记交给现有 `replayAt`：T 处在或晚于最后标记 `μ` 时 `at=null`，否则取 `μ ≤ max(T, μ₁)` 的最后一个标记 seq，以 `at=k` 读 `rewind`。回看画线用同一 scale 的同组标记，取 seq 不超过 `rewoundTo` 的最后一个 `μ`（没有时取第一个），标签仍显示提交本身的 minute 与序号。不从调用时刻反推提交，不改 `replay-at.ts` 及其测试、`packages/ui` 或 wire；“回看到这一步”只作辅助入口，不能替代拖动。D39 映射与画线在 WEB-07 接 `onCursor` 的同一 PR 落地。
 
 **泳道计划条（D35-02 v3）。** W-09 在 `experiments` 页增加 `definitions: NodeDefinition[]`，与 `flowEditor.palette` 同源，服务端取 `context.library.read(lab)` 的库默认分支定义。W-10 按以下规则投影，不将计划条列入 D9：
 
 - 仅给尚未开始执行的未绑定草稿画计划条：`ExperimentWire.run` 为 null、`draft` 非空，且不满足 `pendingLaunch.state = 'sent'` 且 `slots` 非空。满足后者的实验项已经开始第一正式步，虽须第一次正式提交才建立运行，但此时只画在途槽位的实际时段。
 - 已绑定运行（含 `Open`）不画计划条，只画已提交调用与在途槽位的实际区间；来源草稿只是索引，不按 `fn`、画布顺序或调用次序把草稿节点对应成调用或槽位的运行进度。
-- 草稿节点按 `fn` 关联 `definitions`，时长取 `DraftNode.estimateMinutes ?? NodeDefinition.estimateMinutes`；泳道由 `NodeDefinition.template` 经 `templates` 的设备（P3）确定。
+- 草稿节点按 `fn` 关联 `definitions`，时长取 `DraftNode.estimateMinutes ?? NodeDefinition.estimateMinutes`；泳道由 `NodeDefinition.defaultEnvironment` 对应模板经 `templates` 的设备（P3）确定；没有关联到模板的节点仍参与依赖累计，但不画计划条（D41-02 v2）。
 - 根节点锚点取 `now`；按 `DraftNode.from` 的拓扑顺序累计，节点起点为各上游结束时刻的最大值。区间只标 `planned`，不冒充实际执行。
 - 实际时段取目录图中调用的 `startedAt/endedAt` 与在途槽位的 `startedAt`（D12-14），按调用模板经 `templates` 的设备归泳道。冲突由投影在同一设备泳道的计划区间与实际区间之间算出，后端不存计划坐标。
+
+节点定义与 remote 模板统一按 `defaultEnvironment` 关联（D41-02 v2）：原文是字符串字面量时取其值作模板名，与 `TemplateInfo.name` 比较。null 表示节点未声明默认环境，不计调用覆盖时依 D5-10 落在 `central`，由模板派生的字段为空；非字面量只表示本版无法静态识别，由模板派生的字段为空，实际环境仍由 eval 按 D5-10 决定，不认定落在 `central` 或没有 remote 模板。同一规则用于流程编辑器面板的 `device`、`availability` 中的设备占用和 `computeCluster`，节点库的 `device/image/cluster/devicePath/mounts`，以及详情页草稿节点的 `device`。`NodeDefinition.template` 只作为 agent 定义名原样显示；已提交调用与在途槽位仍按 `Call.env`、`SlotState.env` 归泳道。`D12-coverage.md` 中旧的 `Def.template` 关联说法不作为实现依据，调查报告保持原样。
 
 **版本化节点定义（D35-03 v1）。** W-09 在 `experiment` 页增加 `versionedDefinitions: { version: Version; definition: NodeDefinition }[]`，覆盖该运行图中各 `Call.version` 与目录在途槽位 `SlotState.version` 出现的每个版本。服务端按版本静态导出定义：已提交版本取 store `GET /versions/{version}` 的 `NodeVersionRecord`（commit 与源码）；尚未提交的在途版本从持槽会话的 worktree 导出（占位，假定能工作）。`definitions` 保持库默认分支，仅供草稿节点使用；W-10 按实际 `version` 关联在途与已提交节点的定义（D12-14），不用默认分支代替。过渡期内，在途与已提交节点不关联定义、参数默认值留空。wire 与服务端归 W-09，消费及投影归 W-10。
 
@@ -247,7 +249,8 @@ export type NodeDefinition = {
   name: FnName; path: string; signature: string
   parameters: NodeParameter[]; returns: string; fields: NodeReturnField[]
   body: { kind: 'Program' | 'Agent' | 'Human'; source: string }
-  defaultEnvironment: string | null; template: TemplateName | null
+  defaultEnvironment: string | null // 节点构造 env 选项的源码原文，即默认模板；未声明为 null（D5-10、D41-01）
+  template: string | null // Agent 构造 template 选项的源码原文，即 omp agent 定义名；其他体为 null，不用于关联 remote templates（D5-17、D41-01）
   documentation: string; source: string
   artifacts: { field: string; type: string }[]
   group: NodeGroup; estimateMinutes: number                           // D12-15，lab-library 约定必填
