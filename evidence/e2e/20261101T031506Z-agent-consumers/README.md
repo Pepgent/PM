@@ -18,7 +18,7 @@ Code ownership: [soroi #221](https://github.com/Pepgent/soroi/issues/221). The l
 
 | Path | Evidence retained | Classification |
 | --- | --- | --- |
-| [`native-reader/`](native-reader/) | Immutable probe, final raw terminal log, native `rpc.jsonl`, dial/mux stderr | Genuine installed native omp reader; no product flow or provider/model call |
+| [`native-reader/`](native-reader/) | Immutable probe, final raw terminal log, native `rpc.jsonl`, dial/mux stderr | Genuine installed native omp reader; driver sends read commands only, no prompt/host execution or actual F07/F19/F22 model scenario |
 | [`own-io/`](own-io/) | Probe, original command record/stdout, both producers, frozen inputs, replay outputs, intentionally invalid inputs, wire/lifecycle records | Actual HTTP+WS IO through real recorder/consumer APIs against owned transport fixtures; **NON-LIVE ORACLE INPUT** |
 | [`consumer-oracle/`](consumer-oracle/) | Immutable script, final raw terminal log, browsable 16-case observations, complete input/output tree archive | **NON-LIVE ORACLE INPUT**, including all native/publication-shaped fixtures |
 | [`typed-ws-oracle/`](typed-ws-oracle/) | Fake-WS RPC records | **NON-LIVE ORACLE INPUT**, not installed native execution |
@@ -45,7 +45,7 @@ The script starts the actual mux, attaches a writer running installed `omp`, the
 omp --mode rpc --no-extensions --no-skills --no-rules --no-context-files --no-session --no-tools --no-title --max-time 30
 ```
 
-The probe generates an ephemeral bearer in memory and passes it through the existing mux launch path; no value is supplied in this archive's instructions. No provider/model request was made.
+The probe generates an ephemeral bearer in memory and passes it through the existing mux launch path; no value is supplied in this archive's instructions. The driver sends only the four read-command types below, with no prompt or host execution. It does not initiate a model turn or exercise an actual F07/F19/F22 model scenario.
 
 Observed results:
 
@@ -55,7 +55,7 @@ Observed results:
 - The intentionally impossible observation reaches the reader deadline, rather than inventing an observation.
 - Final record reports `readerClosed: true`, `writerAndDialClosed: true`, `modelInvoked: false`, `liveF07F19F22: "not-run"`. The script's finalizer terminates/waits for the mux and records stderr.
 
-This proves bounded read-only native-reader interoperability. It does not establish live F07/F19/F22, native model-generated tool behavior, or an installed build identity not present in the records.
+This proves bounded read-only native-reader interoperability. `modelInvoked: false` is the driver's marker that it did not initiate a model turn, consistent with the unchanged session and zero recorded user/assistant messages, tool calls, usage tokens and premium requests. It is not an independent provider-backend or network audit and does not prove the absence of every possible background provider request from the process. This evidence does not establish live F07/F19/F22, native model-generated tool behavior, or an installed build identity not present in the records.
 
 ### 2. Independent owned HTTP+WS and Evidence namespace integration
 
