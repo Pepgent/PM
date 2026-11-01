@@ -3,142 +3,218 @@
   "issue": "https://github.com/Pepgent/soroi/issues/197",
   "pullRequest": "https://github.com/Pepgent/soroi/pull/255",
   "repository": "Pepgent/soroi",
-  "sourceHead": "e6d5878835af469fe0bf2045b1c0a4f12d71d6a8",
+  "sourceHead": "49f0247e8a5312ac8a76f3e51d1c9d7ec5a9f79f",
+  "initialSourceHead": "e6d5878835af469fe0bf2045b1c0a4f12d71d6a8",
   "artifacts": [
     {
       "path": "runtime-evidence.json",
       "source": "/tmp/soroi-197-review/runtime-evidence.json",
-      "purpose": "Recorded SOR10 runtime evidence summary."
+      "phase": "initial",
+      "purpose": "Recorded initial SOR10 runtime evidence summary from the e6d5878 phase."
     },
     {
       "path": "before.json",
       "source": "/tmp/soroi-197-runtime/before.json",
-      "purpose": "Raw pre-run return-contract state."
+      "phase": "initial",
+      "purpose": "Raw initial pre-run return-contract state."
     },
     {
       "path": "after.json",
       "source": "/tmp/soroi-197-runtime/after.json",
-      "purpose": "Raw post-run return-contract state."
+      "phase": "initial",
+      "purpose": "Raw initial post-run return-contract state."
     },
     {
       "path": "final_reports.json",
       "source": "/tmp/soroi-197-runtime/final_reports.json",
-      "purpose": "Raw final report records."
+      "phase": "initial",
+      "purpose": "Raw initial final report records."
     },
     {
       "path": "final_relay.json",
       "source": "/tmp/soroi-197-runtime/final_relay.json",
-      "purpose": "Raw final relay record."
+      "phase": "initial",
+      "purpose": "Raw initial final relay record."
     },
     {
       "path": "revived.json",
       "source": "/tmp/soroi-197-runtime/revived.json",
-      "purpose": "Raw cold-revival record."
+      "phase": "initial",
+      "purpose": "Raw initial cold-revival record."
     },
     {
       "path": "plain_relay.json",
       "source": "/tmp/soroi-197-runtime/plain_relay.json",
-      "purpose": "Raw plaintext relay record."
-    },
-    {
-      "path": "events.jsonl",
-      "source": "/tmp/soroi-197-runtime/events.jsonl",
-      "purpose": "Raw event stream."
+      "phase": "initial",
+      "purpose": "Raw initial plaintext relay record."
     },
     {
       "path": "before.txt",
       "source": "/tmp/soroi-197-runtime/before.txt",
-      "purpose": "Raw pre-run terminal/state capture."
+      "phase": "initial",
+      "purpose": "Raw initial pre-run terminal/state capture."
     },
     {
       "path": "after.txt",
       "source": "/tmp/soroi-197-runtime/after.txt",
-      "purpose": "Raw post-run terminal/state capture."
+      "phase": "initial",
+      "purpose": "Raw initial post-run terminal/state capture."
     },
     {
       "path": "resume.txt",
       "source": "/tmp/soroi-197-runtime/resume.txt",
-      "purpose": "Raw cold-revival/resume terminal capture."
+      "phase": "initial",
+      "purpose": "Raw initial cold-revival/resume terminal capture."
     },
     {
       "path": "final.txt",
       "source": "/tmp/soroi-197-runtime/final.txt",
-      "purpose": "Raw final terminal capture."
+      "phase": "initial",
+      "purpose": "Raw initial final terminal capture."
     },
     {
       "path": "rebase.txt",
       "source": "/tmp/soroi-197-runtime/rebase.txt",
-      "purpose": "Raw rebase/source-setup terminal capture."
+      "phase": "initial",
+      "purpose": "Raw initial rebase/source-setup terminal capture."
     },
     {
       "path": "probe.ts",
       "source": "/tmp/soroi-197-runtime/probe.ts",
-      "purpose": "Raw return-contract probe source."
+      "phase": "initial",
+      "purpose": "Raw initial return-contract probe source."
     },
     {
       "path": "settings.yml",
       "source": "/tmp/soroi-197-runtime/settings.yml",
-      "purpose": "Raw probe settings."
+      "phase": "initial",
+      "purpose": "Raw initial probe settings."
     },
     {
       "path": "capture197.txt",
       "source": "/tmp/soroi-197-runtime/capture197.txt",
-      "purpose": "Raw capture note."
+      "phase": "initial",
+      "purpose": "Raw initial capture note."
     },
     {
       "path": "nodes/capture_probe.ts",
       "source": "/tmp/soroi-197-runtime/nodes/capture_probe.ts",
-      "purpose": "Raw capture fixture node probe."
+      "phase": "initial",
+      "purpose": "Raw initial capture fixture node probe."
     },
     {
       "path": "nodes/scalar_probe.ts",
       "source": "/tmp/soroi-197-runtime/nodes/scalar_probe.ts",
-      "purpose": "Raw scalar fixture node probe."
+      "phase": "initial",
+      "purpose": "Raw initial scalar fixture node probe."
     },
     {
       "path": "sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d.jsonl",
       "source": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d.jsonl",
-      "purpose": "Raw root Soroi session transcript."
+      "phase": "final",
+      "purpose": "Refreshed raw final49f complete-path root Soroi session transcript."
     },
     {
       "path": "sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Report197After.jsonl",
       "source": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Report197After.jsonl",
-      "purpose": "Raw Report197After actor transcript."
+      "phase": "final",
+      "purpose": "Refreshed raw final49f complete-path Report197After actor transcript."
     },
     {
       "path": "sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/NoReturn197After.jsonl",
       "source": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/NoReturn197After.jsonl",
-      "purpose": "Raw NoReturn197After actor transcript."
+      "phase": "initial",
+      "purpose": "Raw initial NoReturn197After actor transcript."
     },
     {
       "path": "sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/NoReturn197Final.jsonl",
       "source": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/NoReturn197Final.jsonl",
-      "purpose": "Raw NoReturn197Final actor transcript."
+      "phase": "final",
+      "purpose": "Refreshed raw final49f complete-path NoReturn197Final actor transcript."
     },
     {
       "path": "sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Empty197Final.jsonl",
       "source": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Empty197Final.jsonl",
-      "purpose": "Raw Empty197Final actor transcript."
+      "phase": "initial",
+      "purpose": "Raw initial Empty197Final actor transcript."
     },
     {
       "path": "sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/RelaySender197.jsonl",
       "source": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/RelaySender197.jsonl",
-      "purpose": "Raw RelaySender197 actor transcript."
+      "phase": "initial",
+      "purpose": "Raw initial RelaySender197 actor transcript."
     },
     {
       "path": "sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/RelaySender197Final.jsonl",
       "source": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/RelaySender197Final.jsonl",
-      "purpose": "Raw RelaySender197Final actor transcript."
+      "phase": "initial",
+      "purpose": "Raw initial RelaySender197Final actor transcript."
     },
     {
       "path": "sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/PlainRelaySender197.jsonl",
       "source": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/PlainRelaySender197.jsonl",
-      "purpose": "Raw PlainRelaySender197 actor transcript."
+      "phase": "initial",
+      "purpose": "Raw initial PlainRelaySender197 actor transcript."
     },
     {
       "path": "sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Report197After.soroi.json",
       "source": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Report197After.soroi.json",
-      "purpose": "Raw Report197After actor session metadata."
+      "phase": "initial",
+      "purpose": "Raw initial Report197After actor session metadata."
+    },
+    {
+      "path": "wire-runtime-evidence.json",
+      "source": "/tmp/soroi-197-review/wire-runtime-evidence.json",
+      "phase": "final",
+      "purpose": "Recorded final49f complete-path SOR10 runtime evidence summary."
+    },
+    {
+      "path": "wire_reports.json",
+      "source": "/tmp/soroi-197-runtime/wire_reports.json",
+      "phase": "final",
+      "purpose": "Raw final49f complete-path report records."
+    },
+    {
+      "path": "wire_relay.json",
+      "source": "/tmp/soroi-197-runtime/wire_relay.json",
+      "phase": "final",
+      "purpose": "Raw final49f complete-path relay record."
+    },
+    {
+      "path": "wire-final.txt",
+      "source": "/tmp/soroi-197-runtime/wire-final.txt",
+      "phase": "final",
+      "purpose": "Raw final49f complete-path terminal capture."
+    },
+    {
+      "path": "nodes/prototype_probe.ts",
+      "source": "/tmp/soroi-197-runtime/nodes/prototype_probe.ts",
+      "phase": "final",
+      "purpose": "Raw final49f complete-path prototype fixture node probe."
+    },
+    {
+      "path": "events.jsonl",
+      "source": "/tmp/soroi-197-runtime/events.jsonl",
+      "phase": "final",
+      "purpose": "Refreshed raw final49f complete-path event stream."
+    },
+    {
+      "path": "sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/NoReturn197Wire.jsonl",
+      "source": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/NoReturn197Wire.jsonl",
+      "phase": "final",
+      "purpose": "Raw final49f complete-path NoReturn197Wire actor transcript."
+    },
+    {
+      "path": "sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Empty197Wire.jsonl",
+      "source": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Empty197Wire.jsonl",
+      "phase": "final",
+      "purpose": "Raw final49f complete-path Empty197Wire actor transcript."
+    },
+    {
+      "path": "sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/PlainRelaySender197Wire.jsonl",
+      "source": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/PlainRelaySender197Wire.jsonl",
+      "phase": "final",
+      "purpose": "Raw final49f complete-path PlainRelaySender197Wire actor transcript."
     }
   ]
 }

@@ -1,0 +1,2 @@
+import { agent } from "/Users/mouriya/Ext/worktrees/issue-197-return-contract-ff0716f/packages/omp-soroi/src/eval/node.ts";
+export default agent<[], { __proto__: string; constructor: number }>(() => 'Call soroi_return exactly once with JSON arguments {"__proto__":"wire payload 197","constructor":41}, then end your turn. These two names are declared output fields. Do not rename or omit them.', { template: "return-probe" });

@@ -1,0 +1,16 @@
+Run the final wire-schema acceptance path in order. No source-file inspection or editing.
+1. Write to agent://Report197After: Call soroi_return once with result WIRE_REVIVED_197, then end. Wait for its actual task completion (at most two waits).
+2. Call soroi_task once with two return-probe tasks: NoReturn197Wire, task End this turn as required by the negative acceptance fixture; Empty197Wire, task Call soroi_return once with result the empty string "", then end. Wait for both (at most two waits), then runtime_snapshot label wire_reports. The negative child failure is expected; do not repair or retry it.
+3. Call soroi_task once with one return-probe task: PlainRelaySender197Wire, task Send with write to agent://NoReturn197Final: Reply with plain text PLAIN_ONLY_RECEIPT_197 and do not call tools. Wait for the actual IRC reply, then copy the exact body received into soroi_return result and end. Parent wait for that task (at most two waits), then runtime_snapshot label wire_relay.
+4. Call soroi_eval exactly once, mode dry_run, exact code:
+const { score: wire_score_197, approved: wire_approved_197, note: wire_note_197, artifact: wire_file_197 } = capture_probe();
+const wire_single_197 = scalar_probe();
+const { __proto__: wire_proto_197, constructor: wire_constructor_197 } = prototype_probe();
+stop(wire_score_197);
+stop(wire_approved_197);
+stop(wire_note_197);
+stop(wire_file_197);
+stop(wire_single_197);
+stop(wire_proto_197);
+stop(wire_constructor_197);
+5. Print the seven actual output values/previews and finish WIRE_FINAL_CAPTURED_197. No formal eval or other tasks.

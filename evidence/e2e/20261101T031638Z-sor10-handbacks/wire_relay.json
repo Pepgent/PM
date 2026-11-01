@@ -1,0 +1,139 @@
+{
+  "label": "wire_relay",
+  "session": "01a19510-d927-70aa-8e72-98289376696d",
+  "rows": [
+    {
+      "id": "PlainRelaySender197",
+      "status": "parked",
+      "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/PlainRelaySender197.jsonl",
+      "job": null,
+      "artifact": {
+        "exists": true,
+        "text": "PLAIN_ONLY_RECEIPT_197"
+      }
+    },
+    {
+      "id": "RelaySender197Final",
+      "status": "parked",
+      "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/RelaySender197Final.jsonl",
+      "job": null,
+      "artifact": {
+        "exists": true,
+        "text": "PLAIN_RECEIPT_197 acknowledged. REVIVED_FINAL_197 already delivered to Main via soroi_return."
+      }
+    },
+    {
+      "id": "RelaySender197",
+      "status": "parked",
+      "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/RelaySender197.jsonl",
+      "job": null,
+      "artifact": {
+        "exists": true,
+        "text": "PLAIN_RECEIPT_197 acknowledged. REPORT_ONLY_197_AFTER already delivered to Main via soroi_return."
+      }
+    },
+    {
+      "id": "Empty197Final",
+      "status": "parked",
+      "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Empty197Final.jsonl",
+      "job": null,
+      "artifact": {
+        "exists": true,
+        "text": ""
+      }
+    },
+    {
+      "id": "Report197After",
+      "status": "parked",
+      "lifecycle": {
+        "responseAt": 1793503724935,
+        "acceptedAt": 1793503724935,
+        "terminalAt": 1793503725611
+      },
+      "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Report197After.jsonl",
+      "job": {
+        "status": "completed",
+        "resultText": "WIRE_REVIVED_197\n\nAgent `Report197After` stays reachable: message it with write agent://Report197After."
+      },
+      "artifact": {
+        "exists": true,
+        "text": "WIRE_REVIVED_197"
+      }
+    },
+    {
+      "id": "NoReturn197Final",
+      "status": "parked",
+      "lifecycle": {
+        "terminalAt": 1793503740166
+      },
+      "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/NoReturn197Final.jsonl",
+      "job": null,
+      "artifact": {
+        "exists": false,
+        "text": null
+      }
+    },
+    {
+      "id": "NoReturn197After",
+      "status": "parked",
+      "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/NoReturn197After.jsonl",
+      "job": null,
+      "artifact": {
+        "exists": false,
+        "text": null
+      }
+    },
+    {
+      "id": "NoReturn197Wire",
+      "status": "parked",
+      "lifecycle": {
+        "terminalAt": 1793503729544
+      },
+      "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/NoReturn197Wire.jsonl",
+      "job": {
+        "status": "failed",
+        "errorText": "Agent NoReturn197Wire ended without calling soroi_return."
+      },
+      "artifact": {
+        "exists": false,
+        "text": null
+      }
+    },
+    {
+      "id": "Empty197Wire",
+      "status": "parked",
+      "lifecycle": {
+        "responseAt": 1793503729580,
+        "acceptedAt": 1793503729580,
+        "terminalAt": 1793503730980
+      },
+      "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Empty197Wire.jsonl",
+      "job": {
+        "status": "completed",
+        "resultText": "\n\nAgent `Empty197Wire` stays reachable: message it with write agent://Empty197Wire."
+      },
+      "artifact": {
+        "exists": true,
+        "text": ""
+      }
+    },
+    {
+      "id": "PlainRelaySender197Wire",
+      "status": "idle",
+      "lifecycle": {
+        "responseAt": 1793503743709,
+        "acceptedAt": 1793503743709,
+        "terminalAt": 1793503744792
+      },
+      "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/PlainRelaySender197Wire.jsonl",
+      "job": {
+        "status": "completed",
+        "resultText": "PLAIN_ONLY_RECEIPT_197\n\nAgent `PlainRelaySender197Wire` stays reachable: message it with write agent://PlainRelaySender197Wire."
+      },
+      "artifact": {
+        "exists": true,
+        "text": "PLAIN_ONLY_RECEIPT_197"
+      }
+    }
+  ]
+}

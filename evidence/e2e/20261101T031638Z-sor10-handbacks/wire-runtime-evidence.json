@@ -1,0 +1,367 @@
+{
+  "sourceHead": "49f0247",
+  "reports": {
+    "label": "wire_reports",
+    "session": "01a19510-d927-70aa-8e72-98289376696d",
+    "rows": [
+      {
+        "id": "PlainRelaySender197",
+        "status": "parked",
+        "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/PlainRelaySender197.jsonl",
+        "job": null,
+        "artifact": {
+          "exists": true,
+          "text": "PLAIN_ONLY_RECEIPT_197"
+        }
+      },
+      {
+        "id": "RelaySender197Final",
+        "status": "parked",
+        "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/RelaySender197Final.jsonl",
+        "job": null,
+        "artifact": {
+          "exists": true,
+          "text": "PLAIN_RECEIPT_197 acknowledged. REVIVED_FINAL_197 already delivered to Main via soroi_return."
+        }
+      },
+      {
+        "id": "RelaySender197",
+        "status": "parked",
+        "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/RelaySender197.jsonl",
+        "job": null,
+        "artifact": {
+          "exists": true,
+          "text": "PLAIN_RECEIPT_197 acknowledged. REPORT_ONLY_197_AFTER already delivered to Main via soroi_return."
+        }
+      },
+      {
+        "id": "Empty197Final",
+        "status": "parked",
+        "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Empty197Final.jsonl",
+        "job": null,
+        "artifact": {
+          "exists": true,
+          "text": ""
+        }
+      },
+      {
+        "id": "Report197After",
+        "status": "parked",
+        "lifecycle": {
+          "responseAt": 1793503724935,
+          "acceptedAt": 1793503724935,
+          "terminalAt": 1793503725611
+        },
+        "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Report197After.jsonl",
+        "job": {
+          "status": "completed",
+          "resultText": "WIRE_REVIVED_197\n\nAgent `Report197After` stays reachable: message it with write agent://Report197After."
+        },
+        "artifact": {
+          "exists": true,
+          "text": "WIRE_REVIVED_197"
+        }
+      },
+      {
+        "id": "NoReturn197Final",
+        "status": "parked",
+        "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/NoReturn197Final.jsonl",
+        "job": null,
+        "artifact": {
+          "exists": false,
+          "text": null
+        }
+      },
+      {
+        "id": "NoReturn197After",
+        "status": "parked",
+        "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/NoReturn197After.jsonl",
+        "job": null,
+        "artifact": {
+          "exists": false,
+          "text": null
+        }
+      },
+      {
+        "id": "NoReturn197Wire",
+        "status": "parked",
+        "lifecycle": {
+          "terminalAt": 1793503729544
+        },
+        "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/NoReturn197Wire.jsonl",
+        "job": {
+          "status": "failed",
+          "errorText": "Agent NoReturn197Wire ended without calling soroi_return."
+        },
+        "artifact": {
+          "exists": false,
+          "text": null
+        }
+      },
+      {
+        "id": "Empty197Wire",
+        "status": "idle",
+        "lifecycle": {
+          "responseAt": 1793503729580,
+          "acceptedAt": 1793503729580,
+          "terminalAt": 1793503730980
+        },
+        "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Empty197Wire.jsonl",
+        "job": {
+          "status": "completed",
+          "resultText": "\n\nAgent `Empty197Wire` stays reachable: message it with write agent://Empty197Wire."
+        },
+        "artifact": {
+          "exists": true,
+          "text": ""
+        }
+      }
+    ]
+  },
+  "relay": {
+    "label": "wire_relay",
+    "session": "01a19510-d927-70aa-8e72-98289376696d",
+    "rows": [
+      {
+        "id": "PlainRelaySender197",
+        "status": "parked",
+        "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/PlainRelaySender197.jsonl",
+        "job": null,
+        "artifact": {
+          "exists": true,
+          "text": "PLAIN_ONLY_RECEIPT_197"
+        }
+      },
+      {
+        "id": "RelaySender197Final",
+        "status": "parked",
+        "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/RelaySender197Final.jsonl",
+        "job": null,
+        "artifact": {
+          "exists": true,
+          "text": "PLAIN_RECEIPT_197 acknowledged. REVIVED_FINAL_197 already delivered to Main via soroi_return."
+        }
+      },
+      {
+        "id": "RelaySender197",
+        "status": "parked",
+        "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/RelaySender197.jsonl",
+        "job": null,
+        "artifact": {
+          "exists": true,
+          "text": "PLAIN_RECEIPT_197 acknowledged. REPORT_ONLY_197_AFTER already delivered to Main via soroi_return."
+        }
+      },
+      {
+        "id": "Empty197Final",
+        "status": "parked",
+        "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Empty197Final.jsonl",
+        "job": null,
+        "artifact": {
+          "exists": true,
+          "text": ""
+        }
+      },
+      {
+        "id": "Report197After",
+        "status": "parked",
+        "lifecycle": {
+          "responseAt": 1793503724935,
+          "acceptedAt": 1793503724935,
+          "terminalAt": 1793503725611
+        },
+        "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Report197After.jsonl",
+        "job": {
+          "status": "completed",
+          "resultText": "WIRE_REVIVED_197\n\nAgent `Report197After` stays reachable: message it with write agent://Report197After."
+        },
+        "artifact": {
+          "exists": true,
+          "text": "WIRE_REVIVED_197"
+        }
+      },
+      {
+        "id": "NoReturn197Final",
+        "status": "parked",
+        "lifecycle": {
+          "terminalAt": 1793503740166
+        },
+        "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/NoReturn197Final.jsonl",
+        "job": null,
+        "artifact": {
+          "exists": false,
+          "text": null
+        }
+      },
+      {
+        "id": "NoReturn197After",
+        "status": "parked",
+        "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/NoReturn197After.jsonl",
+        "job": null,
+        "artifact": {
+          "exists": false,
+          "text": null
+        }
+      },
+      {
+        "id": "NoReturn197Wire",
+        "status": "parked",
+        "lifecycle": {
+          "terminalAt": 1793503729544
+        },
+        "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/NoReturn197Wire.jsonl",
+        "job": {
+          "status": "failed",
+          "errorText": "Agent NoReturn197Wire ended without calling soroi_return."
+        },
+        "artifact": {
+          "exists": false,
+          "text": null
+        }
+      },
+      {
+        "id": "Empty197Wire",
+        "status": "parked",
+        "lifecycle": {
+          "responseAt": 1793503729580,
+          "acceptedAt": 1793503729580,
+          "terminalAt": 1793503730980
+        },
+        "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Empty197Wire.jsonl",
+        "job": {
+          "status": "completed",
+          "resultText": "\n\nAgent `Empty197Wire` stays reachable: message it with write agent://Empty197Wire."
+        },
+        "artifact": {
+          "exists": true,
+          "text": ""
+        }
+      },
+      {
+        "id": "PlainRelaySender197Wire",
+        "status": "idle",
+        "lifecycle": {
+          "responseAt": 1793503743709,
+          "acceptedAt": 1793503743709,
+          "terminalAt": 1793503744792
+        },
+        "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/PlainRelaySender197Wire.jsonl",
+        "job": {
+          "status": "completed",
+          "resultText": "PLAIN_ONLY_RECEIPT_197\n\nAgent `PlainRelaySender197Wire` stays reachable: message it with write agent://PlainRelaySender197Wire."
+        },
+        "artifact": {
+          "exists": true,
+          "text": "PLAIN_ONLY_RECEIPT_197"
+        }
+      }
+    ]
+  },
+  "evalResult": {
+    "role": "toolResult",
+    "toolCallId": "call_df6ac29455cc405dbe5bda08",
+    "toolName": "soroi_eval",
+    "content": [
+      {
+        "type": "text",
+        "text": "dry run\uff0c\u6ca1\u6709\u5199 store\uff1a\nwire_score_197 = 73 \u2190 capture_probe() [\u8fd0\u884c] @central\nwire_approved_197 = true \u2190 capture_probe() [\u8fd0\u884c] @central\nwire_note_197 = \"reviewed\" \u2190 capture_probe() [\u8fd0\u884c] @central\nwire_file_197 = file 746b6d9e504d (/tmp/soroi-197-runtime/capture197.txt) \u2190 capture_probe() [\u8fd0\u884c] @central\nwire_single_197 = 19.25 \u2190 scalar_probe() [\u8fd0\u884c] @central\nwire_proto_197 = \"wire payload 197\" \u2190 prototype_probe() [\u8fd0\u884c] @central\nwire_constructor_197 = 41 \u2190 prototype_probe() [\u8fd0\u884c] @central\nstop(wire_score_197)\nstop(wire_approved_197)\nstop(wire_note_197)\nstop(wire_file_197)\nstop(wire_single_197)\nstop(wire_proto_197)\nstop(wire_constructor_197)"
+      }
+    ],
+    "details": {
+      "mode": "dry_run",
+      "calls": [
+        {
+          "call": "const { score: wire_score_197, approved: wire_approved_197, note: wire_note_197, artifact: wire_file_197 } = capture_probe();",
+          "outcome": "ran",
+          "env": "central",
+          "outputs": {
+            "wire_score_197": "73",
+            "wire_approved_197": "true",
+            "wire_note_197": "\"reviewed\"",
+            "wire_file_197": "file 746b6d9e504d (/tmp/soroi-197-runtime/capture197.txt)"
+          }
+        },
+        {
+          "call": "const wire_single_197 = scalar_probe();",
+          "outcome": "ran",
+          "env": "central",
+          "outputs": {
+            "wire_single_197": "19.25"
+          }
+        },
+        {
+          "call": "const { __proto__: wire_proto_197, constructor: wire_constructor_197 } = prototype_probe();",
+          "outcome": "ran",
+          "env": "central",
+          "outputs": {
+            "wire_proto_197": "\"wire payload 197\"",
+            "wire_constructor_197": "41"
+          }
+        }
+      ]
+    },
+    "isError": false,
+    "timestamp": 1793503755044
+  },
+  "senderIrc": [
+    {
+      "type": "custom_message",
+      "customType": "irc:incoming",
+      "content": "<irc>\nIncoming IRC message from agent `NoReturn197Final` (reply to 15bc972289013dd5):\n\nPLAIN_ONLY_RECEIPT_197\n\nSent while waiting/working. Active interruptible wait stopped early for immediate reading.\n\nIf response expected, reply via `write` (`path: \"agent://NoReturn197Final\"`, `content: \"\u2026\"`); may finish current step first. No one replies on your behalf. An acknowledgement or progress note before the real answer goes to `agent://NoReturn197Final?progress`, so `NoReturn197Final` keeps waiting for the answer.\n</irc>",
+      "display": true,
+      "details": {
+        "id": "01a19527-4107-71f2-a067-aceb926de159",
+        "from": "NoReturn197Final",
+        "message": "PLAIN_ONLY_RECEIPT_197",
+        "replyTo": "15bc972289013dd5",
+        "wakeRelay": true
+      },
+      "attribution": "agent",
+      "id": "f4bb8060",
+      "parentId": "836ec722",
+      "timestamp": "2026-11-01T03:29:00.167Z",
+      "runtime": {
+        "version": "18.14.2"
+      }
+    }
+  ],
+  "receiverIrc": [
+    {
+      "type": "custom_message",
+      "customType": "irc:incoming",
+      "content": "<irc>\nIncoming IRC message from agent `PlainRelaySender197`:\n\nReply with plain text PLAIN_ONLY_RECEIPT_197 and do not call any tools.\nIf response expected, reply via `write` (`path: \"agent://PlainRelaySender197\"`, `content: \"\u2026\"`), when available; otherwise what you `yield` or say last this turn is delivered to `PlainRelaySender197` when you stop. An acknowledgement or progress note before the real answer goes to `agent://PlainRelaySender197?progress`, so `PlainRelaySender197` keeps waiting for the answer.\n</irc>",
+      "display": true,
+      "details": {
+        "id": "15bc9379402464f4",
+        "from": "PlainRelaySender197",
+        "message": "Reply with plain text PLAIN_ONLY_RECEIPT_197 and do not call any tools."
+      },
+      "attribution": "agent",
+      "id": "5325a57b",
+      "parentId": "32a58439",
+      "timestamp": "2026-11-01T03:12:58.624Z",
+      "runtime": {
+        "version": "18.14.2"
+      }
+    },
+    {
+      "type": "custom_message",
+      "customType": "irc:incoming",
+      "content": "<irc>\nIncoming IRC message from agent `PlainRelaySender197Wire`:\n\nReply with plain text PLAIN_ONLY_RECEIPT_197 and do not call tools.\nIf response expected, reply via `write` (`path: \"agent://PlainRelaySender197Wire\"`, `content: \"\u2026\"`), when available; otherwise what you `yield` or say last this turn is delivered to `PlainRelaySender197Wire` when you stop. An acknowledgement or progress note before the real answer goes to `agent://PlainRelaySender197Wire?progress`, so `PlainRelaySender197Wire` keeps waiting for the answer.\n</irc>",
+      "display": true,
+      "details": {
+        "id": "15bc972289013dd5",
+        "from": "PlainRelaySender197Wire",
+        "message": "Reply with plain text PLAIN_ONLY_RECEIPT_197 and do not call tools."
+      },
+      "attribution": "agent",
+      "id": "d46f9246",
+      "parentId": "2ae1d30b",
+      "timestamp": "2026-11-01T03:28:58.404Z",
+      "runtime": {
+        "version": "18.14.2"
+      }
+    }
+  ],
+  "captureFileBytes": "captured bytes 197"
+}
