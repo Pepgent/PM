@@ -89,3 +89,13 @@
 - 两道闸门都确认不越界：按 ⓐ 免票放行。协调席修订 #329 正文两处，并在 #329 写结论评论（采用哪个方向、谁在哪里改）。由 AreaMgrSoroi 送达 W-07。
 - 任一闸门认定越界：按 P0 用 `council propose --seat Coordination --as DeskSoroi329Blocked` 立案，notify 含 `Main`、`AreaMgrSoroi`。
 - 闸门结论写入 `evidence/gates/soroi329-entry-env-gate-a.md`（Argon）和 `evidence/gates/soroi329-entry-env-gate-b.md`（ArgonGovernance）。
+
+## 八、处置
+
+- **闸门 A（`Argon-2`）：** 不越界，K1，放行处置 ⓐ（方向 c）；(b) 与 D13-02 冲突，(a) 是不必要的跨席位返工。见 `soroi329-entry-env-gate-a.md`（PM `55ea029`）。
+- **闸门 B（`ArgonGovernance-2`）：** 不越界。B-1 改动只在 W-07 的 `compose/**`，不需要投票；B-2 在闸门 A 确认不改验收语义的前提下，协调席可以修订 #329 正文两处；B-3 由 AreaMgrSoroi 按 C4-2 送达。见 `soroi329-entry-env-gate-b.md`（PM `8f8a838`）。
+- **结论：** 按 ⓐ 免票放行，不新开 issue，W-08 不进场。
+- **已执行：**
+  - #329 正文已修订两处：预期结果 2 的后半句、验收 2。正文其余部分不变。
+  - [#329 评论 6563373431](https://github.com/Pepgent/soroi/issues/329#issuecomment-6563373431) 写明采用方向 (c)，以及由谁在哪里改：W-07 在 `issue-329-compose-readme` 上把 6 条命令改为按容器名的 `docker exec`/`docker stop`，`a641d2a` 不需要返工。
+- **送达：** 由 AreaMgrSoroi 按 C4-2 送达 W-07（在席）。
