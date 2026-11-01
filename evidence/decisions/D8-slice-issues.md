@@ -1,122 +1,128 @@
 # D8 切片 → 实现 issue
 
-来源：[D8 决策](https://github.com/Pepgent/PM/issues/8)；[D8 §4.2 全部 108 个切片](https://github.com/Pepgent/PM/blob/main/evidence/decisions/D8-mvp-scope.md#L219-L391)；[§4.1 波次](https://github.com/Pepgent/PM/blob/main/evidence/decisions/D8-mvp-scope.md#L182-L202)。
+来源：[D8 决策](https://github.com/Pepgent/PM/issues/8)；[D8 §4.2 全部 108 个切片](https://github.com/Pepgent/PM/blob/main/evidence/decisions/D8-mvp-scope.md#L202-L375)；[§4.1 统一验收阶段](https://github.com/Pepgent/PM/blob/main/evidence/decisions/D8-mvp-scope.md#L182-L200)。
 
-本次创建 **88** 个 issue，复用已有 issue 覆盖 **20** 个切片，共 **108** 个切片。复用项不重复开 issue、不改已有正文或评论；新 issue 保留原行 what、验收、档位与波次，依赖均为实际 issue 链接。
+本次创建 **88** 个 issue，复用已有 issue 覆盖 **20** 个切片，共 **108** 个切片。复用项不重复开 issue、不改已有正文或评论；映射保留原行 what、验收与档位，依赖均为实际 issue 链接。开发期不再按旧的开发期分组安排或验收切片。
 
-归属按代码所在仓库：ENV 无代码仓库、D9 证据工作在 PM；E2E 第一段/PTY 驱动在 soroi；E2E-20/21 在 Pepgent。Project [Pepgent PM #1](https://github.com/orgs/Pepgent/projects/1) 中新 issue 为 Todo，复用项保留执行事实对应的 In progress / Done。
+归属按代码所在仓库：ENV 无代码仓库、D9 证据工作在 PM；E2E 第一段/PTY 驱动在 soroi；E2E-20/21 在 Pepgent。Project [Pepgent PM #1](https://github.com/orgs/Pepgent/projects/1) 的状态列只记录已有映射快照：新 issue 为 Todo，复用项保留已记录的 In progress / Done；不从文档推断或新增 Project 状态，状态也不构成开工或统一验收前置。
 
-| Slice | Repo | Issue | 本次操作 | Tier | Wave | Project Status |
-| --- | --- | --- | --- | --- | --- | --- |
-| ENV-01 | `Pepgent/PM` | [Pepgent/PM#9](https://github.com/Pepgent/PM/issues/9) | 新建 | low | VS1 | Todo |
-| ENV-02 | `Pepgent/PM` | [Pepgent/PM#10](https://github.com/Pepgent/PM/issues/10) | 新建 | mid | VS1 | Todo |
-| ENV-03 | `Pepgent/PM` | [Pepgent/PM#11](https://github.com/Pepgent/PM/issues/11) | 新建 | low | W4 | Todo |
-| ENV-04 | `Pepgent/PM` | [Pepgent/PM#12](https://github.com/Pepgent/PM/issues/12) | 新建 | low | W5 | Todo |
-| IMG-01 | `Pepgent/images` | [Pepgent/images#1](https://github.com/Pepgent/images/issues/1) | 复用已有 | low | VS1 | Done |
-| IMG-02 | `Pepgent/images` | [Pepgent/images#4](https://github.com/Pepgent/images/issues/4) | 新建 | low | W4 | Todo |
-| IMG-03 | `Pepgent/images` | [Pepgent/images#1](https://github.com/Pepgent/images/issues/1) | 复用已有 | low | W5 | Done |
-| IMG-04 | `Pepgent/images` | [Pepgent/images#3](https://github.com/Pepgent/images/issues/3) | 新建 | low | VS2 | Todo |
-| IMG-05 | `Pepgent/images` | [Pepgent/images#1](https://github.com/Pepgent/images/issues/1) | 复用已有 | low | VS1 | Done |
-| MUX-01 | `Pepgent/omp-rpc-mux` | [Pepgent/omp-rpc-mux#1](https://github.com/Pepgent/omp-rpc-mux/issues/1) | 复用已有 | mid | VS1 | Done |
-| MUX-02 | `Pepgent/omp-rpc-mux` | [Pepgent/omp-rpc-mux#1](https://github.com/Pepgent/omp-rpc-mux/issues/1) | 复用已有 | mid | VS1 | Done |
-| MUX-03 | `Pepgent/omp-rpc-mux` | [Pepgent/omp-rpc-mux#3](https://github.com/Pepgent/omp-rpc-mux/issues/3) | 复用已有 | low | VS2 | In progress |
-| MUX-04 | `Pepgent/omp-rpc-mux` | [Pepgent/omp-rpc-mux#5](https://github.com/Pepgent/omp-rpc-mux/issues/5) | 新建 | low | VS2 | Todo |
-| MUX-05 | `Pepgent/omp-rpc-mux` | [Pepgent/omp-rpc-mux#4](https://github.com/Pepgent/omp-rpc-mux/issues/4) | 新建 | low | W2 | Todo |
-| MUX-06 | `Pepgent/omp-rpc-mux` | [Pepgent/omp-rpc-mux#6](https://github.com/Pepgent/omp-rpc-mux/issues/6) | 新建 | mid | W3 | Todo |
-| MUX-07 | `Pepgent/omp-rpc-mux` | [Pepgent/omp-rpc-mux#7](https://github.com/Pepgent/omp-rpc-mux/issues/7) | 新建 | low | W4 | Todo |
-| MUX-08 | `Pepgent/omp-rpc-mux` | [Pepgent/omp-rpc-mux#1](https://github.com/Pepgent/omp-rpc-mux/issues/1) | 复用已有 | low | VS1 | Done |
-| STO-01 | `Pepgent/soroi` | [Pepgent/soroi#180](https://github.com/Pepgent/soroi/issues/180) | 复用已有 | low | VS1 | Done |
-| STO-02 | `Pepgent/soroi` | [Pepgent/soroi#180](https://github.com/Pepgent/soroi/issues/180) | 复用已有 | mid | VS1 | Done |
-| STO-03 | `Pepgent/soroi` | [Pepgent/soroi#180](https://github.com/Pepgent/soroi/issues/180) | 复用已有 | mid | VS1 | Done |
-| STO-04 | `Pepgent/soroi` | [Pepgent/soroi#188](https://github.com/Pepgent/soroi/issues/188) | 新建 | mid | W1 | Todo |
-| STO-05 | `Pepgent/soroi` | [Pepgent/soroi#190](https://github.com/Pepgent/soroi/issues/190) | 新建 | low | VS2 | Todo |
-| STO-06 | `Pepgent/soroi` | [Pepgent/soroi#189](https://github.com/Pepgent/soroi/issues/189) | 新建 | low | W1 | Todo |
-| STO-07 | `Pepgent/soroi` | [Pepgent/soroi#194](https://github.com/Pepgent/soroi/issues/194) | 新建 | mid | W1 | Todo |
-| STO-08 | `Pepgent/soroi` | [Pepgent/soroi#191](https://github.com/Pepgent/soroi/issues/191) | 新建 | low | W1 | Todo |
-| STO-09 | `Pepgent/soroi` | [Pepgent/soroi#192](https://github.com/Pepgent/soroi/issues/192) | 新建 | mid | W3 | Todo |
-| STO-10 | `Pepgent/soroi` | [Pepgent/soroi#200](https://github.com/Pepgent/soroi/issues/200) | 新建 | low | W4 | Todo |
-| STO-11 | `Pepgent/soroi` | [Pepgent/soroi#202](https://github.com/Pepgent/soroi/issues/202) | 新建 | low | W1 | Todo |
-| STO-12 | `Pepgent/soroi` | [Pepgent/soroi#203](https://github.com/Pepgent/soroi/issues/203) | 新建 | low | VS1 | Todo |
-| SOR-01 | `Pepgent/soroi` | [Pepgent/soroi#178](https://github.com/Pepgent/soroi/issues/178) | 复用已有 | low | VS1 | Done |
-| SOR-02 | `Pepgent/soroi` | [Pepgent/soroi#193](https://github.com/Pepgent/soroi/issues/193) | 新建 | mid | VS1 | Todo |
-| SOR-03 | `Pepgent/soroi` | [Pepgent/soroi#201](https://github.com/Pepgent/soroi/issues/201) | 新建 | mid | VS1 | Todo |
-| SOR-04 | `Pepgent/soroi` | [Pepgent/soroi#185](https://github.com/Pepgent/soroi/issues/185) | 复用已有 | low | W1 | Todo |
-| SOR-05 | `Pepgent/soroi` | [Pepgent/soroi#195](https://github.com/Pepgent/soroi/issues/195) | 新建 | mid | W1 | Todo |
-| SOR-06 | `Pepgent/soroi` | [Pepgent/soroi#212](https://github.com/Pepgent/soroi/issues/212) | 新建 | mid | W1 | Todo |
-| SOR-07 | `Pepgent/soroi` | [Pepgent/soroi#215](https://github.com/Pepgent/soroi/issues/215) | 新建 | low | W4 | Todo |
-| SOR-08 | `Pepgent/soroi` | [Pepgent/soroi#204](https://github.com/Pepgent/soroi/issues/204) | 新建 | low | W1 | Todo |
-| SOR-09 | `Pepgent/soroi` | [Pepgent/soroi#196](https://github.com/Pepgent/soroi/issues/196) | 新建 | mid | W2 | Todo |
-| SOR-10 | `Pepgent/soroi` | [Pepgent/soroi#197](https://github.com/Pepgent/soroi/issues/197) | 新建 | low | W2 | Todo |
-| SOR-11 | `Pepgent/soroi` | [Pepgent/soroi#205](https://github.com/Pepgent/soroi/issues/205) | 新建 | mid | W2 | Todo |
-| SOR-12 | `Pepgent/soroi` | [Pepgent/soroi#211](https://github.com/Pepgent/soroi/issues/211) | 新建 | mid | W2 | Todo |
-| SOR-13 | `Pepgent/soroi` | [Pepgent/soroi#209](https://github.com/Pepgent/soroi/issues/209) | 新建 | mid | W3 | Todo |
-| SOR-14 | `Pepgent/soroi` | [Pepgent/soroi#216](https://github.com/Pepgent/soroi/issues/216) | 新建 | low | W3 | Todo |
-| SOR-15 | `Pepgent/soroi` | [Pepgent/soroi#217](https://github.com/Pepgent/soroi/issues/217) | 新建 | mid | W3 | Todo |
-| SOR-16 | `Pepgent/soroi` | [Pepgent/soroi#207](https://github.com/Pepgent/soroi/issues/207) | 新建 | low | W2 | Todo |
-| SOR-17a | `Pepgent/soroi` | [Pepgent/soroi#214](https://github.com/Pepgent/soroi/issues/214) | 新建 | mid | W4 | Todo |
-| SOR-17b | `Pepgent/soroi` | [Pepgent/soroi#223](https://github.com/Pepgent/soroi/issues/223) | 新建 | low | W4 | Todo |
-| SOR-18 | `Pepgent/soroi` | [Pepgent/soroi#222](https://github.com/Pepgent/soroi/issues/222) | 新建 | mid | W4 | Todo |
-| SOR-19 | `Pepgent/soroi` | [Pepgent/soroi#229](https://github.com/Pepgent/soroi/issues/229) | 新建 | low | W4 | Todo |
-| SOR-20 | `Pepgent/soroi` | [Pepgent/soroi#228](https://github.com/Pepgent/soroi/issues/228) | 新建 | low | W4 | Todo |
-| CUS-01 | `Pepgent/soroi` | [Pepgent/soroi#183](https://github.com/Pepgent/soroi/issues/183) | 复用已有 | high | W1 | Todo |
-| CUS-02 | `Pepgent/soroi` | [Pepgent/soroi#198](https://github.com/Pepgent/soroi/issues/198) | 新建 | high | W1 | Todo |
-| CUS-03 | `Pepgent/soroi` | [Pepgent/soroi#206](https://github.com/Pepgent/soroi/issues/206) | 新建 | high | W1 | Todo |
-| CUS-04 | `Pepgent/soroi` | [Pepgent/soroi#186](https://github.com/Pepgent/soroi/issues/186) | 复用已有 | low | W1 | Todo |
-| DIST-01 | `Pepgent/soroi` | [Pepgent/soroi#199](https://github.com/Pepgent/soroi/issues/199) | 新建 | mid | VS1 | Todo |
-| DIST-02 | `Pepgent/soroi` | [Pepgent/soroi#224](https://github.com/Pepgent/soroi/issues/224) | 新建 | low | W1 | Todo |
-| DIST-03 | `Pepgent/soroi` | [Pepgent/soroi#210](https://github.com/Pepgent/soroi/issues/210) | 新建 | low | VS1 | Todo |
-| DIST-04 | `Pepgent/soroi` | [Pepgent/soroi#225](https://github.com/Pepgent/soroi/issues/225) | 新建 | low | W4 | Todo |
-| REM-01 | `Pepgent/remote` | [Pepgent/remote#1](https://github.com/Pepgent/remote/issues/1) | 复用已有 | mid | W5 | Todo |
-| REM-02 | `Pepgent/remote` | [Pepgent/remote#1](https://github.com/Pepgent/remote/issues/1) | 复用已有 | low | W5 | Todo |
-| REM-03 | `Pepgent/remote` | [Pepgent/remote#1](https://github.com/Pepgent/remote/issues/1) | 复用已有 | low | W5 | Todo |
-| REM-04 | `Pepgent/remote` | [Pepgent/remote#6](https://github.com/Pepgent/remote/issues/6) | 新建 | low | W4 | Todo |
-| REM-05 | `Pepgent/remote` | [Pepgent/remote#3](https://github.com/Pepgent/remote/issues/3) | 新建 | low | W4 | Todo |
-| REM-07 | `Pepgent/remote` | [Pepgent/remote#4](https://github.com/Pepgent/remote/issues/4) | 新建 | low | W4 | Todo |
-| REM-06 | `Pepgent/remote` | [Pepgent/remote#5](https://github.com/Pepgent/remote/issues/5) | 新建 | low | W6 | Todo |
-| LIB-01 | `Pepgent/lab-library` | [Pepgent/lab-library#1](https://github.com/Pepgent/lab-library/issues/1) | 复用已有 | low | W1 | Done |
-| LAB-01 | `Pepgent/Pepgent` | [Pepgent/Pepgent#8](https://github.com/Pepgent/Pepgent/issues/8) | 新建 | low | VS2 | Todo |
-| LAB-02 | `Pepgent/Pepgent` | [Pepgent/Pepgent#10](https://github.com/Pepgent/Pepgent/issues/10) | 新建 | low | VS2 | Todo |
-| LAB-03 | `Pepgent/Pepgent` | [Pepgent/Pepgent#12](https://github.com/Pepgent/Pepgent/issues/12) | 新建 | low | VS2 | Todo |
-| LAB-04 | `Pepgent/Pepgent` | [Pepgent/Pepgent#13](https://github.com/Pepgent/Pepgent/issues/13) | 新建 | mid | VS2 | Todo |
-| LAB-05 | `Pepgent/Pepgent` | [Pepgent/Pepgent#16](https://github.com/Pepgent/Pepgent/issues/16) | 新建 | low | W6 | Todo |
-| LAB-06 | `Pepgent/Pepgent` | [Pepgent/Pepgent#14](https://github.com/Pepgent/Pepgent/issues/14) | 新建 | low | VS2 | Todo |
-| LAB-07a | `Pepgent/Pepgent` | [Pepgent/Pepgent#17](https://github.com/Pepgent/Pepgent/issues/17) | 新建 | low | VS2 | Todo |
-| LAB-07b | `Pepgent/Pepgent` | [Pepgent/Pepgent#20](https://github.com/Pepgent/Pepgent/issues/20) | 新建 | mid | W6 | Todo |
-| LAB-08 | `Pepgent/Pepgent` | [Pepgent/Pepgent#24](https://github.com/Pepgent/Pepgent/issues/24) | 新建 | low | W6 | Todo |
-| LAB-09 | `Pepgent/Pepgent` | [Pepgent/Pepgent#19](https://github.com/Pepgent/Pepgent/issues/19) | 新建 | low | W6 | Todo |
-| LAB-10 | `Pepgent/Pepgent` | [Pepgent/Pepgent#15](https://github.com/Pepgent/Pepgent/issues/15) | 新建 | mid | W6 | Todo |
-| LAB-11a | `Pepgent/Pepgent` | [Pepgent/Pepgent#22](https://github.com/Pepgent/Pepgent/issues/22) | 新建 | low | W6 | Todo |
-| LAB-11b | `Pepgent/Pepgent` | [Pepgent/Pepgent#18](https://github.com/Pepgent/Pepgent/issues/18) | 新建 | low | W6 | Todo |
-| LAB-12 | `Pepgent/Pepgent` | [Pepgent/Pepgent#11](https://github.com/Pepgent/Pepgent/issues/11) | 新建 | low | W6 | Todo |
-| WEB-01 | `Pepgent/Pepgent` | [Pepgent/Pepgent#9](https://github.com/Pepgent/Pepgent/issues/9) | 新建 | low | W6 | Todo |
-| WEB-02 | `Pepgent/Pepgent` | [Pepgent/Pepgent#21](https://github.com/Pepgent/Pepgent/issues/21) | 新建 | mid | W6 | Todo |
-| WEB-03 | `Pepgent/Pepgent` | [Pepgent/Pepgent#26](https://github.com/Pepgent/Pepgent/issues/26) | 新建 | mid | W6 | Todo |
-| WEB-04 | `Pepgent/Pepgent` | [Pepgent/Pepgent#27](https://github.com/Pepgent/Pepgent/issues/27) | 新建 | low | W6 | Todo |
-| WEB-05 | `Pepgent/Pepgent` | [Pepgent/Pepgent#25](https://github.com/Pepgent/Pepgent/issues/25) | 新建 | low | W6 | Todo |
-| WEB-06 | `Pepgent/Pepgent` | [Pepgent/Pepgent#28](https://github.com/Pepgent/Pepgent/issues/28) | 新建 | low | W6 | Todo |
-| WEB-07 | `Pepgent/Pepgent` | [Pepgent/Pepgent#29](https://github.com/Pepgent/Pepgent/issues/29) | 新建 | mid | W6 | Todo |
-| DEP-01 | `Pepgent/deploy` | [Pepgent/deploy#2](https://github.com/Pepgent/deploy/issues/2) | 新建 | low | VS2 | Todo |
-| DEP-02 | `Pepgent/deploy` | [Pepgent/deploy#3](https://github.com/Pepgent/deploy/issues/3) | 新建 | low | W4 | Todo |
-| DEP-03 | `Pepgent/deploy` | [Pepgent/deploy#1](https://github.com/Pepgent/deploy/issues/1) | 新建 | low | VS2 | Todo |
-| E2E-01 | `Pepgent/soroi` | [Pepgent/soroi#181](https://github.com/Pepgent/soroi/issues/181) | 复用已有 | mid | VS1 | Done |
-| E2E-02 | `Pepgent/soroi` | [Pepgent/soroi#218](https://github.com/Pepgent/soroi/issues/218) | 新建 | low | W1 | Todo |
-| E2E-10 | `Pepgent/soroi` | [Pepgent/soroi#182](https://github.com/Pepgent/soroi/issues/182) | 复用已有 | low | VS1 | Todo |
-| E2E-11a | `Pepgent/soroi` | [Pepgent/soroi#213](https://github.com/Pepgent/soroi/issues/213) | 新建 | low | W1 | Todo |
-| E2E-11b | `Pepgent/soroi` | [Pepgent/soroi#219](https://github.com/Pepgent/soroi/issues/219) | 新建 | low | W2 | Todo |
-| E2E-12 | `Pepgent/soroi` | [Pepgent/soroi#220](https://github.com/Pepgent/soroi/issues/220) | 新建 | low | W1 | Todo |
-| E2E-13 | `Pepgent/soroi` | [Pepgent/soroi#221](https://github.com/Pepgent/soroi/issues/221) | 新建 | low | W2 | Todo |
-| E2E-14 | `Pepgent/soroi` | [Pepgent/soroi#226](https://github.com/Pepgent/soroi/issues/226) | 新建 | low | W2 | Todo |
-| E2E-15 | `Pepgent/soroi` | [Pepgent/soroi#227](https://github.com/Pepgent/soroi/issues/227) | 新建 | low | W3 | Todo |
-| E2E-16 | `Pepgent/soroi` | [Pepgent/soroi#231](https://github.com/Pepgent/soroi/issues/231) | 新建 | low | W4 | Todo |
-| E2E-17 | `Pepgent/soroi` | [Pepgent/soroi#232](https://github.com/Pepgent/soroi/issues/232) | 新建 | low | W5 | Todo |
-| E2E-18 | `Pepgent/soroi` | [Pepgent/soroi#233](https://github.com/Pepgent/soroi/issues/233) | 新建 | low | W4 | Todo |
-| E2E-19 | `Pepgent/soroi` | [Pepgent/soroi#208](https://github.com/Pepgent/soroi/issues/208) | 新建 | low | W3 | Todo |
-| E2E-20 | `Pepgent/Pepgent` | [Pepgent/Pepgent#30](https://github.com/Pepgent/Pepgent/issues/30) | 新建 | low | W6 | Todo |
-| E2E-21 | `Pepgent/Pepgent` | [Pepgent/Pepgent#23](https://github.com/Pepgent/Pepgent/issues/23) | 新建 | low | VS2 | Todo |
-| D9-01 | `Pepgent/PM` | [Pepgent/PM#13](https://github.com/Pepgent/PM/issues/13) | 新建 | free | W7 | Todo |
-| D9-02 | `Pepgent/PM` | [Pepgent/PM#14](https://github.com/Pepgent/PM/issues/14) | 新建 | low | W7 | Todo |
-| D9-03 | `Pepgent/PM` | [Pepgent/PM#15](https://github.com/Pepgent/PM/issues/15) | 新建 | high | W7 | Todo |
+| Slice | Repo | Issue | 本次操作 | Tier | Project Status |
+| --- | --- | --- | --- | --- | --- |
+| ENV-01 | `Pepgent/PM` | [Pepgent/PM#9](https://github.com/Pepgent/PM/issues/9) | 新建 | low | Todo |
+| ENV-02 | `Pepgent/PM` | [Pepgent/PM#10](https://github.com/Pepgent/PM/issues/10) | 新建 | mid | Todo |
+| ENV-03 | `Pepgent/PM` | [Pepgent/PM#11](https://github.com/Pepgent/PM/issues/11) | 新建 | low | Todo |
+| ENV-04 | `Pepgent/PM` | [Pepgent/PM#12](https://github.com/Pepgent/PM/issues/12) | 新建 | low | Todo |
+| IMG-01 | `Pepgent/images` | [Pepgent/images#1](https://github.com/Pepgent/images/issues/1) | 复用已有 | low | Done |
+| IMG-02 | `Pepgent/images` | [Pepgent/images#4](https://github.com/Pepgent/images/issues/4) | 新建 | low | Todo |
+| IMG-03 | `Pepgent/images` | [Pepgent/images#1](https://github.com/Pepgent/images/issues/1) | 复用已有 | low | Done |
+| IMG-04 | `Pepgent/images` | [Pepgent/images#3](https://github.com/Pepgent/images/issues/3) | 新建 | low | Todo |
+| IMG-05 | `Pepgent/images` | [Pepgent/images#1](https://github.com/Pepgent/images/issues/1) | 复用已有 | low | Done |
+| MUX-01 | `Pepgent/omp-rpc-mux` | [Pepgent/omp-rpc-mux#1](https://github.com/Pepgent/omp-rpc-mux/issues/1) | 复用已有 | mid | Done |
+| MUX-02 | `Pepgent/omp-rpc-mux` | [Pepgent/omp-rpc-mux#1](https://github.com/Pepgent/omp-rpc-mux/issues/1) | 复用已有 | mid | Done |
+| MUX-03 | `Pepgent/omp-rpc-mux` | [Pepgent/omp-rpc-mux#3](https://github.com/Pepgent/omp-rpc-mux/issues/3) | 复用已有 | low | In progress |
+| MUX-04 | `Pepgent/omp-rpc-mux` | [Pepgent/omp-rpc-mux#5](https://github.com/Pepgent/omp-rpc-mux/issues/5) | 新建 | low | Todo |
+| MUX-05 | `Pepgent/omp-rpc-mux` | [Pepgent/omp-rpc-mux#4](https://github.com/Pepgent/omp-rpc-mux/issues/4) | 新建 | low | Todo |
+| MUX-06 | `Pepgent/omp-rpc-mux` | [Pepgent/omp-rpc-mux#6](https://github.com/Pepgent/omp-rpc-mux/issues/6) | 新建 | mid | Todo |
+| MUX-07 | `Pepgent/omp-rpc-mux` | [Pepgent/omp-rpc-mux#7](https://github.com/Pepgent/omp-rpc-mux/issues/7) | 新建 | low | Todo |
+| MUX-08 | `Pepgent/omp-rpc-mux` | [Pepgent/omp-rpc-mux#1](https://github.com/Pepgent/omp-rpc-mux/issues/1) | 复用已有 | low | Done |
+| STO-01 | `Pepgent/soroi` | [Pepgent/soroi#180](https://github.com/Pepgent/soroi/issues/180) | 复用已有 | low | Done |
+| STO-02 | `Pepgent/soroi` | [Pepgent/soroi#180](https://github.com/Pepgent/soroi/issues/180) | 复用已有 | mid | Done |
+| STO-03 | `Pepgent/soroi` | [Pepgent/soroi#180](https://github.com/Pepgent/soroi/issues/180) | 复用已有 | mid | Done |
+| STO-04 | `Pepgent/soroi` | [Pepgent/soroi#188](https://github.com/Pepgent/soroi/issues/188) | 新建 | mid | Todo |
+| STO-05 | `Pepgent/soroi` | [Pepgent/soroi#190](https://github.com/Pepgent/soroi/issues/190) | 新建 | low | Todo |
+| STO-06 | `Pepgent/soroi` | [Pepgent/soroi#189](https://github.com/Pepgent/soroi/issues/189) | 新建 | low | Todo |
+| STO-07 | `Pepgent/soroi` | [Pepgent/soroi#194](https://github.com/Pepgent/soroi/issues/194) | 新建 | mid | Todo |
+| STO-08 | `Pepgent/soroi` | [Pepgent/soroi#191](https://github.com/Pepgent/soroi/issues/191) | 新建 | low | Todo |
+| STO-09 | `Pepgent/soroi` | [Pepgent/soroi#192](https://github.com/Pepgent/soroi/issues/192) | 新建 | mid | Todo |
+| STO-10 | `Pepgent/soroi` | [Pepgent/soroi#200](https://github.com/Pepgent/soroi/issues/200) | 新建 | low | Todo |
+| STO-11 | `Pepgent/soroi` | [Pepgent/soroi#202](https://github.com/Pepgent/soroi/issues/202) | 新建 | low | Todo |
+| STO-12 | `Pepgent/soroi` | [Pepgent/soroi#203](https://github.com/Pepgent/soroi/issues/203) | 新建 | low | Todo |
+| SOR-01 | `Pepgent/soroi` | [Pepgent/soroi#178](https://github.com/Pepgent/soroi/issues/178) | 复用已有 | low | Done |
+| SOR-02 | `Pepgent/soroi` | [Pepgent/soroi#193](https://github.com/Pepgent/soroi/issues/193) | 新建 | mid | Todo |
+| SOR-03 | `Pepgent/soroi` | [Pepgent/soroi#201](https://github.com/Pepgent/soroi/issues/201) | 新建 | mid | Todo |
+| SOR-04 | `Pepgent/soroi` | [Pepgent/soroi#185](https://github.com/Pepgent/soroi/issues/185) | 复用已有 | low | Todo |
+| SOR-05 | `Pepgent/soroi` | [Pepgent/soroi#195](https://github.com/Pepgent/soroi/issues/195) | 新建 | mid | Todo |
+| SOR-06 | `Pepgent/soroi` | [Pepgent/soroi#212](https://github.com/Pepgent/soroi/issues/212) | 新建 | mid | Todo |
+| SOR-07 | `Pepgent/soroi` | [Pepgent/soroi#215](https://github.com/Pepgent/soroi/issues/215) | 新建 | low | Todo |
+| SOR-08 | `Pepgent/soroi` | [Pepgent/soroi#204](https://github.com/Pepgent/soroi/issues/204) | 新建 | low | Todo |
+| SOR-09 | `Pepgent/soroi` | [Pepgent/soroi#196](https://github.com/Pepgent/soroi/issues/196) | 新建 | mid | Todo |
+| SOR-10 | `Pepgent/soroi` | [Pepgent/soroi#197](https://github.com/Pepgent/soroi/issues/197) | 新建 | low | Todo |
+| SOR-11 | `Pepgent/soroi` | [Pepgent/soroi#205](https://github.com/Pepgent/soroi/issues/205) | 新建 | mid | Todo |
+| SOR-12 | `Pepgent/soroi` | [Pepgent/soroi#211](https://github.com/Pepgent/soroi/issues/211) | 新建 | mid | Todo |
+| SOR-13 | `Pepgent/soroi` | [Pepgent/soroi#209](https://github.com/Pepgent/soroi/issues/209) | 新建 | mid | Todo |
+| SOR-14 | `Pepgent/soroi` | [Pepgent/soroi#216](https://github.com/Pepgent/soroi/issues/216) | 新建 | low | Todo |
+| SOR-15 | `Pepgent/soroi` | [Pepgent/soroi#217](https://github.com/Pepgent/soroi/issues/217) | 新建 | mid | Todo |
+| SOR-16 | `Pepgent/soroi` | [Pepgent/soroi#207](https://github.com/Pepgent/soroi/issues/207) | 新建 | low | Todo |
+| SOR-17a | `Pepgent/soroi` | [Pepgent/soroi#214](https://github.com/Pepgent/soroi/issues/214) | 新建 | mid | Todo |
+| SOR-17b | `Pepgent/soroi` | [Pepgent/soroi#223](https://github.com/Pepgent/soroi/issues/223) | 新建 | low | Todo |
+| SOR-18 | `Pepgent/soroi` | [Pepgent/soroi#222](https://github.com/Pepgent/soroi/issues/222) | 新建 | mid | Todo |
+| SOR-19 | `Pepgent/soroi` | [Pepgent/soroi#229](https://github.com/Pepgent/soroi/issues/229) | 新建 | low | Todo |
+| SOR-20 | `Pepgent/soroi` | [Pepgent/soroi#228](https://github.com/Pepgent/soroi/issues/228) | 新建 | low | Todo |
+| CUS-01 | `Pepgent/soroi` | [Pepgent/soroi#183](https://github.com/Pepgent/soroi/issues/183) | 复用已有 | high | Todo |
+| CUS-02 | `Pepgent/soroi` | [Pepgent/soroi#198](https://github.com/Pepgent/soroi/issues/198) | 新建 | high | Todo |
+| CUS-03 | `Pepgent/soroi` | [Pepgent/soroi#206](https://github.com/Pepgent/soroi/issues/206) | 新建 | high | Todo |
+| CUS-04 | `Pepgent/soroi` | [Pepgent/soroi#186](https://github.com/Pepgent/soroi/issues/186) | 复用已有 | low | Todo |
+| DIST-01 | `Pepgent/soroi` | [Pepgent/soroi#199](https://github.com/Pepgent/soroi/issues/199) | 新建 | mid | Todo |
+| DIST-02 | `Pepgent/soroi` | [Pepgent/soroi#224](https://github.com/Pepgent/soroi/issues/224) | 新建 | low | Todo |
+| DIST-03 | `Pepgent/soroi` | [Pepgent/soroi#210](https://github.com/Pepgent/soroi/issues/210) | 新建 | low | Todo |
+| DIST-04 | `Pepgent/soroi` | [Pepgent/soroi#225](https://github.com/Pepgent/soroi/issues/225) | 新建 | low | Todo |
+| REM-01 | `Pepgent/remote` | [Pepgent/remote#1](https://github.com/Pepgent/remote/issues/1) | 复用已有 | mid | Todo |
+| REM-02 | `Pepgent/remote` | [Pepgent/remote#1](https://github.com/Pepgent/remote/issues/1) | 复用已有 | low | Todo |
+| REM-03 | `Pepgent/remote` | [Pepgent/remote#1](https://github.com/Pepgent/remote/issues/1) | 复用已有 | low | Todo |
+| REM-04 | `Pepgent/remote` | [Pepgent/remote#6](https://github.com/Pepgent/remote/issues/6) | 新建 | low | Todo |
+| REM-05 | `Pepgent/remote` | [Pepgent/remote#3](https://github.com/Pepgent/remote/issues/3) | 新建 | low | Todo |
+| REM-07 | `Pepgent/remote` | [Pepgent/remote#4](https://github.com/Pepgent/remote/issues/4) | 新建 | low | Todo |
+| REM-06 | `Pepgent/remote` | [Pepgent/remote#5](https://github.com/Pepgent/remote/issues/5) | 新建 | low | Todo |
+| LIB-01 | `Pepgent/lab-library` | [Pepgent/lab-library#1](https://github.com/Pepgent/lab-library/issues/1) | 复用已有 | low | Done |
+| LAB-01 | `Pepgent/Pepgent` | [Pepgent/Pepgent#8](https://github.com/Pepgent/Pepgent/issues/8) | 新建 | low | Todo |
+| LAB-02 | `Pepgent/Pepgent` | [Pepgent/Pepgent#10](https://github.com/Pepgent/Pepgent/issues/10) | 新建 | low | Todo |
+| LAB-03 | `Pepgent/Pepgent` | [Pepgent/Pepgent#12](https://github.com/Pepgent/Pepgent/issues/12) | 新建 | low | Todo |
+| LAB-04 | `Pepgent/Pepgent` | [Pepgent/Pepgent#13](https://github.com/Pepgent/Pepgent/issues/13) | 新建 | mid | Todo |
+| LAB-05 | `Pepgent/Pepgent` | [Pepgent/Pepgent#16](https://github.com/Pepgent/Pepgent/issues/16) | 新建 | low | Todo |
+| LAB-06 | `Pepgent/Pepgent` | [Pepgent/Pepgent#14](https://github.com/Pepgent/Pepgent/issues/14) | 新建 | low | Todo |
+| LAB-07a | `Pepgent/Pepgent` | [Pepgent/Pepgent#17](https://github.com/Pepgent/Pepgent/issues/17) | 新建 | low | Todo |
+| LAB-07b | `Pepgent/Pepgent` | [Pepgent/Pepgent#20](https://github.com/Pepgent/Pepgent/issues/20) | 新建 | mid | Todo |
+| LAB-08 | `Pepgent/Pepgent` | [Pepgent/Pepgent#24](https://github.com/Pepgent/Pepgent/issues/24) | 新建 | low | Todo |
+| LAB-09 | `Pepgent/Pepgent` | [Pepgent/Pepgent#19](https://github.com/Pepgent/Pepgent/issues/19) | 新建 | low | Todo |
+| LAB-10 | `Pepgent/Pepgent` | [Pepgent/Pepgent#15](https://github.com/Pepgent/Pepgent/issues/15) | 新建 | mid | Todo |
+| LAB-11a | `Pepgent/Pepgent` | [Pepgent/Pepgent#22](https://github.com/Pepgent/Pepgent/issues/22) | 新建 | low | Todo |
+| LAB-11b | `Pepgent/Pepgent` | [Pepgent/Pepgent#18](https://github.com/Pepgent/Pepgent/issues/18) | 新建 | low | Todo |
+| LAB-12 | `Pepgent/Pepgent` | [Pepgent/Pepgent#11](https://github.com/Pepgent/Pepgent/issues/11) | 新建 | low | Todo |
+| WEB-01 | `Pepgent/Pepgent` | [Pepgent/Pepgent#9](https://github.com/Pepgent/Pepgent/issues/9) | 新建 | low | Todo |
+| WEB-02 | `Pepgent/Pepgent` | [Pepgent/Pepgent#21](https://github.com/Pepgent/Pepgent/issues/21) | 新建 | mid | Todo |
+| WEB-03 | `Pepgent/Pepgent` | [Pepgent/Pepgent#26](https://github.com/Pepgent/Pepgent/issues/26) | 新建 | mid | Todo |
+| WEB-04 | `Pepgent/Pepgent` | [Pepgent/Pepgent#27](https://github.com/Pepgent/Pepgent/issues/27) | 新建 | low | Todo |
+| WEB-05 | `Pepgent/Pepgent` | [Pepgent/Pepgent#25](https://github.com/Pepgent/Pepgent/issues/25) | 新建 | low | Todo |
+| WEB-06 | `Pepgent/Pepgent` | [Pepgent/Pepgent#28](https://github.com/Pepgent/Pepgent/issues/28) | 新建 | low | Todo |
+| WEB-07 | `Pepgent/Pepgent` | [Pepgent/Pepgent#29](https://github.com/Pepgent/Pepgent/issues/29) | 新建 | mid | Todo |
+| DEP-01 | `Pepgent/deploy` | [Pepgent/deploy#2](https://github.com/Pepgent/deploy/issues/2) | 新建 | low | Todo |
+| DEP-02 | `Pepgent/deploy` | [Pepgent/deploy#3](https://github.com/Pepgent/deploy/issues/3) | 新建 | low | Todo |
+| DEP-03 | `Pepgent/deploy` | [Pepgent/deploy#1](https://github.com/Pepgent/deploy/issues/1) | 新建 | low | Todo |
+| E2E-01 | `Pepgent/soroi` | [Pepgent/soroi#181](https://github.com/Pepgent/soroi/issues/181) | 复用已有 | mid | Done |
+| E2E-02 | `Pepgent/soroi` | [Pepgent/soroi#218](https://github.com/Pepgent/soroi/issues/218) | 新建 | low | Todo |
+| E2E-10 | `Pepgent/soroi` | [Pepgent/soroi#182](https://github.com/Pepgent/soroi/issues/182) | 复用已有 | low | Todo |
+| E2E-11a | `Pepgent/soroi` | [Pepgent/soroi#213](https://github.com/Pepgent/soroi/issues/213) | 新建 | low | Todo |
+| E2E-11b | `Pepgent/soroi` | [Pepgent/soroi#219](https://github.com/Pepgent/soroi/issues/219) | 新建 | low | Todo |
+| E2E-12 | `Pepgent/soroi` | [Pepgent/soroi#220](https://github.com/Pepgent/soroi/issues/220) | 新建 | low | Todo |
+| E2E-13 | `Pepgent/soroi` | [Pepgent/soroi#221](https://github.com/Pepgent/soroi/issues/221) | 新建 | low | Todo |
+| E2E-14 | `Pepgent/soroi` | [Pepgent/soroi#226](https://github.com/Pepgent/soroi/issues/226) | 新建 | low | Todo |
+| E2E-15 | `Pepgent/soroi` | [Pepgent/soroi#227](https://github.com/Pepgent/soroi/issues/227) | 新建 | low | Todo |
+| E2E-16 | `Pepgent/soroi` | [Pepgent/soroi#231](https://github.com/Pepgent/soroi/issues/231) | 新建 | low | Todo |
+| E2E-17 | `Pepgent/soroi` | [Pepgent/soroi#232](https://github.com/Pepgent/soroi/issues/232) | 新建 | low | Todo |
+| E2E-18 | `Pepgent/soroi` | [Pepgent/soroi#233](https://github.com/Pepgent/soroi/issues/233) | 新建 | low | Todo |
+| E2E-19 | `Pepgent/soroi` | [Pepgent/soroi#208](https://github.com/Pepgent/soroi/issues/208) | 新建 | low | Todo |
+| E2E-20 | `Pepgent/Pepgent` | [Pepgent/Pepgent#30](https://github.com/Pepgent/Pepgent/issues/30) | 新建 | low | Todo |
+| E2E-21 | `Pepgent/Pepgent` | [Pepgent/Pepgent#23](https://github.com/Pepgent/Pepgent/issues/23) | 新建 | low | Todo |
+| D9-01 | `Pepgent/PM` | [Pepgent/PM#13](https://github.com/Pepgent/PM/issues/13) | 新建 | free | Todo |
+| D9-02 | `Pepgent/PM` | [Pepgent/PM#14](https://github.com/Pepgent/PM/issues/14) | 新建 | low | Todo |
+| D9-03 | `Pepgent/PM` | [Pepgent/PM#15](https://github.com/Pepgent/PM/issues/15) | 新建 | high | Todo |
+
+## 统一验收与状态约定
+
+- `依赖` 只表示编译、类型、构建或调用契约上必须先存在的代码或产物；依赖切片的代码合入其仓 `main` 后即可开工，不等待 runtime 验收。
+- 切片验收只观察所属仓库的真实入口，不启动其他 Pepgent 组件、不拉起完整 compose、不执行 F 流程。原有跨组件义务保留在 [D8 §4.2 的“统一验收前置”列](https://github.com/Pepgent/PM/blob/main/evidence/decisions/D8-mvp-scope.md#L202-L375)，按 **A0 → S1（F01–F30）→ E2E-21 → S2（F08–F31）→ D9（F32）** 统一执行。E2E spec、runbook、check 在开发期编写，统一阶段执行。
+- Project Status 只记录既有 Project 映射快照；不得由本表发明、推断或改写状态，也不得把 issue/Project 状态当作代码、产物或 runtime 事实。
 
 ## 执行状态约定
 
-工程师、测试者、操作员在各自实现 issue 评论中写 `STARTED` / `PR` / `BLOCKED` / `DONE` 并附证据。依赖切片须已有 runtime 验收证据才可开工；issue/Project 状态或映射本身不替代 runtime 结论。
+工程师、测试者、操作员在各自实现 issue 评论中写 `STARTED` / `PR` / `BLOCKED` / `DONE` 并附证据。依赖切片代码或产物合入其仓 `main` 后即可开工；跨组件 runtime 只在统一验收阶段执行。issue/Project 状态或映射本身不替代代码、产物或 runtime 事实。
