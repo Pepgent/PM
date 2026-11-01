@@ -3,8 +3,8 @@
 - **初审材料：** `/Users/mouriya/Ext/code/pepgent/pepgent-pm/evidence/gates/w10-user-wt-quote.md`
 - **关联议题：** [Pepgent/Pepgent#25](https://github.com/Pepgent/Pepgent/issues/25)（既有处置评论 [`#issuecomment-6563492271`](https://github.com/Pepgent/Pepgent/issues/25#issuecomment-6563492271)）
 - **把关席位：** `ArgonGovernance-2`（组织治理与分配守护席，正交闸门 B）
-- **把关复核源头：** 已全量复核 `LEDGER.md:1-141`（含 `:85` 对 `tool-policy-nag` `attribution: "agent"` 非用户原话的既有核定）、`AGENTS.md:1-129`（含 `C2-4`、`C3-4.4`、`C4-2`、`AGENTS.md:125-127,129`）与初审取证事实 `F1–F8`
-- **判定时间：** `2026-11-01T21:07Z`
+- **把关复核源头：** 已分段全量直读并复核 `LEDGER.md:1-141`（`#E637`，含 `:1-14`、`:15-88`、`:89-141`，核对 `:85` 对 `tool-policy-nag` `attribution: "agent"` 非用户原话的既有核定及 `U7`/`U22`/`U97`/`U103–U111`）、`AGENTS.md:1-129`（含 `C2-4`、`C3-4.4`、`C4-2`、`AGENTS.md:125-127,129`）与初审取证事实 `F1–F8`
+- **判定与全量复核时间：** `2026-11-01T21:10Z`（全量复核 `LEDGER.md:89-141` 后确认 `B-1`～`B-4` 结论不变）
 
 ---
 
