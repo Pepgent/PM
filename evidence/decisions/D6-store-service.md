@@ -138,7 +138,7 @@ type Handback = { fields: { field: string; value: Value }[] } // 与交回工具
 type TransferId = string & { readonly _: 'TransferId' } // store 生成并持有；不进中心副本
 type TransferKind =                               // 两种都只是传输暂存区（D4-13）
   | { kind: 'EvalTransfer'; evalCall: string }     // eval 调用开始时开；按 position 分卷；dry run 返回或步提交确认后结束
-  | { kind: 'AgentGenerationTransfer'; agent: string; generation: number } // 非 eval 场景的远程 agent 一代；一卷；transcript 写回确认后由 subagent 模块 DELETE
+  | { kind: 'AgentGenerationTransfer'; agent: string; generation: string } // D3 §4 Generation；非 eval 场景的远程 agent 一代；一卷；transcript 写回确认后由 subagent 模块 DELETE
 // GET    /objects/{sha256}                                  → bytes（中心副本里的对象）
 // POST   /transfers               body: TransferKind        → { transfer: TransferId }
 // PUT    /transfers/{t}/objects/{sha256}                    ← bytes（本机产出、节点 bundle 与源码、人类上传、transcript 包）

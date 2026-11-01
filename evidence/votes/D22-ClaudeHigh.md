@@ -17,7 +17,7 @@
 | D2-20 规定中心检出缓存卷挂进 Lab 后端容器 | 属实 | `/tmp/govclone-pm/evidence/decisions/D2-components.md:57`：“中心检出缓存卷和会话 worktree 卷都挂进 Lab 后端容器”；载体是可重建的近处副本，写方是 Lab 后端 |
 | D7-19 写明集成检出放在该卷上；环境变量含“上述各卷的挂载路径”，但没有给出变量名 | 属实（出处需细化） | `D7-lab-backend.md:79`。“干净集成检出也放在这个卷上”出自 D7-19；D7-11（D7:71）只定义了 merge 操作本身。草案标注成“（D7-11）”，见建议 2 |
 | `runtime.ts:45` 的内容 | 属实 | Pepgent `origin/main`（`dbc1120`）`git show` 第 45 行为 `cacheHome: resolve(environment.PEPGENT_LAB_LIBRARY_HOME ?? join(webRoot, 'lab-library'))`；`apps/web/README.md:159-160` 有对应说明 |
-| compose `:107` 把 `library-cache` 卷挂到 `/var/lib/pepgent/library`；environment `:85-101` 没有注入该变量 | 属实 | `/tmp/govclone-deploy/stacks/pepgent-central/compose.yaml:107`、`:85-101`；deploy `origin/main` 为 `c0b56f3` |
+| compose `:107` 把 `library-cache` 挂到 `/var/lib/pepgent/library`；environment `:85-101` 没有注入该变量 | 属实 | `/tmp/govclone-deploy/stacks/pepgent-central/compose.yaml:107`、`:85-101`；deploy `origin/main` 为 `c0b56f3` |
 | 当前库缓存落在 `web-state` 上的 `/var/lib/pepgent/web/lab-library`，`library-cache` 闲置 | 属实 | `runtime.ts:37` 中 `webRoot = PEPGENT_WEB_ROOT`；`compose.yaml:89` 设 `PEPGENT_WEB_ROOT=/var/lib/pepgent/web`，`:105` 挂 `web-state`；`library.ts:110-114` 在 `cacheHome` 下 `clone` |
 | `PEPGENT_LAB_HOME` 已注入，对应 `lab-db` | 属实 | `compose.yaml:90`、`:104` |
 | deploy README 卷表的 `library-cache` 行 | 属实 | `/tmp/govclone-deploy/README.md:108`：`/var/lib/pepgent/library`，写方为 Lab 后端，可重建 |
