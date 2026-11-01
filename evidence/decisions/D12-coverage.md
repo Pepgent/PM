@@ -359,9 +359,9 @@
 | `discussions[].messages[].kind` | C | OmpMessage.role 的 user/assistant 映射；工具消息用于挂附件不伪装成人类 |
 | `discussions[].messages[].references[]` | C | Page.discussion.attachments[kind=references].artifacts 经 toolCallId 归到对应 assistant 消息 |
 | `discussions[].messages[].attachments[].kind` | A | AttachmentWire.kind[plan/conclusion] |
-| `discussions[].messages[].attachments[].plan.runId` | C | plan.draft 关联目录草稿/已绑定运行；未启动时使用草稿引用，不虚构 store RunId |
+| `discussions[].messages[].attachments[].plan.runId` | C | plan.draft 关联目录草稿/已绑定运行；未启动时使用草稿引用，不虚构 store RunId；目录中找不到该草稿 = 已丢弃（D26-04/05），转录附件保留，不虚构草稿或运行，标题与步骤仍从附件本身渲染 |
 | `discussions[].messages[].attachments[].plan.title, discussions[].messages[].attachments[].plan.steps[].text, discussions[].messages[].attachments[].plan.steps[].node` | A | AttachmentWire[plan].title/plan[].text/plan[].node |
-| `discussions[].messages[].attachments[].plan.meta` | C | 由 plan 步数、草稿引用与 pendingLaunch.state 套 copy |
+| `discussions[].messages[].attachments[].plan.meta` | C | 由 plan 步数、草稿引用与 pendingLaunch.state 套 copy；目录中找不到 plan.draft = 已丢弃（D26-04/05），呈现“已丢弃”，标题与步骤仍取附件本身 |
 | `discussions[].messages[].attachments[].draft.text, discussions[].messages[].attachments[].draft.evidence` | A | AttachmentWire[conclusion].conclusion 关联 Page.discussion.conclusions[].text/evidence |
 | `discussions[].messages[].attachments[].draft.confidence` | K | 原型固定 medium 演示标签，不可冒充模型给出的置信度 |
 | `discussions[].conclusions[].kind` | A | ConclusionWire.confirmation.kind |
