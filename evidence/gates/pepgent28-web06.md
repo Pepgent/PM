@@ -114,3 +114,22 @@
 - 闸门结论写入 `GATES/pepgent28-web06-gate-a.md`（Argon）与 `GATES/pepgent28-web06-gate-b.md`（ArgonGovernance）。
 - A、B 都确认不越界的项，在 #28 写结论评论并引用正文原文，由 Pepgent 片区经理（`AreaMgrPepgent`）送达 W-10。
 - 任一闸门认定越界的项，合为一张 P0 议案（每行一个主案，备选写进取舍栏，`notify` 含 `AreaMgrPepgent`），由本实例用 `council propose --seat Coordination --as DeskPepgent28Blocked` 立案。
+
+## 五、处置结果
+
+- **闸门结论：** 闸门 A（`Argon-2`）见 `pepgent28-web06-gate-a.md`（PM `703c26b`），闸门 B（`ArgonGovernance-2`）见 `pepgent28-web06-gate-b.md`（PM `0038a31`，后续补充 `7b1bdc7`）。两道闸门对五项初分类全部同意；三行立案都不加 `governance`，4 席参投，门槛 3。
+- **两道闸门都判不越界，按正文作答，不立案：**
+  - G1-a（K1）：采用候选 (C)，理由改为“remote 把 `boundClusters/primaryCluster` 定义为模板唯一的后端端点”；集群行以 `primaryCluster` 去重，作业经模板归组。
+  - G1-b 的 `name`（K3）：显示端点串。
+  - G2-a（K1）：实验事件取目录中运行的起止，里程碑取 `MilestoneWire`。
+  - 结论评论：[Pepgent#28 issuecomment-6563854658](https://github.com/Pepgent/Pepgent/issues/28#issuecomment-6563854658)。
+- **立案：** `DeskPepgent28Blocked` 以 Coordination 席发起 D38（[Pepgent/PM#57](https://github.com/Pepgent/PM/issues/57)，P0），共三行：
+  - D38-01：`isDefault` 列入 D9，投影 `null`；
+  - D38-02：`ActivityWire.kind` 取 D12-10 命令名，并给出首页类别、图标与入口的映射；
+  - D38-03：`ImageDefinition.name` 为 OCI repository 路径，模板引用归一后比较。
+  三行都是串联、缺失设计；资格席为 Coordination、ClaudeHigh、Argon、LeadMentor。
+- **表决期暂停范围：** W-10 只暂停以下三处，其余照常交付：
+  - `isDefault` 定稿；
+  - Lab 自有活动行的分类与入口；
+  - 容器页的 `nodeBindingCount`、`resources`、模板挂载、`liveContainers`。
+- **送达：** 由 AreaMgrPepgent 把结论评论送达 W-10。D38 各行有结果后，再在 #28 登记并送达 W-10。
