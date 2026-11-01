@@ -213,7 +213,7 @@ type Activity = {                                 // 提交后按原始时刻重
 type Pair =
   | { kind: 'SameValue'; a: GraphNode; b: GraphNode }    // 根值相同
   | { kind: 'SameCapture'; a: GraphNode; b: GraphNode }  // 只用于已完成的调用
-  | { kind: 'Aborted'; a: GraphNode; b: GraphNode; side: AbortedSide } // side 表示被中止的一侧；此草图不另定其 wire 编码
+  | { kind: 'Aborted'; a: GraphNode; b: GraphNode; side: 'a' | 'b' | 'both' }
   | { kind: 'Changed'; a: GraphNode; b: GraphNode; fields: (
       | { field: string; kind: 'Both'; a: Value; b: Value }
       | { field: string; kind: 'OnlyA'; a: Value }
@@ -225,9 +225,11 @@ type RunComparison = { a: RunId; b: RunId; pairs: Pair[] }
 
 // ---- 推送（SSE） ----
 type RunEvent =
-  | { kind: 'run_started'; seq: Seq; at: string } // 派生 seq 1 还携带物化的继承调用、名字、新根与边（D6-09）；不在此另定记录容器的字段编码
+  | { kind: 'run_started'; seq: Seq; at: string
+      records: { nodes: GraphNode[]; names: AtomName[]; edges: GraphEdge[] } } // 派生 seq 1 携带继承调用、名字、新根与边；普通运行无派生物化记录
   | { kind: 'run_ended' | 'run_aborted'; seq: Seq; at: string }
-  | { kind: 'step_committed'; seq: Seq; at: string; step: { session: SessionId; code: string } } // 还携带本步新定义的根与名字，不携带调用或入边（D6-09）
+  | { kind: 'step_committed'; seq: Seq; at: string; step: { session: SessionId; code: string }
+      records: { roots: GraphNode[]; names: AtomName[] } } // 只携带本步新定义的根与名字，不重复携带调用和入边
   | { kind: 'call_started' | 'call_ended' | 'call_adopted' | 'call_inherited' | 'call_aborted' | 'human_handback'
       seq: Seq; at: string; call: GraphNode; edges: GraphEdge[] } // 调用节点与其入边的唯一携带者，消费方按序插入
   | { kind: 'atom_stopped'; seq: Seq; at: string; name: AtomName }
