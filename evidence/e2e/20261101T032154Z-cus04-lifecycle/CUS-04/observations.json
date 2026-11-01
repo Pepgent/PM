@@ -1,0 +1,149 @@
+{
+  "ciRun": "https://github.com/Pepgent/soroi/actions/runs/41268444926",
+  "head": "ab127d25990cb1be498451522543142655f9af31",
+  "manifestVersion": "873981891527dc2bd63fb073991fb2072deb2a8a",
+  "release": "soroi-59df0eb399f80f4c7b6a857fe8ee525a10cba8994300b710cc24c6107af255ca.tar",
+  "omp": "18.14.2",
+  "model": "opencode-go/deepseek-v4.1-flash",
+  "settings": [
+    {
+      "at": 1793503032270,
+      "pid": 64,
+      "role": "Main",
+      "kind": "settings",
+      "personality": "pragmatic",
+      "approval": "yolo",
+      "ttl": 2000
+    },
+    {
+      "at": 1793503044897,
+      "pid": 177,
+      "role": "LocalChild",
+      "kind": "settings",
+      "personality": "none",
+      "approval": "yolo",
+      "ttl": 2000
+    },
+    {
+      "at": 1793503117914,
+      "pid": 297,
+      "role": "LocalChild",
+      "kind": "settings",
+      "personality": "none",
+      "approval": "yolo",
+      "ttl": 2000
+    }
+  ],
+  "initialAcceptedHandback": {
+    "type": "message",
+    "id": "1a9ccd93",
+    "parentId": "66cc5cba",
+    "timestamp": "2026-11-01T03:17:28.118Z",
+    "runtime": {
+      "version": "18.14.2"
+    },
+    "message": {
+      "role": "toolResult",
+      "toolCallId": "call_b8a02743e40242f3ab293dcc",
+      "toolName": "soroi_return",
+      "content": [
+        {
+          "type": "text",
+          "text": "Result delivered to Main. End your turn now."
+        }
+      ],
+      "details": {},
+      "isError": false,
+      "timestamp": 1793503048118
+    }
+  },
+  "mainRegistryTransitions": [
+    {
+      "at": 1793503049391,
+      "id": "CUS04Worker",
+      "status": "idle",
+      "attached": true,
+      "sessionFile": "/home/agent/.omp/agent/sessions/--work--/2026-11-01T03-17-12-123Z_01a1951c-733b-7013-ab34-291eb1ff43df/CUS04Worker.jsonl"
+    },
+    {
+      "at": 1793503051401,
+      "id": "CUS04Worker",
+      "status": "parked",
+      "attached": false,
+      "sessionFile": "/home/agent/.omp/agent/sessions/--work--/2026-11-01T03-17-12-123Z_01a1951c-733b-7013-ab34-291eb1ff43df/CUS04Worker.jsonl"
+    },
+    {
+      "at": 1793503118040,
+      "id": "CUS04Worker",
+      "status": "idle",
+      "attached": true,
+      "sessionFile": "/home/agent/.omp/agent/sessions/--work--/2026-11-01T03-17-12-123Z_01a1951c-733b-7013-ab34-291eb1ff43df/CUS04Worker.jsonl"
+    },
+    {
+      "at": 1793503118044,
+      "id": "CUS04Worker",
+      "status": "running",
+      "attached": true,
+      "sessionFile": "/home/agent/.omp/agent/sessions/--work--/2026-11-01T03-17-12-123Z_01a1951c-733b-7013-ab34-291eb1ff43df/CUS04Worker.jsonl"
+    },
+    {
+      "at": 1793503124447,
+      "id": "CUS04Worker",
+      "status": "idle",
+      "attached": true,
+      "sessionFile": "/home/agent/.omp/agent/sessions/--work--/2026-11-01T03-17-12-123Z_01a1951c-733b-7013-ab34-291eb1ff43df/CUS04Worker.jsonl"
+    },
+    {
+      "at": 1793503126451,
+      "id": "CUS04Worker",
+      "status": "parked",
+      "attached": false,
+      "sessionFile": "/home/agent/.omp/agent/sessions/--work--/2026-11-01T03-17-12-123Z_01a1951c-733b-7013-ab34-291eb1ff43df/CUS04Worker.jsonl"
+    }
+  ],
+  "idleToParkedMs": [
+    2010,
+    2004
+  ],
+  "childPids": [
+    177,
+    297
+  ],
+  "sameTranscriptPrefixPreserved": true,
+  "normalChildExits": [
+    {
+      "type": "custom",
+      "customType": "session_exit",
+      "data": {
+        "reason": "dispose",
+        "kind": "normal",
+        "recordedAt": "2026-11-01T03:17:31.403Z"
+      },
+      "id": "2caf7cc3",
+      "parentId": "50b23200",
+      "timestamp": "2026-11-01T03:17:31.403Z",
+      "runtime": {
+        "version": "18.14.2"
+      }
+    },
+    {
+      "type": "custom",
+      "customType": "session_exit",
+      "data": {
+        "reason": "dispose",
+        "kind": "normal",
+        "recordedAt": "2026-11-01T03:18:46.452Z"
+      },
+      "id": "69068440",
+      "parentId": "8c74c00b",
+      "timestamp": "2026-11-01T03:18:46.452Z",
+      "runtime": {
+        "version": "18.14.2"
+      }
+    }
+  ],
+  "ptyExitCode": 0,
+  "containerAbsent": true,
+  "deviation": "The revival prompt requested a second soroi_return, but the model responded without a tool call. CUS04 requires initial accepted handback followed by idle, TTL parking and actual revival, not a second handback. Revival is proven by native registry attachment/running, new PID297, preserved sessionFile, incoming IRC and a new actual model turn in that transcript. No second successful soroi_return or PID reuse is claimed.",
+  "originalFailureCause": "Gateway owner established old provider-apiKey configuration populated wrong model cache identities; fixed auth:none plus command-resolved Authorization header. Not a proven Mac/Linux or Soroi inheritance cause from the old evidence."
+}

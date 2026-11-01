@@ -1,0 +1,8 @@
+startup:
+  setupWizard: false
+  checkUpdate: false
+personality: pragmatic
+task:
+  agentIdleTtlMs: 2000
+extensions:
+  - /probe/observe.ts
