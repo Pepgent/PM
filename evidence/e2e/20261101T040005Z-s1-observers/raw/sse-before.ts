@@ -1,0 +1,12 @@
+import { mkdtemp } from 'node:fs/promises';
+import { join } from 'node:path';
+import { Evidence } from '/Users/mouriya/Ext/worktrees/test-208-s1-observers-ff0716f/e2e/standin/evidence.ts';
+import { observeSse } from '/Users/mouriya/Ext/worktrees/test-208-s1-observers-ff0716f/e2e/standin/sse.ts';
+const root=await mkdtemp('/tmp/soroi-observer-sse-before-'),evidence=await Evidence.create(join(root,'evidence'));
+let cancel=0;
+const server=Bun.serve({hostname:'127.0.0.1',port:0,fetch(){return new Response(new ReadableStream({start(c){c.enqueue(new TextEncoder().encode('{'));},cancel(){cancel++;}}),{headers:{'content-type':'application/json'}});}});
+let settled=false;const call=observeSse(server.url.href,'/invalid',evidence,40).then(()=>{settled=true;return'resolved';},e=>{settled=true;return String(e);});
+await Bun.sleep(180);const observed={scenario:'invalid-response-deadline-before',timeoutMs:40,observedAfterMs:180,settled,classification:!settled?'deadline-disabled-before-body':'bounded',liveProductFlow:false};
+console.log(JSON.stringify(observed));await Bun.write(join(root,'observation.json'),JSON.stringify(observed,null,2));
+await server.stop(true);await call;console.log(JSON.stringify({root,serverStopped:true,cancel}));
+if(settled&&observed.settled)throw Error('Expected original counterexample did not occur');

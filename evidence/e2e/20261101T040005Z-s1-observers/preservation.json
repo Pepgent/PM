@@ -1,0 +1,182 @@
+{
+  "method": "Direct regular-file byte equality; complete tar member name/type inventory including empty directories and nested .git. No content hashes used. Packaging only, not runtime verification.",
+  "groups": [
+    {
+      "label": "io-final",
+      "source": "/tmp/soroi-observer-io-AOGr5h",
+      "archive": "raw/io-final.tar.gz",
+      "entries": 255,
+      "directories": 94,
+      "regular_files": 161,
+      "symlinks": 0,
+      "regular_file_bytes": 336470,
+      "inventory_type_and_regular_bytes_equal": true
+    },
+    {
+      "label": "sse-initial-failure",
+      "source": "/tmp/soroi-observer-sse-before-iqDbOe",
+      "archive": "raw/sse-initial-failure.tar.gz",
+      "entries": 4,
+      "directories": 3,
+      "regular_files": 1,
+      "symlinks": 0,
+      "regular_file_bytes": 198,
+      "inventory_type_and_regular_bytes_equal": true
+    },
+    {
+      "label": "streams-final",
+      "source": "/tmp/observer-stream-oracle-r2-zG9abH",
+      "archive": "raw/streams-final.tar.gz",
+      "entries": 769,
+      "directories": 85,
+      "regular_files": 684,
+      "symlinks": 0,
+      "regular_file_bytes": 1974143,
+      "inventory_type_and_regular_bytes_equal": true
+    },
+    {
+      "label": "streams-initial-failure",
+      "source": "/tmp/observer-stream-oracle-23c3rg",
+      "archive": "raw/streams-initial-failure.tar.gz",
+      "entries": 665,
+      "directories": 85,
+      "regular_files": 580,
+      "symlinks": 0,
+      "regular_file_bytes": 1858634,
+      "inventory_type_and_regular_bytes_equal": true
+    },
+    {
+      "label": "streams-replay",
+      "source": "/tmp/observer-stream-replay-ynIqT2",
+      "archive": "raw/streams-replay.tar.gz",
+      "entries": 384,
+      "directories": 57,
+      "regular_files": 327,
+      "symlinks": 0,
+      "regular_file_bytes": 1276705,
+      "inventory_type_and_regular_bytes_equal": true
+    },
+    {
+      "label": "phases-f27-f28",
+      "source": "/tmp/soroi-observer-phases-RV41kV",
+      "archive": "raw/phases-f27-f28.tar.gz",
+      "entries": 807,
+      "directories": 112,
+      "regular_files": 695,
+      "symlinks": 0,
+      "regular_file_bytes": 1322555,
+      "inventory_type_and_regular_bytes_equal": true
+    },
+    {
+      "label": "version-f29-final",
+      "source": "/tmp/soroi-observer-phases-ykYanP",
+      "archive": "raw/version-f29-final.tar.gz",
+      "entries": 590,
+      "directories": 64,
+      "regular_files": 526,
+      "symlinks": 0,
+      "regular_file_bytes": 990759,
+      "inventory_type_and_regular_bytes_equal": true
+    },
+    {
+      "label": "cli-missing-a0",
+      "source": "/tmp/soroi-observer-cli-49y_mho7",
+      "archive": "raw/cli-missing-a0.tar.gz",
+      "entries": 42,
+      "directories": 11,
+      "regular_files": 31,
+      "symlinks": 0,
+      "regular_file_bytes": 13382,
+      "inventory_type_and_regular_bytes_equal": true
+    },
+    {
+      "label": "aux-reader",
+      "source": "/tmp/soroi-reader-proof-yH85pj",
+      "archive": "raw/aux-reader.tar.gz",
+      "entries": 4,
+      "directories": 3,
+      "regular_files": 1,
+      "symlinks": 0,
+      "regular_file_bytes": 6559,
+      "inventory_type_and_regular_bytes_equal": true
+    },
+    {
+      "label": "aux-agent",
+      "source": "/tmp/soroi-agent-oracle-LCAYN0",
+      "archive": "raw/aux-agent.tar.gz",
+      "entries": 17,
+      "directories": 7,
+      "regular_files": 10,
+      "symlinks": 0,
+      "regular_file_bytes": 7846,
+      "inventory_type_and_regular_bytes_equal": true
+    },
+    {
+      "label": "aux-local",
+      "source": "/tmp/soroi-local-flow-proof-4gRv0d",
+      "archive": "raw/aux-local.tar.gz",
+      "entries": 17,
+      "directories": 7,
+      "regular_files": 10,
+      "symlinks": 0,
+      "regular_file_bytes": 8817,
+      "inventory_type_and_regular_bytes_equal": true
+    },
+    {
+      "label": "io-probe.ts",
+      "source": "/tmp/soroi-observer-io-probe.ts",
+      "copy": "raw/io-probe.ts",
+      "regular_files": 1,
+      "regular_file_bytes": 14951,
+      "regular_bytes_equal": true
+    },
+    {
+      "label": "sse-before.ts",
+      "source": "/tmp/soroi-observer-sse-before.ts",
+      "copy": "raw/sse-before.ts",
+      "regular_files": 1,
+      "regular_file_bytes": 1332,
+      "regular_bytes_equal": true
+    },
+    {
+      "label": "io-final-exec.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-2-a3da4466.log",
+      "copy": "raw/io-final-exec.log",
+      "regular_files": 1,
+      "regular_file_bytes": 2350,
+      "regular_bytes_equal": true
+    },
+    {
+      "label": "sse-initial-exec.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-1-f6e804d4.log",
+      "copy": "raw/sse-initial-exec.log",
+      "regular_files": 1,
+      "regular_file_bytes": 257,
+      "regular_bytes_equal": true
+    },
+    {
+      "label": "auxiliary-exec.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-3-18153f4f.log",
+      "copy": "raw/auxiliary-exec.log",
+      "regular_files": 1,
+      "regular_file_bytes": 6650,
+      "regular_bytes_equal": true
+    },
+    {
+      "label": "native-readback",
+      "source": "/tmp/soroi-observer-native-readback-7o4y30ir",
+      "archive": "raw/native-readback.tar.gz",
+      "entries": 2,
+      "directories": 1,
+      "regular_files": 1,
+      "symlinks": 0,
+      "regular_file_bytes": 943,
+      "inventory_type_and_regular_bytes_equal": true,
+      "classification": "Analysis readback of the same frozen native ledger; no new runtime"
+    }
+  ],
+  "total_original_regular_files": 3032,
+  "total_original_regular_file_bytes": 7822551,
+  "total_archived_regular_files": 3032,
+  "total_archived_regular_file_bytes": 7822551
+}
