@@ -1,0 +1,96 @@
+{
+  "ciRun": "https://github.com/Pepgent/soroi/actions/runs/41267552401",
+  "head": "d5e72ecb55b6949134c4753ba47d38a2419d6508",
+  "release": "soroi-98087c0ecc36febb5e83093b60855fe7ddc2f40776776909e11404ecd8740e52.tar",
+  "manifestVersion": "1d083de6835740e32885a642d518668c655eb5ba",
+  "image": "pepgent-registry.orb.local:5000/pepgent/omp-agent:latest",
+  "omp": "18.14.2",
+  "model": "opencode-go/deepseek-v4.1-flash",
+  "emptyHome": true,
+  "nativeRulesMatched": 5,
+  "skillChars": 8658,
+  "skillComparison": "Actual native reader equals tar source except terminal LF.",
+  "workerDefinitionMatched": true,
+  "settings": [
+    {
+      "kind": "settings",
+      "role": "Main",
+      "pid": 64,
+      "personality": "pragmatic",
+      "personalitySource": "overlay",
+      "approval": "yolo",
+      "ttl": 2000
+    },
+    {
+      "kind": "settings",
+      "role": "LocalChild",
+      "pid": 191,
+      "personality": "none",
+      "personalitySource": "overlay",
+      "approval": "yolo",
+      "ttl": 2000
+    }
+  ],
+  "evalResult": {
+    "role": "toolResult",
+    "toolCallId": "call_7386119c4acc42c4a01a6b1c",
+    "toolName": "soroi_eval",
+    "content": [
+      {
+        "type": "text",
+        "text": "dry run\uff0c\u6ca1\u6709\u5199 store\uff1a\nfinal_release_probe = 199\nstop(final_release_probe)"
+      }
+    ],
+    "details": {
+      "mode": "dry_run",
+      "calls": []
+    },
+    "isError": false,
+    "timestamp": 1793502232511
+  },
+  "workerReturn": {
+    "role": "toolResult",
+    "toolCallId": "call_a609d3abff6b4542aa935ce6",
+    "toolName": "soroi_return",
+    "content": [
+      {
+        "type": "text",
+        "text": "Result delivered to Main. End your turn now."
+      }
+    ],
+    "details": {},
+    "isError": false,
+    "timestamp": 1793502239358
+  },
+  "workerExit": {
+    "type": "custom",
+    "customType": "session_exit",
+    "data": {
+      "reason": "dispose",
+      "kind": "normal",
+      "recordedAt": "2026-11-01T03:04:02.644Z"
+    },
+    "id": "7c152279",
+    "parentId": "9de50a55",
+    "timestamp": "2026-11-01T03:04:02.644Z",
+    "runtime": {
+      "version": "18.14.2"
+    }
+  },
+  "xdg": {
+    "inherited": {
+      "XDG_DATA_HOME": "/tmp/operator-data",
+      "XDG_STATE_HOME": "/tmp/operator-state",
+      "XDG_CACHE_HOME": "/tmp/operator-cache"
+    },
+    "before": "Old actual CI installer wrote external /tmp/operator-data/omp/plugins/node_modules/omp-soroi and lock.",
+    "after": "Final actual CI installer linked under targetHOME; all three external omp directories remained empty after actual launcher, model and child.",
+    "sentinels": [
+      "xdg_plugin_isolated=true",
+      "xdg_runtime_isolated=true"
+    ]
+  },
+  "ptyExitCode": 0,
+  "containerAbsent": true,
+  "scope": "DIST01 real install/settings smoke; dry-run calls[] does not claim full A0 nonempty node CallReport or CUS04 exact diff."
+}

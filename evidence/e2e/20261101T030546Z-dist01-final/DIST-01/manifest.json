@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "version": "1d083de6835740e32885a642d518668c655eb5ba",
+  "components": {
+    "customization": {
+      "path": "customization.tar",
+      "sha256": "e69b2fbaedbf2e73570c8a246954ed43eb29f9df4fda33017526033bc09dca39"
+    },
+    "runner": {
+      "path": "runner.js",
+      "sha256": "906fecc50609cec381fb01de5b3642afcddb2a28f3ee90c39e28daa244644d98"
+    }
+  }
+}
