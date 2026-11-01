@@ -272,7 +272,7 @@ VS1 只含 18 个切片，不含任何节点、subagent、远程或 Lab。它覆
 | STO-07 | `/compare`，对齐规则按 D6-13（D6:41） | STO-03 | F13 | 夹具得到 `SameCapture`、`Changed`、`Ambiguous` | mid |
 | STO-08 | `/search`（ILIKE，含中文）、`/values/{hash}/runs`（D6:36）；`File` 值的身份就是它的内容哈希（`pepgent-soroi/design/store.md:29`：文件的身份是“内容的哈希”），所以 `hash` 可以直接用 graph 中的 `Root.value.content` | STO-02 | F12 | 中文子串能命中；以一个 `File` 根 atom 的 `Root.value.content` 查询 `/values/{hash}/runs`，列出用到它的运行 | low |
 | STO-09 | `POST /runs/derive`、`/runs/{run}/abort`（D6:44、33） | STO-02 | F17、F24 | 一个事务里完成：P 未结束时写 `run_aborted`，R' 写 `Inherited`、继承的停止记录与新根 atom；返回 `Derived{run, seq, parentAborted}`（D6:44、131） | mid |
-| STO-10 | 在步提交的同一事务里，把暂存区 `soroi-batch/` 汇入 `agent_progress`；`/runs/{run}/progress`（D6:31-32） | STO-04 | F16 | 夹具 Parquet 汇入后可查；dry run 不汇入 | low |
+| STO-10 | 在步提交的同一事务里，把暂存区 `soroi-batch/` 的四列批次（`seq`、`at`、`kind`、`transcript_entry`）汇入 `agent_progress`；store 为每批填入 `run_id`、`step`、`position`；`/runs/{run}/progress`（D6:31-32） | STO-04 | F16 | 夹具 Parquet 汇入后可查；dry run 不汇入 | low |
 | STO-11 | `NodeVersionRecord` 随步提交；`/functions/{name}/usage`、`/versions/{v}`（D6:49） | STO-04 | F06、F29 | 两个版本、两次运行，usage 都正确 | low |
 | STO-12 `VS1` | store 镜像与 compose 服务；发行导入 `PUT /releases/{version}`（正文是 artifact 字节，带声明的 sha256）：同一事务校验哈希，把 boot、runner、定制 tar 各自按内容哈希放入对象目录，写 `ReleaseRecord`；`GET /releases`（D6:50、155-158）。init 在 store 就绪后调用一次。`boot.js` 的 program、agent 分支分别随 SOR-17a、SOR-18 进入发行物，届时由 DIST-01 重新产出 | STO-01、DIST-01 | 全部 | 冷启动后 init 返回 `ReleaseRecord`；`GET /releases` 有这条记录，它引用的 boot、runner、定制 tar 都能 `GET /objects/<哈希>`；哈希不符时不写任何记录 | low |
 
@@ -299,7 +299,7 @@ VS1 只含 18 个切片，不含任何节点、subagent、远程或 Lab。它覆
 | SOR-17a | 远程 Program 的正式运行路径：暂存区、`call.json`、`RunRequest`、`remote` CLI 客户端、等到终态、取回结果、随步提交、`remove`；`boot.js` 的 program 分支（D4:51-54）。终态有两种：`Ended`（拷出已送达）与 `EndedUnstarted{ended_at}`（排队后被取消、从未开始，leader 技术裁决 PM#4）；后者没有拷出，这次调用记为失败，不读暂存区 | SOR-06、STO-04、REM-05、REM-07 | F14、F15、F18 | 在 Komodo 上跑通一次 formal：结果随步提交，Stack 与卷已删除。`EndedUnstarted` 分支在 Slurm 上由 E2E-17 验证（排队中取消，中间件不读暂存区，`remove` 在终态之后成功） | mid |
 | SOR-17b | 远程 Program 的 dry run 分流：结果交回 AI，调用返回时 `DELETE /transfers/{t}`，不提交、不写对象（D4:67） | SOR-17a | F15 | 在 Komodo 上跑通一次 dry run：store 的 seq 不变，暂存区文件返回 404 | low |
 | SOR-18 | 远程 Agent：`launchRemote`；拷入两个定制 tar；`boot.js` 的 agent 分支；transcript 拷入拷出；交回（D4:55-60） | SOR-17a、SOR-11、MUX-07 | F16、F17 | 远程那一代能连回 Mux，并完成交回 | mid |
-| SOR-19 | `RemoteChild` 写 Parquet 批次：schema 与 `agent_progress` 相同，先写临时名再改名（D4:61） | SOR-18、STO-10 | F16 | `soroi-batch/` 中只有已改名的文件 | low |
+| SOR-19 | `RemoteChild` 写 Parquet 批次：每个批次只含 `seq`、`at`、`kind`、`transcript_entry` 四列，`kind` 只允许 `turn \| tool_call \| file_written`；先写 `x.parquet.tmp`，完成后原子改名为 `x.parquet`（D4:61） | SOR-18、STO-10 | F16 | `soroi-batch/` 中只有已改名的文件；批次只含四列 | low |
 | SOR-20 | 远程中止：Program 用 `remote abort`，等到终态（`Ended` 或 `EndedUnstarted`）再 `remove`；Agent 按顺序停止。dry run 零写入的回归检查（D6:43；D4:67；PM#4） | SOR-14、SOR-18 | F04、F17 | 远程 Agent 中止后，transcript 回到中心。中止一个仍在排队的作业得到 `EndedUnstarted` 的分支由 E2E-17 在 Slurm 上验证 | low |
 
 #### CUS 与 DIST：`Pepgent/soroi` 仓根（D2:62）
