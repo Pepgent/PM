@@ -1,0 +1,47 @@
+{
+  "head": "98eb3eeed75aea31154105e8723a26e0a7bc72b5",
+  "pr": "https://github.com/Pepgent/soroi/pull/263",
+  "ownerPublication": "https://github.com/Pepgent/deploy/pull/7",
+  "remoteHome": "/Users/mouriya/Ext/work/orbstack/pepgent-soroi-e2e/remote-home",
+  "remoteHomeTarget": "/home/agent/.config/remote",
+  "uid": 1000,
+  "remoteHomeMode": "0700",
+  "remoteFilesUid": 1000,
+  "remoteFilesMode": "0600",
+  "configParent": {
+    "uid": 0,
+    "gid": 0,
+    "mode": "0755",
+    "observation": "Actual TUI rendered normally; no root-run or broad chown workaround was applied. Unrelated future application writes under .config were not exercised."
+  },
+  "remoteTemplates": {
+    "command": "docker exec pepgent-soroi-e2e-central remote templates",
+    "result": "Actual TemplateInfo[] includes soroi-komodo with provider-returned identity; raw JSON in central-cli.raw.log. No hash comparison is an acceptance predicate."
+  },
+  "slurm": {
+    "producer": "https://github.com/Pepgent/deploy/pull/4",
+    "producerRecord": "Retained owning smoke.py completion response: job76 COMPLETED/SUCCESS return0. Controller later404 is retention; job was not rerun.",
+    "jobId": 76,
+    "nonce": "86200c36d94f49b88989b2aa65f4b2c9",
+    "file": "/srv/pepgent-runs/smoke-86200c36d94f49b88989b2aa65f4b2c9/result.txt",
+    "centralReadExitCode": 0
+  },
+  "lifecycle": {
+    "oldTuiExitCode": 0,
+    "preview": "central only",
+    "apply": "central only; --no-deps",
+    "fullTuiObserved": true,
+    "dockerDetachClientExitCode": 1,
+    "dockerDetachMessage": "read escape sequence",
+    "centralRunningAfterDetach": true,
+    "centralExitCode": 0,
+    "storeStartedAt": "2026-11-01T02:55:20.583904151Z",
+    "muxStartedAt": "2026-11-01T01:36:25.295413525Z",
+    "centralStartedAt": "2026-11-01T04:40:45.175627996Z"
+  },
+  "nonClaims": [
+    "No new Slurm job, copied producer fixture or host touch.",
+    "No Soroi boot/remote Program/F14 business execution was tested.",
+    "ENV04 owns config/credentials; DIST04 only mounts and consumes them."
+  ]
+}

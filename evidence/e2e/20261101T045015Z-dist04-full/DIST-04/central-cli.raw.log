@@ -1,0 +1,41 @@
+uid=1000(agent) gid=1000(agent) groups=1000(agent)
+0:0 755 /home/agent/.config
+1000:1000 700 /home/agent/.config/remote
+1000:1000 600 /home/agent/.config/remote/config.toml
+1000:1000 600 /home/agent/.config/remote/credentials.toml
+[
+  {
+    "name": "infra-slurm-check",
+    "description": "Infrastructure only: JWT, copy-in/out and shared body.log; not Soroi boot",
+    "backend": "slurm",
+    "mount": "/work",
+    "identity": {
+      "image": "sha256:3e9e97d1dad3fefa6173474c3b48472e7d89edcd5fd7197be72187c1feb7c5ab",
+      "config": "sha256:a5c7cd4e6de0ca4a9693c89c06ff726cb6bc524f4b91e94635cfb76f8757fc41"
+    }
+  },
+  {
+    "name": "soroi-komodo",
+    "description": "Soroi agent through the REM-04 Komodo template",
+    "backend": "komodo",
+    "mount": "/work",
+    "identity": {
+      "image": "sha256:3e9e97d1dad3fefa6173474c3b48472e7d89edcd5fd7197be72187c1feb7c5ab",
+      "config": "sha256:c9ebd62b834be9f933c833d988f4dd4736c31feb3d164c8cd449c4fa8b849a84"
+    }
+  },
+  {
+    "name": "soroi-slurm",
+    "description": "Soroi boot on Slurm; real boot inputs are supplied by the caller",
+    "backend": "slurm",
+    "mount": "/work",
+    "identity": {
+      "image": "sha256:3e9e97d1dad3fefa6173474c3b48472e7d89edcd5fd7197be72187c1feb7c5ab",
+      "config": "sha256:35ac3b642fce87b298f5b89f507e7a8da756b1315ceea652ab2ae640f0cce6a0"
+    }
+  }
+]
+nonce=86200c36d94f49b88989b2aa65f4b2c9
+job_id=76
+arch=aarch64
+container_os=alpine-3.24.3

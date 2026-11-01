@@ -1,0 +1,208 @@
+{
+  "configs": {
+    "central-entrypoint": {
+      "name": "pepgent-soroi-e2e_central-entrypoint",
+      "file": "/Users/mouriya/Ext/worktrees/eng-release-230-ff0716f/compose/central-entrypoint.sh"
+    },
+    "central-startup": {
+      "name": "pepgent-soroi-e2e_central-startup",
+      "file": "/Users/mouriya/Ext/worktrees/eng-release-230-ff0716f/compose/startup.yml"
+    },
+    "omp-config": {
+      "name": "pepgent-soroi-e2e_omp-config",
+      "file": "/Users/mouriya/Ext/work/orbstack/pepgent-gateway/central/config.yml"
+    },
+    "omp-models": {
+      "name": "pepgent-soroi-e2e_omp-models",
+      "file": "/Users/mouriya/Ext/work/orbstack/pepgent-gateway/central/models.yml"
+    }
+  },
+  "name": "pepgent-soroi-e2e",
+  "networks": {
+    "default": {
+      "name": "pepgent-soroi-e2e",
+      "ipam": {}
+    }
+  },
+  "secrets": {
+    "gateway-client-token": {
+      "name": "pepgent-soroi-e2e_gateway-client-token",
+      "file": "/Users/mouriya/Ext/work/orbstack/pepgent-gateway/central/token"
+    },
+    "mux-auth-token": {
+      "name": "pepgent-soroi-e2e_mux-auth-token",
+      "file": "/Users/mouriya/Ext/work/orbstack/pepgent-mux/token"
+    }
+  },
+  "services": {
+    "central": {
+      "command": [
+        "--model",
+        "opencode-go/deepseek-v4.1-flash"
+      ],
+      "configs": [
+        {
+          "source": "central-entrypoint",
+          "target": "/run/config/central-entrypoint.sh"
+        },
+        {
+          "source": "central-startup",
+          "target": "/run/config/startup.yml"
+        },
+        {
+          "source": "omp-models",
+          "target": "/run/config/models.yml"
+        },
+        {
+          "source": "omp-config",
+          "target": "/run/config/config.yml"
+        }
+      ],
+      "container_name": "pepgent-soroi-e2e-central",
+      "depends_on": {
+        "mux": {
+          "condition": "service_started",
+          "required": true
+        },
+        "store": {
+          "condition": "service_healthy",
+          "required": true
+        }
+      },
+      "entrypoint": [
+        "/bin/sh",
+        "/run/config/central-entrypoint.sh"
+      ],
+      "environment": {
+        "HOME": "/home/agent",
+        "SOROI_MUX_URL": "ws://pepgent-soroi-e2e-mux.orb.local:8080",
+        "SOROI_STORE_URL": "http://pepgent-soroi-e2e-store.orb.local:3001"
+      },
+      "image": "pepgent-registry.orb.local:5000/pepgent/central:latest",
+      "init": true,
+      "networks": {
+        "default": null
+      },
+      "secrets": [
+        {
+          "source": "gateway-client-token",
+          "target": "/run/secrets/gateway-client-token"
+        },
+        {
+          "source": "mux-auth-token",
+          "target": "/run/secrets/mux-auth-token"
+        }
+      ],
+      "stdin_open": true,
+      "tty": true,
+      "volumes": [
+        {
+          "type": "volume",
+          "source": "central-home",
+          "target": "/home/agent",
+          "volume": {}
+        },
+        {
+          "type": "volume",
+          "source": "central-work",
+          "target": "/work",
+          "volume": {}
+        },
+        {
+          "type": "bind",
+          "source": "/Users/mouriya/Ext/work/orbstack/pepgent-soroi-e2e/releases/soroi-b7347d4159a17a1fe761f3dcf553dbb15c37add1865d42c70eac52ee4e63e5c0.tar",
+          "target": "/release/soroi.tar",
+          "read_only": true,
+          "bind": {
+            "create_host_path": false
+          }
+        }
+      ]
+    },
+    "mux": {
+      "cap_drop": [
+        "ALL"
+      ],
+      "command": [
+        "serve",
+        "--listen",
+        "0.0.0.0:8080",
+        "--token-file",
+        "/run/secrets/mux-auth-token"
+      ],
+      "container_name": "pepgent-soroi-e2e-mux",
+      "entrypoint": null,
+      "image": "pepgent-registry.orb.local:5000/pepgent/omp-rpc-mux:latest",
+      "networks": {
+        "default": {
+          "aliases": [
+            "pepgent-soroi-e2e-mux.orb.local"
+          ]
+        }
+      },
+      "read_only": true,
+      "secrets": [
+        {
+          "source": "mux-auth-token",
+          "target": "/run/secrets/mux-auth-token"
+        }
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ]
+    },
+    "store": {
+      "build": {
+        "context": "/Users/mouriya/Ext/worktrees/eng-release-230-ff0716f",
+        "dockerfile": "packages/store/Dockerfile"
+      },
+      "command": null,
+      "container_name": "pepgent-soroi-e2e-store",
+      "entrypoint": null,
+      "environment": {
+        "STORE_HOME": "/var/lib/soroi-store",
+        "STORE_HOST": "0.0.0.0",
+        "STORE_PORT": "3001"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "bun",
+          "-e",
+          "const r = await fetch(\"http://127.0.0.1:3001/runs\"); if (!r.ok || !Array.isArray(await r.json())) process.exit(1);"
+        ],
+        "timeout": "3s",
+        "interval": "5s",
+        "retries": 12,
+        "start_period": "10s"
+      },
+      "image": "pepgent-registry.orb.local:5000/pepgent/soroi-store:latest",
+      "networks": {
+        "default": {
+          "aliases": [
+            "pepgent-soroi-e2e-store.orb.local"
+          ]
+        }
+      },
+      "volumes": [
+        {
+          "type": "volume",
+          "source": "store-data",
+          "target": "/var/lib/soroi-store",
+          "volume": {}
+        }
+      ]
+    }
+  },
+  "volumes": {
+    "central-home": {
+      "name": "pepgent-soroi-e2e-central-home"
+    },
+    "central-work": {
+      "name": "pepgent-soroi-e2e-central-work"
+    },
+    "store-data": {
+      "name": "pepgent-soroi-e2e-store-data"
+    }
+  }
+}

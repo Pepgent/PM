@@ -1,0 +1,16 @@
+services:
+  central:
+    environment:
+      REMOTE_HOME: /home/agent/.config/remote
+    volumes:
+      - type: bind
+        source: "${SOROI_REMOTE_HOME:?Set SOROI_REMOTE_HOME to the published standalone remote-home directory}"
+        target: /home/agent/.config/remote
+        bind:
+          create_host_path: false
+      - type: bind
+        source: "${SOROI_SLURM_RUNS:?Set SOROI_SLURM_RUNS to the existing Slurm shared runs directory}"
+        target: /srv/pepgent-runs
+        read_only: true
+        bind:
+          create_host_path: false
