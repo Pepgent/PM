@@ -10,7 +10,7 @@ The frozen owner publication is [comment 6553021595](https://github.com/Pepgent/
 
 Both failed attempts used the actual CI release from [run 41270217013](https://github.com/Pepgent/soroi/actions/runs/41270217013), manifest source `777c75678b8ec73822a3bdbe7c9cdfa87bd64f57`. The original tar filename/release identity is `soroi-621607dfe57f576be0e07bad19fbdaf0299d6f7beb024cea9f4de63947597b3a.tar`. The tar and native executable are **not** included here. Commit/release/image strings in retained configs are historical identities only; they are not correctness evidence and were not hash-verified.
 
-Recorded driver checkout: `/Users/mouriya/Ext/worktrees/test-208-s1-observers-ff0716f`. Host stderr records macOS arm64 with Bun 1.4.4; IMG01 output records Linux arm64, Bun 1.4.4 and native OMP 18.14.2. These are observations, not version pins. The image reference, Docker network, non-secret store URL, installer/prepare/verifier argv and native arguments remain verbatim in each `campaign.json`. Credential/model/settings paths are historical references only: their target files were not followed, read or copied by the archivist. A configured `build.model` is an intended target, **not** evidence that a model turn happened.
+Recorded driver checkout: `/Users/mouriya/Ext/worktrees/test-208-s1-observers-ff0716f`. Recorded host environment supplied by the tester: Darwin/macOS arm64, Bun 1.4.4; IMG01 output records Linux arm64, Bun 1.4.4 and native OMP 18.14.2. These are observations, not version pins. The image reference, Docker network, non-secret store URL, installer/prepare/verifier argv and native arguments remain verbatim in each `campaign.json`. Credential/model/settings paths are historical references only: their target files were not followed, read or copied by the archivist. A configured `build.model` is an intended target, **not** evidence that a model turn happened.
 
 Actual historical commands, all from the recorded checkout unless stated otherwise:
 
@@ -31,7 +31,7 @@ Every tar contains the entire named frozen root, including its root directory an
 
 | Under `raw/` | Class / actual outcome | Files | Directories | Original file bytes |
 | --- | --- | ---: | ---: | ---: |
-| `r1-failed-a0.tar.gz` | Actual R1 full-path attempt, failed before injection completed | 10 | 4 | 9258 |
+| `r1-failed-a0.tar.gz` | Actual R1 full-path attempt, failed before the `:injected` marker | 10 | 4 | 9258 |
 | `r2-failed-a0.tar.gz` | Actual R2 full-path attempt, real install/prepare/TUI, turn-end timeout | 8 | 4 | 30108 |
 | `deliberate-prepare-failure.tar.gz` | Intentional exit 7 after real prepare; partial diagnostic retention only | 11 | 6 | 9712 |
 | `version-only-identity.tar.gz` | Clean IMG01 `omp --version`, exit 0; not A0 | 1 | 1 | 381 |
