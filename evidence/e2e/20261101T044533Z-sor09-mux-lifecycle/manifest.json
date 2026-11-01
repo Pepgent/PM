@@ -61,8 +61,8 @@
     {
       "path": "outputs/runtime-evidence.json",
       "source": "/tmp/soroi-196-runtime/runtime-evidence.json",
-      "category": "output",
-      "purpose": "Recorded runtime evidence summary and qualifications."
+      "category": "metadata",
+      "purpose": "Main-authored observation metadata/summary; not raw executable output."
     },
     {
       "path": "outputs/events.jsonl",
@@ -223,14 +223,14 @@
     {
       "path": "native-transcripts/recipes/MuxWorker196.soroi.json",
       "source": "/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13/MuxWorker196.soroi.json",
-      "category": "native-transcript",
-      "role": "child recipe"
+      "category": "launch-recipe",
+      "role": "immutable launch recipe"
     },
     {
       "path": "native-transcripts/recipes/LossWorker196.soroi.json",
       "source": "/tmp/soroi-196-runtime/sessions/2026-11-01T04-50-04-806Z_01a19571-7b86-76ab-a26c-20f54edcfc13/LossWorker196.soroi.json",
-      "category": "native-transcript",
-      "role": "child recipe"
+      "category": "launch-recipe",
+      "role": "immutable launch recipe"
     },
     {
       "path": "native-transcripts/host-cancel/2026-11-01T04-54-51-464Z_01a19575-db48-7318-a704-96aab363572e.jsonl",
