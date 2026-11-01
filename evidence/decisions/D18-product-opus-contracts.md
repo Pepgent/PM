@@ -1,49 +1,18 @@
-# 产品与跨组件契约决策表（SoroiKeeperOpus 依 U93/U96 发起，优先级 P1）
+# D18：产品全景与跨组件契约纠偏（v2，P1）
 
-- 发起人：`SoroiKeeperOpus`（产品与架构全景守护部）。编号 D18 为暂定；若已被占用，请秘书顺延到下一个空号。
-- 依据：U93（产品角色有权发起投票）；U12（逐条 what/where/how/取舍）；C2-3（产品、架构与跨组件契约议案由 Main 协调席、claude-high、Argon、LeadMentor 四席逐条投票；Argon 凭 (U) 原文享原始意图否决权；意图/技术分类争议由 LeadMentor 仲裁）。
-- 证据采样时间：2026-11-01；remote 代码以 `origin/main` `695a1a7` 为准。
-- 发起人只提出条目和证据，不预判结论，也没有就任何条目采取行动。
+发起：SoroiKeeperOpus，依据U93/U96。现行表决对象见 https://github.com/Pepgent/PM/issues/28#issuecomment-6559342240 。D18-01按11子项逐项表决；02/04对象不变，03/05为方案C；这是待表决提案，不是已通过决议。
 
-| ID | what | where | how（供表决的方案） | 取舍 | 分类 |
+| ID | what | where | how | 取舍 | 分类 |
 |---|---|---|---|---|---|
-| D18-01 | 原型要求、但 `design/layers.md` 未覆盖的业务面，逐项确定归属 | `pepgent-soroi/design/layers.md`；`pepgent-pm/evidence/decisions/D8-mvp-scope.md:72,87`；`D12-lab-wire.md:561-579` | 逐项表决归属（Lab 后端 / 独立组件 / 列入 D9）：①Lab 业务目录与关系 ②仪器资源排程 ③算力运维与集群接入 ④镜像开发构建 ⑤多人讨论与成果治理 ⑥数据集索引、预览与导出（ZIP/RO-Crate）⑦广义自动化触发源（节点判据、设备 idle、构建、cron、邮件）⑧身份、授权与配额 ⑨科研主页对象 ⑩业务 AI 会话与动作协议 ⑪函数到科研节点卡片的元数据映射（设备、耗时、判据）。提议默认归 Lab 后端或独立组件，不进 soroi 内核 | 进 soroi：内核膨胀，违背“soroi本身相当于只是omp的扩展组件”（U1）。归 Lab：Lab 后端范围扩大，需排期。只列 D9：首版页面对应字段留空 | 意图 + 技术 |
+| D18-01 | 原型要求、但 `design/layers.md` 未覆盖的业务面，逐项确定归属 | `pepgent-soroi/design/layers.md`；`pepgent-pm/evidence/decisions/D8-mvp-scope.md:72,87`；`D12-lab-wire.md:561-579` | ① Lab 业务目录与关系；Lab 后端（`lab.sqlite`）；按 D12 已有字段；实验标签、项目多标签在 D12 线上无来源，列 D9；D7-02、D12:155,267,561<br>② 仪器资源排程；Lab 后端只持有预约与冲突；设备本身由 remote 模板字段提供（P3），Lab 不另建设备目录；预约、仲裁、设备 idle 列 D9；现有运行实际时段、草稿估时、设备泳道投影按 D7/D12 首版；D7-12、D12-06、D8:87<br>③ 算力运维与集群接入；只读作业列表/status/tail：Lab 经 remote，首版。作业控制（restart、destroy、new_sandbox）与集群/模板登记：remote 的操作，由 Lab 门面调用，D9。只有集群健康、容量、交互 shell 等 remote 不持有的事实，归独立运维组件，D9；只读首版，其余 D9；D2-09、D4 §2、D7-12（remote 是作业与模板目录唯一权威）、D8:87<br>④ 镜像开发构建；`Pepgent/images` + Komodo Build；Lab 只做门面；构建控制 D9；已定镜像定义、模板资源绑定与运行作业读取不取消；D2-13、D7-13、D8-16<br>⑤ 讨论（一人一会话）与成果治理；Lab 后端（讨论 = 该成员自己的 Lab 根会话，其他成员只读；成果治理 = 结论确认与报告）；首版；D7-04、D11-49、D12-intent:59-63、F31<br>⑥ 数据集索引、预览与导出；Lab 后端读 store 事实 + 业务库标签；索引、预览、来源、装载首版；实验产物 role/verdict/契约与 ZIP/RO-Crate 导出 D9；D12:571、D8-16<br>⑦ 自动化触发源；Lab 自动化引擎；生命周期事件（`run_started`/`run_ended`/`run_aborted`）+ `schedule{cron}` + 手动运行首版；节点判据、设备 idle、构建事件、邮件、仪器事件 D9；D7-10、D12-09（D12:41,237-247）、D8-16<br>⑧ 身份、授权与配额；Lab 后端（Better Auth organization，唯一权限源）；认证与四角色首版；配额设定值已有字段；GPU 小时实际用量、邀请邮件 D9；D7-03、D8-16<br>⑨ 科研主页对象；Lab 后端；由真实运行/讨论派生的报告、里程碑首版；研究阶段叙述 D9；“文献”除非由报告 `sources` 派生，否则 D9；D7-02、D12:567<br>⑩ 业务 AI 会话与动作协议；Lab 后端（根会话 + `lab_*` host tools；实验提案只建草稿）；首版；D7-04、D7-05<br>⑪ 函数到科研节点卡片的元数据映射；Lab 后端从 Lab 库 TS 静态导出；签名、参数、返回、默认 env、分组、估时首版；节点级科研设备、判据、产物契约 D9；默认 env 对应的模板设备继续供首版使用；D10-11、D12-15 | 进 soroi：内核膨胀，违背“soroi本身相当于只是omp的扩展组件”（U1）。归 Lab：Lab 后端范围扩大，需排期。只列 D9：首版页面对应字段留空 | 意图 + 技术 |
 | D18-02 | 设计正文是否同步 D10 三仓目标与过渡状态，并修正两处措辞 | `pepgent-soroi/design/soroi.md:9-15,31`；`store.md:3,11`；`eval.md:3,125,234` | ①“`Pepgent/soroi` 单仓作为一个可安装整体发行”改为“仓 A store / 仓 B omp-soroi / soroi 设计与组装仓；迁仓前在现仓互斥路径域开发”；②`store.md:11`“dry run 从头到尾不调用任何写接口”改为“不写正式记录与中心副本”（`store.md:111`、`eval.md:107,121-123` 写明 dry run 创建并删除 transfer）；③`eval.md:125`“程序运行之前不声明产出”澄清为“不预声明捕获集与产物路径，返回形状仍由 TS 静态给出” | 同步：正文与已通过的 D10/D16-01 一致，工人不被误导。不同步：正文与已表决决策长期矛盾 | 技术 |
-| D18-03 | remote 终态 `Ended` 的已表决契约与 remote main 实现不一致，如何收敛 | 契约：`D4-remote-exec.md:28`（“`Ended` 表示拷出已送达”）、D4-12 第 3 条；`pepgent-soroi/design/eval.md:117-120`。实现：`pepgent-remote` `templates/komodo/soroi/compose.yaml`（copy-out `depends_on: body: condition: service_completed_successfully`）；`src/backend/komodo/mod.rs::derive_status`（体失败、无 copy-out 时 `broken` 分支也返回 `Ended`）；`src/backend/slurm/mod.rs::status`（有 batch host 的终态一律 `Ended`，不看 copy-out 是否成功）；`README.md`（“A failed or cancelled terminal run does not by itself prove the requested output was delivered”） | 方案 A：维持 D4。remote 改为无论体成败都执行 copy-out；copy-out 未送达时不报 `Ended`。方案 B：修订 D4，新增终态变体（如带退出结果的失败态、拷出缺失态），eval 中间件与 Lab 按变体穷尽处理 | A：契约不动，只改 remote 两个后端；体的退出结果仍不可见（D12 已把“退出结果”列入 D9）。B：GUI 能区分 failed 与 exited，但 remote、eval、Lab 三方都要改契约 | 技术（跨组件契约） |
-| D18-04 | GUI“设置 · 智能体模板”页的语义 | `pepgent/AI4S-prototype/AI4S-Settings-Hi-Fi.dc.html:153-161,191-196`（列 Claude Code/Codex/Pi/OpenCode）；`pepgent-pm/evidence/argon/D12-intent.md:152-162`（唯一 harness 字面量为 omp）；`pepgent-soroi/design/layers.md:11` | 方案 A：限定为编辑 Lab 库 `.omp/agents/` 中的 omp agent 定义，其他 harness 字段不出线。方案 B：保留原型多 harness 模板 | A：符合 U13（核心 harness 以 omp 为核心）、U24 与“远程 Agent 携带同一 soroi 发行”。B：与新版设计冲突。请同时确认 D12-intent 现有文字是否已覆盖本页 | 意图 |
-| D18-05 | 多 Lab 隔离模型：每个 Lab 全套独立部署，还是单一 Lab 后端内的 organization 多 Lab | 用户原话：session `01a0d0f1-ef92-760c-b084-544d41a96888` entry `93d9c89c`（2026-09-24T01:56:57Z）“实验室的抽象实际上是soroi多租户模式，而soroi多租户在早期直接用多实例解决”；`bf96d256`（02:01:18Z）“多租户概念不侵入soroi”；`4d388e7f`（2026-09-25T16:24:01Z）“在新增实验室的时候，等于部署全套soroi下的东西成独立的一份，包括km，这样根本不存在手动做租户数据隔离”；`d5277d47`（16:24:15Z）“而新增实验室等于部署，这个部分是个占位细节”。现行决策：`D7-lab-backend.md:61`（同进程隔离区，“进程仍是一个”）、`:63`（Better Auth organization 管 Lab/member/invitation，seed 首 Lab）、`:79`（中心主机单个 Lab 容器） | 方案 A：恢复用户原话，每新增一个 Lab 部署一整套（Lab 后端、store、Mux、Komodo 等），Lab 后端内不做跨 Lab 隔离；organization 只承载单 Lab 内成员与角色。方案 B：维持 D7 单后端多 organization，需同时补 store/Mux/remote 的按 Lab 数据隔离设计 | A：零租户隔离代码，符合用户原话；资源成本按 Lab 线性增长（用户原话已声明“不考虑资源消耗”）。B：省资源，但多租户概念会侵入 store 等组件，与“多租户概念不侵入soroi”冲突 | 意图 |
+| D18-03 | remote 终态 `Ended` 的已表决契约与 remote main 实现不一致，如何收敛 | 契约：`D4-remote-exec.md:28`（“`Ended` 表示拷出已送达”）、D4-12 第 3 条；`pepgent-soroi/design/eval.md:117-120`。实现：`pepgent-remote` `templates/komodo/soroi/compose.yaml`（copy-out `depends_on: body: condition: service_completed_successfully`）；`src/backend/komodo/mod.rs::derive_status`（体失败、无 copy-out 时 `broken` 分支也返回 `Ended`）；`src/backend/slurm/mod.rs::status`（有 batch host 的终态一律 `Ended`，不看 copy-out 是否成功）；`README.md`（“A failed or cancelled terminal run does not by itself prove the requested output was delivered”） | 方案 C：1. `D4-remote-exec.md:28`、D4-07 第 3 步、D4-12 第 3 条、`pepgent-soroi/design/eval.md:118` 改为：“`Ended` 是作业的执行终态。未被 `abort` 的作业到达 `Ended` 时拷出已送达。被 `abort` 的作业也以 `Ended` 结束，但不保证拷出，发起中止的调用方不读暂存区（被中止的调用记 `call_aborted`，D6-15）。”<br>2. remote 两个后端的终态推导保持现状；体自身失败、拷入失败属于失败分支，按 `design-assumes-it-works` 本轮不设计。<br>3. GUI 区分 failed/exited 维持 D12:572（G22）列 D9，届时再议新增终态变体。<br>远程 Agent 有序停止（关闭这一代 → omp 正常退出 → 体以 0 退出 → 拷出）走自然结束，仍得到“拷出已送达”的 `Ended`，F18 复盘浏览不受影响。 | 保留既有作业终态与 remove 路径；被 abort 的调用不保证拷出、不读暂存区；GUI failed/exited 区分仍列 D9，当前不新增终态或改代码 | 技术（跨组件契约） |
+| D18-04 | GUI“设置 · 智能体模板”页的语义 | `pepgent/AI4S-prototype/AI4S-Settings-Hi-Fi.dc.html:153-161,191-196`（列 Claude Code/Codex/Pi/OpenCode）；`pepgent-pm/evidence/argon/D12-intent.md:53-58,114,189-200`（唯一 harness 字面量为 omp）；`pepgent-soroi/design/layers.md:11` | 方案 A：限定为编辑 Lab 库 `.omp/agents/` 中的 omp agent 定义，其他 harness 字段不出线。方案 B：保留原型多 harness 模板 | A：符合 U13（核心 harness 以 omp 为核心）、U24 与“远程 Agent 携带同一 soroi 发行”。B：与新版设计冲突。请同时确认 D12-intent 现有文字是否已覆盖本页 | 意图 |
+| D18-05 | 多 Lab 隔离模型：每个 Lab 全套独立部署，还是单一 Lab 后端内的 organization 多 Lab | 用户完整原话 bf96d256：你错了，web对接soroi多租户啊，我说的是多租户概念不侵入soroi，想什么啊；93d9c89c、4d388e7f、d5277d47；D7-01/02/03/19、D12-03/04 | 方案 C：1. Lab 后端是唯一的多租户层：D7-01/02/03 保持不变，Better Auth organization 承载多个 Lab 及其成员、角色、邀请；目录与切换 Lab 按 D12-03/04 进首版。<br>2. 每新增一个 Lab，部署一套独立的 soroi 实例：store、Mux、Komodo（km）、remote home，以及该 Lab 的中心 omp 会话卷与 worktree 卷；soroi 各组件里没有 Lab 字段。<br>3. Lab 后端按 `labId` 路由到该 Lab 实例的 store URL、Mux URL 与 remote home：D7-19 的单一 `SOROI_STORE_URL`、`SOROI_MUX_URL` 改为按 Lab 配置；D12-04 的 `openRuns` 改为分别查询各 Lab 实例的 store；`experiment_ext.lab_id` 不再用于在同一 store 里给运行分 Lab。<br>4. “新增实验室等于部署”的部署单元边界与供给方式，按用户原话“这个部分是个占位细节”（`d5277d47`）作为占位，先假定能工作。 | Lab 后端承担多租户与按 Lab 路由；soroi 各组件按实例隔离且不增加 Lab 字段。新增 Lab 的部署单元供给细节按用户原话作为占位，不撤首版目录与切换 Lab | 意图 |
 
-## D18-05 的检索说明
-子代理检索了 2026-09-25 之后的全部用户原话（关键词：多租户、租户、多实例、实验室、Lab 隔离、独立部署、organization、切换 Lab、每个lab、多个lab、store、mux、Komodo、共享），**没有找到用户撤回、改变或重申“每 Lab 全套独立部署”的原话**。D7 引用了其他用户原话（如 `#e3692177` “app层的业务好像几乎不用动”），但没有引用上述 09-25 原话，也没有说明该要求已被替换。D7 与 09-25 原话冲突是发起人的判断，D7 没有逐字写出“所有 Lab 共享同一部署”。上述原话早于 2026-10-30 分水岭，但属于 Pepgent 应用层的部署与组织模型，不属于被替换的旧 soroi 承载路径；用户 10-30 后说过“app层的业务好像几乎不用动”。
+## 执行边界
 
-## 发起人正式提案（表决对象；“赞成”即赞成本节方案）
+原则：soroi 只是 omp 扩展组件（U1），以下全部不进 soroi 内核。①④⑥⑧⑩⑪ 的首版范围已由 D7/D8-16/D12 表决，本表只确认归属，首版字段以 D7/D12 为准，不另立范围；“D9”指首版页面保留、无源字段诚实留空、列入 F32 差距分析（D12:561-579）。
 
-### D18-01：11 项逐项归属
-
-原则：soroi 只是 omp 扩展组件（U1），以下全部不进 soroi 内核；“首版”指本轮 A0+F01–F31 必须真实走通，“D9”指首版页面保留、无源字段诚实留空、列入 F32 差距分析（D8-16、D12:561-579）。
-
-| 项 | 归属 | 首版范围 | 依据 |
-|---|---|---|---|
-| ① Lab 业务目录与关系（实验名称/负责人/标签、草稿版本、讨论绑定、项目多标签） | Lab 后端（`lab.sqlite`） | 首版 | D7-03、D12 13 页 wire |
-| ② 仪器资源排程（设备目录、机位预留、冲突、设备 idle） | Lab 后端 | D9 | D8:87 已列仪器事件入 D9 |
-| ③ 算力运维与集群接入 | 只读作业列表/status/tail：Lab 经 remote，首版；集群健康/容量/重启/销毁/shell/接入向导：独立运维组件（不归 soroi、不归 remote），D9 | 只读首版，其余 D9 | D7:72,103-105；D8:87（只读 status/tail 必须进首版） |
-| ④ 镜像开发构建 | `Pepgent/images` + Komodo Build；Lab 只做门面 | D9 | D2:50；D7:36-40；D8:87 |
-| ⑤ 多人讨论与成果治理 | Lab 后端（讨论 = Lab 根会话，经 Mux 与 host tools） | 首版 | D7-04、D7:65-67、F31 |
-| ⑥ 数据集索引、预览与导出 | Lab 后端读 store 事实（来源、被引用、产物字节）+ 业务库标签 | 索引/预览/来源首版；role/verdict/契约语义与 ZIP/RO-Crate 导出 D9 | layers 远程捕获/记录；D12:567-571 |
-| ⑦ 广义自动化触发源 | Lab 自动化引擎 | 生命周期触发（F30）首版；节点判据、设备 idle、构建、cron、邮件 D9 | layers 运行事件；D8:87 |
-| ⑧ 身份、授权与配额 | Lab 后端（Better Auth organization，唯一权限源） | 认证与四角色首版；GPU 小时真实用量、邀请邮件 D9 | D7:63；D8:87 |
-| ⑨ 科研主页对象（报告、文献、里程碑、阶段叙述） | Lab 后端 | 由真实运行/讨论派生的部分首版；研究阶段叙述 D9 | D12:569-570 |
-| ⑩ 业务 AI 会话与动作协议 | Lab 后端（根会话 + `lab_*` host tools；实验提案只建草稿） | 首版 | D7:65-67；D12:48 |
-| ⑪ 函数到科研节点卡片的元数据映射 | Lab 后端从 Lab 库 TS 静态导出（签名、默认 env、JSDoc `@group`/`@estimateMinutes`） | 签名/参数/返回/默认 env/分组/估时首版；设备、判据、产物契约 D9 | D10:23；lab-library PR14 |
-
-### D18-02
-按表中 how 列①②③执行（由 Argon 回写 design 正文）。
-
-### D18-03：推荐方案 A（维持 D4）
-remote 两个后端改为：体结束后无论成败都执行 copy-out；`Ended` 只在 copy-out 已送达后报告。Komodo 模板 copy-out 的依赖改为体结束（不要求成功），`derive_status` 不再在缺 copy-out 时返回 `Ended`；Slurm 以 copy-out 步骤完成作为 `Ended` 依据。eval 中间件与 D4 契约不变；体的退出结果仍按 D12 列入 D9。理由：契约已表决，改动只落在 remote 一个组件；失败运行的工作目录照样回收，复盘可浏览（F18）；符合用户“创建临时的volume，然后全自动的把文件拷回来”（`01a18e3a/#09e1cc92`）。
-
-### D18-04：推荐方案 A
-智能体模板页限定为编辑 Lab 库 `.omp/agents/` 中的 omp agent 定义；Claude Code/Codex/Pi/OpenCode 等其他 harness 字段不出线。理由：U13、U24，远程 Agent 携带同一 soroi 发行与 Lab `.omp/`（layers:11）。
-
-### D18-05：推荐方案 A
-每新增一个 Lab 部署一整套（Lab 后端、store、Mux、Komodo 等）；单个部署内的 Better Auth organization 只承载本 Lab 的成员、角色与邀请，部署 seed 创建该 Lab。D7-01/02/19 中隐含“单后端承载多个 Lab”的部分按此修订；侧栏“切换 Lab”首版列 D9。理由：用户原话“新增实验室的时候，等于部署全套soroi下的东西成独立的一份，包括km”，之后无撤回；多租户概念不侵入 soroi。
+按表中 how 列①②③执行，由 Argon 回写 design 正文。
+执行附注（文档一致性要求，不改表决对象）：同步覆盖 `subagent.md:11,28,151`、`soroi.md:13-16,31`、`eval.md:251`、`store.md:3`（发行 tar 不含 store 服务实现，D10-03）；②的替换文字保留“不写对象目录”，即“dry run 只经传输暂存区收发字节（`POST`/`PUT`/`DELETE /transfers`），不写正式记录、中心副本与对象目录”。
