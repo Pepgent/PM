@@ -112,3 +112,19 @@
   - 表决期间 W-10 是否只暂停 C-3 至 C-6 中“由定义找模板”的部分，WEB-07 其余部分照常？
 
 闸门结论分别写入 `GATES/node-template-field-gate-a.md`（Argon-2）与 `GATES/node-template-field-gate-b.md`（ArgonGovernance-2）。
+
+## 五、处置结果
+
+- **闸门 A（Argon-2，`node-template-field-gate-a.md`，PM `80e364d`）：**
+  - 第三节的两点是 D5-10、D5-17、D7-13 和 D7 P1 的原意：`template` 是 omp agent 定义名，节点的 remote 模板是 `defaultEnvironment`。
+  - 改 D12 类型和 D35-02 v3 的泳道依据，属于纠正已通过正文和跨组件公开语义（K4），必须表决；同意列 P1。
+  - 未声明 `env` 的节点按 D5-10 落在 `central`，不画计划条，设备为空。这符合 D7:96 和 D35-02 v3 的意图。lab-library 现有节点没有声明 `env`，属于库内容的问题，不在本议题内。
+- **闸门 B（ArgonGovernance-2，`node-template-field-gate-b.md`，PM `106d456`）：**
+  - 两处改动都在 D16-09 和 D20-01 白名单内，不改切片归属：W-09 改 `protocol/lab/library.ts`，W-10 在 WEB-07（#29）改四处投影。
+  - 必须表决。没有 `BLOCKED`，不进 P0，按跨组件接缝纠偏列 P1；两行都是 4 席参与的契约行，不加 `governance`。
+  - 通过后，由协调席按 D16-04 为 W-09 补建承载 issue，或并入既有承载。
+  - 表决期间，W-10 只在 C-3 至 C-6 的模板关联上等待，WEB-07 的其余接线照常推进。
+- **立案：** `council propose --seat Coordination --as DeskNodeTemplateField --file /tmp/deskntf/D-node-template-field.yaml` 立为 D41（[Pepgent/PM#60](https://github.com/Pepgent/PM/issues/60)，P1）。共两行，资格席为 Coordination、ClaudeHigh、Argon、LeadMentor，门槛 3：
+  - D41-01：D12 类型改正，并改 W-09 协议的类型名与注释；
+  - D41-02：节点定义与模板之间改用 `defaultEnvironment` 关联，取代 D35-02 v3 的泳道一句，四处投影由 W-10 在 WEB-07 承接。
+- **登记：** 在 [Pepgent#29 issuecomment-6564146198](https://github.com/Pepgent/Pepgent/issues/29#issuecomment-6564146198) 记下 D41 立案和表决期范围，由 Pepgent 片区经理送达 W-10。D40-01 的 `nodeBindingCount` 结果在 #28 另行送达。
