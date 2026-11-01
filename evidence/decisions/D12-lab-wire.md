@@ -531,6 +531,8 @@ export type LabCommandResult<C extends LabCommand> = LabCommandOutput[C['kind']]
 | 指向该草稿的 pending 为 `awaiting_approval`，且未绑定运行 | LC-2：按 F14 同一保存修订号规则递增 `savedVersion`，其余保存行为与无 pending 的草稿相同；pending 保持 `awaiting_approval`，不因保存撤回或重新申请 | LC-5：在一次受理中同时删除该 `pending_launch` 行与 `draft` 行，返回 `Done`、发 `catalog`；撤回尚未投递的启动意图，释放该讨论的 pending 主键，随后可再建 pending；不新增撤回或拒绝命令 |
 | 该草稿所在会话的 pending 为 `sent` 且指向它，或已有 `experiment_ext.draft` 指向它 | LC-3：返回既有领域失败 `revision_conflict`；草稿、pending 和 `catalog` 都不变，不新增失败码 | LC-6：返回既有领域失败 `revision_conflict`；草稿、pending 和 `catalog` 都不变，不新增失败码 |
 
+**已绑定草稿再次启动：** 草稿已有 `experiment_ext.draft` 指向它时，`experiment.start` 返回既有领域失败 `revision_conflict`，草稿、`pending_launch` 和 `catalog` 都不变（[Pepgent#18 restart 双闸门处置 a](https://github.com/Pepgent/Pepgent/issues/18#issuecomment-6561436037)）。
+
 主路径上，`sent` 的 pending 由随后的非派生 `run_started` 绑定到运行、写入 `experiment_ext` 后删除（D7-06）。已绑定草稿作为运行的来源草稿出现，不另列成一条未绑定草稿项；其内容不能再保存或丢弃。`plan` 转录附件保留历史内容，所指草稿已丢弃时的呈现见 `D12-coverage.md` 的 discussions 映射。
 
 ### HTTP 路由（D12-13、D12-17）
