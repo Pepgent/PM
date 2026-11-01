@@ -210,12 +210,12 @@ type Verdict = {
 
 #### ENV：本机测试环境（台账 `~/Ext/work/orbstack/`，执行者是基础设施操作员）
 
-| ID | 切片 | 依赖 | 解锁 | 验收 | 档位 | 统一验收前置 |
-| --- | --- | --- | --- | --- | --- | --- |
-| ENV-01 `VS1` | CNCF Distribution 容器 `pepgent-registry`（HTTP，`pepgent-registry.orb.local:5000`），先登记台账；Slurm 机的 Apptainer 配置为接受该仓库 | — | 全部镜像 | ① Mac 推送一个 alpine tag；② Komodo 部署的容器用这个镜像输出 nonce；③ Slurm 机上 `apptainer pull docker://…`，并以 `pepgent` 用户执行同一 nonce 命令。三处都要成功（EP2） | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| ENV-02 `VS1` | 本机 auth broker 与 gateway；`--clients` 文件给每个消费方一个 token（只存 digest）；每个消费方一份 `models.yml`（D8-06）。在台账里登记进程与端口 | ENV-01 | 全部 | 在一个装了上游 omp 的临时容器（先登记，用后删除）、Komodo 部署的容器、Slurm 作业里，`omp -p "reply ok" --model <D8-06 顺序>` 都返回补全；三处日志里都找不到 provider token（EP1）。`--clients` 文件里另为 A0 的临时 IMG-01 容器准备一个 client token（D8-03、E2E-02）。不依赖 IMG-01，所以能排在 VS1 最前面 | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| ENV-03 | 网络可达矩阵：起一个临时的 WS/HTTP 回显容器（先登记，用后删除）。分别从 Komodo 部署的容器和 Slurm 作业建立 WS 往返，并 PUT 一个 100 MiB 的 tar | ENV-01 | F14–F18 | 两处 WS 往返成功，tar 的 sha256 一致（EP3）；临时资源删除，台账更新 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| ENV-04 | token.sh 签发 Slurm JWT，私密写入 central/lab-web remote home（有效期覆盖一轮，不打印）；config.toml 的 soroi-slurm 模板写 IMG-01/02 的 OCI 引用（tag/digest），body/步骤镜像均以 docker:// 原样交 Apptainer，不写 SIF；run_root=/srv/pepgent-runs，shared_root 为容器挂载点，identity.image 在读取目录时解析（D11-10） | REM-01、IMG-03、DIST-04、DEP-02 | F15 | templates 列出模板/identity，status 读 Slurm 作业，tail 读 body.log | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
+| ID | 切片 | 依赖 | 解锁 | 验收 | 档位 |
+| --- | --- | --- | --- | --- | --- |
+| ENV-01 `VS1` | CNCF Distribution 容器 `pepgent-registry`（HTTP，`pepgent-registry.orb.local:5000`），先登记台账；Slurm 机的 Apptainer 配置为接受该仓库 | — | 全部镜像 | ① Mac 推送一个 alpine tag；② Komodo 部署的容器用这个镜像输出 nonce；③ Slurm 机上 `apptainer pull docker://…`，并以 `pepgent` 用户执行同一 nonce 命令。三处都要成功（EP2） | low |
+| ENV-02 `VS1` | 本机 auth broker 与 gateway；`--clients` 文件给每个消费方一个 token（只存 digest）；每个消费方一份 `models.yml`（D8-06）。在台账里登记进程与端口 | ENV-01 | 全部 | 在一个装了上游 omp 的临时容器（先登记，用后删除）、Komodo 部署的容器、Slurm 作业里，`omp -p "reply ok" --model <D8-06 顺序>` 都返回补全；三处日志里都找不到 provider token（EP1）。`--clients` 文件里另为 A0 的临时 IMG-01 容器准备一个 client token（D8-03、E2E-02）。不依赖 IMG-01，所以能排在 VS1 最前面 | mid |
+| ENV-03 | 网络可达矩阵：起一个临时的 WS/HTTP 回显容器（先登记，用后删除）。分别从 Komodo 部署的容器和 Slurm 作业建立 WS 往返，并 PUT 一个 100 MiB 的 tar | ENV-01 | F14–F18 | 两处 WS 往返成功，tar 的 sha256 一致（EP3）；临时资源删除，台账更新 | low |
+| ENV-04 | token.sh 签发 Slurm JWT，私密写入 central/lab-web remote home（有效期覆盖一轮，不打印）；config.toml 的 soroi-slurm 模板写 IMG-01/02 的 OCI 引用（tag/digest），body/步骤镜像均以 docker:// 原样交 Apptainer，不写 SIF；run_root=/srv/pepgent-runs，shared_root 为容器挂载点，identity.image 在读取目录时解析（D11-10） | REM-01、IMG-03、DIST-04、DEP-02 | F15 | templates 列出模板/identity，status 读 Slurm 作业，tail 读 body.log | low |
 
 #### IMG：`Pepgent/images`（新仓库，D2:50）
 
@@ -229,59 +229,59 @@ type Verdict = {
 
 #### MUX：`Pepgent/omp-rpc-mux`（新仓库，Rust，D3:56）
 
-| ID | 切片 | 依赖 | 解锁 | 验收 | 档位 | 统一验收前置 |
-| --- | --- | --- | --- | --- | --- | --- |
-| MUX-01 `VS1` | `serve`：`/agents/{id}/writer`、`mux_open_generation` 签发 generation 与 token、`/process` 校验 token、逐行双向转发、`mux_attached`、`mux_exited`、`mux_close_stdin`（D3:59-61） | — | 全部 | 与 MUX-02 联合验收：写方 dial 一个 `omp --mode rpc`，收到 `ready`，`get_state` 往返成功，`mux_close_stdin` 之后收到 `mux_exited` | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| MUX-02 `VS1` | `dial`：拉起子进程、持有 stdio、出站 WS、处理 `mux_close_stdin`、上报退出码（D3:58） | MUX-01 | 全部 | 同上；另外，dial 被 kill 后，子进程也退出 | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| MUX-03 `VS2` | 读方：命令白名单、id 加前缀、广播、`mux_welcome`、代的事件（D3:60） | MUX-01 | F07、F19、F26 | 读方能读到 stdout；读方发 `get_messages` 后，response 原样广播给所有连接；请求方按自己的 `r{conn}:` 前缀识别自己的那条，其他读方也会看到这条原始帧（D3-06，D3:60）；读方发 `prompt` 被拒绝 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| MUX-04 `VS2` | 在线：`GET /agents`、`/agents/events`（D3:69） | MUX-01 | F07、F16、F19–F21 | 一次停驻和唤醒，在快照和事件里给出相同答案 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| MUX-05 | 人类 IRC 帧从读方转给写方，只接受受信 reader 凭据（D3:66） | MUX-03 | F25 | 受信读方发的帧能到达写方；非受信读方被拒绝 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| MUX-06 | 控制端点：`WS /endpoints/{name}` 绑定写方声明与代；`POST /endpoints/{name}/requests` 转发（D3:73） | MUX-01 | F08、F23、F24 | 请求能往返；同名端点只有同一会话的新一代能接替 | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| MUX-07 | 文件：`dial --root/--expose`、`mux_list_files`、`mux_read_file`、`GET /agents/{id}/files…`（D3:67） | MUX-02 | F16、F17 | 只能列出 `--expose` 声明的目录，读到的字节与源文件一致 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| MUX-08 `VS1` | 发布：linux arm64/x64 与 macOS 的静态二进制；`serve` 容器镜像；compose 服务片段 | MUX-02 | 全部 | 镜像在本地仓库；`omp-rpc-mux serve` 容器可以访问 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
+| ID | 切片 | 依赖 | 解锁 | 验收 | 档位 |
+| --- | --- | --- | --- | --- | --- |
+| MUX-01 `VS1` | `serve`：`/agents/{id}/writer`、`mux_open_generation` 签发 generation 与 token、`/process` 校验 token、逐行双向转发、`mux_attached`、`mux_exited`、`mux_close_stdin`（D3:59-61） | — | 全部 | 与 MUX-02 联合验收：写方 dial 一个 `omp --mode rpc`，收到 `ready`，`get_state` 往返成功，`mux_close_stdin` 之后收到 `mux_exited` | mid |
+| MUX-02 `VS1` | `dial`：拉起子进程、持有 stdio、出站 WS、处理 `mux_close_stdin`、上报退出码（D3:58） | MUX-01 | 全部 | 同上；另外，dial 被 kill 后，子进程也退出 | mid |
+| MUX-03 `VS2` | 读方：命令白名单、id 加前缀、广播、`mux_welcome`、代的事件（D3:60） | MUX-01 | F07、F19、F26 | 读方能读到 stdout；读方发 `get_messages` 后，response 原样广播给所有连接；请求方按自己的 `r{conn}:` 前缀识别自己的那条，其他读方也会看到这条原始帧（D3-06，D3:60）；读方发 `prompt` 被拒绝 | low |
+| MUX-04 `VS2` | 在线：`GET /agents`、`/agents/events`（D3:69） | MUX-01 | F07、F16、F19–F21 | 一次停驻和唤醒，在快照和事件里给出相同答案 | low |
+| MUX-05 | 人类 IRC 帧从读方转给写方，只接受受信 reader 凭据（D3:66） | MUX-03 | F25 | 受信读方发的帧能到达写方；非受信读方被拒绝 | low |
+| MUX-06 | 控制端点：`WS /endpoints/{name}` 绑定写方声明与代；`POST /endpoints/{name}/requests` 转发（D3:73） | MUX-01 | F08、F23、F24 | 请求能往返；同名端点只有同一会话的新一代能接替 | mid |
+| MUX-07 | 文件：`dial --root/--expose`、`mux_list_files`、`mux_read_file`、`GET /agents/{id}/files…`（D3:67） | MUX-02 | F16、F17 | 只能列出 `--expose` 声明的目录，读到的字节与源文件一致 | low |
+| MUX-08 `VS1` | 发布：linux arm64/x64 与 macOS 的静态二进制；`serve` 容器镜像；compose 服务片段 | MUX-02 | 全部 | 镜像在本地仓库；`omp-rpc-mux serve` 容器可以访问 | low |
 
 #### STO：`Pepgent/soroi` 的 `packages/store`（D6:29）
 
-| ID | 切片 | 依赖 | 解锁 | 验收 | 档位 | 统一验收前置 |
-| --- | --- | --- | --- | --- | --- | --- |
-| STO-01 `VS1` | Bun 服务；DuckLake（SQLite 目录库）；按 D6-03 建全部表；对象目录；`GET /objects/{sha}`（D6:30-31） | — | 全部 | 服务重启后表和对象都还在 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| STO-02 `VS1` | `POST /runs/steps`：`open` 或 `existing`、一个事务、事件、`StepCommitted`；`POST /runs/{run}/end`：在请求的事务里确认未消费集合为空才写 `run_ended`，返回 `EndResult`（`Ended{seq}` 或 `NotEmpty`）；PM#5 第 1 项的最小 transfer 闭环：`POST /transfers`、`PUT /transfers/{t}/objects/{sha256}`、步提交时把被引用的字节转入对象目录、`GET /transfers/{t}/objects/{sha256}`、`DELETE /transfers/{t}`（D6:32-33、35、107、115-118；PM#5） | STO-01 | 全部 | 用 HTTP 夹具开一个 transfer，带这个 transfer 提交 F01 的那一步，再调用 `/end`：返回 `Ended{seq}`，事件顺序正确；未消费非空时返回 `NotEmpty`，不写任何记录；transfer 分两种情形验收：① 正式提交的 EvalTransfer：提交前 `GET /transfers/{t}/objects/{sha}` 返回 200；步提交之后 `GET /objects/{sha}` 返回 200，同一个 transfer URL 返回 404（D6-07：提交事务里转入对象目录并删除暂存区）；② 另开一个从不提交的 transfer：显式 `DELETE` 之前同一 URL 返回 200，之后返回 404 | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| STO-03 `VS1` | `GET /runs`、`/runs/{run}/graph?at`、`/runs/{run}/state`、`/captures/{id}`（D6:38）；被中止的调用在 `RunGraph` 中是独立的 `Aborted` 变体，不带 `version`、`body`、`env`，`outputs = []`（PM#5 第 2 项） | STO-02 | 全部 | 对 3 步夹具，`at=k` 的投影都正确；含一个被中止调用的夹具投影出 `Aborted` 变体 | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| STO-04 | 远程用的 volume 与进度部分（最小 transfer 闭环已在 STO-02，PM#5 第 1 项）：`PUT /transfers/{t}/volumes/{position}` 的 tar 解包、`GET /transfers/{t}/volumes/{position}/files/{path}`、提交时写 volume 清单、`GET /volumes/{run}/{step}/{position}` 与其文件（D6:35、146-152） | STO-02 | F14–F18 | dry run 删除暂存区后，volume 文件返回 404；正式提交后，volume 清单与文件都可读 | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| STO-05 `VS2` | SSE：`/runs/{run}/stream?after`、`/stream/lifecycle?after`（D6:34、37） | STO-02 | F10、F26、F30 | 从任意 seq 续订，事件不重不漏 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| STO-06 | `/runs/{run}/activity?until`（D6:38） | STO-03 | F03、F22 | 区间等于提交时带上的原始时刻 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| STO-07 | `/compare`，对齐规则按 D6-13（D6:41） | STO-03 | F13 | 夹具得到 `SameCapture`、`Changed`、`Ambiguous` | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| STO-08 | `/search`（ILIKE，含中文）、`/values/{hash}/runs`（D6:36）；`File` 值的身份就是它的内容哈希（`pepgent-soroi/design/store.md:29`：文件的身份是“内容的哈希”），所以 `hash` 可以直接用 graph 中的 `Root.value.content` | STO-02 | F12 | 中文子串能命中；以一个 `File` 根 atom 的 `Root.value.content` 查询 `/values/{hash}/runs`，列出用到它的运行 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| STO-09 | `POST /runs/derive`、`/runs/{run}/abort`（D6:44、33） | STO-02 | F17、F24 | 一个事务里完成：P 未结束时写 `run_aborted`，R' 写 `Inherited`、继承的停止记录与新根 atom；返回 `Derived{run, seq, parentAborted}`（D6:44、131） | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| STO-10 | 在步提交的同一事务里，把暂存区 `soroi-batch/` 的四列批次（`seq`、`at`、`kind`、`transcript_entry`）汇入 `agent_progress`；store 为每批填入 `run_id`、`step`、`position`；`/runs/{run}/progress`（D6:31-32） | STO-04 | F16 | 夹具 Parquet 汇入后可查；dry run 不汇入 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| STO-11 | `NodeVersionRecord` 随步提交；`/functions/{name}/usage`、`/versions/{v}`（D6:49） | STO-04 | F06、F29 | 两个版本、两次运行，usage 都正确 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| STO-12 `VS1` | store 镜像与 compose 服务；发行导入 `PUT /releases/{version}`（正文是 artifact 字节，带声明的 sha256）：同一事务校验哈希，把 boot、runner、定制 tar 各自按内容哈希放入对象目录，写 `ReleaseRecord`；`GET /releases`（D6:50、155-158）。init 在 store 就绪后调用一次。`boot.js` 的 program、agent 分支分别随 SOR-17a、SOR-18 进入发行物，届时由 DIST-01 重新产出 | STO-01、DIST-01 | 全部 | 冷启动后 init 返回 `ReleaseRecord`；`GET /releases` 有这条记录，它引用的 boot、runner、定制 tar 都能 `GET /objects/<哈希>`；哈希不符时不写任何记录 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
+| ID | 切片 | 依赖 | 解锁 | 验收 | 档位 |
+| --- | --- | --- | --- | --- | --- |
+| STO-01 `VS1` | Bun 服务；DuckLake（SQLite 目录库）；按 D6-03 建全部表；对象目录；`GET /objects/{sha}`（D6:30-31） | — | 全部 | 服务重启后表和对象都还在 | low |
+| STO-02 `VS1` | `POST /runs/steps`：`open` 或 `existing`、一个事务、事件、`StepCommitted`；`POST /runs/{run}/end`：在请求的事务里确认未消费集合为空才写 `run_ended`，返回 `EndResult`（`Ended{seq}` 或 `NotEmpty`）；PM#5 第 1 项的最小 transfer 闭环：`POST /transfers`、`PUT /transfers/{t}/objects/{sha256}`、步提交时把被引用的字节转入对象目录、`GET /transfers/{t}/objects/{sha256}`、`DELETE /transfers/{t}`（D6:32-33、35、107、115-118；PM#5） | STO-01 | 全部 | 用 HTTP 夹具开一个 transfer，带这个 transfer 提交 F01 的那一步，再调用 `/end`：返回 `Ended{seq}`，事件顺序正确；未消费非空时返回 `NotEmpty`，不写任何记录；transfer 分两种情形验收：① 正式提交的 EvalTransfer：提交前 `GET /transfers/{t}/objects/{sha}` 返回 200；步提交之后 `GET /objects/{sha}` 返回 200，同一个 transfer URL 返回 404（D6-07：提交事务里转入对象目录并删除暂存区）；② 另开一个从不提交的 transfer：显式 `DELETE` 之前同一 URL 返回 200，之后返回 404 | mid |
+| STO-03 `VS1` | `GET /runs`、`/runs/{run}/graph?at`、`/runs/{run}/state`、`/captures/{id}`（D6:38）；被中止的调用在 `RunGraph` 中是独立的 `Aborted` 变体，不带 `version`、`body`、`env`，`outputs = []`（PM#5 第 2 项） | STO-02 | 全部 | 对 3 步夹具，`at=k` 的投影都正确；含一个被中止调用的夹具投影出 `Aborted` 变体 | mid |
+| STO-04 | 远程用的 volume 与进度部分（最小 transfer 闭环已在 STO-02，PM#5 第 1 项）：`PUT /transfers/{t}/volumes/{position}` 的 tar 解包、`GET /transfers/{t}/volumes/{position}/files/{path}`、提交时写 volume 清单、`GET /volumes/{run}/{step}/{position}` 与其文件（D6:35、146-152） | STO-02 | F14–F18 | dry run 删除暂存区后，volume 文件返回 404；正式提交后，volume 清单与文件都可读 | mid |
+| STO-05 `VS2` | SSE：`/runs/{run}/stream?after`、`/stream/lifecycle?after`（D6:34、37） | STO-02 | F10、F26、F30 | 从任意 seq 续订，事件不重不漏 | low |
+| STO-06 | `/runs/{run}/activity?until`（D6:38） | STO-03 | F03、F22 | 区间等于提交时带上的原始时刻 | low |
+| STO-07 | `/compare`，对齐规则按 D6-13（D6:41） | STO-03 | F13 | 夹具得到 `SameCapture`、`Changed`、`Ambiguous` | mid |
+| STO-08 | `/search`（ILIKE，含中文）、`/values/{hash}/runs`（D6:36）；`File` 值的身份就是它的内容哈希（`pepgent-soroi/design/store.md:29`：文件的身份是“内容的哈希”），所以 `hash` 可以直接用 graph 中的 `Root.value.content` | STO-02 | F12 | 中文子串能命中；以一个 `File` 根 atom 的 `Root.value.content` 查询 `/values/{hash}/runs`，列出用到它的运行 | low |
+| STO-09 | `POST /runs/derive`、`/runs/{run}/abort`（D6:44、33） | STO-02 | F17、F24 | 一个事务里完成：P 未结束时写 `run_aborted`，R' 写 `Inherited`、继承的停止记录与新根 atom；返回 `Derived{run, seq, parentAborted}`（D6:44、131） | mid |
+| STO-10 | 在步提交的同一事务里，把暂存区 `soroi-batch/` 的四列批次（`seq`、`at`、`kind`、`transcript_entry`）汇入 `agent_progress`；store 为每批填入 `run_id`、`step`、`position`；`/runs/{run}/progress`（D6:31-32） | STO-04 | F16 | 夹具 Parquet 汇入后可查；dry run 不汇入 | low |
+| STO-11 | `NodeVersionRecord` 随步提交；`/functions/{name}/usage`、`/versions/{v}`（D6:49） | STO-04 | F06、F29 | 两个版本、两次运行，usage 都正确 | low |
+| STO-12 `VS1` | store 镜像与 compose 服务；发行导入 `PUT /releases/{version}`（正文是 artifact 字节，带声明的 sha256）：同一事务校验哈希，把 boot、runner、定制 tar 各自按内容哈希放入对象目录，写 `ReleaseRecord`；`GET /releases`（D6:50、155-158）。init 在 store 就绪后调用一次。`boot.js` 的 program、agent 分支分别随 SOR-17a、SOR-18 进入发行物，届时由 DIST-01 重新产出 | STO-01、DIST-01 | 全部 | 冷启动后 init 返回 `ReleaseRecord`；`GET /releases` 有这条记录，它引用的 boot、runner、定制 tar 都能 `GET /objects/<哈希>`；哈希不符时不写任何记录 | low |
 
 #### SOR：`Pepgent/soroi` 的 `packages/omp-soroi`（D5:76）
 
-| ID | 切片 | 依赖 | 解锁 | 验收 | 档位 | 统一验收前置 |
-| --- | --- | --- | --- | --- | --- | --- |
-| SOR-01 `VS1` | 把两个旧仓的代码迁到 `src/eval`、`src/subagent`；一个扩展入口，按 `SOROI_ROLE` 选角色；旧仓迁完后归档（D5:76） | — | 全部 | 在 omp 中加载后，Main 角色注册了 `soroi_eval` 与 `soroi_task` | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| SOR-02 `VS1` | store HTTP 客户端：删进程内 DuckLake，提交/state/复用走 SOROI_STORE_URL；每 eval 开 EvalTransfer，产出/bundle 入暂存，formal 带 transfer、dry 返回删（D6-07） | SOR-01、STO-02、STO-03 的契约代码 | 全部 | 本仓真实入口检查客户端与 transfer 路径，插件无 DuckDB 句柄；不执行跨组件 F01 | mid | 统一 S1 F01 中观察实际带 transfer 提交与 dry 后暂存删除，不作开工锁 |
-| SOR-03 `VS1` | 运行生命周期：第一次正式提交带 `open`；根会话的 eval supervisor 确认没有活动的正式 eval、也没有未释放的批次后，调用 `POST /runs/{run}/end`，不论最后一步由哪个会话提交（D6:33） | SOR-02 | 全部 | F01 以 `Ended{seq}` 和 `run_ended` 结束；有活动的正式 eval 时不发 `/end`。批次分支由 SOR-12 的验收与 E2E-13（F22 ⑨）验证 | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| SOR-04 | `soroi_eval` 参数改为判别联合；`pins` 按 atom 名；`env` 参数；`CallReport`（D5:83-85；D5:230-245） | SOR-01 | F03–F05 | 带 pins 的 formal 被 schema 拒绝；只钉一部分输出被拒绝 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| SOR-05 | 检查器按 D5-11 的十项，`CheckError` 用 ADT（D5:86；D5:260-274） | SOR-04 | F03、F09 | F03 的 9 段违规代码全部得到预期的 `kind` | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| SOR-06 | 先按 lockfile 恢复依赖，再 `Bun.build`，以 bundle 哈希为版本；runner bundle；`Site.central`；`NodeVersionRecord` 放进暂存区（D4:47-50；D6:49） | SOR-02、STO-04、STO-11 | F06、F11、F14 | 只改 helper 文件，版本也变 | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| SOR-07 | 环境身份：中心取部署注入值；远程取 `remote templates.identity`（D4:64） | SOR-06、REM-05 | F11、F14、F15 | 同一调用先正式运行一次；然后把模板换到一个已确认 digest 不同的镜像（或改动计入 `config` 身份的模板配置）。先断言 `remote templates` 返回的 `identity` 前后不同，再以相同输入正式运行同一调用：第二次在 stream 中是 `call_started`/`call_ended` 而不是 `call_adopted`，graph 状态不是 `Adopted`，`/compare` 中这一对不是 `SameCapture` | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| SOR-08 | 公开 addBeforeModelCall 每次候选现算未消费集合，按 Subagents.visibility 过滤，经 obfuscator 注入；格式/批次目的按 D5-13。每次注入记 transcript customType=soroi.unconsumed-reminder，数据仅{text}；空集不注入不记，按条目后首 assistant 对应候选，不证明 provider 实发（D11-37） | SOR-02 | F02、F08、F22、F23 | 本仓真实候选入口观察提醒与可见集、最终文本一致及 transcript 顺序；批次可见性在统一 E2E-13 的 F22⑥⑦ 收口，不读 soroi.eval-lifecycle | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| SOR-09 | subagent 改走 Mux：`MuxWriter`、`Generation`、`ProcessRef`；本机子进程用 dial 启动（D3:63） | SOR-01、MUX-02 | F07、F19–F21 | 子 agent 出现在 `/agents`；停驻和唤醒按 D3-07 开、关代 | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| SOR-10 | `ReturnContract`；删除“最后一条回复兜底”，保留 IRC 唤醒回执（D5:79-80；现状见 SUB-RD:21） | SOR-01 | F07 | 没有交回就没有结果；唤醒回执仍会送达 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| SOR-11 | `spawnCapture`：删除 `runSubprocess`；`LocalChild` 的 host call 转发（D5:78、93） | SOR-09、SOR-10 | F07 | `review` 完成捕获，并记录 transcript sessionId | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| SOR-12 | 角色闸门、`writesEval`、嵌套的 `soroi_task`、批次与 `purpose`、批次释放（D5:81-82、87） | SOR-09、SOR-03、SOR-08 | F19、F22 | worker 能写步；Agent 体没有 eval；同批全部交回后才释放；未释放批次的产出只对产出它的 worker 子树可见，主 agent 的提醒里没有；批次未释放时根 supervisor 不发 `/end`（D5:86-88；D6:33） | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| SOR-13 | 每个 `writesEval` 为真的会话注册控制端点 `eval:<session>`，提供 `slots(runId)`、`answer`、`takeover`；只有根会话的端点另答 `writers(runId)`（D5:89、301-311；D3:73）。整个运行的 `abort` 发到根端点（D7-09）。`human()` 构造器 | SOR-02、SOR-11、MUX-06 | F08、F23 | 经 Mux 能读到槽位，`answer` 能结束槽位 | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| SOR-14 | 本机的中止路径：结束 Program 的 runner，中止 Agent 当前这一轮（D6:43） | SOR-13 | F17、F23 | runner 进程消失；子 agent 仍可唤醒 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| SOR-15 | 派生：`InFlight` 先落成 `Committed`，再请求 store，再执行 R' 的第一步；用 IRC 通知 AI（D6:44；D5:91） | SOR-13、STO-09 | F24 | F24 的两种变体都成立 | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| SOR-16 | 监管者实现人类 IRC 写方契约：待投递表、`edit`、`withdraw`，在空闲或步边界 `deliver`（D3:66） | SOR-09、MUX-05 | F25 | 编辑后的消息被投递，撤回的不投递 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| SOR-17a | 远程 Program 的正式运行路径：暂存区、`call.json`、`RunRequest`、`remote` CLI 客户端、等到终态、取回结果、随步提交、`remove`；`boot.js` 的 program 分支（D4:51-54）。终态有两种：`Ended`（拷出已送达）与 `EndedUnstarted{ended_at}`（排队后被取消、从未开始，leader 技术裁决 PM#4）；后者没有拷出，这次调用记为失败，不读暂存区 | SOR-06、STO-04、REM-05、REM-07 | F14、F15、F18 | 在 Komodo 上跑通一次 formal：结果随步提交，Stack 与卷已删除。`EndedUnstarted` 分支在 Slurm 上由 E2E-17 验证（排队中取消，中间件不读暂存区，`remove` 在终态之后成功） | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| SOR-17b | 远程 Program 的 dry run 分流：结果交回 AI，调用返回时 `DELETE /transfers/{t}`，不提交、不写对象（D4:67） | SOR-17a | F15 | 在 Komodo 上跑通一次 dry run：store 的 seq 不变，暂存区文件返回 404 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| SOR-18 | 远程 Agent：`launchRemote`；拷入两个定制 tar；`boot.js` 的 agent 分支；transcript 拷入拷出；交回（D4:55-60） | SOR-17a、SOR-11、MUX-07 | F16、F17 | 远程那一代能连回 Mux，并完成交回 | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| SOR-19 | `RemoteChild` 写 Parquet 批次：每个批次只含 `seq`、`at`、`kind`、`transcript_entry` 四列，`kind` 只允许 `turn \| tool_call \| file_written`；先写 `x.parquet.tmp`，完成后原子改名为 `x.parquet`（D4:61） | SOR-18、STO-10 | F16 | `soroi-batch/` 中只有已改名的文件；批次只含四列 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| SOR-20 | 远程中止：Program 用 `remote abort`，等到终态（`Ended` 或 `EndedUnstarted`）再 `remove`；Agent 按顺序停止。dry run 零写入的回归检查（D6:43；D4:67；PM#4） | SOR-14、SOR-18 | F04、F17 | 远程 Agent 中止后，transcript 回到中心。中止一个仍在排队的作业得到 `EndedUnstarted` 的分支由 E2E-17 在 Slurm 上验证 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
+| ID | 切片 | 依赖 | 解锁 | 验收 | 档位 |
+| --- | --- | --- | --- | --- | --- |
+| SOR-01 `VS1` | 把两个旧仓的代码迁到 `src/eval`、`src/subagent`；一个扩展入口，按 `SOROI_ROLE` 选角色；旧仓迁完后归档（D5:76） | — | 全部 | 在 omp 中加载后，Main 角色注册了 `soroi_eval` 与 `soroi_task` | low |
+| SOR-02 `VS1` | store HTTP 客户端：删进程内 DuckLake，提交/state/复用走 SOROI_STORE_URL；每 eval 开 EvalTransfer，产出/bundle 入暂存，formal 带 transfer、dry 返回删（D6-07） | SOR-01、STO-02、STO-03 的契约代码 | 全部 | 本仓真实入口检查客户端与 transfer 路径，插件无 DuckDB 句柄；不执行跨组件 F01；统一验收前置：统一 S1 F01 中观察实际带 transfer 提交与 dry 后暂存删除，不作开工锁 | mid |
+| SOR-03 `VS1` | 运行生命周期：第一次正式提交带 `open`；根会话的 eval supervisor 确认没有活动的正式 eval、也没有未释放的批次后，调用 `POST /runs/{run}/end`，不论最后一步由哪个会话提交（D6:33） | SOR-02 | 全部 | F01 以 `Ended{seq}` 和 `run_ended` 结束；有活动的正式 eval 时不发 `/end`。批次分支由 SOR-12 的验收与 E2E-13（F22 ⑨）验证 | mid |
+| SOR-04 | `soroi_eval` 参数改为判别联合；`pins` 按 atom 名；`env` 参数；`CallReport`（D5:83-85；D5:230-245） | SOR-01 | F03–F05 | 带 pins 的 formal 被 schema 拒绝；只钉一部分输出被拒绝 | low |
+| SOR-05 | 检查器按 D5-11 的十项，`CheckError` 用 ADT（D5:86；D5:260-274） | SOR-04 | F03、F09 | F03 的 9 段违规代码全部得到预期的 `kind` | mid |
+| SOR-06 | 先按 lockfile 恢复依赖，再 `Bun.build`，以 bundle 哈希为版本；runner bundle；`Site.central`；`NodeVersionRecord` 放进暂存区（D4:47-50；D6:49） | SOR-02、STO-04、STO-11 | F06、F11、F14 | 只改 helper 文件，版本也变 | mid |
+| SOR-07 | 环境身份：中心取部署注入值；远程取 `remote templates.identity`（D4:64） | SOR-06、REM-05 | F11、F14、F15 | 同一调用先正式运行一次；然后把模板换到一个已确认 digest 不同的镜像（或改动计入 `config` 身份的模板配置）。先断言 `remote templates` 返回的 `identity` 前后不同，再以相同输入正式运行同一调用：第二次在 stream 中是 `call_started`/`call_ended` 而不是 `call_adopted`，graph 状态不是 `Adopted`，`/compare` 中这一对不是 `SameCapture` | low |
+| SOR-08 | 公开 addBeforeModelCall 每次候选现算未消费集合，按 Subagents.visibility 过滤，经 obfuscator 注入；格式/批次目的按 D5-13。每次注入记 transcript customType=soroi.unconsumed-reminder，数据仅{text}；空集不注入不记，按条目后首 assistant 对应候选，不证明 provider 实发（D11-37） | SOR-02 | F02、F08、F22、F23 | 本仓真实候选入口观察提醒与可见集、最终文本一致及 transcript 顺序；批次可见性在统一 E2E-13 的 F22⑥⑦ 收口，不读 soroi.eval-lifecycle | low |
+| SOR-09 | subagent 改走 Mux：`MuxWriter`、`Generation`、`ProcessRef`；本机子进程用 dial 启动（D3:63） | SOR-01、MUX-02 | F07、F19–F21 | 子 agent 出现在 `/agents`；停驻和唤醒按 D3-07 开、关代 | mid |
+| SOR-10 | `ReturnContract`；删除“最后一条回复兜底”，保留 IRC 唤醒回执（D5:79-80；现状见 SUB-RD:21） | SOR-01 | F07 | 没有交回就没有结果；唤醒回执仍会送达 | low |
+| SOR-11 | `spawnCapture`：删除 `runSubprocess`；`LocalChild` 的 host call 转发（D5:78、93） | SOR-09、SOR-10 | F07 | `review` 完成捕获，并记录 transcript sessionId | mid |
+| SOR-12 | 角色闸门、`writesEval`、嵌套的 `soroi_task`、批次与 `purpose`、批次释放（D5:81-82、87） | SOR-09、SOR-03、SOR-08 | F19、F22 | worker 能写步；Agent 体没有 eval；同批全部交回后才释放；未释放批次的产出只对产出它的 worker 子树可见，主 agent 的提醒里没有；批次未释放时根 supervisor 不发 `/end`（D5:86-88；D6:33） | mid |
+| SOR-13 | 每个 `writesEval` 为真的会话注册控制端点 `eval:<session>`，提供 `slots(runId)`、`answer`、`takeover`；只有根会话的端点另答 `writers(runId)`（D5:89、301-311；D3:73）。整个运行的 `abort` 发到根端点（D7-09）。`human()` 构造器 | SOR-02、SOR-11、MUX-06 | F08、F23 | 经 Mux 能读到槽位，`answer` 能结束槽位 | mid |
+| SOR-14 | 本机的中止路径：结束 Program 的 runner，中止 Agent 当前这一轮（D6:43） | SOR-13 | F17、F23 | runner 进程消失；子 agent 仍可唤醒 | low |
+| SOR-15 | 派生：`InFlight` 先落成 `Committed`，再请求 store，再执行 R' 的第一步；用 IRC 通知 AI（D6:44；D5:91） | SOR-13、STO-09 | F24 | F24 的两种变体都成立 | mid |
+| SOR-16 | 监管者实现人类 IRC 写方契约：待投递表、`edit`、`withdraw`，在空闲或步边界 `deliver`（D3:66） | SOR-09、MUX-05 | F25 | 编辑后的消息被投递，撤回的不投递 | low |
+| SOR-17a | 远程 Program 的正式运行路径：暂存区、`call.json`、`RunRequest`、`remote` CLI 客户端、等到终态、取回结果、随步提交、`remove`；`boot.js` 的 program 分支（D4:51-54）。终态有两种：`Ended`（拷出已送达）与 `EndedUnstarted{ended_at}`（排队后被取消、从未开始，leader 技术裁决 PM#4）；后者没有拷出，这次调用记为失败，不读暂存区 | SOR-06、STO-04、REM-05、REM-07 | F14、F15、F18 | 在 Komodo 上跑通一次 formal：结果随步提交，Stack 与卷已删除。`EndedUnstarted` 分支在 Slurm 上由 E2E-17 验证（排队中取消，中间件不读暂存区，`remove` 在终态之后成功） | mid |
+| SOR-17b | 远程 Program 的 dry run 分流：结果交回 AI，调用返回时 `DELETE /transfers/{t}`，不提交、不写对象（D4:67） | SOR-17a | F15 | 在 Komodo 上跑通一次 dry run：store 的 seq 不变，暂存区文件返回 404 | low |
+| SOR-18 | 远程 Agent：`launchRemote`；拷入两个定制 tar；`boot.js` 的 agent 分支；transcript 拷入拷出；交回（D4:55-60） | SOR-17a、SOR-11、MUX-07 | F16、F17 | 远程那一代能连回 Mux，并完成交回 | mid |
+| SOR-19 | `RemoteChild` 写 Parquet 批次：每个批次只含 `seq`、`at`、`kind`、`transcript_entry` 四列，`kind` 只允许 `turn \| tool_call \| file_written`；先写 `x.parquet.tmp`，完成后原子改名为 `x.parquet`（D4:61） | SOR-18、STO-10 | F16 | `soroi-batch/` 中只有已改名的文件；批次只含四列 | low |
+| SOR-20 | 远程中止：Program 用 `remote abort`，等到终态（`Ended` 或 `EndedUnstarted`）再 `remove`；Agent 按顺序停止。dry run 零写入的回归检查（D6:43；D4:67；PM#4） | SOR-14、SOR-18 | F04、F17 | 远程 Agent 中止后，transcript 回到中心。中止一个仍在排队的作业得到 `EndedUnstarted` 的分支由 E2E-17 在 Slurm 上验证 | low |
 
 #### CUS 与 DIST：`Pepgent/soroi` 仓根（D2:62）
 
@@ -298,47 +298,47 @@ type Verdict = {
 
 #### REM：`Pepgent/remote`（D2:46）
 
-| ID | 切片 | 依赖 | 解锁 | 验收 | 档位 | 统一验收前置 |
-| --- | --- | --- | --- | --- | --- | --- |
-| REM-01 | Slurm run/status：JWT 经 slurmrestd 提交，run_root/<run> 依次 copy-in/body/copy-out，脚本 `apptainer exec docker://<模板OCI引用>` 原样执行 body/步骤镜像，不用 SIF；body.log 与 job 状态读取。run_root 为集群可见，shared_root 为调用方可读同存储，句柄记确切路径，测试映射按 ENV-S | IMG-03 | F15 | 本仓 Slurm 入口给出 Ended、拷出 tar、shared_root body.log | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| REM-02 | Slurm 的 `tail`（读 `shared_root/<run>/body.log`）、`abort`（取消后等到终态）、`remove`（等到终态后清理 `run_root/<run>/` 再记 `removed`）；排队中被取消的作业记 `EndedUnstarted`（REM-07，PM#4） | REM-01、REM-07 | F15、F17 | `tail` 返回 body 的输出；运行中 abort 得到 `Ended`，排队中 abort 得到 `EndedUnstarted`；两种终态之后 `remove` 都记下 `removed`，`run_root/<run>/` 不存在 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| REM-03 | Slurm 的 env 注入：把 `REMOTE_*`、调用方的 env、部署方的密钥文件传进 `apptainer --env`（D4:56） | REM-01 | F15、F16 | body 中能读到这些变量，密钥不出现在运行记录里 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| REM-04 | soroi 约定的 Komodo 模板：`templates/komodo/soroi/compose.yaml`，body 命令为 `omp ${REMOTE_MOUNT}/soroi/boot.js`（D4:54；现有示例 `templates/komodo/example/compose.yaml`） | IMG-01、IMG-02 | F14、F16 | 用一个夹具 `boot.js` 跑通拷入、body、拷出 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| REM-05 | templates 输出 identity{image,config}：Slurm 与 Komodo/k8s 在读取目录时同用 Registry::resolve，OCI tag/digest 均可，Slurm 执行不预解析（D11-10） | — | F11、F14、F15 | 换镜像 tag 后目录返回新 image 身份，并以实际调用观察复用行为，不以 digest 比对当通过证据 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| REM-07 | `RunStatus` 与生命周期新增终态 `EndedUnstarted{ended_at}`（排队后被取消、从未开始）；`remove` 先等到终态（`Ended` 或 `EndedUnstarted`）再记 `removed`；Komodo 后端按同一规则处理；`remote schema` 输出随之更新（leader 技术裁决 PM#4） | — | F14、F15、F17 | `remote schema` 含新变体；Komodo 上一个已结束的作业 `remove` 照常记 `removed`；对一个尚未结束的作业调用 `remove`，等到终态后才记 `removed` | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| REM-06 | 只读作业列表 `remote runs`：读 remote home 里的运行记录 `runs/<run>.json`（REM-RD:52、94-96），列出每个作业的 run id、模板、后端、生命周期事实与起止时间；按 run id 的 `status`、`tail` 沿用现有操作。只读，不加任何控制操作（D8-16） | REM-01 | F17（S2）、F31 | 先后跑两个作业（一个 Komodo、一个 Slurm），`remote runs` 列出两条，字段与各自 `status` 一致；`remove` 后仍按记录列出，状态为 `removed` | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
+| ID | 切片 | 依赖 | 解锁 | 验收 | 档位 |
+| --- | --- | --- | --- | --- | --- |
+| REM-01 | Slurm run/status：JWT 经 slurmrestd 提交，run_root/<run> 依次 copy-in/body/copy-out，脚本 `apptainer exec docker://<模板OCI引用>` 原样执行 body/步骤镜像，不用 SIF；body.log 与 job 状态读取。run_root 为集群可见，shared_root 为调用方可读同存储，句柄记确切路径，测试映射按 ENV-S | IMG-03 | F15 | 本仓 Slurm 入口给出 Ended、拷出 tar、shared_root body.log | mid |
+| REM-02 | Slurm 的 `tail`（读 `shared_root/<run>/body.log`）、`abort`（取消后等到终态）、`remove`（等到终态后清理 `run_root/<run>/` 再记 `removed`）；排队中被取消的作业记 `EndedUnstarted`（REM-07，PM#4） | REM-01、REM-07 | F15、F17 | `tail` 返回 body 的输出；运行中 abort 得到 `Ended`，排队中 abort 得到 `EndedUnstarted`；两种终态之后 `remove` 都记下 `removed`，`run_root/<run>/` 不存在 | low |
+| REM-03 | Slurm 的 env 注入：把 `REMOTE_*`、调用方的 env、部署方的密钥文件传进 `apptainer --env`（D4:56） | REM-01 | F15、F16 | body 中能读到这些变量，密钥不出现在运行记录里 | low |
+| REM-04 | soroi 约定的 Komodo 模板：`templates/komodo/soroi/compose.yaml`，body 命令为 `omp ${REMOTE_MOUNT}/soroi/boot.js`（D4:54；现有示例 `templates/komodo/example/compose.yaml`） | IMG-01、IMG-02 | F14、F16 | 用一个夹具 `boot.js` 跑通拷入、body、拷出 | low |
+| REM-05 | templates 输出 identity{image,config}：Slurm 与 Komodo/k8s 在读取目录时同用 Registry::resolve，OCI tag/digest 均可，Slurm 执行不预解析（D11-10） | — | F11、F14、F15 | 换镜像 tag 后目录返回新 image 身份，并以实际调用观察复用行为，不以 digest 比对当通过证据 | low |
+| REM-07 | `RunStatus` 与生命周期新增终态 `EndedUnstarted{ended_at}`（排队后被取消、从未开始）；`remove` 先等到终态（`Ended` 或 `EndedUnstarted`）再记 `removed`；Komodo 后端按同一规则处理；`remote schema` 输出随之更新（leader 技术裁决 PM#4） | — | F14、F15、F17 | `remote schema` 含新变体；Komodo 上一个已结束的作业 `remove` 照常记 `removed`；对一个尚未结束的作业调用 `remove`，等到终态后才记 `removed` | low |
+| REM-06 | 只读作业列表 `remote runs`：读 remote home 里的运行记录 `runs/<run>.json`（REM-RD:52、94-96），列出每个作业的 run id、模板、后端、生命周期事实与起止时间；按 run id 的 `status`、`tail` 沿用现有操作。只读，不加任何控制操作（D8-16） | REM-01 | F17（S2）、F31 | 先后跑两个作业（一个 Komodo、一个 Slurm），`remote runs` 列出两条，字段与各自 `status` 一致；`remove` 后仍按记录列出，状态为 `removed` | low |
 
 #### LIB：`Pepgent/lab-library`（新仓库，D2:49）
 
-| ID | 切片 | 依赖 | 解锁 | 验收 | 档位 | 统一验收前置 |
-| --- | --- | --- | --- | --- | --- | --- |
-| LIB-01 | D8-07 的节点、`package.json` 与 lockfile、`.omp/agents/` | SOR-01 | F03、F06–F30 | 每个节点都能 dry run 一次，结果符合节点里写明的预期 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
+| ID | 切片 | 依赖 | 解锁 | 验收 | 档位 |
+| --- | --- | --- | --- | --- | --- |
+| LIB-01 | D8-07 的节点、`package.json` 与 lockfile、`.omp/agents/` | SOR-01 | F03、F06–F30 | 每个节点都能 dry run 一次，结果符合节点里写明的预期 | low |
 
 #### LAB 与 WEB：`Pepgent/Pepgent` 的 `apps/web`（D7）
 
-| ID | 切片 | 依赖 | 解锁 | 验收 | 档位 | 统一验收前置 |
-| --- | --- | --- | --- | --- | --- | --- |
-| LAB-01 `VS2` | `server/lab` 隔离区、`labRuntime()`、`rpc/lab.ts` 骨架、请求中间件分流（D7:61、78、81） | — | S2 | Lab 区不 import Paseo 区（由架构检查确认）；`lab.catalog.read` 返回 `OperationResult` | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| LAB-02 `VS2` | `lab.sqlite`：Drizzle schema 与迁移（D7:62） | LAB-01 | S2 | 启动时自动迁移，表齐全 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| LAB-03 `VS2` | Better Auth 加 organization 插件、角色、`/api/auth/*`；e2e 管理员账号由部署种子创建；登录页由 UI 负责人实现（D7:63） | LAB-02 | S2 | 邮箱加密码能登录；没有会话时访问 Lab 面被拒绝 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| LAB-04 `VS2` | `LabSessions`：写方、开代、dial、`ready`、`get_state`、`set_host_tools`；根会话的 `human_irc_queue`（根会话的写方就是 Lab，不经 Mux 转发，D3:66）；`discussion.create` 与 `discussion.prompt`（D7:64、69） | LAB-02、MUX-03、DIST-01 | F25、F31 | 一条 prompt 到达根会话，会话停驻后能唤醒 | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| LAB-05 | `lab_*` host tools（D7:65、216-221） | LAB-04、STO-04 | F09、F31 | `lab_open_artifact` 把产物拷进本会话 worktree 的 `inputs/`，字节与 store 对象哈希一致；`lab_save_artifact` 在 worktree 里生成不可变快照 `artifacts/<hash>/<文件名>` 并登记 `artifact_meta`，不写 store（D7:65、67、219） | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| LAB-06 `VS2` | store 客户端；订阅生命周期流，写 `experiment_ext`；实验状态的投影（D7:66） | LAB-02、STO-05 | F30、F31 | 收到 `run_started` 后分配 `R-0xx` 编号 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| LAB-07a `VS2` | 读取侧：catalog 与实验页的线数据（`RunGraph`）、`/api/lab/events`、对象代理（D7:68） | LAB-06、MUX-04 | F26 | 运行变更时推送 `run` 频道 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| LAB-07b | 读取侧：在途叠加层（`writers` 与 `slots`）、`/api/lab/agents/{id}/stream`、files（D7:68） | LAB-07a、MUX-03、MUX-06、MUX-07 | F08、F17、F26 | 页面线数据中带有在途槽位，SSE 转发读方帧 | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| LAB-08 | 命令：`intervene.takeover`、`intervene.answer`、`intervene.derive`，`run.abort`，`human.irc`（D7:69） | LAB-07b、SOR-13、SOR-15、SOR-16 | F08、F23–F25 | 每条命令的结论都由拥有方返回 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| LAB-09 | 自动化：事件触发、`croner` 定时、审批门禁（D7:70） | LAB-04、LAB-06 | F30 | A-01 规则写入 `automation_run`；`waiting` 状态的运行批准后才开会话 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| LAB-10 | 节点库：从 TS 导出定义（D7 P1）、`library.stage` 与 `library.apply`（commit 后快进）、usage（D7:71） | LAB-02、STO-11、LIB-01 | F24、F28、F29 | 导出与源码一致；apply 生成 commit | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| LAB-11a | 讨论的读取与装载：停驻会话的 transcript 读取（P2）、`discussion.load`、附件（D7:67） | LAB-04、LAB-05 | F09、F31 | 读停驻会话不会唤醒它；`discussion.load` 写入 `discussion_context` | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| LAB-11b | 草稿与启动：`draft.save`、`experiment.start`、`experiment.approve`；启动意图与审批状态记在 `pending_launch`，运行绑定记在 `experiment_ext.draft`，不往草稿写 `launched`（D7:66、161-162；D6:40） | LAB-04、LAB-06 | F27、F31 | 草稿只在 `lab.sqlite`，不进 store；免审批时 `pending_launch` 为 `sent`、会话收到含草稿的 prompt；`run_started` 后 `experiment_ext.draft` 指向该草稿，`pending_launch` 已删除 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| LAB-12 | 算力页的只读读取（D7-12、D7-18；D8-16）：`lab.page.read{lab, page:'clusters'}` 返回 `templates`、`jobs: {run: RemoteRunSummary; status: RunStatus}[]`、`presence`；日志尾部另由只读 SSE `GET /api/lab/jobs/{run}/tail` 提供（`remote tail` 快照，有订阅者时定期取）。有订阅者时定期调用 `remote runs`、`remote status`，变化经 `/api/lab/events` 的 `compute` 频道通知重读；作业最新事实为 `Removed` 时不开 tail 流（D7:72、78、145-146）。第一版无命令 | REM-05、REM-06、REM-07、REM-02、MUX-04 | F17、F31 | 一个运行中的远程作业出现在页面线数据里，带模板与状态；tail SSE 推送它的日志尾部；作业结束后 `compute` 通知触发重读、状态更新；排队中被取消的作业显示终态 `EndedUnstarted`（PM#4）；`remove` 之后不再开 tail 流 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| WEB-01 | 阶段 A：`readSnapshot` 改为异步，loader 构造服务（D7:76） | — | S2 | 13 个 controller 没有改动，页面照常渲染 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| WEB-02 | 阶段 B 的基础：`src/protocol/lab`、新的 `LabBridge`、`subscribe`、`send`、`watchAgent`（D7:77、117-123） | LAB-07a、WEB-01 | S2 | 页面 loader 读取线数据，事件使它失效后重读 | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| WEB-03 | 投影：catalog、实验列表、实验详情（`RunGraph` 到 `ExperimentFlowFixture`，含时间轴、对比、派生导航、runner workspace） | WEB-02、LAB-07b | F08、F10、F13、F18、F23–F26 | 纯函数投影的单元测试，输入是真实录制的线数据；录制中含 `Aborted` 变体的调用（不带 `version`、`body`、`env`，`outputs = []`），投影出被中止的节点（PM#5 第 2 项） | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| WEB-04 | 投影：讨论、数据集、流程编辑器 | WEB-02、LAB-11a、LAB-11b | F09、F12、F27 | 同上 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| WEB-05 | 投影：节点库、自动化 | WEB-02、LAB-09、LAB-10 | F28–F30 | 同上 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| WEB-06 | 投影：集群、容器、接入向导、设置、首页 | WEB-02、LAB-12 | F17、F31 | 同上 | low | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
-| WEB-07 | 阶段 B 一次落地：放宽 id、把剧情字面量改成数据事实、`AgentTemplate.id` 改为 omp agent 定义名、`AgentTemplate.harness` 收窄为字面量 `'omp'`（D7:71、77）、运行时不再引用 `LAB_SNAPSHOT`；经 Main 与 UI 负责人协调（D7:77） | WEB-03–06 | S2 | 构建好的 host 在浏览器中走完 13 个页面，数据都来自后端（SMOKE:22-54） | mid | 按 §3 对应流程在统一阶段核对；不作开发期开工锁 |
+| ID | 切片 | 依赖 | 解锁 | 验收 | 档位 |
+| --- | --- | --- | --- | --- | --- |
+| LAB-01 `VS2` | `server/lab` 隔离区、`labRuntime()`、`rpc/lab.ts` 骨架、请求中间件分流（D7:61、78、81） | — | S2 | Lab 区不 import Paseo 区（由架构检查确认）；`lab.catalog.read` 返回 `OperationResult` | low |
+| LAB-02 `VS2` | `lab.sqlite`：Drizzle schema 与迁移（D7:62） | LAB-01 | S2 | 启动时自动迁移，表齐全 | low |
+| LAB-03 `VS2` | Better Auth 加 organization 插件、角色、`/api/auth/*`；e2e 管理员账号由部署种子创建；登录页由 UI 负责人实现（D7:63） | LAB-02 | S2 | 邮箱加密码能登录；没有会话时访问 Lab 面被拒绝 | low |
+| LAB-04 `VS2` | `LabSessions`：写方、开代、dial、`ready`、`get_state`、`set_host_tools`；根会话的 `human_irc_queue`（根会话的写方就是 Lab，不经 Mux 转发，D3:66）；`discussion.create` 与 `discussion.prompt`（D7:64、69） | LAB-02、MUX-03、DIST-01 | F25、F31 | 一条 prompt 到达根会话，会话停驻后能唤醒 | mid |
+| LAB-05 | `lab_*` host tools（D7:65、216-221） | LAB-04、STO-04 | F09、F31 | `lab_open_artifact` 把产物拷进本会话 worktree 的 `inputs/`，字节与 store 对象哈希一致；`lab_save_artifact` 在 worktree 里生成不可变快照 `artifacts/<hash>/<文件名>` 并登记 `artifact_meta`，不写 store（D7:65、67、219） | low |
+| LAB-06 `VS2` | store 客户端；订阅生命周期流，写 `experiment_ext`；实验状态的投影（D7:66） | LAB-02、STO-05 | F30、F31 | 收到 `run_started` 后分配 `R-0xx` 编号 | low |
+| LAB-07a `VS2` | 读取侧：catalog 与实验页的线数据（`RunGraph`）、`/api/lab/events`、对象代理（D7:68） | LAB-06、MUX-04 | F26 | 运行变更时推送 `run` 频道 | low |
+| LAB-07b | 读取侧：在途叠加层（`writers` 与 `slots`）、`/api/lab/agents/{id}/stream`、files（D7:68） | LAB-07a、MUX-03、MUX-06、MUX-07 | F08、F17、F26 | 页面线数据中带有在途槽位，SSE 转发读方帧 | mid |
+| LAB-08 | 命令：`intervene.takeover`、`intervene.answer`、`intervene.derive`，`run.abort`，`human.irc`（D7:69） | LAB-07b、SOR-13、SOR-15、SOR-16 | F08、F23–F25 | 每条命令的结论都由拥有方返回 | low |
+| LAB-09 | 自动化：事件触发、`croner` 定时、审批门禁（D7:70） | LAB-04、LAB-06 | F30 | A-01 规则写入 `automation_run`；`waiting` 状态的运行批准后才开会话 | low |
+| LAB-10 | 节点库：从 TS 导出定义（D7 P1）、`library.stage` 与 `library.apply`（commit 后快进）、usage（D7:71） | LAB-02、STO-11、LIB-01 | F24、F28、F29 | 导出与源码一致；apply 生成 commit | mid |
+| LAB-11a | 讨论的读取与装载：停驻会话的 transcript 读取（P2）、`discussion.load`、附件（D7:67） | LAB-04、LAB-05 | F09、F31 | 读停驻会话不会唤醒它；`discussion.load` 写入 `discussion_context` | low |
+| LAB-11b | 草稿与启动：`draft.save`、`experiment.start`、`experiment.approve`；启动意图与审批状态记在 `pending_launch`，运行绑定记在 `experiment_ext.draft`，不往草稿写 `launched`（D7:66、161-162；D6:40） | LAB-04、LAB-06 | F27、F31 | 草稿只在 `lab.sqlite`，不进 store；免审批时 `pending_launch` 为 `sent`、会话收到含草稿的 prompt；`run_started` 后 `experiment_ext.draft` 指向该草稿，`pending_launch` 已删除 | low |
+| LAB-12 | 算力页的只读读取（D7-12、D7-18；D8-16）：`lab.page.read{lab, page:'clusters'}` 返回 `templates`、`jobs: {run: RemoteRunSummary; status: RunStatus}[]`、`presence`；日志尾部另由只读 SSE `GET /api/lab/jobs/{run}/tail` 提供（`remote tail` 快照，有订阅者时定期取）。有订阅者时定期调用 `remote runs`、`remote status`，变化经 `/api/lab/events` 的 `compute` 频道通知重读；作业最新事实为 `Removed` 时不开 tail 流（D7:72、78、145-146）。第一版无命令 | REM-05、REM-06、REM-07、REM-02、MUX-04 | F17、F31 | 一个运行中的远程作业出现在页面线数据里，带模板与状态；tail SSE 推送它的日志尾部；作业结束后 `compute` 通知触发重读、状态更新；排队中被取消的作业显示终态 `EndedUnstarted`（PM#4）；`remove` 之后不再开 tail 流 | low |
+| WEB-01 | 阶段 A：`readSnapshot` 改为异步，loader 构造服务（D7:76） | — | S2 | 13 个 controller 没有改动，页面照常渲染 | low |
+| WEB-02 | 阶段 B 的基础：`src/protocol/lab`、新的 `LabBridge`、`subscribe`、`send`、`watchAgent`（D7:77、117-123） | LAB-07a、WEB-01 | S2 | 页面 loader 读取线数据，事件使它失效后重读 | mid |
+| WEB-03 | 投影：catalog、实验列表、实验详情（`RunGraph` 到 `ExperimentFlowFixture`，含时间轴、对比、派生导航、runner workspace） | WEB-02、LAB-07b | F08、F10、F13、F18、F23–F26 | 纯函数投影的单元测试，输入是真实录制的线数据；录制中含 `Aborted` 变体的调用（不带 `version`、`body`、`env`，`outputs = []`），投影出被中止的节点（PM#5 第 2 项） | mid |
+| WEB-04 | 投影：讨论、数据集、流程编辑器 | WEB-02、LAB-11a、LAB-11b | F09、F12、F27 | 同上 | low |
+| WEB-05 | 投影：节点库、自动化 | WEB-02、LAB-09、LAB-10 | F28–F30 | 同上 | low |
+| WEB-06 | 投影：集群、容器、接入向导、设置、首页 | WEB-02、LAB-12 | F17、F31 | 同上 | low |
+| WEB-07 | 阶段 B 一次落地：放宽 id、把剧情字面量改成数据事实、`AgentTemplate.id` 改为 omp agent 定义名、`AgentTemplate.harness` 收窄为字面量 `'omp'`（D7:71、77）、运行时不再引用 `LAB_SNAPSHOT`；经 Main 与 UI 负责人协调（D7:77） | WEB-03–06 | S2 | 构建好的 host 在浏览器中走完 13 个页面，数据都来自后端（SMOKE:22-54） | mid |
 
 #### DEP：`Pepgent/deploy`（新仓库，D2:60）
 
