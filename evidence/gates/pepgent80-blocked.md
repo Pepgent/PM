@@ -134,15 +134,17 @@
 
 ---
 
-## 六、议程草案（P0，待闸门判定）
+## 六、议程（两道闸门判须表决，P0）
+
+闸门 A（`pepgent80-blocked-gate-a.md`）：F4 中“id=定义名、harness='omp'、文件和 models 取源码/frontmatter”引 D7-11 原文在 #80 作答；其余各项须 P0 表决，R-01..R-06 在意图上成立。闸门 B（`pepgent80-blocked-gate-b.md`）：各项均须 P0 表决；R-02（向 W-04 派工）、R-03（重派已退役的 W-03）、R-06（放宽 LAB-13 白名单）标 `domains: [governance]`。
 
 | 行 | 来自 | what | 类别 | 领域 |
 |---|---|---|---|---|
 | R-01 | F1 | `member.invite/role/remove` 在 Better Auth 端点成功返回后，以单独一个 SQLite 事务写 activity；`member.quota`、`conclusion.confirm` 仍同一事务；wire 不变，不设失败分支 | 技术 | — |
-| R-02 | F2 | images 检出配置接口：deploy 注入 `PEPGENT_LAB_IMAGES_HOME=/var/lib/pepgent/images` 与远端 `PEPGENT_LAB_IMAGES_REMOTE`；Lab 后端作为检出写方，读 `containers` 前把检出快进到远端默认分支；只读凭据由 deploy 按既有注入路径提供（P15 占位） | 串联 | — |
-| R-03 | F2 | `ImageDefinition` 的来源是 images 仓库根部的机器可读清单 `images.json`（W-03 交付），每个发布目标一项，列出 `name/target/path/base/dependencies/files`；Lab 只读清单和检出，`files` 的 `size/contents` 取自检出，不解析 Dockerfile | 串联 | 可由 SoroiKeeper 认领 `globalArchitecture` |
+| R-02 | F2 | images 检出配置接口：deploy 注入 `PEPGENT_LAB_IMAGES_HOME=/var/lib/pepgent/images` 与远端 `PEPGENT_LAB_IMAGES_REMOTE`；Lab 后端作为检出写方，读 `containers` 前把检出快进到远端默认分支；只读凭据由 deploy 按既有注入路径提供（P15 占位） | 串联 | `governance` |
+| R-03 | F2 | `ImageDefinition` 的来源是 images 仓库根部的机器可读清单 `images.json`（W-03 交付），每个发布目标一项，列出 `name/target/path/base/dependencies/files`；Lab 只读清单和检出，`files` 的 `size/contents` 取自检出，不解析 Dockerfile | 串联 | `governance`；SoroiKeeper 可认领 `globalArchitecture` |
 | R-04 | F3 | `online` = 该成员当前在本 Lab 持有至少一个 `GET /api/lab/events` 订阅；`lastActiveAt` = 自 Lab 进程启动以来，Lab 最近一次接纳该成员对本 Lab 的已认证调用的时刻，无则 `null`；两者都是 Lab 进程内事实，不落库，不改 wire | 技术 | — |
 | R-05 | F4 | 模板规范布局为 `.omp/agents/<id>.md` 单文件，文件名主干等于定义名；`description/models/files/lastCommit/drafts` 的取值规则；saveVersion 合入路径为 `[.omp/agents/<id>.md]`；D7-11、D12:452、D42-02 的 `.omp/agents/<id>` 一并替换 | 串联 | — |
 | R-06 | F4 | LAB-13 白名单在 `apps/web/src/server/lab/**` 之外增加 `apps/web/package.json` 与根 `package-lock.json`，只用于新增 YAML 解析依赖 | 治理 | `governance` |
 
-完整行文见同目录的 `pepgent80-blocked-proposal.yaml`（立案时生成），以议会 daemon 发布的 decision issue 正文为准。
+完整行文见同目录的 [`pepgent80-blocked-proposal.yaml`](pepgent80-blocked-proposal.yaml)，以议会 daemon 发布的 decision issue 正文为准。
