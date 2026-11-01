@@ -44,7 +44,7 @@
 | G-15 | D9-01 以 SNAP 的 18 个顶层字段为根，其中包括 `labs`、`projects`、`home`、`flowEditor`、`datasets`、`connectCluster`、`settings`。D9-02 依据 WEB-03..06 的投影源码和录制的线数据做叶子来源分类。 | (D) `DEC/D8-mvp-scope.md:413,420` |
 | G-16 | 禁令原文：“接口或权限表缺少某项不构成授权：禁止据此……把功能移入 D9。” | (D) `SOR/AGENTS.md:123` |
 | G-17 | D1-12 的优先级：“`P0`（关键路径工程 `BLOCKED` 解阻）→ `P1`（产品全景/跨组件接缝金丝雀纠偏）→ `P2`（PM 错误路径清理）→ `P3`（`omomp` 工作流提效方针）”。C1-3 设开发期接缝纠偏，是为了防止跨组件错配“潜伏……直到阶段 C 才集中爆发”，发现即发起 P1。 | (D) `SOR/AGENTS.md:26,45` |
-| G-18 | W-09 当前在 `/Users/mouriya/Ext/worktrees/pepgent-lab-78` 承载 #78；LAB-13 由 D42 新建，issue 尚待总协调席创建。 | (A) Main 派活 brief；(R) `gh issue list` 最新 issue 为 #78 |
+| G-18 | W-09 当前在 `/Users/mouriya/Ext/worktrees/pepgent-lab-78` 承载 #78。D42 新建的 LAB-13 已由总协调席建为 [Pepgent#80](https://github.com/Pepgent/Pepgent/issues/80)。 | (A) Main 派活 brief；(D) 闸门 B 材料 `lab-entry-batch2-gate-b.md` |
 
 ## 二、逐项归属表
 
@@ -78,7 +78,11 @@
 - **另开一个 LAB-14，不按页面拆成多个切片：** 同一席位（W-09）、同一路径域，拆成多个 issue 徒增仪式（U83，C1-3 允许同域关联切片合并提交）。
 - **LAB-14 依赖 LAB-13：** `agentTemplate.writeFile/removeFile` 要求操作者是 agents Panel 会话的 owner，而这个会话只能由 LAB-13 的 `panel.prompt` 新建。W-09 是同一席位，按 LAB-13 → LAB-14 顺序做即可。这个依赖不是开工锁，也不要求跨组件 runtime 证据（`SOR/AGENTS.md:128`）。
 
-## 四、承载议程（草案）
+## 四、承载议程（两道闸门判定后已按 P1 立案为 [D44（PM#63）](https://github.com/Pepgent/PM/issues/63)）
+
+- **闸门 A（Argon-2）：** [`lab-entry-batch2-gate-a.md`](lab-entry-batch2-gate-a.md)。判定不改已定公开契约；三行划归 LAB-14、不并入 LAB-13、不列 D9、不拆碎 issue，在产品意图与切片取舍上都成立；同意按 P1 立案。
+- **闸门 B（ArgonGovernance-2）：** [`lab-entry-batch2-gate-b.md`](lab-entry-batch2-gate-b.md)。判定不越白名单与阶段门禁；属尚未定案的切片归属（K4），必须表决；非 BLOCKED 的跨席位接缝纠偏，定级 P1 成立；三行 `domains: [governance]`，5 席参投；另开 LAB-14、依赖 LAB-13 合规。
+
 
 ```yaml
 title: Lab 第二批未承载入口：flowEditor、datasets、connectCluster 三页读取与 19 个命令的承载切片 LAB-14
