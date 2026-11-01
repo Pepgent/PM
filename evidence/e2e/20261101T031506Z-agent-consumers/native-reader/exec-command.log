@@ -1,0 +1,6 @@
+{"scenario":"native-reader-response","command":"get_messages","id":"r024afa1b117649c39fc19643cc71d2e3:reader-2","success":true,"data":{"messages":[]},"modelInvoked":false}
+{"scenario":"native-reader-response","command":"get_messages_page","id":"r024afa1b117649c39fc19643cc71d2e3:reader-3","success":true,"data":{"messages":[],"totalMessages":0},"modelInvoked":false}
+{"scenario":"native-reader-response","command":"get_session_stats","id":"r024afa1b117649c39fc19643cc71d2e3:reader-4","success":true,"data":{"sessionId":"01a19518-98fc-7508-8d27-032d2684ec79","userMessages":0,"assistantMessages":0,"toolCalls":0,"toolResults":0,"totalMessages":0,"tokens":{"input":0,"output":0,"reasoning":0,"cacheRead":0,"cacheWrite":0,"total":0},"cost":0,"premiumRequests":0,"contextUsage":{"tokens":4627,"contextWindow":1000000,"percent":0.4627}},"modelInvoked":false}
+{"scenario":"native-readonly-state","before":{"sessionId":"01a19518-98fc-7508-8d27-032d2684ec79","isStreaming":false,"messageCount":0},"after":{"sessionId":"01a19518-98fc-7508-8d27-032d2684ec79","isStreaming":false,"messageCount":0},"modelInvoked":false}
+{"scenario":"native-missing-observation","failure":"deadline","modelInvoked":false}
+{"scenario":"native-reader-complete","readerClosed":true,"writerAndDialClosed":true,"evidence":"/tmp/soroi-reader-native-IiEiqK","liveF07F19F22":"not-run","modelInvoked":false}

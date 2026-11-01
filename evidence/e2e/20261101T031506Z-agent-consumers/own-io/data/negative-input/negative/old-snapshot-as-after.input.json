@@ -1,0 +1,14 @@
+{
+  "label": "DELIBERATE-INVALID-FIXTURE",
+  "case": "old-snapshot-as-after",
+  "input": {
+    "ref": {
+      "metadata": "store/GET-%2Ffixture%2Fknown-value-1.json"
+    },
+    "path": "/fixture/known-value",
+    "bounds": {
+      "kind": "after",
+      "receive": 3
+    }
+  }
+}

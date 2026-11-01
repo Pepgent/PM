@@ -1,0 +1,14 @@
+{"direction":"send","transport":"WS-server","raw":"{\"type\":\"mux_welcome\",\"prefix\":\"r1:\",\"generation\":\"fixture-generation\"}"}
+{"direction":"receive","transport":"HTTP-server","raw":"GET /fixture/known-value"}
+{"direction":"send","transport":"HTTP-server","raw":"{\"kind\":\"owned-transport-fixture\",\"value\":2200}"}
+{"direction":"receive","transport":"WS-server","raw":"{\"type\":\"get_state\",\"id\":\"reader-1\"}"}
+{"direction":"send","transport":"WS-server","raw":"{\"type\":\"response\",\"command\":\"get_state\",\"id\":\"r1:reader-1\",\"success\":true,\"data\":{\"sessionId\":\"fixture-session\",\"fixtureValue\":2200}}"}
+{"direction":"receive","transport":"HTTP-server","raw":"GET /fixture/known-value"}
+{"direction":"send","transport":"HTTP-server","raw":"{\"kind\":\"owned-transport-fixture\",\"value\":2200}"}
+{"direction":"send","transport":"WS-server","raw":"{\"type\":\"mux_welcome\",\"prefix\":\"r2:\",\"generation\":\"fixture-generation\"}"}
+{"direction":"receive","transport":"HTTP-server","raw":"GET /fixture/known-value"}
+{"direction":"send","transport":"HTTP-server","raw":"{\"kind\":\"owned-transport-fixture\",\"value\":2200}"}
+{"direction":"receive","transport":"WS-server","raw":"{\"type\":\"get_state\",\"id\":\"reader-1\"}"}
+{"direction":"send","transport":"WS-server","raw":"{\"type\":\"response\",\"command\":\"get_state\",\"id\":\"r2:reader-1\",\"success\":true,\"data\":{\"sessionId\":\"fixture-session\",\"fixtureValue\":2200}}"}
+{"direction":"receive","transport":"HTTP-server","raw":"GET /fixture/known-value"}
+{"direction":"send","transport":"HTTP-server","raw":"{\"kind\":\"owned-transport-fixture\",\"value\":2200}"}

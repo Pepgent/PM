@@ -1,0 +1,43 @@
+{
+  "flow": "F22",
+  "segment": "S1",
+  "env": "L",
+  "startedAt": "2026-11-01T03:11:30.221Z",
+  "endedAt": "2026-11-01T03:11:30.221Z",
+  "build": {
+    "commits": {
+      "soroi": "not-run"
+    },
+    "images": {},
+    "release": "not-installed",
+    "omp": "not-run",
+    "model": "not-run"
+  },
+  "runs": [],
+  "agents": [],
+  "remoteRuns": [],
+  "assertions": [
+    {
+      "id": "execution",
+      "claim": "All required owner observations and phases are available",
+      "source": {
+        "kind": "transcript",
+        "file": "execution-error.txt",
+        "lines": [
+          1,
+          3
+        ]
+      },
+      "expected": "\"complete native/RPC/store evidence\"",
+      "observed": "\"Error: ENOENT: no such file or directory, open '/tmp/soroi-recorded-cli-2aq953dn/missing-full-a0.json'\\n    at async runRecorded (/Users/mouriya/Ext/worktrees/test-218-pty-a0-ff0716f/e2e/s1/recorded.ts:149:60)\\n    at async recordedMain (/Users/mouriya/Ext/worktrees/test-218-pty-a0-ff0716f/e2e/s1/recorded.ts:171:24)\"",
+      "pass": false
+    }
+  ],
+  "deviations": [],
+  "result": {
+    "kind": "fail",
+    "failed": [
+      "execution"
+    ]
+  }
+}

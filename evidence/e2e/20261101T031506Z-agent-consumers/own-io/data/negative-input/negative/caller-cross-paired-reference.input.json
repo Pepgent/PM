@@ -1,0 +1,8 @@
+{
+  "label": "DELIBERATE-INVALID-FIXTURE",
+  "case": "caller-cross-paired-reference",
+  "input": {
+    "metadata": "store/GET-%2Ffixture%2Fknown-value-1.json",
+    "body": "store/GET-%2Ffixture%2Fknown-value-2.body"
+  }
+}

@@ -1,0 +1,1 @@
+NON-LIVE ORACLE INPUT. data/ contains owned fake-WebSocket protocol fixtures, not installed native sessions or product/model flows.

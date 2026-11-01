@@ -1,0 +1,2 @@
+$ bun run s1/f22.spec.ts --config "/tmp/soroi-recorded-cli-2aq953dn/F22.json"
+error: script "f22" exited with code 1

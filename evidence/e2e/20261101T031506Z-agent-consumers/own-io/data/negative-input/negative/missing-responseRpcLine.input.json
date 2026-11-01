@@ -1,0 +1,41 @@
+{
+  "label": "DELIBERATE-INVALID-FIXTURE",
+  "case": "missing-responseRpcLine",
+  "input": {
+    "label": "CORRUPTED-generated-after-metadata",
+    "removedField": "responseRpcLine",
+    "ref": {
+      "metadata": "negative/missing-responseRpcLine.json"
+    },
+    "metadata": {
+      "evidenceId": "2b165513-8563-4d44-a945-8502619c0e0e",
+      "method": "GET",
+      "path": "/fixture/known-value",
+      "status": 200,
+      "requestRpcLine": 3,
+      "headers": [
+        [
+          "content-length",
+          "47"
+        ],
+        [
+          "content-type",
+          "application/json"
+        ],
+        [
+          "date",
+          "Sun, 01 Nov 2026 02:45:34 GMT"
+        ],
+        [
+          "x-fixture",
+          "non-product"
+        ]
+      ]
+    },
+    "path": "/fixture/known-value",
+    "bounds": {
+      "kind": "after",
+      "receive": 3
+    }
+  }
+}

@@ -1,0 +1,3 @@
+{"evidenceId":"f24944b1-d3db-450a-92ff-3aa34b537aa5","at":"2026-11-01T02:45:34.770Z","direction":"receive","channel":"watermark-fixture-reader","raw":"{\"type\":\"mux_welcome\",\"prefix\":\"r2:\",\"generation\":\"fixture-generation\"}"}
+{"evidenceId":"f24944b1-d3db-450a-92ff-3aa34b537aa5","at":"2026-11-01T02:45:34.770Z","direction":"send","channel":"watermark-fixture-reader","raw":"{\"type\":\"get_state\",\"id\":\"reader-1\"}"}
+{"evidenceId":"f24944b1-d3db-450a-92ff-3aa34b537aa5","at":"2026-11-01T02:45:34.770Z","direction":"receive","channel":"watermark-fixture-reader","raw":"{\"type\":\"response\",\"command\":\"get_state\",\"id\":\"r2:reader-1\",\"success\":true,\"data\":{\"sessionId\":\"fixture-session\",\"fixtureValue\":2200}}"}

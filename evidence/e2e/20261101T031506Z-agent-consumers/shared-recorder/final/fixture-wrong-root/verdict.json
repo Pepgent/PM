@@ -1,0 +1,218 @@
+{
+  "flow": "F01",
+  "segment": "S1",
+  "env": "L",
+  "startedAt": "2026-11-01T02:45:26.850Z",
+  "endedAt": "2026-11-01T02:45:26.906Z",
+  "build": {
+    "commits": {
+      "soroi": "fixture"
+    },
+    "release": "fixture",
+    "images": {},
+    "omp": "fixture",
+    "model": "fixture/deterministic"
+  },
+  "runs": [
+    "fixture-wrong-root-1"
+  ],
+  "agents": [
+    "fixture-wrong-root"
+  ],
+  "remoteRuns": [],
+  "assertions": [
+    {
+      "id": "a0",
+      "claim": "The same release passed installation prerequisite A0",
+      "source": {
+        "kind": "transcript",
+        "file": "a0-verdict.json",
+        "lines": [
+          1,
+          1
+        ]
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "live-build",
+      "claim": "This campaign identifies a real release, commits, images and omp",
+      "source": {
+        "kind": "transcript",
+        "file": "verdict.json",
+        "lines": [
+          1,
+          1
+        ]
+      },
+      "expected": "true",
+      "observed": "false",
+      "pass": false
+    },
+    {
+      "id": "script",
+      "claim": "The model invoked the exact formal step",
+      "source": {
+        "kind": "rpc",
+        "agent": "fixture-wrong-root",
+        "frame": "11"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "tool-result",
+      "claim": "The formal tool result confirms the new run ended",
+      "source": {
+        "kind": "rpc",
+        "agent": "fixture-wrong-root",
+        "frame": "12"
+      },
+      "expected": "[\"formal\",true,true,false,[]]",
+      "observed": "[\"formal\",true,true,false,[]]",
+      "pass": true
+    },
+    {
+      "id": "ended-list",
+      "claim": "The ended list contains this run with its root session as holder",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs?state=Ended"
+      },
+      "expected": "[{\"run\":\"fixture-wrong-root-1\",\"holder\":\"fixture-root-session\",\"state\":\"Ended\"}]",
+      "observed": "[{\"run\":\"fixture-wrong-root-1\",\"holder\":\"fixture-root-session\",\"state\":\"Ended\"}]",
+      "pass": true
+    },
+    {
+      "id": "graph-state",
+      "claim": "The graph belongs to the root session and is ended",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/fixture-wrong-root-1/graph"
+      },
+      "expected": "[\"fixture-wrong-root-1\",\"fixture-root-session\",\"Ended\"]",
+      "observed": "[\"fixture-wrong-root-1\",\"fixture-root-session\",\"Ended\"]",
+      "pass": true
+    },
+    {
+      "id": "root",
+      "claim": "The only graph node is Root temp_2200c = 2200",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/fixture-wrong-root-1/graph"
+      },
+      "expected": "[{\"kind\":\"Root\",\"name\":\"temp_2200c\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":2200}}}]",
+      "observed": "[{\"kind\":\"Root\",\"name\":\"temp_2200c\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":2199}}}]",
+      "pass": false
+    },
+    {
+      "id": "consumed",
+      "claim": "No edge or unconsumed atom remains",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/fixture-wrong-root-1/graph"
+      },
+      "expected": "[[],[]]",
+      "observed": "[[],[]]",
+      "pass": true
+    },
+    {
+      "id": "event-order",
+      "claim": "The stream contains exactly the four F01 lifecycle events",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/fixture-wrong-root-1/stream?after=0"
+      },
+      "expected": "[\"run_started\",\"step_committed\",\"atom_stopped\",\"run_ended\"]",
+      "observed": "[\"run_started\",\"step_committed\",\"atom_stopped\",\"run_ended\"]",
+      "pass": true
+    },
+    {
+      "id": "event-seq",
+      "claim": "The stream sequences increase strictly and end at graph.at",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/fixture-wrong-root-1/stream?after=0"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "step-code",
+      "claim": "The committed step preserves exact code and session",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/fixture-wrong-root-1/stream?after=0"
+      },
+      "expected": "{\"session\":\"fixture-root-session\",\"code\":\"const temp_2200c = 2200\\nstop(temp_2200c)\"}",
+      "observed": "{\"session\":\"fixture-root-session\",\"code\":\"const temp_2200c = 2200\\nstop(temp_2200c)\"}",
+      "pass": true
+    },
+    {
+      "id": "stopped-name",
+      "claim": "The stop event names the required atom",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/fixture-wrong-root-1/stream?after=0"
+      },
+      "expected": "[\"temp_2200c\"]",
+      "observed": "[\"temp_2200c\"]",
+      "pass": true
+    },
+    {
+      "id": "open-step",
+      "claim": "The supervisor submitted this root step as open",
+      "source": {
+        "kind": "store",
+        "method": "POST",
+        "path": "/runs/steps"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "supervisor-end",
+      "claim": "The supervisor requested end and received the store Ended response",
+      "source": {
+        "kind": "store",
+        "method": "POST",
+        "path": "/runs/fixture-wrong-root-1/end"
+      },
+      "expected": "[{\"kind\":\"Ended\",\"seq\":4}]",
+      "observed": "[{\"seq\":4,\"kind\":\"Ended\"}]",
+      "pass": true
+    },
+    {
+      "id": "lifecycle",
+      "claim": "The generation exits before writer closure",
+      "source": {
+        "kind": "mux",
+        "path": "/agents/fixture-wrong-root/writer"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    }
+  ],
+  "deviations": [],
+  "result": {
+    "kind": "fail",
+    "failed": [
+      "live-build",
+      "root"
+    ]
+  }
+}

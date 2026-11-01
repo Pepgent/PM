@@ -1,0 +1,2 @@
+$ bun run s1/f07.spec.ts --config "/tmp/soroi-recorded-cli-2aq953dn/F07.json"
+error: script "f07" exited with code 1

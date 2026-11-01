@@ -1,0 +1,44 @@
+[
+  {
+    "flow": "F07",
+    "exit": 1,
+    "result": {
+      "kind": "fail",
+      "failed": [
+        "execution"
+      ]
+    },
+    "runs": [],
+    "agents": [],
+    "stdout": "{\"flow\":\"F07\",\"result\":{\"kind\":\"fail\",\"failed\":[\"execution\"]},\"evidence\":\"/tmp/soroi-recorded-cli-2aq953dn/F07\"}",
+    "liveFlow": "not-run"
+  },
+  {
+    "flow": "F19",
+    "exit": 1,
+    "result": {
+      "kind": "fail",
+      "failed": [
+        "execution"
+      ]
+    },
+    "runs": [],
+    "agents": [],
+    "stdout": "{\"flow\":\"F19\",\"result\":{\"kind\":\"fail\",\"failed\":[\"execution\"]},\"evidence\":\"/tmp/soroi-recorded-cli-2aq953dn/F19\"}",
+    "liveFlow": "not-run"
+  },
+  {
+    "flow": "F22",
+    "exit": 1,
+    "result": {
+      "kind": "fail",
+      "failed": [
+        "execution"
+      ]
+    },
+    "runs": [],
+    "agents": [],
+    "stdout": "{\"flow\":\"F22\",\"result\":{\"kind\":\"fail\",\"failed\":[\"execution\"]},\"evidence\":\"/tmp/soroi-recorded-cli-2aq953dn/F22\"}",
+    "liveFlow": "not-run"
+  }
+]

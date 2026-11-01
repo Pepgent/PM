@@ -1,0 +1,74 @@
+[0m[2m[35m$[0m [2m[1mbun run smoke.ts[0m
+{"scenario":"fixture-valid","verdict":{"kind":"fail","failed":["live-build"]},"runs":["fixture-valid-1"],"deviations":0,"assertions":[{"id":"a0","pass":true},{"id":"live-build","pass":false},{"id":"script","pass":true},{"id":"tool-result","pass":true},{"id":"ended-list","pass":true},{"id":"graph-state","pass":true},{"id":"root","pass":true},{"id":"consumed","pass":true},{"id":"event-order","pass":true},{"id":"event-seq","pass":true},{"id":"step-code","pass":true},{"id":"stopped-name","pass":true},{"id":"open-step","pass":true},{"id":"supervisor-end","pass":true},{"id":"lifecycle","pass":true}],"evidence":"/tmp/soroi-standin-smoke-OytnTp/fixture-valid"}
+{"scenario":"fixture-wrong-root","verdict":{"kind":"fail","failed":["live-build","root"]},"runs":["fixture-wrong-root-1"],"deviations":0,"assertions":[{"id":"a0","pass":true},{"id":"live-build","pass":false},{"id":"script","pass":true},{"id":"tool-result","pass":true},{"id":"ended-list","pass":true},{"id":"graph-state","pass":true},{"id":"root","pass":false},{"id":"consumed","pass":true},{"id":"event-order","pass":true},{"id":"event-seq","pass":true},{"id":"step-code","pass":true},{"id":"stopped-name","pass":true},{"id":"open-step","pass":true},{"id":"supervisor-end","pass":true},{"id":"lifecycle","pass":true}],"evidence":"/tmp/soroi-standin-smoke-OytnTp/fixture-wrong-root"}
+{"scenario":"fixture-deviation","verdict":{"kind":"fail","failed":["live-build"]},"runs":["fixture-deviation-2","fixture-deviation-1"],"deviations":1,"assertions":[{"id":"a0","pass":true},{"id":"live-build","pass":false},{"id":"script","pass":true},{"id":"tool-result","pass":true},{"id":"ended-list","pass":true},{"id":"graph-state","pass":true},{"id":"root","pass":true},{"id":"consumed","pass":true},{"id":"event-order","pass":true},{"id":"event-seq","pass":true},{"id":"step-code","pass":true},{"id":"stopped-name","pass":true},{"id":"open-step","pass":true},{"id":"supervisor-end","pass":true},{"id":"lifecycle","pass":true}],"evidence":"/tmp/soroi-standin-smoke-OytnTp/fixture-deviation"}
+{"scenario":"native-reader-response","command":"get_messages","id":"rf949c247af4d4f9ba914713b9d890584:reader-2","success":true,"data":{"messages":[]},"modelInvoked":false}
+{"scenario":"native-reader-response","command":"get_messages_page","id":"rf949c247af4d4f9ba914713b9d890584:reader-3","success":true,"data":{"messages":[],"totalMessages":0},"modelInvoked":false}
+{"scenario":"native-reader-response","command":"get_session_stats","id":"rf949c247af4d4f9ba914713b9d890584:reader-4","success":true,"data":{"sessionId":"01a194ff-620d-76c2-8985-157d8789a18c","userMessages":0,"assistantMessages":0,"toolCalls":0,"toolResults":0,"totalMessages":0,"tokens":{"input":0,"output":0,"reasoning":0,"cacheRead":0,"cacheWrite":0,"total":0},"cost":0,"premiumRequests":0,"contextUsage":{"tokens":4627,"contextWindow":1000000,"percent":0.4627}},"modelInvoked":false}
+{"scenario":"native-readonly-state","before":{"sessionId":"01a194ff-620d-76c2-8985-157d8789a18c","isStreaming":false,"messageCount":0},"after":{"sessionId":"01a194ff-620d-76c2-8985-157d8789a18c","isStreaming":false,"messageCount":0},"modelInvoked":false}
+{"scenario":"native-missing-observation","failure":"deadline","modelInvoked":false}
+{"scenario":"native-reader-complete","readerClosed":true,"writerAndDialClosed":true,"evidence":"/tmp/soroi-reader-native-3y838U","liveF07F19F22":"not-run","modelInvoked":false}
+[0m[2m[35m$[0m [2m[1mbun run reader-smoke.ts[0m
+{"scenario":"reader-prefix-correlation","agent":"alpha","command":"get_state","observed":"alpha","liveProductFlow":false}
+{"scenario":"reader-prefix-correlation","agent":"alpha","command":"get_messages","observed":"alpha","liveProductFlow":false}
+{"scenario":"reader-prefix-correlation","agent":"alpha","command":"get_messages_page","observed":"alpha","liveProductFlow":false}
+{"scenario":"reader-prefix-correlation","agent":"alpha","command":"get_session_stats","observed":"alpha","liveProductFlow":false}
+{"scenario":"reader-prefix-correlation","agent":"beta","command":"get_state","observed":"beta","liveProductFlow":false}
+{"scenario":"reader-prefix-correlation","agent":"beta","command":"get_messages","observed":"beta","liveProductFlow":false}
+{"scenario":"reader-prefix-correlation","agent":"beta","command":"get_messages_page","observed":"beta","liveProductFlow":false}
+{"scenario":"reader-prefix-correlation","agent":"beta","command":"get_session_stats","observed":"beta","liveProductFlow":false}
+{"scenario":"missing-observation","failure":"deadline","liveProductFlow":false}
+{"scenario":"query-eof","failure":"connection-closed","liveProductFlow":false}
+{"scenario":"reader-lifecycle","serverObservedClosed":["alpha","beta","early"],"received":[{"client":"alpha","type":"get_state","id":"reader-1"},{"client":"alpha","type":"get_messages","id":"reader-2"},{"client":"alpha","type":"get_messages_page","id":"reader-3"},{"client":"alpha","type":"get_session_stats","id":"reader-4"},{"client":"beta","type":"get_state","id":"reader-1"},{"client":"beta","type":"get_messages","id":"reader-2"},{"client":"beta","type":"get_messages_page","id":"reader-3"},{"client":"beta","type":"get_session_stats","id":"reader-4"},{"client":"early","type":"get_state","id":"reader-1"}],"evidence":"/tmp/soroi-reader-proof-7H73PV","liveProductFlow":false}
+[0m[2m[35m$[0m [2m[1mbun run s1/agent-smoke.ts[0m
+{"scenario":"request-is-not-accepted-return","observed":[],"liveF07F19F22":false}
+{"scenario":"matched-successful-return","observed":["return"],"liveF07F19F22":false}
+{"scenario":"transport-id-is-not-tool-call-id","observed":[],"liveF07F19F22":false}
+{"scenario":"rejected-return-is-not-accepted","observed":[],"liveF07F19F22":false}
+{"scenario":"quoted-purpose-group","observed":[{"purpose":"比较「A」与B","names":["a","b"]}],"liveF07F19F22":false}
+{"scenario":"next-group-does-not-belong-to-first","observed":[{"purpose":"first","names":[]},{"purpose":"second","names":["a"]}],"liveF07F19F22":false}
+{"scenario":"prose-is-not-purpose-header","observed":[],"liveF07F19F22":false}
+{"scenario":"all-obligations-release-before-end","observed":true,"liveF07F19F22":false}
+{"scenario":"end-before-batch-release","observed":false,"liveF07F19F22":false}
+{"scenario":"unreleased-formal-blocks-end","observed":false,"liveF07F19F22":false}
+{"scenario":"wrong-root-release","observed":false,"liveF07F19F22":false}
+{"scenario":"release-without-registration","observed":false,"liveF07F19F22":false}
+{"scenario":"duplicate-release","observed":false,"liveF07F19F22":false}
+{"scenario":"missing-end","observed":false,"liveF07F19F22":false}
+{"scenario":"wrong-run-end","observed":false,"liveF07F19F22":false}
+{"scenario":"old-episode-cannot-satisfy-new-run","observed":false,"liveF07F19F22":false}
+{"scenario":"unknown-lifecycle-tag-is-rejected","observed":true,"liveF07F19F22":false}
+{"scenario":"missing-obligation-field-is-rejected","observed":true,"liveF07F19F22":false}
+{"scenario":"F07-missing-prerequisite-is-not-pass","observed":{"kind":"fail","failed":["execution"]},"liveF07F19F22":false}
+{"scenario":"F19-missing-prerequisite-is-not-pass","observed":{"kind":"fail","failed":["execution"]},"liveF07F19F22":false}
+{"scenario":"F22-missing-prerequisite-is-not-pass","observed":{"kind":"fail","failed":["execution"]},"liveF07F19F22":false}
+{"evidence":"/tmp/soroi-agent-oracle-8jpvwy","liveF07F19F22":"not-run"}
+[0m[2m[35m$[0m [2m[1mbun run s1/local-smoke.ts[0m
+{"scenario":"real-identifiers-not-comment-or-string","observed":["other","out"],"liveFlow":false}
+{"scenario":"semantic-stop-whitespace","observed":true,"liveFlow":false}
+{"scenario":"stop-text-in-string-is-not-stop","observed":false,"liveFlow":false}
+{"scenario":"non-stop-statement-is-not-cleanup","observed":false,"liveFlow":false}
+{"scenario":"formatted-reminder","observed":{"names":["score"],"formatted":true},"liveFlow":false}
+{"scenario":"reminder-without-provenance-is-rejected","observed":{"names":["score"],"formatted":false},"liveFlow":false}
+{"scenario":"documented-indented-reminder-list","observed":{"names":["curve_svm","score"],"formatted":true},"liveFlow":false}
+{"scenario":"host-schema-error-is-distinct","observed":"schema_error","liveFlow":false}
+{"scenario":"runtime-error-is-not-schema-rejection","observed":"tool_error","liveFlow":false}
+{"scenario":"synthetic-unexecuted-is-not-schema-rejection","observed":"tool_error","liveFlow":false}
+{"scenario":"unstructured-error-is-not-schema-rejection","observed":"tool_error","liveFlow":false}
+{"scenario":"edge-from-prior-commit","observed":true,"liveFlow":false}
+{"scenario":"edge-from-future-output-is-rejected","observed":false,"liveFlow":false}
+{"scenario":"interval-intersection","observed":true,"liveFlow":false}
+{"scenario":"touching-intervals-are-not-concurrent","observed":false,"liveFlow":false}
+{"scenario":"zero-duration-is-not-concurrent","observed":false,"liveFlow":false}
+{"scenario":"reversed-interval-is-invalid","observed":false,"liveFlow":false}
+{"scenario":"file-preview-only-locates-path","observed":"/tmp/a (b).log","liveFlow":false}
+{"scenario":"original-tool-args-survive-host-repair","observed":{"mode":"formal","code":"const x = 1","pins":{"x":1}},"liveFlow":false}
+{"scenario":"reminder-binds-same-assistant-request","observed":["call"],"liveFlow":false}
+{"scenario":"off-branch-reminder-is-not-current","observed":["reminder"],"liveFlow":false}
+{"scenario":"late-record-does-not-prove-earlier-request","observed":false,"liveFlow":false}
+{"scenario":"request-ordinal-cannot-repeat","observed":true,"liveFlow":false}
+{"scenario":"F02-missing-A0-never-passes","observed":{"kind":"fail","failed":["execution"]},"liveFlow":false}
+{"scenario":"F03-missing-A0-never-passes","observed":{"kind":"fail","failed":["execution"]},"liveFlow":false}
+{"scenario":"F04-missing-A0-never-passes","observed":{"kind":"fail","failed":["execution"]},"liveFlow":false}
+{"evidence":"/tmp/soroi-local-flow-proof-zPag9k","liveF02F03F04":"not-run"}
+[0m[2m[35m$[0m [2m[1mtsc --noEmit[0m

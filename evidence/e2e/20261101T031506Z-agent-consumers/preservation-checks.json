@@ -1,0 +1,295 @@
+{
+  "classification": "ARCHIVAL PRESERVATION CHECKS ONLY; no runtime rerun or hash verification",
+  "checkedAtUtc": "2026-11-01T03:16:40.699608+00:00",
+  "campaign": "20261101T031506Z-agent-consumers",
+  "sourceScan": {
+    "files": 1106,
+    "suspectedSecretMatches": 0,
+    "explicitSyntheticMatchesAllowed": 0
+  },
+  "publicationScan": {
+    "textFilesAndTarMembers": 1292,
+    "suspectedSecretMatches": 0,
+    "explicitSyntheticMatchesAllowed": 0,
+    "patterns": [
+      "github-token",
+      "provider-token",
+      "private-key",
+      "authorization-bearer",
+      "literal-sensitive-field"
+    ],
+    "valuesPrinted": false,
+    "credentialStoreOpened": false,
+    "limit": "Bounded pattern scan, not detection of arbitrary secret encodings"
+  },
+  "checks": [
+    {
+      "kind": "file-byte-equality",
+      "archived": "native-reader/probe.ts",
+      "source": "/tmp/soroi-reader-native-probe.ts",
+      "bytes": 3575,
+      "equal": true
+    },
+    {
+      "kind": "file-byte-equality",
+      "archived": "native-reader/exec-command.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-9-e87e1377.log",
+      "bytes": 1376,
+      "equal": true
+    },
+    {
+      "kind": "file-byte-equality",
+      "archived": "consumer-oracle/probe.mjs",
+      "source": "/tmp/soroi-agent-full-consumer-probe.mjs",
+      "bytes": 29673,
+      "equal": true
+    },
+    {
+      "kind": "file-byte-equality",
+      "archived": "consumer-oracle/exec-command.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-8-ea1b0914.log",
+      "bytes": 7661,
+      "equal": true
+    },
+    {
+      "kind": "file-byte-equality",
+      "archived": "consumer-oracle/oracle-observations.json",
+      "source": "/tmp/soroi-full-consumer-oracle-otLBS0/oracle-observations.json",
+      "bytes": 4887,
+      "equal": true
+    },
+    {
+      "kind": "file-byte-equality",
+      "archived": "own-io/probe.ts",
+      "source": "/tmp/soroi-watermark-ownership-probe.ts",
+      "bytes": 17379,
+      "equal": true
+    },
+    {
+      "kind": "file-byte-equality",
+      "archived": "own-io/probe.stdout",
+      "source": "/tmp/soroi-watermark-ownership-probe.stdout",
+      "bytes": 4932,
+      "equal": true
+    },
+    {
+      "kind": "file-byte-equality",
+      "archived": "own-io/command.txt",
+      "source": "/tmp/soroi-watermark-ownership-WjB0Xj/soroi-watermark-ownership-probe.command.txt",
+      "bytes": 659,
+      "equal": true
+    },
+    {
+      "kind": "file-byte-equality",
+      "archived": "shared-recorder/exec-command.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-6-f364bd31.log",
+      "bytes": 10118,
+      "equal": true
+    },
+    {
+      "kind": "file-byte-equality",
+      "archived": "owner-contract/obligation-publication.json",
+      "source": "/tmp/soroi-221-contracts/obligation-publication.json",
+      "bytes": 3842,
+      "equal": true
+    },
+    {
+      "kind": "file-byte-equality",
+      "archived": "cli-observations.json",
+      "source": "/tmp/soroi-recorded-cli-2aq953dn/observations.json",
+      "bytes": 1028,
+      "equal": true
+    },
+    {
+      "kind": "file-byte-equality",
+      "archived": "F07/flow.json",
+      "source": "/tmp/soroi-recorded-cli-2aq953dn/F07.json",
+      "bytes": 451,
+      "equal": true
+    },
+    {
+      "kind": "file-byte-equality",
+      "archived": "F07/stdout",
+      "source": "/tmp/soroi-recorded-cli-2aq953dn/F07.stdout",
+      "bytes": 113,
+      "equal": true
+    },
+    {
+      "kind": "file-byte-equality",
+      "archived": "F07/stderr",
+      "source": "/tmp/soroi-recorded-cli-2aq953dn/F07.stderr",
+      "bytes": 117,
+      "equal": true
+    },
+    {
+      "kind": "file-byte-equality",
+      "archived": "F19/flow.json",
+      "source": "/tmp/soroi-recorded-cli-2aq953dn/F19.json",
+      "bytes": 451,
+      "equal": true
+    },
+    {
+      "kind": "file-byte-equality",
+      "archived": "F19/stdout",
+      "source": "/tmp/soroi-recorded-cli-2aq953dn/F19.stdout",
+      "bytes": 113,
+      "equal": true
+    },
+    {
+      "kind": "file-byte-equality",
+      "archived": "F19/stderr",
+      "source": "/tmp/soroi-recorded-cli-2aq953dn/F19.stderr",
+      "bytes": 117,
+      "equal": true
+    },
+    {
+      "kind": "file-byte-equality",
+      "archived": "F22/flow.json",
+      "source": "/tmp/soroi-recorded-cli-2aq953dn/F22.json",
+      "bytes": 451,
+      "equal": true
+    },
+    {
+      "kind": "file-byte-equality",
+      "archived": "F22/stdout",
+      "source": "/tmp/soroi-recorded-cli-2aq953dn/F22.stdout",
+      "bytes": 113,
+      "equal": true
+    },
+    {
+      "kind": "file-byte-equality",
+      "archived": "F22/stderr",
+      "source": "/tmp/soroi-recorded-cli-2aq953dn/F22.stderr",
+      "bytes": 117,
+      "equal": true
+    },
+    {
+      "kind": "tree-byte-and-inventory-equality",
+      "archived": "native-reader/data",
+      "source": "/tmp/soroi-reader-native-IiEiqK",
+      "files": 3,
+      "directories": 2,
+      "allEqual": true
+    },
+    {
+      "kind": "tree-byte-and-inventory-equality",
+      "archived": "own-io/data",
+      "source": "/tmp/soroi-watermark-ownership-WjB0Xj",
+      "files": 88,
+      "directories": 37,
+      "allEqual": true
+    },
+    {
+      "kind": "tree-byte-and-inventory-equality",
+      "archived": "typed-ws-oracle/data",
+      "source": "/tmp/soroi-reader-proof-hUhwWu",
+      "files": 1,
+      "directories": 2,
+      "allEqual": true
+    },
+    {
+      "kind": "tree-byte-and-inventory-equality",
+      "archived": "agent-oracle/data",
+      "source": "/tmp/soroi-agent-oracle-mEdyZa",
+      "files": 10,
+      "directories": 6,
+      "allEqual": true
+    },
+    {
+      "kind": "tree-byte-and-inventory-equality",
+      "archived": "shared-recorder/final",
+      "source": "/tmp/soroi-standin-smoke-OytnTp",
+      "files": 58,
+      "directories": 6,
+      "allEqual": true
+    },
+    {
+      "kind": "tree-byte-and-inventory-equality",
+      "archived": "shared-recorder/intermediate-ready-failure",
+      "source": "/tmp/soroi-standin-smoke-RzOo63",
+      "files": 8,
+      "directories": 2,
+      "allEqual": true
+    },
+    {
+      "kind": "tree-byte-and-inventory-equality",
+      "archived": "F07/result",
+      "source": "/tmp/soroi-recorded-cli-2aq953dn/F07",
+      "files": 3,
+      "directories": 1,
+      "allEqual": true
+    },
+    {
+      "kind": "tree-byte-and-inventory-equality",
+      "archived": "F19/result",
+      "source": "/tmp/soroi-recorded-cli-2aq953dn/F19",
+      "files": 3,
+      "directories": 1,
+      "allEqual": true
+    },
+    {
+      "kind": "tree-byte-and-inventory-equality",
+      "archived": "F22/result",
+      "source": "/tmp/soroi-recorded-cli-2aq953dn/F22",
+      "files": 3,
+      "directories": 1,
+      "allEqual": true
+    },
+    {
+      "kind": "tar-byte-and-inventory-equality",
+      "archive": "consumer-oracle/fixture-trees.tar.gz",
+      "files": 911,
+      "directories": 95,
+      "emptyDirectories": [
+        "soroi-full-consumer-oracle-otLBS0/F07-forbidden-start-output/store",
+        "soroi-full-consumer-oracle-otLBS0/F07-missing-phase-output/store",
+        "soroi-full-consumer-oracle-otLBS0/F07-none-output/store",
+        "soroi-full-consumer-oracle-otLBS0/F07-stale-after-output/store",
+        "soroi-full-consumer-oracle-otLBS0/F07-wrong-run-output/store",
+        "soroi-full-consumer-oracle-otLBS0/F19-missing-alpha-outgoing-output/store",
+        "soroi-full-consumer-oracle-otLBS0/F19-missing-beta-broadcast-output/store",
+        "soroi-full-consumer-oracle-otLBS0/F19-none-output/store",
+        "soroi-full-consumer-oracle-otLBS0/F19-stale-wait-output/store",
+        "soroi-full-consumer-oracle-otLBS0/F19-wrong-broadcast-transcript-output/store",
+        "soroi-full-consumer-oracle-otLBS0/F22-end-before-release-output/store",
+        "soroi-full-consumer-oracle-otLBS0/F22-hidden-early-return-output/store",
+        "soroi-full-consumer-oracle-otLBS0/F22-historical-adoption-output/store",
+        "soroi-full-consumer-oracle-otLBS0/F22-none-output/store",
+        "soroi-full-consumer-oracle-otLBS0/F22-same-run-output/store",
+        "soroi-full-consumer-oracle-otLBS0/F22-wrong-purpose-group-output/store"
+      ],
+      "allEqual": true
+    },
+    {
+      "kind": "tar-byte-and-inventory-equality",
+      "archive": "source-directories.tar.gz",
+      "files": 177,
+      "directories": 67,
+      "emptyDirectories": [
+        "soroi-reader-native-IiEiqK/native/store",
+        "soroi-watermark-ownership-WjB0Xj/missing-RPC-evidenceId-negative-output/store",
+        "soroi-watermark-ownership-WjB0Xj/mixed-owner-RPC-row-negative-output/store",
+        "soroi-watermark-ownership-WjB0Xj/negative-recorded-output/store",
+        "soroi-watermark-ownership-WjB0Xj/recorded-output/store",
+        "soroi-watermark-ownership-WjB0Xj/second-recorded-output/store",
+        "soroi-reader-proof-hUhwWu/protocol-fixture/store",
+        "soroi-agent-oracle-mEdyZa/F07/store",
+        "soroi-agent-oracle-mEdyZa/F19/store",
+        "soroi-agent-oracle-mEdyZa/F22/store",
+        "soroi-standin-smoke-RzOo63/fixture-valid/store",
+        "F07/store",
+        "F19/store",
+        "F22/store"
+      ],
+      "allEqual": true
+    }
+  ],
+  "retainedArtifactFacts": {
+    "completeConsumerCases": 16,
+    "positiveCasesWithoutFailedAssertionsOrErrors": 3,
+    "negativeCasesWithNamedFailuresOrErrors": 13,
+    "actualCliFailExecutionVerdicts": 3,
+    "actualCliRunsAndAgents": 0,
+    "passingLiveVerdictCreatedByArchive": false
+  }
+}

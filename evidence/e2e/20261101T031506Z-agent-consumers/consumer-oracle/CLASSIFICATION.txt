@@ -1,0 +1,1 @@
+NON-LIVE ORACLE INPUT. All native/publication-shaped records in fixture-trees.tar.gz are SYNTHETIC, including owner-publication.json, native transcripts, lifecycle entries, store/event bodies, and generation records. No product/provider/model produced them. Positive consumer results are not passing live Verdicts. The original per-case FIXTURE-ONLY.txt files remain unchanged.

@@ -1,0 +1,182 @@
+{
+  "liveFlow": false,
+  "observations": [
+    {
+      "scenario": "request-is-not-accepted-return",
+      "expected": [],
+      "observed": []
+    },
+    {
+      "scenario": "matched-successful-return",
+      "expected": [
+        "return"
+      ],
+      "observed": [
+        "return"
+      ]
+    },
+    {
+      "scenario": "transport-id-is-not-tool-call-id",
+      "expected": [],
+      "observed": []
+    },
+    {
+      "scenario": "rejected-return-is-not-accepted",
+      "expected": [],
+      "observed": []
+    },
+    {
+      "scenario": "quoted-purpose-group",
+      "expected": [
+        {
+          "purpose": "比较「A」与B",
+          "names": [
+            "a",
+            "b"
+          ]
+        }
+      ],
+      "observed": [
+        {
+          "purpose": "比较「A」与B",
+          "names": [
+            "a",
+            "b"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "next-group-does-not-belong-to-first",
+      "expected": [
+        {
+          "purpose": "first",
+          "names": []
+        },
+        {
+          "purpose": "second",
+          "names": [
+            "a"
+          ]
+        }
+      ],
+      "observed": [
+        {
+          "purpose": "first",
+          "names": []
+        },
+        {
+          "purpose": "second",
+          "names": [
+            "a"
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "prose-is-not-purpose-header",
+      "expected": [],
+      "observed": []
+    },
+    {
+      "scenario": "all-obligations-release-before-end",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "scenario": "end-before-batch-release",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "scenario": "unreleased-formal-blocks-end",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "scenario": "wrong-root-release",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "scenario": "release-without-registration",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "scenario": "duplicate-release",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "scenario": "missing-end",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "scenario": "wrong-run-end",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "scenario": "old-episode-cannot-satisfy-new-run",
+      "expected": false,
+      "observed": false
+    },
+    {
+      "scenario": "unknown-lifecycle-tag-is-rejected",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "scenario": "missing-obligation-field-is-rejected",
+      "expected": true,
+      "observed": true
+    },
+    {
+      "scenario": "F07-missing-prerequisite-is-not-pass",
+      "expected": {
+        "kind": "fail",
+        "failed": [
+          "execution"
+        ]
+      },
+      "observed": {
+        "kind": "fail",
+        "failed": [
+          "execution"
+        ]
+      }
+    },
+    {
+      "scenario": "F19-missing-prerequisite-is-not-pass",
+      "expected": {
+        "kind": "fail",
+        "failed": [
+          "execution"
+        ]
+      },
+      "observed": {
+        "kind": "fail",
+        "failed": [
+          "execution"
+        ]
+      }
+    },
+    {
+      "scenario": "F22-missing-prerequisite-is-not-pass",
+      "expected": {
+        "kind": "fail",
+        "failed": [
+          "execution"
+        ]
+      },
+      "observed": {
+        "kind": "fail",
+        "failed": [
+          "execution"
+        ]
+      }
+    }
+  ]
+}

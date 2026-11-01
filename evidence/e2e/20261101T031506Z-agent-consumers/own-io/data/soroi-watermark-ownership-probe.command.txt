@@ -1,0 +1,7 @@
+cd /tmp
+bun /tmp/soroi-watermark-ownership-probe.ts > /tmp/soroi-watermark-ownership-probe.stdout 2>&1
+
+Classification: final ownership-aware fixed-input owned HTTP+WS fixture, not product/model runtime.
+One complete execution against changed evidenceId producer/consumer APIs; not a rerun of an old failure.
+Original /tmp/soroi-watermark-probe.ts, original stdout and /tmp/soroi-watermark-owned-io-f2EBk7 remain untouched.
+Both real producers record with StoreClient.get + MuxReader + independent Evidence. Positive input contains no injected metadata. Frozen producer copies are untouched; negative artifacts/corruptions are explicitly labelled separately.

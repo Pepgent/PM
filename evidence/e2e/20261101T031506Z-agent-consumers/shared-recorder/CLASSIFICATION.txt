@@ -1,0 +1,1 @@
+NON-LIVE ORACLE INPUT. Real mux transport plus deterministic rpc-child/store fixtures, not a product/model run. The fixture *-a0.json and a0-verdict.json pass-shaped files are SYNTHETIC gate inputs, NOT successful A0 evidence. Every final fixture flow Verdict fails live-build. intermediate-ready-failure/ is the original failed attempt, not the corrected run.

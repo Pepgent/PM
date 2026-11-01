@@ -1,0 +1,17 @@
+{
+  "label": "DELIBERATE-INVALID-FIXTURE",
+  "case": "foreign-HTTP-before",
+  "input": {
+    "label": "INVALID-CROSS-NAMESPACE-REFERENCE",
+    "ref": {
+      "metadata": "second-owner-artifacts/store/GET-%2Ffixture%2Fknown-value-1.json"
+    },
+    "path": "/fixture/known-value",
+    "bounds": {
+      "kind": "before",
+      "send": 2
+    },
+    "expectedNamespace": "2b165513-8563-4d44-a945-8502619c0e0e",
+    "actualNamespace": "f24944b1-d3db-450a-92ff-3aa34b537aa5"
+  }
+}

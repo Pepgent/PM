@@ -1,0 +1,53 @@
+{"flow":"F07","variant":"none","oracleOnly":true,"liveProductFlow":false,"assertions":34,"failed":[],"error":null,"input":"/tmp/soroi-full-consumer-oracle-otLBS0/F07-none"}
+{"flow":"F07","variant":"forbidden-start","oracleOnly":true,"liveProductFlow":false,"assertions":34,"failed":["forbidden-not-executed"],"error":null,"input":"/tmp/soroi-full-consumer-oracle-otLBS0/F07-forbidden-start"}
+{"flow":"F07","variant":"wrong-run","oracleOnly":true,"liveProductFlow":false,"assertions":34,"failed":["no-return-request-run"],"error":null,"input":"/tmp/soroi-full-consumer-oracle-otLBS0/F07-wrong-run"}
+{"flow":"F07","variant":"stale-after","oracleOnly":true,"liveProductFlow":false,"assertions":28,"failed":[],"error":"The snapshot was not requested after the required RPC result","input":"/tmp/soroi-full-consumer-oracle-otLBS0/F07-stale-after"}
+{"flow":"F07","variant":"missing-phase","oracleOnly":true,"liveProductFlow":false,"assertions":0,"failed":[],"error":"Expected an object","input":"/tmp/soroi-full-consumer-oracle-otLBS0/F07-missing-phase"}
+{"flow":"F19","variant":"none","oracleOnly":true,"liveProductFlow":false,"assertions":28,"failed":[],"error":null,"input":"/tmp/soroi-full-consumer-oracle-otLBS0/F19-none"}
+{"flow":"F19","variant":"missing-alpha-outgoing","oracleOnly":true,"liveProductFlow":false,"assertions":28,"failed":["irc-alpha-send-persisted"],"error":null,"input":"/tmp/soroi-full-consumer-oracle-otLBS0/F19-missing-alpha-outgoing"}
+{"flow":"F19","variant":"stale-wait","oracleOnly":true,"liveProductFlow":false,"assertions":28,"failed":["roundtrip-current-reply"],"error":null,"input":"/tmp/soroi-full-consumer-oracle-otLBS0/F19-stale-wait"}
+{"flow":"F19","variant":"missing-beta-broadcast","oracleOnly":true,"liveProductFlow":false,"assertions":28,"failed":["broadcast-Beta"],"error":null,"input":"/tmp/soroi-full-consumer-oracle-otLBS0/F19-missing-beta-broadcast"}
+{"flow":"F19","variant":"wrong-broadcast-transcript","oracleOnly":true,"liveProductFlow":false,"assertions":28,"failed":["broadcast-Beta-session"],"error":null,"input":"/tmp/soroi-full-consumer-oracle-otLBS0/F19-wrong-broadcast-transcript"}
+{"flow":"F22","variant":"none","oracleOnly":true,"liveProductFlow":false,"assertions":66,"failed":[],"error":null,"input":"/tmp/soroi-full-consumer-oracle-otLBS0/F22-none"}
+{"flow":"F22","variant":"end-before-release","oracleOnly":true,"liveProductFlow":false,"assertions":66,"failed":["batch-release-before-end-request"],"error":null,"input":"/tmp/soroi-full-consumer-oracle-otLBS0/F22-end-before-release"}
+{"flow":"F22","variant":"wrong-purpose-group","oracleOnly":true,"liveProductFlow":false,"assertions":66,"failed":["batch-released-as-group"],"error":null,"input":"/tmp/soroi-full-consumer-oracle-otLBS0/F22-wrong-purpose-group"}
+{"flow":"F22","variant":"historical-adoption","oracleOnly":true,"liveProductFlow":false,"assertions":66,"failed":["five-concurrent"],"error":null,"input":"/tmp/soroi-full-consumer-oracle-otLBS0/F22-historical-adoption"}
+{"flow":"F22","variant":"same-run","oracleOnly":true,"liveProductFlow":false,"assertions":0,"failed":[],"error":"The two-worker end gate must use a separate run","input":"/tmp/soroi-full-consumer-oracle-otLBS0/F22-same-run"}
+{"flow":"F22","variant":"hidden-early-return","oracleOnly":true,"liveProductFlow":false,"assertions":14,"failed":[],"error":"Each batch member needs one real formal eval and one accepted return","input":"/tmp/soroi-full-consumer-oracle-otLBS0/F22-hidden-early-return"}
+{"evidence":"/tmp/soroi-full-consumer-oracle-otLBS0","liveF07F19F22":"not-run","noPassingLiveVerdictCreated":true}
+[0m[2m[35m$[0m [2m[1mbun run reader-smoke.ts[0m
+{"scenario":"reader-prefix-correlation","agent":"alpha","command":"get_state","observed":"alpha","liveProductFlow":false}
+{"scenario":"reader-prefix-correlation","agent":"alpha","command":"get_messages","observed":"alpha","liveProductFlow":false}
+{"scenario":"reader-prefix-correlation","agent":"alpha","command":"get_messages_page","observed":"alpha","liveProductFlow":false}
+{"scenario":"reader-prefix-correlation","agent":"alpha","command":"get_session_stats","observed":"alpha","liveProductFlow":false}
+{"scenario":"reader-prefix-correlation","agent":"beta","command":"get_state","observed":"beta","liveProductFlow":false}
+{"scenario":"reader-prefix-correlation","agent":"beta","command":"get_messages","observed":"beta","liveProductFlow":false}
+{"scenario":"reader-prefix-correlation","agent":"beta","command":"get_messages_page","observed":"beta","liveProductFlow":false}
+{"scenario":"reader-prefix-correlation","agent":"beta","command":"get_session_stats","observed":"beta","liveProductFlow":false}
+{"scenario":"missing-observation","failure":"deadline","liveProductFlow":false}
+{"scenario":"query-eof","failure":"connection-closed","liveProductFlow":false}
+{"scenario":"reader-lifecycle","serverObservedClosed":["alpha","beta","early"],"received":[{"client":"alpha","type":"get_state","id":"reader-1"},{"client":"alpha","type":"get_messages","id":"reader-2"},{"client":"alpha","type":"get_messages_page","id":"reader-3"},{"client":"alpha","type":"get_session_stats","id":"reader-4"},{"client":"beta","type":"get_state","id":"reader-1"},{"client":"beta","type":"get_messages","id":"reader-2"},{"client":"beta","type":"get_messages_page","id":"reader-3"},{"client":"beta","type":"get_session_stats","id":"reader-4"},{"client":"early","type":"get_state","id":"reader-1"}],"evidence":"/tmp/soroi-reader-proof-hUhwWu","liveProductFlow":false}
+[0m[2m[35m$[0m [2m[1mbun run s1/agent-smoke.ts[0m
+{"scenario":"request-is-not-accepted-return","observed":[],"liveF07F19F22":false}
+{"scenario":"matched-successful-return","observed":["return"],"liveF07F19F22":false}
+{"scenario":"transport-id-is-not-tool-call-id","observed":[],"liveF07F19F22":false}
+{"scenario":"rejected-return-is-not-accepted","observed":[],"liveF07F19F22":false}
+{"scenario":"quoted-purpose-group","observed":[{"purpose":"比较「A」与B","names":["a","b"]}],"liveF07F19F22":false}
+{"scenario":"next-group-does-not-belong-to-first","observed":[{"purpose":"first","names":[]},{"purpose":"second","names":["a"]}],"liveF07F19F22":false}
+{"scenario":"prose-is-not-purpose-header","observed":[],"liveF07F19F22":false}
+{"scenario":"all-obligations-release-before-end","observed":true,"liveF07F19F22":false}
+{"scenario":"end-before-batch-release","observed":false,"liveF07F19F22":false}
+{"scenario":"unreleased-formal-blocks-end","observed":false,"liveF07F19F22":false}
+{"scenario":"wrong-root-release","observed":false,"liveF07F19F22":false}
+{"scenario":"release-without-registration","observed":false,"liveF07F19F22":false}
+{"scenario":"duplicate-release","observed":false,"liveF07F19F22":false}
+{"scenario":"missing-end","observed":false,"liveF07F19F22":false}
+{"scenario":"wrong-run-end","observed":false,"liveF07F19F22":false}
+{"scenario":"old-episode-cannot-satisfy-new-run","observed":false,"liveF07F19F22":false}
+{"scenario":"unknown-lifecycle-tag-is-rejected","observed":true,"liveF07F19F22":false}
+{"scenario":"missing-obligation-field-is-rejected","observed":true,"liveF07F19F22":false}
+{"scenario":"F07-missing-prerequisite-is-not-pass","observed":{"kind":"fail","failed":["execution"]},"liveF07F19F22":false}
+{"scenario":"F19-missing-prerequisite-is-not-pass","observed":{"kind":"fail","failed":["execution"]},"liveF07F19F22":false}
+{"scenario":"F22-missing-prerequisite-is-not-pass","observed":{"kind":"fail","failed":["execution"]},"liveF07F19F22":false}
+{"evidence":"/tmp/soroi-agent-oracle-mEdyZa","liveF07F19F22":"not-run"}
+[0m[2m[35m$[0m [2m[1mtsc --noEmit[0m

@@ -1,0 +1,22 @@
+{
+  "evidenceId": "e5335dcd-2444-43aa-a607-452830df7cda",
+  "method": "POST",
+  "path": "/runs/fixture-valid-1/end",
+  "status": 200,
+  "requestRpcLine": 11,
+  "responseRpcLine": 11,
+  "headers": [
+    [
+      "content-length",
+      "24"
+    ],
+    [
+      "content-type",
+      "application/json;charset=utf-8"
+    ],
+    [
+      "date",
+      "Sun, 01 Nov 2026 02:45:26 GMT"
+    ]
+  ]
+}

@@ -1,0 +1,1 @@
+CONTRACT SNAPSHOT ONLY. The actual owner comment establishes a published schema, explicitly not implemented runtime proof. It does not make synthetic oracle publication/transcript records owner observations.

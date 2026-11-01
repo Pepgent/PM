@@ -1,0 +1,22 @@
+{
+  "label": "DELIBERATE-INVALID-FIXTURE",
+  "case": "producer-foreign-begin-observation",
+  "input": {
+    "label": "INVALID-CROSS-OWNER-COMPLETION",
+    "beginObservation": {
+      "evidenceId": "2b165513-8563-4d44-a945-8502619c0e0e",
+      "method": "GET",
+      "path": "/fixture/foreign-begin",
+      "requestRpcLine": 3
+    },
+    "completionEvidenceId": "f24944b1-d3db-450a-92ff-3aa34b537aa5",
+    "status": 200,
+    "headers": [
+      [
+        "content-type",
+        "application/json"
+      ]
+    ],
+    "rawBody": "{\"kind\":\"owned-transport-fixture\",\"value\":2200}"
+  }
+}

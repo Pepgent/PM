@@ -1,0 +1,41 @@
+{
+  "label": "DELIBERATE-INVALID-FIXTURE",
+  "case": "missing-evidenceId",
+  "input": {
+    "label": "CORRUPTED-generated-after-metadata",
+    "removedField": "evidenceId",
+    "ref": {
+      "metadata": "negative/missing-evidenceId.json"
+    },
+    "metadata": {
+      "method": "GET",
+      "path": "/fixture/known-value",
+      "status": 200,
+      "requestRpcLine": 3,
+      "responseRpcLine": 3,
+      "headers": [
+        [
+          "content-length",
+          "47"
+        ],
+        [
+          "content-type",
+          "application/json"
+        ],
+        [
+          "date",
+          "Sun, 01 Nov 2026 02:45:34 GMT"
+        ],
+        [
+          "x-fixture",
+          "non-product"
+        ]
+      ]
+    },
+    "path": "/fixture/known-value",
+    "bounds": {
+      "kind": "after",
+      "receive": 3
+    }
+  }
+}

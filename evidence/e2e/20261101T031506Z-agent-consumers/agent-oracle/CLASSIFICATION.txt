@@ -1,0 +1,1 @@
+NON-LIVE ORACLE INPUT. Predicate fixtures and deliberately missing-prerequisite fail Verdicts only. No product/model flow, no passing live Verdict.

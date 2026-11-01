@@ -1,0 +1,184 @@
+{
+  "oracleOnly": true,
+  "liveProductFlow": false,
+  "observations": [
+    {
+      "flow": "F07",
+      "variant": "none",
+      "oracleOnly": true,
+      "liveProductFlow": false,
+      "assertions": 34,
+      "failed": [],
+      "error": null,
+      "input": "/tmp/soroi-full-consumer-oracle-otLBS0/F07-none"
+    },
+    {
+      "flow": "F07",
+      "variant": "forbidden-start",
+      "oracleOnly": true,
+      "liveProductFlow": false,
+      "assertions": 34,
+      "failed": [
+        "forbidden-not-executed"
+      ],
+      "error": null,
+      "input": "/tmp/soroi-full-consumer-oracle-otLBS0/F07-forbidden-start"
+    },
+    {
+      "flow": "F07",
+      "variant": "wrong-run",
+      "oracleOnly": true,
+      "liveProductFlow": false,
+      "assertions": 34,
+      "failed": [
+        "no-return-request-run"
+      ],
+      "error": null,
+      "input": "/tmp/soroi-full-consumer-oracle-otLBS0/F07-wrong-run"
+    },
+    {
+      "flow": "F07",
+      "variant": "stale-after",
+      "oracleOnly": true,
+      "liveProductFlow": false,
+      "assertions": 28,
+      "failed": [],
+      "error": "The snapshot was not requested after the required RPC result",
+      "input": "/tmp/soroi-full-consumer-oracle-otLBS0/F07-stale-after"
+    },
+    {
+      "flow": "F07",
+      "variant": "missing-phase",
+      "oracleOnly": true,
+      "liveProductFlow": false,
+      "assertions": 0,
+      "failed": [],
+      "error": "Expected an object",
+      "input": "/tmp/soroi-full-consumer-oracle-otLBS0/F07-missing-phase"
+    },
+    {
+      "flow": "F19",
+      "variant": "none",
+      "oracleOnly": true,
+      "liveProductFlow": false,
+      "assertions": 28,
+      "failed": [],
+      "error": null,
+      "input": "/tmp/soroi-full-consumer-oracle-otLBS0/F19-none"
+    },
+    {
+      "flow": "F19",
+      "variant": "missing-alpha-outgoing",
+      "oracleOnly": true,
+      "liveProductFlow": false,
+      "assertions": 28,
+      "failed": [
+        "irc-alpha-send-persisted"
+      ],
+      "error": null,
+      "input": "/tmp/soroi-full-consumer-oracle-otLBS0/F19-missing-alpha-outgoing"
+    },
+    {
+      "flow": "F19",
+      "variant": "stale-wait",
+      "oracleOnly": true,
+      "liveProductFlow": false,
+      "assertions": 28,
+      "failed": [
+        "roundtrip-current-reply"
+      ],
+      "error": null,
+      "input": "/tmp/soroi-full-consumer-oracle-otLBS0/F19-stale-wait"
+    },
+    {
+      "flow": "F19",
+      "variant": "missing-beta-broadcast",
+      "oracleOnly": true,
+      "liveProductFlow": false,
+      "assertions": 28,
+      "failed": [
+        "broadcast-Beta"
+      ],
+      "error": null,
+      "input": "/tmp/soroi-full-consumer-oracle-otLBS0/F19-missing-beta-broadcast"
+    },
+    {
+      "flow": "F19",
+      "variant": "wrong-broadcast-transcript",
+      "oracleOnly": true,
+      "liveProductFlow": false,
+      "assertions": 28,
+      "failed": [
+        "broadcast-Beta-session"
+      ],
+      "error": null,
+      "input": "/tmp/soroi-full-consumer-oracle-otLBS0/F19-wrong-broadcast-transcript"
+    },
+    {
+      "flow": "F22",
+      "variant": "none",
+      "oracleOnly": true,
+      "liveProductFlow": false,
+      "assertions": 66,
+      "failed": [],
+      "error": null,
+      "input": "/tmp/soroi-full-consumer-oracle-otLBS0/F22-none"
+    },
+    {
+      "flow": "F22",
+      "variant": "end-before-release",
+      "oracleOnly": true,
+      "liveProductFlow": false,
+      "assertions": 66,
+      "failed": [
+        "batch-release-before-end-request"
+      ],
+      "error": null,
+      "input": "/tmp/soroi-full-consumer-oracle-otLBS0/F22-end-before-release"
+    },
+    {
+      "flow": "F22",
+      "variant": "wrong-purpose-group",
+      "oracleOnly": true,
+      "liveProductFlow": false,
+      "assertions": 66,
+      "failed": [
+        "batch-released-as-group"
+      ],
+      "error": null,
+      "input": "/tmp/soroi-full-consumer-oracle-otLBS0/F22-wrong-purpose-group"
+    },
+    {
+      "flow": "F22",
+      "variant": "historical-adoption",
+      "oracleOnly": true,
+      "liveProductFlow": false,
+      "assertions": 66,
+      "failed": [
+        "five-concurrent"
+      ],
+      "error": null,
+      "input": "/tmp/soroi-full-consumer-oracle-otLBS0/F22-historical-adoption"
+    },
+    {
+      "flow": "F22",
+      "variant": "same-run",
+      "oracleOnly": true,
+      "liveProductFlow": false,
+      "assertions": 0,
+      "failed": [],
+      "error": "The two-worker end gate must use a separate run",
+      "input": "/tmp/soroi-full-consumer-oracle-otLBS0/F22-same-run"
+    },
+    {
+      "flow": "F22",
+      "variant": "hidden-early-return",
+      "oracleOnly": true,
+      "liveProductFlow": false,
+      "assertions": 14,
+      "failed": [],
+      "error": "Each batch member needs one real formal eval and one accepted return",
+      "input": "/tmp/soroi-full-consumer-oracle-otLBS0/F22-hidden-early-return"
+    }
+  ]
+}

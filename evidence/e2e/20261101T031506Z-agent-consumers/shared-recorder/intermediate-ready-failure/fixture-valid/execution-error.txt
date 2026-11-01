@@ -1,0 +1,2 @@
+Error: Writer closed unexpectedly (1008)
+    at <anonymous> (/Users/mouriya/Ext/worktrees/test-218-pty-a0-ff0716f/e2e/standin/lab-standin.ts:39:42)

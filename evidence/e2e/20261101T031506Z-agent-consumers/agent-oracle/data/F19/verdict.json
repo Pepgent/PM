@@ -1,0 +1,43 @@
+{
+  "flow": "F19",
+  "segment": "S1",
+  "env": "L",
+  "startedAt": "2026-11-01T03:11:18.641Z",
+  "endedAt": "2026-11-01T03:11:18.641Z",
+  "build": {
+    "commits": {
+      "soroi": "not-run"
+    },
+    "release": "not-installed",
+    "images": {},
+    "omp": "not-run",
+    "model": "not-run"
+  },
+  "runs": [],
+  "agents": [],
+  "remoteRuns": [],
+  "assertions": [
+    {
+      "id": "execution",
+      "claim": "All required owner observations and phases are available",
+      "source": {
+        "kind": "transcript",
+        "file": "execution-error.txt",
+        "lines": [
+          1,
+          2
+        ]
+      },
+      "expected": "\"complete native/RPC/store evidence\"",
+      "observed": "\"Error: ENOENT: no such file or directory, open '/tmp/soroi-agent-oracle-mEdyZa/missing-full-a0.json'\\n    at async runRecorded (/Users/mouriya/Ext/worktrees/test-218-pty-a0-ff0716f/e2e/s1/recorded.ts:149:60)\"",
+      "pass": false
+    }
+  ],
+  "deviations": [],
+  "result": {
+    "kind": "fail",
+    "failed": [
+      "execution"
+    ]
+  }
+}

@@ -1,0 +1,2 @@
+$ bun run s1/f19.spec.ts --config "/tmp/soroi-recorded-cli-2aq953dn/F19.json"
+error: script "f19" exited with code 1

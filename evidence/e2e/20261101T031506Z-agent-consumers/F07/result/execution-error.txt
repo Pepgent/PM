@@ -1,0 +1,3 @@
+Error: ENOENT: no such file or directory, open '/tmp/soroi-recorded-cli-2aq953dn/missing-full-a0.json'
+    at async runRecorded (/Users/mouriya/Ext/worktrees/test-218-pty-a0-ff0716f/e2e/s1/recorded.ts:149:60)
+    at async recordedMain (/Users/mouriya/Ext/worktrees/test-218-pty-a0-ff0716f/e2e/s1/recorded.ts:171:24)

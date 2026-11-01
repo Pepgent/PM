@@ -1,0 +1,32 @@
+{
+  "label": "fixture-only",
+  "endpoints": {
+    "http": "http://127.0.0.1:65355/",
+    "ws": "http://127.0.0.1:65356/"
+  },
+  "activeSockets": 0,
+  "httpRequests": 4,
+  "wsConnections": 2,
+  "wsCommands": 2,
+  "events": [
+    "http-and-ws-servers-started",
+    "first-reader-connected-and-welcome-recorded",
+    "first-before-http-completed",
+    "first-read-command-result-recorded",
+    "first-after-http-completed",
+    "r1:ws-server-observed-client-close",
+    "first-reader-close-completed",
+    "second-reader-connected-and-welcome-recorded",
+    "second-before-http-completed",
+    "second-read-command-result-recorded",
+    "second-after-http-completed",
+    "r2:ws-server-observed-client-close",
+    "second-reader-close-completed",
+    "http-server-stop-completed",
+    "ws-server-stop-completed",
+    "http-endpoint-connection-refused-after-stop",
+    "ws-endpoint-connection-refused-after-stop",
+    "finished-producer-artifacts-copied-to-frozen-input",
+    "recorded-context-consumed-untouched-frozen-input"
+  ]
+}

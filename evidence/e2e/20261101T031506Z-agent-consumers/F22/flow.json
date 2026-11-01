@@ -1,0 +1,15 @@
+{
+  "evidenceDir": "/tmp/soroi-recorded-cli-2aq953dn/F22",
+  "inputDir": "/tmp/soroi-recorded-cli-2aq953dn/absent-recording",
+  "a0Verdict": "/tmp/soroi-recorded-cli-2aq953dn/missing-full-a0.json",
+  "build": {
+    "commits": {
+      "soroi": "not-run"
+    },
+    "release": "not-installed",
+    "images": {},
+    "omp": "not-run",
+    "model": "not-run"
+  },
+  "reproduce": "bun run --cwd e2e f22 --config /tmp/soroi-recorded-cli-2aq953dn/F22.json"
+}

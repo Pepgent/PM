@@ -1,0 +1,14 @@
+{
+  "segment": "A0",
+  "result": {
+    "kind": "pass"
+  },
+  "build": {
+    "release": "fixture"
+  },
+  "assertions": [
+    {
+      "pass": true
+    }
+  ]
+}

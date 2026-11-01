@@ -1,0 +1,1 @@
+{"run":"fixture-deviation-2","holder":"fixture-retry-session","derivedFrom":null,"state":"Ended","at":4,"nodes":[{"kind":"Root","name":"temp_2200c","value":{"kind":"scalar","scalar":{"kind":"number","v":2200}}}],"edges":[],"unconsumed":[]}

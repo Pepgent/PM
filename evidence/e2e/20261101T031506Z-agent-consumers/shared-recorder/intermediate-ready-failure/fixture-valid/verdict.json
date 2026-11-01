@@ -1,0 +1,76 @@
+{
+  "flow": "F01",
+  "segment": "S1",
+  "env": "L",
+  "startedAt": "2026-11-01T02:44:47.978Z",
+  "endedAt": "2026-11-01T02:44:48.002Z",
+  "build": {
+    "commits": {
+      "soroi": "fixture"
+    },
+    "release": "fixture",
+    "images": {},
+    "omp": "fixture",
+    "model": "fixture/deterministic"
+  },
+  "runs": [],
+  "agents": [
+    "fixture-valid"
+  ],
+  "remoteRuns": [],
+  "assertions": [
+    {
+      "id": "a0",
+      "claim": "The same release passed installation prerequisite A0",
+      "source": {
+        "kind": "transcript",
+        "file": "a0-verdict.json",
+        "lines": [
+          1,
+          1
+        ]
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "live-build",
+      "claim": "This campaign identifies a real release, commits, images and omp",
+      "source": {
+        "kind": "transcript",
+        "file": "verdict.json",
+        "lines": [
+          1,
+          1
+        ]
+      },
+      "expected": "true",
+      "observed": "false",
+      "pass": false
+    },
+    {
+      "id": "execution",
+      "claim": "The complete F01 runtime path succeeds",
+      "source": {
+        "kind": "transcript",
+        "file": "execution-error.txt",
+        "lines": [
+          1,
+          2
+        ]
+      },
+      "expected": "all prerequisites and protocol operations succeed",
+      "observed": "Error: Writer closed unexpectedly (1008)\n    at <anonymous> (/Users/mouriya/Ext/worktrees/test-218-pty-a0-ff0716f/e2e/standin/lab-standin.ts:39:42)",
+      "pass": false
+    }
+  ],
+  "deviations": [],
+  "result": {
+    "kind": "fail",
+    "failed": [
+      "live-build",
+      "execution"
+    ]
+  }
+}

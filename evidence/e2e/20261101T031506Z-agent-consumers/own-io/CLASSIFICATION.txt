@@ -1,0 +1,1 @@
+NON-LIVE ORACLE INPUT. Actual owned HTTP+WS transport IO generated these fixed fixture records through MuxReader/StoreClient/Evidence; there is no product or model runtime. Positive transport assertions are not live F07/F19/F22 passes. Negative-input copies are intentionally invalid.

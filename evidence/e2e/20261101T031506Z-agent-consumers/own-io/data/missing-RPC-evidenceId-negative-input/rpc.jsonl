@@ -1,0 +1,3 @@
+{"evidenceId":"2b165513-8563-4d44-a945-8502619c0e0e","at":"2026-11-01T02:45:34.769Z","direction":"receive","channel":"watermark-fixture-reader","raw":"{\"type\":\"mux_welcome\",\"prefix\":\"r1:\",\"generation\":\"fixture-generation\"}"}
+{"at":"2026-11-01T02:45:34.770Z","direction":"send","channel":"watermark-fixture-reader","raw":"{\"type\":\"get_state\",\"id\":\"reader-1\"}"}
+{"evidenceId":"2b165513-8563-4d44-a945-8502619c0e0e","at":"2026-11-01T02:45:34.770Z","direction":"receive","channel":"watermark-fixture-reader","raw":"{\"type\":\"response\",\"command\":\"get_state\",\"id\":\"r1:reader-1\",\"success\":true,\"data\":{\"sessionId\":\"fixture-session\",\"fixtureValue\":2200}}"}

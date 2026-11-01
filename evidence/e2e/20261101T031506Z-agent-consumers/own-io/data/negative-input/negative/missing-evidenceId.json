@@ -1,0 +1,25 @@
+{
+  "method": "GET",
+  "path": "/fixture/known-value",
+  "status": 200,
+  "requestRpcLine": 3,
+  "responseRpcLine": 3,
+  "headers": [
+    [
+      "content-length",
+      "47"
+    ],
+    [
+      "content-type",
+      "application/json"
+    ],
+    [
+      "date",
+      "Sun, 01 Nov 2026 02:45:34 GMT"
+    ],
+    [
+      "x-fixture",
+      "non-product"
+    ]
+  ]
+}

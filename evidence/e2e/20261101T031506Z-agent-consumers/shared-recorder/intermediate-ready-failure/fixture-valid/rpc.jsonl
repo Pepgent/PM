@@ -1,0 +1,3 @@
+{"evidenceId":"661cee7f-b61b-41e3-8b55-2cb4d163d7b8","at":"2026-11-01T02:44:47.984Z","direction":"send","channel":"fixture-valid","raw":"{\"type\":\"mux_open_generation\"}"}
+{"evidenceId":"661cee7f-b61b-41e3-8b55-2cb4d163d7b8","at":"2026-11-01T02:44:47.985Z","direction":"receive","channel":"fixture-valid","raw":"{\"type\":\"mux_generation\",\"generation\":\"dd83c490-2e62-4059-a1a5-c063204966ae\",\"token\":\"[REDACTED]\"}"}
+{"evidenceId":"661cee7f-b61b-41e3-8b55-2cb4d163d7b8","at":"2026-11-01T02:44:47.989Z","direction":"receive","channel":"fixture-valid","raw":"{\"type\":\"mux_attached\",\"generation\":\"dd83c490-2e62-4059-a1a5-c063204966ae\",\"where\":{\"kind\":\"local\",\"host\":\"MouriyadeMac-mini.local\"}}"}
