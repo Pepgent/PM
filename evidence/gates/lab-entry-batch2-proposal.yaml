@@ -25,7 +25,7 @@ facts: |
     - D12-06、D12-08、D12-10 与逐命令权限表：`DEC/D12-lab-wire.md:38,40,42,540-561`。
   - D8 §4.2 的 LAB 切片表（`DEC/D8-mvp-scope.md:321-334`）没有一行写这些入口。D42 的 LAB-13（[Pepgent#80](https://github.com/Pepgent/Pepgent/issues/80)）只承载 D42-01..03 列出的入口。
   - D12-10 列出的 D9 排除清单不含这些命令。D8-16 清单（`DEC/D8-mvp-scope.md:87`）只含接入向导执行（P7），不含这三页读取或这些命令。
-  - D12“第一版无来源字段”（`DEC/D12-lab-wire.md:625,636,640`）只把 `datasets.artifacts[].role/verdict/contract` 与 `connectCluster` 的安装日志、注册令牌、连接测试结果列 D9。
+  - D12“第一版无来源字段”（`DEC/D12-lab-wire.md:641,645`）只把视图字段 `datasets.artifacts[].role/verdict/contract`（实验产物）与 `connectCluster` 的安装日志、注册令牌、连接测试结果列 D9。
   - `pepgent-soroi/AGENTS.md:123`：“接口或权限表缺少某项不构成授权：禁止据此……把功能移入 D9”。
   - `pepgent-soroi/AGENTS.md`：“尚未定案的范围或派工归属必须经表决，或有逐字依据”。
 
@@ -46,8 +46,8 @@ rows:
         - store File 来自目录图；
         - 卷为结束远程调用清单；
         - valueRuns 读 store（D12-08）；
-        - `artifacts[].role/verdict/contract` 按 D12“第一版无来源字段”取精确空值。
-      - `connectCluster` 返回 `{templates}`，只读。向导执行（P7）按 D8-16、D12 列 D9，本切片不做。
+        - `artifacts` 按线上形状返回讨论产物：每条 `artifact_meta` 行原样返回一个 `ArtifactMetaWire`，`role` 有源（D12-13 上传路由写入），返回真实值，不置空、不丢行。D12“第一版无来源字段”所列的 `datasets.artifacts[].role/verdict/contract（实验产物）`（`DEC/D12-lab-wire.md:641`）是视图字段，空值只在 WEB-04 投影层处理；服务端对此无动作，也不在 wire 上新加这些字段。
+      - `connectCluster` 返回 `{templates}`，只读。向导执行（P7）按 D8-16、D12 列 D9（`DEC/D12-lab-wire.md:645`），本切片不做。
       - 各页 `panels` 按 D12-08“只选本人本页会话头”。
 
       路径白名单是 D16-09 的 W-09 行，实际只改 `apps/web/src/server/lab/**`。不改 `protocol/lab/**`、`rpc/lab.ts`，不改 wire 形状。
@@ -56,7 +56,7 @@ rows:
 
       本行通过后：
       - 总协调席在 Pepgent 新建 LAB-14 issue；
-      - 秘书在 D8 §4.2 切片表与 `D8-slice-issues.md` 加 LAB-14 一行（解锁 F09、F12、F27、F31；依赖 LAB-05、LAB-07a、LAB-10、LAB-11a、LAB-12、LAB-13）；
+      - 秘书在 D8 §4.2 切片表与 `D8-slice-issues.md` 加 LAB-14 一行（解锁 F09、F12、F27、F31；依赖 LAB-05、LAB-07a、LAB-10、LAB-11a、LAB-12、LAB-13、STO-08）；
       - AreaMgrPepgent 在 Pepgent#29 登记 LAB-14 为这些入口的服务端承载，并送达 W-09。W-09 在 LAB-13（Pepgent#80）之后接着做。
     tradeoff: |
       **得到：** F09、F12、F27、F31 的 S2 所需读取有了逐字承载，WEB-07 能接上真实数据，D9-02 能录到真实线数据。仍是一席一域，不扩白名单，不改 wire。

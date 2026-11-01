@@ -35,7 +35,7 @@
 | G-6 | D7-14 规定了设置页其余部分的语义：<br>- 项目 merge 把讨论和实验的归属改到目标项目，archive 改状态；<br>- `library_repo` 记远端、分支和密钥引用；<br>- Lab 生成并持有私钥，界面只显示公钥，rotate 重新生成。<br>D7-15 规定 `set_model{provider, modelId}` 发给该会话自己的那一代。D7-07 规定讨论的 `bound` 是人手动绑定的运行（`discussion_binding`）。 | (D) `DEC/D7-lab-backend.md:67,74,75` |
 | G-7 | D12-08 定了三页的形状：<br>- `datasets={artifacts,contexts,references,objectSizes,valueRuns,volumes,templates,panels}`，“store File 来自目录图，卷为结束远程调用清单，valueRuns 读 store”；<br>- `connectCluster={templates}`，只读；<br>- 各页 `panels` 只选本人本页会话头。<br>D12-06 规定 `flowEditor.palette` 取库默认分支。 | (D) `DEC/D12-lab-wire.md:38,40` |
 | G-8 | D12-10 是命令联合，“无兜底”。它的逐命令权限表对本批每个命令都写明了权限：<br>- `lab.update`：`organization: update`；<br>- `project.*`：`write`；<br>- `repo.*`：`editLibrary`；<br>- `agentTemplate.writeFile/removeFile`：`editLibrary`，且是该 Panel 会话的 owner；<br>- `discussion.bind/rename/move/archive`：`write`，且是该讨论的 owner；<br>- `panel.model`：`write`，且是该会话的 owner；<br>- `experiment.update`：`write`，且是该运行的会话 owner；<br>- `milestone.*`：`write`。<br>第一版不含、列入 D9 的只有：`image.build/template.bind`、`cluster.connect`、`sandbox.create`、`job.restart/destroy`、`shell`、预检查。这份清单不含 G-2 中的任何命令。 | (D) `DEC/D12-lab-wire.md:42,540-561` |
-| G-9 | D12“第一版无来源字段”一节规定了以下字段列 D9、投影留空：<br>- `datasets.artifacts[].role/verdict/contract`（实验产物契约）；<br>- `connectCluster` 的安装日志、注册令牌、连接测试结果（P7）。<br>这一节不含 `flowEditor`、`datasets`、`connectCluster` 三页读取本身。 | (D) `DEC/D12-lab-wire.md:625,636,640` |
+| G-9 | D12“第一版无来源字段”一节列 D9、投影留空的是“视图字段（web/client/contracts）”，与本批相关的是：<br>- `datasets.artifacts[].role/verdict/contract`（实验产物）：缺产物契约与判据；<br>- `connectCluster` 的安装日志、注册令牌、连接测试结果（P7）。<br>这一节约束的是 WEB-04/06 投影层，不约束服务端线形状。线上 `datasets.artifacts` 是讨论产物的 `ArtifactMetaWire[]`：`role` 是必填枚举，由上传路由写入，有源；没有 `verdict`、`contract` 字段。这一节也不含 `flowEditor`、`datasets`、`connectCluster` 三页读取本身。 | (D) `DEC/D12-lab-wire.md:630,634,641,645,185-186,597`；`DEC/D12-coverage.md:316`；(R) `P/pages.ts:185-186`、`P/rows.ts:192-216` |
 | G-10 | D8-16 是“D2–D7 已定、但任何 F 流程都走不到的部分：不进 MVP 验收，原样列入 D9 输入”，正文有一句“只有 F 流程直接要用的才实现”。它的清单中有接入向导（P7），但没有 G-1、G-2 中的页面读取或命令。<br>D12-10 晚于 D8，由 D16-03 恢复。它按 D8-16 逐项写出了命令联合中列 D9 的部分（G-8），其余命令都是第一版命令。<br>D42-02 以同样的依据，把 F01–F31 中没有逐字使用的 `member.*`、`agentTemplate.saveVersion` 划给 LAB-13，已 5/5 通过。 | (D) `DEC/D8-mvp-scope.md:87`；`DEC/D12-lab-wire.md:42`；`DEC/D16-phaseB-review-restore.md:27`；`DEC/D42-lab-entry-ownership.md` |
 | G-11 | D8 §4.2 的 LAB 切片表（LAB-01 至 LAB-12）没有一行写本批入口：<br>- LAB-11b 只写 `draft.save`、`experiment.start/approve`，不写 `flowEditor` 读取；<br>- LAB-11a 只写 `discussion.load` 与附件；<br>- LAB-12 只写 `page:'clusters'`。<br>D42 新建的 LAB-13 只承载 D42-01..03 列出的入口。 | (D) `DEC/D8-mvp-scope.md:321-334`；`DEC/D42-lab-entry-ownership.md` |
 | G-12 | 在 Pepgent 全部 40 个 issue 的正文与评论中，本批入口都没有逐字承载。<br>提到它们的只有以下几处，都是记录缺口，不是承载：<br>- #73 正文记录“`flowEditor` 页的读取目前返回 `notSupported`”；<br>- #28 评论记录 `connectCluster` 读取返回 `not_supported`；<br>- #29 评论 6564277591 记录“这些都属于 W-09（server/lab），目前只有 #78 承载其中的 activity 与 P15 部分，没有找到其余部分的承载 issue”，并写明“不是 W-10 的 BLOCKED”。 | (R) `grep` 于 `/tmp/labentry2/issues/{b,c}*.md`；(A) [#29 评论 6564277591](https://github.com/Pepgent/Pepgent/issues/29#issuecomment-6564277591) |
@@ -51,7 +51,7 @@
 | 入口 | 现有承载 | 依据 | 涉及的 F 流程与下游 |
 |---|---|---|---|
 | `lab.page.read` `flowEditor` | **无** | G-1、G-3、G-5、G-7、G-11、G-12 | F27 S2（流程编辑器保存草稿，G-14）；WEB-04 投影、WEB-07 真实数据；D9-01 `flowEditor` 字段 |
-| `lab.page.read` `datasets` | **无** | G-1、G-3、G-5、G-7、G-9、G-11、G-12 | F09 S2、F12 S2、F31 ⑥（G-14）；WEB-04、WEB-07；D9-01 `datasets` 字段。`artifacts[].role/verdict/contract` 按 G-9 留空 |
+| `lab.page.read` `datasets` | **无** | G-1、G-3、G-5、G-7、G-9、G-11、G-12 | F09 S2、F12 S2、F31 ⑥（G-14）；WEB-04、WEB-07；D9-01 `datasets` 字段。服务端原样返回讨论产物的 `ArtifactMetaWire`，`role` 返回真实值；实验产物视图的 `role/verdict/contract` 按 G-9 只在 WEB-04 投影层留空 |
 | `lab.page.read` `connectCluster` | **无** | G-1、G-3、G-5、G-7、G-9、G-12 | WEB-06（解锁 F17、F31）、WEB-07；D9-01/02 需要它的录制线数据（G-15）。向导执行（P7）按 G-9、G-10 列 D9，不在本批 |
 | `lab.update` | **无** | G-2、G-5、G-8 | F01–F31 中没有一行逐字使用；D12-10 第一版命令，不在 D9 排除清单（G-8），不得据缺项移入 D9（G-16）。WEB-07；D9-01 `labs` 字段 |
 | `project.create/rename/merge/archive` | **无** | G-2、G-5、G-6、G-8 | 同上；设置页（WEB-06、WEB-07）；D9-01 `projects`、`settings` 字段 |
@@ -66,7 +66,7 @@
 
 - **不缺契约：** 本批入口的形状、语义与权限都已由 D7、D12-06/08/10 定案，wire 齐全（G-3），表也都已建好（G-4）。
 - **缺的是承载切片与派工归属：** D8 切片表、D42 和全部 issue 都没有逐字承载（G-11、G-12）。按 `SOR/AGENTS.md`，“尚未定案的范围或派工归属必须经表决，或有逐字依据”，所以不能由治理承接者或 Main 单方补派。
-- **不得移入 D9：** D12-10 的 D9 排除清单与 D8-16 清单都不含本批入口（G-8、G-10）。只有 G-9 列出的无来源字段留空。禁令 G-16 不允许据缺项移入 D9。
+- **不得移入 D9：** D12-10 的 D9 排除清单与 D8-16 清单都不含本批入口（G-8、G-10）。只有 G-9 列出的视图字段在投影层留空，服务端不为它们做任何事。禁令 G-16 不允许据缺项移入 D9。
 - **优先级草拟 P1，不报 P0：** 没有工人为这批入口报 BLOCKED，W-10 明写“不是 W-10 的 BLOCKED”（G-12），所以不符合 P0“关键路径工程 `BLOCKED` 解阻”。但它是 W-10 的 WEB-07 页面接线与 W-09 的服务端入口之间的接缝缺口。不补，F09、F12、F27、F31 的 S2 会到阶段 C 才失败（G-13、G-14）。这正是 C1-3 要提前纠偏的情形，符合 P1“接缝纠偏”（G-17）。它也不属于 P2：要补的是工程承载，不是删改 PM 中的错误条文。
 
 ### 切片取舍：另开 LAB-14，不并入 LAB-13
@@ -95,3 +95,15 @@ rows:
 ```
 
 完整行文见同目录 [`lab-entry-batch2-proposal.yaml`](lab-entry-batch2-proposal.yaml)。立案后以议会 daemon 发布的 decision issue 正文为准。
+
+## 五、表决中的反例处置
+
+- **结果：** D44-02 v1、D44-03 v1 都以 5/5 通过。D44-01 v1 被 LeadMentor 反例阻断，反例题为“不能把讨论产物的有源 role 按实验视图缺源规则置空”（见 [PM#63 LeadMentor-2 选票](https://github.com/Pepgent/PM/issues/63#issuecomment-6564428305)）。ClaudeHighD44 选票的修正 (ii) 指出的是同一处错误。
+- **核对：反例成立。**
+  - v1 写“`artifacts[].role/verdict/contract` 按 D12‘第一版无来源字段’取精确空值”。这句去掉了原文“实验产物”的限定，又把视图层的留空规则放到了服务端。
+  - 线上 `datasets.artifacts` 是讨论产物的 `ArtifactMetaWire[]`，`role` 是必填枚举且有源，没有 `verdict`、`contract` 字段（更正后的 G-9）。照 v1 的字面执行，合法上传的 `role=raw` 讨论产物要么违反必填枚举，要么被丢掉。
+- **处置：** 发起席（`DeskD44Revise`）用 `council revise D44-01` 立了 v2，v1 的票全部作废，5 席重投。v2 相对 v1 只改三处：
+  - `artifacts` 一句改为：服务端按线上形状原样返回讨论产物的 `ArtifactMetaWire`，`role` 返回真实值，不置空、不丢行；实验产物视图的 `role/verdict/contract` 只在 WEB-04 投影层留空，服务端无动作，wire 上不新加字段。
+  - 依赖列补 STO-08。`valueRuns` 直接调用 STO-08 的 `GET /values/{hash}/runs`（`DEC/D8-mvp-scope.md:254`），该路由已在 soroi main 上，不构成等待。
+  - 行号改为 `DEC/D12-lab-wire.md:641,645`。议程事实段由 daemon 维护，其中的 `:625,636,640` 应读作 `:641,645`。本材料的 G-9 已更正。
+- 除这三处外，what、where、其余 how、取舍、分类和 domains 都与 v1 相同。修订理由全文已随 revise 提交，由 daemon 记录在 PM#63。
