@@ -200,7 +200,7 @@ sequenceDiagram
     UI->>LAB: intervene.derive{run, at: InFlight{writerSession, slot}, changes}
     LAB->>MUX: POST /endpoints/eval:{root}/requests {derive}
     MUX-->>LAB: 结论（新运行 R'，derivedFrom = run）
-    ST-->>LAB: run stream：step_committed（携带 records）、call_started、call_aborted、human_handback
+    ST-->>LAB: run stream：call_aborted、human_handback、step_committed
     ST-->>LAB: /stream/lifecycle run_ended
     LAB->>DB: automation_run（规则 A-01 命中）
     LAB->>MUX: 写方声明；dial 新会话（origin Automation）
