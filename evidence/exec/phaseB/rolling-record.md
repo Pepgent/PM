@@ -1,6 +1,6 @@
 # 阶段 B 滚动发车与退役记录
 
-本记录供 ArgonGovernance 事后检查，由秘书归档到 PM 的 `evidence/exec/phaseB/`。
+本记录由秘书维护并归档到 PM 的 `evidence/exec/phaseB/`，供 ArgonGovernance 事后检查。Main 只提供每次工人进场、退役的事实及 (R) 证据，不再亲自编辑；秘书据拥有方报告直接更新，进程状态仍由 tern、实现状态由原 issue/PR 确认，不以记录代替源头。
 
 ## 退役
 
@@ -36,7 +36,9 @@
 5. **片区经理改为专门岗位（U99）。** 岗位定义在 `.omp/agents/area-manager.md`，提交 soroi 6d36128。按该岗位重新启动了 AreaMgrPepgent（负责 W-09、W-10）和 AreaMgrSoroi（负责 W-07、W-08）。旧实例写完交接文件后已结束，`proc://` 中只剩新实例。
 6. **W-04 pepgent-deploy 第二次进场。** 承载 [deploy#18](https://github.com/Pepgent/deploy/issues/18)，修复 soroi#231 模板接缝；双闸门放行后范围为两TOML加README，三个模板metadata完整，见[范围解除评论](https://github.com/Pepgent/deploy/issues/18#issuecomment-6559568646)。tern `665423578136579`、peer `01a19793-ac7e`，经理 AreaMgrDeploy。**违规事实：** Main启动该席时，已有lab、plugin、e2e、web四席，合计五席，超过D16-10硬上限4且没有抢占令。已交ArgonGovernanceSol检查；实际处置按第7项退役W-10纠错，不把“临时补位”当作豁免，deploy本席交付后仍按正常生命周期退役。
 7. **按并发纠错退役 W-10，回到 4 席。** ArgonGovernanceSol 裁定 D16-10 的同时活跃上限 4 是硬边界，因此先退役 W-10：WEB-01 已合入，WEB-02 还在等 D20 和 LAB-07a。AreaMgrPepgent 完成交接后，执行了 `tern kill session pepgent-web`，交接评论见 Pepgent#21 comment 6559596233。`tern ls` 显示当前在跑 4 席：pepgent-lab、pepgent-plugin、pepgent-e2e、pepgent-deploy。W-10 的重新进场条件是 D20 通过且 LAB-07a 合入，用原会话名和原目录进场。第 6 条记录的 5 席违例仍然成立，已计入 R8 降级（soroi 380ab02）。
-8. **W-04 deploy 第二次进场结束并退役。** deploy PR#19 已合入，deploy#18 已关闭，issue 中有 ALL_DONE 评论；`gh issue list -R Pepgent/deploy --state open` 结果为 0。已执行 `tern kill session pepgent-deploy`。当前在跑 3 席：lab、plugin、e2e。待处理：`PEPGENT_LAB_WORKTREE_HOME` 的 deploy 注入（Pepgent#13，LAB-04 新增），正由 GovClone 初审，审定后决定承载方式。空出的名额优先给 W-10，前提是 D20 通过且 LAB-07a 已合入。
+8. **W-04 deploy 第二次进场结束并退役。** [deploy PR#19](https://github.com/Pepgent/deploy/pull/19) 已合入，[deploy#18](https://github.com/Pepgent/deploy/issues/18) 已关闭，issue 中有 ALL_DONE 评论；`gh issue list -R Pepgent/deploy --state open` 结果为 0，已执行 `tern kill session pepgent-deploy`。该次退役后为 lab、plugin、e2e 三席。随后两个卷路径变量经 D21/D22 审定，以[deploy#20](https://github.com/Pepgent/deploy/issues/20)承载，第三次进退场见第9、10项，不再列为等待初审。
+9. **W-04 deploy 第三次进场，承接 deploy#20（D21 与 D22，注入两个卷路径变量）。** 发车前用 `tern ls` 核对过在跑席位为 lab、plugin、e2e 三席，W-04 补上后共 4 席，没有超过上限。本次 tern id 为 666080708132867，peer 为 01a197aa-8615，片区经理为 AreaMgrDeploy2。另外，W-07、W-08 的 home 已快进到 origin/main 380ab02，避免 watchdog 读到旧版规则后对工人误报。
+10. **W-04 第三次进场交付后退役。** (R) Main 提供：[deploy PR#21](https://github.com/Pepgent/deploy/pull/21) 已合入，[deploy#20](https://github.com/Pepgent/deploy/issues/20) 已关闭并留有 ALL_DONE 评论，`gh issue list -R Pepgent/deploy --state open` 返回 0，已执行 `tern kill session pepgent-deploy`；AreaMgrDeploy2 核实 `tern capture` 已返回 `no block is called`。最近一次源头观察为 lab、plugin、e2e 三席。W-10 等 LAB-07a（[Pepgent#17](https://github.com/Pepgent/Pepgent/issues/17)，Main 本次报告为 OPEN）合入后，以原会话名、原目录重新进场；D20 已通过，不再作为待投票条件。未提供精确退役UTC，不补造。
 ## LEDGER 核对
 
 | 条款 | 核对结果 |
@@ -44,8 +46,8 @@
 | C1-2 | 每个域一个席位；Pepgent 使用独立克隆 |
 | C1-3 | 同域切片可合并 PR，不设每步验收锁；W-08 在所测代码合入后编写 spec，阶段 C 统一全流程验收尚未开始。开发期异步非阻塞接缝金丝雀依 U96 / C1-3 执行，不作为工人开工、合并或轮换门禁 |
 | C3-4 | 切片 worktree 用 `-b` 建；不检出 main |
-| 当前席位 | Main已按并发纠错退役W-10，随后W-04第二次交付并退役；最近一次源头观察为lab、plugin、e2e，共3席。十席全部至少发车一次；实时状态以tern ls和本记录为准，不以退役纠错抹去此前五席违例，不以发车、合入或退役代替阶段C统一验收。W-10重新进场仍以D20通过且LAB-07a合入为前置，W-04后续接D21/D22承载由Main安排 |
+| 当前席位 | W-04第三次交付后已退役，最近一次Main/片区经理源头观察为lab、plugin、e2e，共3席；deploy#20已由PR#21合入关闭，经理capture确认席位不存在。十席全部至少发车一次；实时状态以tern ls及原issue/PR为准，本记录保留拥有方观察。不以退役纠错抹去此前五席违例，不以合入或退役代替阶段C统一验收。W-10等待LAB-07a（Pepgent#17，目前OPEN）合入后重新进场 |
 
 ## W-10 重新进场前置
 
-- 首次前置 Pepgent#43 已由 PR#45 合入（06e6480）。本次因并发纠错退役后，须 D20 通过且 LAB-07a 合入，再以原会话名、原目录重新进场；不是从零重做已交付 WEB-01。
+- 首次前置 [Pepgent#43](https://github.com/Pepgent/Pepgent/issues/43) 已由 [PR#45](https://github.com/Pepgent/Pepgent/pull/45) 合入（06e6480）；[D20](https://github.com/Pepgent/PM/issues/30) 已通过。当前剩余前置为 LAB-07a（[Pepgent#17](https://github.com/Pepgent/Pepgent/issues/17)，Main 本次报告为 OPEN）合入；之后由 Main 安排，以原会话名、原目录重新进场，不从零重做已交付 WEB-01。
