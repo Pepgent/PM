@@ -1,0 +1,4 @@
+#!/bin/sh
+# Pepgent council CLI entry: forwards to src/cli.ts with Bun.
+here=$(cd "$(dirname "$0")" && pwd)
+exec bun "$here/../src/cli.ts" "$@"

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>org.pepgent.council</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/mouriya/.local/share/mise/shims/bun</string>
+    <string>/Users/mouriya/Ext/code/pepgent/pepgent-pm/tools/council/src/daemon.ts</string>
+  </array>
+  <key>WorkingDirectory</key><string>/Users/mouriya/Ext/code/pepgent/pepgent-pm/tools/council</string>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key><string>/Users/mouriya/.local/share/mise/shims:/opt/homebrew/bin:/usr/bin:/bin</string>
+    <key>HOME</key><string>/Users/mouriya</string>
+  </dict>
+  <key>RunAtLoad</key><true/>
+  <key>KeepAlive</key><true/>
+  <key>StandardOutPath</key><string>/Users/mouriya/.local/state/pepgent-council/daemon.log</string>
+  <key>StandardErrorPath</key><string>/Users/mouriya/.local/state/pepgent-council/daemon.log</string>
+</dict>
+</plist>

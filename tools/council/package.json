@@ -1,0 +1,13 @@
+{
+	"name": "pepgent-council",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"check": "tsc -p .",
+		"test": "bun test"
+	},
+	"devDependencies": {
+		"@types/bun": "latest",
+		"typescript": "latest"
+	}
+}
