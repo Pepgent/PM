@@ -1,0 +1,57 @@
+{
+  "slice": "DIST-03",
+  "sourceCommit": "507c604",
+  "issue": "https://github.com/Pepgent/soroi/issues/210",
+  "pr": "https://github.com/Pepgent/soroi/pull/247",
+  "release": {
+    "ciRun": "https://github.com/Pepgent/soroi/actions/runs/41260968182",
+    "version": "ca21262edd40389d32981060b6d4b51ecf339fd5"
+  },
+  "store": {
+    "url": "http://pepgent-soroi-e2e-store.orb.local:3001",
+    "run": "01M6ACB67PSDANGEP2D3RS557B",
+    "writeSeq": 2,
+    "value": 42,
+    "readAfterContainerRecreation": 42,
+    "end": {
+      "kind": "Ended",
+      "seq": 5
+    }
+  },
+  "mux": {
+    "agent": "Dist03RPC-1793497480263",
+    "sessionId": "01a194c7-bd70-702e-b9f4-05ede980c780",
+    "sequence": [
+      "mux_generation",
+      "mux_attached",
+      "ready",
+      "response",
+      "mux_exited"
+    ],
+    "getStateSuccess": true,
+    "exitCode": 0
+  },
+  "central": {
+    "model": "opencode-go/deepseek-v4.1-flash",
+    "entry": "installed soroi TUI",
+    "tool": "soroi_eval",
+    "mode": "dry_run",
+    "atom": "standalone_probe",
+    "value": 210,
+    "detachedClientExit": 1,
+    "containerAfterDetach": {
+      "running": true,
+      "exit": 0,
+      "restarts": 0
+    }
+  },
+  "boundaries": [
+    "Direct HTTP proof is not SOR-02 plugin HTTP integration",
+    "Dial/get_state proof is not SOR-09/11 supervisor mux integration",
+    "No release import/boot outcome claimed"
+  ],
+  "sanitation": {
+    "knownConsumerTokenLiteralMatches": 0,
+    "generationTokensRedacted": true
+  }
+}

@@ -1,0 +1,25 @@
+[?25l[0G[+] up 2/3
+ [32m✔[0m Container pepgent-soroi-e2e-mux     [32mRunning[0m                                                                                                    [34m0.0s[0m
+ [32m✔[0m Container pepgent-soroi-e2e-central [32mRunning[0m                                                                                                    [34m0.0s[0m
+ [33m⠋[0m Container pepgent-soroi-e2e-store   Waiting                                                                                                    [34m0.1s[0m
+[?25h[?25l[4A[0G[+] up 2/3
+ [32m✔[0m Container pepgent-soroi-e2e-mux     [32mRunning[0m                                                                                                    [34m0.0s[0m
+ [32m✔[0m Container pepgent-soroi-e2e-central [32mRunning[0m                                                                                                    [34m0.0s[0m
+ [33m⠙[0m Container pepgent-soroi-e2e-store   Waiting                                                                                                    [34m0.2s[0m
+[?25h[?25l[4A[0G[+] up 2/3
+ [32m✔[0m Container pepgent-soroi-e2e-mux     [32mRunning[0m                                                                                                    [34m0.0s[0m
+ [32m✔[0m Container pepgent-soroi-e2e-central [32mRunning[0m                                                                                                    [34m0.0s[0m
+ [33m⠹[0m Container pepgent-soroi-e2e-store   Waiting                                                                                                    [34m0.3s[0m
+[?25h[?25l[4A[0G[+] up 2/3
+ [32m✔[0m Container pepgent-soroi-e2e-mux     [32mRunning[0m                                                                                                    [34m0.0s[0m
+ [32m✔[0m Container pepgent-soroi-e2e-central [32mRunning[0m                                                                                                    [34m0.0s[0m
+ [33m⠸[0m Container pepgent-soroi-e2e-store   Waiting                                                                                                    [34m0.4s[0m
+[?25h[?25l[4A[0G[+] up 2/3
+ [32m✔[0m Container pepgent-soroi-e2e-mux     [32mRunning[0m                                                                                                    [34m0.0s[0m
+ [32m✔[0m Container pepgent-soroi-e2e-central [32mRunning[0m                                                                                                    [34m0.0s[0m
+ [33m⠼[0m Container pepgent-soroi-e2e-store   Waiting                                                                                                    [34m0.5s[0m
+[?25h[?25l[4A[0G[+] up 3/3
+ [32m✔[0m Container pepgent-soroi-e2e-mux     [32mRunning[0m                                                                                                    [34m0.0s[0m
+ [32m✔[0m Container pepgent-soroi-e2e-central [32mRunning[0m                                                                                                    [34m0.0s[0m
+ [32m✔[0m Container pepgent-soroi-e2e-store   [32mHealthy[0m                                                                                                    [34m0.5s[0m
+[?25h

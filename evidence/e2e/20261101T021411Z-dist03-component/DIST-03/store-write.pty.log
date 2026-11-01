@@ -1,0 +1,2 @@
+Successfully copied 4.48kB (transferred 6.14kB) to pepgent-soroi-e2e-central:/tmp/dist03-store-probe.ts
+{"plane":"store","stage":"committed-and-read","url":"http://pepgent-soroi-e2e-store.orb.local:3001","run":"01M6ACB67PSDANGEP2D3RS557B","seq":2,"observed":{"unconsumed":[{"name":"dist03_value","value":{"kind":"scalar","scalar":{"kind":"number","v":42}},"origin":"literal"}]}}

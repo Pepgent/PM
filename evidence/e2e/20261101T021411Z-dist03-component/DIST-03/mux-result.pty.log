@@ -1,0 +1,1 @@
+{"plane":"mux","agent":"Dist03RPC-1793497480263","muxUrl":"ws://pepgent-soroi-e2e-mux.orb.local:8080","sessionId":"01a194c7-bd70-702e-b9f4-05ede980c780","frames":[{"type":"mux_generation"},{"type":"mux_attached"},{"type":"ready"},{"type":"response"},{"type":"mux_exited","code":0}],"evidence":"/tmp/Dist03RPC-1793497480263"}
