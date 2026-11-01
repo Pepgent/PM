@@ -1,0 +1,7 @@
+store ready
+Both identities initialized through the built official initializer before serving.
+Authored repository and nodes Panel fixtures; fixture DB connection closed before host launch.
+host ready
+LAB10_READY {"root":"/tmp/lab10-built-browser-je3bEe","baseURL":"http://127.0.0.1:61630","storeUrl":"http://127.0.0.1:61629","lab":"mbxFrqYXEQiK2XoiQvwAnysdAQYDYdo4","otherLab":"J4xVmkHVoJtdmFAevchgF5tntY0k2kEh","remote":"/tmp/lab10-built-browser-je3bEe/remote.git","panel":"/tmp/lab10-built-browser-je3bEe/panel","cache":"/tmp/lab10-built-browser-je3bEe/library-cache/repo-browser-library","read":"/_serverFn/ca973099fc17c53628e637307bb87b51a8c3f822517024442074eda60c945120","command":"/_serverFn/425fc6f548b6d27ed5ea8125260cd43144f1249308d3914c52d6d97e161a505b","versions":["9ae92ccaa4303a5f960cc70b51d157e9c88dedfd79d6950fea292aa442c928c9","68532db70d108732c46caa8bffc13f4de259afe667c2d5fe42510e388f151787","e77ede2761670f3969d890fdc345e7f8d458df74637248b6a0f324fad48d7826"],"fn":"historical-runtime-node"}
+host stopped {"code":0,"signal":null}
+store stopped {"code":0,"signal":null}

@@ -1,0 +1,8 @@
+{
+  "sessions": 0,
+  "stagedFunctions": 0,
+  "hostExit": 0,
+  "storeExit": 0,
+  "paseoWorkerExit": 0,
+  "centralCalcBody": "export default program(async (input: number): Promise<number> => new Decimal(input).times(4).toNumber());"
+}

@@ -1,0 +1,155 @@
+{
+  "actualLibrary": [
+    {
+      "name": "anneal",
+      "signature": "(...args: [film: string, temperature: number]) => { curve: number; log: File }",
+      "artifacts": [
+        {
+          "field": "log",
+          "type": "File"
+        }
+      ]
+    },
+    {
+      "name": "ask_human",
+      "signature": "(...args: [string]) => number",
+      "artifacts": []
+    },
+    {
+      "name": "calc",
+      "signature": "(...args: [input: number]) => number",
+      "artifacts": []
+    },
+    {
+      "name": "compare_scores",
+      "signature": "(...args: [svm: number, rf: number, gp: number, knn: number, lr: number]) => number",
+      "artifacts": []
+    },
+    {
+      "name": "review",
+      "signature": "(...args: [number]) => { score: number; report: File }",
+      "artifacts": [
+        {
+          "field": "report",
+          "type": "File"
+        }
+      ]
+    },
+    {
+      "name": "run_gp",
+      "signature": "(...args: [film: string, length_scale: number]) => number",
+      "artifacts": []
+    },
+    {
+      "name": "run_knn",
+      "signature": "(...args: [film: string, neighbors: number]) => number",
+      "artifacts": []
+    },
+    {
+      "name": "run_lr",
+      "signature": "(...args: [film: string, learning_rate: number, epochs: number]) => number",
+      "artifacts": []
+    },
+    {
+      "name": "run_rf",
+      "signature": "(...args: [film: string, trees: number]) => number",
+      "artifacts": []
+    },
+    {
+      "name": "run_svm",
+      "signature": "(...args: [film: string, c: number, gamma: number]) => number",
+      "artifacts": []
+    },
+    {
+      "name": "slow_step",
+      "signature": "(...args: [label: string] | [label: string, duration_ms: number]) => { label: string; duration_ms: number }",
+      "artifacts": []
+    },
+    {
+      "name": "text_only",
+      "signature": "(...args: [string]) => string",
+      "artifacts": []
+    },
+    {
+      "name": "try_eval",
+      "signature": "(...args: [string]) => string",
+      "artifacts": []
+    }
+  ],
+  "observations": [
+    "Every exported source equals its actual node file.",
+    "slow_step preserves both declared input tuples and the default 1000.",
+    "anneal.log and review.report retain public File types.",
+    "Alias import and same-file output alias preserve artifact field.",
+    "Default env expression is exported literally.",
+    "Top-level write and callback did not execute; dependency is not installed.",
+    "Unannotated output raises UnsupportedNodeDefinition."
+  ],
+  "constructorOutcomes": [
+    {
+      "name": "aliased",
+      "kind": "defined"
+    },
+    {
+      "name": "unannotated",
+      "kind": "unavailable",
+      "code": "not_supported",
+      "message": "nodes/unannotated.ts: declare an explicit output type or callback return annotation."
+    },
+    {
+      "name": "type_import",
+      "kind": "unavailable",
+      "code": "not_supported",
+      "message": "nodes/type_import.ts must use a value-imported program, agent or human with an inline function."
+    },
+    {
+      "name": "type_specifier",
+      "kind": "unavailable",
+      "code": "not_supported",
+      "message": "nodes/type_specifier.ts must use a value-imported program, agent or human with an inline function."
+    },
+    {
+      "name": "missing_template",
+      "kind": "unavailable",
+      "code": "not_supported",
+      "message": "nodes/missing_template.ts: Agent requires an explicit template option."
+    },
+    {
+      "name": "duplicate_env",
+      "kind": "unavailable",
+      "code": "not_supported",
+      "message": "nodes/duplicate_env.ts: duplicate or unsupported env option."
+    },
+    {
+      "name": "program_template",
+      "kind": "unavailable",
+      "code": "not_supported",
+      "message": "nodes/program_template.ts: duplicate or unsupported template option."
+    },
+    {
+      "name": "human_options",
+      "kind": "unavailable",
+      "code": "not_supported",
+      "message": "nodes/human_options.ts: unsupported constructor argument count."
+    },
+    {
+      "name": "computed_env",
+      "kind": "unavailable",
+      "code": "not_supported",
+      "message": "nodes/computed_env.ts: computed, spread, shorthand and method options are not supported."
+    },
+    {
+      "name": "spread_options",
+      "kind": "unavailable",
+      "code": "not_supported",
+      "message": "nodes/spread_options.ts: computed, spread, shorthand and method options are not supported."
+    },
+    {
+      "name": "shorthand_template",
+      "kind": "unavailable",
+      "code": "not_supported",
+      "message": "nodes/shorthand_template.ts: computed, spread, shorthand and method options are not supported."
+    }
+  ],
+  "fixture": "/tmp/lab10-export-3BQo5V"
+}

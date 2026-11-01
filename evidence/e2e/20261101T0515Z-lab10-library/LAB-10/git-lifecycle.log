@@ -1,0 +1,1628 @@
+FIXTURE_ROOT /tmp/lab-library-lifecycle-WYIhvz
+SEED_TRACKED_PATHS [".gitignore",".omp/agents/review.md",".omp/agents/text_only.md",".omp/agents/try_eval.md","AGENTS.md","README.md","bun.lock","nodes/anneal.ts","nodes/ask_human.ts","nodes/calc.ts","nodes/compare_scores.ts","nodes/review.ts","nodes/run_gp.ts","nodes/run_knn.ts","nodes/run_lr.ts","nodes/run_rf.ts","nodes/run_svm.ts","nodes/slow_step.ts","nodes/text_only.ts","nodes/try_eval.ts","package.json","workloads/f07-agent-negatives.json"]
+SQLITE_AUTHORED_FIXTURE {
+  lab: 'runtime-lab',
+  repoId: 'runtime/library',
+  member: 'runtime-owner',
+  panel: 'panel-runtime',
+  discussion: 'discussion-runtime',
+  sqliteHome: '/tmp/lab-library-lifecycle-WYIhvz/sqlite'
+}
+Panel initial dirty status M  README.md
+?? private-note.txt
+
+Panel actual nonempty staged sentinel diff diff --git a/README.md b/README.md
+--- a/README.md
++++ b/README.md
+@@ -133,3 +133,5 @@ stop(f07_text_reply)
+ - [Soroi 节点 API](https://github.com/Pepgent/soroi/blob/main/packages/omp-soroi/src/eval/node.ts) 定义构造器；Soroi 从会话 cwd 的 `nodes/` 与 `.omp/agents/` 消费定义。
+ - `Pepgent/Pepgent` 的 Lab 后端检出默认分支，为每个会话建立独立 worktree，在人确认后提交合并。
+ - `Pepgent/remote` 与 `Pepgent/images` 提供运行环境模板与镜像；Soroi store 保存正式调用的版本与来源证据。
++
++Panel staged private draft.
+
+Discussion initial dirty status M  README.md
+?? private-note.txt
+
+Discussion actual nonempty staged sentinel diff diff --git a/README.md b/README.md
+--- a/README.md
++++ b/README.md
+@@ -133,3 +133,5 @@ stop(f07_text_reply)
+ - [Soroi 节点 API](https://github.com/Pepgent/soroi/blob/main/packages/omp-soroi/src/eval/node.ts) 定义构造器；Soroi 从会话 cwd 的 `nodes/` 与 `.omp/agents/` 消费定义。
+ - `Pepgent/Pepgent` 的 Lab 后端检出默认分支，为每个会话建立独立 worktree，在人确认后提交合并。
+ - `Pepgent/remote` 与 `Pepgent/images` 提供运行环境模板与镜像；Soroi store 保存正式调用的版本与来源证据。
++
++Discussion staged private draft.
+
+ACTUAL_SOURCE initial index change summary 
+
+=== TRACE 1: stage two, apply calc only ===
+INPUT stage calc {
+  "kind": "library.stage",
+  "lab": "runtime-lab",
+  "fn": "calc",
+  "changes": [
+    {
+      "kind": "source",
+      "source": "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\nexport default program(async (input: number): Promise<number> => new Decimal(input).times(3).toNumber());\n"
+    }
+  ]
+}
+RESULT stage calc {
+  "ok": true,
+  "output": {
+    "kind": "staged",
+    "fn": "calc"
+  }
+}
+INPUT stage slow_step {
+  "kind": "library.stage",
+  "lab": "runtime-lab",
+  "fn": "slow_step",
+  "changes": [
+    {
+      "kind": "source",
+      "source": "import { mkdir } from \"node:fs/promises\";\nimport { program } from \"omp-soroi/node\";\n\n/** Write a startup marker before waiting. slow_step(\"probe\", 25) returns { label: \"probe\", duration_ms: 25 }.\n * Marker: /var/tmp/soroi-e2e/markers/probe contains {\"label\":\"probe\",\"duration_ms\":25} plus a newline.\n * Labels are single safe path components; duration is a finite nonnegative number of milliseconds.\n */\nexport default program<[label: string] | [label: string, duration_ms: number], { label: string; duration_ms: number }>(async (label: string, duration_ms: number = 1000) => {\n  if (!/^[A-Za-z0-9_-]{1,128}$/.test(label)) throw new Error(\"label must contain 1–128 ASCII letters, digits, underscores or hyphens\");\n  if (!Number.isFinite(duration_ms) || duration_ms < 0) throw new Error(\"duration_ms must be finite and nonnegative\");\n  const markers = \"/var/tmp/soroi-e2e/markers\";\n  await mkdir(markers, { recursive: true });\n  await Bun.write(`${markers}/${label}`, `${JSON.stringify({ label, duration_ms })}\\n`);\n  console.log(`slow_step started: ${label} (${duration_ms} ms)`);\n  await Bun.sleep(duration_ms);\n  console.log(`slow_step finished: ${label}`);\n  return { label: `staged:${label}`, duration_ms };\n});\n"
+    }
+  ]
+}
+RESULT stage slow_step {
+  "ok": true,
+  "output": {
+    "kind": "staged",
+    "fn": "slow_step"
+  }
+}
+SQLITE intents before apply [
+  {
+    "fn": "calc",
+    "source": "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\nexport default program(async (input: number): Promise<number> => new Decimal(input).times(3).toNumber());\n"
+  },
+  {
+    "fn": "slow_step",
+    "source": "import { mkdir } from \"node:fs/promises\";\nimport { program } from \"omp-soroi/node\";\n\n/** Write a startup marker before waiting. slow_step(\"probe\", 25) returns { label: \"probe\", duration_ms: 25 }.\n * Marker: /var/tmp/soroi-e2e/markers/probe contains {\"label\":\"probe\",\"duration_ms\":25} plus a newline.\n * Labels are single safe path components; duration is a finite nonnegative number of milliseconds.\n */\nexport default program<[label: string] | [label: string, duration_ms: number], { label: string; duration_ms: number }>(async (label: string, duration_ms: number = 1000) => {\n  if (!/^[A-Za-z0-9_-]{1,128}$/.test(label)) throw new Error(\"label must contain 1–128 ASCII letters, digits, underscores or hyphens\");\n  if (!Number.isFinite(duration_ms) || duration_ms < 0) throw new Error(\"duration_ms must be finite and nonnegative\");\n  const markers = \"/var/tmp/soroi-e2e/markers\";\n  await mkdir(markers, { recursive: true });\n  await Bun.write(`${markers}/${label}`, `${JSON.stringify({ label, duration_ms })}\\n`);\n  console.log(`slow_step started: ${label} (${duration_ms} ms)`);\n  await Bun.sleep(duration_ms);\n  console.log(`slow_step finished: ${label}`);\n  return { label: `staged:${label}`, duration_ms };\n});\n"
+  }
+]
+INPUT apply {
+  "kind": "library.apply",
+  "lab": "runtime-lab",
+  "conversation": "panel-runtime",
+  "fns": [
+    "calc"
+  ]
+}
+RESULT apply {
+  "ok": true,
+  "output": {
+    "commit": "<opaque commit identifier; not used as evidence>",
+    "paths": [
+      "nodes/calc.ts"
+    ],
+    "cache": {
+      "kind": "refreshed"
+    },
+    "kind": "applied",
+    "staging": "cleared"
+  }
+}
+PASS remote and central calc contain selected .times(3)
+PASS unselected slow_step not pushed or copied to central
+PASS full remote and central trees differ from seed only by selected calc source; no private draft files published
+REMOTE calc content "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\nexport default program(async (input: number): Promise<number> => new Decimal(input).times(3).toNumber());\n"
+CENTRAL calc content "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\nexport default program(async (input: number): Promise<number> => new Decimal(input).times(3).toNumber());\n"
+REMOTE latest commit message Confirm library nodes: calc
+
+PASS only selected intent removed; unselected intent preserved exactly by source
+PASS Panel real index content unchanged after selectedDiff/apply
+PASS other Discussion clone working files and real index unchanged
+PASS remote contains only main; unrelated indexed README and untracked private-note absent from publication
+PANEL branch conv/panel-runtime
+DISCUSSION branch conv/discussion-runtime
+
+=== TRACE 2: same stale Panel, three nonoverlapping same-file edits ===
+OBSERVED stale Panel slow_step content before apply import { mkdir } from "node:fs/promises";
+import { program } from "omp-soroi/node";
+
+/** Panel-local note: Write a startup marker before waiting. slow_step("probe", 25) returns { label: "probe", duration_ms: 25 }.
+ * Marker: /var/tmp/soroi-e2e/markers/probe contains {"label":"probe","duration_ms":25} plus a newline.
+ * Labels are single safe path components; duration is a finite nonnegative number of milliseconds.
+ */
+export default program<[label: string] | [label: string, duration_ms: number], { label: string; duration_ms: number }>(async (label: string, duration_ms: number = 1000) => {
+  if (!/^[A-Za-z0-9_-]{1,128}$/.test(label)) throw new Error("label must contain 1–128 ASCII letters, digits, underscores or hyphens");
+  if (!Number.isFinite(duration_ms) || duration_ms < 0) throw new Error("duration_ms must be finite and nonnegative");
+  const markers = "/var/tmp/soroi-e2e/markers";
+  await mkdir(markers, { recursive: true });
+  await Bun.write(`${markers}/${label}`, `${JSON.stringify({ label, duration_ms })}\n`);
+  console.log(`slow_step started: ${label} (${duration_ms} ms)`);
+  await Bun.sleep(duration_ms);
+  console.log(`slow_step finished: ${label}`);
+  return { label, duration_ms };
+});
+
+OBSERVED new remote slow_step content before apply import { mkdir } from "node:fs/promises";
+import { program } from "omp-soroi/node";
+
+/** Write a startup marker before waiting. slow_step("probe", 25) returns { label: "probe", duration_ms: 25 }.
+ * Marker: /var/tmp/soroi-e2e/markers/probe contains {"label":"probe","duration_ms":25} plus a newline.
+ * Labels are single safe path components; duration is a finite nonnegative number of milliseconds.
+ */
+export default program<[label: string] | [label: string, duration_ms: number], { label: string; duration_ms: number }>(async (label: string, duration_ms: number = 1000) => {
+  if (!/^[A-Za-z0-9_-]{1,128}$/.test(label)) throw new Error("label must contain 1–128 ASCII letters, digits, underscores or hyphens");
+  if (!Number.isFinite(duration_ms) || duration_ms < 0) throw new Error("duration_ms must be finite and nonnegative");
+  const markers = "/var/tmp/soroi-e2e/remote-markers";
+  await mkdir(markers, { recursive: true });
+  await Bun.write(`${markers}/${label}`, `${JSON.stringify({ label, duration_ms })}\n`);
+  console.log(`slow_step started: ${label} (${duration_ms} ms)`);
+  await Bun.sleep(duration_ms);
+  console.log(`slow_step finished: ${label}`);
+  return { label, duration_ms };
+});
+
+INPUT apply {
+  "kind": "library.apply",
+  "lab": "runtime-lab",
+  "conversation": "panel-runtime",
+  "fns": [
+    "slow_step"
+  ]
+}
+RESULT apply {
+  "ok": true,
+  "output": {
+    "commit": "<opaque commit identifier; not used as evidence>",
+    "paths": [
+      "nodes/slow_step.ts"
+    ],
+    "cache": {
+      "kind": "refreshed"
+    },
+    "kind": "applied",
+    "staging": "cleared"
+  }
+}
+REMOTE combined slow_step content import { mkdir } from "node:fs/promises";
+import { program } from "omp-soroi/node";
+
+/** Panel-local note: Write a startup marker before waiting. slow_step("probe", 25) returns { label: "probe", duration_ms: 25 }.
+ * Marker: /var/tmp/soroi-e2e/markers/probe contains {"label":"probe","duration_ms":25} plus a newline.
+ * Labels are single safe path components; duration is a finite nonnegative number of milliseconds.
+ */
+export default program<[label: string] | [label: string, duration_ms: number], { label: string; duration_ms: number }>(async (label: string, duration_ms: number = 1000) => {
+  if (!/^[A-Za-z0-9_-]{1,128}$/.test(label)) throw new Error("label must contain 1–128 ASCII letters, digits, underscores or hyphens");
+  if (!Number.isFinite(duration_ms) || duration_ms < 0) throw new Error("duration_ms must be finite and nonnegative");
+  const markers = "/var/tmp/soroi-e2e/remote-markers";
+  await mkdir(markers, { recursive: true });
+  await Bun.write(`${markers}/${label}`, `${JSON.stringify({ label, duration_ms })}\n`);
+  console.log(`slow_step started: ${label} (${duration_ms} ms)`);
+  await Bun.sleep(duration_ms);
+  console.log(`slow_step finished: ${label}`);
+  return { label: `staged:${label}`, duration_ms };
+});
+
+CENTRAL combined slow_step content import { mkdir } from "node:fs/promises";
+import { program } from "omp-soroi/node";
+
+/** Panel-local note: Write a startup marker before waiting. slow_step("probe", 25) returns { label: "probe", duration_ms: 25 }.
+ * Marker: /var/tmp/soroi-e2e/markers/probe contains {"label":"probe","duration_ms":25} plus a newline.
+ * Labels are single safe path components; duration is a finite nonnegative number of milliseconds.
+ */
+export default program<[label: string] | [label: string, duration_ms: number], { label: string; duration_ms: number }>(async (label: string, duration_ms: number = 1000) => {
+  if (!/^[A-Za-z0-9_-]{1,128}$/.test(label)) throw new Error("label must contain 1–128 ASCII letters, digits, underscores or hyphens");
+  if (!Number.isFinite(duration_ms) || duration_ms < 0) throw new Error("duration_ms must be finite and nonnegative");
+  const markers = "/var/tmp/soroi-e2e/remote-markers";
+  await mkdir(markers, { recursive: true });
+  await Bun.write(`${markers}/${label}`, `${JSON.stringify({ label, duration_ms })}\n`);
+  console.log(`slow_step started: ${label} (${duration_ms} ms)`);
+  await Bun.sleep(duration_ms);
+  console.log(`slow_step finished: ${label}`);
+  return { label: `staged:${label}`, duration_ms };
+});
+
+PASS remote edit, stale Panel edit and staged source edit all survive in same file
+PASS full remote and central trees contain exactly the selected combined changes; latest message Confirm library nodes: slow_step
+PASS slow_step intent removed only after successful push
+PASS stale Panel real index and other clone content/index remain untouched
+
+=== TRACE 3: overlapping Panel/staged change ===
+INPUT stage calc {
+  "kind": "library.stage",
+  "lab": "runtime-lab",
+  "fn": "calc",
+  "changes": [
+    {
+      "kind": "source",
+      "source": "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\nexport default program(async (input: number): Promise<number> => new Decimal(input).times(5).toNumber());\n"
+    }
+  ]
+}
+RESULT stage calc {
+  "ok": true,
+  "output": {
+    "kind": "staged",
+    "fn": "calc"
+  }
+}
+CONFLICT Panel source "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\nexport default program(async (input: number): Promise<number> => new Decimal(input).times(7).toNumber());\n"
+CONFLICT staged source "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\nexport default program(async (input: number): Promise<number> => new Decimal(input).times(5).toNumber());\n"
+INPUT apply {
+  "kind": "library.apply",
+  "lab": "runtime-lab",
+  "conversation": "panel-runtime",
+  "fns": [
+    "calc"
+  ]
+}
+RESULT apply {
+  "ok": false,
+  "error": {
+    "layer": "domain",
+    "code": "revision_conflict",
+    "message": "Git merge-file failed; inspect repository access or merge conflicts."
+  }
+}
+PASS overlap returns typed domain revision_conflict
+PASS overlapping apply leaves full remote tracked contents/history messages, staged source and Panel source unchanged
+SQLITE retained conflicting intent [
+  {
+    "fn": "calc",
+    "source": "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\nexport default program(async (input: number): Promise<number> => new Decimal(input).times(5).toNumber());\n"
+  }
+]
+PASS overlapping apply leaves Panel index unchanged
+
+=== TRACE 3B: integration overlap against remote authority ===
+INTEGRATION CONFLICT remote calc source "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\nexport default program(async (input: number): Promise<number> => new Decimal(input).times(3).toNumber());\n"
+INTEGRATION CONFLICT Discussion calc source "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\nexport default program(async (input: number): Promise<number> => new Decimal(input).times(9).toNumber());\n"
+INPUT integration merge {
+  "kind": "library.merge",
+  "lab": "runtime-lab",
+  "conversation": "discussion-runtime",
+  "paths": [
+    "nodes/calc.ts"
+  ]
+}
+RESULT integration merge {
+  "ok": false,
+  "error": {
+    "layer": "domain",
+    "code": "revision_conflict",
+    "message": "Git apply failed; inspect repository access or merge conflicts."
+  }
+}
+PASS remote-authority overlap returns typed domain revision_conflict
+PASS integration Git apply conflict leaves remote content/history, central content, SQLite staged source and Discussion draft/index unchanged
+DRIVER_ONLY_SETUP restore only owned calc overlap probe before separate nonconflicting sync; README and private-note drafts retained
+
+=== TRACE 4: explicit sync keeps private drafts local ===
+INPUT sync {
+  "kind": "library.sync",
+  "lab": "runtime-lab",
+  "conversation": "discussion-runtime"
+}
+RESULT sync {
+  "ok": true,
+  "output": {
+    "kind": "synced",
+    "conversation": "discussion-runtime"
+  }
+}
+PASS synced central full tree equals authoritative remote; private drafts absent and remote marker present
+DISCUSSION local private README "# Pepgent/lab-library\n\n## 职责\n\n本仓库是首个 Lab 的节点库，保存 `nodes/*.ts`、依赖与 lockfile，以及 Agent 节点使用的 `.omp/agents/` 定义。Lab 后端在人确认后将会话 worktree 的改动提交合入默认分支；正式执行的历史证据由 Soroi store 保存，本仓库不复制运行记录或 Lab 业务状态。\n\n这些节点提供 D8-07 指定的确定性 e2e 输入，以及 F07 的专用 Agent 负例。`anneal` 与 `run_*` 使用公开的算术公式，不执行物理模拟或机器学习训练。所有参数按位置传入，节点默认在中心运行，远程位置通过 `soroi_eval.env` 覆盖，不另建远程节点。\n\n## 安装与构造器解析\n\n本仓库使用 Bun。`decimal.js` 是节点真实调用的纯 JS 依赖，用于验证依赖恢复与远程 bundle；`bun.lock` 记录其具体解析结果。\n\n`omp-soroi/node` 属于 Soroi 发行环境，不属于本仓库实现。当前声明可选 peer dependency，以便在 Soroi 包尚未发布到 registry 时正常恢复库依赖；**可选只针对安装，运行时不可缺少**。当前开发路径需要将实际 Soroi 包显式 link 进本项目的 `node_modules`，仅加载 omp 扩展不会让 TypeScript 或 Bun 自动解析该包。\n\n```sh\n# 在实际 Soroi 检出中恢复扩展依赖。\ncd /path/to/soroi\nbun install\n\n# 在 Lab 会话 worktree 中恢复依赖并连接相同 Soroi 包。\ncd /path/to/lab-library\nbun install --frozen-lockfile\nln -s /path/to/soroi/packages/omp-soroi node_modules/omp-soroi\n\n# 在另一个终端启动真实 store；测试时使用独立空目录。\nSTORE_HOME=/tmp/lab-library-store STORE_PORT=19624 \\\n  bun /path/to/soroi/packages/store/src/main.ts\n\n# 在真实 omp 中加载独立 Soroi 扩展；不加载本机其他扩展或提示词。\nSOROI_ROLE=Main SOROI_STORE_URL=http://127.0.0.1:19624 \\\n  omp --no-extensions --no-skills --no-rules --no-context-files \\\n  -e /path/to/soroi/packages/omp-soroi/src/index.ts \\\n  --model opencode-go/deepseek-v4.1-flash\n```\n\n开发链接只写入被忽略的 `node_modules`，机器路径不进入 manifest 或 lockfile。当前 Bun 对可选 peer 的 `bun link` 未建立所需链接，因此这里显式创建目录链接；若目标已存在，不覆盖，应先确认它是否指向本次加载的 Soroi 包。Soroi 的 DIST-01 负责发行安装与后续构造器解析；当前开发链接不等于发行环境已实现自动解析。模型不可用时改用 `openai-codex/gpt-6-luna`；凭据由 omp 既有凭据路径提供，不写入本仓。\n\n## 节点契约\n\n每个文件 default-export 一个公共构造器创建的定义。表中 `File` 表示 `omp-soroi/node` 的文件 atom，不是路径字符串结果。文件名每次调用唯一，文件字节与标量输出由输入决定；调用方应检查捕获内容，而不是断言随机文件名。\n\nLab 的节点库页按 TypeScript AST 静态导出定义，不执行节点、加载依赖或推断未声明的返回类型。节点文件须直接 default-export 从 `omp-soroi/node` 具名导入的 `program`、`agent` 或 `human` 调用，并使用内联回调；导入可有别名。回调参数须逐项标注类型，返回值须用第二个显式类型参数或回调返回注解声明；Program 的返回注解可为 `Promise<输出>`。输出支持 `number`、`string`、`boolean`、从公共模块导入的 `File`，以及由这些 atom 构成的必填扁平对象；同文件的类型别名可以展开。缺少显式注解或无法静态展开的定义返回 `not_supported`，不伪造参数或输出字段。\n\n显式的第一个类型参数是调用签名的输入约束，例如 `slow_step` 的两个 tuple 变体；参数默认值、`env` 与 Agent `template` 按 TS 表达式原文导出，不在读取时求值。`File` 输出字段可被识别为产物，但当前公共节点 API 没有产物 `role` 或判据，Lab 不导出这些不存在的元数据。\n\n| 节点 / 体 | 位置参数 | 返回值与样例预期 |\n| --- | --- | --- |\n| `calc` / Program | `input: number` | `input × 2`；`calc(21) = 42`。 |\n| `anneal` / Program | `film: string, temperature: number` | `{ curve: number, log: File }`；`curve = temperature / 100 + film.length`。`anneal(\"film\", 2200)` 返回 `curve = 26`，日志字节为 `film=film\\ntemperature=2200\\ncurve=26\\n`。 |\n| `slow_step` / Program | `label: string, duration_ms: number = 1000` | `{ label: string, duration_ms: number }`；先写启动标记并输出开始日志，再等待指定毫秒并输出结束日志。`slow_step(\"probe\", 25)` 返回 `{ label: \"probe\", duration_ms: 25 }`。 |\n| `run_svm` / Program | `film: string, c: number, gamma: number` | `film.length + c + gamma`；`(\"film\", 2, 0.5) → 6.5`。 |\n| `run_rf` / Program | `film: string, trees: number` | `film.length + trees / 100`；`(\"film\", 100) → 5`。 |\n| `run_gp` / Program | `film: string, length_scale: number` | `film.length + 1 / length_scale`；`(\"film\", 2) → 4.5`。`length_scale` 必须是有限正数。 |\n| `run_knn` / Program | `film: string, neighbors: number` | `film.length + 1 / neighbors`；`(\"film\", 4) → 4.25`。`neighbors` 必须是正安全整数。 |\n| `run_lr` / Program | `film: string, learning_rate: number, epochs: number` | `film.length + learning_rate × epochs`；`(\"film\", 0.1, 10) → 5`。 |\n| `compare_scores` / Program | `svm, rf, gp, knn, lr: number` | 五个分数的算术平均值；`(6.5, 5, 4.5, 4.25, 5) → 5.05`。 |\n| `review` / Agent | `score: number` | `{ score: number, report: File }`；`review(42)` 必须经 `soroi_return` 交回 `score = 42` 与内容为 `score=42\\n` 的文件。节点指定项目级 agent `review`，定义在 `.omp/agents/review.md`，模型由运行环境继承。 |\n| `try_eval` / Agent | `token: string` | 直接探测 `soroi_eval`，记录实际不可用、拒绝或意外成功的诊断，再经 `soroi_return` 交回原 token。token 返回成功本身不证明角色闸门通过。 |\n| `text_only` / Agent | `token: string` | 只输出 token 原文，不调用任何工具；预期调用失败，不能把最后文本当成 capture。 |\n| `ask_human` / Human | `question: string` | 一个由真人回答的 `number`；请求文本为 `Return one numeric score for: <question>`。该节点依赖尚未交付的 SOR-13，当前 Soroi 公共模块没有 `human` 导出，因此不能执行。 |\n\n`slow_step` 的启动标记路径固定为执行主机上的 `/var/tmp/soroi-e2e/markers/<label>`，与 runner 的 cwd 无关。内容为 `{\"label\":\"probe\",\"duration_ms\":25}\\n`。`label` 只接受 1–128 个 ASCII 字母、数字、下划线或连字符；时长必须是有限非负数。非法输入在写标记前失败。测试者应为每次探针使用独立 label，避免将历史标记当作本次启动。\n\n## dry run 输入\n\n在上述 omp 中请求逐字调用 `soroi_eval`，`mode` 为 `dry_run`，`code` 为以下代码。该步骤覆盖全部九个 Program 节点和真实 `review` Agent 节点，不使用 pins。返回的分数应与节点契约表相符，`log_2200c` 与 `review_report` 应被捕获为文件。\n\n```ts\nconst film = \"film\"\nconst temperature = 2200\nconst input = 21\nconst label = \"library_probe\"\nconst duration = 25\nconst c = 2\nconst gamma = 0.5\nconst trees = 100\nconst length_scale = 2\nconst neighbors = 4\nconst learning_rate = 0.1\nconst epochs = 10\nconst doubled = calc(input)\nconst { curve: curve_2200c, log: log_2200c } = anneal(film, temperature)\nconst { label: finished_label, duration_ms: finished_duration } = slow_step(label, duration)\nconst svm_score = run_svm(film, c, gamma)\nconst rf_score = run_rf(film, trees)\nconst gp_score = run_gp(film, length_scale)\nconst knn_score = run_knn(film, neighbors)\nconst lr_score = run_lr(film, learning_rate, epochs)\nconst mean_score = compare_scores(svm_score, rf_score, gp_score, knn_score, lr_score)\nconst { score: reviewed_score, report: review_report } = review(doubled)\n```\n\nDry run 不提交 store，但节点体本身仍会写日志文件和启动标记。调用者核对 File 字节后只清理本次调用产生的文件与标记，不清理共享目录。\n\n## F07 Agent 负例\n\n两个模板均不声明 `tools`、`model` 或 `spawns`，因此 `try_eval` 不通过 fixture 白名单自行隐藏 `soroi_eval`。模型与实际工具集合由 Soroi/omp 运行环境决定。`text_only` 的 system protocol 明确覆盖 runner 在任务末尾追加的通用 `soroi_return` 指令，但不移除宿主工具。\n\n在真实 omp 中分别逐字调用以下 `soroi_eval` 代码，先用 `mode: \"dry_run\"`，再以完全相同的代码用 `mode: \"formal\"`；两者都不使用 pins。重新验证子 Agent 时使用新的空 store，避免固定输入命中已有 capture。\n\n```ts\nconst f07_eval_token = \"f07-try-eval\"\nconst f07_eval_reply = try_eval(f07_eval_token)\nstop(f07_eval_reply)\n```\n\n```ts\nconst f07_text_token = \"f07-text-only\"\nconst f07_text_reply = text_only(f07_text_token)\nstop(f07_text_reply)\n```\n\n`try_eval` 的通过证据必须同时包含实际 Agent-body 身份、子 Agent 未获得 `soroi_eval`、明确的工具未提供诊断，以及配对的 `soroi_return` 调用与成功结果。若出现 `soroi_eval` execution-start 后才被拒绝，只能证明执行入口拒绝，不能判工具可见性闸门通过。禁止用 token echo 或 store 未变化单独代替这些证据。\n\n`text_only` 的通过证据必须包含子 Agent 最终文本逐字等于 `f07-text-only`、没有任何工具调用、outer call 失败，以及正式运行前后 graph 与 stream 最大 seq 不变。provider 错误、取消或崩溃不构成这个负例；若模型调用了 `soroi_return`，本次没有产生指定负例，不能将成功捕获解释为通过。\n\n[机器可读 workload](workloads/f07-agent-negatives.json) 保存相同的 `kind`、原始 `code` 和完整 `assignment`。`assignment` 来自 Soroi `8e11d1b5ab23e8eaa853ff0430fec4029492bc5a` 的真实 launch recipe，只读记录实际传给 `runSubprocess` 的 `task` 并与返回的 `task` 核对，包含 runner 追加的通用 handback 后缀，不是手写的理想化提示词。该字符串是该次启动的任务文本，不保证后续 Soroi runner 的包装文本不变。\n\n当前 runner 的子会话是内存会话，没有持久 transcript；launch recipe 与 outer tool 结果不能代替完整闸门证据。F07 的最终判定须等 SOR-11 提供可持久的真实子 Agent 流后，由测试者按上述判据验收。父会话的 `--model` 不保证子会话使用同一模型，测试者必须记录真实 child resolved model。\n\n这两个 workload 只覆盖直接 Agent-body 闸门与 no-last-message-fallback，不证明 capture descendants、完整 SOR-11 或 MUX 生命周期。\n\n## 集成依赖\n\n- SOR-13 提供 `human` 构造器与真实 `answer` 路径后，`ask_human` 才能产生等待槽位并完成 Human 捕获。源码保留目标公共 API，不增加声明补丁、pins、Program 或 Agent 替代。SOR-13 / E2E-15 负责实际回答验证。\n- SOR-17 与 E2E-16/17 负责远程 env 覆盖、依赖恢复、bundle 与 Komodo/Slurm 的真实执行。本库不实现 remote 生命周期。\n- LAB-10 负责 Lab 的节点导出、确认、合并和 worktree 同步；本库不自行更新会话基线。\n\n## 设计与接口\n\n- [D2-12](https://github.com/Pepgent/PM/blob/main/evidence/decisions/D2-components.md) 定义 Lab 库、依赖与 Agent 定义归属。\n- [D8-07 / LIB-01](https://github.com/Pepgent/PM/blob/main/evidence/decisions/D8-mvp-scope.md) 指定本库节点全集与 dry run 验收。\n- [Soroi 节点 API](https://github.com/Pepgent/soroi/blob/main/packages/omp-soroi/src/eval/node.ts) 定义构造器；Soroi 从会话 cwd 的 `nodes/` 与 `.omp/agents/` 消费定义。\n- `Pepgent/Pepgent` 的 Lab 后端检出默认分支，为每个会话建立独立 worktree，在人确认后提交合并。\n- `Pepgent/remote` 与 `Pepgent/images` 提供运行环境模板与镜像；Soroi store 保存正式调用的版本与来源证据。\n\nDiscussion staged private draft.\n"
+DISCUSSION local private note "Discussion untracked private draft.\n"
+DISCUSSION private branch commit messages Merge branch 'main' of /tmp/lab-library-lifecycle-WYIhvz/remote into conv/discussion-runtime
+Save conversation drafts before library sync
+Remote update before explicit sync
+Confirm library nodes: slow_step
+
+REMOTE final commit messages Remote update before explicit sync
+Confirm library nodes: slow_step
+Remote nonoverlapping slow_step marker directory
+Confirm library nodes: calc
+Seed actual lab-library tracked sources
+
+PASS explicit sync brings remote edits into private branch, commits dirty drafts locally, and does not push drafts or private refs
+PASS explicit sync retains unrelated conflicting staged intent
+
+=== TRACE 5: proposed staged source validation under literal /tmp cache ===
+CACHE_PATH_IDENTITY {
+  literal: '/tmp/lab-library-lifecycle-WYIhvz/cache/repo-runtime%2Flibrary',
+  canonical: '/private/tmp/lab-library-lifecycle-WYIhvz/cache/repo-runtime%2Flibrary'
+}
+INPUT stage annotated_probe {
+  "kind": "library.stage",
+  "lab": "runtime-lab",
+  "fn": "annotated_probe",
+  "changes": [
+    {
+      "kind": "source",
+      "source": "import { program } from \"omp-soroi/node\";\nexport default program((input: number): number => input + 17);\n"
+    }
+  ]
+}
+RESULT stage annotated_probe {
+  "ok": true,
+  "output": {
+    "kind": "staged",
+    "fn": "annotated_probe"
+  }
+}
+INPUT reject unannotated source replacing valid on-disk calc {
+  "kind": "library.stage",
+  "lab": "runtime-lab",
+  "fn": "calc",
+  "changes": [
+    {
+      "kind": "source",
+      "source": "import { program } from \"omp-soroi/node\";\nexport default program((input: number) => input + 1);\n"
+    }
+  ]
+}
+RESULT reject unannotated source replacing valid on-disk calc {
+  "ok": false,
+  "error": {
+    "layer": "domain",
+    "code": "not_supported",
+    "capability": "library.definition",
+    "message": "nodes/calc.ts: declare an explicit output type or callback return annotation."
+  }
+}
+PASS unannotated source replacing valid on-disk calc rejected from actual proposed source; valid prior intents retained
+INPUT reject duplicate-env source replacing valid on-disk calc {
+  "kind": "library.stage",
+  "lab": "runtime-lab",
+  "fn": "calc",
+  "changes": [
+    {
+      "kind": "source",
+      "source": "import { program } from \"omp-soroi/node\";\nexport default program((input: number): number => input + 1, { env: \"first\", env: \"second\" });\n"
+    }
+  ]
+}
+RESULT reject duplicate-env source replacing valid on-disk calc {
+  "ok": false,
+  "error": {
+    "layer": "domain",
+    "code": "not_supported",
+    "capability": "library.definition",
+    "message": "nodes/calc.ts: duplicate or unsupported env option."
+  }
+}
+PASS duplicate-env source replacing valid on-disk calc rejected from actual proposed source; valid prior intents retained
+INPUT apply {
+  "kind": "library.apply",
+  "lab": "runtime-lab",
+  "conversation": "panel-runtime",
+  "fns": [
+    "annotated_probe"
+  ]
+}
+RESULT apply {
+  "ok": true,
+  "output": {
+    "commit": "<opaque commit identifier; not used as evidence>",
+    "paths": [
+      "nodes/annotated_probe.ts"
+    ],
+    "cache": {
+      "kind": "refreshed"
+    },
+    "kind": "applied",
+    "staging": "cleared"
+  }
+}
+PASS annotated new-node staged overlay is inspected and published under /tmp cache; selected new intent cleared, unrelated calc retained, Panel index untouched
+
+=== TRACE 6: positive Discussion merge output contract ===
+INPUT positive merge {
+  "kind": "library.merge",
+  "lab": "runtime-lab",
+  "conversation": "discussion-runtime",
+  "paths": [
+    "nodes/merge_probe.ts"
+  ]
+}
+RESULT positive merge {
+  "ok": true,
+  "output": {
+    "commit": "<opaque commit identifier; not used as evidence>",
+    "paths": [
+      "nodes/merge_probe.ts"
+    ],
+    "cache": {
+      "kind": "refreshed"
+    },
+    "kind": "merged"
+  }
+}
+PASS library.merge returns merged and publishes only selected Discussion node with no apply-only staging field
+
+=== TRACE 7: failed sync abort, retry, and preexisting unresolved merge ===
+RESULT sync overlap first attempt {
+  "ok": false,
+  "error": {
+    "layer": "domain",
+    "code": "revision_conflict",
+    "message": "Git -c failed; inspect repository access or merge conflicts."
+  }
+}
+RESULT sync overlap retry {
+  "ok": false,
+  "error": {
+    "layer": "domain",
+    "code": "revision_conflict",
+    "message": "Git -c failed; inspect repository access or merge conflicts."
+  }
+}
+PASS sync conflict aborts merge, preserves saved private calc without markers, and retry creates no commit or remote change
+RESULT sync preexisting unresolved merge {
+  "ok": false,
+  "error": {
+    "layer": "domain",
+    "code": "revision_conflict",
+    "message": "Resolve or abort the existing Git merge before syncing."
+  }
+}
+PASS preexisting unresolved merge refused before commit; marker file remains uncommitted and HEAD retains marker-free private source
+DRIVER_ONLY_SETUP abort manually authored unresolved merge after observing rejection
+
+=== TRACE 8: per-node and per-draft read availability ADTs ===
+RESULT degraded read {
+  "ok": true,
+  "output": {
+    "commit": "<opaque commit identifier; not used as evidence>",
+    "sequence": 9,
+    "nodes": [
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "anneal",
+          "path": "nodes/anneal.ts",
+          "signature": "(...args: [film: string, temperature: number]) => { curve: number; log: File }",
+          "parameters": [
+            {
+              "name": "film",
+              "type": "string",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "temperature",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "{ curve: number; log: File }",
+          "fields": [
+            {
+              "name": "curve",
+              "type": "number"
+            },
+            {
+              "name": "log",
+              "type": "File"
+            }
+          ],
+          "body": {
+            "kind": "Program",
+            "source": "async (film: string, temperature: number): Promise<{ curve: number; log: File }> => {\n  const curve = new Decimal(temperature).div(100).plus(film.length).toNumber();\n  const log = `anneal-${crypto.randomUUID()}.txt`;\n  await Bun.write(log, `film=${film}\\ntemperature=${temperature}\\ncurve=${curve}\\n`);\n  return { curve, log: file(log) };\n}"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "/** Deterministic e2e surrogate, not a physical annealing model.\n * anneal(\"film\", 2200) = { curve: 26, log: File containing \"film=film\\ntemperature=2200\\ncurve=26\\n\" }.\n */",
+          "source": "import Decimal from \"decimal.js\";\nimport { file, program, type File } from \"omp-soroi/node\";\n\n/** Deterministic e2e surrogate, not a physical annealing model.\n * anneal(\"film\", 2200) = { curve: 26, log: File containing \"film=film\\ntemperature=2200\\ncurve=26\\n\" }.\n */\nexport default program(async (film: string, temperature: number): Promise<{ curve: number; log: File }> => {\n  const curve = new Decimal(temperature).div(100).plus(film.length).toNumber();\n  const log = `anneal-${crypto.randomUUID()}.txt`;\n  await Bun.write(log, `film=${film}\\ntemperature=${temperature}\\ncurve=${curve}\\n`);\n  return { curve, log: file(log) };\n});\n",
+          "artifacts": [
+            {
+              "field": "log",
+              "type": "File"
+            }
+          ]
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "annotated_probe",
+          "path": "nodes/annotated_probe.ts",
+          "signature": "(...args: [input: number]) => number",
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "number",
+          "fields": [],
+          "body": {
+            "kind": "Program",
+            "source": "(input: number): number => input + 17"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "",
+          "source": "import { program } from \"omp-soroi/node\";\nexport default program((input: number): number => input + 17);\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "ask_human",
+          "path": "nodes/ask_human.ts",
+          "signature": "(...args: [string]) => number",
+          "parameters": [
+            {
+              "name": "question",
+              "type": "string",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "number",
+          "fields": [],
+          "body": {
+            "kind": "Human",
+            "source": "(question: string) => `Return one numeric score for: ${question}`"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "/** Ask for a numeric score. The result is exactly the human's numeric answer, not an AI fallback.\n * Requires Soroi SOR-13 (public human constructor and answer endpoint).\n */",
+          "source": "import { human } from \"omp-soroi/node\";\n\n/** Ask for a numeric score. The result is exactly the human's numeric answer, not an AI fallback.\n * Requires Soroi SOR-13 (public human constructor and answer endpoint).\n */\nexport default human<[string], number>((question: string) => `Return one numeric score for: ${question}`);\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "calc",
+          "path": "nodes/calc.ts",
+          "signature": "(...args: [input: number]) => number",
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "number",
+          "fields": [],
+          "body": {
+            "kind": "Program",
+            "source": "async (input: number): Promise<number> => new Decimal(input).times(11).toNumber()"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */",
+          "source": "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\nexport default program(async (input: number): Promise<number> => new Decimal(input).times(11).toNumber());\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "compare_scores",
+          "path": "nodes/compare_scores.ts",
+          "signature": "(...args: [svm: number, rf: number, gp: number, knn: number, lr: number]) => number",
+          "parameters": [
+            {
+              "name": "svm",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "rf",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "gp",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "knn",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "lr",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "number",
+          "fields": [],
+          "body": {
+            "kind": "Program",
+            "source": "async (svm: number, rf: number, gp: number, knn: number, lr: number): Promise<number> =>\n  new Decimal(svm).plus(rf).plus(gp).plus(knn).plus(lr).div(5).toNumber()"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "/** Mean of the five positional scores (svm, rf, gp, knn, lr). Example: (6.5, 5, 4.5, 4.25, 5) = 5.05. */",
+          "source": "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Mean of the five positional scores (svm, rf, gp, knn, lr). Example: (6.5, 5, 4.5, 4.25, 5) = 5.05. */\nexport default program(async (svm: number, rf: number, gp: number, knn: number, lr: number): Promise<number> =>\n  new Decimal(svm).plus(rf).plus(gp).plus(knn).plus(lr).div(5).toNumber(),\n);\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "merge_probe",
+          "path": "nodes/merge_probe.ts",
+          "signature": "(...args: [input: number]) => number",
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "number",
+          "fields": [],
+          "body": {
+            "kind": "Program",
+            "source": "(input: number): number => input * 19"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "",
+          "source": "import { program } from \"omp-soroi/node\";\nexport default program((input: number): number => input * 19);\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "review",
+          "path": "nodes/review.ts",
+          "signature": "(...args: [number]) => { score: number; report: File }",
+          "parameters": [
+            {
+              "name": "score",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "{ score: number; report: File }",
+          "fields": [
+            {
+              "name": "score",
+              "type": "number"
+            },
+            {
+              "name": "report",
+              "type": "File"
+            }
+          ],
+          "body": {
+            "kind": "Agent",
+            "source": "(score: number) => {\n    const report = `review-${crypto.randomUUID()}.txt`;\n    return `Review the supplied e2e score without changing it: ${score}.\nWrite a UTF-8 file at ${JSON.stringify(report)} in the current working directory containing exactly ${JSON.stringify(`score=${score}\\n`)}.\nThen call soroi_return with score=${score} and report set to that file's path. Do not report success in prose instead of calling soroi_return.`;\n  }"
+          },
+          "defaultEnvironment": null,
+          "template": "\"review\"",
+          "documentation": "/** review(42) hands back { score: 42, report: File containing \"score=42\\n\" } via soroi_return. */",
+          "source": "import { agent, type File } from \"omp-soroi/node\";\n\n/** review(42) hands back { score: 42, report: File containing \"score=42\\n\" } via soroi_return. */\nexport default agent<[number], { score: number; report: File }>(\n  (score: number) => {\n    const report = `review-${crypto.randomUUID()}.txt`;\n    return `Review the supplied e2e score without changing it: ${score}.\nWrite a UTF-8 file at ${JSON.stringify(report)} in the current working directory containing exactly ${JSON.stringify(`score=${score}\\n`)}.\nThen call soroi_return with score=${score} and report set to that file's path. Do not report success in prose instead of calling soroi_return.`;\n  },\n  { template: \"review\" },\n);\n",
+          "artifacts": [
+            {
+              "field": "report",
+              "type": "File"
+            }
+          ]
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "run_gp",
+          "path": "nodes/run_gp.ts",
+          "signature": "(...args: [film: string, length_scale: number]) => number",
+          "parameters": [
+            {
+              "name": "film",
+              "type": "string",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "length_scale",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "number",
+          "fields": [],
+          "body": {
+            "kind": "Program",
+            "source": "async (film: string, length_scale: number): Promise<number> => {\n  if (!Number.isFinite(length_scale) || length_scale <= 0) throw new Error(\"length_scale must be finite and positive\");\n  return film.length + 1 / length_scale;\n}"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "/** E2e scoring surrogate, not model training. run_gp(\"film\", 2) = 4.5. */",
+          "source": "import { program } from \"omp-soroi/node\";\n\n/** E2e scoring surrogate, not model training. run_gp(\"film\", 2) = 4.5. */\nexport default program(async (film: string, length_scale: number): Promise<number> => {\n  if (!Number.isFinite(length_scale) || length_scale <= 0) throw new Error(\"length_scale must be finite and positive\");\n  return film.length + 1 / length_scale;\n});\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "run_knn",
+          "path": "nodes/run_knn.ts",
+          "signature": "(...args: [film: string, neighbors: number]) => number",
+          "parameters": [
+            {
+              "name": "film",
+              "type": "string",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "neighbors",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "number",
+          "fields": [],
+          "body": {
+            "kind": "Program",
+            "source": "async (film: string, neighbors: number): Promise<number> => {\n  if (!Number.isSafeInteger(neighbors) || neighbors <= 0) throw new Error(\"neighbors must be a positive safe integer\");\n  return film.length + 1 / neighbors;\n}"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "/** E2e scoring surrogate, not model training. run_knn(\"film\", 4) = 4.25. */",
+          "source": "import { program } from \"omp-soroi/node\";\n\n/** E2e scoring surrogate, not model training. run_knn(\"film\", 4) = 4.25. */\nexport default program(async (film: string, neighbors: number): Promise<number> => {\n  if (!Number.isSafeInteger(neighbors) || neighbors <= 0) throw new Error(\"neighbors must be a positive safe integer\");\n  return film.length + 1 / neighbors;\n});\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "run_lr",
+          "path": "nodes/run_lr.ts",
+          "signature": "(...args: [film: string, learning_rate: number, epochs: number]) => number",
+          "parameters": [
+            {
+              "name": "film",
+              "type": "string",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "learning_rate",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "epochs",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "number",
+          "fields": [],
+          "body": {
+            "kind": "Program",
+            "source": "async (film: string, learning_rate: number, epochs: number): Promise<number> => film.length + learning_rate * epochs"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "/** E2e scoring surrogate, not model training. run_lr(\"film\", 0.1, 10) = 5. */",
+          "source": "import { program } from \"omp-soroi/node\";\n\n/** E2e scoring surrogate, not model training. run_lr(\"film\", 0.1, 10) = 5. */\nexport default program(async (film: string, learning_rate: number, epochs: number): Promise<number> => film.length + learning_rate * epochs);\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "run_rf",
+          "path": "nodes/run_rf.ts",
+          "signature": "(...args: [film: string, trees: number]) => number",
+          "parameters": [
+            {
+              "name": "film",
+              "type": "string",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "trees",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "number",
+          "fields": [],
+          "body": {
+            "kind": "Program",
+            "source": "async (film: string, trees: number): Promise<number> => film.length + trees / 100"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "/** E2e scoring surrogate, not model training. run_rf(\"film\", 100) = 5. */",
+          "source": "import { program } from \"omp-soroi/node\";\n\n/** E2e scoring surrogate, not model training. run_rf(\"film\", 100) = 5. */\nexport default program(async (film: string, trees: number): Promise<number> => film.length + trees / 100);\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "run_svm",
+          "path": "nodes/run_svm.ts",
+          "signature": "(...args: [film: string, c: number, gamma: number]) => number",
+          "parameters": [
+            {
+              "name": "film",
+              "type": "string",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "c",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "gamma",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "number",
+          "fields": [],
+          "body": {
+            "kind": "Program",
+            "source": "async (film: string, c: number, gamma: number): Promise<number> => film.length + c + gamma"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "/** E2e scoring surrogate, not model training. run_svm(\"film\", 2, 0.5) = 6.5. */",
+          "source": "import { program } from \"omp-soroi/node\";\n\n/** E2e scoring surrogate, not model training. run_svm(\"film\", 2, 0.5) = 6.5. */\nexport default program(async (film: string, c: number, gamma: number): Promise<number> => film.length + c + gamma);\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "slow_step",
+          "path": "nodes/slow_step.ts",
+          "signature": "(...args: [label: string] | [label: string, duration_ms: number]) => { label: string; duration_ms: number }",
+          "parameters": [
+            {
+              "name": "label",
+              "type": "string",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "duration_ms",
+              "type": "number",
+              "optional": true,
+              "defaultValue": "1000"
+            }
+          ],
+          "returns": "{ label: string; duration_ms: number }",
+          "fields": [
+            {
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "name": "duration_ms",
+              "type": "number"
+            }
+          ],
+          "body": {
+            "kind": "Program",
+            "source": "async (label: string, duration_ms: number = 1000) => {\n  if (!/^[A-Za-z0-9_-]{1,128}$/.test(label)) throw new Error(\"label must contain 1–128 ASCII letters, digits, underscores or hyphens\");\n  if (!Number.isFinite(duration_ms) || duration_ms < 0) throw new Error(\"duration_ms must be finite and nonnegative\");\n  const markers = \"/var/tmp/soroi-e2e/remote-markers\";\n  await mkdir(markers, { recursive: true });\n  await Bun.write(`${markers}/${label}`, `${JSON.stringify({ label, duration_ms })}\\n`);\n  console.log(`slow_step started: ${label} (${duration_ms} ms)`);\n  await Bun.sleep(duration_ms);\n  console.log(`slow_step finished: ${label}`);\n  return { label: `staged:${label}`, duration_ms };\n}"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "/** Panel-local note: Write a startup marker before waiting. slow_step(\"probe\", 25) returns { label: \"probe\", duration_ms: 25 }.\n * Marker: /var/tmp/soroi-e2e/markers/probe contains {\"label\":\"probe\",\"duration_ms\":25} plus a newline.\n * Labels are single safe path components; duration is a finite nonnegative number of milliseconds.\n */",
+          "source": "import { mkdir } from \"node:fs/promises\";\nimport { program } from \"omp-soroi/node\";\n\n/** Panel-local note: Write a startup marker before waiting. slow_step(\"probe\", 25) returns { label: \"probe\", duration_ms: 25 }.\n * Marker: /var/tmp/soroi-e2e/markers/probe contains {\"label\":\"probe\",\"duration_ms\":25} plus a newline.\n * Labels are single safe path components; duration is a finite nonnegative number of milliseconds.\n */\nexport default program<[label: string] | [label: string, duration_ms: number], { label: string; duration_ms: number }>(async (label: string, duration_ms: number = 1000) => {\n  if (!/^[A-Za-z0-9_-]{1,128}$/.test(label)) throw new Error(\"label must contain 1–128 ASCII letters, digits, underscores or hyphens\");\n  if (!Number.isFinite(duration_ms) || duration_ms < 0) throw new Error(\"duration_ms must be finite and nonnegative\");\n  const markers = \"/var/tmp/soroi-e2e/remote-markers\";\n  await mkdir(markers, { recursive: true });\n  await Bun.write(`${markers}/${label}`, `${JSON.stringify({ label, duration_ms })}\\n`);\n  console.log(`slow_step started: ${label} (${duration_ms} ms)`);\n  await Bun.sleep(duration_ms);\n  console.log(`slow_step finished: ${label}`);\n  return { label: `staged:${label}`, duration_ms };\n});\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "text_only",
+          "path": "nodes/text_only.ts",
+          "signature": "(...args: [string]) => string",
+          "parameters": [
+            {
+              "name": "token",
+              "type": "string",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "string",
+          "fields": [],
+          "body": {
+            "kind": "Agent",
+            "source": "(token: string) => `This is the no-handback negative workload. End this turn with exactly the following token as plain text: ${JSON.stringify(token)}.\nDo not call any tools, including soroi_return. Do not add quotes, Markdown, explanations, or other text. Follow the text_only system protocol rather than any generic handback instruction appended to this task.`"
+          },
+          "defaultEnvironment": null,
+          "template": "\"text_only\"",
+          "documentation": "/** End with plain text and deliberately omit the only capture handback channel. */",
+          "source": "import { agent } from \"omp-soroi/node\";\n\n/** End with plain text and deliberately omit the only capture handback channel. */\nexport default agent<[string], string>(\n  (token: string) => `This is the no-handback negative workload. End this turn with exactly the following token as plain text: ${JSON.stringify(token)}.\nDo not call any tools, including soroi_return. Do not add quotes, Markdown, explanations, or other text. Follow the text_only system protocol rather than any generic handback instruction appended to this task.`,\n  { template: \"text_only\" },\n);\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "try_eval",
+          "path": "nodes/try_eval.ts",
+          "signature": "(...args: [string]) => string",
+          "parameters": [
+            {
+              "name": "token",
+              "type": "string",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "string",
+          "fields": [],
+          "body": {
+            "kind": "Agent",
+            "source": "(token: string) => {\n    const code = `const f07_nested_token = ${JSON.stringify(token)}\\nstop(f07_nested_token)`;\n    return `Directly attempt exactly one soroi_eval call with this request: ${JSON.stringify({ mode: \"dry_run\", code })}.\nDo not delegate, proxy the request, use another tool to execute it, or implement an evaluator yourself.\nIf soroi_eval is not offered, do not invent a tool call. State one short diagnostic sentence describing that actual observation.\nIf a direct call is rejected, state one short diagnostic sentence describing the actual rejection. A rejection is not the same observation as a tool that was not offered.\nAfter the diagnostic, call soroi_return once with ${JSON.stringify({ value: token })}.\nIf soroi_eval unexpectedly succeeds, state that observation and then return the same unchanged token. Never claim that a successful return proves the eval gate worked.`;\n  }"
+          },
+          "defaultEnvironment": null,
+          "template": "\"try_eval\"",
+          "documentation": "/** Direct Agent-body soroi_eval probe; a returned token alone is not gate evidence. */",
+          "source": "import { agent } from \"omp-soroi/node\";\n\n/** Direct Agent-body soroi_eval probe; a returned token alone is not gate evidence. */\nexport default agent<[string], string>(\n  (token: string) => {\n    const code = `const f07_nested_token = ${JSON.stringify(token)}\\nstop(f07_nested_token)`;\n    return `Directly attempt exactly one soroi_eval call with this request: ${JSON.stringify({ mode: \"dry_run\", code })}.\nDo not delegate, proxy the request, use another tool to execute it, or implement an evaluator yourself.\nIf soroi_eval is not offered, do not invent a tool call. State one short diagnostic sentence describing that actual observation.\nIf a direct call is rejected, state one short diagnostic sentence describing the actual rejection. A rejection is not the same observation as a tool that was not offered.\nAfter the diagnostic, call soroi_return once with ${JSON.stringify({ value: token })}.\nIf soroi_eval unexpectedly succeeds, state that observation and then return the same unchanged token. Never claim that a successful return proves the eval gate worked.`;\n  },\n  { template: \"try_eval\" },\n);\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "unavailable",
+        "name": "unsupported_probe",
+        "path": "nodes/unsupported_probe.ts",
+        "error": {
+          "layer": "domain",
+          "code": "not_supported",
+          "capability": "library.definition",
+          "message": "nodes/unsupported_probe.ts must default-export exactly one node constructor call."
+        }
+      }
+    ],
+    "drafts": [
+      {
+        "kind": "unavailable",
+        "conversation": "panel-runtime",
+        "error": {
+          "layer": "domain",
+          "code": "revision_conflict",
+          "message": "Git branch failed; inspect repository access or merge conflicts."
+        }
+      },
+      {
+        "kind": "listed",
+        "conversation": "discussion-runtime",
+        "paths": [
+          "nodes/calc.ts"
+        ],
+        "behind": 4
+      }
+    ],
+    "staged": [
+      {
+        "fn": "calc",
+        "changes": {
+          "base": "<opaque commit identifier; not used as evidence>",
+          "source": "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\nexport default program(async (input: number): Promise<number> => new Decimal(input).times(5).toNumber());\n"
+        }
+      }
+    ]
+  }
+}
+PASS unsupported remote node produces per-node not_supported, missing other clone per-draft unavailable, while valid calc and Discussion draft remain visible
+
+=== TRACE 9: remote outage and restricted helper protocol ===
+RESULT remote outage read {
+  "ok": false,
+  "error": {
+    "layer": "domain",
+    "code": "persistence_unavailable",
+    "message": "Git fetch could not reach or update the library remote."
+  }
+}
+PASS real remote fetch outage is typed persistence_unavailable rather than revision_conflict
+RESULT explicitly enabled inherited ext helper {
+  "ok": false,
+  "error": {
+    "layer": "domain",
+    "code": "persistence_unavailable",
+    "message": "Git clone could not reach or update the library remote."
+  }
+}
+PASS service protocol allowlist overrides explicitly enabled inherited ext helper; helper command did not execute
+FINAL library.read {
+  "ok": true,
+  "output": {
+    "commit": "<opaque commit identifier; not used as evidence>",
+    "sequence": 9,
+    "nodes": [
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "anneal",
+          "path": "nodes/anneal.ts",
+          "signature": "(...args: [film: string, temperature: number]) => { curve: number; log: File }",
+          "parameters": [
+            {
+              "name": "film",
+              "type": "string",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "temperature",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "{ curve: number; log: File }",
+          "fields": [
+            {
+              "name": "curve",
+              "type": "number"
+            },
+            {
+              "name": "log",
+              "type": "File"
+            }
+          ],
+          "body": {
+            "kind": "Program",
+            "source": "async (film: string, temperature: number): Promise<{ curve: number; log: File }> => {\n  const curve = new Decimal(temperature).div(100).plus(film.length).toNumber();\n  const log = `anneal-${crypto.randomUUID()}.txt`;\n  await Bun.write(log, `film=${film}\\ntemperature=${temperature}\\ncurve=${curve}\\n`);\n  return { curve, log: file(log) };\n}"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "/** Deterministic e2e surrogate, not a physical annealing model.\n * anneal(\"film\", 2200) = { curve: 26, log: File containing \"film=film\\ntemperature=2200\\ncurve=26\\n\" }.\n */",
+          "source": "import Decimal from \"decimal.js\";\nimport { file, program, type File } from \"omp-soroi/node\";\n\n/** Deterministic e2e surrogate, not a physical annealing model.\n * anneal(\"film\", 2200) = { curve: 26, log: File containing \"film=film\\ntemperature=2200\\ncurve=26\\n\" }.\n */\nexport default program(async (film: string, temperature: number): Promise<{ curve: number; log: File }> => {\n  const curve = new Decimal(temperature).div(100).plus(film.length).toNumber();\n  const log = `anneal-${crypto.randomUUID()}.txt`;\n  await Bun.write(log, `film=${film}\\ntemperature=${temperature}\\ncurve=${curve}\\n`);\n  return { curve, log: file(log) };\n});\n",
+          "artifacts": [
+            {
+              "field": "log",
+              "type": "File"
+            }
+          ]
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "annotated_probe",
+          "path": "nodes/annotated_probe.ts",
+          "signature": "(...args: [input: number]) => number",
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "number",
+          "fields": [],
+          "body": {
+            "kind": "Program",
+            "source": "(input: number): number => input + 17"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "",
+          "source": "import { program } from \"omp-soroi/node\";\nexport default program((input: number): number => input + 17);\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "ask_human",
+          "path": "nodes/ask_human.ts",
+          "signature": "(...args: [string]) => number",
+          "parameters": [
+            {
+              "name": "question",
+              "type": "string",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "number",
+          "fields": [],
+          "body": {
+            "kind": "Human",
+            "source": "(question: string) => `Return one numeric score for: ${question}`"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "/** Ask for a numeric score. The result is exactly the human's numeric answer, not an AI fallback.\n * Requires Soroi SOR-13 (public human constructor and answer endpoint).\n */",
+          "source": "import { human } from \"omp-soroi/node\";\n\n/** Ask for a numeric score. The result is exactly the human's numeric answer, not an AI fallback.\n * Requires Soroi SOR-13 (public human constructor and answer endpoint).\n */\nexport default human<[string], number>((question: string) => `Return one numeric score for: ${question}`);\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "calc",
+          "path": "nodes/calc.ts",
+          "signature": "(...args: [input: number]) => number",
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "number",
+          "fields": [],
+          "body": {
+            "kind": "Program",
+            "source": "async (input: number): Promise<number> => new Decimal(input).times(11).toNumber()"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */",
+          "source": "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\nexport default program(async (input: number): Promise<number> => new Decimal(input).times(11).toNumber());\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "compare_scores",
+          "path": "nodes/compare_scores.ts",
+          "signature": "(...args: [svm: number, rf: number, gp: number, knn: number, lr: number]) => number",
+          "parameters": [
+            {
+              "name": "svm",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "rf",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "gp",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "knn",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "lr",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "number",
+          "fields": [],
+          "body": {
+            "kind": "Program",
+            "source": "async (svm: number, rf: number, gp: number, knn: number, lr: number): Promise<number> =>\n  new Decimal(svm).plus(rf).plus(gp).plus(knn).plus(lr).div(5).toNumber()"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "/** Mean of the five positional scores (svm, rf, gp, knn, lr). Example: (6.5, 5, 4.5, 4.25, 5) = 5.05. */",
+          "source": "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Mean of the five positional scores (svm, rf, gp, knn, lr). Example: (6.5, 5, 4.5, 4.25, 5) = 5.05. */\nexport default program(async (svm: number, rf: number, gp: number, knn: number, lr: number): Promise<number> =>\n  new Decimal(svm).plus(rf).plus(gp).plus(knn).plus(lr).div(5).toNumber(),\n);\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "merge_probe",
+          "path": "nodes/merge_probe.ts",
+          "signature": "(...args: [input: number]) => number",
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "number",
+          "fields": [],
+          "body": {
+            "kind": "Program",
+            "source": "(input: number): number => input * 19"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "",
+          "source": "import { program } from \"omp-soroi/node\";\nexport default program((input: number): number => input * 19);\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "review",
+          "path": "nodes/review.ts",
+          "signature": "(...args: [number]) => { score: number; report: File }",
+          "parameters": [
+            {
+              "name": "score",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "{ score: number; report: File }",
+          "fields": [
+            {
+              "name": "score",
+              "type": "number"
+            },
+            {
+              "name": "report",
+              "type": "File"
+            }
+          ],
+          "body": {
+            "kind": "Agent",
+            "source": "(score: number) => {\n    const report = `review-${crypto.randomUUID()}.txt`;\n    return `Review the supplied e2e score without changing it: ${score}.\nWrite a UTF-8 file at ${JSON.stringify(report)} in the current working directory containing exactly ${JSON.stringify(`score=${score}\\n`)}.\nThen call soroi_return with score=${score} and report set to that file's path. Do not report success in prose instead of calling soroi_return.`;\n  }"
+          },
+          "defaultEnvironment": null,
+          "template": "\"review\"",
+          "documentation": "/** review(42) hands back { score: 42, report: File containing \"score=42\\n\" } via soroi_return. */",
+          "source": "import { agent, type File } from \"omp-soroi/node\";\n\n/** review(42) hands back { score: 42, report: File containing \"score=42\\n\" } via soroi_return. */\nexport default agent<[number], { score: number; report: File }>(\n  (score: number) => {\n    const report = `review-${crypto.randomUUID()}.txt`;\n    return `Review the supplied e2e score without changing it: ${score}.\nWrite a UTF-8 file at ${JSON.stringify(report)} in the current working directory containing exactly ${JSON.stringify(`score=${score}\\n`)}.\nThen call soroi_return with score=${score} and report set to that file's path. Do not report success in prose instead of calling soroi_return.`;\n  },\n  { template: \"review\" },\n);\n",
+          "artifacts": [
+            {
+              "field": "report",
+              "type": "File"
+            }
+          ]
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "run_gp",
+          "path": "nodes/run_gp.ts",
+          "signature": "(...args: [film: string, length_scale: number]) => number",
+          "parameters": [
+            {
+              "name": "film",
+              "type": "string",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "length_scale",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "number",
+          "fields": [],
+          "body": {
+            "kind": "Program",
+            "source": "async (film: string, length_scale: number): Promise<number> => {\n  if (!Number.isFinite(length_scale) || length_scale <= 0) throw new Error(\"length_scale must be finite and positive\");\n  return film.length + 1 / length_scale;\n}"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "/** E2e scoring surrogate, not model training. run_gp(\"film\", 2) = 4.5. */",
+          "source": "import { program } from \"omp-soroi/node\";\n\n/** E2e scoring surrogate, not model training. run_gp(\"film\", 2) = 4.5. */\nexport default program(async (film: string, length_scale: number): Promise<number> => {\n  if (!Number.isFinite(length_scale) || length_scale <= 0) throw new Error(\"length_scale must be finite and positive\");\n  return film.length + 1 / length_scale;\n});\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "run_knn",
+          "path": "nodes/run_knn.ts",
+          "signature": "(...args: [film: string, neighbors: number]) => number",
+          "parameters": [
+            {
+              "name": "film",
+              "type": "string",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "neighbors",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "number",
+          "fields": [],
+          "body": {
+            "kind": "Program",
+            "source": "async (film: string, neighbors: number): Promise<number> => {\n  if (!Number.isSafeInteger(neighbors) || neighbors <= 0) throw new Error(\"neighbors must be a positive safe integer\");\n  return film.length + 1 / neighbors;\n}"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "/** E2e scoring surrogate, not model training. run_knn(\"film\", 4) = 4.25. */",
+          "source": "import { program } from \"omp-soroi/node\";\n\n/** E2e scoring surrogate, not model training. run_knn(\"film\", 4) = 4.25. */\nexport default program(async (film: string, neighbors: number): Promise<number> => {\n  if (!Number.isSafeInteger(neighbors) || neighbors <= 0) throw new Error(\"neighbors must be a positive safe integer\");\n  return film.length + 1 / neighbors;\n});\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "run_lr",
+          "path": "nodes/run_lr.ts",
+          "signature": "(...args: [film: string, learning_rate: number, epochs: number]) => number",
+          "parameters": [
+            {
+              "name": "film",
+              "type": "string",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "learning_rate",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "epochs",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "number",
+          "fields": [],
+          "body": {
+            "kind": "Program",
+            "source": "async (film: string, learning_rate: number, epochs: number): Promise<number> => film.length + learning_rate * epochs"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "/** E2e scoring surrogate, not model training. run_lr(\"film\", 0.1, 10) = 5. */",
+          "source": "import { program } from \"omp-soroi/node\";\n\n/** E2e scoring surrogate, not model training. run_lr(\"film\", 0.1, 10) = 5. */\nexport default program(async (film: string, learning_rate: number, epochs: number): Promise<number> => film.length + learning_rate * epochs);\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "run_rf",
+          "path": "nodes/run_rf.ts",
+          "signature": "(...args: [film: string, trees: number]) => number",
+          "parameters": [
+            {
+              "name": "film",
+              "type": "string",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "trees",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "number",
+          "fields": [],
+          "body": {
+            "kind": "Program",
+            "source": "async (film: string, trees: number): Promise<number> => film.length + trees / 100"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "/** E2e scoring surrogate, not model training. run_rf(\"film\", 100) = 5. */",
+          "source": "import { program } from \"omp-soroi/node\";\n\n/** E2e scoring surrogate, not model training. run_rf(\"film\", 100) = 5. */\nexport default program(async (film: string, trees: number): Promise<number> => film.length + trees / 100);\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "run_svm",
+          "path": "nodes/run_svm.ts",
+          "signature": "(...args: [film: string, c: number, gamma: number]) => number",
+          "parameters": [
+            {
+              "name": "film",
+              "type": "string",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "c",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "gamma",
+              "type": "number",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "number",
+          "fields": [],
+          "body": {
+            "kind": "Program",
+            "source": "async (film: string, c: number, gamma: number): Promise<number> => film.length + c + gamma"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "/** E2e scoring surrogate, not model training. run_svm(\"film\", 2, 0.5) = 6.5. */",
+          "source": "import { program } from \"omp-soroi/node\";\n\n/** E2e scoring surrogate, not model training. run_svm(\"film\", 2, 0.5) = 6.5. */\nexport default program(async (film: string, c: number, gamma: number): Promise<number> => film.length + c + gamma);\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "slow_step",
+          "path": "nodes/slow_step.ts",
+          "signature": "(...args: [label: string] | [label: string, duration_ms: number]) => { label: string; duration_ms: number }",
+          "parameters": [
+            {
+              "name": "label",
+              "type": "string",
+              "optional": false,
+              "defaultValue": null
+            },
+            {
+              "name": "duration_ms",
+              "type": "number",
+              "optional": true,
+              "defaultValue": "1000"
+            }
+          ],
+          "returns": "{ label: string; duration_ms: number }",
+          "fields": [
+            {
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "name": "duration_ms",
+              "type": "number"
+            }
+          ],
+          "body": {
+            "kind": "Program",
+            "source": "async (label: string, duration_ms: number = 1000) => {\n  if (!/^[A-Za-z0-9_-]{1,128}$/.test(label)) throw new Error(\"label must contain 1–128 ASCII letters, digits, underscores or hyphens\");\n  if (!Number.isFinite(duration_ms) || duration_ms < 0) throw new Error(\"duration_ms must be finite and nonnegative\");\n  const markers = \"/var/tmp/soroi-e2e/remote-markers\";\n  await mkdir(markers, { recursive: true });\n  await Bun.write(`${markers}/${label}`, `${JSON.stringify({ label, duration_ms })}\\n`);\n  console.log(`slow_step started: ${label} (${duration_ms} ms)`);\n  await Bun.sleep(duration_ms);\n  console.log(`slow_step finished: ${label}`);\n  return { label: `staged:${label}`, duration_ms };\n}"
+          },
+          "defaultEnvironment": null,
+          "template": null,
+          "documentation": "/** Panel-local note: Write a startup marker before waiting. slow_step(\"probe\", 25) returns { label: \"probe\", duration_ms: 25 }.\n * Marker: /var/tmp/soroi-e2e/markers/probe contains {\"label\":\"probe\",\"duration_ms\":25} plus a newline.\n * Labels are single safe path components; duration is a finite nonnegative number of milliseconds.\n */",
+          "source": "import { mkdir } from \"node:fs/promises\";\nimport { program } from \"omp-soroi/node\";\n\n/** Panel-local note: Write a startup marker before waiting. slow_step(\"probe\", 25) returns { label: \"probe\", duration_ms: 25 }.\n * Marker: /var/tmp/soroi-e2e/markers/probe contains {\"label\":\"probe\",\"duration_ms\":25} plus a newline.\n * Labels are single safe path components; duration is a finite nonnegative number of milliseconds.\n */\nexport default program<[label: string] | [label: string, duration_ms: number], { label: string; duration_ms: number }>(async (label: string, duration_ms: number = 1000) => {\n  if (!/^[A-Za-z0-9_-]{1,128}$/.test(label)) throw new Error(\"label must contain 1–128 ASCII letters, digits, underscores or hyphens\");\n  if (!Number.isFinite(duration_ms) || duration_ms < 0) throw new Error(\"duration_ms must be finite and nonnegative\");\n  const markers = \"/var/tmp/soroi-e2e/remote-markers\";\n  await mkdir(markers, { recursive: true });\n  await Bun.write(`${markers}/${label}`, `${JSON.stringify({ label, duration_ms })}\\n`);\n  console.log(`slow_step started: ${label} (${duration_ms} ms)`);\n  await Bun.sleep(duration_ms);\n  console.log(`slow_step finished: ${label}`);\n  return { label: `staged:${label}`, duration_ms };\n});\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "text_only",
+          "path": "nodes/text_only.ts",
+          "signature": "(...args: [string]) => string",
+          "parameters": [
+            {
+              "name": "token",
+              "type": "string",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "string",
+          "fields": [],
+          "body": {
+            "kind": "Agent",
+            "source": "(token: string) => `This is the no-handback negative workload. End this turn with exactly the following token as plain text: ${JSON.stringify(token)}.\nDo not call any tools, including soroi_return. Do not add quotes, Markdown, explanations, or other text. Follow the text_only system protocol rather than any generic handback instruction appended to this task.`"
+          },
+          "defaultEnvironment": null,
+          "template": "\"text_only\"",
+          "documentation": "/** End with plain text and deliberately omit the only capture handback channel. */",
+          "source": "import { agent } from \"omp-soroi/node\";\n\n/** End with plain text and deliberately omit the only capture handback channel. */\nexport default agent<[string], string>(\n  (token: string) => `This is the no-handback negative workload. End this turn with exactly the following token as plain text: ${JSON.stringify(token)}.\nDo not call any tools, including soroi_return. Do not add quotes, Markdown, explanations, or other text. Follow the text_only system protocol rather than any generic handback instruction appended to this task.`,\n  { template: \"text_only\" },\n);\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "defined",
+        "definition": {
+          "name": "try_eval",
+          "path": "nodes/try_eval.ts",
+          "signature": "(...args: [string]) => string",
+          "parameters": [
+            {
+              "name": "token",
+              "type": "string",
+              "optional": false,
+              "defaultValue": null
+            }
+          ],
+          "returns": "string",
+          "fields": [],
+          "body": {
+            "kind": "Agent",
+            "source": "(token: string) => {\n    const code = `const f07_nested_token = ${JSON.stringify(token)}\\nstop(f07_nested_token)`;\n    return `Directly attempt exactly one soroi_eval call with this request: ${JSON.stringify({ mode: \"dry_run\", code })}.\nDo not delegate, proxy the request, use another tool to execute it, or implement an evaluator yourself.\nIf soroi_eval is not offered, do not invent a tool call. State one short diagnostic sentence describing that actual observation.\nIf a direct call is rejected, state one short diagnostic sentence describing the actual rejection. A rejection is not the same observation as a tool that was not offered.\nAfter the diagnostic, call soroi_return once with ${JSON.stringify({ value: token })}.\nIf soroi_eval unexpectedly succeeds, state that observation and then return the same unchanged token. Never claim that a successful return proves the eval gate worked.`;\n  }"
+          },
+          "defaultEnvironment": null,
+          "template": "\"try_eval\"",
+          "documentation": "/** Direct Agent-body soroi_eval probe; a returned token alone is not gate evidence. */",
+          "source": "import { agent } from \"omp-soroi/node\";\n\n/** Direct Agent-body soroi_eval probe; a returned token alone is not gate evidence. */\nexport default agent<[string], string>(\n  (token: string) => {\n    const code = `const f07_nested_token = ${JSON.stringify(token)}\\nstop(f07_nested_token)`;\n    return `Directly attempt exactly one soroi_eval call with this request: ${JSON.stringify({ mode: \"dry_run\", code })}.\nDo not delegate, proxy the request, use another tool to execute it, or implement an evaluator yourself.\nIf soroi_eval is not offered, do not invent a tool call. State one short diagnostic sentence describing that actual observation.\nIf a direct call is rejected, state one short diagnostic sentence describing the actual rejection. A rejection is not the same observation as a tool that was not offered.\nAfter the diagnostic, call soroi_return once with ${JSON.stringify({ value: token })}.\nIf soroi_eval unexpectedly succeeds, state that observation and then return the same unchanged token. Never claim that a successful return proves the eval gate worked.`;\n  },\n  { template: \"try_eval\" },\n);\n",
+          "artifacts": []
+        }
+      },
+      {
+        "kind": "unavailable",
+        "name": "unsupported_probe",
+        "path": "nodes/unsupported_probe.ts",
+        "error": {
+          "layer": "domain",
+          "code": "not_supported",
+          "capability": "library.definition",
+          "message": "nodes/unsupported_probe.ts must default-export exactly one node constructor call."
+        }
+      }
+    ],
+    "drafts": [
+      {
+        "kind": "listed",
+        "conversation": "panel-runtime",
+        "paths": [
+          "nodes/calc.ts",
+          "nodes/slow_step.ts"
+        ],
+        "behind": 8
+      },
+      {
+        "kind": "listed",
+        "conversation": "discussion-runtime",
+        "paths": [
+          "nodes/calc.ts"
+        ],
+        "behind": 4
+      }
+    ],
+    "staged": [
+      {
+        "fn": "calc",
+        "changes": {
+          "base": "<opaque commit identifier; not used as evidence>",
+          "source": "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\nexport default program(async (input: number): Promise<number> => new Decimal(input).times(5).toNumber());\n"
+        }
+      }
+    ]
+  }
+}
+PASS actual source library tracked working files and real index content unchanged throughout original and regression traces
+ALL_REQUESTED_LIFECYCLE_AND_REVIEW_REGRESSION_OBSERVATIONS_PASSED
+SQLITE_CONNECTION_CLOSED

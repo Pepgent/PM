@@ -1,0 +1,1240 @@
+{
+  "observations": [
+    "Anonymous node-library navigation rendered the real sign-in form with safe returnTo.",
+    "Actual email/password form login returned to the rendered node-library fixture; official session exists.",
+    "Definitions match all actual Git node sources; current explicit membership permits the requested Lab and rejects another Lab.",
+    "Browser transport preserved exact authority counts/states and historical record, without inventing a sequence for an absent source commit.",
+    "Browser stage persisted an intent without changing Git; browser apply committed/pushed selected calc, refreshed central and cleared only its intent.",
+    "Reload retained the session and committed definition; official sign-out revoked both new RPC endpoints and redirected the document to sign-in."
+  ],
+  "events": [
+    {
+      "label": "anonymous-library-read-raw",
+      "http": 401,
+      "type": "application/json",
+      "body": "{\"ok\":false,\"error\":{\"layer\":\"auth\",\"code\":\"unauthenticated\",\"message\":\"A Lab session is required.\"}}"
+    },
+    {
+      "label": "anonymous-library-read",
+      "http": 401,
+      "body": {
+        "ok": false,
+        "error": {
+          "layer": "auth",
+          "code": "unauthenticated",
+          "message": "A Lab session is required."
+        }
+      }
+    },
+    {
+      "label": "real-form-sign-in-and-render",
+      "url": "http://127.0.0.1:61630/experiments/nodes",
+      "session": {
+        "status": 200,
+        "authenticated": true,
+        "activeOrganizationId": null
+      }
+    },
+    {
+      "label": "member-library-definitions-raw",
+      "http": 200,
+      "type": "application/json",
+      "body": "{\"t\":10,\"i\":0,\"p\":{\"k\":[\"result\",\"error\",\"context\"],\"v\":[{\"t\":10,\"i\":1,\"p\":{\"k\":[\"ok\",\"output\"],\"v\":[{\"t\":2,\"s\":2},{\"t\":10,\"i\":2,\"p\":{\"k\":[\"kind\",\"snapshot\"],\"v\":[{\"t\":1,\"s\":\"definitions\"},{\"t\":10,\"i\":3,\"p\":{\"k\":[\"commit\",\"sequence\",\"nodes\",\"drafts\",\"staged\"],\"v\":[{\"t\":1,\"s\":\"0a2da95df801239c01c82bde8f77b4e7e0331005\"},{\"t\":0,\"s\":7},{\"t\":9,\"i\":4,\"a\":[{\"t\":10,\"i\":5,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":6,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"anneal\"},{\"t\":1,\"s\":\"nodes/anneal.ts\"},{\"t\":1,\"s\":\"(...args: [film: string, temperature: number]) => { curve: number; log: File }\"},{\"t\":9,\"i\":7,\"a\":[{\"t\":10,\"i\":8,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"film\"},{\"t\":1,\"s\":\"string\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":9,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"temperature\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"{ curve: number; log: File }\"},{\"t\":9,\"i\":10,\"a\":[{\"t\":10,\"i\":11,\"p\":{\"k\":[\"name\",\"type\"],\"v\":[{\"t\":1,\"s\":\"curve\"},{\"t\":1,\"s\":\"number\"}]},\"o\":0},{\"t\":10,\"i\":12,\"p\":{\"k\":[\"name\",\"type\"],\"v\":[{\"t\":1,\"s\":\"log\"},{\"t\":1,\"s\":\"File\"}]},\"o\":0}],\"o\":0},{\"t\":10,\"i\":13,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Program\"},{\"t\":1,\"s\":\"async (film: string, temperature: number): Promise\\\\x3C{ curve: number; log: File }> => {\\\\n  const curve = new Decimal(temperature).div(100).plus(film.length).toNumber();\\\\n  const log = `anneal-${crypto.randomUUID()}.txt`;\\\\n  await Bun.write(log, `film=${film}\\\\\\\\ntemperature=${temperature}\\\\\\\\ncurve=${curve}\\\\\\\\n`);\\\\n  return { curve, log: file(log) };\\\\n}\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"/** Deterministic e2e surrogate, not a physical annealing model.\\\\n * anneal(\\\\\\\"film\\\\\\\", 2200) = { curve: 26, log: File containing \\\\\\\"film=film\\\\\\\\ntemperature=2200\\\\\\\\ncurve=26\\\\\\\\n\\\\\\\" }.\\\\n */\"},{\"t\":1,\"s\":\"import Decimal from \\\\\\\"decimal.js\\\\\\\";\\\\nimport { file, program, type File } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** Deterministic e2e surrogate, not a physical annealing model.\\\\n * anneal(\\\\\\\"film\\\\\\\", 2200) = { curve: 26, log: File containing \\\\\\\"film=film\\\\\\\\ntemperature=2200\\\\\\\\ncurve=26\\\\\\\\n\\\\\\\" }.\\\\n */\\\\nexport default program(async (film: string, temperature: number): Promise\\\\x3C{ curve: number; log: File }> => {\\\\n  const curve = new Decimal(temperature).div(100).plus(film.length).toNumber();\\\\n  const log = `anneal-${crypto.randomUUID()}.txt`;\\\\n  await Bun.write(log, `film=${film}\\\\\\\\ntemperature=${temperature}\\\\\\\\ncurve=${curve}\\\\\\\\n`);\\\\n  return { curve, log: file(log) };\\\\n});\\\\n\"},{\"t\":9,\"i\":14,\"a\":[{\"t\":10,\"i\":15,\"p\":{\"k\":[\"field\",\"type\"],\"v\":[{\"t\":1,\"s\":\"log\"},{\"t\":1,\"s\":\"File\"}]},\"o\":0}],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":16,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":17,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"ask_human\"},{\"t\":1,\"s\":\"nodes/ask_human.ts\"},{\"t\":1,\"s\":\"(...args: [string]) => number\"},{\"t\":9,\"i\":18,\"a\":[{\"t\":10,\"i\":19,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"question\"},{\"t\":1,\"s\":\"string\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"number\"},{\"t\":9,\"i\":20,\"a\":[],\"o\":0},{\"t\":10,\"i\":21,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Human\"},{\"t\":1,\"s\":\"(question: string) => `Return one numeric score for: ${question}`\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"/** Ask for a numeric score. The result is exactly the human's numeric answer, not an AI fallback.\\\\n * Requires Soroi SOR-13 (public human constructor and answer endpoint).\\\\n */\"},{\"t\":1,\"s\":\"import { human } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** Ask for a numeric score. The result is exactly the human's numeric answer, not an AI fallback.\\\\n * Requires Soroi SOR-13 (public human constructor and answer endpoint).\\\\n */\\\\nexport default human\\\\x3C[string], number>((question: string) => `Return one numeric score for: ${question}`);\\\\n\"},{\"t\":9,\"i\":22,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":23,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":24,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"calc\"},{\"t\":1,\"s\":\"nodes/calc.ts\"},{\"t\":1,\"s\":\"(...args: [input: number]) => number\"},{\"t\":9,\"i\":25,\"a\":[{\"t\":10,\"i\":26,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"input\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"number\"},{\"t\":9,\"i\":27,\"a\":[],\"o\":0},{\"t\":10,\"i\":28,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Program\"},{\"t\":1,\"s\":\"async (input: number): Promise\\\\x3Cnumber> => new Decimal(input).times(2).toNumber()\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\"},{\"t\":1,\"s\":\"import Decimal from \\\\\\\"decimal.js\\\\\\\";\\\\nimport { program } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\\\\nexport default program(async (input: number): Promise\\\\x3Cnumber> => new Decimal(input).times(2).toNumber());\\\\n\"},{\"t\":9,\"i\":29,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":30,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":31,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"compare_scores\"},{\"t\":1,\"s\":\"nodes/compare_scores.ts\"},{\"t\":1,\"s\":\"(...args: [svm: number, rf: number, gp: number, knn: number, lr: number]) => number\"},{\"t\":9,\"i\":32,\"a\":[{\"t\":10,\"i\":33,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"svm\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":34,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"rf\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":35,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"gp\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":36,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"knn\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":37,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"lr\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"number\"},{\"t\":9,\"i\":38,\"a\":[],\"o\":0},{\"t\":10,\"i\":39,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Program\"},{\"t\":1,\"s\":\"async (svm: number, rf: number, gp: number, knn: number, lr: number): Promise\\\\x3Cnumber> =>\\\\n  new Decimal(svm).plus(rf).plus(gp).plus(knn).plus(lr).div(5).toNumber()\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"/** Mean of the five positional scores (svm, rf, gp, knn, lr). Example: (6.5, 5, 4.5, 4.25, 5) = 5.05. */\"},{\"t\":1,\"s\":\"import Decimal from \\\\\\\"decimal.js\\\\\\\";\\\\nimport { program } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** Mean of the five positional scores (svm, rf, gp, knn, lr). Example: (6.5, 5, 4.5, 4.25, 5) = 5.05. */\\\\nexport default program(async (svm: number, rf: number, gp: number, knn: number, lr: number): Promise\\\\x3Cnumber> =>\\\\n  new Decimal(svm).plus(rf).plus(gp).plus(knn).plus(lr).div(5).toNumber(),\\\\n);\\\\n\"},{\"t\":9,\"i\":40,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":41,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":42,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"review\"},{\"t\":1,\"s\":\"nodes/review.ts\"},{\"t\":1,\"s\":\"(...args: [number]) => { score: number; report: File }\"},{\"t\":9,\"i\":43,\"a\":[{\"t\":10,\"i\":44,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"score\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"{ score: number; report: File }\"},{\"t\":9,\"i\":45,\"a\":[{\"t\":10,\"i\":46,\"p\":{\"k\":[\"name\",\"type\"],\"v\":[{\"t\":1,\"s\":\"score\"},{\"t\":1,\"s\":\"number\"}]},\"o\":0},{\"t\":10,\"i\":47,\"p\":{\"k\":[\"name\",\"type\"],\"v\":[{\"t\":1,\"s\":\"report\"},{\"t\":1,\"s\":\"File\"}]},\"o\":0}],\"o\":0},{\"t\":10,\"i\":48,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Agent\"},{\"t\":1,\"s\":\"(score: number) => {\\\\n    const report = `review-${crypto.randomUUID()}.txt`;\\\\n    return `Review the supplied e2e score without changing it: ${score}.\\\\nWrite a UTF-8 file at ${JSON.stringify(report)} in the current working directory containing exactly ${JSON.stringify(`score=${score}\\\\\\\\n`)}.\\\\nThen call soroi_return with score=${score} and report set to that file's path. Do not report success in prose instead of calling soroi_return.`;\\\\n  }\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"\\\\\\\"review\\\\\\\"\"},{\"t\":1,\"s\":\"/** review(42) hands back { score: 42, report: File containing \\\\\\\"score=42\\\\\\\\n\\\\\\\" } via soroi_return. */\"},{\"t\":1,\"s\":\"import { agent, type File } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** review(42) hands back { score: 42, report: File containing \\\\\\\"score=42\\\\\\\\n\\\\\\\" } via soroi_return. */\\\\nexport default agent\\\\x3C[number], { score: number; report: File }>(\\\\n  (score: number) => {\\\\n    const report = `review-${crypto.randomUUID()}.txt`;\\\\n    return `Review the supplied e2e score without changing it: ${score}.\\\\nWrite a UTF-8 file at ${JSON.stringify(report)} in the current working directory containing exactly ${JSON.stringify(`score=${score}\\\\\\\\n`)}.\\\\nThen call soroi_return with score=${score} and report set to that file's path. Do not report success in prose instead of calling soroi_return.`;\\\\n  },\\\\n  { template: \\\\\\\"review\\\\\\\" },\\\\n);\\\\n\"},{\"t\":9,\"i\":49,\"a\":[{\"t\":10,\"i\":50,\"p\":{\"k\":[\"field\",\"type\"],\"v\":[{\"t\":1,\"s\":\"report\"},{\"t\":1,\"s\":\"File\"}]},\"o\":0}],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":51,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":52,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"run_gp\"},{\"t\":1,\"s\":\"nodes/run_gp.ts\"},{\"t\":1,\"s\":\"(...args: [film: string, length_scale: number]) => number\"},{\"t\":9,\"i\":53,\"a\":[{\"t\":10,\"i\":54,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"film\"},{\"t\":1,\"s\":\"string\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":55,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"length_scale\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"number\"},{\"t\":9,\"i\":56,\"a\":[],\"o\":0},{\"t\":10,\"i\":57,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Program\"},{\"t\":1,\"s\":\"async (film: string, length_scale: number): Promise\\\\x3Cnumber> => {\\\\n  if (!Number.isFinite(length_scale) || length_scale \\\\x3C= 0) throw new Error(\\\\\\\"length_scale must be finite and positive\\\\\\\");\\\\n  return film.length + 1 / length_scale;\\\\n}\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"/** E2e scoring surrogate, not model training. run_gp(\\\\\\\"film\\\\\\\", 2) = 4.5. */\"},{\"t\":1,\"s\":\"import { program } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** E2e scoring surrogate, not model training. run_gp(\\\\\\\"film\\\\\\\", 2) = 4.5. */\\\\nexport default program(async (film: string, length_scale: number): Promise\\\\x3Cnumber> => {\\\\n  if (!Number.isFinite(length_scale) || length_scale \\\\x3C= 0) throw new Error(\\\\\\\"length_scale must be finite and positive\\\\\\\");\\\\n  return film.length + 1 / length_scale;\\\\n});\\\\n\"},{\"t\":9,\"i\":58,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":59,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":60,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"run_knn\"},{\"t\":1,\"s\":\"nodes/run_knn.ts\"},{\"t\":1,\"s\":\"(...args: [film: string, neighbors: number]) => number\"},{\"t\":9,\"i\":61,\"a\":[{\"t\":10,\"i\":62,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"film\"},{\"t\":1,\"s\":\"string\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":63,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"neighbors\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"number\"},{\"t\":9,\"i\":64,\"a\":[],\"o\":0},{\"t\":10,\"i\":65,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Program\"},{\"t\":1,\"s\":\"async (film: string, neighbors: number): Promise\\\\x3Cnumber> => {\\\\n  if (!Number.isSafeInteger(neighbors) || neighbors \\\\x3C= 0) throw new Error(\\\\\\\"neighbors must be a positive safe integer\\\\\\\");\\\\n  return film.length + 1 / neighbors;\\\\n}\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"/** E2e scoring surrogate, not model training. run_knn(\\\\\\\"film\\\\\\\", 4) = 4.25. */\"},{\"t\":1,\"s\":\"import { program } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** E2e scoring surrogate, not model training. run_knn(\\\\\\\"film\\\\\\\", 4) = 4.25. */\\\\nexport default program(async (film: string, neighbors: number): Promise\\\\x3Cnumber> => {\\\\n  if (!Number.isSafeInteger(neighbors) || neighbors \\\\x3C= 0) throw new Error(\\\\\\\"neighbors must be a positive safe integer\\\\\\\");\\\\n  return film.length + 1 / neighbors;\\\\n});\\\\n\"},{\"t\":9,\"i\":66,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":67,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":68,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"run_lr\"},{\"t\":1,\"s\":\"nodes/run_lr.ts\"},{\"t\":1,\"s\":\"(...args: [film: string, learning_rate: number, epochs: number]) => number\"},{\"t\":9,\"i\":69,\"a\":[{\"t\":10,\"i\":70,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"film\"},{\"t\":1,\"s\":\"string\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":71,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"learning_rate\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":72,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"epochs\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"number\"},{\"t\":9,\"i\":73,\"a\":[],\"o\":0},{\"t\":10,\"i\":74,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Program\"},{\"t\":1,\"s\":\"async (film: string, learning_rate: number, epochs: number): Promise\\\\x3Cnumber> => film.length + learning_rate * epochs\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"/** E2e scoring surrogate, not model training. run_lr(\\\\\\\"film\\\\\\\", 0.1, 10) = 5. */\"},{\"t\":1,\"s\":\"import { program } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** E2e scoring surrogate, not model training. run_lr(\\\\\\\"film\\\\\\\", 0.1, 10) = 5. */\\\\nexport default program(async (film: string, learning_rate: number, epochs: number): Promise\\\\x3Cnumber> => film.length + learning_rate * epochs);\\\\n\"},{\"t\":9,\"i\":75,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":76,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":77,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"run_rf\"},{\"t\":1,\"s\":\"nodes/run_rf.ts\"},{\"t\":1,\"s\":\"(...args: [film: string, trees: number]) => number\"},{\"t\":9,\"i\":78,\"a\":[{\"t\":10,\"i\":79,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"film\"},{\"t\":1,\"s\":\"string\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":80,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"trees\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"number\"},{\"t\":9,\"i\":81,\"a\":[],\"o\":0},{\"t\":10,\"i\":82,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Program\"},{\"t\":1,\"s\":\"async (film: string, trees: number): Promise\\\\x3Cnumber> => film.length + trees / 100\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"/** E2e scoring surrogate, not model training. run_rf(\\\\\\\"film\\\\\\\", 100) = 5. */\"},{\"t\":1,\"s\":\"import { program } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** E2e scoring surrogate, not model training. run_rf(\\\\\\\"film\\\\\\\", 100) = 5. */\\\\nexport default program(async (film: string, trees: number): Promise\\\\x3Cnumber> => film.length + trees / 100);\\\\n\"},{\"t\":9,\"i\":83,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":84,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":85,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"run_svm\"},{\"t\":1,\"s\":\"nodes/run_svm.ts\"},{\"t\":1,\"s\":\"(...args: [film: string, c: number, gamma: number]) => number\"},{\"t\":9,\"i\":86,\"a\":[{\"t\":10,\"i\":87,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"film\"},{\"t\":1,\"s\":\"string\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":88,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"c\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":89,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"gamma\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"number\"},{\"t\":9,\"i\":90,\"a\":[],\"o\":0},{\"t\":10,\"i\":91,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Program\"},{\"t\":1,\"s\":\"async (film: string, c: number, gamma: number): Promise\\\\x3Cnumber> => film.length + c + gamma\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"/** E2e scoring surrogate, not model training. run_svm(\\\\\\\"film\\\\\\\", 2, 0.5) = 6.5. */\"},{\"t\":1,\"s\":\"import { program } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** E2e scoring surrogate, not model training. run_svm(\\\\\\\"film\\\\\\\", 2, 0.5) = 6.5. */\\\\nexport default program(async (film: string, c: number, gamma: number): Promise\\\\x3Cnumber> => film.length + c + gamma);\\\\n\"},{\"t\":9,\"i\":92,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":93,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":94,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"slow_step\"},{\"t\":1,\"s\":\"nodes/slow_step.ts\"},{\"t\":1,\"s\":\"(...args: [label: string] | [label: string, duration_ms: number]) => { label: string; duration_ms: number }\"},{\"t\":9,\"i\":95,\"a\":[{\"t\":10,\"i\":96,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"label\"},{\"t\":1,\"s\":\"string\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":97,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"duration_ms\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":2},{\"t\":1,\"s\":\"1000\"}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"{ label: string; duration_ms: number }\"},{\"t\":9,\"i\":98,\"a\":[{\"t\":10,\"i\":99,\"p\":{\"k\":[\"name\",\"type\"],\"v\":[{\"t\":1,\"s\":\"label\"},{\"t\":1,\"s\":\"string\"}]},\"o\":0},{\"t\":10,\"i\":100,\"p\":{\"k\":[\"name\",\"type\"],\"v\":[{\"t\":1,\"s\":\"duration_ms\"},{\"t\":1,\"s\":\"number\"}]},\"o\":0}],\"o\":0},{\"t\":10,\"i\":101,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Program\"},{\"t\":1,\"s\":\"async (label: string, duration_ms: number = 1000) => {\\\\n  if (!/^[A-Za-z0-9_-]{1,128}$/.test(label)) throw new Error(\\\\\\\"label must contain 1–128 ASCII letters, digits, underscores or hyphens\\\\\\\");\\\\n  if (!Number.isFinite(duration_ms) || duration_ms \\\\x3C 0) throw new Error(\\\\\\\"duration_ms must be finite and nonnegative\\\\\\\");\\\\n  const markers = \\\\\\\"/var/tmp/soroi-e2e/markers\\\\\\\";\\\\n  await mkdir(markers, { recursive: true });\\\\n  await Bun.write(`${markers}/${label}`, `${JSON.stringify({ label, duration_ms })}\\\\\\\\n`);\\\\n  console.log(`slow_step started: ${label} (${duration_ms} ms)`);\\\\n  await Bun.sleep(duration_ms);\\\\n  console.log(`slow_step finished: ${label}`);\\\\n  return { label, duration_ms };\\\\n}\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"/** Write a startup marker before waiting. slow_step(\\\\\\\"probe\\\\\\\", 25) returns { label: \\\\\\\"probe\\\\\\\", duration_ms: 25 }.\\\\n * Marker: /var/tmp/soroi-e2e/markers/probe contains {\\\\\\\"label\\\\\\\":\\\\\\\"probe\\\\\\\",\\\\\\\"duration_ms\\\\\\\":25} plus a newline.\\\\n * Labels are single safe path components; duration is a finite nonnegative number of milliseconds.\\\\n */\"},{\"t\":1,\"s\":\"import { mkdir } from \\\\\\\"node:fs/promises\\\\\\\";\\\\nimport { program } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** Write a startup marker before waiting. slow_step(\\\\\\\"probe\\\\\\\", 25) returns { label: \\\\\\\"probe\\\\\\\", duration_ms: 25 }.\\\\n * Marker: /var/tmp/soroi-e2e/markers/probe contains {\\\\\\\"label\\\\\\\":\\\\\\\"probe\\\\\\\",\\\\\\\"duration_ms\\\\\\\":25} plus a newline.\\\\n * Labels are single safe path components; duration is a finite nonnegative number of milliseconds.\\\\n */\\\\nexport default program\\\\x3C[label: string] | [label: string, duration_ms: number], { label: string; duration_ms: number }>(async (label: string, duration_ms: number = 1000) => {\\\\n  if (!/^[A-Za-z0-9_-]{1,128}$/.test(label)) throw new Error(\\\\\\\"label must contain 1–128 ASCII letters, digits, underscores or hyphens\\\\\\\");\\\\n  if (!Number.isFinite(duration_ms) || duration_ms \\\\x3C 0) throw new Error(\\\\\\\"duration_ms must be finite and nonnegative\\\\\\\");\\\\n  const markers = \\\\\\\"/var/tmp/soroi-e2e/markers\\\\\\\";\\\\n  await mkdir(markers, { recursive: true });\\\\n  await Bun.write(`${markers}/${label}`, `${JSON.stringify({ label, duration_ms })}\\\\\\\\n`);\\\\n  console.log(`slow_step started: ${label} (${duration_ms} ms)`);\\\\n  await Bun.sleep(duration_ms);\\\\n  console.log(`slow_step finished: ${label}`);\\\\n  return { label, duration_ms };\\\\n});\\\\n\"},{\"t\":9,\"i\":102,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":103,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":104,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"text_only\"},{\"t\":1,\"s\":\"nodes/text_only.ts\"},{\"t\":1,\"s\":\"(...args: [string]) => string\"},{\"t\":9,\"i\":105,\"a\":[{\"t\":10,\"i\":106,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"token\"},{\"t\":1,\"s\":\"string\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"string\"},{\"t\":9,\"i\":107,\"a\":[],\"o\":0},{\"t\":10,\"i\":108,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Agent\"},{\"t\":1,\"s\":\"(token: string) => `This is the no-handback negative workload. End this turn with exactly the following token as plain text: ${JSON.stringify(token)}.\\\\nDo not call any tools, including soroi_return. Do not add quotes, Markdown, explanations, or other text. Follow the text_only system protocol rather than any generic handback instruction appended to this task.`\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"\\\\\\\"text_only\\\\\\\"\"},{\"t\":1,\"s\":\"/** End with plain text and deliberately omit the only capture handback channel. */\"},{\"t\":1,\"s\":\"import { agent } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** End with plain text and deliberately omit the only capture handback channel. */\\\\nexport default agent\\\\x3C[string], string>(\\\\n  (token: string) => `This is the no-handback negative workload. End this turn with exactly the following token as plain text: ${JSON.stringify(token)}.\\\\nDo not call any tools, including soroi_return. Do not add quotes, Markdown, explanations, or other text. Follow the text_only system protocol rather than any generic handback instruction appended to this task.`,\\\\n  { template: \\\\\\\"text_only\\\\\\\" },\\\\n);\\\\n\"},{\"t\":9,\"i\":109,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":110,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":111,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"try_eval\"},{\"t\":1,\"s\":\"nodes/try_eval.ts\"},{\"t\":1,\"s\":\"(...args: [string]) => string\"},{\"t\":9,\"i\":112,\"a\":[{\"t\":10,\"i\":113,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"token\"},{\"t\":1,\"s\":\"string\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"string\"},{\"t\":9,\"i\":114,\"a\":[],\"o\":0},{\"t\":10,\"i\":115,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Agent\"},{\"t\":1,\"s\":\"(token: string) => {\\\\n    const code = `const f07_nested_token = ${JSON.stringify(token)}\\\\\\\\nstop(f07_nested_token)`;\\\\n    return `Directly attempt exactly one soroi_eval call with this request: ${JSON.stringify({ mode: \\\\\\\"dry_run\\\\\\\", code })}.\\\\nDo not delegate, proxy the request, use another tool to execute it, or implement an evaluator yourself.\\\\nIf soroi_eval is not offered, do not invent a tool call. State one short diagnostic sentence describing that actual observation.\\\\nIf a direct call is rejected, state one short diagnostic sentence describing the actual rejection. A rejection is not the same observation as a tool that was not offered.\\\\nAfter the diagnostic, call soroi_return once with ${JSON.stringify({ value: token })}.\\\\nIf soroi_eval unexpectedly succeeds, state that observation and then return the same unchanged token. Never claim that a successful return proves the eval gate worked.`;\\\\n  }\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"\\\\\\\"try_eval\\\\\\\"\"},{\"t\":1,\"s\":\"/** Direct Agent-body soroi_eval probe; a returned token alone is not gate evidence. */\"},{\"t\":1,\"s\":\"import { agent } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** Direct Agent-body soroi_eval probe; a returned token alone is not gate evidence. */\\\\nexport default agent\\\\x3C[string], string>(\\\\n  (token: string) => {\\\\n    const code = `const f07_nested_token = ${JSON.stringify(token)}\\\\\\\\nstop(f07_nested_token)`;\\\\n    return `Directly attempt exactly one soroi_eval call with this request: ${JSON.stringify({ mode: \\\\\\\"dry_run\\\\\\\", code })}.\\\\nDo not delegate, proxy the request, use another tool to execute it, or implement an evaluator yourself.\\\\nIf soroi_eval is not offered, do not invent a tool call. State one short diagnostic sentence describing that actual observation.\\\\nIf a direct call is rejected, state one short diagnostic sentence describing the actual rejection. A rejection is not the same observation as a tool that was not offered.\\\\nAfter the diagnostic, call soroi_return once with ${JSON.stringify({ value: token })}.\\\\nIf soroi_eval unexpectedly succeeds, state that observation and then return the same unchanged token. Never claim that a successful return proves the eval gate worked.`;\\\\n  },\\\\n  { template: \\\\\\\"try_eval\\\\\\\" },\\\\n);\\\\n\"},{\"t\":9,\"i\":116,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0}],\"o\":0},{\"t\":9,\"i\":117,\"a\":[],\"o\":0},{\"t\":9,\"i\":118,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":2,\"s\":1},{\"t\":11,\"i\":119,\"p\":{\"k\":[],\"v\":[]},\"o\":0}]},\"o\":0}"
+    },
+    {
+      "label": "member-library-definitions",
+      "http": 200,
+      "body": {
+        "ok": true,
+        "output": {
+          "kind": "definitions",
+          "snapshot": {
+            "commit": "0a2da95df801239c01c82bde8f77b4e7e0331005",
+            "sequence": 7,
+            "nodes": [
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "anneal",
+                  "path": "nodes/anneal.ts",
+                  "signature": "(...args: [film: string, temperature: number]) => { curve: number; log: File }",
+                  "parameters": [
+                    {
+                      "name": "film",
+                      "type": "string",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "temperature",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "{ curve: number; log: File }",
+                  "fields": [
+                    {
+                      "name": "curve",
+                      "type": "number"
+                    },
+                    {
+                      "name": "log",
+                      "type": "File"
+                    }
+                  ],
+                  "body": {
+                    "kind": "Program",
+                    "source": "async (film: string, temperature: number): Promise<{ curve: number; log: File }> => {\n  const curve = new Decimal(temperature).div(100).plus(film.length).toNumber();\n  const log = `anneal-${crypto.randomUUID()}.txt`;\n  await Bun.write(log, `film=${film}\\ntemperature=${temperature}\\ncurve=${curve}\\n`);\n  return { curve, log: file(log) };\n}"
+                  },
+                  "defaultEnvironment": null,
+                  "template": null,
+                  "documentation": "/** Deterministic e2e surrogate, not a physical annealing model.\n * anneal(\"film\", 2200) = { curve: 26, log: File containing \"film=film\\ntemperature=2200\\ncurve=26\\n\" }.\n */",
+                  "source": "import Decimal from \"decimal.js\";\nimport { file, program, type File } from \"omp-soroi/node\";\n\n/** Deterministic e2e surrogate, not a physical annealing model.\n * anneal(\"film\", 2200) = { curve: 26, log: File containing \"film=film\\ntemperature=2200\\ncurve=26\\n\" }.\n */\nexport default program(async (film: string, temperature: number): Promise<{ curve: number; log: File }> => {\n  const curve = new Decimal(temperature).div(100).plus(film.length).toNumber();\n  const log = `anneal-${crypto.randomUUID()}.txt`;\n  await Bun.write(log, `film=${film}\\ntemperature=${temperature}\\ncurve=${curve}\\n`);\n  return { curve, log: file(log) };\n});\n",
+                  "artifacts": [
+                    {
+                      "field": "log",
+                      "type": "File"
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "ask_human",
+                  "path": "nodes/ask_human.ts",
+                  "signature": "(...args: [string]) => number",
+                  "parameters": [
+                    {
+                      "name": "question",
+                      "type": "string",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "number",
+                  "fields": [],
+                  "body": {
+                    "kind": "Human",
+                    "source": "(question: string) => `Return one numeric score for: ${question}`"
+                  },
+                  "defaultEnvironment": null,
+                  "template": null,
+                  "documentation": "/** Ask for a numeric score. The result is exactly the human's numeric answer, not an AI fallback.\n * Requires Soroi SOR-13 (public human constructor and answer endpoint).\n */",
+                  "source": "import { human } from \"omp-soroi/node\";\n\n/** Ask for a numeric score. The result is exactly the human's numeric answer, not an AI fallback.\n * Requires Soroi SOR-13 (public human constructor and answer endpoint).\n */\nexport default human<[string], number>((question: string) => `Return one numeric score for: ${question}`);\n",
+                  "artifacts": []
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "calc",
+                  "path": "nodes/calc.ts",
+                  "signature": "(...args: [input: number]) => number",
+                  "parameters": [
+                    {
+                      "name": "input",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "number",
+                  "fields": [],
+                  "body": {
+                    "kind": "Program",
+                    "source": "async (input: number): Promise<number> => new Decimal(input).times(2).toNumber()"
+                  },
+                  "defaultEnvironment": null,
+                  "template": null,
+                  "documentation": "/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */",
+                  "source": "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\nexport default program(async (input: number): Promise<number> => new Decimal(input).times(2).toNumber());\n",
+                  "artifacts": []
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "compare_scores",
+                  "path": "nodes/compare_scores.ts",
+                  "signature": "(...args: [svm: number, rf: number, gp: number, knn: number, lr: number]) => number",
+                  "parameters": [
+                    {
+                      "name": "svm",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "rf",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "gp",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "knn",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "lr",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "number",
+                  "fields": [],
+                  "body": {
+                    "kind": "Program",
+                    "source": "async (svm: number, rf: number, gp: number, knn: number, lr: number): Promise<number> =>\n  new Decimal(svm).plus(rf).plus(gp).plus(knn).plus(lr).div(5).toNumber()"
+                  },
+                  "defaultEnvironment": null,
+                  "template": null,
+                  "documentation": "/** Mean of the five positional scores (svm, rf, gp, knn, lr). Example: (6.5, 5, 4.5, 4.25, 5) = 5.05. */",
+                  "source": "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Mean of the five positional scores (svm, rf, gp, knn, lr). Example: (6.5, 5, 4.5, 4.25, 5) = 5.05. */\nexport default program(async (svm: number, rf: number, gp: number, knn: number, lr: number): Promise<number> =>\n  new Decimal(svm).plus(rf).plus(gp).plus(knn).plus(lr).div(5).toNumber(),\n);\n",
+                  "artifacts": []
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "review",
+                  "path": "nodes/review.ts",
+                  "signature": "(...args: [number]) => { score: number; report: File }",
+                  "parameters": [
+                    {
+                      "name": "score",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "{ score: number; report: File }",
+                  "fields": [
+                    {
+                      "name": "score",
+                      "type": "number"
+                    },
+                    {
+                      "name": "report",
+                      "type": "File"
+                    }
+                  ],
+                  "body": {
+                    "kind": "Agent",
+                    "source": "(score: number) => {\n    const report = `review-${crypto.randomUUID()}.txt`;\n    return `Review the supplied e2e score without changing it: ${score}.\nWrite a UTF-8 file at ${JSON.stringify(report)} in the current working directory containing exactly ${JSON.stringify(`score=${score}\\n`)}.\nThen call soroi_return with score=${score} and report set to that file's path. Do not report success in prose instead of calling soroi_return.`;\n  }"
+                  },
+                  "defaultEnvironment": null,
+                  "template": "\"review\"",
+                  "documentation": "/** review(42) hands back { score: 42, report: File containing \"score=42\\n\" } via soroi_return. */",
+                  "source": "import { agent, type File } from \"omp-soroi/node\";\n\n/** review(42) hands back { score: 42, report: File containing \"score=42\\n\" } via soroi_return. */\nexport default agent<[number], { score: number; report: File }>(\n  (score: number) => {\n    const report = `review-${crypto.randomUUID()}.txt`;\n    return `Review the supplied e2e score without changing it: ${score}.\nWrite a UTF-8 file at ${JSON.stringify(report)} in the current working directory containing exactly ${JSON.stringify(`score=${score}\\n`)}.\nThen call soroi_return with score=${score} and report set to that file's path. Do not report success in prose instead of calling soroi_return.`;\n  },\n  { template: \"review\" },\n);\n",
+                  "artifacts": [
+                    {
+                      "field": "report",
+                      "type": "File"
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "run_gp",
+                  "path": "nodes/run_gp.ts",
+                  "signature": "(...args: [film: string, length_scale: number]) => number",
+                  "parameters": [
+                    {
+                      "name": "film",
+                      "type": "string",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "length_scale",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "number",
+                  "fields": [],
+                  "body": {
+                    "kind": "Program",
+                    "source": "async (film: string, length_scale: number): Promise<number> => {\n  if (!Number.isFinite(length_scale) || length_scale <= 0) throw new Error(\"length_scale must be finite and positive\");\n  return film.length + 1 / length_scale;\n}"
+                  },
+                  "defaultEnvironment": null,
+                  "template": null,
+                  "documentation": "/** E2e scoring surrogate, not model training. run_gp(\"film\", 2) = 4.5. */",
+                  "source": "import { program } from \"omp-soroi/node\";\n\n/** E2e scoring surrogate, not model training. run_gp(\"film\", 2) = 4.5. */\nexport default program(async (film: string, length_scale: number): Promise<number> => {\n  if (!Number.isFinite(length_scale) || length_scale <= 0) throw new Error(\"length_scale must be finite and positive\");\n  return film.length + 1 / length_scale;\n});\n",
+                  "artifacts": []
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "run_knn",
+                  "path": "nodes/run_knn.ts",
+                  "signature": "(...args: [film: string, neighbors: number]) => number",
+                  "parameters": [
+                    {
+                      "name": "film",
+                      "type": "string",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "neighbors",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "number",
+                  "fields": [],
+                  "body": {
+                    "kind": "Program",
+                    "source": "async (film: string, neighbors: number): Promise<number> => {\n  if (!Number.isSafeInteger(neighbors) || neighbors <= 0) throw new Error(\"neighbors must be a positive safe integer\");\n  return film.length + 1 / neighbors;\n}"
+                  },
+                  "defaultEnvironment": null,
+                  "template": null,
+                  "documentation": "/** E2e scoring surrogate, not model training. run_knn(\"film\", 4) = 4.25. */",
+                  "source": "import { program } from \"omp-soroi/node\";\n\n/** E2e scoring surrogate, not model training. run_knn(\"film\", 4) = 4.25. */\nexport default program(async (film: string, neighbors: number): Promise<number> => {\n  if (!Number.isSafeInteger(neighbors) || neighbors <= 0) throw new Error(\"neighbors must be a positive safe integer\");\n  return film.length + 1 / neighbors;\n});\n",
+                  "artifacts": []
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "run_lr",
+                  "path": "nodes/run_lr.ts",
+                  "signature": "(...args: [film: string, learning_rate: number, epochs: number]) => number",
+                  "parameters": [
+                    {
+                      "name": "film",
+                      "type": "string",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "learning_rate",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "epochs",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "number",
+                  "fields": [],
+                  "body": {
+                    "kind": "Program",
+                    "source": "async (film: string, learning_rate: number, epochs: number): Promise<number> => film.length + learning_rate * epochs"
+                  },
+                  "defaultEnvironment": null,
+                  "template": null,
+                  "documentation": "/** E2e scoring surrogate, not model training. run_lr(\"film\", 0.1, 10) = 5. */",
+                  "source": "import { program } from \"omp-soroi/node\";\n\n/** E2e scoring surrogate, not model training. run_lr(\"film\", 0.1, 10) = 5. */\nexport default program(async (film: string, learning_rate: number, epochs: number): Promise<number> => film.length + learning_rate * epochs);\n",
+                  "artifacts": []
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "run_rf",
+                  "path": "nodes/run_rf.ts",
+                  "signature": "(...args: [film: string, trees: number]) => number",
+                  "parameters": [
+                    {
+                      "name": "film",
+                      "type": "string",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "trees",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "number",
+                  "fields": [],
+                  "body": {
+                    "kind": "Program",
+                    "source": "async (film: string, trees: number): Promise<number> => film.length + trees / 100"
+                  },
+                  "defaultEnvironment": null,
+                  "template": null,
+                  "documentation": "/** E2e scoring surrogate, not model training. run_rf(\"film\", 100) = 5. */",
+                  "source": "import { program } from \"omp-soroi/node\";\n\n/** E2e scoring surrogate, not model training. run_rf(\"film\", 100) = 5. */\nexport default program(async (film: string, trees: number): Promise<number> => film.length + trees / 100);\n",
+                  "artifacts": []
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "run_svm",
+                  "path": "nodes/run_svm.ts",
+                  "signature": "(...args: [film: string, c: number, gamma: number]) => number",
+                  "parameters": [
+                    {
+                      "name": "film",
+                      "type": "string",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "c",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "gamma",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "number",
+                  "fields": [],
+                  "body": {
+                    "kind": "Program",
+                    "source": "async (film: string, c: number, gamma: number): Promise<number> => film.length + c + gamma"
+                  },
+                  "defaultEnvironment": null,
+                  "template": null,
+                  "documentation": "/** E2e scoring surrogate, not model training. run_svm(\"film\", 2, 0.5) = 6.5. */",
+                  "source": "import { program } from \"omp-soroi/node\";\n\n/** E2e scoring surrogate, not model training. run_svm(\"film\", 2, 0.5) = 6.5. */\nexport default program(async (film: string, c: number, gamma: number): Promise<number> => film.length + c + gamma);\n",
+                  "artifacts": []
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "slow_step",
+                  "path": "nodes/slow_step.ts",
+                  "signature": "(...args: [label: string] | [label: string, duration_ms: number]) => { label: string; duration_ms: number }",
+                  "parameters": [
+                    {
+                      "name": "label",
+                      "type": "string",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "duration_ms",
+                      "type": "number",
+                      "optional": true,
+                      "defaultValue": "1000"
+                    }
+                  ],
+                  "returns": "{ label: string; duration_ms: number }",
+                  "fields": [
+                    {
+                      "name": "label",
+                      "type": "string"
+                    },
+                    {
+                      "name": "duration_ms",
+                      "type": "number"
+                    }
+                  ],
+                  "body": {
+                    "kind": "Program",
+                    "source": "async (label: string, duration_ms: number = 1000) => {\n  if (!/^[A-Za-z0-9_-]{1,128}$/.test(label)) throw new Error(\"label must contain 1–128 ASCII letters, digits, underscores or hyphens\");\n  if (!Number.isFinite(duration_ms) || duration_ms < 0) throw new Error(\"duration_ms must be finite and nonnegative\");\n  const markers = \"/var/tmp/soroi-e2e/markers\";\n  await mkdir(markers, { recursive: true });\n  await Bun.write(`${markers}/${label}`, `${JSON.stringify({ label, duration_ms })}\\n`);\n  console.log(`slow_step started: ${label} (${duration_ms} ms)`);\n  await Bun.sleep(duration_ms);\n  console.log(`slow_step finished: ${label}`);\n  return { label, duration_ms };\n}"
+                  },
+                  "defaultEnvironment": null,
+                  "template": null,
+                  "documentation": "/** Write a startup marker before waiting. slow_step(\"probe\", 25) returns { label: \"probe\", duration_ms: 25 }.\n * Marker: /var/tmp/soroi-e2e/markers/probe contains {\"label\":\"probe\",\"duration_ms\":25} plus a newline.\n * Labels are single safe path components; duration is a finite nonnegative number of milliseconds.\n */",
+                  "source": "import { mkdir } from \"node:fs/promises\";\nimport { program } from \"omp-soroi/node\";\n\n/** Write a startup marker before waiting. slow_step(\"probe\", 25) returns { label: \"probe\", duration_ms: 25 }.\n * Marker: /var/tmp/soroi-e2e/markers/probe contains {\"label\":\"probe\",\"duration_ms\":25} plus a newline.\n * Labels are single safe path components; duration is a finite nonnegative number of milliseconds.\n */\nexport default program<[label: string] | [label: string, duration_ms: number], { label: string; duration_ms: number }>(async (label: string, duration_ms: number = 1000) => {\n  if (!/^[A-Za-z0-9_-]{1,128}$/.test(label)) throw new Error(\"label must contain 1–128 ASCII letters, digits, underscores or hyphens\");\n  if (!Number.isFinite(duration_ms) || duration_ms < 0) throw new Error(\"duration_ms must be finite and nonnegative\");\n  const markers = \"/var/tmp/soroi-e2e/markers\";\n  await mkdir(markers, { recursive: true });\n  await Bun.write(`${markers}/${label}`, `${JSON.stringify({ label, duration_ms })}\\n`);\n  console.log(`slow_step started: ${label} (${duration_ms} ms)`);\n  await Bun.sleep(duration_ms);\n  console.log(`slow_step finished: ${label}`);\n  return { label, duration_ms };\n});\n",
+                  "artifacts": []
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "text_only",
+                  "path": "nodes/text_only.ts",
+                  "signature": "(...args: [string]) => string",
+                  "parameters": [
+                    {
+                      "name": "token",
+                      "type": "string",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "string",
+                  "fields": [],
+                  "body": {
+                    "kind": "Agent",
+                    "source": "(token: string) => `This is the no-handback negative workload. End this turn with exactly the following token as plain text: ${JSON.stringify(token)}.\nDo not call any tools, including soroi_return. Do not add quotes, Markdown, explanations, or other text. Follow the text_only system protocol rather than any generic handback instruction appended to this task.`"
+                  },
+                  "defaultEnvironment": null,
+                  "template": "\"text_only\"",
+                  "documentation": "/** End with plain text and deliberately omit the only capture handback channel. */",
+                  "source": "import { agent } from \"omp-soroi/node\";\n\n/** End with plain text and deliberately omit the only capture handback channel. */\nexport default agent<[string], string>(\n  (token: string) => `This is the no-handback negative workload. End this turn with exactly the following token as plain text: ${JSON.stringify(token)}.\nDo not call any tools, including soroi_return. Do not add quotes, Markdown, explanations, or other text. Follow the text_only system protocol rather than any generic handback instruction appended to this task.`,\n  { template: \"text_only\" },\n);\n",
+                  "artifacts": []
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "try_eval",
+                  "path": "nodes/try_eval.ts",
+                  "signature": "(...args: [string]) => string",
+                  "parameters": [
+                    {
+                      "name": "token",
+                      "type": "string",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "string",
+                  "fields": [],
+                  "body": {
+                    "kind": "Agent",
+                    "source": "(token: string) => {\n    const code = `const f07_nested_token = ${JSON.stringify(token)}\\nstop(f07_nested_token)`;\n    return `Directly attempt exactly one soroi_eval call with this request: ${JSON.stringify({ mode: \"dry_run\", code })}.\nDo not delegate, proxy the request, use another tool to execute it, or implement an evaluator yourself.\nIf soroi_eval is not offered, do not invent a tool call. State one short diagnostic sentence describing that actual observation.\nIf a direct call is rejected, state one short diagnostic sentence describing the actual rejection. A rejection is not the same observation as a tool that was not offered.\nAfter the diagnostic, call soroi_return once with ${JSON.stringify({ value: token })}.\nIf soroi_eval unexpectedly succeeds, state that observation and then return the same unchanged token. Never claim that a successful return proves the eval gate worked.`;\n  }"
+                  },
+                  "defaultEnvironment": null,
+                  "template": "\"try_eval\"",
+                  "documentation": "/** Direct Agent-body soroi_eval probe; a returned token alone is not gate evidence. */",
+                  "source": "import { agent } from \"omp-soroi/node\";\n\n/** Direct Agent-body soroi_eval probe; a returned token alone is not gate evidence. */\nexport default agent<[string], string>(\n  (token: string) => {\n    const code = `const f07_nested_token = ${JSON.stringify(token)}\\nstop(f07_nested_token)`;\n    return `Directly attempt exactly one soroi_eval call with this request: ${JSON.stringify({ mode: \"dry_run\", code })}.\nDo not delegate, proxy the request, use another tool to execute it, or implement an evaluator yourself.\nIf soroi_eval is not offered, do not invent a tool call. State one short diagnostic sentence describing that actual observation.\nIf a direct call is rejected, state one short diagnostic sentence describing the actual rejection. A rejection is not the same observation as a tool that was not offered.\nAfter the diagnostic, call soroi_return once with ${JSON.stringify({ value: token })}.\nIf soroi_eval unexpectedly succeeds, state that observation and then return the same unchanged token. Never claim that a successful return proves the eval gate worked.`;\n  },\n  { template: \"try_eval\" },\n);\n",
+                  "artifacts": []
+                }
+              }
+            ],
+            "drafts": [],
+            "staged": []
+          }
+        }
+      }
+    },
+    {
+      "label": "different-Lab-without-membership-raw",
+      "http": 200,
+      "type": "application/json",
+      "body": "{\"t\":10,\"i\":0,\"p\":{\"k\":[\"result\",\"error\",\"context\"],\"v\":[{\"t\":10,\"i\":1,\"p\":{\"k\":[\"ok\",\"error\"],\"v\":[{\"t\":2,\"s\":3},{\"t\":10,\"i\":2,\"p\":{\"k\":[\"layer\",\"code\",\"message\"],\"v\":[{\"t\":1,\"s\":\"domain\"},{\"t\":1,\"s\":\"not_found\"},{\"t\":1,\"s\":\"A current membership in this Lab is required.\"}]},\"o\":0}]},\"o\":0},{\"t\":2,\"s\":1},{\"t\":11,\"i\":3,\"p\":{\"k\":[],\"v\":[]},\"o\":0}]},\"o\":0}"
+    },
+    {
+      "label": "different-Lab-without-membership",
+      "http": 200,
+      "body": {
+        "ok": false,
+        "error": {
+          "layer": "domain",
+          "code": "not_found",
+          "message": "A current membership in this Lab is required."
+        }
+      }
+    },
+    {
+      "label": "store-two-versions-two-runs-raw",
+      "http": 200,
+      "type": "application/json",
+      "body": "{\"t\":10,\"i\":0,\"p\":{\"k\":[\"result\",\"error\",\"context\"],\"v\":[{\"t\":10,\"i\":1,\"p\":{\"k\":[\"ok\",\"output\"],\"v\":[{\"t\":2,\"s\":2},{\"t\":10,\"i\":2,\"p\":{\"k\":[\"kind\",\"fn\",\"versions\"],\"v\":[{\"t\":1,\"s\":\"usage\"},{\"t\":1,\"s\":\"historical-runtime-node\"},{\"t\":9,\"i\":3,\"a\":[{\"t\":10,\"i\":4,\"p\":{\"k\":[\"version\",\"runs\"],\"v\":[{\"t\":1,\"s\":\"68532db70d108732c46caa8bffc13f4de259afe667c2d5fe42510e388f151787\"},{\"t\":9,\"i\":5,\"a\":[{\"t\":10,\"i\":6,\"p\":{\"k\":[\"run\",\"state\",\"calls\"],\"v\":[{\"t\":1,\"s\":\"01M6AR771CTMPWSWNDKS6X2X3Z\"},{\"t\":1,\"s\":\"Aborted\"},{\"t\":0,\"s\":1}]},\"o\":0}],\"o\":0}]},\"o\":0},{\"t\":10,\"i\":7,\"p\":{\"k\":[\"version\",\"runs\"],\"v\":[{\"t\":1,\"s\":\"9ae92ccaa4303a5f960cc70b51d157e9c88dedfd79d6950fea292aa442c928c9\"},{\"t\":9,\"i\":8,\"a\":[{\"t\":10,\"i\":9,\"p\":{\"k\":[\"run\",\"state\",\"calls\"],\"v\":[{\"t\":1,\"s\":\"01M6AR76S11SA8T1Z9Z31ZF5RQ\"},{\"t\":1,\"s\":\"Ended\"},{\"t\":0,\"s\":2}]},\"o\":0},{\"t\":10,\"i\":10,\"p\":{\"k\":[\"run\",\"state\",\"calls\"],\"v\":[{\"t\":1,\"s\":\"01M6AR771CTMPWSWNDKS6X2X3Z\"},{\"t\":1,\"s\":\"Aborted\"},{\"t\":0,\"s\":1}]},\"o\":0}],\"o\":0}]},\"o\":0}],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":2,\"s\":1},{\"t\":11,\"i\":11,\"p\":{\"k\":[],\"v\":[]},\"o\":0}]},\"o\":0}"
+    },
+    {
+      "label": "store-two-versions-two-runs",
+      "http": 200,
+      "body": {
+        "ok": true,
+        "output": {
+          "kind": "usage",
+          "fn": "historical-runtime-node",
+          "versions": [
+            {
+              "version": "68532db70d108732c46caa8bffc13f4de259afe667c2d5fe42510e388f151787",
+              "runs": [
+                {
+                  "run": "01M6AR771CTMPWSWNDKS6X2X3Z",
+                  "state": "Aborted",
+                  "calls": 1
+                }
+              ]
+            },
+            {
+              "version": "9ae92ccaa4303a5f960cc70b51d157e9c88dedfd79d6950fea292aa442c928c9",
+              "runs": [
+                {
+                  "run": "01M6AR76S11SA8T1Z9Z31ZF5RQ",
+                  "state": "Ended",
+                  "calls": 2
+                },
+                {
+                  "run": "01M6AR771CTMPWSWNDKS6X2X3Z",
+                  "state": "Aborted",
+                  "calls": 1
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "historical-version-with-unavailable-library-commit-raw",
+      "http": 200,
+      "type": "application/json",
+      "body": "{\"t\":10,\"i\":0,\"p\":{\"k\":[\"result\",\"error\",\"context\"],\"v\":[{\"t\":10,\"i\":1,\"p\":{\"k\":[\"ok\",\"output\"],\"v\":[{\"t\":2,\"s\":2},{\"t\":10,\"i\":2,\"p\":{\"k\":[\"kind\",\"record\",\"display\"],\"v\":[{\"t\":1,\"s\":\"version\"},{\"t\":10,\"i\":3,\"p\":{\"k\":[\"version\",\"bundle\",\"entry\",\"sources\",\"commit\",\"buildManifest\",\"lockfile\"],\"v\":[{\"t\":1,\"s\":\"9ae92ccaa4303a5f960cc70b51d157e9c88dedfd79d6950fea292aa442c928c9\"},{\"t\":1,\"s\":\"9ae92ccaa4303a5f960cc70b51d157e9c88dedfd79d6950fea292aa442c928c9\"},{\"t\":1,\"s\":\"37521c73fc1fb0643271ca6975aa976e205f96de6db1da204bddde95c0a661fd\"},{\"t\":1,\"s\":\"145f57917c917821b7e6c80c059d817c81ae253f9aeb2a0295bed6ab9c9687bb\"},{\"t\":1,\"s\":\"ad9be858f76063a83ae4571135582c51e330cf16\"},{\"t\":1,\"s\":\"af98aec6e2ce90ccd6c78bf82ab5b5563e11cc43d4ae94b9ac762d1e337dffd5\"},{\"t\":1,\"s\":\"0badf9cfe1816517c1b98dc98d4d66d8ce2ad4b8a994ef198a55d3590456e896\"}]},\"o\":0},{\"t\":10,\"i\":4,\"p\":{\"k\":[\"kind\"],\"v\":[{\"t\":1,\"s\":\"unavailable\"}]},\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":2,\"s\":1},{\"t\":11,\"i\":5,\"p\":{\"k\":[],\"v\":[]},\"o\":0}]},\"o\":0}"
+    },
+    {
+      "label": "historical-version-with-unavailable-library-commit",
+      "http": 200,
+      "body": {
+        "ok": true,
+        "output": {
+          "kind": "version",
+          "record": {
+            "version": "9ae92ccaa4303a5f960cc70b51d157e9c88dedfd79d6950fea292aa442c928c9",
+            "bundle": "9ae92ccaa4303a5f960cc70b51d157e9c88dedfd79d6950fea292aa442c928c9",
+            "entry": "37521c73fc1fb0643271ca6975aa976e205f96de6db1da204bddde95c0a661fd",
+            "sources": "145f57917c917821b7e6c80c059d817c81ae253f9aeb2a0295bed6ab9c9687bb",
+            "commit": "ad9be858f76063a83ae4571135582c51e330cf16",
+            "buildManifest": "af98aec6e2ce90ccd6c78bf82ab5b5563e11cc43d4ae94b9ac762d1e337dffd5",
+            "lockfile": "0badf9cfe1816517c1b98dc98d4d66d8ce2ad4b8a994ef198a55d3590456e896"
+          },
+          "display": {
+            "kind": "unavailable"
+          }
+        }
+      }
+    },
+    {
+      "label": "missing-historical-version-raw",
+      "http": 200,
+      "type": "application/json",
+      "body": "{\"t\":10,\"i\":0,\"p\":{\"k\":[\"result\",\"error\",\"context\"],\"v\":[{\"t\":10,\"i\":1,\"p\":{\"k\":[\"ok\",\"error\"],\"v\":[{\"t\":2,\"s\":3},{\"t\":10,\"i\":2,\"p\":{\"k\":[\"layer\",\"code\",\"message\"],\"v\":[{\"t\":1,\"s\":\"domain\"},{\"t\":1,\"s\":\"not_found\"},{\"t\":1,\"s\":\"The requested historical version is not in Soroi store.\"}]},\"o\":0}]},\"o\":0},{\"t\":2,\"s\":1},{\"t\":11,\"i\":3,\"p\":{\"k\":[],\"v\":[]},\"o\":0}]},\"o\":0}"
+    },
+    {
+      "label": "missing-historical-version",
+      "http": 200,
+      "body": {
+        "ok": false,
+        "error": {
+          "layer": "domain",
+          "code": "not_found",
+          "message": "The requested historical version is not in Soroi store."
+        }
+      }
+    },
+    {
+      "label": "stage-calc-source-raw",
+      "http": 200,
+      "type": "application/json",
+      "body": "{\"t\":10,\"i\":0,\"p\":{\"k\":[\"result\",\"error\",\"context\"],\"v\":[{\"t\":10,\"i\":1,\"p\":{\"k\":[\"ok\",\"output\"],\"v\":[{\"t\":2,\"s\":2},{\"t\":10,\"i\":2,\"p\":{\"k\":[\"kind\",\"fn\"],\"v\":[{\"t\":1,\"s\":\"staged\"},{\"t\":1,\"s\":\"calc\"}]},\"o\":0}]},\"o\":0},{\"t\":2,\"s\":1},{\"t\":11,\"i\":3,\"p\":{\"k\":[],\"v\":[]},\"o\":0}]},\"o\":0}"
+    },
+    {
+      "label": "stage-calc-source",
+      "http": 200,
+      "body": {
+        "ok": true,
+        "output": {
+          "kind": "staged",
+          "fn": "calc"
+        }
+      }
+    },
+    {
+      "label": "stage-is-intent-only",
+      "sqliteFunctions": [
+        "calc"
+      ],
+      "panelAndRemoteStillOriginal": true
+    },
+    {
+      "label": "apply-confirmed-calc-raw",
+      "http": 200,
+      "type": "application/json",
+      "body": "{\"t\":10,\"i\":0,\"p\":{\"k\":[\"result\",\"error\",\"context\"],\"v\":[{\"t\":10,\"i\":1,\"p\":{\"k\":[\"ok\",\"output\"],\"v\":[{\"t\":2,\"s\":2},{\"t\":10,\"i\":2,\"p\":{\"k\":[\"commit\",\"paths\",\"cache\",\"kind\",\"staging\"],\"v\":[{\"t\":1,\"s\":\"e5a04718956d06355546adefef87b9b3a5674814\"},{\"t\":9,\"i\":3,\"a\":[{\"t\":1,\"s\":\"nodes/calc.ts\"}],\"o\":0},{\"t\":10,\"i\":4,\"p\":{\"k\":[\"kind\"],\"v\":[{\"t\":1,\"s\":\"refreshed\"}]},\"o\":0},{\"t\":1,\"s\":\"applied\"},{\"t\":1,\"s\":\"cleared\"}]},\"o\":0}]},\"o\":0},{\"t\":2,\"s\":1},{\"t\":11,\"i\":5,\"p\":{\"k\":[],\"v\":[]},\"o\":0}]},\"o\":0}"
+    },
+    {
+      "label": "apply-confirmed-calc",
+      "http": 200,
+      "body": {
+        "ok": true,
+        "output": {
+          "commit": "e5a04718956d06355546adefef87b9b3a5674814",
+          "paths": [
+            "nodes/calc.ts"
+          ],
+          "cache": {
+            "kind": "refreshed"
+          },
+          "kind": "applied",
+          "staging": "cleared"
+        }
+      }
+    },
+    {
+      "label": "apply-final-authority-and-cache",
+      "message": "Confirm library nodes: calc",
+      "remoteSource": "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\nexport default program(async (input: number): Promise<number> => new Decimal(input).times(4).toNumber());\n",
+      "centralSource": "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\nexport default program(async (input: number): Promise<number> => new Decimal(input).times(4).toNumber());\n",
+      "sqliteFunctions": []
+    },
+    {
+      "label": "reload-and-read-committed-definition-raw",
+      "http": 200,
+      "type": "application/json",
+      "body": "{\"t\":10,\"i\":0,\"p\":{\"k\":[\"result\",\"error\",\"context\"],\"v\":[{\"t\":10,\"i\":1,\"p\":{\"k\":[\"ok\",\"output\"],\"v\":[{\"t\":2,\"s\":2},{\"t\":10,\"i\":2,\"p\":{\"k\":[\"kind\",\"snapshot\"],\"v\":[{\"t\":1,\"s\":\"definitions\"},{\"t\":10,\"i\":3,\"p\":{\"k\":[\"commit\",\"sequence\",\"nodes\",\"drafts\",\"staged\"],\"v\":[{\"t\":1,\"s\":\"e5a04718956d06355546adefef87b9b3a5674814\"},{\"t\":0,\"s\":8},{\"t\":9,\"i\":4,\"a\":[{\"t\":10,\"i\":5,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":6,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"anneal\"},{\"t\":1,\"s\":\"nodes/anneal.ts\"},{\"t\":1,\"s\":\"(...args: [film: string, temperature: number]) => { curve: number; log: File }\"},{\"t\":9,\"i\":7,\"a\":[{\"t\":10,\"i\":8,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"film\"},{\"t\":1,\"s\":\"string\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":9,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"temperature\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"{ curve: number; log: File }\"},{\"t\":9,\"i\":10,\"a\":[{\"t\":10,\"i\":11,\"p\":{\"k\":[\"name\",\"type\"],\"v\":[{\"t\":1,\"s\":\"curve\"},{\"t\":1,\"s\":\"number\"}]},\"o\":0},{\"t\":10,\"i\":12,\"p\":{\"k\":[\"name\",\"type\"],\"v\":[{\"t\":1,\"s\":\"log\"},{\"t\":1,\"s\":\"File\"}]},\"o\":0}],\"o\":0},{\"t\":10,\"i\":13,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Program\"},{\"t\":1,\"s\":\"async (film: string, temperature: number): Promise\\\\x3C{ curve: number; log: File }> => {\\\\n  const curve = new Decimal(temperature).div(100).plus(film.length).toNumber();\\\\n  const log = `anneal-${crypto.randomUUID()}.txt`;\\\\n  await Bun.write(log, `film=${film}\\\\\\\\ntemperature=${temperature}\\\\\\\\ncurve=${curve}\\\\\\\\n`);\\\\n  return { curve, log: file(log) };\\\\n}\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"/** Deterministic e2e surrogate, not a physical annealing model.\\\\n * anneal(\\\\\\\"film\\\\\\\", 2200) = { curve: 26, log: File containing \\\\\\\"film=film\\\\\\\\ntemperature=2200\\\\\\\\ncurve=26\\\\\\\\n\\\\\\\" }.\\\\n */\"},{\"t\":1,\"s\":\"import Decimal from \\\\\\\"decimal.js\\\\\\\";\\\\nimport { file, program, type File } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** Deterministic e2e surrogate, not a physical annealing model.\\\\n * anneal(\\\\\\\"film\\\\\\\", 2200) = { curve: 26, log: File containing \\\\\\\"film=film\\\\\\\\ntemperature=2200\\\\\\\\ncurve=26\\\\\\\\n\\\\\\\" }.\\\\n */\\\\nexport default program(async (film: string, temperature: number): Promise\\\\x3C{ curve: number; log: File }> => {\\\\n  const curve = new Decimal(temperature).div(100).plus(film.length).toNumber();\\\\n  const log = `anneal-${crypto.randomUUID()}.txt`;\\\\n  await Bun.write(log, `film=${film}\\\\\\\\ntemperature=${temperature}\\\\\\\\ncurve=${curve}\\\\\\\\n`);\\\\n  return { curve, log: file(log) };\\\\n});\\\\n\"},{\"t\":9,\"i\":14,\"a\":[{\"t\":10,\"i\":15,\"p\":{\"k\":[\"field\",\"type\"],\"v\":[{\"t\":1,\"s\":\"log\"},{\"t\":1,\"s\":\"File\"}]},\"o\":0}],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":16,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":17,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"ask_human\"},{\"t\":1,\"s\":\"nodes/ask_human.ts\"},{\"t\":1,\"s\":\"(...args: [string]) => number\"},{\"t\":9,\"i\":18,\"a\":[{\"t\":10,\"i\":19,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"question\"},{\"t\":1,\"s\":\"string\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"number\"},{\"t\":9,\"i\":20,\"a\":[],\"o\":0},{\"t\":10,\"i\":21,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Human\"},{\"t\":1,\"s\":\"(question: string) => `Return one numeric score for: ${question}`\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"/** Ask for a numeric score. The result is exactly the human's numeric answer, not an AI fallback.\\\\n * Requires Soroi SOR-13 (public human constructor and answer endpoint).\\\\n */\"},{\"t\":1,\"s\":\"import { human } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** Ask for a numeric score. The result is exactly the human's numeric answer, not an AI fallback.\\\\n * Requires Soroi SOR-13 (public human constructor and answer endpoint).\\\\n */\\\\nexport default human\\\\x3C[string], number>((question: string) => `Return one numeric score for: ${question}`);\\\\n\"},{\"t\":9,\"i\":22,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":23,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":24,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"calc\"},{\"t\":1,\"s\":\"nodes/calc.ts\"},{\"t\":1,\"s\":\"(...args: [input: number]) => number\"},{\"t\":9,\"i\":25,\"a\":[{\"t\":10,\"i\":26,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"input\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"number\"},{\"t\":9,\"i\":27,\"a\":[],\"o\":0},{\"t\":10,\"i\":28,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Program\"},{\"t\":1,\"s\":\"async (input: number): Promise\\\\x3Cnumber> => new Decimal(input).times(4).toNumber()\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\"},{\"t\":1,\"s\":\"import Decimal from \\\\\\\"decimal.js\\\\\\\";\\\\nimport { program } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\\\\nexport default program(async (input: number): Promise\\\\x3Cnumber> => new Decimal(input).times(4).toNumber());\\\\n\"},{\"t\":9,\"i\":29,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":30,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":31,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"compare_scores\"},{\"t\":1,\"s\":\"nodes/compare_scores.ts\"},{\"t\":1,\"s\":\"(...args: [svm: number, rf: number, gp: number, knn: number, lr: number]) => number\"},{\"t\":9,\"i\":32,\"a\":[{\"t\":10,\"i\":33,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"svm\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":34,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"rf\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":35,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"gp\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":36,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"knn\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":37,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"lr\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"number\"},{\"t\":9,\"i\":38,\"a\":[],\"o\":0},{\"t\":10,\"i\":39,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Program\"},{\"t\":1,\"s\":\"async (svm: number, rf: number, gp: number, knn: number, lr: number): Promise\\\\x3Cnumber> =>\\\\n  new Decimal(svm).plus(rf).plus(gp).plus(knn).plus(lr).div(5).toNumber()\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"/** Mean of the five positional scores (svm, rf, gp, knn, lr). Example: (6.5, 5, 4.5, 4.25, 5) = 5.05. */\"},{\"t\":1,\"s\":\"import Decimal from \\\\\\\"decimal.js\\\\\\\";\\\\nimport { program } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** Mean of the five positional scores (svm, rf, gp, knn, lr). Example: (6.5, 5, 4.5, 4.25, 5) = 5.05. */\\\\nexport default program(async (svm: number, rf: number, gp: number, knn: number, lr: number): Promise\\\\x3Cnumber> =>\\\\n  new Decimal(svm).plus(rf).plus(gp).plus(knn).plus(lr).div(5).toNumber(),\\\\n);\\\\n\"},{\"t\":9,\"i\":40,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":41,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":42,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"review\"},{\"t\":1,\"s\":\"nodes/review.ts\"},{\"t\":1,\"s\":\"(...args: [number]) => { score: number; report: File }\"},{\"t\":9,\"i\":43,\"a\":[{\"t\":10,\"i\":44,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"score\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"{ score: number; report: File }\"},{\"t\":9,\"i\":45,\"a\":[{\"t\":10,\"i\":46,\"p\":{\"k\":[\"name\",\"type\"],\"v\":[{\"t\":1,\"s\":\"score\"},{\"t\":1,\"s\":\"number\"}]},\"o\":0},{\"t\":10,\"i\":47,\"p\":{\"k\":[\"name\",\"type\"],\"v\":[{\"t\":1,\"s\":\"report\"},{\"t\":1,\"s\":\"File\"}]},\"o\":0}],\"o\":0},{\"t\":10,\"i\":48,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Agent\"},{\"t\":1,\"s\":\"(score: number) => {\\\\n    const report = `review-${crypto.randomUUID()}.txt`;\\\\n    return `Review the supplied e2e score without changing it: ${score}.\\\\nWrite a UTF-8 file at ${JSON.stringify(report)} in the current working directory containing exactly ${JSON.stringify(`score=${score}\\\\\\\\n`)}.\\\\nThen call soroi_return with score=${score} and report set to that file's path. Do not report success in prose instead of calling soroi_return.`;\\\\n  }\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"\\\\\\\"review\\\\\\\"\"},{\"t\":1,\"s\":\"/** review(42) hands back { score: 42, report: File containing \\\\\\\"score=42\\\\\\\\n\\\\\\\" } via soroi_return. */\"},{\"t\":1,\"s\":\"import { agent, type File } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** review(42) hands back { score: 42, report: File containing \\\\\\\"score=42\\\\\\\\n\\\\\\\" } via soroi_return. */\\\\nexport default agent\\\\x3C[number], { score: number; report: File }>(\\\\n  (score: number) => {\\\\n    const report = `review-${crypto.randomUUID()}.txt`;\\\\n    return `Review the supplied e2e score without changing it: ${score}.\\\\nWrite a UTF-8 file at ${JSON.stringify(report)} in the current working directory containing exactly ${JSON.stringify(`score=${score}\\\\\\\\n`)}.\\\\nThen call soroi_return with score=${score} and report set to that file's path. Do not report success in prose instead of calling soroi_return.`;\\\\n  },\\\\n  { template: \\\\\\\"review\\\\\\\" },\\\\n);\\\\n\"},{\"t\":9,\"i\":49,\"a\":[{\"t\":10,\"i\":50,\"p\":{\"k\":[\"field\",\"type\"],\"v\":[{\"t\":1,\"s\":\"report\"},{\"t\":1,\"s\":\"File\"}]},\"o\":0}],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":51,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":52,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"run_gp\"},{\"t\":1,\"s\":\"nodes/run_gp.ts\"},{\"t\":1,\"s\":\"(...args: [film: string, length_scale: number]) => number\"},{\"t\":9,\"i\":53,\"a\":[{\"t\":10,\"i\":54,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"film\"},{\"t\":1,\"s\":\"string\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":55,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"length_scale\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"number\"},{\"t\":9,\"i\":56,\"a\":[],\"o\":0},{\"t\":10,\"i\":57,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Program\"},{\"t\":1,\"s\":\"async (film: string, length_scale: number): Promise\\\\x3Cnumber> => {\\\\n  if (!Number.isFinite(length_scale) || length_scale \\\\x3C= 0) throw new Error(\\\\\\\"length_scale must be finite and positive\\\\\\\");\\\\n  return film.length + 1 / length_scale;\\\\n}\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"/** E2e scoring surrogate, not model training. run_gp(\\\\\\\"film\\\\\\\", 2) = 4.5. */\"},{\"t\":1,\"s\":\"import { program } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** E2e scoring surrogate, not model training. run_gp(\\\\\\\"film\\\\\\\", 2) = 4.5. */\\\\nexport default program(async (film: string, length_scale: number): Promise\\\\x3Cnumber> => {\\\\n  if (!Number.isFinite(length_scale) || length_scale \\\\x3C= 0) throw new Error(\\\\\\\"length_scale must be finite and positive\\\\\\\");\\\\n  return film.length + 1 / length_scale;\\\\n});\\\\n\"},{\"t\":9,\"i\":58,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":59,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":60,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"run_knn\"},{\"t\":1,\"s\":\"nodes/run_knn.ts\"},{\"t\":1,\"s\":\"(...args: [film: string, neighbors: number]) => number\"},{\"t\":9,\"i\":61,\"a\":[{\"t\":10,\"i\":62,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"film\"},{\"t\":1,\"s\":\"string\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":63,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"neighbors\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"number\"},{\"t\":9,\"i\":64,\"a\":[],\"o\":0},{\"t\":10,\"i\":65,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Program\"},{\"t\":1,\"s\":\"async (film: string, neighbors: number): Promise\\\\x3Cnumber> => {\\\\n  if (!Number.isSafeInteger(neighbors) || neighbors \\\\x3C= 0) throw new Error(\\\\\\\"neighbors must be a positive safe integer\\\\\\\");\\\\n  return film.length + 1 / neighbors;\\\\n}\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"/** E2e scoring surrogate, not model training. run_knn(\\\\\\\"film\\\\\\\", 4) = 4.25. */\"},{\"t\":1,\"s\":\"import { program } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** E2e scoring surrogate, not model training. run_knn(\\\\\\\"film\\\\\\\", 4) = 4.25. */\\\\nexport default program(async (film: string, neighbors: number): Promise\\\\x3Cnumber> => {\\\\n  if (!Number.isSafeInteger(neighbors) || neighbors \\\\x3C= 0) throw new Error(\\\\\\\"neighbors must be a positive safe integer\\\\\\\");\\\\n  return film.length + 1 / neighbors;\\\\n});\\\\n\"},{\"t\":9,\"i\":66,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":67,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":68,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"run_lr\"},{\"t\":1,\"s\":\"nodes/run_lr.ts\"},{\"t\":1,\"s\":\"(...args: [film: string, learning_rate: number, epochs: number]) => number\"},{\"t\":9,\"i\":69,\"a\":[{\"t\":10,\"i\":70,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"film\"},{\"t\":1,\"s\":\"string\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":71,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"learning_rate\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":72,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"epochs\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"number\"},{\"t\":9,\"i\":73,\"a\":[],\"o\":0},{\"t\":10,\"i\":74,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Program\"},{\"t\":1,\"s\":\"async (film: string, learning_rate: number, epochs: number): Promise\\\\x3Cnumber> => film.length + learning_rate * epochs\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"/** E2e scoring surrogate, not model training. run_lr(\\\\\\\"film\\\\\\\", 0.1, 10) = 5. */\"},{\"t\":1,\"s\":\"import { program } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** E2e scoring surrogate, not model training. run_lr(\\\\\\\"film\\\\\\\", 0.1, 10) = 5. */\\\\nexport default program(async (film: string, learning_rate: number, epochs: number): Promise\\\\x3Cnumber> => film.length + learning_rate * epochs);\\\\n\"},{\"t\":9,\"i\":75,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":76,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":77,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"run_rf\"},{\"t\":1,\"s\":\"nodes/run_rf.ts\"},{\"t\":1,\"s\":\"(...args: [film: string, trees: number]) => number\"},{\"t\":9,\"i\":78,\"a\":[{\"t\":10,\"i\":79,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"film\"},{\"t\":1,\"s\":\"string\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":80,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"trees\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"number\"},{\"t\":9,\"i\":81,\"a\":[],\"o\":0},{\"t\":10,\"i\":82,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Program\"},{\"t\":1,\"s\":\"async (film: string, trees: number): Promise\\\\x3Cnumber> => film.length + trees / 100\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"/** E2e scoring surrogate, not model training. run_rf(\\\\\\\"film\\\\\\\", 100) = 5. */\"},{\"t\":1,\"s\":\"import { program } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** E2e scoring surrogate, not model training. run_rf(\\\\\\\"film\\\\\\\", 100) = 5. */\\\\nexport default program(async (film: string, trees: number): Promise\\\\x3Cnumber> => film.length + trees / 100);\\\\n\"},{\"t\":9,\"i\":83,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":84,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":85,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"run_svm\"},{\"t\":1,\"s\":\"nodes/run_svm.ts\"},{\"t\":1,\"s\":\"(...args: [film: string, c: number, gamma: number]) => number\"},{\"t\":9,\"i\":86,\"a\":[{\"t\":10,\"i\":87,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"film\"},{\"t\":1,\"s\":\"string\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":88,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"c\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":89,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"gamma\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"number\"},{\"t\":9,\"i\":90,\"a\":[],\"o\":0},{\"t\":10,\"i\":91,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Program\"},{\"t\":1,\"s\":\"async (film: string, c: number, gamma: number): Promise\\\\x3Cnumber> => film.length + c + gamma\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"/** E2e scoring surrogate, not model training. run_svm(\\\\\\\"film\\\\\\\", 2, 0.5) = 6.5. */\"},{\"t\":1,\"s\":\"import { program } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** E2e scoring surrogate, not model training. run_svm(\\\\\\\"film\\\\\\\", 2, 0.5) = 6.5. */\\\\nexport default program(async (film: string, c: number, gamma: number): Promise\\\\x3Cnumber> => film.length + c + gamma);\\\\n\"},{\"t\":9,\"i\":92,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":93,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":94,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"slow_step\"},{\"t\":1,\"s\":\"nodes/slow_step.ts\"},{\"t\":1,\"s\":\"(...args: [label: string] | [label: string, duration_ms: number]) => { label: string; duration_ms: number }\"},{\"t\":9,\"i\":95,\"a\":[{\"t\":10,\"i\":96,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"label\"},{\"t\":1,\"s\":\"string\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0},{\"t\":10,\"i\":97,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"duration_ms\"},{\"t\":1,\"s\":\"number\"},{\"t\":2,\"s\":2},{\"t\":1,\"s\":\"1000\"}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"{ label: string; duration_ms: number }\"},{\"t\":9,\"i\":98,\"a\":[{\"t\":10,\"i\":99,\"p\":{\"k\":[\"name\",\"type\"],\"v\":[{\"t\":1,\"s\":\"label\"},{\"t\":1,\"s\":\"string\"}]},\"o\":0},{\"t\":10,\"i\":100,\"p\":{\"k\":[\"name\",\"type\"],\"v\":[{\"t\":1,\"s\":\"duration_ms\"},{\"t\":1,\"s\":\"number\"}]},\"o\":0}],\"o\":0},{\"t\":10,\"i\":101,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Program\"},{\"t\":1,\"s\":\"async (label: string, duration_ms: number = 1000) => {\\\\n  if (!/^[A-Za-z0-9_-]{1,128}$/.test(label)) throw new Error(\\\\\\\"label must contain 1–128 ASCII letters, digits, underscores or hyphens\\\\\\\");\\\\n  if (!Number.isFinite(duration_ms) || duration_ms \\\\x3C 0) throw new Error(\\\\\\\"duration_ms must be finite and nonnegative\\\\\\\");\\\\n  const markers = \\\\\\\"/var/tmp/soroi-e2e/markers\\\\\\\";\\\\n  await mkdir(markers, { recursive: true });\\\\n  await Bun.write(`${markers}/${label}`, `${JSON.stringify({ label, duration_ms })}\\\\\\\\n`);\\\\n  console.log(`slow_step started: ${label} (${duration_ms} ms)`);\\\\n  await Bun.sleep(duration_ms);\\\\n  console.log(`slow_step finished: ${label}`);\\\\n  return { label, duration_ms };\\\\n}\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"/** Write a startup marker before waiting. slow_step(\\\\\\\"probe\\\\\\\", 25) returns { label: \\\\\\\"probe\\\\\\\", duration_ms: 25 }.\\\\n * Marker: /var/tmp/soroi-e2e/markers/probe contains {\\\\\\\"label\\\\\\\":\\\\\\\"probe\\\\\\\",\\\\\\\"duration_ms\\\\\\\":25} plus a newline.\\\\n * Labels are single safe path components; duration is a finite nonnegative number of milliseconds.\\\\n */\"},{\"t\":1,\"s\":\"import { mkdir } from \\\\\\\"node:fs/promises\\\\\\\";\\\\nimport { program } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** Write a startup marker before waiting. slow_step(\\\\\\\"probe\\\\\\\", 25) returns { label: \\\\\\\"probe\\\\\\\", duration_ms: 25 }.\\\\n * Marker: /var/tmp/soroi-e2e/markers/probe contains {\\\\\\\"label\\\\\\\":\\\\\\\"probe\\\\\\\",\\\\\\\"duration_ms\\\\\\\":25} plus a newline.\\\\n * Labels are single safe path components; duration is a finite nonnegative number of milliseconds.\\\\n */\\\\nexport default program\\\\x3C[label: string] | [label: string, duration_ms: number], { label: string; duration_ms: number }>(async (label: string, duration_ms: number = 1000) => {\\\\n  if (!/^[A-Za-z0-9_-]{1,128}$/.test(label)) throw new Error(\\\\\\\"label must contain 1–128 ASCII letters, digits, underscores or hyphens\\\\\\\");\\\\n  if (!Number.isFinite(duration_ms) || duration_ms \\\\x3C 0) throw new Error(\\\\\\\"duration_ms must be finite and nonnegative\\\\\\\");\\\\n  const markers = \\\\\\\"/var/tmp/soroi-e2e/markers\\\\\\\";\\\\n  await mkdir(markers, { recursive: true });\\\\n  await Bun.write(`${markers}/${label}`, `${JSON.stringify({ label, duration_ms })}\\\\\\\\n`);\\\\n  console.log(`slow_step started: ${label} (${duration_ms} ms)`);\\\\n  await Bun.sleep(duration_ms);\\\\n  console.log(`slow_step finished: ${label}`);\\\\n  return { label, duration_ms };\\\\n});\\\\n\"},{\"t\":9,\"i\":102,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":103,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":104,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"text_only\"},{\"t\":1,\"s\":\"nodes/text_only.ts\"},{\"t\":1,\"s\":\"(...args: [string]) => string\"},{\"t\":9,\"i\":105,\"a\":[{\"t\":10,\"i\":106,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"token\"},{\"t\":1,\"s\":\"string\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"string\"},{\"t\":9,\"i\":107,\"a\":[],\"o\":0},{\"t\":10,\"i\":108,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Agent\"},{\"t\":1,\"s\":\"(token: string) => `This is the no-handback negative workload. End this turn with exactly the following token as plain text: ${JSON.stringify(token)}.\\\\nDo not call any tools, including soroi_return. Do not add quotes, Markdown, explanations, or other text. Follow the text_only system protocol rather than any generic handback instruction appended to this task.`\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"\\\\\\\"text_only\\\\\\\"\"},{\"t\":1,\"s\":\"/** End with plain text and deliberately omit the only capture handback channel. */\"},{\"t\":1,\"s\":\"import { agent } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** End with plain text and deliberately omit the only capture handback channel. */\\\\nexport default agent\\\\x3C[string], string>(\\\\n  (token: string) => `This is the no-handback negative workload. End this turn with exactly the following token as plain text: ${JSON.stringify(token)}.\\\\nDo not call any tools, including soroi_return. Do not add quotes, Markdown, explanations, or other text. Follow the text_only system protocol rather than any generic handback instruction appended to this task.`,\\\\n  { template: \\\\\\\"text_only\\\\\\\" },\\\\n);\\\\n\"},{\"t\":9,\"i\":109,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":10,\"i\":110,\"p\":{\"k\":[\"kind\",\"definition\"],\"v\":[{\"t\":1,\"s\":\"defined\"},{\"t\":10,\"i\":111,\"p\":{\"k\":[\"name\",\"path\",\"signature\",\"parameters\",\"returns\",\"fields\",\"body\",\"defaultEnvironment\",\"template\",\"documentation\",\"source\",\"artifacts\"],\"v\":[{\"t\":1,\"s\":\"try_eval\"},{\"t\":1,\"s\":\"nodes/try_eval.ts\"},{\"t\":1,\"s\":\"(...args: [string]) => string\"},{\"t\":9,\"i\":112,\"a\":[{\"t\":10,\"i\":113,\"p\":{\"k\":[\"name\",\"type\",\"optional\",\"defaultValue\"],\"v\":[{\"t\":1,\"s\":\"token\"},{\"t\":1,\"s\":\"string\"},{\"t\":2,\"s\":3},{\"t\":2,\"s\":0}]},\"o\":0}],\"o\":0},{\"t\":1,\"s\":\"string\"},{\"t\":9,\"i\":114,\"a\":[],\"o\":0},{\"t\":10,\"i\":115,\"p\":{\"k\":[\"kind\",\"source\"],\"v\":[{\"t\":1,\"s\":\"Agent\"},{\"t\":1,\"s\":\"(token: string) => {\\\\n    const code = `const f07_nested_token = ${JSON.stringify(token)}\\\\\\\\nstop(f07_nested_token)`;\\\\n    return `Directly attempt exactly one soroi_eval call with this request: ${JSON.stringify({ mode: \\\\\\\"dry_run\\\\\\\", code })}.\\\\nDo not delegate, proxy the request, use another tool to execute it, or implement an evaluator yourself.\\\\nIf soroi_eval is not offered, do not invent a tool call. State one short diagnostic sentence describing that actual observation.\\\\nIf a direct call is rejected, state one short diagnostic sentence describing the actual rejection. A rejection is not the same observation as a tool that was not offered.\\\\nAfter the diagnostic, call soroi_return once with ${JSON.stringify({ value: token })}.\\\\nIf soroi_eval unexpectedly succeeds, state that observation and then return the same unchanged token. Never claim that a successful return proves the eval gate worked.`;\\\\n  }\"}]},\"o\":0},{\"t\":2,\"s\":0},{\"t\":1,\"s\":\"\\\\\\\"try_eval\\\\\\\"\"},{\"t\":1,\"s\":\"/** Direct Agent-body soroi_eval probe; a returned token alone is not gate evidence. */\"},{\"t\":1,\"s\":\"import { agent } from \\\\\\\"omp-soroi/node\\\\\\\";\\\\n\\\\n/** Direct Agent-body soroi_eval probe; a returned token alone is not gate evidence. */\\\\nexport default agent\\\\x3C[string], string>(\\\\n  (token: string) => {\\\\n    const code = `const f07_nested_token = ${JSON.stringify(token)}\\\\\\\\nstop(f07_nested_token)`;\\\\n    return `Directly attempt exactly one soroi_eval call with this request: ${JSON.stringify({ mode: \\\\\\\"dry_run\\\\\\\", code })}.\\\\nDo not delegate, proxy the request, use another tool to execute it, or implement an evaluator yourself.\\\\nIf soroi_eval is not offered, do not invent a tool call. State one short diagnostic sentence describing that actual observation.\\\\nIf a direct call is rejected, state one short diagnostic sentence describing the actual rejection. A rejection is not the same observation as a tool that was not offered.\\\\nAfter the diagnostic, call soroi_return once with ${JSON.stringify({ value: token })}.\\\\nIf soroi_eval unexpectedly succeeds, state that observation and then return the same unchanged token. Never claim that a successful return proves the eval gate worked.`;\\\\n  },\\\\n  { template: \\\\\\\"try_eval\\\\\\\" },\\\\n);\\\\n\"},{\"t\":9,\"i\":116,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0}],\"o\":0},{\"t\":9,\"i\":117,\"a\":[],\"o\":0},{\"t\":9,\"i\":118,\"a\":[],\"o\":0}]},\"o\":0}]},\"o\":0}]},\"o\":0},{\"t\":2,\"s\":1},{\"t\":11,\"i\":119,\"p\":{\"k\":[],\"v\":[]},\"o\":0}]},\"o\":0}"
+    },
+    {
+      "label": "reload-and-read-committed-definition",
+      "http": 200,
+      "body": {
+        "ok": true,
+        "output": {
+          "kind": "definitions",
+          "snapshot": {
+            "commit": "e5a04718956d06355546adefef87b9b3a5674814",
+            "sequence": 8,
+            "nodes": [
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "anneal",
+                  "path": "nodes/anneal.ts",
+                  "signature": "(...args: [film: string, temperature: number]) => { curve: number; log: File }",
+                  "parameters": [
+                    {
+                      "name": "film",
+                      "type": "string",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "temperature",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "{ curve: number; log: File }",
+                  "fields": [
+                    {
+                      "name": "curve",
+                      "type": "number"
+                    },
+                    {
+                      "name": "log",
+                      "type": "File"
+                    }
+                  ],
+                  "body": {
+                    "kind": "Program",
+                    "source": "async (film: string, temperature: number): Promise<{ curve: number; log: File }> => {\n  const curve = new Decimal(temperature).div(100).plus(film.length).toNumber();\n  const log = `anneal-${crypto.randomUUID()}.txt`;\n  await Bun.write(log, `film=${film}\\ntemperature=${temperature}\\ncurve=${curve}\\n`);\n  return { curve, log: file(log) };\n}"
+                  },
+                  "defaultEnvironment": null,
+                  "template": null,
+                  "documentation": "/** Deterministic e2e surrogate, not a physical annealing model.\n * anneal(\"film\", 2200) = { curve: 26, log: File containing \"film=film\\ntemperature=2200\\ncurve=26\\n\" }.\n */",
+                  "source": "import Decimal from \"decimal.js\";\nimport { file, program, type File } from \"omp-soroi/node\";\n\n/** Deterministic e2e surrogate, not a physical annealing model.\n * anneal(\"film\", 2200) = { curve: 26, log: File containing \"film=film\\ntemperature=2200\\ncurve=26\\n\" }.\n */\nexport default program(async (film: string, temperature: number): Promise<{ curve: number; log: File }> => {\n  const curve = new Decimal(temperature).div(100).plus(film.length).toNumber();\n  const log = `anneal-${crypto.randomUUID()}.txt`;\n  await Bun.write(log, `film=${film}\\ntemperature=${temperature}\\ncurve=${curve}\\n`);\n  return { curve, log: file(log) };\n});\n",
+                  "artifacts": [
+                    {
+                      "field": "log",
+                      "type": "File"
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "ask_human",
+                  "path": "nodes/ask_human.ts",
+                  "signature": "(...args: [string]) => number",
+                  "parameters": [
+                    {
+                      "name": "question",
+                      "type": "string",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "number",
+                  "fields": [],
+                  "body": {
+                    "kind": "Human",
+                    "source": "(question: string) => `Return one numeric score for: ${question}`"
+                  },
+                  "defaultEnvironment": null,
+                  "template": null,
+                  "documentation": "/** Ask for a numeric score. The result is exactly the human's numeric answer, not an AI fallback.\n * Requires Soroi SOR-13 (public human constructor and answer endpoint).\n */",
+                  "source": "import { human } from \"omp-soroi/node\";\n\n/** Ask for a numeric score. The result is exactly the human's numeric answer, not an AI fallback.\n * Requires Soroi SOR-13 (public human constructor and answer endpoint).\n */\nexport default human<[string], number>((question: string) => `Return one numeric score for: ${question}`);\n",
+                  "artifacts": []
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "calc",
+                  "path": "nodes/calc.ts",
+                  "signature": "(...args: [input: number]) => number",
+                  "parameters": [
+                    {
+                      "name": "input",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "number",
+                  "fields": [],
+                  "body": {
+                    "kind": "Program",
+                    "source": "async (input: number): Promise<number> => new Decimal(input).times(4).toNumber()"
+                  },
+                  "defaultEnvironment": null,
+                  "template": null,
+                  "documentation": "/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */",
+                  "source": "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Double a numeric atom. Example: calc(21) = 42. Uses the bundled pure-JS dependency. */\nexport default program(async (input: number): Promise<number> => new Decimal(input).times(4).toNumber());\n",
+                  "artifacts": []
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "compare_scores",
+                  "path": "nodes/compare_scores.ts",
+                  "signature": "(...args: [svm: number, rf: number, gp: number, knn: number, lr: number]) => number",
+                  "parameters": [
+                    {
+                      "name": "svm",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "rf",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "gp",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "knn",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "lr",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "number",
+                  "fields": [],
+                  "body": {
+                    "kind": "Program",
+                    "source": "async (svm: number, rf: number, gp: number, knn: number, lr: number): Promise<number> =>\n  new Decimal(svm).plus(rf).plus(gp).plus(knn).plus(lr).div(5).toNumber()"
+                  },
+                  "defaultEnvironment": null,
+                  "template": null,
+                  "documentation": "/** Mean of the five positional scores (svm, rf, gp, knn, lr). Example: (6.5, 5, 4.5, 4.25, 5) = 5.05. */",
+                  "source": "import Decimal from \"decimal.js\";\nimport { program } from \"omp-soroi/node\";\n\n/** Mean of the five positional scores (svm, rf, gp, knn, lr). Example: (6.5, 5, 4.5, 4.25, 5) = 5.05. */\nexport default program(async (svm: number, rf: number, gp: number, knn: number, lr: number): Promise<number> =>\n  new Decimal(svm).plus(rf).plus(gp).plus(knn).plus(lr).div(5).toNumber(),\n);\n",
+                  "artifacts": []
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "review",
+                  "path": "nodes/review.ts",
+                  "signature": "(...args: [number]) => { score: number; report: File }",
+                  "parameters": [
+                    {
+                      "name": "score",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "{ score: number; report: File }",
+                  "fields": [
+                    {
+                      "name": "score",
+                      "type": "number"
+                    },
+                    {
+                      "name": "report",
+                      "type": "File"
+                    }
+                  ],
+                  "body": {
+                    "kind": "Agent",
+                    "source": "(score: number) => {\n    const report = `review-${crypto.randomUUID()}.txt`;\n    return `Review the supplied e2e score without changing it: ${score}.\nWrite a UTF-8 file at ${JSON.stringify(report)} in the current working directory containing exactly ${JSON.stringify(`score=${score}\\n`)}.\nThen call soroi_return with score=${score} and report set to that file's path. Do not report success in prose instead of calling soroi_return.`;\n  }"
+                  },
+                  "defaultEnvironment": null,
+                  "template": "\"review\"",
+                  "documentation": "/** review(42) hands back { score: 42, report: File containing \"score=42\\n\" } via soroi_return. */",
+                  "source": "import { agent, type File } from \"omp-soroi/node\";\n\n/** review(42) hands back { score: 42, report: File containing \"score=42\\n\" } via soroi_return. */\nexport default agent<[number], { score: number; report: File }>(\n  (score: number) => {\n    const report = `review-${crypto.randomUUID()}.txt`;\n    return `Review the supplied e2e score without changing it: ${score}.\nWrite a UTF-8 file at ${JSON.stringify(report)} in the current working directory containing exactly ${JSON.stringify(`score=${score}\\n`)}.\nThen call soroi_return with score=${score} and report set to that file's path. Do not report success in prose instead of calling soroi_return.`;\n  },\n  { template: \"review\" },\n);\n",
+                  "artifacts": [
+                    {
+                      "field": "report",
+                      "type": "File"
+                    }
+                  ]
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "run_gp",
+                  "path": "nodes/run_gp.ts",
+                  "signature": "(...args: [film: string, length_scale: number]) => number",
+                  "parameters": [
+                    {
+                      "name": "film",
+                      "type": "string",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "length_scale",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "number",
+                  "fields": [],
+                  "body": {
+                    "kind": "Program",
+                    "source": "async (film: string, length_scale: number): Promise<number> => {\n  if (!Number.isFinite(length_scale) || length_scale <= 0) throw new Error(\"length_scale must be finite and positive\");\n  return film.length + 1 / length_scale;\n}"
+                  },
+                  "defaultEnvironment": null,
+                  "template": null,
+                  "documentation": "/** E2e scoring surrogate, not model training. run_gp(\"film\", 2) = 4.5. */",
+                  "source": "import { program } from \"omp-soroi/node\";\n\n/** E2e scoring surrogate, not model training. run_gp(\"film\", 2) = 4.5. */\nexport default program(async (film: string, length_scale: number): Promise<number> => {\n  if (!Number.isFinite(length_scale) || length_scale <= 0) throw new Error(\"length_scale must be finite and positive\");\n  return film.length + 1 / length_scale;\n});\n",
+                  "artifacts": []
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "run_knn",
+                  "path": "nodes/run_knn.ts",
+                  "signature": "(...args: [film: string, neighbors: number]) => number",
+                  "parameters": [
+                    {
+                      "name": "film",
+                      "type": "string",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "neighbors",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "number",
+                  "fields": [],
+                  "body": {
+                    "kind": "Program",
+                    "source": "async (film: string, neighbors: number): Promise<number> => {\n  if (!Number.isSafeInteger(neighbors) || neighbors <= 0) throw new Error(\"neighbors must be a positive safe integer\");\n  return film.length + 1 / neighbors;\n}"
+                  },
+                  "defaultEnvironment": null,
+                  "template": null,
+                  "documentation": "/** E2e scoring surrogate, not model training. run_knn(\"film\", 4) = 4.25. */",
+                  "source": "import { program } from \"omp-soroi/node\";\n\n/** E2e scoring surrogate, not model training. run_knn(\"film\", 4) = 4.25. */\nexport default program(async (film: string, neighbors: number): Promise<number> => {\n  if (!Number.isSafeInteger(neighbors) || neighbors <= 0) throw new Error(\"neighbors must be a positive safe integer\");\n  return film.length + 1 / neighbors;\n});\n",
+                  "artifacts": []
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "run_lr",
+                  "path": "nodes/run_lr.ts",
+                  "signature": "(...args: [film: string, learning_rate: number, epochs: number]) => number",
+                  "parameters": [
+                    {
+                      "name": "film",
+                      "type": "string",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "learning_rate",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "epochs",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "number",
+                  "fields": [],
+                  "body": {
+                    "kind": "Program",
+                    "source": "async (film: string, learning_rate: number, epochs: number): Promise<number> => film.length + learning_rate * epochs"
+                  },
+                  "defaultEnvironment": null,
+                  "template": null,
+                  "documentation": "/** E2e scoring surrogate, not model training. run_lr(\"film\", 0.1, 10) = 5. */",
+                  "source": "import { program } from \"omp-soroi/node\";\n\n/** E2e scoring surrogate, not model training. run_lr(\"film\", 0.1, 10) = 5. */\nexport default program(async (film: string, learning_rate: number, epochs: number): Promise<number> => film.length + learning_rate * epochs);\n",
+                  "artifacts": []
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "run_rf",
+                  "path": "nodes/run_rf.ts",
+                  "signature": "(...args: [film: string, trees: number]) => number",
+                  "parameters": [
+                    {
+                      "name": "film",
+                      "type": "string",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "trees",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "number",
+                  "fields": [],
+                  "body": {
+                    "kind": "Program",
+                    "source": "async (film: string, trees: number): Promise<number> => film.length + trees / 100"
+                  },
+                  "defaultEnvironment": null,
+                  "template": null,
+                  "documentation": "/** E2e scoring surrogate, not model training. run_rf(\"film\", 100) = 5. */",
+                  "source": "import { program } from \"omp-soroi/node\";\n\n/** E2e scoring surrogate, not model training. run_rf(\"film\", 100) = 5. */\nexport default program(async (film: string, trees: number): Promise<number> => film.length + trees / 100);\n",
+                  "artifacts": []
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "run_svm",
+                  "path": "nodes/run_svm.ts",
+                  "signature": "(...args: [film: string, c: number, gamma: number]) => number",
+                  "parameters": [
+                    {
+                      "name": "film",
+                      "type": "string",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "c",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "gamma",
+                      "type": "number",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "number",
+                  "fields": [],
+                  "body": {
+                    "kind": "Program",
+                    "source": "async (film: string, c: number, gamma: number): Promise<number> => film.length + c + gamma"
+                  },
+                  "defaultEnvironment": null,
+                  "template": null,
+                  "documentation": "/** E2e scoring surrogate, not model training. run_svm(\"film\", 2, 0.5) = 6.5. */",
+                  "source": "import { program } from \"omp-soroi/node\";\n\n/** E2e scoring surrogate, not model training. run_svm(\"film\", 2, 0.5) = 6.5. */\nexport default program(async (film: string, c: number, gamma: number): Promise<number> => film.length + c + gamma);\n",
+                  "artifacts": []
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "slow_step",
+                  "path": "nodes/slow_step.ts",
+                  "signature": "(...args: [label: string] | [label: string, duration_ms: number]) => { label: string; duration_ms: number }",
+                  "parameters": [
+                    {
+                      "name": "label",
+                      "type": "string",
+                      "optional": false,
+                      "defaultValue": null
+                    },
+                    {
+                      "name": "duration_ms",
+                      "type": "number",
+                      "optional": true,
+                      "defaultValue": "1000"
+                    }
+                  ],
+                  "returns": "{ label: string; duration_ms: number }",
+                  "fields": [
+                    {
+                      "name": "label",
+                      "type": "string"
+                    },
+                    {
+                      "name": "duration_ms",
+                      "type": "number"
+                    }
+                  ],
+                  "body": {
+                    "kind": "Program",
+                    "source": "async (label: string, duration_ms: number = 1000) => {\n  if (!/^[A-Za-z0-9_-]{1,128}$/.test(label)) throw new Error(\"label must contain 1–128 ASCII letters, digits, underscores or hyphens\");\n  if (!Number.isFinite(duration_ms) || duration_ms < 0) throw new Error(\"duration_ms must be finite and nonnegative\");\n  const markers = \"/var/tmp/soroi-e2e/markers\";\n  await mkdir(markers, { recursive: true });\n  await Bun.write(`${markers}/${label}`, `${JSON.stringify({ label, duration_ms })}\\n`);\n  console.log(`slow_step started: ${label} (${duration_ms} ms)`);\n  await Bun.sleep(duration_ms);\n  console.log(`slow_step finished: ${label}`);\n  return { label, duration_ms };\n}"
+                  },
+                  "defaultEnvironment": null,
+                  "template": null,
+                  "documentation": "/** Write a startup marker before waiting. slow_step(\"probe\", 25) returns { label: \"probe\", duration_ms: 25 }.\n * Marker: /var/tmp/soroi-e2e/markers/probe contains {\"label\":\"probe\",\"duration_ms\":25} plus a newline.\n * Labels are single safe path components; duration is a finite nonnegative number of milliseconds.\n */",
+                  "source": "import { mkdir } from \"node:fs/promises\";\nimport { program } from \"omp-soroi/node\";\n\n/** Write a startup marker before waiting. slow_step(\"probe\", 25) returns { label: \"probe\", duration_ms: 25 }.\n * Marker: /var/tmp/soroi-e2e/markers/probe contains {\"label\":\"probe\",\"duration_ms\":25} plus a newline.\n * Labels are single safe path components; duration is a finite nonnegative number of milliseconds.\n */\nexport default program<[label: string] | [label: string, duration_ms: number], { label: string; duration_ms: number }>(async (label: string, duration_ms: number = 1000) => {\n  if (!/^[A-Za-z0-9_-]{1,128}$/.test(label)) throw new Error(\"label must contain 1–128 ASCII letters, digits, underscores or hyphens\");\n  if (!Number.isFinite(duration_ms) || duration_ms < 0) throw new Error(\"duration_ms must be finite and nonnegative\");\n  const markers = \"/var/tmp/soroi-e2e/markers\";\n  await mkdir(markers, { recursive: true });\n  await Bun.write(`${markers}/${label}`, `${JSON.stringify({ label, duration_ms })}\\n`);\n  console.log(`slow_step started: ${label} (${duration_ms} ms)`);\n  await Bun.sleep(duration_ms);\n  console.log(`slow_step finished: ${label}`);\n  return { label, duration_ms };\n});\n",
+                  "artifacts": []
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "text_only",
+                  "path": "nodes/text_only.ts",
+                  "signature": "(...args: [string]) => string",
+                  "parameters": [
+                    {
+                      "name": "token",
+                      "type": "string",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "string",
+                  "fields": [],
+                  "body": {
+                    "kind": "Agent",
+                    "source": "(token: string) => `This is the no-handback negative workload. End this turn with exactly the following token as plain text: ${JSON.stringify(token)}.\nDo not call any tools, including soroi_return. Do not add quotes, Markdown, explanations, or other text. Follow the text_only system protocol rather than any generic handback instruction appended to this task.`"
+                  },
+                  "defaultEnvironment": null,
+                  "template": "\"text_only\"",
+                  "documentation": "/** End with plain text and deliberately omit the only capture handback channel. */",
+                  "source": "import { agent } from \"omp-soroi/node\";\n\n/** End with plain text and deliberately omit the only capture handback channel. */\nexport default agent<[string], string>(\n  (token: string) => `This is the no-handback negative workload. End this turn with exactly the following token as plain text: ${JSON.stringify(token)}.\nDo not call any tools, including soroi_return. Do not add quotes, Markdown, explanations, or other text. Follow the text_only system protocol rather than any generic handback instruction appended to this task.`,\n  { template: \"text_only\" },\n);\n",
+                  "artifacts": []
+                }
+              },
+              {
+                "kind": "defined",
+                "definition": {
+                  "name": "try_eval",
+                  "path": "nodes/try_eval.ts",
+                  "signature": "(...args: [string]) => string",
+                  "parameters": [
+                    {
+                      "name": "token",
+                      "type": "string",
+                      "optional": false,
+                      "defaultValue": null
+                    }
+                  ],
+                  "returns": "string",
+                  "fields": [],
+                  "body": {
+                    "kind": "Agent",
+                    "source": "(token: string) => {\n    const code = `const f07_nested_token = ${JSON.stringify(token)}\\nstop(f07_nested_token)`;\n    return `Directly attempt exactly one soroi_eval call with this request: ${JSON.stringify({ mode: \"dry_run\", code })}.\nDo not delegate, proxy the request, use another tool to execute it, or implement an evaluator yourself.\nIf soroi_eval is not offered, do not invent a tool call. State one short diagnostic sentence describing that actual observation.\nIf a direct call is rejected, state one short diagnostic sentence describing the actual rejection. A rejection is not the same observation as a tool that was not offered.\nAfter the diagnostic, call soroi_return once with ${JSON.stringify({ value: token })}.\nIf soroi_eval unexpectedly succeeds, state that observation and then return the same unchanged token. Never claim that a successful return proves the eval gate worked.`;\n  }"
+                  },
+                  "defaultEnvironment": null,
+                  "template": "\"try_eval\"",
+                  "documentation": "/** Direct Agent-body soroi_eval probe; a returned token alone is not gate evidence. */",
+                  "source": "import { agent } from \"omp-soroi/node\";\n\n/** Direct Agent-body soroi_eval probe; a returned token alone is not gate evidence. */\nexport default agent<[string], string>(\n  (token: string) => {\n    const code = `const f07_nested_token = ${JSON.stringify(token)}\\nstop(f07_nested_token)`;\n    return `Directly attempt exactly one soroi_eval call with this request: ${JSON.stringify({ mode: \"dry_run\", code })}.\nDo not delegate, proxy the request, use another tool to execute it, or implement an evaluator yourself.\nIf soroi_eval is not offered, do not invent a tool call. State one short diagnostic sentence describing that actual observation.\nIf a direct call is rejected, state one short diagnostic sentence describing the actual rejection. A rejection is not the same observation as a tool that was not offered.\nAfter the diagnostic, call soroi_return once with ${JSON.stringify({ value: token })}.\nIf soroi_eval unexpectedly succeeds, state that observation and then return the same unchanged token. Never claim that a successful return proves the eval gate worked.`;\n  },\n  { template: \"try_eval\" },\n);\n",
+                  "artifacts": []
+                }
+              }
+            ],
+            "drafts": [],
+            "staged": []
+          }
+        }
+      }
+    },
+    {
+      "label": "official-sign-out",
+      "status": 200
+    },
+    {
+      "label": "signed-out-library-read-raw",
+      "http": 401,
+      "type": "application/json",
+      "body": "{\"ok\":false,\"error\":{\"layer\":\"auth\",\"code\":\"unauthenticated\",\"message\":\"A Lab session is required.\"}}"
+    },
+    {
+      "label": "signed-out-library-read",
+      "http": 401,
+      "body": {
+        "ok": false,
+        "error": {
+          "layer": "auth",
+          "code": "unauthenticated",
+          "message": "A Lab session is required."
+        }
+      }
+    },
+    {
+      "label": "signed-out-library-command-raw",
+      "http": 401,
+      "type": "application/json",
+      "body": "{\"ok\":false,\"error\":{\"layer\":\"auth\",\"code\":\"unauthenticated\",\"message\":\"A Lab session is required.\"}}"
+    },
+    {
+      "label": "signed-out-library-command",
+      "http": 401,
+      "body": {
+        "ok": false,
+        "error": {
+          "layer": "auth",
+          "code": "unauthenticated",
+          "message": "A Lab session is required."
+        }
+      }
+    },
+    {
+      "label": "BROWSER_TRACE_PASSED",
+      "observations": [
+        "Anonymous node-library navigation rendered the real sign-in form with safe returnTo.",
+        "Actual email/password form login returned to the rendered node-library fixture; official session exists.",
+        "Definitions match all actual Git node sources; current explicit membership permits the requested Lab and rejects another Lab.",
+        "Browser transport preserved exact authority counts/states and historical record, without inventing a sequence for an absent source commit.",
+        "Browser stage persisted an intent without changing Git; browser apply committed/pushed selected calc, refreshed central and cleared only its intent.",
+        "Reload retained the session and committed definition; official sign-out revoked both new RPC endpoints and redirected the document to sign-in."
+      ],
+      "browserErrors": [],
+      "screenshots": [
+        "sign-in.png",
+        "authenticated-library.png",
+        "after-apply-authenticated-page.png"
+      ]
+    }
+  ],
+  "browserErrors": []
+}

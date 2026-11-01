@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+import {readFile,writeFile} from 'node:fs/promises';
+import {join} from 'node:path';
+const repo='/Users/mouriya/Ext/worktrees/feat-lab-10-library-12fb373';
+const metadata=JSON.parse(await readFile('/tmp/lab10-built-browser-current.json','utf8'));
+const Database=createRequire(join(repo,'package.json'))('better-sqlite3');
+const db=new Database(join(metadata.root,'lab/lab.sqlite'),{readonly:true,fileMustExist:true});
+let sessions,staging;
+try{sessions=db.prepare('select count(*) as count from session').get().count;staging=db.prepare('select count(*) as count from library_staging').get().count;}finally{db.close();}
+assert.equal(sessions,0);assert.equal(staging,0);
+const lifecycle=await readFile(join(metadata.root,'lifecycle.log'),'utf8');
+assert.ok(lifecycle.includes('host stopped {"code":0,"signal":null}'));
+assert.ok(lifecycle.includes('store stopped {"code":0,"signal":null}'));
+const daemon=await readFile(join(metadata.root,'host.stderr.log'),'utf8');
+assert.match(daemon,/Worker exited \(code 0\)/);
+const calc=await readFile(join(metadata.cache,'nodes/calc.ts'),'utf8');
+assert.ok(calc.includes('.times(4)'));
+const result={sessions,stagedFunctions:staging,hostExit:0,storeExit:0,paseoWorkerExit:0,centralCalcBody:calc.split('\n').find(line=>line.startsWith('export default'))};
+await writeFile(join(metadata.root,'post-shutdown.json'),JSON.stringify(result,null,2));
+console.log(JSON.stringify(result,null,2));

@@ -1,0 +1,57 @@
+{
+  "issue": "https://github.com/Pepgent/Pepgent/issues/15",
+  "implementationHead": "fc89bcd",
+  "builtBrowserRoot": "/tmp/lab10-built-browser-je3bEe",
+  "finalHistoryFixture": "/tmp/lab10-historical-read-KFexby",
+  "commands": [
+    "node --import tsx /tmp/lab10-export-smoke.mjs",
+    "node --import tsx /tmp/lab-library-git-lifecycle.mts",
+    "node --import tsx /tmp/lab10-historical-read-driver.mts",
+    "npm test",
+    "node --import tsx /tmp/lab10-built-host.mjs",
+    "node /tmp/lab10-built-browser.mjs",
+    "node /tmp/lab10-final-readback.mjs"
+  ],
+  "observations": {
+    "sourceExport": "13 real node definitions; exact source, tuple signature, default1000, File fields; unsupported constructor forms reported per node; no source execution.",
+    "git": "selected-only stage/apply, stale three-way preservation, both overlap boundaries, unchanged indexes/other clone, failed sync abort/retry, unavailable entries, transport and helper restriction.",
+    "history": "two versions/two runs/four call occurrences survive restart; downloaded bundles17/29; default-history sequences1/2; present nonancestor orphan object has unavailable display.",
+    "browser": "real form login, explicit membership, definitions/usage/version through actual server functions, stage intent, remote commit and central fast-forward, reload, sign-out and both RPC401s.",
+    "shutdown": {
+      "sessions": 0,
+      "stagedFunctions": 0,
+      "hostExit": 0,
+      "storeExit": 0,
+      "paseoWorkerExit": 0,
+      "centralCalcBody": "export default program(async (input: number): Promise<number> => new Decimal(input).times(4).toNumber());"
+    }
+  },
+  "limits": [
+    "The rendered seven-node page remains the UI fixture. Screenshots prove authentication/navigation/rendering only; backend mutations were browser-originated server-function requests.",
+    "Hosted SSH/deploy-key authorization and host trust were not exercised.",
+    "No credentials, cookie jars, private identity configuration or SQLite files are included. The store emitted no stderr bytes, so no stderr file was created or synthesized."
+  ],
+  "drivers": "Exact executed snapshots with local absolute fixture/repository paths; adapt those path constants to the corresponding local checkouts before reproduction. No portable test harness is claimed.",
+  "files": [
+    "node-export.json",
+    "git-lifecycle.log",
+    "store-history.jsonl",
+    "store-version-records.json",
+    "browser-transcript.json",
+    "post-shutdown.json",
+    "lifecycle.log",
+    "host.stdout.log",
+    "host.stderr.log",
+    "store.stdout.log",
+    "seed.log",
+    "screenshots/sign-in.png",
+    "screenshots/authenticated-fixture-page.png",
+    "drivers/node-export.mjs",
+    "drivers/git-lifecycle.mts",
+    "drivers/store-history.mts",
+    "drivers/built-host.mjs",
+    "drivers/built-browser.mjs",
+    "drivers/post-shutdown.mjs",
+    "hygiene/npm-test.log"
+  ]
+}
