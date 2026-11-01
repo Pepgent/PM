@@ -1,0 +1,13 @@
+{
+  "startup": {
+    "setupWizard": false,
+    "checkUpdate": false
+  },
+  "personality": "pragmatic",
+  "task": {
+    "agentIdleTtlMs": 2000
+  },
+  "extensions": [
+    "/tmp/soroi-a0/release/install-check/observe.ts"
+  ]
+}

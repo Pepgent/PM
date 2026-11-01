@@ -1,0 +1,14 @@
+/tmp/soroi-a0/work/node_modules:
+total 4
+drwxr-xr-x 1 agent agent  18 Nov  1 05:20 .
+drwxr-xr-x 1 agent agent  34 Nov  1 05:20 ..
+lrwxrwxrwx 1 agent agent 106 Nov  1 05:20 omp-soroi -> /home/agent/.omp/soroi/db93c567dd2b5473bf9848ba1b5d1cf01d9ac412a143c449c13640aa02425d62/packages/omp-soroi
+
+/tmp/soroi-a0/work/nodes:
+total 4
+drwxr-xr-x 1 agent agent  46 Nov  1 05:20 .
+drwxr-xr-x 1 agent agent  34 Nov  1 05:20 ..
+-rw-r--r-- 1 agent agent 103 Nov  1 05:20 install_check_double.ts
+--- input.json
+{"env":{"SOROI_STORE_URL":"http://pepgent-soroi-e2e-store.orb.local:3001","SOROI_MUX_URL":"ws://pepgent-soroi-e2e-mux.orb.local:8080"},"installer":["bun","/tmp/soroi-a0/release/install.ts","--home","/home/agent"],"prepare":["bun","/tmp/soroi-a0/release/install-check/prepare.js","--home","/home/agent","--proof","/tmp/soroi-a0/proof","--work","/tmp/soroi-a0/work"],"verifier":["bun","/tmp/soroi-a0/release/install-check/verify.js","--home","/home/agent","--proof","/tmp/soroi-a0/proof","--build","/tmp/soroi-a0/build.json"],"ompArgs":["--model","opencode-go/deepseek-v4.1-flash","--no-context-files","--no-lsp","--max-time","180","--cwd","/tmp/soroi-a0/work","--config","/tmp/soroi-a0/proof/check.yml","--","This is a bounded installation check, not a source-editing task. Read skill://soroi-eval first. Then call soroi_eval exactly with {\"mode\":\"dry_run\",\"code\":\"const install_input = 21\\nconst install_output = install_check_double(install_input)\\nstop(install_output)\"}. Do not use formal mode, pins or env. Next call soroi_task with {\"context\":\"Read-only installation check; no source edits or formal eval.\",\"tasks\":[{\"name\":\"InstallCheckWorker\",\"agent\":\"soroi-worker\",\"task\":\"Read-only installation check. Do not edit files or call soroi_eval. Call soroi_return once with result install-check-complete, then end your turn.\"}]}. Wait for the actual worker handback before reporting the real tool results. Do not edit files."],"marker":"a0-31c6ce50-9c0e-49ba-affe-ae960635becd"}--- build.json
+{"commits":{"soroi":"a5ac6d81ff67d2b9a4cf8b18fd7defb6fe45339f","e2e-driver":"cf4a47face2a0f5d94e55bf9b6ae02830bdb9c15"},"images":{"omp-agent":"sha256:3e9e97d1dad3fefa6173474c3b48472e7d89edcd5fd7197be72187c1feb7c5ab","store":"sha256:43d075bbdd507e733164d8c08e04fad826761a8744292f7dbe3b40fcd5ec78ed","mux":"sha256:6a88295275988f2b96f74c34761903ff16023ff1caabecbb0453556336b26fcc"},"release":"bb36f1e863fb5824369e1f5b449ac9d7c8b32dde2a2272d423980934722d6df3","omp":"18.14.2","model":"opencode-go/deepseek-v4.1-flash"}

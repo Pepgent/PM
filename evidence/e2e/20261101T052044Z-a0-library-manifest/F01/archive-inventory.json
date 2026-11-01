@@ -1,0 +1,248 @@
+{
+  "purpose": "Immutable actual A0 R4 failure preservation; not a product pass or runtime rerun",
+  "source_root": "/tmp/soroi-full-a0-r4-xnm280bs",
+  "publication_source": "/tmp/soroi-a0-r4-publication",
+  "original_terminal": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-91915-12-3afc0af7.log",
+  "source_counts": {
+    "files": 16,
+    "directories_excluding_root": 6,
+    "file_bytes": 1627926
+  },
+  "publication_counts": {
+    "files": 17,
+    "directories_excluding_root": 0,
+    "file_bytes": 183333
+  },
+  "original_terminal_counts": {
+    "files": 1,
+    "file_bytes": 74
+  },
+  "source_members": [
+    {
+      "path": "campaign.json",
+      "type": "file",
+      "bytes": 3217
+    },
+    {
+      "path": "evidence",
+      "type": "directory"
+    },
+    {
+      "path": "evidence/README.md",
+      "type": "file",
+      "bytes": 199
+    },
+    {
+      "path": "evidence/cleanup.json",
+      "type": "file",
+      "bytes": 76
+    },
+    {
+      "path": "evidence/proof",
+      "type": "directory"
+    },
+    {
+      "path": "evidence/proof/check.yml",
+      "type": "file",
+      "bytes": 224
+    },
+    {
+      "path": "evidence/proof/install-check-error.txt",
+      "type": "file",
+      "bytes": 195
+    },
+    {
+      "path": "evidence/proof/prepared.json",
+      "type": "file",
+      "bytes": 824
+    },
+    {
+      "path": "evidence/proof/recipe.json",
+      "type": "file",
+      "bytes": 1154
+    },
+    {
+      "path": "evidence/proof/sessions",
+      "type": "directory"
+    },
+    {
+      "path": "evidence/proof/sessions/2026-11-01T05-20-51-724Z_01a1958d-aa0c-74cc-988f-52e753acc569",
+      "type": "directory"
+    },
+    {
+      "path": "evidence/proof/sessions/2026-11-01T05-20-51-724Z_01a1958d-aa0c-74cc-988f-52e753acc569.jsonl",
+      "type": "file",
+      "bytes": 98263
+    },
+    {
+      "path": "evidence/proof/sessions/2026-11-01T05-20-51-724Z_01a1958d-aa0c-74cc-988f-52e753acc569/1.bash.log",
+      "type": "file",
+      "bytes": 2535
+    },
+    {
+      "path": "evidence/proof/verdict.json",
+      "type": "file",
+      "bytes": 4076
+    },
+    {
+      "path": "evidence/proof/verified-registration.json",
+      "type": "file",
+      "bytes": 620
+    },
+    {
+      "path": "evidence/pty",
+      "type": "directory"
+    },
+    {
+      "path": "evidence/pty/a0.txt",
+      "type": "file",
+      "bytes": 892281
+    },
+    {
+      "path": "evidence/store",
+      "type": "directory"
+    },
+    {
+      "path": "evidence/verdict.json",
+      "type": "file",
+      "bytes": 4399
+    },
+    {
+      "path": "native-summary.json",
+      "type": "file",
+      "bytes": 69871
+    },
+    {
+      "path": "owner-recipe.json",
+      "type": "file",
+      "bytes": 1154
+    },
+    {
+      "path": "terminal-plain.txt",
+      "type": "file",
+      "bytes": 548838
+    }
+  ],
+  "publication_members": [
+    {
+      "path": "235-r3-archive-response.json",
+      "type": "file",
+      "bytes": 2303
+    },
+    {
+      "path": "235-r4-result-response.json",
+      "type": "file",
+      "bytes": 3919
+    },
+    {
+      "path": "235-retry-intent.json",
+      "type": "file",
+      "bytes": 2154
+    },
+    {
+      "path": "260-check-runs.json",
+      "type": "file",
+      "bytes": 3496
+    },
+    {
+      "path": "260-comments.json",
+      "type": "file",
+      "bytes": 26659
+    },
+    {
+      "path": "260-graph.json",
+      "type": "file",
+      "bytes": 436
+    },
+    {
+      "path": "260-object.json",
+      "type": "file",
+      "bytes": 19638
+    },
+    {
+      "path": "260-r3-archive-response.json",
+      "type": "file",
+      "bytes": 2301
+    },
+    {
+      "path": "260-r4-result-response.json",
+      "type": "file",
+      "bytes": 3917
+    },
+    {
+      "path": "260-retry-intent.json",
+      "type": "file",
+      "bytes": 2152
+    },
+    {
+      "path": "260-review-comments.json",
+      "type": "file",
+      "bytes": 4
+    },
+    {
+      "path": "260-review-reviews.json",
+      "type": "file",
+      "bytes": 1571
+    },
+    {
+      "path": "260-status.json",
+      "type": "file",
+      "bytes": 4209
+    },
+    {
+      "path": "260-timeline.json",
+      "type": "file",
+      "bytes": 102204
+    },
+    {
+      "path": "266-r3-archive-response.json",
+      "type": "file",
+      "bytes": 2301
+    },
+    {
+      "path": "266-r4-result-response.json",
+      "type": "file",
+      "bytes": 3917
+    },
+    {
+      "path": "266-retry-intent.json",
+      "type": "file",
+      "bytes": 2152
+    }
+  ],
+  "direct_comparison": {
+    "method": "Compare exact relative member sets, member types, sizes, and every regular-file byte in 65536-byte blocks; no hashes",
+    "source_root": "equal before adding archive administration members",
+    "publication": "equal",
+    "original_terminal": "equal",
+    "preservation_container": "All source members/types/sizes and every regular-file byte equal; includes explicit root and empty directories"
+  },
+  "preservation_container": {
+    "path": "preservation/frozen-source-root.tar",
+    "bytes": 1669120,
+    "empty_source_directories": [
+      "evidence/store"
+    ],
+    "reason": "Git does not record empty directories; this labelled full-source tar preserves every frozen source member and byte without adding files inside the original source directories."
+  },
+  "obvious_credential_scan": {
+    "performed_before_copy": true,
+    "scanned_files": 34,
+    "scanned_bytes": 1811333,
+    "per_file_byte_limit": 8388608,
+    "total_byte_limit": 33554432,
+    "skipped_files": 0,
+    "symlinks_or_special_members": 0,
+    "pattern_match_counts": {
+      "private_key": 0,
+      "github_token": 0,
+      "aws_access_key": 0,
+      "google_api_key": 0,
+      "slack_token": 0,
+      "bearer_literal": 0,
+      "credential_assignment": 0
+    },
+    "scope": "All regular files physically within the two frozen source roots plus the supplied original terminal log. No config-referenced paths followed.",
+    "limitations": "Bounded obvious-pattern scan only, not a guarantee of absence of secrets; does not detect arbitrary, encoded, obfuscated, unknown-format or semantic secrets. No matched values printed; no credential files, SOPS or keychain read."
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "ompArgs": [
+    "--cwd",
+    "/tmp/soroi-a0/work",
+    "--config",
+    "/tmp/soroi-a0/proof/check.yml",
+    "--",
+    "This is a bounded installation check, not a source-editing task. Read skill://soroi-eval first. Then call soroi_eval exactly with {\"mode\":\"dry_run\",\"code\":\"const install_input = 21\\nconst install_output = install_check_double(install_input)\\nstop(install_output)\"}. Do not use formal mode, pins or env. Next call soroi_task with {\"context\":\"Read-only installation check; no source edits or formal eval.\",\"tasks\":[{\"name\":\"InstallCheckWorker\",\"agent\":\"soroi-worker\",\"task\":\"Read-only installation check. Do not edit files or call soroi_eval. Call soroi_return once with result install-check-complete, then end your turn.\"}]}. Wait for the actual worker handback before reporting the real tool results. Do not edit files."
+  ],
+  "steps": [
+    {
+      "kind": "expect",
+      "pattern": "soroi-install-check:turn-end"
+    },
+    {
+      "kind": "send",
+      "text": "/exit"
+    },
+    {
+      "kind": "expect",
+      "pattern": "/exit"
+    },
+    {
+      "kind": "send",
+      "text": "\r"
+    }
+  ]
+}
