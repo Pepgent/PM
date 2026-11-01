@@ -4,13 +4,13 @@
 
 ## 待表决
 
-本轮已收提案均已取得结论，没有待秘书计票的决策。D24 v2已4/4通过，决策关闭，九处正文正在按批准清单回写；该文书步骤不另设工程发车门禁。
+本轮已收提案均已取得结论，没有待秘书计票的决策。D24 v2已4/4通过并关闭，九处正文已统一回写；实际工程实现、送达及统一验收由各自拥有方确认，不以文书结案替代。
 
 ## 已结案、执行与文书边界
 
 | 决策 | 已登记结论与原票 | 文书回写和承载 |
 |---|---|---|
-| [D24 / PM#34](https://github.com/Pepgent/PM/issues/34)（P0） | v2四席4/4，0意图否决、0分类争议，独立审查第1轮反例已由v2消除并在第2轮改赞成；v1不计；CLOSED、Project Done；[定稿与原票5fd29cf](https://github.com/Pepgent/PM/commit/5fd29cf) | 九处根端点derive正文按批准清单回写中，统一必填by，保留store POST/runs/derive、DeriveCommit和GUI intervene.derive不变；实际送达分别由AreaMgrSoroi/AreaMgrPepgent负责，不把评论当收到。 |
+| [D24 / PM#34](https://github.com/Pepgent/PM/issues/34)（P0） | v2四席4/4，0意图否决、0分类争议，独立审查首轮反例已由v2消除、第二轮改赞成；v1不计；CLOSED、Project Done；[定稿及各轮原票5fd29cf](https://github.com/Pepgent/PM/commit/5fd29cf) | [九处正文已回写6beff82](https://github.com/Pepgent/PM/commit/6beff82)，根请求统一必填by；store POST/runs/derive、DeriveCommit和GUI intervene.derive不变，D12未动。[原BLOCKED已登记结论](https://github.com/Pepgent/soroi/issues/217#issuecomment-6560041051)，已回GovClone_2dcf，由AreaMgrSoroi/AreaMgrPepgent送W07/W09；尚无本项实际送达证据，不把评论当收到。 |
 | [D23 / PM#33](https://github.com/Pepgent/PM/issues/33)（P0） | 01四席4/4、02五席5/5，0否决、无有效反例；CLOSED、Project Done；[五票、定稿与取证a5a0c5e](https://github.com/Pepgent/PM/commit/a5a0c5e) | D6:141已回写string；[soroi#315](https://github.com/Pepgent/soroi/issues/315)已由[PR#316](https://github.com/Pepgent/soroi/pull/316)合入关闭，Main提供合并提交5ad9b4b与W06退役事实；W07仍只写自己的域，不等待跨组件live验收。 |
 | [D20 / PM#30](https://github.com/Pepgent/PM/issues/30)（P0） | v4 三项逐条5/5赞成，0专责否决、有效反例清零；v1–v3不计入，历史票保留；CLOSED、Project Done | 五席原票及D16-09/11、D7/D8前端边界直接替换：[PM 5621469](https://github.com/Pepgent/PM/commit/5621469)。[文档承载 Pepgent#51](https://github.com/Pepgent/Pepgent/issues/51)已建，W09在席owner为W09、退役后W10；renderer README始终W10。[经理已实际送达](https://github.com/Pepgent/Pepgent/issues/51#issuecomment-6559750589)。W10重新进场仍由Main按LAB-07a、并发和滚动源安排，不由秘书启停。 |
 | [D22 / PM#31](https://github.com/Pepgent/PM/issues/31)（P1） | D22-01四席赞成/四席，无否决/有效反例；CLOSED、Project Done；[定稿及前三席原票 bd2d4fa](https://github.com/Pepgent/PM/commit/bd2d4fa)，[协调席原票已补登](https://github.com/Pepgent/PM/issues/31#issuecomment-6559817971)，归档为 `evidence/votes/D22-Coordination.md` | 与D21共用[deploy#20](https://github.com/Pepgent/deploy/issues/20)。D7-19变量名及容器内挂载根语义、D7-04引用已[回写8a8ec77](https://github.com/Pepgent/PM/commit/8a8ec77)。应用临时检出偏差另由[Pepgent#52](https://github.com/Pepgent/Pepgent/issues/52)承载，不把部署注入当该偏差已修复。 |
