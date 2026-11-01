@@ -4,12 +4,15 @@
 
 ## 待表决
 
-本轮秘书已收的 D18–D22 均已达到现行门槛并结案，没有尚待秘书计票的阻断项。D22 总协调席赞成原票已补登，最终四席4/4通过。新提案仍按 P0→P1→P2→P3、同级 issue 号 FIFO 登记。
+| 顺序 | 优先级 | 决策 | 当前状态与下一步 |
+|---|---|---|---|
+| 1 | P0 | [D24：根端点derive请求补by / PM#34](https://github.com/Pepgent/PM/issues/34) | 完整草案已立案、Project In progress；四个产品/契约职能席收票中，尚未向秘书提供原票，不补造票数或结论。发起人GovClone负责继续收票；未通过前不把草案作为已批准wire。 |
 
 ## 已结案、执行与文书边界
 
 | 决策 | 已登记结论与原票 | 文书回写和承载 |
 |---|---|---|
+| [D23 / PM#33](https://github.com/Pepgent/PM/issues/33)（P0） | 01四席4/4、02五席5/5，0否决、无有效反例；CLOSED、Project Done；[五票、定稿与取证a5a0c5e](https://github.com/Pepgent/PM/commit/a5a0c5e) | D6:141已回写string；[soroi#315](https://github.com/Pepgent/soroi/issues/315)归W06，同PR同步derive.test.ts:238，已按明确指令交Main并由Main报告发车；W07仍只写自己的域，不等待跨组件live验收。 |
 | [D20 / PM#30](https://github.com/Pepgent/PM/issues/30)（P0） | v4 三项逐条5/5赞成，0专责否决、有效反例清零；v1–v3不计入，历史票保留；CLOSED、Project Done | 五席原票及D16-09/11、D7/D8前端边界直接替换：[PM 5621469](https://github.com/Pepgent/PM/commit/5621469)。[文档承载 Pepgent#51](https://github.com/Pepgent/Pepgent/issues/51)已建，W09在席owner为W09、退役后W10；renderer README始终W10。[经理已实际送达](https://github.com/Pepgent/Pepgent/issues/51#issuecomment-6559750589)。W10重新进场仍由Main按LAB-07a、并发和滚动源安排，不由秘书启停。 |
 | [D22 / PM#31](https://github.com/Pepgent/PM/issues/31)（P1） | D22-01四席赞成/四席，无否决/有效反例；CLOSED、Project Done；[定稿及前三席原票 bd2d4fa](https://github.com/Pepgent/PM/commit/bd2d4fa)，[协调席原票已补登](https://github.com/Pepgent/PM/issues/31#issuecomment-6559817971)，归档为 `evidence/votes/D22-Coordination.md` | 与D21共用[deploy#20](https://github.com/Pepgent/deploy/issues/20)。D7-19变量名及容器内挂载根语义、D7-04引用已[回写8a8ec77](https://github.com/Pepgent/PM/commit/8a8ec77)。应用临时检出偏差另由[Pepgent#52](https://github.com/Pepgent/Pepgent/issues/52)承载，不把部署注入当该偏差已修复。 |
 | [D21 / PM#32](https://github.com/Pepgent/PM/issues/32)（P1） | D21-01四席赞成/四席，无否决/有效反例；CLOSED、Project Done；[定稿及原票 bd2d4fa](https://github.com/Pepgent/PM/commit/bd2d4fa) | [deploy#20](https://github.com/Pepgent/deploy/issues/20)两个变量独立验收，已由[PR#21](https://github.com/Pepgent/deploy/pull/21)合入关闭；Main提供W04第三次退役事实，AreaMgrDeploy2 capture确认席位不存在。只记录本仓交付，不冒称阶段C或真实卷路径已验证。 |
