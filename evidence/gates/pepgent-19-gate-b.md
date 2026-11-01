@@ -4,7 +4,7 @@
 
 对象：[Pepgent/Pepgent#19（LAB-09）](https://github.com/Pepgent/Pepgent/issues/19) [评论 6561464709](https://github.com/Pepgent/Pepgent/issues/19#issuecomment-6561464709) 上报的七项自动化契约裁决请求（分支 `issue-19-lab-automation`）。输入材料为 `/Users/mouriya/Ext/code/pepgent/pepgent-pm/evidence/gates/pepgent-19.md`。
 
-本判定仅审席位路径白名单、阶段门禁、必须投票的程序边界与表决期过渡是否符合 `D10-08`“只暂停依赖部分”，不替 `Argon`（闸门 A）或投票席位裁决产品原始意图、公开契约内容或具体运行时/wire 形态。所有被判入 P0 的依赖子项在 P0 议案表决通过前严禁合入 `main`；待闸门 A 判定落盘后立即通过议会 daemon 立案 P0（由 `DeskPepgent19Rulings` / `Secretary-2` / `ArgonGovernance-2` 经 `council propose` 提交入 P0 队列）。
+本判定仅审席位路径白名单、阶段门禁、必须投票的程序边界与表决期过渡是否符合 `D10-08`“只暂停依赖部分”，不替 `Argon`（闸门 A）或投票席位裁决产品原始意图、公开契约内容或具体运行时/wire 形态。所有被判入 P0（`D30`）的依赖子项在 P0 议案表决通过前**严禁写入交付 PR 或合入其 base 父分支 `issue-17-lab-catalog-events`（PR#55）、`main` 及任何上游/集成路径**；待闸门 A 判定落盘后立即通过议会 daemon 立案 P0（已由 `DeskPepgent19Rulings` 以 `--seat Coordination` 立案为 [`D30`（PM#49）](https://github.com/Pepgent/PM/issues/49)）。
 
 ---
 
@@ -42,4 +42,4 @@
 
 ## 三、合表立案与参投席位界定
 
-- **合入前阻断与立即 P0 立案：** 凡经闸门 A 或闸门 B 认定需表决的子项（`1c`、`2a`、经 A 认定需表决的 `2d`、`3a`、`4a`、`5a`、`6a`、以及经 A 认定需表决的 `7a/7b/7c`），在 P0 表决通过前**严禁合入 `main`**；在闸门 A（`pepgent-19-gate-a.md`）落盘合流后，立即由 `DeskPepgent19Rulings` / `Secretary-2`（或本席直接以 `council propose --seat ArgonGovernance`）合为**一张 LAB-09 P0 议案**提交议会 daemon 队列逐行表决。只要各行方案均在 W-09 `Pepgent` 白名单内闭环、不修改其他工程席位（如 `W-06 store`、`W-10 web`）的派工或路径白名单，均属纯产品/契约行，由 4 席（`Coordination`、`ClaudeHigh`、`Argon`、`LeadMentor`，门槛 3/4）参投；仅当某行修改跨席位派工或路径白名单时才为该行标注 `domains: [governance]`。
+- **全路径合入前阻断与立即 P0 立案：** 凡经闸门 A 或闸门 B 认定需表决的子项（`1c`、`2a`、经 A 认定需表决的 `2d`、`3a`、`4a`、`5a`、`6a`、以及经 A 认定需表决的 `7a/7b/7c`），在 P0（[`D30`（PM#49）](https://github.com/Pepgent/PM/issues/49)）表决通过前**严禁合入其 base 父分支 `issue-17-lab-catalog-events`（PR#55）、`main` 或任何上游/集成分支，亦不得提前写入待合入 PR**；在闸门 A（`pepgent-19-gate-a.md`）落盘合流后，立即由具备发起权的 `DeskPepgent19Rulings`（`council propose --seat Coordination`）或本席（`council propose --seat ArgonGovernance`）合为**一张 LAB-09 P0 议案（`D30`）**直接提交议会 daemon 队列逐行表决（不经秘书中转）。只要各行方案均在 W-09 `Pepgent` 白名单内闭环、不修改其他工程席位（如 `W-06 store`、`W-10 web`）的派工或路径白名单，均属纯产品/契约行，由 4 席（`Coordination`、`ClaudeHigh`、`Argon`、`LeadMentor`，门槛 3/4）参投；仅当某行修改跨席位派工或路径白名单时才为该行标注 `domains: [governance]`。
