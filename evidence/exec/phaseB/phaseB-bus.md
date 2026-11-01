@@ -1,6 +1,6 @@
 # 阶段 B 席位异步总线汇总
 
-最近整理时间：2026-11-01T14:13:30Z（UTC）；本轮取回 #211/#220/#226 的评论截至 14:09:17Z，其他席位沿用 14:01:26Z 取回。席位生命周期依据 Main 的 `local://exec/phaseB/rolling-record.md`：在跑 **lab、plugin、e2e、remote，共 4 席**；已退役 **store（含 D16-15 临时席）、mux、library、images、deploy**。各次重新进场与结束分开记录；未重新取回的实现进度不推断。本文为取回时副本，不替代 issue/PR；秘书未派工、未改业务代码、未运行测试。
+本轮按 Main 最新 rolling-record、片区经理 **2026-11-01T14:29Z** 观察及原 issue 截至 **14:36:15Z** 的放行/恢复记录更新：在跑 **lab、plugin、e2e、web，共4席**，十席全部至少发车一次。remote 二次进场已退役、W-10已补入。以下是取回时副本，不替代 issue/PR、tern ls 或片区经理现场；秘书未派工、未改业务代码、未运行测试。
 
 ## 席位状态
 
@@ -9,12 +9,13 @@
 | W-06 `pepgent-store` | [D16-15 / PM#26](https://github.com/Pepgent/PM/issues/26)；实现 [soroi#293](https://github.com/Pepgent/soroi/issues/293)，消费方 [Pepgent#43](https://github.com/Pepgent/Pepgent/issues/43)；前批 #282/#190/#203 已交付 | 本次 [PR#294](https://github.com/Pepgent/soroi/pull/294) 已 MERGED；前批 PR#286/#287 已合入 | **临时任务已合入／已退役**：W-06 已在[消费方原帖发出解锁评论](https://github.com/Pepgent/Pepgent/issues/43#issuecomment-6558903750)，CI 已生成 `store-contract` 分支；Main 提供的 `git ls-remote` 观察指向 `8a23e213`，并报告已执行 `tern kill session pepgent-store`。秘书未重复发解锁评论，不再计为第五席 | 2026-11-01T13:55:56Z（解锁及 CI 观察评论）；退役按 Main 本轮报告 |
 | W-05 `pepgent-library` | [lab-library#5](https://github.com/Pepgent/lab-library/issues/5)、[#13](https://github.com/Pepgent/lab-library/issues/13) | [PR#14](https://github.com/Pepgent/lab-library/pull/14) 已 MERGED，正文关闭 #5/#13 | **已合入／已退役**：Main 滚动记录报告 OPEN issue 数为 0，已执行 `tern kill session pepgent-library`，由 W-04 补位。此前承载缺口已在[原 issue 回复解除](https://github.com/Pepgent/PM/issues/25#issuecomment-6558437925)。真实 File 根装载与 Lab 元数据投影仍留阶段 C，不把本仓合入当成组装可用 | 2026-11-01T13:38:53Z（PR 更新）；退役见滚动源记录 |
 | W-01 `pepgent-mux` | [omp-rpc-mux#13](https://github.com/Pepgent/omp-rpc-mux/issues/13)、[#17](https://github.com/Pepgent/omp-rpc-mux/issues/17) | [PR#16](https://github.com/Pepgent/omp-rpc-mux/pull/16)、[PR#18](https://github.com/Pepgent/omp-rpc-mux/pull/18) 均 MERGED，分别关闭 #13、#17 | **已合入／已退役**：合并状态已从 GitHub 取回；Main 滚动记录报告 OPEN issue 数为 0，已执行 `tern kill session pepgent-mux`。不再列作活跃席位，不冒称阶段 C 已通过 | 2026-11-01T13:14:00Z、13:16:42Z（两 PR 更新）；退役见滚动源记录 |
-| W-02 `pepgent-remote` | 本次 [remote#18](https://github.com/Pepgent/remote/issues/18)，前批 #16 已结束 | 本次 [PR#19](https://github.com/Pepgent/remote/pull/19)，前批 PR#17 | **ALL_DONE 报告／待 Main 确认退役**：Argon 本轮已查实 #18/PR#19 于 14:09:38Z–14:09:43Z 合入 main；工人 14:10:05Z 结束后 idle，因旧协议未发送常规完成通知而占槽。此为 Argon 的源头调查报告；秘书未重查日志，尚无 Main 的本次退役确认，不把完成等同进程结束 | 2026-11-01T14:10:05Z（工人结束，Argon 报告）；生命周期待 Main 更新 |
-| W-09 `pepgent-lab` | [Pepgent#43](https://github.com/Pepgent/Pepgent/issues/43)，后续 LAB 队列 | 本轮未取回对应实现 PR | **WAITING_FOR_RULING／须由 Main 唤醒**：Argon 已查实工人 13:58:05Z 将 C1..C8 列为阻塞并结束为 idle；其中 C1–C4/C8 已放行、C5/C6 已交付、C7 现已由 remote PR#19 合入。GitHub 评论未唤醒 idle 进程；用户已直接要求 Main peer_send 送达解除依据和双向消息协议。秘书已将相关 issue 评论链接交 Main，不把“通知已交管理层”记作“工人已恢复” | 2026-11-01T13:58:05Z（等待开始，Argon 查实）；实际唤醒待 Main 结果 |
-| W-07 `pepgent-plugin` | 当前 [SOR-12 #211](https://github.com/Pepgent/soroi/issues/211)；新承载 [D11-F12 #299](https://github.com/Pepgent/soroi/issues/299)；构建项 [#284](https://github.com/Pepgent/soroi/issues/284) 按原帖推进 | 已观察 PR#290、PR#295 合入；当前 #211/#299 实现 PR 未取回，不推定完成 | 🔄 **STARTED**：[#211 原帖](https://github.com/Pepgent/soroi/issues/211#issuecomment-6559039705) 已登记 worktree `issue-211-batches`、writesEval/批次接入；#299 按既有初审补齐插件 File 根承载，已在[#211](https://github.com/Pepgent/soroi/issues/211#issuecomment-6559101325)及[#299](https://github.com/Pepgent/soroi/issues/299#issuecomment-6559101537)登记既定队列，不新增派工。#284 的等待 install-check 裁决已回写已有解除依据 | 2026-11-01T14:07:32Z（#211 STARTED）；#299 承载登记时间见评论 |
+| W-02 `pepgent-remote` | 本次 [remote#18](https://github.com/Pepgent/remote/issues/18)，前批 #16 已结束 | 本次 [PR#19](https://github.com/Pepgent/remote/pull/19)，前批 PR#17 | **已合入／二次进场已退役**：Main 的 rolling-record 确认 remote#18 已关闭、PR#19 合入，OPEN=0 后执行 `tern kill session pepgent-remote`。不再因 Argon 早先报告的 idle 等待状态将其计入在跑席位 | 2026-11-01T14:10:05Z（工人结束，Argon 报告）；本次退役以 Main 最新滚动记录为准 |
+| W-09 `pepgent-lab` | [Pepgent#43](https://github.com/Pepgent/Pepgent/issues/43)、[LAB-10 #15](https://github.com/Pepgent/Pepgent/issues/15)、[#44](https://github.com/Pepgent/Pepgent/issues/44)，控制端点相关LAB-08 #24 | [PR#45](https://github.com/Pepgent/Pepgent/pull/45) 已合入 #43 | **推进中／AreaPepgent已观察恢复**：经理14:29Z记录实际工具活动与LAB-10推进。#44第2项已[双闸门放行](https://github.com/Pepgent/Pepgent/issues/44#issuecomment-6559372690)并[终端送达](https://github.com/Pepgent/Pepgent/issues/44#issuecomment-6559378482)，不再等待旧额度恢复；按LAB-10→LAB-04→#44。控制端点受影响部分仍待D19，不阻断无关实现 | 2026-11-01T14:29Z（推进观察）；14:36:07Z（#44送达记录） |
+| W-07 `pepgent-plugin` | 当前 [SOR-18 #222](https://github.com/Pepgent/soroi/issues/222)，随后SOR-19/20独立部分；[SOR-13 #209](https://github.com/Pepgent/soroi/issues/209)部分等待 | 经理记录 [PR#300](https://github.com/Pepgent/soroi/pull/300) 已说明本机原生模块限制；File根 [PR#304](https://github.com/Pepgent/soroi/pull/304) 已合入 #299 | **推进中／部分BLOCKED**：AreaSoroi已观察新协议实际送达和确认；SOR-13/14/15待P0控制端点契约D19/PM#29，其他切片继续。#284不再等待install-check，经理已查到DONE；不重复派工 | 2026-11-01T14:29Z（AreaSoroi） |
 | W-03 `pepgent-images` | [images#6](https://github.com/Pepgent/images/issues/6)、[#3](https://github.com/Pepgent/images/issues/3) | [PR#12](https://github.com/Pepgent/images/pull/12) 已 MERGED，正文关闭 #6/#3 | **已合入／已退役**：本轮 GitHub OPEN issue 列表返回无匹配，Main 滚动记录报告已执行 `tern kill session pepgent-images`，由 W-08 补位。镜像本仓证据不代替发行安装、真实浏览器会话和部署顺序的阶段 C 验收 | 2026-11-01T13:41:04Z（PR 更新）；退役见滚动源记录 |
 | W-04 `pepgent-deploy` | [deploy#16](https://github.com/Pepgent/deploy/issues/16)、[#8](https://github.com/Pepgent/deploy/issues/8)、[#1](https://github.com/Pepgent/deploy/issues/1) | [PR#17](https://github.com/Pepgent/deploy/pull/17) 已 MERGED，正文一次关闭三项 | **已合入／已退役**：GitHub OPEN issue 列表返回无匹配，Main 滚动记录报告已执行 `tern kill session pepgent-deploy`。本仓基础检查不代表阶段 C 的真实 store 导入、seed/Web 顺序、登录及安装后工具验收完成 | 2026-11-01T13:47:17Z（PR 更新）；退役见滚动源记录 |
-| W-08 `pepgent-e2e` | [A2-08 #285](https://github.com/Pepgent/soroi/issues/285)、[E2E-12 #220](https://github.com/Pepgent/soroi/issues/220)、[E2E-14 #226](https://github.com/Pepgent/soroi/issues/226)；DIST-02/A0 及其他符合时点的 spec | 沿用既有 [PR#266](https://github.com/Pepgent/soroi/pull/266)、[PR#260](https://github.com/Pepgent/soroi/pull/260) 的 e2e 分工；本轮新 PR 未取回 | 🔄 **STARTED／部分等待实现依赖**：#220 先编写 F06/09/10/11/13；F12 待新承载 #299 合入。工程师已[更正 #214 的旧快照误判](https://github.com/Pepgent/soroi/issues/220#issuecomment-6559060915)，远程换模板项不再阻塞。#226 先写 F21，F20 待 #211 提供 child eval；该项[已分类并回写依赖](https://github.com/Pepgent/soroi/issues/226#issuecomment-6559112324)，不待新投票。阶段 B 不执行跨组件测试 | 2026-11-01T14:09:17Z（#220 更正）；#226 初审 14:04:26Z，回写见链接 |
+| W-08 `pepgent-e2e` | [E2E-12 #220](https://github.com/Pepgent/soroi/issues/220)、[E2E-14 #226](https://github.com/Pepgent/soroi/issues/226)、DIST-02/A0 | 沿用既有PR#266/#260分工；经理观察F05、F21驱动已有提交，不据此推断全部统一验收完成 | **推进中／File根依赖已解锁并送达**：#299由PR#304合入，经理已终端送达；工人[#220确认](https://github.com/Pepgent/soroi/issues/220#issuecomment-6559271276)接续F12、采用片区协议。F12后续具体编辑结果待观察，不以接续声明当完成。统一阶段全流程验收未开始；异步非阻塞接缝金丝雀依C1-3/U96，不作为工人门禁 | 2026-11-01T14:29Z（AreaSoroi） |
+| W-10 `pepgent-web` | [WEB-01 / Pepgent#9](https://github.com/Pepgent/Pepgent/issues/9)，后续WEB-02..07与E2E-20/21 | 尚未取回对应实现PR | **STARTED（恢复）**：tern `664899592126467`、peer `01a19781-1a1e`；A组5文件已[双闸门放行](https://github.com/Pepgent/Pepgent/issues/9#issuecomment-6559372684)，经理已[终端送达](https://github.com/Pepgent/Pepgent/issues/9#issuecomment-6559378242)，工人已[登记恢复](https://github.com/Pepgent/Pepgent/issues/9#issuecomment-6559380035)，切片`issue-9-web-01-async-snapshot`。B组仍待[P0 D20/PM#30](https://github.com/Pepgent/PM/issues/30)，不随A组放行 | 2026-11-01T14:36:15Z（工人STARTED恢复） |
 
 ## 依赖解除与证据
 
@@ -28,7 +29,7 @@
 - W-07 的 [LeaderCompliance 范围冲突上报](https://github.com/Pepgent/soroi/pull/290#issuecomment-6558686798) 已因 [bf19aee](https://github.com/Pepgent/soroi/commit/bf19aee641d53b476e683175d85a8261c5f5e1ae) 的适用范围修订解除，已回写[原 PR 评论](https://github.com/Pepgent/soroi/pull/290#issuecomment-6558717336)。该 watchdog 不再约束上述 worktree 中的 tern 工程席位；这里只登记本项解除，不宣称 W-07 整体完成或已独立验证后续不再误报。
 - D16-15 的 C5/C6 解锁已由 W-06 本人在 [Pepgent#43 原帖发布](https://github.com/Pepgent/Pepgent/issues/43#issuecomment-6558903750)，秘书已查到该评论，按 Main 要求不重复补发。合入 [PR#294](https://github.com/Pepgent/soroi/pull/294) 与 [CI 成功观察](https://github.com/Pepgent/soroi/pull/294#issuecomment-6558903754) 均有源头记录；W-09 继续按原 issue 完成本仓交付。
 - 重启后续接总线时，#284 的 W-07 进度仍写“等待 install-check 交接裁决”。原帖已有[初审](https://github.com/Pepgent/soroi/issues/284#issuecomment-6558804885)及[双核会审](https://github.com/Pepgent/soroi/issues/284#issuecomment-6558827868)，秘书已[回写已有解除条件](https://github.com/Pepgent/soroi/issues/284#issuecomment-6558973174)：发行物不带 install-check，W-08 通过 A0 驱动自行投送，不再等待新裁决；未关闭实现 issue，未新增契约或门禁。
-- #220 的 File 根缺承载已按[初审](https://github.com/Pepgent/soroi/issues/220#issuecomment-6559003278)建立 [#299](https://github.com/Pepgent/soroi/issues/299)，并[回复原 BLOCKED](https://github.com/Pepgent/soroi/issues/220#issuecomment-6559101026)。分类与承载已经闭环，代码依赖尚未宣称交付；不把 W-08 原帖最后一句“仍待领导层分类”当成仍需表决。
+- #220 的 File 根承载 [#299](https://github.com/Pepgent/soroi/issues/299) 已由 [PR#304](https://github.com/Pepgent/soroi/pull/304) 合入。AreaSoroi 已实际送达，W-08 在[#220确认接续](https://github.com/Pepgent/soroi/issues/220#issuecomment-6559271276)；不再列为待承载或待领导分类，不以此等同F12统一真实验收通过。
 - #226 的 F20②′ 已按[初审](https://github.com/Pepgent/soroi/issues/226#issuecomment-6559003280)登记依赖 [SOR-12 #211](https://github.com/Pepgent/soroi/issues/211#issuecomment-6559101325)。D8 的 E2E-14 依赖及 F20 组件列已直接补齐 SOR-12（[PM aa9899b](https://github.com/Pepgent/PM/commit/aa9899b)，main 整合 [6e0ea23](https://github.com/Pepgent/PM/commit/6e0ea23)）；保持 slow_step、角色闸门与阶段边界，不换成 sleep。
 - 后续常规发车、退役由 Main 直接维护 `local://exec/phaseB/rolling-record.md`，秘书据此归档并替换本总线对应行，不再要求 Main 为每次常规轮换发送 IRC；源记录归档为 PM `evidence/exec/phaseB/rolling-record.md`。
 - 自 U95 通知起，工程轮换只维护本总线与 rolling-record，不再逐次改 LEDGER R8/R13/R14 或为此提交；LEDGER 仅在阶段性变化时替换。D17 重大决策索引已按明确指令更新，skill 保持 🏗，未宣称提效效果已验证。
@@ -57,21 +58,21 @@ W-09 本次以命名分支 `pepgent-lab-home` 发车；Main 已确认并修正�
 - Main 转交自报中的消息原文：“仍在执行本轮调查的子代理现在收束并提交最终报告；不要扩展范围”。该消息是任务催收，不含事实、记忆或观点；误入事件本身仍已发生。
 - SoroiKeeperGpt **称没有读取对方任何内容**，并表示今后只定向发送给自己的子代理。未读取声明及后续改正均按自报记录，秘书未据此声称双模全程隔离已验证。
 
-## 用户直接整改：工人消息渠道与唤醒断点
+## 每仓片区经理与实际送达（U98）
 
-来源：Argon 向管理层广播的用户直接指令及其 `.workers/*/sessions/*.jsonl`、`tern ls` 调查报告。报告指出：W-09 在 C1..C8 已有处置或上游就绪后仍 idle 等待；W-02 已完成却没有完成唤醒消息、未释放槽位。秘书不把广播中的报告冒充自己独立重查的结果。
+来源：Main 转交的用户直接指令、已就位报告及 rolling-record 第34行。原话已登记 LEDGER U98；本节直接替换旧的工人 peer_send 方案，不将其保留为并行执行口径。
 
-- 新协议直接替代“常规工程状态一律不得 peer_send”的旧限制：工人写 issue/PR 后，BLOCKED（停工时标 WAITING_FOR_RULING）、关键跨席前置合入、ALL_DONE 三类事件必须同时通知 Main；处置仍在原 issue/PR 留存。
-- 对工人的 BLOCKED 裁决、白名单放行、新承载分配或上游就绪，必须 GitHub 评论 + Main 的 peer_send 双送达。只有 Main 持有跨进程工具权限，秘书不能以写评论代替 Main 唤醒。
-- 秘书已向 Main 交付 #284、#220/#299、#211/#226 的原评论链接；Main 实际 peer_send、W-09 恢复及 remote 退役/补位结果须由拥有方写入 rolling-record 后记录，不预先宣布完成。
-- 该整改是用户直接指令，不等 D18 或任何投票；不得用“无常规 IRC”旧条款继续让工人静默等待。角色/skill/watchdog 修改由各自拥有方执行，秘书不改其实现。
+- 每个 repo 设一名独立常驻 task:mid 片区经理：AreaPepgent 管 W-09、W-10；AreaSoroi 管 W-07、W-08。片区经理只写 `local://state/area-*.md` 与 issue 评论，不改业务代码、不裁决契约。
+- 工人把 STARTED/PR/BLOCKED/DONE/ALL_DONE 与停工等待写原 issue/PR，不再 peer_send 管理层。经理以 `tern capture` 观察现场、收集停工/前置合入/全部完成，向管理层上报；收到处置后以 `tern send` 送达并观察恢复。
+- Main 保留首次派活、全局排期和席位轮换；首次之后的日常工人通信交经理，不再由常规管理人员主动 peer 对接。秘书汇总 issue/PR 与经理记录，不替经理接管工人，不把评论已写等同实际送达。
+- 已取得首轮经理送达与响应证据：AreaPepgent 的14:29Z记录确认W-09恢复推进、#43合入、W-10收到协议但因新白名单缺口停工；AreaSoroi 的14:29Z记录确认W-07/W-08收到并处理协议，W-07继续独立切片、W-08接续F12。这里只登记该窗口的实际观察，不泛化为后续通信永久合规。源记录分别为 `local://state/area-pepgent.md` 与 `local://state/area-soroi.md`。
 
 ## 核对 C1–C5
 
 - C1：只记录既定席位及授权范围；不改代码、design/、生产环境，不编写或运行测试，不以 hash 比对作证据。
 - C2：当前投票依 U95 / LEDGER C2-3 按职能席位与专责权重计票；D15/D16 的三族数字只作为当时历史事实保留，不追溯改票。秘书不投票、不判断设计。
 - C3：沿用十席矩阵，本轮不派工、不跨仓操作工程师工作树。
-- C4：工程事实沿用 issue/PR，进程与停工观察标明 Main/Argon 等拥有方报告来源；保留观察时间，不把本汇总作为源头。需唤醒时由 Main 按新协议双送达，不以评论已写替代工人已收到。
+- C4：工程事实沿用 issue/PR，进程与停工观察标明片区经理/Main/Argon 等报告来源；实际送达交每仓片区经理用 tern capture/send 负责。工人不再 peer_send 管理层，秘书不以评论已写替代工人已收到。
 - C5：不触碰冻结目录、不接触无关前端会话；不因本记录另设审批或验收门禁。
 
 后续刷新直接替换对应行，标明源头与观察时间；运行状态取 issue/PR 和具名拥有方的进程观察，轮换取 Main 的 rolling-record，不从“消息已投递”推断工人已恢复或完成。

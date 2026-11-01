@@ -30,16 +30,18 @@
 ## 重新进场与当前状态
 
 1. **W-06 pepgent-store 的 D16-15 临时切片已完成并退役。** 本次临时 tern 为 `663838735204355`，peer `01a1975b-ea4f`，按源记录中的 ArgonGovernance 关键路径抢占令重新进场。实现已由 [PR#294](https://github.com/Pepgent/soroi/pull/294) 合入，CI 生成 `store-contract` 分支（首次提交 `8a23e213c03b`）；W-06 已在 [Pepgent#43](https://github.com/Pepgent/Pepgent/issues/43#issuecomment-6558903750) 登记可安装地址 `git+https://github.com/Pepgent/soroi.git#store-contract`，秘书未重复发评论。Main 已报告结束该临时席。
-2. **W-02 pepgent-remote 仍在重新进场任务中。** 为 remote#18（C7 `TemplateMetadata`）承接任务，tern `663967584223235`；此前 deploy#17 已合入，W-04 已退役。当前在跑 lab、plugin、e2e、remote，共 4 席。
+2. **W-02 pepgent-remote 二次进场已完成，已退役。** remote#18 已关闭，PR#19 已合入，remote 仓 OPEN=0（`gh issue list` 返回 0），随后执行了 `tern kill session pepgent-remote`。deploy#17 此前已合入，W-04 已退役；本次释放的名额现已由 W-10 补入，见 W-10 发车记录。
+3. **工人沟通改由片区经理负责（用户直接指令，U98）。** 每个在跑仓设一名常驻 task:mid 片区经理：AreaPepgent 管 W-09、W-10；AreaSoroi 管 W-07、W-08。片区经理用 `tern capture` 巡检工人，用 `tern send` 送达裁决、唤醒空闲工人并向管理层上报。工人不再用 peer_send 联系管理层，状态一律写 issue/PR，由片区经理收集。管理层的裁决交对应片区经理转达；主会话只在首次派活时直接 peer_send 工人，不再使用此前的工人直接 peer_send 上报协议。
+4. **W-10 pepgent-web 已发车。** 前置条件是 Pepgent#43 已由 PR#45 合入（06e6480）。tern id 为 664899592126467，peer 为 01a19781-1a1e，home 在 pepgent-web-home（独立克隆 pepgent-web-clone）。首个切片是 WEB-01 #9。席位归片区经理 AreaPepgent 管理。当前在跑的有 lab、plugin、e2e、web，共 4 席。
 ## LEDGER 核对
 
 | 条款 | 核对结果 |
 | --- | --- |
 | C1-2 | 每个域一个席位；Pepgent 使用独立克隆 |
-| C1-3 | 同域切片可以合进同一个 PR；只做本仓检查；W-08 按被测代码已合入的时点编写 spec，阶段 B 不执行跨组件测试 |
+| C1-3 | 同域切片可合并 PR，不设每步验收锁；W-08 在所测代码合入后编写 spec，阶段 C 统一全流程验收尚未开始。开发期异步非阻塞接缝金丝雀依 U96 / C1-3 执行，不作为工人开工、合并或轮换门禁 |
 | C3-4 | 切片 worktree 用 `-b` 建；不检出 main |
-| 当前席位 | 在跑 lab、plugin、e2e、remote，共 4 席；store（含 D16-15 临时席）、mux、library、images、deploy 已退役。各次重新进场与结束分开记录，启动、退役不等同阶段 C 统一验收通过 |
+| 当前席位 | 在跑 lab、plugin、e2e、web，共 4 席；store、mux、remote、library、images、deploy 已退役。十席均已至少发车一次；当前运行以 tern ls 和本记录为准，发车、合入与退役不等于阶段 C 统一验收通过 |
 
-## 待补入
+## W-10 发车前置
 
-- Pepgent#43 合入后，W-10 web 优先补入。
+- Pepgent#43 已由 PR#45 合入（06e6480），W-10 已据此发车，不再列为待前置。
