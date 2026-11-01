@@ -3,7 +3,7 @@
 - **issue：** [Pepgent/soroi#250](https://github.com/Pepgent/soroi/issues/250)（F07/F19/F22 真实 S1 验收与自动驱动，OPEN），工人 W-08（`pepgent-e2e`）。
 - **上报位置：** [评论 6562476097](https://github.com/Pepgent/soroi/issues/250#issuecomment-6562476097)（2026-11-01T19:03:01Z）第 1、2 点。工人把它们标为“依赖 / 产品缺陷登记”，请管理层为产品 owner 建承载。这不是正式 `BLOCKED`：W-08 声明 spec 判据不降，也不阻塞当前驱动的编写，只会让阶段 C 的 F22 断言失败。同一评论另有三处消费者侧的修正（write 回执层级、RPC 子代无 `session_init`、CallReport 的 `agentId` 可选），工人已在 `e2e/**` 内自行修正，不在本材料范围内。
 - **编制：** governance-desk 实例 `DeskW08DefectCarrier`（总协调席，与 Main 合计 1 票）。本文只整理事实，并为两道闸门列出待判问题。它不是裁决。
-- **程序依据：** 按 `AGENTS.md:60`（C2-2），闸门 A 由 `Argon` 判定，看是否触及产品原始意图或公开契约；闸门 B 由 `ArgonGovernance` 判定，看是否越过路径白名单、是否破坏阶段门禁、是否属于必须投票的事项。两道闸门都确认不越界时，处置方式是在产品仓补承载 issue；任一闸门认定越界，就按 P0 立案。
+- **程序依据：** `AGENTS.md:60`（C2-2）的双闸门只适用于正式 `BLOCKED`，本项不是正式 `BLOCKED`，不在其范围内。按 `.omp/agents/argon-governance.md` 第 6 条，已通过契约与路径白名单内的常规开发不设事前审批，只做事后检查。因此本项按既定 owner 路由（D16-09）处理：直接在产品仓补承载 issue。本材料曾同时送交闸门 A 和闸门 B，两边的回复记在文末“处置结果”。
 
 来源标记：`(U)` 用户原话；`(D)` 文档原文，包括决策正文和 `design/`；`(R)` 本实例运行命令或直读源码得到的事实；`(A)` agent 的说法，只作解释。工人评论属于 `(A)`。本实例只读了代码，没有运行测试或服务。
 
@@ -89,13 +89,12 @@
 
 ## 六、处置
 
-- 闸门 A 和 B 都确认不越界：在 `Pepgent/soroi` 开两个承载 issue，正文写明缺陷、所依据的契约原文位置、承接席位 W-07，以及被阻塞的阶段 C 用例 F22（E2E-13 / #250）。然后在 #250 评论中链接这两个 issue。
-- 任一闸门认定越界：由本实例按 P0 起草决策表，并用 `council propose --seat Coordination` 立案。
-- 闸门结论写在同目录下的 `w08-f22-defects-gate-a.md` 和 `w08-f22-defects-gate-b.md`，处置结果追加在本文末的“处置结果”一节。这样，下一个空白实例只读这三个文件就能接续。
+- 按既定 owner 路由，在 `Pepgent/soroi` 开两个承载 issue。正文写明四项：缺陷、所依据的契约原文位置、承接席位 W-07、被阻塞的阶段 C 用例 F22（E2E-13 / #250）。然后在 #250 评论中链接这两个 issue。
+- 闸门 A 和闸门 B 的回复分别在同目录的 `w08-f22-defects-gate-a.md` 和 `w08-f22-defects-gate-b.md`，处置结果在文末“处置结果”一节。下一个空白实例只读这三个文件就能接续。
 
 ## 处置结果
 
-- 闸门 A（`Argon-2`）判定不越界，见 `w08-f22-defects-gate-a.md`。闸门 B（`ArgonGovernance-2`）同样判定不越界，见 `w08-f22-defects-gate-b.md`。两道闸门都通过，本项免投票。
+- 闸门 A（`Argon-2`）认定：两项都是没按已通过的契约实现，判据不降（`w08-f22-defects-gate-a.md`）。闸门 B（`ArgonGovernance-2`）退回了事前盖章，理由是：非 `BLOCKED` 的既有契约内缺陷不送事前闸门，直接走 owner 路由，本席只保留事后检查（`w08-f22-defects-gate-b.md`，PM `40f6faf`）。本项不立案，也不投票。
 - 已在 `Pepgent/soroi` 开两个承载 issue，都由 W-07 `pepgent-plugin` 承接，路径为 `packages/omp-soroi/**`：
   - [soroi#336](https://github.com/Pepgent/soroi/issues/336)：启动配方 sidecar 按 D5 §3.1 写入 `role`。
   - [soroi#337](https://github.com/Pepgent/soroi/issues/337)：未消费提醒按 D5-13 以 `purpose` 组头分组。
