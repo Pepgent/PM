@@ -44,3 +44,51 @@ leader 的技术立场已采用：
 | D7-02、D7-03、D7-13、D7-14、D7-17 | 落实 task:high 的建议，以及由上面各行带出的改动 | 三方 |
 
 argon 已全票赞成；本轮改动都属于技术或串联细化，意图层面没有变化，但由 argon 决定是否需要重新确认。
+
+## 第 2 轮
+
+第 2 轮投票结果：task:high 21/21 赞成，argon 21/21 赞成，leader 赞成；LeadMentor 17 赞成、4 反对（`votes/D7-mentor-r2.md`）。下面四条反例都是主路径上的断裂，全部采纳。
+
+| # | 反例（来源） | 处理 | 改动的条目 | 新写法摘要 |
+| --- | --- | --- | --- | --- |
+| 19 | 每一代启动前把默认分支合并进会话 worktree：worktree 本来就带着未提交的草稿，git 拒绝合并，会话起不来（mentor-r2 D7-04） | 采纳 | D7-04；接口草图 `LabSessions.open` | 启动配方删掉“同步 worktree”这一步，现在是六步。worktree 在会话第一次启动前从当前默认分支克隆，此后基线只在人执行 `library.sync` 时改变；启动、唤醒和别的会话合入节点都不碰它 |
+| 20 | `library.merge` 在源会话 worktree 里 commit 并 push，每次 push 后再合并进所有会话 worktree：遇到未提交草稿时 git 拒绝；为合并先提交全部草稿，又会让未确认内容进入 commit（mentor-r2 D7-11） | 采纳 | D7-11、D7-09、D7-19；18 字段表 `nodeLibrary`；接口草图；占位 P13 | `library.merge{conversation, paths}` 从源会话读出选中路径的内容，在一份干净的集成检出上（基于当前默认分支，每次新建，放在中心检出缓存卷上，push 后删除）只提交这些路径并 push，然后快进中心检出。源会话 worktree 和其他会话都不被改动。新增 `library.sync{conversation}`，由人发起：未提交的改动先提交到这份 clone 里的私有分支 `conv/<conversation>`（从不 push），再把默认分支合并进来。D7-09 派生时，新函数体写在持有会话里就直接打包；写在别处时，人确认派生也就确认了对持有会话执行 `library.sync`。P13 改为假定这两种合并主路径上无冲突 |
+| 21 | `lab_save_artifact` 只记一个可变的 worktree 路径，文件被覆盖后，已保存的产物读到的是新字节（mentor-r2 D7-05） | 采纳 | D7-05；接口草图 `ArtifactMetaRow`、`LabHostTool` | 保存时读出字节、算内容哈希，复制成 worktree 里的不可变快照 `artifacts/<hash>/<文件名>`。`artifact_meta` 记下 id、所属会话、hash、快照路径、原路径和 role。同一会话里相同字节复用已有的 `ArtifactId`，字节一变就生成新的快照和新的 `ArtifactId`。仍然不写 store |
+| 22 | 上传文件和讨论产物指向可变路径，同名再上传或 agent 改写后，已有引用和跨会话装载会读到新内容（mentor-r2 D7-07） | 采纳 | D7-07；18 字段表 `datasets`；接口草图 `artifact.upload` | 上传时也由 Lab 按内容哈希直接写成快照，不再有 `uploads/` 目录。附件、Datasets 页和 `lab_open_artifact` 都读快照。`inputs/` 里的文件只是从快照派生出的近处副本。作为正式运行输入时，字节仍按 D6-07 经暂存区随那一步提交进 store。`.gitignore` 排除 `artifacts/` 和 `inputs/` |
+
+### 第 2 轮需要重投的条目
+
+| 条目 | 改动 | 需要重投的一方 |
+| --- | --- | --- |
+| D7-04、D7-05、D7-07、D7-11 | 按 LeadMentor 第 2 轮的反例修改 | LeadMentor；task:high 与 argon 是否复核，由治理决定 |
+| D7-09、D7-19 | 随 D7-11 带出的改动：派生时的同步改为显式的 `library.sync`；在中心检出缓存卷上放干净的集成检出 | 三方确认 |
+
+## 第 3 轮
+
+第 3 轮投票结果：argon 6/6 赞成，LeadMentor 6/6 赞成；task:high 对 D7-11 投反对，其余赞成（`votes/D7-high-r3.md`）。
+
+| # | 反例（来源） | 处理 | 改动的条目 | 新写法摘要 |
+| --- | --- | --- | --- | --- |
+| 23 | `library.merge` 把选中路径的整份文件拷到集成检出上提交。会话基线落后于默认分支时，别的会话已经确认的合入会被静默冲掉；这一步根本没有经过合并，P13 的“无冲突”假定也挡不住。另外，“未合入”是相对会话自己的 HEAD 算的，已经合入的节点会一直被列为草稿（high-r3 D7-11） | 采纳 | D7-11；18 字段表 `nodeLibrary`；接口草图 `library.merge`；占位 P13 | 会话的改动定义为：从会话基线 `merge-base(conv/<conversation>, 默认分支)` 到会话工作区内容的差异，包括私有分支上的提交和未提交的改动。`library.merge` 只针对选中路径做这份 diff，在基于当前默认分支的干净集成检出上执行 `git apply --3way`，以会话基线为合并基准，然后提交、push、快进中心检出。之后别的会话合入的改动得以保留。“未合入”改为相对**当前默认分支**计算，节点库页另外标出每个会话落后默认分支几个 commit（采纳该票对 D7-04 的附注）。合并冲突仍是占位 P13。源会话的 worktree 和私有分支不被改动 |
+
+本轮没有采纳 high-r3 对 D7-05 的两条附注：`ArtifactId` 的复用键改为 `(conversation, hash, role)`，以及 `discussion_context` 改用 sum type。原因是 D7-05 本轮已获三方赞成，这两条也都是非阻塞的建议，留到实现阶段处理，不为它们重开投票。
+
+### 第 3 轮需要重投的条目
+
+| 条目 | 需要重投的一方 |
+| --- | --- |
+| D7-11 | task:high；argon、LeadMentor 是否复核由治理决定 |
+
+## 第 4 轮
+
+起因不是 D7 的选票，而是 LeadMentor 对 D8 的反例（`votes/D8-mentor.md`，D8-16）。按已通过的 D7，P5（作业列表）整体不在第一版，Lab 拿不到作业列表。可是 F17 要求算力页显示作业与日志，F31 第 4 步要求算力页实时显示容器 stdout 尾部。照 D7 实现的 Lab 因此永远过不了 D8 的 W6 验收，等于悄悄收缩了用户流程（U2）。leader 席位的技术裁决：P5 的只读部分进第一版。
+
+| # | 反例（来源） | 处理 | 改动的条目 | 新写法摘要 |
+| --- | --- | --- | --- | --- |
+| 24 | P5 整体推迟，使 F17 与 F31 第 4 步（作业列表、状态、日志尾部）在第一版无法完成（D8-mentor D8-16；leader 裁决） | 采纳 | D7-12、D7-13、D7-18；18 字段表 `clusters`、`containers`；接口草图 `LabPageWire.clusters` 与命令注释；占位 P5；“已裁决的条目”；文档表 `remote.md` 一行 | remote 新增只读操作 `remote runs`，由 `Pepgent/remote` 实现，返回其作业记录（`runs/<run>.json`）的摘要：run id、模板、后端、最新生命周期事实。算力页的线数据带 `jobs`，每项附 `remote status`；日志尾部经新的只读 SSE `GET /api/lab/jobs/{run}/tail`，由 Lab 调用 `remote tail`。容器页 `liveContainers` 取自同一份列表。remote 仍是作业的唯一权威，Lab 不建作业表。作业的读取走 `lab.page.read` 和 tail 流，不是命令。`restart`、`destroy`、`new_sandbox` 等控制部分仍不在第一版，列入 D9，P4、P6、P7 不变 |
+
+### 第 4 轮需要重投的条目
+
+| 条目 | 需要重投的一方 |
+| --- | --- |
+| D7-12、D7-18（及随之改动的 D7-13） | 三方 |

@@ -1,0 +1,24 @@
+# D7 LeadMentor round 2
+| ID | 票 | 理由 | 反例 |
+|---|---|---|---|
+| D7-01 | 赞成 | Lab 与旧 Paseo 在同一 Node 进程内按代码、状态、runtime 和请求面隔离；Lab 请求不 import 或等待旧 Paseo runtime，同时复用现有 server function、`OperationResult` 和 SSE 约定，符合 D2-14/D2-19。 | — |
+| D7-02 | 赞成 | Lab DB 只保存自身业务事实及以外部主键为键的扩展；运行状态、transcript、worktree 文件、模板和构建记录均不复制。`activity` 只记录 Lab 自有事件，运行动态从 Store 生命周期流投影，权威边界正确。 | — |
+| D7-03 | 赞成 | Better Auth organization/member/invitation 是 Lab、成员、角色和邀请的唯一权威；`startWithoutApproval` 与 `approve` 已分成不同权限。Principal 通过受信 reader 帧传递而非任意 header，服务也限定在本机/内网。许可证选择合理。 | — |
+| D7-04 | 反对 | 每个 conversation 使用独立 clone 并持有自己的节点草稿是正确的，但“每一代启动前把默认分支快进合并进 worktree，同时保留未合入改动”在正常主路径中不可成立：会话 worktree 的设计目的就是长期包含未提交改动，而 Git 通常不能在 dirty worktree 上执行 merge/fast-forward。 | **主路径反例：** Discussion A 的 worktree 中有 AI 尚未确认的 `nodes/anneal.ts` 修改；另一个会话已向默认分支推送新节点。A 下一次普通 prompt 唤醒 generation，D7-04 第 ③ 步尝试把默认分支合并进 dirty worktree，Git 拒绝操作，根会话无法启动。**修改：** 不要在每一代启动时隐式同步 dirty worktree。会话 clone 创建后保持其草稿权威；默认分支更新通过显式 `library.sync` 发生。同步前可把 dirty 内容保存为本会话私有 draft commit，再合并默认分支；或在有未提交改动时保持原 base，等待人明确同步。人确认的 `library.merge` 应在干净的 integration checkout 上把选定路径提交到默认分支，而不是依赖把整个 dirty conversation worktree 推上去。 |
+| D7-05 | 反对 | Host tools 由根写方注册、讨论产物在正式运行前不进入 Store 的方向正确，但 `lab_save_artifact` 只记录一个指向普通 worktree 文件的 path；该文件仍可被后续工具或 Agent 覆盖，已“保存”的 artifact 没有稳定内容身份。 | **主路径反例：** Agent 写出 `work/result.png`，调用 `lab_save_artifact`，附件和报告记录该 path；随后同一会话再次运行并覆盖 `work/result.png`。历史消息中的 artifact 现在展示新字节，而不是保存时的结果。**修改：** `lab_save_artifact` 在会话 worktree 的被 `.gitignore` 排除的 artifact 区中创建不可变快照，例如 `artifacts/<content-hash>/<name>`，并在 `artifact_meta` 保存 content hash、不可变路径、原始来源 path 和 role；相同字节可复用，修改后的内容必须生成新 ArtifactId。仍不需要写 Store。 |
+| D7-06 | 赞成 | `pending_launch` 将草稿启动建模为每 conversation 至多一条显式意图；审批后才发 prompt，下一次非派生 `run_started` 只绑定该意图，绑定后删除。运行状态、根 session 和 derivedFrom 仍只从 Store 读取。 | — |
+| D7-07 | 反对 | Transcript、运行关系和讨论产物在正式运行前归 conversation worktree 的方向正确，但本行仍把可变的普通 worktree path 直接定义为 artifact 字节权威；因此附件、Datasets 和跨会话装载不能保证读取保存时的内容。 | **主路径反例：** 用户上传 `uploads/data.csv` 并把它绑定到讨论；之后再次上传同名文件或 Agent 修改该路径。`artifact_meta` 仍指向同一路径，既有讨论引用和另一个会话的 `lab_open_artifact` 会无提示地读到新内容。**修改：** 上传和 Agent 保存都先复制为 worktree 内不可变、按内容寻址的 artifact snapshot，并让 `artifact_meta` 指向该 snapshot。`inputs/` 只是目标会话从 artifact snapshot 派生的近处副本；作为正式运行输入时，eval 再按 D6-07 将相同字节随 step 提交进 Store。 |
+| D7-08 | 赞成 | Lab 后端分别从 Store、实际 eval endpoint、Mux reader/files 和自身 DB 请求各项权威，只向浏览器发送切片失效通知；浏览器不直连 Store/Mux，也不把通知流当作状态。 | — |
+| D7-09 | 赞成 | 介入先从 Store 根 session 和 `writers(runId)` 找到实际 owner；`derive.at` 已与 D6-16 对齐为 `Committed \| InFlight`，函数体变更先合入 Git 再由持有会话打包，Lab 始终等待拥有方结论而不直接写运行事实。 | — |
+| D7-10 | 赞成 | 自动化规则、游标、调度和运行记录归 Lab；Store 只发布生命周期事实。审批使用独立 `approve` 权限，不再误用启动免审批权限；事件、schedule 和 manual 动作共用一种 Automation conversation 路径。 | — |
+| D7-11 | 反对 | 会话中 AI 写出的节点现在有明确合入入口，方向正确；但“每次 push 后把默认分支快进合并进所有会话 worktree，并保留未合入改动”重复了 D7-04 的 dirty-worktree 主路径断裂，而且从某个 conversation branch 直接合并/push 容易把未确认草稿混进默认分支。 | **主路径反例：** 会话 A、B 都有未提交节点草稿；A 确认其中一个文件并 `library.merge`。Lab push 默认分支后按本行更新 B，但 B 是 dirty worktree，Git merge 拒绝；若 Lab 为了合并先提交 B 全部草稿，又把未确认内容变成 Git commit，后续错误 push 风险增加。**修改：** `library.merge{conversation, paths}` 从源会话读取选定路径内容，在一个干净的 integration checkout 上基于当前默认分支提交并 push；未选中的会话草稿不进入该 commit。中心检出随后快进。其他会话 clone 不自动同步，保持各自草稿权威；提供显式 `library.sync`，由用户选择同步，必要时先在该会话私有 branch 保存 draft commit，再合并默认分支。D7-04 的 generation 启动也不隐式 merge。 |
+| D7-12 | 赞成 | Cluster/template/job 权威继续归 remote；P4–P7 和依赖它们的 restart、destroy、sandbox、shell、接入向导明确不在第一版，按钮不可用并进入 D9。Lab 不建立第二份作业或后端状态来伪装缺失能力。 | — |
+| D7-13 | 赞成 | 镜像定义、构建记录、镜像产物和模板绑定分别取自 images Git、Komodo、Distribution 和 remote；Lab 不复制镜像表，构建前在专用 images checkout commit/push，权威分工清楚。 | — |
+| D7-14 | 赞成 | 项目、repo 引用和 profile 事实归 Lab；Git 状态从中心检出读取。部署密钥由实际使用它的 Lab 生成并持有，界面只展示公钥，没有要求操作员粘贴 secret。 | — |
+| D7-15 | 赞成 | 可用模型与当前模型均从目标 conversation 自己的 omp generation 查询，切换也发给同一 generation；停驻时先唤醒该会话。不存在从任意进程推断全 Lab 模型目录的第二权威。 | — |
+| D7-16 | 赞成 | 阶段 A 只将加载时机改成异步 loader，保持 feature/controller 不动，便于与当前 UI 工作并行；它明确是进入阶段 B 前的一次性迁移步骤，而不是最终 fixture 双路径。 | — |
+| D7-17 | 赞成 | 线上协议只传各权威方的领域数据，布局、计数和文案在客户端纯投影；运行时删除 `LAB_SNAPSHOT`，品牌 id 放宽，剧情字面量数据化，Harness 收敛为字面量 `omp`，AgentTemplate id 承载 omp agent definition 名。 | — |
+| D7-18 | 赞成 | 对外接口收敛为 catalog/page/command、SSE 和两类字节代理；第一版命令联合只包含有真实 owner 和实现路径的能力，P4–P7 不以 placeholder/no-op 命令暴露，类型可以真正穷尽处理。 | — |
+| D7-19 | 赞成 | Lab DB、omp session、中心检出缓存、conversation worktrees、images checkout 和 remote home 已按写方与生命周期分开；凭据分别由 Lab 自己生成持有或由 `Pepgent/deploy` 注入，与 D2-20 对齐。 | — |
+| D7-20 | 赞成 | 依赖方向保持为 Pepgent 通过 Store、Mux/RPC、host tools 和 project `.omp` 调用 Soroi；Soroi 不 import 或认识 Pepgent，拿掉 Pepgent 后仍能运行完整 Soroi profile。 | — |
+| D7-21 | 赞成 | Lab 区明确不 import 或调用 Paseo/hub/session-store/serverRuntime，旧 `_app` 表面保持不动；这符合用户“先不动”以及旧 AI 不可复用的直接意图。 | — |
