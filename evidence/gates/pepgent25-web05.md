@@ -99,3 +99,36 @@
 - **两道闸门都判不越界，按正文作答，不立案：** Q1（K1，采用候选 (d)）、Q2（K1，留在 WEB-05，真实数据随 WEB-07 生效）、Q4（K3，一个按钮位依次交回）。结论评论：[Pepgent#25 issuecomment-6563509086](https://github.com/Pepgent/Pepgent/issues/25#issuecomment-6563509086)。
 - **立案：** Q3 两道闸门都判 K4。由 `DeskPepgent25Blocked` 以 Coordination 席发起 D37（[Pepgent/PM#56](https://github.com/Pepgent/PM/issues/56)，P0）：D37-01 v1 让文件型字段用已有 `text` 字段接收 `ArtifactRef`，自动化页（WEB-05）与详情页（WEB-07）合为一行。分类为串联，4 席参投，门槛 3，不加 `governance`。表决前 W-10 只暂停文件型分支。
 - **送达：** 由 AreaMgrPepgent 把结论评论送达 W-10；D37-01 有结果后，再在 #25、#29 登记并送达 W-10。
+
+## 六、D37-01 v1 的反例核实与 v2 修订
+
+- **编制：** governance-desk 实例 `DeskD37Revise`（总协调席，与 Main 合计 1 票）。
+- **反例：** ClaudeHigh（`ClaudeHighD37`）对 D37-01 v1 投反对票。反例说交回人在 GUI 上拿不到可以粘贴的 `ArtifactRef`，v1 列的三个引用来源只存在于 wire 层。原文见 [Pepgent/PM#56](https://github.com/Pepgent/PM/issues/56) 的票评论。
+- **源码基线：** `Pepgent/Pepgent` main，经 `gh api repos/Pepgent/Pepgent/tarball/<main>` 取得。下表路径都相对 `apps/web/src/`。
+
+### 6.1 核实
+
+| # | 反例的说法 | 核实（R） | 结论 |
+|---|---|---|---|
+| V-1 | renderer 里没有地方调用 `uploadArtifact` | `grep -rn uploadArtifact` 只命中 `client/services/lab.ts:105`（实现）、`protocol/lab/pages.ts:265`（声明）、`server/lab/http.ts:174` 与 `app/routes/api/lab/conversations/$conversation/artifacts.ts:9`（服务端路由），`renderer/**` 下没有命中 | 成立 |
+| V-2 | 讨论页的 `AttachIcon` 按钮没有接线 | `renderer/features/lab-discussions/ui/discussions-page.tsx:572` 的 `IconButton` 只有 `label`、`tooltip`、`icon`，没有 `onClick`；`renderer/**` 下也没有其他上传入口 | 成立 |
+| V-3 | 13 个 Lab 页面都不显示 `ArtifactRef` | `grep -rln ArtifactRef client renderer` 无结果。数据集页详情的 `chain` 只有运行或讨论、节点或来源、容器、镜像几项（`renderer/features/lab-datasets/model/datasets-view-model.ts:404-445`）；以 mono 显示的 `row.id` 是分组 id（`datasets-page.tsx:335`），引用区的 `ref.id` 是讨论 id（`:464`） | 成立 |
+| V-4 | 修订可用的现有元素 | 原型 `DatasetArtifact.id` 的类型是 `ArtifactId = ${string}:${string}`（`client/contracts/lab-workspace.ts:50,59`）。D12-02⑤ 规定 `ArtifactRef` 与之同形（`DEC/D12-lab-wire.md:34`），所以投影后的 `id` 就是 `ArtifactRef`。详情 `chain` 是 `DatasetLineage{label,value,page,mono}[]`（`datasets-view-model.ts:192-197`），UI 逐项渲染，`mono` 为真时用等宽样式（`datasets-page.tsx:432-441`）。已有文案 `copy.columns.artifact` 的值是“产物”/“Artifact”（`renderer/locales/lab-datasets-copy.ts:91,167`） | 只改 model 就能显示引用串 |
+| V-5 | 上传接口 | `LabBridge.uploadArtifact(conversation, name, role, bytes)` 已实现（`client/services/lab.ts:105`）。路由要求调用者是该会话的 owner（`DEC/D12-lab-wire.md:581`）。D12-13 把 D7 原来的 `artifact.upload` 命令改走 HTTP（`DEC/D12-lab-wire.md:45`；`DEC/D7-lab-backend.md:120`） | 讨论页附件按钮接上它即可上传 |
+
+**结论：** 反例成立，不提 rebut。v1 改为 v2，按 ClaudeHigh 的清零条件 (a) 补上 GUI 中引用串的完整来源。
+
+### 6.2 v2 行要点（全文见 PM#56 的 D37-01 v2 行）
+
+- 交回对话框与 v1 相同：file 字段用 `kind: 'text'`（`mono: true`）接收 `ArtifactRef`，提示文案指向数据集页详情的“产物”行。
+- 引用串在数据集页详情显示（WEB-04，Pepgent#27）：model 在 `chain` 末尾加一项 `{ label: copy.columns.artifact, value: artifact.id, mono: true, page: 与该产物第一项相同 }`。不改 `ui/**`，不加文案。
+- 新文件经讨论页上传（WEB-07，Pepgent#29）：`discussions-page.tsx:572` 的 `AttachIcon` 加 `onClick`；controller 以程序化的 `input type=file` 取得文件，调用 `uploadArtifact(当前讨论会话, 文件名, 'raw', 文件)`。
+- 承载：自动化页交回在 WEB-05；数据集页引用串在 WEB-04；详情页交回与讨论页上传在 WEB-07（上传要到运行时脱离 `LAB_SNAPSHOT` 后才生效，沿用 D36-02 v2 的先例）。
+- 回写 `DEC/D8-mvp-scope.md` 的 :348“交回”条和 WEB-04、WEB-07 两行。
+
+### 6.3 送闸门的问题
+
+v2 给 WEB-04、WEB-07 新增了承载内容，`ui/**` 多了一处 `onClick`，所以重新送两道闸门。
+
+- **A（Argon）：** “数据集页详情显示引用串 + 讨论页附件上传 + 交回框粘贴”这条主路径，是否满足 D12-11/P16 中文件型交回在两页可用的意图？讨论页附件按钮接到 `uploadArtifact`，是否与 LAB-11a“附件”、F09/F31 的意图一致，没有越过任何公开契约？
+- **B（ArgonGovernance）：** 数据集页只改 model，讨论页改 controller 加 `discussions-page.tsx:572` 一处 `onClick`。这是否都在 D20-01/02 内，不需要改白名单、不加 `governance`？上传不是 `LabCommand`（`DEC/D7-lab-backend.md:120`），而是 D12-13 把原 `artifact.upload` 改走 HTTP 后的形态；这一处 `onClick` 算不算 D20-02 的“最少 props”？引用串放在 WEB-04、上传接线放在 WEB-07，是否不涉及阶段门禁，也不需要另开 issue？
