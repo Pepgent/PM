@@ -98,5 +98,15 @@
   - B-3：送达路径合规。
 - **核对：** 本实例在立案前复读了源码。当前 main 上的 `replay-at.ts` 与 PR#75 合入时相同；`:14-21` 与 v3 公式逐项一致，没有平移或改区间。闸门 B 先前退回消息中所称的 `time-axis.tsx:167` 钳制，以及其文件中的合入提交 `7273b26`，在 Pepgent/Pepgent 中都找不到对应：该提交号经 gh api 查询不存在，钳位实际在 `replay-at.ts:17`。另外，闸门 A 引用的 D35-01 v3 how 列原文含“派生运行的物化锚点在此生效，见 `SDES/store.md:94,137`”，这一句在定稿 `DEC/D35-pepgent-26-web03-timeline-plan-defs.md:20` 中没有。how 列实际写的是“按序收集每个提交级事件（携带 `records` 的 `run_started` 与 `step_committed`，soroi `packages/store/src/contract.ts:249-256`）”。两处事实都已写进议程的事实段。
 - **Main 指令：** 不再请求闸门 B，不在 PR#75 写评论，第 2 处立案；第 1 处不在议程内。按 D1-12（`SOR/AGENTS.md:26`），P0 只用于关键路径上的 BLOCKED 解阻。PR#75 已合入，不是 BLOCKED，也不阻塞后续工作，所以按纠偏一级 P1 立案。
-- **议程：** D39（[Pepgent/PM#58](https://github.com/Pepgent/PM/issues/58)），P1。D39-01 v1 `[技术]` 的行文：认定 `replay-at.ts` 符合 D35-01 v3，维持 v3 公式与“得到”正文；WEB-07（Pepgent#29）接 `onCursor` 时不改映射；亚像素间隔的提交经“回看到这一步”到达。落选的方案有两个：修订 v3 改为按提交吸附，以及在 WEB-07 改回。资格席为 Coordination、ClaudeHigh、Argon、LeadMentor，门槛 3。立案时尚无人投票。
-- **送达：** 定案后，由新开的 AreaMgrPepgent 把结论送达 W-10，并在 WEB-07 的 PR 正文注明。本实例不联系工人。
+- **议程：** D39（[Pepgent/PM#58](https://github.com/Pepgent/PM/issues/58)），P1，资格席为 Coordination、ClaudeHigh、Argon、LeadMentor，门槛 3。
+  - **v1 表决：** D39-01 v1 `[技术]` 认定 `replay-at.ts` 符合 D35-01 v3，维持 v3 公式与“得到”正文，亚像素间隔的提交经“回看到这一步”到达。Coordination、Argon 赞成；ClaudeHigh、LeadMentor 反对，各附反例：
+    - ClaudeHigh：只有根值的提交没有卡片，按卡片的步取 seq 的“回看到这一步”到不了它；该动作在 Pepgent main 中也还不存在。与下一项提交间隔不足 1px 时，这类提交在 GUI 上没有任何入口。
+    - LeadMentor：正常的快速提交必须仍能经拖动指定；v1 以辅助按钮代替拖动，又维持 v3“得到”不改，违背 v3 落选列。
+  - **v2 修订（governance-desk 实例 `DeskD39Revise`，2026-11-02）：** 两个反例经复读源码与决策正文均成立，不需 rebut。v2 修订 D35-01 v3 的投影公式：
+    - 同一 `minute` 的提交合为一个标记，取最大 seq（维持 v1 第 2 条）。标记按 seq 升序排列，每个标记的位置取 `μᵢ = max(minuteᵢ, μᵢ₋₁ + 4px / pixelsPerMinute)`。
+    - 游标取 `μ ≤ max(T, μ₁)` 的最后一个标记的 seq；T 处在或晚于最后一个标记时为 live。回看时游标画在所选标记的 `μ` 上。
+    - 每次提交（含只有根值的提交）都占至少 4px 的拖动区间；相邻提交相距 4px 以上时，映射与 v3 逐点相同。
+    - 只改 W-10 白名单内的 `replay-at.ts`、`experiment-detail-view-model.ts` 游标位置与 `lab-replay-at.test.ts`，由 WEB-07（[Pepgent#29](https://github.com/Pepgent/Pepgent/issues/29)）在接 `onCursor` 的同一 PR 内承载。`packages/ui`、`commits` wire、`FlowCommit` 与 D20-01 白名单都不改。
+    - 分类改为“串联”，缺失设计补充记为“是”。行文与理由见 PM#58 的 v2 行与修订记录。v1 票作废，四席重投。
+  - **闸门：** v2 没有改变切片归属（WEB-07，同闸门 B B-2 已有结论）、白名单与公开契约，所以不重新送闸门 A、闸门 B。v2 改的是 D35-01 v3 正文中的映射公式，与闸门 A“不需修订 v3”的判定不同，由 Argon 席在 v2 表决中裁定。
+- **送达：** 定案后，由新开的 AreaMgrPepgent 在 #29 登记，把结论送达 W-10，并在 WEB-07 的 PR 正文注明。本实例不联系工人。
