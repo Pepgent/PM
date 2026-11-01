@@ -481,6 +481,7 @@ type Verdict = {
 | --- | --- |
 | home.progress.phase/detail | 研究阶段与整体进展叙述 |
 | home.clusters.*；clusters.clusters[].health/load/gpu/cpu/nodeCount/handshakeAge；gpuNodePatterns；gateways；containers.clusterAvailability | P4 集群健康与容量 |
+| clusters.clusters[].isDefault | Lab 默认集群选择；P3 与 remote 没有该事实。视图允许 null、投影一律 null，不以 false 或首个模板端点造默认值，不显示默认标记（D38-01） |
 | experimentFlows[].description（未绑草稿） | 无草稿运行的研究描述 |
 | experimentFlows[].remainingMinutes | 未提交的后续调用不可知 |
 | nodes[].status 的 failed_verdict/flagged；tableVerdict；detail.verdict；artifactContracts；datasets.artifacts[].role/verdict/contract（实验产物） | 产物契约与判据，D10-11(b) |

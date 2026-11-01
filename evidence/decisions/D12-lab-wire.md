@@ -198,6 +198,9 @@ export type ReportWire = { id: ReportId; lab: LabId; conversation: ConversationI
                            model: { provider: string; id: string } | null; createdAt: Instant }
 export type ActivityWire = { id: string; lab: LabId; actor: MemberId | null; project: ProjectId | null
                              kind: string; text: string; at: Instant }  // 只记 Lab 自己产生的事件（D7-02）
+// kind 为产生事件的 D12-10 命令名，仅以下三族（D38-02 v2），wire 仍为 string：
+// 成员：member.invite、member.role、member.quota、member.remove；结论确认：conclusion.confirm；
+// 节点合入：library.merge、library.apply、agentTemplate.saveVersion，不将后两者改写为 library.merge。
 export type MilestoneWire = { id: MilestoneId; lab: LabId; project: ProjectId | null; title: string
                               description: string | null; dueAt: Instant | null; completedAt: Instant | null }
 export type InvitationWire = { id: InvitationId; email: string; role: LabRole; sentAt: Instant; inviter: MemberId }
@@ -205,6 +208,14 @@ export type LibraryRepoWire = { id: LibraryRepoId; remoteUrl: string; branch: st
                                 publicKey: string | null; checkout: { head: string; sequence: number; fetchedAt: Instant; ahead: number } }
 export type HumanIrcQueueWire = { msg: string; principal: UserId; body: string; queuedAt: Instant }
 ```
+
+#### Lab 自有活动的读取与首页投影（D38-02 v2）
+
+**写入（W-09）：上述命令成功落库时，在同一事务写一行 activity。**
+
+`ActivityWire` 的形状不变，`kind` 只取上述三族的原命令名。`actor` 为执行命令的成员；结论事件的 `project` 取其讨论的项目，节点合入事件在命令会话是讨论时取该讨论项目、Panel 会话为 null，成员事件为 null。`text` 为事实摘要：结论正文、合入结果的 `paths` 列表，或成员与角色/配额；不新增关联目标字段。`home.activity` 返回本 Lab 的全部 activity 行；`settings.repoActivity` 仅返回节点合入族三个命令名的行。
+
+首页由 W-10 按封闭词表投影：`conclusion.confirm` → category `experiments`、glyph `literature`、action.dialog `results`；`library.merge`、`library.apply`、`agentTemplate.saveVersion` → category `data`、glyph `database`、action.dialog `dataset`。`member.*` 仍落库与出线，但不进入首页事件流。标题按 `kind` 取 renderer copy，入口打开 renderer 本地已有弹窗，不跳具体关联对象、不新增合入专属弹窗。合入弹窗标题沿现有“数据集”，不是“文献”。活动写入和页面读取归 W-09，首页投影与 `client/services/lab/invalidation.ts` 归 W-10；D12-17 的 `library` 频道令 `home` 重读，成员与结论仍沿 `catalog` 令 `home`、`settings` 失效。
 
 ### 草稿编码（D12-06；`draft.canvas` 列存其 JSON）
 
@@ -351,7 +362,7 @@ export type TemplateMetadata = {                                             // 
 export type TemplateWire = TemplateInfo & { metadata: TemplateMetadata }
 export type JobWire = { run: RemoteRunSummary; status: RunStatus }
 export type ImageDefinition = {                                               // P15
-  name: string; path: string; base: string
+  name: string; path: string; base: string // name = 发布的 OCI repository 路径，不含 registry 主机、tag 或 digest，例如 pepgent/omp-agent（D38-03）
   dependencies: { name: string; version: string; kind: 'base' | 'sdk' | 'python_package' | 'internal_library' | 'files' | 'runtime_config' }[]
   files: { path: string; size: number; contents: string | null }[]           // contents：文本文件全文，二进制为 null
 }
@@ -608,7 +619,7 @@ export type JobTailFrame = { observedAt: Instant; text: string }
 | `run` | 该运行的 store 运行流事件；挂在该运行 `ExperimentWire.slots` 的在途槽位变化（D7-08 有订阅者时定期读在线根会话 `writers` → 各写方 `slots` 比较发现，不等待步提交） | 目录；同一运行的 `experiment`；`datasets` |
 | `conversation` | 该会话一条消息结束（`message_end`）；附件、结论正文、装载上下文、当前成员已读、人类消息队列变化；Panel 或 Automation 会话头改变；挂在 Panel 或 Automation 的 `ConversationWire.slots` 的在途槽位变化 | 该会话的 `lab.conversation.read`；`discussions`、`discussion`、`home`、`settings`（`activity` 与 `discussionActivity`）；`panels` 含该会话的页面；`conversations` 含该会话的自动化页；`datasets` |
 | `automation` | `automation_rule`、`automation_run` 变化 | `automation`；`home` |
-| `library` | 库默认分支、`library_staging`、会话未合入改动、`.omp/agents` 变化 | `nodes`、`flowEditor`、`experiment`、`containers`、`settings` |
+| `library` | 库默认分支、`library_staging`、会话未合入改动、`.omp/agents` 变化 | `nodes`、`flowEditor`、`experiment`、`containers`、`settings`、`home` |
 | `compute` | remote 作业列表或状态变化（有订阅者时定期发现，D7-12）；Mux 在线变化 | `clusters`、`containers`、`home`、`experiment` |
 
 ## 第一版无来源字段（D8-16 规则，列入 D9 输入）
@@ -619,6 +630,7 @@ export type JobTailFrame = { observedAt: Instant; text: string }
 | --- | --- | --- |
 | `home.progress.phase`、`.detail` | 研究阶段与整体进展叙述 | G10 |
 | `home.clusters.*`、`clusters.clusters[].health/load/gpu/cpu/nodeCount/handshakeAge`、`gpuNodePatterns`、`gateways`、`containers.clusterAvailability` | 集群健康与容量（P4） | — |
+| `clusters.clusters[].isDefault` | Lab 默认集群选择；P3 的 `TemplateMetadata` 与 remote 只给每个模板自己的唯一后端端点，不给 Lab 默认值。视图 `ClusterRecord.isDefault` 为 `boolean \| null`，投影一律 `null`、不渲染默认标记，不改 UI、remote 或 wire（D38-01） | — |
 | `experimentFlows[].description`（未绑定草稿的运行） | 没有草稿的运行无研究描述 | G13 |
 | `experimentFlows[].remainingMinutes` | 未提交的后续调用不可知 | G47 |
 | `nodes[].status` 的 `failed_verdict/flagged`、`tableVerdict`、`detail.verdict`、`artifactContracts`、`datasets.artifacts[].role/verdict/contract`（实验产物） | 产物契约与判据（D10-11(b)） | — |
@@ -639,7 +651,7 @@ export type JobTailFrame = { observedAt: Instant; text: string }
 | --- | --- |
 | P3（展开） | remote 模板能返回 `TemplateMetadata`（见类型定义），即 D2-09 的“GUI 展示所需字段” |
 | P14 对象大小 | store `GET /objects/{sha}` 响应带 `Content-Length`，Lab 读响应头即可得到大小 |
-| P15 镜像定义导出 | Lab 能从 images 检出读出每个镜像的 `ImageDefinition`（D7-13“从中读出依赖、文件、层”） |
+| P15 镜像定义导出 | Lab 能从 images 检出读出每个镜像的 `ImageDefinition`（D7-13）；`name` 导出发布的 OCI repository 路径，不含 registry 主机、tag 或 digest，模板引用按 D7-13 / D38-03 归一关联，假定能工作 |
 | P16 GUI 交回中的文件 | Lab 把 `ArtifactRef` 的字节放进持有槽位会话可读的位置，以 D5 `Returned.file{path, placement}` 交给端点 |
 | P17 智能体模板使用次数 | 设置页“使用次数”能从会话记录统计；第一版投影不显示 |
 | P18 omp 版本 | Lab 能读出所装 omp 的版本（D7-11“`harnessVersion` 取容器里 omp 的版本”） |
