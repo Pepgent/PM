@@ -151,9 +151,8 @@ D10-05 要将上述 live 正文改为“统一 e2e 阶段工作项”并关联�
 | A2-07 | Pepgent/deploy | **由 D16-04 新增**：秘书新建 issue，内容为中心 Stack 的 `lab-entrypoint.sh` 调用安装器时传入 `--artifact /release/soroi.tar`；正文引用 D14-02。owner 为 W-04，排在 A2-05 合入之后。 | (D：D14-release-identity.md:39；D16-04) | D16 通过后执行 |
 | A2-08 | Pepgent/soroi | **由 D16-04 新增**：秘书新建 issue，内容为 A0 campaign 及 DIST-01、CUS-04 启动脚本的安装器 argv 加 `--artifact`，所有中心 Main 入口从已安装发行启动；正文引用 D14-02。owner 为 W-08。 | (D：D14-release-identity.md:40；D16-04) | D16 通过后执行 |
 | A2-09 | Pepgent/Pepgent | **由 D16-04 新增**：秘书新建 issue，内容为宿主机开发驱动从已安装发行启动根 omp；正文引用 D14-02。owner 为 W-09。 | (D：D14-release-identity.md:41；D16-04) | D16 通过后执行 |
-| A2-10 | Pepgent/soroi | **由 D16-05 新增**：秘书新建 issue，内容为在 `packages/store/src/contract.ts` 中实现并导出 `RunComparisonSchema`、`ValueUsageSchema`、`ActivitySchema`。owner 为 W-06，作为该席第一个切片。 | (D：D12-lab-wire.md:33；D16-05①) | D16 通过后执行 |
-| A2-11 | Pepgent/soroi | **由 D16-05 新增**：秘书新建 issue，内容为根 `package.json` 增加 `exports` 的 `./contract` 与 `./identity`，补 `zod` 依赖，并重新生成 `bun.lock`。owner 为 W-07，作为该席第一个切片。 | (D：D10-10；D12-01；D16-05②) | D16 通过后执行 |
-| A2-12 | Pepgent/Pepgent | **由 D16-03、D16-05 新增**：秘书新建 issue，内容为落地 D12 的 `apps/web/src/protocol/lab/**`，并在依赖文件中以 git 依赖引用 `Pepgent/soroi` 默认分支的 store 契约；在 A2-10、A2-11 合入后进行。owner 为 W-09，作为该席第一个切片；合入后 W-10 才启动。 | (D：D12-01、D12:33；D16-03③；D16-05③) | D16 通过后执行 |
+| A2-10 | Pepgent/soroi | **由 D16-05 新增：** 秘书新建一个 issue，由 W-06 在同一个 PR 中完成，作为该席位的第一个切片。内容如下：<br>• 在 `packages/store/src/contract.ts` 中实现并导出 `RunComparisonSchema`、`ValueUsageSchema`、`ActivitySchema`；<br>• 在根 `package.json` 新增 `exports`：`./contract`、`./identity`；<br>• 补 `zod` 依赖；<br>• 重新生成 `bun.lock`。 | (D：D12-lab-wire.md:33；D10-10；D16-05①) | D16 通过后执行 |
+| A2-12 | Pepgent/Pepgent | **由 D16-03、D16-05 新增：** 秘书新建一个 issue，在 A2-10 合入后进行。内容如下：<br>• 落地 D12 的 `apps/web/src/protocol/lab/**`；<br>• 在依赖文件中以 git 依赖引用 `Pepgent/soroi` 默认分支的 store 契约。<br>owner 为 W-09，作为该席位的第一个切片；合入后 W-10 才能启动。 | (D：D12-01、D12:33；D16-03④；D16-05②) | D16 通过后执行 |
 
 **重开：0 条明确要求；挂父子边：0 条明确要求。** D10:30 的 child 6/8 为既有工作引用；D11/12/13/14 的影响表只列消费者与实现动作，未写“重开”或“挂父子边”。尤其 D14:36 指向已不在 soroi OPEN 列表中的 DIST-01/#199，仍不能据“安装器加参数”自行决定重开它。D10-05:17 的③要求把移出的义务写入对应 E2E/A0/S1/S2 正文，未明确要求新建 issue，故不添造新号。(D；R)
 
