@@ -334,11 +334,21 @@ type Verdict = {
 | LAB-12 | 算力页的只读读取（D7-12、D7-18；D8-16）：`lab.page.read{lab, page:'clusters'}` 返回 `templates`、`jobs: {run: RemoteRunSummary; status: RunStatus}[]`、`presence`；日志尾部另由只读 SSE `GET /api/lab/jobs/{run}/tail` 提供（`remote tail` 快照，有订阅者时定期取）。有订阅者时定期调用 `remote runs`、`remote status`，变化经 `/api/lab/events` 的 `compute` 频道通知重读；作业最新事实为 `Removed` 时不开 tail 流（D7:72、78、145-146）。第一版无命令 | REM-05、REM-06、REM-07、REM-02、MUX-04 | F17、F31 | 一个运行中的远程作业出现在页面线数据里，带模板与状态；tail SSE 推送它的日志尾部；作业结束后 `compute` 通知触发重读、状态更新；排队中被取消的作业显示终态 `EndedUnstarted`（PM#4）；`remove` 之后不再开 tail 流 | low |
 | WEB-01 | 阶段 A：`readSnapshot` 改为异步，loader 构造服务（D7:76） | — | S2 | 13 个 controller 没有改动，页面照常渲染 | low |
 | WEB-02 | 阶段 B 的基础：`src/protocol/lab`、新的 `LabBridge`、`subscribe`、`send`、`watchAgent`（D7:77、117-123） | LAB-07a、WEB-01 | S2 | 页面 loader 读取线数据，事件使它失效后重读 | mid |
-| WEB-03 | 投影：catalog、实验列表、实验详情（`RunGraph` 到 `ExperimentFlowFixture`，含时间轴、对比、派生导航、runner workspace） | WEB-02、LAB-07b | F08、F10、F13、F18、F23–F26 | 纯函数投影的单元测试，输入是真实录制的线数据；录制中含 `Aborted` 变体的调用（不带 `version`、`body`、`env`，`outputs = []`），投影出被中止的节点（PM#5 第 2 项） | mid |
+| WEB-03 | 投影：catalog、实验列表、实验详情（`RunGraph` 到 `ExperimentFlowFixture`，含时间轴、对比、派生导航、runner workspace 与交回地址）。目录投影在本切片交付；所选 Lab 的持有与重读、详情页回看/派生/对比/workspace/交回五项真实页面接线归 WEB-07（D36-01 v1、D36-02 v2），不作为 WEB-03 关闭条件。D35-01 v3 的共享组件受控位置/回调属性与 model 内时刻→`k` 纯映射可在本切片交付，关闭时未交付的部分随 WEB-07 回看接线承接 | WEB-02、LAB-07b | F08、F10、F13、F18、F23–F26 的投影；页面接线在 WEB-07 | 纯函数投影的单元测试，输入是真实录制的线数据；录制中含 `Aborted` 变体的调用（不带 `version`、`body`、`env`，`outputs = []`），投影出被中止的节点（PM#5 第 2 项） | mid |
 | WEB-04 | 投影：讨论、数据集、流程编辑器 | WEB-02、LAB-11a、LAB-11b | F09、F12、F27 | 同上 | low |
 | WEB-05 | 投影：节点库、自动化 | WEB-02、LAB-09、LAB-10 | F28–F30 | 同上 | low |
 | WEB-06 | 投影：集群、容器、接入向导、设置、首页 | WEB-02、LAB-12 | F17、F31 | 同上 | low |
-| WEB-07 | 阶段 B 一次落地：放宽 id、把剧情字面量改成数据事实、`AgentTemplate.id` 改为 omp agent 定义名、`AgentTemplate.harness` 收窄为字面量 `'omp'`（D7:71、77）、运行时不再引用 `LAB_SNAPSHOT`；W-10 按 D20-01/02 路径与 UI 数据绑定边界实施，保留 U59 合法结构/语义，不联系无关前端会话；文档按 D20-03 交接（D7-17） | WEB-03–06 | S2 | 构建好的 host 在浏览器中走完 13 个页面，数据都来自后端（SMOKE:22-54） | mid |
+| WEB-07 | 阶段 B 一次落地：放宽 id、把剧情字面量改成数据事实、`AgentTemplate.id` 改为 omp agent 定义名、`AgentTemplate.harness` 收窄为字面量 `'omp'`（D7:71、77）、运行时不再引用 `LAB_SNAPSHOT`；同时交付客户端所选 Lab 的持有与切换重读，以及详情页回看、派生、对比、workspace、交回五项真实页面接线，具体行为见下文（D36-01 v1、D36-02 v2）。D35-01 v3 在 WEB-03 关闭时尚未交付的共享属性与纯映射随回看接线一并承接。W-10 按 D20-01/02 路径与 UI 数据绑定边界实施，保留 U59 合法结构/语义，不联系无关前端会话；文档按 D20-03 交接（D7-17） | WEB-03–06；D35-01 的提交时间轴 wire 按最终通过版本消费 | S2 | 构建好的 host 在浏览器中走完 13 个页面，数据都来自后端（SMOKE:22-54）；切换 Lab 与五项接线均交付，F10 S2 仍以拖动时间轴读取 `at=k` 的真实节点集合统一验收 | mid |
+
+**WEB-07 的切换 Lab 与详情页接线（D36）。** 客户端持有 `selectedLabId: LabId | null`，首次为 `null`；切换时 `readCatalog(selectedLabId)` 重读目录，按新 `catalog.lab` 重读页面并重订阅 events，不写 Better Auth 会话。该行为随去除运行时 `LAB_SNAPSHOT` 一并交付，WEB-03 只交目录投影。
+
+详情页路由 loader 调用 `readPage('experiment')`，五个入口与该页真实数据切换一并接线：
+
+- 回看：“回看到这一步”工具栏动作，以及 D35-01 v3 的游标受控位置/拖动或点选回调接到 `readPage('experiment', {at})`；`at=k` 按 D12-05 读 `rewind`，`at=null` 读实时。不能用工具栏动作替代拖动。
+- 派生、对比、交回：工具栏动作与数据驱动的 `DialogSpecFixture`，调用处传入 `ActionDialog` 已有的 `onDone`。
+- workspace：卷清单放入节点侧栏已有的 `artifactsAndSignals` 行。
+
+数据投影仍由 WEB-03 交付；上述五项页面接线与切换 Lab 不作为 WEB-03 关闭条件。相关 F 流程的 S2 部分在 WEB-07 合入后的统一 S2 验收，范围不缩减。D35-01 的共享组件属性与时刻→`k` 映射按最终通过版本实施，WEB-03 关闭时未交付部分在 WEB-07 承接。AreaMgrPepgent 在 [WEB-07 / Pepgent#29](https://github.com/Pepgent/Pepgent/issues/29) 评论登记承接 [D36-01、D36-02 v2](https://github.com/Pepgent/PM/issues/55)，逐项列出切换 Lab 及回看、派生、对比、workspace、交回五项接线，回看须含工具栏动作和 D35 游标回调，再送达 W-10；W-10 在 WEB-07 的 PR 正文逐项列出落点。路径仍限 D20-01，详情页 `ui` 只改 D20-02 允许的行。
 
 #### DEP：`Pepgent/deploy`（新仓库，D2:60）
 
