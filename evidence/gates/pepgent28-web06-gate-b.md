@@ -47,3 +47,13 @@
 ### 5. `G3 B`（镜像与模板关联键是否属必须投票事项；表决前只暂停容器页依赖该对应的部分是否合规）
 - **判定：** **越界，必须立 `P0` 表决；不加 `domains: [governance]`（4 席参投）；表决期“只暂停依赖部分”完全合规。**
 - **依据：** `ImageDefinition.name` 取值与 `TemplateMetadata.image` 归一匹配规则横跨 `W-03`（`Pepgent/images`）、`W-09`（`P15` 导出）与 `W-10`（容器页投影）三方，属跨仓公开契约缺口（`K4`），按 `C2-2.2`、`D10-08`、`AGENTS.md:123` 必须立 `P0` 表决；不改 `D16-09`/`D20` 白名单，故**不加 `domains: [governance]`**。表决前按 `D10-08` `W-10` 仅暂停容器页依赖该关联键的 4 项（`nodeBindingCount`、`resources`、模板挂载、`liveContainers`），容器定义、依赖、文件、Panel 头照常交付，**完全合规**。
+
+---
+
+## 三、`D38-02 v2`（及 `D38-03 v2` 告知项）修订复核判定（`DeskD38Revise`，`2026-11-01T21:16Z`）
+
+- **复核对象：** `/tmp/desk38r/D38-02-v2-gate-request.md`、`/tmp/desk38r/D38-02-v2.yaml`（对应 `Pepgent/PM#57` `D38-02 v2`）。
+- **闸门 B 结论：** **合规；仍在 `W-09` 与 `W-10` 既有路径白名单内，不改 `D16-09`/`D20` 白名单与切片归属，维持 4 席参投（不加 `domains: [governance]`）。**
+  1. **`W-09` 写方路径边界：** 节点合入族扩展为 `library.merge`、`library.apply`、`agentTemplate.saveVersion` 三个命令并在 `settings.repoActivity` 过滤三者，代码改动仍限 `apps/web/src/server/lab/**`，完全在 `D16-09` 授予 `W-09` 的白名单内。
+  2. **`W-10` 读方与失效表路径边界：** `D12-17` `library` 频道失效读取加 `home` 由 `W-10` 在 `apps/web/src/client/services/lab/invalidation.ts` 实现（属 `D20-01` `apps/web/src/client/**` 白名单）；合入事件入口弹窗由既有 `sources` 改为既有 `dataset` 弹窗，仅改 `features/lab-home/model/**`（及 `client/**`）投影映射，不新增弹窗、不触碰 `ui/**` 组件结构，完全在 `D20-01/02` 白名单内，仍由 `WEB-06`（`Pepgent#28`）承载。
+  3. **`D38-03` 后续修订路由核对（`D40`，`Pepgent/PM#59`）：** 因 `D38-03 v1` 已定案（daemon 拒绝 `revise`），`DeskD38Revise` 将 `nodeBindingCount` 匹配字段由 `NodeDefinition.template` 改为 `NodeDefinition.defaultEnvironment` 以新议程 `D40`（`Pepgent/PM#59`，单行 `D40-01`）立案表决而非私下回写已定决策，且改动不超出 `W-10` 白名单与 `WEB-06` 切片归属，符合议会程序，仍为 4 席参投（不加 `domains: [governance]`）。
