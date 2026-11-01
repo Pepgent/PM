@@ -92,3 +92,14 @@
 - 闸门 A 和 B 都确认不越界：在 `Pepgent/soroi` 开两个承载 issue，正文写明缺陷、所依据的契约原文位置、承接席位 W-07，以及被阻塞的阶段 C 用例 F22（E2E-13 / #250）。然后在 #250 评论中链接这两个 issue。
 - 任一闸门认定越界：由本实例按 P0 起草决策表，并用 `council propose --seat Coordination` 立案。
 - 闸门结论写在同目录下的 `w08-f22-defects-gate-a.md` 和 `w08-f22-defects-gate-b.md`，处置结果追加在本文末的“处置结果”一节。这样，下一个空白实例只读这三个文件就能接续。
+
+## 处置结果
+
+- 闸门 A（`Argon-2`）判定不越界，见 `w08-f22-defects-gate-a.md`。闸门 B（`ArgonGovernance-2`）同样判定不越界，见 `w08-f22-defects-gate-b.md`。两道闸门都通过，本项免投票。
+- 已在 `Pepgent/soroi` 开两个承载 issue，都由 W-07 `pepgent-plugin` 承接，路径为 `packages/omp-soroi/**`：
+  - [soroi#336](https://github.com/Pepgent/soroi/issues/336)：启动配方 sidecar 按 D5 §3.1 写入 `role`。
+  - [soroi#337](https://github.com/Pepgent/soroi/issues/337)：未消费提醒按 D5-13 以 `purpose` 组头分组。
+
+  两项都阻塞 [#250](https://github.com/Pepgent/soroi/issues/250) 在阶段 C 的 F22。
+- 已在 [#250 评论 6562678969](https://github.com/Pepgent/soroi/issues/250#issuecomment-6562678969) 链接这两个承载 issue。
+- 待排期：W-07 目前不在岗。它重新入场的时间由 Main 按 D16-10 安排，届时 #329、#336、#337 一起处理。入场后由 Main 首次派活，或由 soroi 片区经理送达。本实例不联系工人。
