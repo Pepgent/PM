@@ -1,0 +1,4 @@
+extensions:
+  - /tmp/soroi-eval-wire-runtime/probe.ts
+tools:
+  approvalMode: yolo

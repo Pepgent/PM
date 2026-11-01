@@ -1,0 +1,37 @@
+{
+  "label": "after-valid267",
+  "session": "01a19586-d739-70e3-9ef4-f029877862dc",
+  "runs": [
+    {
+      "run": "01M6ARE3VBZZ1C6J3PC8PQZXY0",
+      "holder": "01a19586-d739-70e3-9ef4-f029877862dc",
+      "state": "Ended",
+      "startedAt": "2026-11-01T05:13:38.923Z",
+      "endedAt": "2026-11-01T05:13:39.357Z"
+    }
+  ],
+  "graphs": [
+    {
+      "run": "01M6ARE3VBZZ1C6J3PC8PQZXY0",
+      "holder": "01a19586-d739-70e3-9ef4-f029877862dc",
+      "derivedFrom": null,
+      "state": "Ended",
+      "at": 4,
+      "nodes": [
+        {
+          "kind": "Root",
+          "name": "wire_value",
+          "value": {
+            "kind": "scalar",
+            "scalar": {
+              "kind": "number",
+              "v": 7
+            }
+          }
+        }
+      ],
+      "edges": [],
+      "unconsumed": []
+    }
+  ]
+}

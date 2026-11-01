@@ -1,0 +1,112 @@
+{
+  "issue": "https://github.com/Pepgent/soroi/issues/267",
+  "session": {
+    "kind": "session_start",
+    "session": "01a19586-d739-70e3-9ef4-f029877862dc",
+    "file": "/tmp/soroi-eval-wire-runtime/sessions/2026-11-01T05-13-24-537Z_01a19586-d739-70e3-9ef4-f029877862dc.jsonl",
+    "pid": 63929
+  },
+  "runtime": {
+    "omp": "18.14.2",
+    "model": "opencode-go/deepseek-v4.1-flash",
+    "store": "http://127.0.0.1:19688",
+    "storeHome": "/tmp/soroi201-runtime/store"
+  },
+  "before": "before-schema-failure.json contains safe actual400 request fields only; no headers/unrelated body",
+  "actualAcceptedFormal": {
+    "type": "tool_result",
+    "toolName": "soroi_eval",
+    "toolCallId": "call_00_y6b20yevozgjbod7m5h0qi68",
+    "input": {
+      "mode": "formal",
+      "code": "const wire_value = 7\nstop(wire_value)"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "\u5f00\u59cb\u8fd0\u884c 01M6ARE3VBZZ1C6J3PC8PQZXY0\u3002\n\u6b63\u5f0f\u8fd0\u884c\uff1a\u8fd9\u4e00\u6b65\u5199\u8fdb\u4e86\u8fd0\u884c 01M6ARE3VBZZ1C6J3PC8PQZXY0\u3002\nwire_value = 7\nstop(wire_value)\n\u8fd0\u884c 01M6ARE3VBZZ1C6J3PC8PQZXY0 \u5df2\u7ed3\u675f\uff0cEnded{seq: 4}\u3002"
+      }
+    ],
+    "details": {
+      "mode": "formal",
+      "runId": "01M6ARE3VBZZ1C6J3PC8PQZXY0",
+      "seq": 3,
+      "runStarted": true,
+      "runEnded": true,
+      "calls": [],
+      "end": {
+        "kind": "Ended",
+        "seq": 4,
+        "run": "01M6ARE3VBZZ1C6J3PC8PQZXY0"
+      }
+    },
+    "isError": false
+  },
+  "actualRefusedFormal": {
+    "type": "tool_result",
+    "toolName": "soroi_eval",
+    "toolCallId": "call_00_rfjrrhezgk9jv70f18zqsl4r",
+    "input": {
+      "mode": "formal",
+      "code": "const rejected_wire_value = 9\nstop(rejected_wire_value)",
+      "pins": {
+        "rejected_wire_value": 99
+      }
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "pins must be undefined (was {\"rejected_wire_value\":99})"
+      }
+    ],
+    "details": {},
+    "isError": true
+  },
+  "nativeLifecycle": [
+    {
+      "kind": "obligation_registered",
+      "rootSession": "01a19586-d739-70e3-9ef4-f029877862dc",
+      "obligation": {
+        "kind": "FormalEval",
+        "session": "01a19586-d739-70e3-9ef4-f029877862dc",
+        "evalId": "call_00_y6b20yevozgjbod7m5h0qi68"
+      }
+    },
+    {
+      "kind": "obligation_released",
+      "rootSession": "01a19586-d739-70e3-9ef4-f029877862dc",
+      "obligation": {
+        "kind": "FormalEval",
+        "session": "01a19586-d739-70e3-9ef4-f029877862dc",
+        "evalId": "call_00_y6b20yevozgjbod7m5h0qi68"
+      }
+    },
+    {
+      "kind": "run_end_requested",
+      "rootSession": "01a19586-d739-70e3-9ef4-f029877862dc",
+      "run": "01M6ARE3VBZZ1C6J3PC8PQZXY0"
+    }
+  ],
+  "postRefusalRunsEqual": true,
+  "postRefusalGraphsEqual": true,
+  "rootExitCode": 0,
+  "hygiene": {
+    "typecheckExit": 0,
+    "targetTestsPass": 4,
+    "suitePass": 32,
+    "suiteFail": 0,
+    "expect": 83
+  },
+  "qualifications": [
+    "The first observation fixture failed loading a workspace package import before submitting a model request; that launch is not passing evidence. The fixture was corrected to use direct contract imports, then the full relevant path was rerun.",
+    "The root assistant claimed the two snapshot files were byte-identical, but their labels differ. Main compared runs and graphs directly; only those business data fields are equal. No hash/checksum used.",
+    "The intentional formal pins refusal now occurs at domain safeParse in execute, before state/lifecycle/checker access. Exact old host exception wording/channel is not an acceptance requirement."
+  ],
+  "sourceCommit": "a867639",
+  "command": "PI_CODING_AGENT_DIR=/tmp/soroi-185-runtime/agent SOROI_STORE_URL=http://127.0.0.1:19688 omp --model opencode-go/deepseek-v4.1-flash --no-context-files -e /Users/mouriya/Ext/worktrees/issue-196-mux-writer-ff0716f/packages/omp-soroi --config /tmp/soroi-eval-wire-runtime/settings.yml --session-dir /tmp/soroi-eval-wire-runtime/sessions",
+  "storeShutdown": {
+    "at": "2026-11-01T05:16:01Z",
+    "exitCode": 0,
+    "leaseReleased": true
+  }
+}

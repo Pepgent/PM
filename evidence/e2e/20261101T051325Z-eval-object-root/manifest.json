@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "issue": "https://github.com/Pepgent/soroi/issues/267",
+  "repository": "Pepgent/soroi",
+  "sourceCommit": "a867639",
+  "archive": "Issue 267 wire-object-root runtime evidence",
+  "artifactCount": 16,
+  "facts": {
+    "scope": {
+      "rootSession": "01a19586-d739-70e3-9ef4-f029877862dc",
+      "runId": "01M6ARE3VBZZ1C6J3PC8PQZXY0",
+      "endedSequence": 4,
+      "rootWireValue": 7,
+      "validFormalCallId": "call_00_y6b20yevozgjbod7m5h0qi68",
+      "refusedFormalCall": {
+        "pins": 99,
+        "callId": "call_00_rfjrrhezgk9jv70f18zqsl4r",
+        "isError": true,
+        "obligationRegistered": false
+      }
+    },
+    "comparison": {
+      "runsEqual": true,
+      "graphsEqual": true,
+      "wholeFilesByteEqual": false,
+      "basis": "Main directly compared runs and graphs; labels differ."
+    },
+    "wireBehavior": {
+      "domainUnionUnchanged": true,
+      "wireObjectRootProjection": true,
+      "domainParseBeforeLifecycle": true,
+      "formalRefusalErrorChannelChanged": true,
+      "behaviorPreserved": true
+    },
+    "recordedChecks": {
+      "tscExitCode": 0,
+      "targetTestsPass": 4,
+      "suitePass": 32,
+      "suiteFail": 0,
+      "expect": 83
+    },
+    "observer": {
+      "registeredToolInfo": "SDK wire rootEval/Task and report/capture single/fields object",
+      "driverRole": "Function boundary only",
+      "proof": "Actual root/store is end-to-end proof"
+    },
+    "qualifications": [
+      "The first observation fixture failed loading a workspace package import before submitting a model request; that launch is not passing evidence. The fixture was corrected to use direct contract imports, then the full relevant path was rerun.",
+      "The root assistant claimed the two snapshot files were byte-identical, but their labels differ. Main compared runs and graphs directly; only those business data fields are equal. No hash/checksum used.",
+      "The intentional formal pins refusal now occurs at domain safeParse in execute, before state/lifecycle/checker access. Exact old host exception wording/channel is not an acceptance requirement."
+    ],
+    "verificationPolicy": "No hash/checksum verification claimed."
+  },
+  "artifacts": [
+    {
+      "path": "metadata/before-schema-failure.json",
+      "source": "/tmp/soroi-eval-wire-runtime/before-schema-failure.json",
+      "category": "output",
+      "purpose": "Safe selected real-request/failure output; not a Main-authored conclusion.",
+      "recordNature": "Actual runtime output."
+    },
+    {
+      "path": "metadata/before267.json",
+      "source": "/tmp/soroi-eval-wire-runtime/before267.json",
+      "category": "output",
+      "purpose": "Issue 267 before-state runtime output; not authored metadata.",
+      "recordNature": "Actual runtime output."
+    },
+    {
+      "path": "metadata/after-valid267.json",
+      "source": "/tmp/soroi-eval-wire-runtime/after-valid267.json",
+      "category": "output",
+      "purpose": "Issue 267 after-state runtime output for the valid formal call; not authored metadata.",
+      "recordNature": "Actual runtime output."
+    },
+    {
+      "path": "metadata/after-refused267.json",
+      "source": "/tmp/soroi-eval-wire-runtime/after-refused267.json",
+      "category": "output",
+      "purpose": "Issue 267 after-state runtime output for the refused formal call; not authored metadata.",
+      "recordNature": "Actual runtime output."
+    },
+    {
+      "path": "metadata/schema-probe-result.json",
+      "source": "/tmp/soroi-eval-wire-runtime/schema-probe-result.json",
+      "category": "output",
+      "purpose": "Schema probe runtime output; not authored metadata.",
+      "recordNature": "Actual runtime output."
+    },
+    {
+      "path": "metadata/runtime-evidence.json",
+      "source": "/tmp/soroi-eval-wire-runtime/runtime-evidence.json",
+      "category": "metadata",
+      "purpose": "Main-authored runtime metadata and qualifications; not raw output.",
+      "recordNature": "Main-authored summary metadata."
+    },
+    {
+      "path": "metadata/issue267-payload.json",
+      "source": "/tmp/soroi-eval-wire-runtime/issue267-payload.json",
+      "category": "metadata",
+      "purpose": "GitHub issue metadata.",
+      "recordNature": "GitHub metadata."
+    },
+    {
+      "path": "source/probe.ts",
+      "source": "/tmp/soroi-eval-wire-runtime/probe.ts",
+      "category": "source",
+      "purpose": "Observer driver source."
+    },
+    {
+      "path": "source/settings.yml",
+      "source": "/tmp/soroi-eval-wire-runtime/settings.yml",
+      "category": "source",
+      "purpose": "Observer/runtime settings."
+    },
+    {
+      "path": "source/schema-probe.ts",
+      "source": "/tmp/soroi-eval-wire-runtime/schema-probe.ts",
+      "category": "source",
+      "purpose": "Schema probe source."
+    },
+    {
+      "path": "native-transcripts/2026-11-01T05-13-24-537Z_01a19586-d739-70e3-9ef4-f029877862dc.jsonl",
+      "source": "/tmp/soroi-eval-wire-runtime/sessions/2026-11-01T05-13-24-537Z_01a19586-d739-70e3-9ef4-f029877862dc.jsonl",
+      "category": "native-transcript",
+      "purpose": "Successful native JSONL transcript for the root session; only the requested transcript."
+    },
+    {
+      "path": "output/observations.jsonl",
+      "source": "/tmp/soroi-eval-wire-runtime/observations.jsonl",
+      "category": "output",
+      "purpose": "Actual observer output."
+    },
+    {
+      "path": "terminal/pi-unified-exec-6335-9-e783a301.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-6335-9-e783a301.log",
+      "category": "terminal",
+      "purpose": "Successful full actual root."
+    },
+    {
+      "path": "terminal/pi-unified-exec-6335-8-9841718a.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-6335-8-9841718a.log",
+      "category": "terminal",
+      "purpose": "Failed fixture import before request; not passing evidence."
+    },
+    {
+      "path": "terminal/pi-unified-exec-6335-7-5d342941.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-6335-7-5d342941.log",
+      "category": "terminal",
+      "purpose": "Actual original 400 integration failure."
+    },
+    {
+      "path": "terminal/pi-unified-exec-6335-6-e6389283.log",
+      "source": "/var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T/pi-unified-exec-6335-6-e6389283.log",
+      "category": "terminal",
+      "purpose": "Actual store exit 0."
+    }
+  ],
+  "excluded": [
+    {
+      "source": "/tmp/soroi-eval-wire-runtime/sessions/.2026-11-01T05-13-24-537Z_01a19586-d739-70e3-9ef4-f029877862dc.jsonl.lock.os",
+      "reason": "Lock file was not requested and was not copied."
+    },
+    {
+      "source": "/tmp/soroi-eval-wire-runtime/sessions/2026-11-01T05-13-24-537Z_01a19586-d739-70e3-9ef4-f029877862dc.thinking-translator-trace.jsonl",
+      "reason": "Non-requested thinking trace was not copied."
+    },
+    {
+      "source": "/tmp/soroi-eval-wire-runtime/sessions/2026-11-01T05-12-02-481Z_01a19585-96b1-776e-a9e2-f2a7f6b63262.thinking-translator-trace.jsonl",
+      "reason": "Non-requested thinking trace was not copied."
+    },
+    {
+      "source": "DB files, raw HTTP request headers, auth databases, credential sources, and the original HTTP source file",
+      "reason": "Excluded by assignment; not read or copied."
+    },
+    {
+      "source": "Other terminal logs under /var/folders/8w/2m72zhg91gq6cr9_ngx6l0q40000gn/T",
+      "reason": "Only the four named terminal logs were requested and copied."
+    }
+  ]
+}

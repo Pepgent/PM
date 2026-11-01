@@ -1,0 +1,158 @@
+{
+  "provider": "opencode-go",
+  "model": "deepseek-v4.1-flash",
+  "errorResponse": {
+    "status": 400,
+    "message": "400 Upstream request failed: [invalid_request_error] Invalid schema for function 'soroi_eval': schema must be a JSON Schema of 'type: \"object\"', got 'type: null'. (request_id: 3e874128-fdf8-4396-a42c-4ca133054952) (type=invalid_request_error param=invalid_request_error)"
+  },
+  "soroiToolSchemas": [
+    {
+      "type": "function",
+      "function": {
+        "name": "soroi_eval",
+        "description": "Write and run one step of the soroi program in the current run.\n\nThe code may contain only three statement kinds:\n- root atom: const temp_2200c = 2200   (number, string or boolean literal)\n- call: const score = svm(p1, p2)   or, for a node returning an object, destructure every field with renaming: const { curve: curve_2200c, log: log_2200c } = anneal(film, temp_2200c)\n- stop: stop(log_2200c)\nArguments are atom names only: no literals, no nested calls, no loops, objects or arrays. Every name is new in the run. Node functions are <cwd>/nodes/<name>.ts.\n\nmode \"dry_run\" runs the step without committing; pins maps output atom names to number, string, boolean or {file: path}. Pin every output of a call or none. mode \"formal\" has no pins. After a successful dry run, submit exactly the same code formally: do not combine or rewrite steps. env maps an output atom name to the environment template for its producing call; overrides take precedence over the node default and central. Every atom must be consumed: passed to a formally run step, or stopped.",
+        "parameters": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "i": {
+                  "type": "string",
+                  "description": "concise intent"
+                },
+                "mode": {
+                  "const": "dry_run"
+                },
+                "code": {
+                  "type": "string",
+                  "description": "the step's TypeScript source"
+                },
+                "env": {
+                  "type": "object",
+                  "properties": {},
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "description": "output atom name \u2192 environment template; applies to the producing call"
+                },
+                "pins": {
+                  "type": "object",
+                  "properties": {},
+                  "additionalProperties": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "boolean"
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "file": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "file"
+                        ],
+                        "additionalProperties": false
+                      }
+                    ]
+                  },
+                  "description": "output atom name \u2192 pinned value; pin every output of a call or none"
+                }
+              },
+              "required": [
+                "mode",
+                "code",
+                "i"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "i": {
+                  "type": "string",
+                  "description": "concise intent"
+                },
+                "mode": {
+                  "const": "formal"
+                },
+                "code": {
+                  "type": "string",
+                  "description": "the step's TypeScript source"
+                },
+                "env": {
+                  "type": "object",
+                  "properties": {},
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "description": "output atom name \u2192 environment template; applies to the producing call"
+                },
+                "pins": true
+              },
+              "required": [
+                "mode",
+                "code",
+                "i"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "soroi_task",
+        "description": "Spawn soroi subagents. Each subagent is its own omp process (`omp --mode rpc`) with this session's plugins, settings, agent definitions, skills and rules.\n\nReturns immediately with the agent ids; a result arrives automatically only when the agent calls `soroi_return`. Ending a turn without that handback fails the task; the final assistant message is not a result. Agents stay registered after returning: message them with `write agent://<id>` (idle agents wake, parked agents are revived on the same transcript), read `agent://<id>` / `history://<id>`, and `wait` for replies \u2014 exactly as with built-in subagents.\n\n- `context`: shared background for every task.\n- `tasks[].task`: the assignment, self-contained.\n- `tasks[].name`: agent id (CamelCase); a free name is generated when omitted, `-2`, `-3`\u2026 when taken.\n- `tasks[].agent`: agent definition name; its model, thinking level, tools and prompt apply to the child.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "i": {
+              "type": "string",
+              "description": "concise intent"
+            },
+            "tasks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "task": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "agent": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "task"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            },
+            "context": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "tasks",
+            "i"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}
