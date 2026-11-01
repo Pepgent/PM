@@ -18,7 +18,9 @@
 | **`G2-b`**（Lab 自有活动 `ActivityWire.kind` 词表与映射） | **越界**（跨 `W-09` 写方与 `W-10` 读方的 wire/ADT 语义缺口） | **必须立 `P0` 表决** | **不加 `governance`**（4 席参投，两席各自在既有白名单内实现） | 合规：仅暂停 Lab 自有活动行的分类与入口，首页实验/里程碑及全页其余部分照常 |
 | **`G3`**（镜像定义 `ImageDefinition.name` 与 `TemplateMetadata.image` 关联键） | **越界**（跨 `W-03`、`W-09` P15 导出、`W-10` 三方的公开契约缺口） | **必须立 `P0` 表决** | **不加 `governance`**（4 席参投，不改 `D16-09`/`D20` 白名单） | 合规：仅暂停容器页依赖该关联键的 4 项（`nodeBindingCount`、`resources`、模板挂载、`liveContainers`），容器定义/依赖/文件/Panel 头照常 |
 
-- **正交双闸门前置约束（`AGENTS.md:60` C2-2.2、`.omp/agents/argon-governance.md:20-21`）：** 本席不替 `Argon` 裁决 `G1-a A`、`G1-b A`、`G2-a A`、`G2-b A`、`G3 A` 的产品原始意图与公开契约语义；仅当已落盘的 `Argon` 闸门 A（`pepgent28-web06-gate-a.md`）与本闸门 B **双双确认 `G1-a`、`G1-b(name)`、`G2-a` 不越界**时，方可在 `Pepgent#28` 免投票放行这三项并由 `AreaMgrPepgent` 送达 `W-10`；若闸门 A 对其中任一项判越界，须与 `G1-b(isDefault)`、`G2-b`、`G3` 一并合入同一张 `P0` 议案立案表决。
+- **正交双闸门程序规则（`AGENTS.md:60` C2-2.2、`.omp/agents/argon-governance.md:20-21`）：**
+  1. **越界必投项（`G1-b(isDefault)`、`G2-b`、`G3`）立即入 `P0`：** 依 `AGENTS.md:60`“任一闸门认定越界，按 `P0` 立即进入投票”，一经本闸门 B（及已落盘的 `pepgent28-web06-gate-a.md`）认定越界，立即由 `DeskPepgent28Blocked` 调用 `council propose` 立案入 `P0` 队列，不设等待锁。
+  2. **免票放行项（`G1-a`、`G1-b(name)`、`G2-a`）须双闸门共同确认：** 本席不替 `Argon` 裁决产品原始意图与公开契约语义；仅当已落盘的 `Argon` 闸门 A（`pepgent28-web06-gate-a.md`）与本闸门 B **双双确认不越界**时，方可在 `Pepgent#28` 免投票放行这三项并由 `AreaMgrPepgent` 送达 `W-10`。
 
 ---
 
