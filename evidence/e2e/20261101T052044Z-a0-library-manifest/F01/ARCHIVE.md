@@ -29,7 +29,7 @@ The following are supplied observations and ownership statements, preserved as s
 
 - The actual command was `e2e/pty/a0-install.sh /tmp/soroi-full-a0-r4-xnm280bs/campaign.json`. Actual owner: `CI41276505949`. Manifest source `a5ac6d81ff67d2b9a4cf8b18fd7defb6fe45339f`, driver `cf4a47face2a0f5d94e55bf9b6ae02830bdb9c15`, and release `bb36f1e863fb5824369e1f5b449ac9d7c8b32dde2a2272d423980934722d6df3` identify the supplied run inputs only; these identifiers are not correctness proof.
 - This was the same fresh-HOME public interactive positional-prompt recipe. Main verified the unique root line 6 user message is the exact recipe and `/exit` is not a user message.
-- The header parser passed the actual title/session native layout. Actual root lines 11/13 used the exact `dry_run`, no pins and the requested environment, then returned `isError: true` with the missing `/tmp/soroi-a0/work/package.json` error.
+- The header parser passed the actual title/session native layout. Actual root lines 11/13 used the exact `dry_run`, no pins or env arguments, then returned `isError: true` with the missing `/tmp/soroi-a0/work/package.json` error.
 - Actual native line 17 listed only `nodes` and `node_modules` in the work directory; actual lines 26/29 showed `restoreLibrary` reading `cwd/package.json`.
 - R4 contained no actual `soroi_task` invocation or child. Therefore its failure is not evidence of a broken child feature: this run did not exercise that feature. Do not borrow R3's `21 → 42` or worker `214` to fill this gap.
 - Root line 36 recorded normal/dispose, but the model had continued read-only debugging after the evaluation error. Normal/dispose is not task completion and must not be described as such.
