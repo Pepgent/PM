@@ -1,6 +1,6 @@
 # 阶段 B 席位异步总线汇总
 
-本轮取回时间：2026-11-01T13:20:32Z（UTC）；W-06 退役与 W-09 发车同时结合 Main 通知登记，其余席位沿用各行注明的取回证据。本文是源头取回时刻的副本，不替代 issue/PR，不把进程启动或历史 DONE 当成本轮产品验收完成。秘书未派工、未改业务代码、未运行测试。
+GitHub 取回基点：2026-11-01T13:20:32Z（UTC），随后按 Main 维护的 `local://exec/phaseB/rolling-record.md` 补录滚动轮换。当前活跃四席为 **library、lab、plugin、images**；store、mux、remote 已退役。各行注明来源，未重新取回的工程实现进度不推断。本文是工作副本，不替代 issue/PR；秘书未派工、未改业务代码、未运行测试。
 
 ## 席位状态
 
@@ -8,9 +8,11 @@
 |---|---|---|---|---|
 | W-06 `pepgent-store` | [soroi#282](https://github.com/Pepgent/soroi/issues/282)、[STO-05 #190](https://github.com/Pepgent/soroi/issues/190)、[STO-12 #203](https://github.com/Pepgent/soroi/issues/203) 均 CLOSED | [#286](https://github.com/Pepgent/soroi/pull/286) MERGED，关闭 #282；[#287](https://github.com/Pepgent/soroi/pull/287) MERGED，关闭 #190/#203 | **DONE／已退役（组件交付，不代表阶段 C 验收）**：三项关闭已由 `gh issue view` 核对，PR 合并由 GitHub 源头核对；Main 报告于 13:2xZ 执行 `tern kill session pepgent-store`，保留会话目录。此前 BLOCKED 已解除，不再列作活跃席位 | 2026-11-01T13:16:16Z（DONE 评论）；13:2xZ（Main 报告退役，具体分钟未提供） |
 | W-05 `pepgent-library` | [lab-library#5](https://github.com/Pepgent/lab-library/issues/5)；[lab-library#13](https://github.com/Pepgent/lab-library/issues/13) 承载 D11-F12、D12-15，创建于 13:09:02Z | 本次未重新取回实现 PR 状态，不将历史 [#6](https://github.com/Pepgent/lab-library/pull/6)、[#9](https://github.com/Pepgent/lab-library/pull/9)、[#11](https://github.com/Pepgent/lab-library/pull/11) 当作本轮交付 | 🔄 **承载缺口 BLOCKED 已解除**：W-05 在 [PM 原评论](https://github.com/Pepgent/PM/issues/25#issuecomment-6558363366) 上报缺少有效 OPEN issue；现已有 #13，且 Main 确认 W-05 已收到通知。秘书已在[原 issue 回复解除](https://github.com/Pepgent/PM/issues/25#issuecomment-6558437925)，未据此宣称实现、PR 或验收完成 | 2026-11-01T13:07:37Z（原 BLOCKED）；13:09:02Z（#13 创建）；解除回复时间见链接 |
-| W-01 `pepgent-mux` | [omp-rpc-mux#13](https://github.com/Pepgent/omp-rpc-mux/issues/13) | 未见本轮 PR；历史 [#14](https://github.com/Pepgent/omp-rpc-mux/pull/14) 已被 [#15](https://github.com/Pepgent/omp-rpc-mux/pull/15) 回退 | 🏗 **已派发，未见本轮 STARTED / PR / DONE**。#13 当前 OPEN；最后评论恢复会话前 OPEN，旧 DONE 不生效 | 2026-11-01T10:48:05Z（#13 最后评论；非 W-01 本轮上报） |
-| W-02 `pepgent-remote` | [remote#16](https://github.com/Pepgent/remote/issues/16)（A2-01）；随实现对齐 remove 与 Slurm OCI 契约 | 未见本轮 PR；历史 [#15](https://github.com/Pepgent/remote/pull/15) CLOSED 未合并 | 🏗 **承载已建、已派发，未见本轮 STARTED / PR / DONE**。#16 当前 OPEN 无评论；旧 [#14](https://github.com/Pepgent/remote/issues/14) 已被 D15 以 NOT_PLANNED 关闭，不作本轮派工依据 | 2026-11-01T13:03:09Z（#16 创建/更新；尚无工程师评论） |
+| W-01 `pepgent-mux` | [omp-rpc-mux#13](https://github.com/Pepgent/omp-rpc-mux/issues/13)、[#17](https://github.com/Pepgent/omp-rpc-mux/issues/17) | [PR#16](https://github.com/Pepgent/omp-rpc-mux/pull/16)、[PR#18](https://github.com/Pepgent/omp-rpc-mux/pull/18) 均 MERGED，分别关闭 #13、#17 | **已合入／已退役**：合并状态已从 GitHub 取回；Main 滚动记录报告 OPEN issue 数为 0，已执行 `tern kill session pepgent-mux`。不再列作活跃席位，不冒称阶段 C 已通过 | 2026-11-01T13:14:00Z、13:16:42Z（两 PR 更新）；退役见滚动源记录 |
+| W-02 `pepgent-remote` | [remote#16](https://github.com/Pepgent/remote/issues/16)（A2-01） | [PR#17](https://github.com/Pepgent/remote/pull/17) MERGED，关闭 #16 | **已合入／已退役**：GitHub OPEN issue 列表已返回无匹配；Main 滚动记录报告执行 `tern kill session pepgent-remote`。真实 registry、Slurm、Apptainer 集成结果仍由阶段 C 承担，不冒称验收完成 | 2026-11-01T13:21:02Z（PR 更新）；退役见滚动源记录 |
 | W-09 `pepgent-lab` | 首项 [Pepgent#43](https://github.com/Pepgent/Pepgent/issues/43)（A2-12），随后 LAB-10、[Pepgent#44](https://github.com/Pepgent/Pepgent/issues/44)、LAB-04..12，按已发派工稿 | 本轮未见对应实现 PR 记录，不以启动推定 PR 或代码完成 | 🔄 **已发车（Main 运行报告）**：tern `663117180698627`；peer `01a19743-a0be`；pid `25147`。独立克隆 `pepgent-backend-clone`，home 分支 `pepgent-lab-home`，不访问无关根 checkout；首次取回 #43 仍 OPEN 无评论，不替工程师补报 STARTED | 本轮 Main 发车通知；GitHub #43 取回于 2026-11-01T13:20:32Z |
+| W-07 `pepgent-plugin` | 首项 [soroi#283](https://github.com/Pepgent/soroi/issues/283)（A2-05） | 本轮未取回对应实现 PR，不作推断 | 🔄 **已发车（Main 滚动记录）**：tern `663228849848323`，peer `01a19747-23fa`，home `pepgent-plugin-home`，基点 soroi `5a1089f`；#283 初次取回仍 OPEN，无工程师状态评论 | 发车见滚动源记录；GitHub 状态为本轮取回副本 |
+| W-03 `pepgent-images` | [images#6](https://github.com/Pepgent/images/issues/6)，接着 [#3](https://github.com/Pepgent/images/issues/3) | 本轮未取回对应实现 PR，不作推断 | 🔄 **已发车（Main 滚动记录）**：tern `663263209586691`，peer `01a19748-1206`，home `pepgent-images-home`，基点 images `f66e655`；接续 `issue-6-lab-web-live` 的合法 `d40585f`。旧 DONE 已被 D15 作废，不作为本轮完成依据 | 发车见滚动源记录；GitHub 状态为本轮取回副本 |
 
 ## 依赖解除与证据
 
@@ -21,6 +23,8 @@
 - W-06 当时因 PM#25 尚未公示计票，自行判断冻结未解除并暂停，见[原 BLOCKED](https://github.com/Pepgent/soroi/issues/282#issuecomment-6558301314)及[其后更正](https://github.com/Pepgent/soroi/issues/282#issuecomment-6558321367)。Main 本轮指出：等待秘书登记计票不是 `C5-4②` 的发车前置，回写与开发本应并行。现 [PM#25](https://github.com/Pepgent/PM/issues/25) 已关闭并登记三族各 14/14，秘书已发[解除回复](https://github.com/Pepgent/soroi/issues/282#issuecomment-6558344288)，W-06 后续独立完成组件交付并已退役。Main 表示后续派工将明示“D16 已通过（PM#25 已关闭），回写与开发并行，不等待回写”；本记录不据此新增开工门禁。
 - 双核原票的固定归档引用已由归档负责人发布在 [PM#25 补充评论](https://github.com/Pepgent/PM/issues/25#issuecomment-6558359030)，分别指向上述两个提交，不把秘书档案 `e3b59f1` 误当成双核原票的归档提交。
 - W-05 的 D11-F12、D12-15 普通承载依赖已由 [lab-library#13](https://github.com/Pepgent/lab-library/issues/13) 补齐；据 Main 确认，通知已到达 W-05。解除事实已回复到 [PM#25 原 BLOCKED 所在 issue](https://github.com/Pepgent/PM/issues/25#issuecomment-6558437925)。后续普通依赖解除同样记录在原 issue，不以主会话私下记忆替代总线记录。
+- 后续常规发车、退役由 Main 直接维护 `local://exec/phaseB/rolling-record.md`，秘书据此归档并替换本总线对应行，不再要求 Main 为每次常规轮换发送 IRC；源记录归档为 PM `evidence/exec/phaseB/rolling-record.md`。
+- 台账本次仅更新 R8、R13、R14、R15，已推送 [soroi `1cd2716`](https://github.com/Pepgent/soroi/commit/1cd2716)：R14 仅记 🏗 已合入，R8/R13/R15 记录滚动推进，不升级为产品验收 ✅。
 
 ## 首轮哨兵巡检：写入白名单纠正
 
