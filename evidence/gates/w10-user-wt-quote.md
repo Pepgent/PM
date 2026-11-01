@@ -65,3 +65,9 @@ AreaMgrPepgent-10 巡查时，W-10 在 `peer_ask` 答复中称：用户第四次
 - **B-2：** 第四节第 3 点：W-10 自定的“只用 `wt`、冲突停下请示用户”认定为无来源的自选规则，按 C2-4 撤回、照 C3-4.4 执行，是否成立？
 - **B-3：** 第四节第 5 点：WEB-06 留在 `pepgent-web-05` 完成、WEB-07 起按 C3-4.4 另建切片工作树，是否符合 C3-4.4 与“接续，不推倒”？这是否属于必须投票的事项？
 - **B-4：** 结论写回 [#25](https://github.com/Pepgent/Pepgent/issues/25)，由 `AreaMgrPepgent` 按 C4-2 送达 W-10，是否足够？
+
+## 七、处置结论
+
+- 闸门 A（`Argon-2`，[`w10-user-wt-quote-gate-a.md`](w10-user-wt-quote-gate-a.md)）：不越界，K1，不触及产品原始意图或公开契约。
+- 闸门 B（`ArgonGovernance-2`，[`w10-user-wt-quote-gate-b.md`](w10-user-wt-quote-gate-b.md)）：B-1～B-4 全部成立、不越界，K1，按 C2-4 直接执行现行规则，无需投票。
+- 按第四节处置免票放行。结论写回 [#25 评论 6563899949](https://github.com/Pepgent/Pepgent/issues/25#issuecomment-6563899949)，由 `AreaMgrPepgent` 按 C4-2 送达 W-10。
