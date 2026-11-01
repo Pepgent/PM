@@ -22,13 +22,14 @@
 
 - **`D16-09` 席位边界与 `C2-4` / `git.rule.md` 适用对象：**
   - `omp-rpc-mux#20` 是 `deploy#24` 双闸门按 `D10-03` 放行后派给 `W-01`（`pepgent-omp-rpc-mux`）的纯构建产物重发任务（基于已合入 `origin/main` 的 `140624344b3e` 重新构建并推送双架构镜像 `pepgent/omp-rpc-mux:latest`，无任何仓内源码或文档改动）。
-  - 机主全局规则 `git.rule.md` 在“GitHub issue / PR routing rule”中明文规定：“`Issue 主题争议、blocked/skipped/no-code 或 PR 明确作废时回 issue`”，而“工作区”一节的分支/PR 规定针对的是产生 Git 改动的任务。`#20` 属于典型的 `no-code`（无 Git tree diff）制品重发议题，将发行 digest（`sha256:98a5a1b216b45a4166348dbc3409e33c6fabb42debea51ff589f63bc1901f837`）与验收 1–4 证据记录在 `#20` 评论并以 `DONE` 关闭，正是直接执行 `git.rule.md` 的 `no-code 回 issue` 条款与 `MUX/AGENTS.md:19`，**绝非给机主规则开例外**；反之，为凑 PR 而强行修改 `#20` 范围外的仓内文件才违反范围边界与反设卡原则（`U88`）。
-- **`D16-13` 与 `C1-3` 阶段门禁边界：**
-  - `AGENTS.md` C1-3（`U30`、`U32`、`U83`、`U88`）与 `D16-13` 明确规定开发期只做本仓检查，严禁为每一步小切片（尤其是无代码改动的制品刷新切片）额外部署跨组件 runtime 验收仪式。`W-01` 在验收 1–4 中已针对 registry 实物镜像跑通双架构 manifest 检查、双架构 `serve --help` 及注入 `MUX_TRUSTED_READER_TOKEN` 后的容器真实启动监听（符合 `MUX-08` 与单组件容器产物入口验证），将 `serve + dial + 真实 omp RPC` 留给代码改动 PR（`PR#10` 已验）与阶段 C 统一组装（`D10-06`、`D16-13`），完全符合阶段 B 门禁，禁止层层加码设卡。
+  - 机主全局规则 `git.rule.md` 在“GitHub issue / PR routing rule”中明文规定：“`Issue 主题争议、blocked/skipped/no-code 或 PR 明确作废时回 issue`”，而“工作区”一节的分支/PR 规定针对的是产生 Git 改动的任务。`#20` 属于无 Git tree diff 的 `no-code` 制品重发议题，在 `#20` 评论登记并以 `DONE` 关闭是直接执行 `git.rule.md` 的 `no-code 回 issue` 条款与 `MUX/AGENTS.md:19`，绝非给机主规则开例外；反之，为凑 PR 而强行修改 `#20` 范围外的仓内文件才违反范围边界与反设卡原则（`U88`）。
+- **`D16-13`、`C1-3` 阶段门禁与 `AGENTS.md:126` 状态观察边界：**
+  - `AGENTS.md` C1-3（`U30`、`U32`、`U83`、`U88`）与 `D16-13` 明确规定开发期只做本仓检查，严禁为无代码改动的制品刷新切片额外部署跨组件 `serve + dial + 真实 omp RPC` 验收仪式（该跨组件组装留给阶段 C 统一验收 `D10-06`/`D16-13`）。
+  - 严格区分证据来源（`AGENTS.md:126`“状态只记拥有方的观察”）：`F1`（双架构 manifest index 与 `sha256:98a5a1b216b45a4166348dbc3409e33c6fabb42debea51ff589f63bc1901f837`）已由 `DeskMux20Blocked` 复跑 `curl` 观察 `(R)`，而 `F2`（评论 `6562805022` 中的双平台 `serve --help` 与容器启动日志）目前属工人自报 `(A)`，在本文件及台账中仅标为工人自报（未由管理层独立复跑验收），由 `AreaMgrMux` 在送达/巡查 `#20` 闭环时按职责核对，不把 `(A)` 直接升格为管理层已验证状态。
 
 ### 2. `B-2`（`images#13` 在 `#20` 结案前开工是否符合 `D16-10` 与 `C1-3`）：**完全符合**
 
-- **依据：** `images#13` 的实质前置条件是 registry 中 `pepgent/omp-rpc-mux:latest` 双架构镜像已更新且支持受信 reader（已由 `F1`/`F2` 实测确认在库）。依 `AGENTS.md` C1-3（“禁止把依赖切片的结案仪式设为下游开工锁”）与 `D16-10`，`images#13` 的依赖已经满足，无需等待 `#20` 的评论关闭手续。
+- **依据：** `images#13` 的前置镜像引用与双架构 index（`F1`）已由 `(R)` 在 registry 观察到，且 `AGENTS.md` C1-3 明确禁止把上游切片的结案评论仪式或跨组件验收设为下游开工锁，故 `images#13` 可按 `D16-10` 安排开工（不等于将 `#20` 的 `(A)` 自报直接标为管理层已验证）。
 
 ### 3. `B-3`（在结论中写明 `#20` 结案后 `W-01` 按 `D16-10` 退役/轮换）：**应当写明**
 
