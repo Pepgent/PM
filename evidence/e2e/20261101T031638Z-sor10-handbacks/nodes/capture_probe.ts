@@ -1,0 +1,2 @@
+import { agent, type File } from "/Users/mouriya/Ext/worktrees/issue-197-return-contract-ff0716f/packages/omp-soroi/src/eval/node.ts";
+export default agent<[], { score: number; approved: boolean; note: string; artifact: File }>(() => "Write capture197.txt in your cwd with exactly the text captured bytes 197. Then call soroi_return with score 73, approved true, note reviewed, and artifact capture197.txt. End your turn.", { template: "return-probe" });

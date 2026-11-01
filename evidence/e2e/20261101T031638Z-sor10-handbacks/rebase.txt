@@ -1,0 +1,10 @@
+Verify only the rebased eval integration. Call soroi_eval once with mode dry_run and exactly:
+const { score: integrated_score_197, approved: integrated_approved_197, note: integrated_note_197, artifact: integrated_file_197 } = capture_probe();
+const integrated_single_197 = scalar_probe();
+stop(integrated_score_197);
+stop(integrated_approved_197);
+stop(integrated_note_197);
+stop(integrated_file_197);
+stop(integrated_single_197);
+Then call soroi_eval once with mode formal and exactly: const rebase_anchor_197 = 197; stop(rebase_anchor_197);
+Report actual capture outputs and the formal end conclusion, then finish exactly REBASE_INTEGRATION_CAPTURED_197. Do not spawn tasks, retry, edit files or run any additional eval.

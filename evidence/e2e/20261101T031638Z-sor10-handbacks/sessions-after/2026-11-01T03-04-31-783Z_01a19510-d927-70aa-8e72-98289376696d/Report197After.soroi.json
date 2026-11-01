@@ -1,0 +1,15 @@
+{
+	"parentId": "Main",
+	"cwd": "/tmp/soroi-197-runtime",
+	"launch": {
+		"agent": "return-probe",
+		"model": "opencode-go/deepseek-v4.1-flash",
+		"systemPrompt": "Complete only the concrete acceptance assignment."
+	},
+	"placement": {
+		"kind": "central"
+	},
+	"contract": {
+		"kind": "report"
+	}
+}

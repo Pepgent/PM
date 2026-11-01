@@ -1,0 +1,13 @@
+Run this bounded acceptance path in order. Do not inspect or edit source files. Do not fix or retry the deliberate negative child.
+1. Send an IRC message with write to agent://Report197After: Call soroi_return once with result REVIVED_FINAL_197, then end your turn. Wait for that actual job to finish (at most two wait calls).
+2. Call soroi_task exactly once with two tasks, both agent return-probe: name NoReturn197Final, task End this turn as required by the negative acceptance fixture; name Empty197Final, task Call soroi_return exactly once with result equal to the empty string "", then end your turn. Wait for both jobs to settle (at most two wait calls). NoReturn197Final must fail without a report; that is expected. Call runtime_snapshot with label final_reports.
+3. Call soroi_task exactly once with one task: name RelaySender197Final, agent return-probe, task Send an IRC message using write to agent://Report197After with body PLAIN_RECEIPT_197. Wait for the automatic IRC reply. Once PLAIN_RECEIPT_197 is actually received from Report197After, call soroi_return with result equal to that exact reply, then end. Parent: wait for this job to finish (at most two waits), then call runtime_snapshot label final_relay.
+4. Call soroi_eval exactly once with mode dry_run and this exact code:
+const { score: captured_score_197, approved: captured_approved_197, note: captured_note_197, artifact: captured_file_197 } = capture_probe();
+const captured_single_197 = scalar_probe();
+stop(captured_score_197);
+stop(captured_approved_197);
+stop(captured_note_197);
+stop(captured_file_197);
+stop(captured_single_197);
+5. Do not submit formally. Print the five actual output values or previews from the dry-run tool, then finish with FINAL_ALL_CAPTURED_197. Do not spawn anything else or call any additional eval.

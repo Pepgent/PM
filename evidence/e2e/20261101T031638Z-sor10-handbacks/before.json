@@ -1,0 +1,42 @@
+{
+  "label": "before",
+  "session": "01a1950f-a9c5-773c-80c1-9a169a84aab3",
+  "rows": [
+    {
+      "id": "NoReturn197Before",
+      "status": "parked",
+      "lifecycle": {
+        "responseAt": 1793502199626,
+        "acceptedAt": 1793502199626,
+        "terminalAt": 1793502199626
+      },
+      "sessionFile": "/tmp/soroi-197-runtime/sessions-before/2026-11-01T03-03-14-117Z_01a1950f-a9c5-773c-80c1-9a169a84aab3/NoReturn197Before.jsonl",
+      "job": {
+        "status": "completed",
+        "resultText": "NO_RETURN_TEXT_197\n\nAgent `NoReturn197Before` stays reachable: message it with write agent://NoReturn197Before."
+      },
+      "artifact": {
+        "exists": true,
+        "text": "NO_RETURN_TEXT_197"
+      }
+    },
+    {
+      "id": "Report197Before",
+      "status": "idle",
+      "lifecycle": {
+        "responseAt": 1793502200749,
+        "acceptedAt": 1793502200749,
+        "terminalAt": 1793502201789
+      },
+      "sessionFile": "/tmp/soroi-197-runtime/sessions-before/2026-11-01T03-03-14-117Z_01a1950f-a9c5-773c-80c1-9a169a84aab3/Report197Before.jsonl",
+      "job": {
+        "status": "completed",
+        "resultText": "REPORT_ONLY_197_BEFORE\n\nAgent `Report197Before` stays reachable: message it with write agent://Report197Before."
+      },
+      "artifact": {
+        "exists": true,
+        "text": "REPORT_ONLY_197_BEFORE"
+      }
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+extensions:
+  - /tmp/soroi-197-runtime/probe.ts
+task:
+  agentIdleTtlMs: 1500

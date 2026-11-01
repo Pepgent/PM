@@ -1,0 +1,40 @@
+{
+  "label": "after",
+  "session": "01a19510-d927-70aa-8e72-98289376696d",
+  "rows": [
+    {
+      "id": "NoReturn197After",
+      "status": "parked",
+      "lifecycle": {
+        "terminalAt": 1793502279543
+      },
+      "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/NoReturn197After.jsonl",
+      "job": {
+        "status": "failed",
+        "errorText": "Agent NoReturn197After ended without calling soroi_return."
+      },
+      "artifact": {
+        "exists": false,
+        "text": null
+      }
+    },
+    {
+      "id": "Report197After",
+      "status": "parked",
+      "lifecycle": {
+        "responseAt": 1793502279021,
+        "acceptedAt": 1793502279021,
+        "terminalAt": 1793502279654
+      },
+      "sessionFile": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Report197After.jsonl",
+      "job": {
+        "status": "completed",
+        "resultText": "REPORT_ONLY_197_AFTER\n\nAgent `Report197After` stays reachable: message it with write agent://Report197After."
+      },
+      "artifact": {
+        "exists": true,
+        "text": "REPORT_ONLY_197_AFTER"
+      }
+    }
+  ]
+}

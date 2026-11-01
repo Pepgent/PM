@@ -1,0 +1,4 @@
+Run a bounded handback acceptance experiment. Do not inspect or edit files. First call soroi_task exactly once with these two tasks, both agent `return-probe`:
+1. name `NoReturn197After`, task `End this turn as required by the negative acceptance fixture.`
+2. name `Report197After`, task `Call soroi_return exactly once with result equal to REPORT_ONLY_197_AFTER, then end your turn.`
+Wait for both task jobs to settle; use wait no more than twice if necessary. The negative child is expected to fail: do not fix it, retry it, or treat its final text as a report. Then call runtime_snapshot with label `after`, and finish with exactly AFTER_CAPTURED_197. Do not spawn anything else and do not call soroi_eval.

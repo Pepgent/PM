@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "issue": "https://github.com/Pepgent/soroi/issues/197",
+  "pullRequest": "https://github.com/Pepgent/soroi/pull/255",
+  "repository": "Pepgent/soroi",
+  "sourceHead": "e6d5878835af469fe0bf2045b1c0a4f12d71d6a8",
+  "artifacts": [
+    {
+      "path": "runtime-evidence.json",
+      "source": "/tmp/soroi-197-review/runtime-evidence.json",
+      "purpose": "Recorded SOR10 runtime evidence summary."
+    },
+    {
+      "path": "before.json",
+      "source": "/tmp/soroi-197-runtime/before.json",
+      "purpose": "Raw pre-run return-contract state."
+    },
+    {
+      "path": "after.json",
+      "source": "/tmp/soroi-197-runtime/after.json",
+      "purpose": "Raw post-run return-contract state."
+    },
+    {
+      "path": "final_reports.json",
+      "source": "/tmp/soroi-197-runtime/final_reports.json",
+      "purpose": "Raw final report records."
+    },
+    {
+      "path": "final_relay.json",
+      "source": "/tmp/soroi-197-runtime/final_relay.json",
+      "purpose": "Raw final relay record."
+    },
+    {
+      "path": "revived.json",
+      "source": "/tmp/soroi-197-runtime/revived.json",
+      "purpose": "Raw cold-revival record."
+    },
+    {
+      "path": "plain_relay.json",
+      "source": "/tmp/soroi-197-runtime/plain_relay.json",
+      "purpose": "Raw plaintext relay record."
+    },
+    {
+      "path": "events.jsonl",
+      "source": "/tmp/soroi-197-runtime/events.jsonl",
+      "purpose": "Raw event stream."
+    },
+    {
+      "path": "before.txt",
+      "source": "/tmp/soroi-197-runtime/before.txt",
+      "purpose": "Raw pre-run terminal/state capture."
+    },
+    {
+      "path": "after.txt",
+      "source": "/tmp/soroi-197-runtime/after.txt",
+      "purpose": "Raw post-run terminal/state capture."
+    },
+    {
+      "path": "resume.txt",
+      "source": "/tmp/soroi-197-runtime/resume.txt",
+      "purpose": "Raw cold-revival/resume terminal capture."
+    },
+    {
+      "path": "final.txt",
+      "source": "/tmp/soroi-197-runtime/final.txt",
+      "purpose": "Raw final terminal capture."
+    },
+    {
+      "path": "rebase.txt",
+      "source": "/tmp/soroi-197-runtime/rebase.txt",
+      "purpose": "Raw rebase/source-setup terminal capture."
+    },
+    {
+      "path": "probe.ts",
+      "source": "/tmp/soroi-197-runtime/probe.ts",
+      "purpose": "Raw return-contract probe source."
+    },
+    {
+      "path": "settings.yml",
+      "source": "/tmp/soroi-197-runtime/settings.yml",
+      "purpose": "Raw probe settings."
+    },
+    {
+      "path": "capture197.txt",
+      "source": "/tmp/soroi-197-runtime/capture197.txt",
+      "purpose": "Raw capture note."
+    },
+    {
+      "path": "nodes/capture_probe.ts",
+      "source": "/tmp/soroi-197-runtime/nodes/capture_probe.ts",
+      "purpose": "Raw capture fixture node probe."
+    },
+    {
+      "path": "nodes/scalar_probe.ts",
+      "source": "/tmp/soroi-197-runtime/nodes/scalar_probe.ts",
+      "purpose": "Raw scalar fixture node probe."
+    },
+    {
+      "path": "sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d.jsonl",
+      "source": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d.jsonl",
+      "purpose": "Raw root Soroi session transcript."
+    },
+    {
+      "path": "sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Report197After.jsonl",
+      "source": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Report197After.jsonl",
+      "purpose": "Raw Report197After actor transcript."
+    },
+    {
+      "path": "sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/NoReturn197After.jsonl",
+      "source": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/NoReturn197After.jsonl",
+      "purpose": "Raw NoReturn197After actor transcript."
+    },
+    {
+      "path": "sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/NoReturn197Final.jsonl",
+      "source": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/NoReturn197Final.jsonl",
+      "purpose": "Raw NoReturn197Final actor transcript."
+    },
+    {
+      "path": "sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Empty197Final.jsonl",
+      "source": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Empty197Final.jsonl",
+      "purpose": "Raw Empty197Final actor transcript."
+    },
+    {
+      "path": "sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/RelaySender197.jsonl",
+      "source": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/RelaySender197.jsonl",
+      "purpose": "Raw RelaySender197 actor transcript."
+    },
+    {
+      "path": "sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/RelaySender197Final.jsonl",
+      "source": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/RelaySender197Final.jsonl",
+      "purpose": "Raw RelaySender197Final actor transcript."
+    },
+    {
+      "path": "sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/PlainRelaySender197.jsonl",
+      "source": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/PlainRelaySender197.jsonl",
+      "purpose": "Raw PlainRelaySender197 actor transcript."
+    },
+    {
+      "path": "sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Report197After.soroi.json",
+      "source": "/tmp/soroi-197-runtime/sessions-after/2026-11-01T03-04-31-783Z_01a19510-d927-70aa-8e72-98289376696d/Report197After.soroi.json",
+      "purpose": "Raw Report197After actor session metadata."
+    }
+  ]
+}
