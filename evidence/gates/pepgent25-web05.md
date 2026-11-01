@@ -132,3 +132,9 @@ v2 给 WEB-04、WEB-07 新增了承载内容，`ui/**` 多了一处 `onClick`，
 
 - **A（Argon）：** “数据集页详情显示引用串 + 讨论页附件上传 + 交回框粘贴”这条主路径，是否满足 D12-11/P16 中文件型交回在两页可用的意图？讨论页附件按钮接到 `uploadArtifact`，是否与 LAB-11a“附件”、F09/F31 的意图一致，没有越过任何公开契约？
 - **B（ArgonGovernance）：** 数据集页只改 model，讨论页改 controller 加 `discussions-page.tsx:572` 一处 `onClick`。这是否都在 D20-01/02 内，不需要改白名单、不加 `governance`？上传不是 `LabCommand`（`DEC/D7-lab-backend.md:120`），而是 D12-13 把原 `artifact.upload` 改走 HTTP 后的形态；这一处 `onClick` 算不算 D20-02 的“最少 props”？引用串放在 WEB-04、上传接线放在 WEB-07，是否不涉及阶段门禁，也不需要另开 issue？
+
+### 6.4 处置结果
+
+- **闸门：** 闸门 A（`Argon-2`）判定见 `pepgent25-web05-d37v2-gate-a.md`：同意 v2，满足 D12-11/P16 的意图，没有越过公开契约。闸门 B（`ArgonGovernance-2`）判定见 `pepgent25-web05-d37v2-gate-b.md`：不越界，不改 D16-09/D20 白名单，不加 `governance`，资格席仍为 4 席，不另开 issue；`discussions-page.tsx:572` 的 `onClick` 属 D20-02 的“最少 props”，须在 PR 正文逐行列出。
+- **修订：** `DeskD37Revise` 执行 `council revise D37-01 --file /tmp/D37-01-v2.yaml`，D37-01 改为 v2，v1 的票全部作废。修订后 `council tally D37` 显示 v2 四席都未投，门槛 3，由 daemon 通知各席重投。
+- **表决期：** W-10 的文件型分支继续暂停，number/string/boolean 照常交付。D37-01 有结果后，由 AreaMgrPepgent 在 #25、#27、#29 登记，再送达 W-10。
