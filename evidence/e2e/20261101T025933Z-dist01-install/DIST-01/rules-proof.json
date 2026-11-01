@@ -1,0 +1,32 @@
+{
+  "ciRun": "https://github.com/Pepgent/soroi/actions/runs/41266214381",
+  "release": "soroi-e3d50121e2965c58b4dbc46f334524bbc51faff53911ba988fa0cc782215d766.tar",
+  "nativePromptBlocks": 2,
+  "rules": [
+    {
+      "path": "packages/omp-soroi/rules/soroi-consume-every-atom.md",
+      "body": "# soroi_eval: every atom must be consumed\n\nAn atom is consumed in one of two ways only:\n\n- a formally run step passes it to a node call, or\n- `stop(atom)`.\n\nThis holds for every atom: the ones in your soroi reminder, the root atoms you define, and every name your calls produce.\n\n- For each new name in your step, know who consumes it: a later step, or `stop` now.\n- `stop` dead ends (logs, fields nobody needs) and the final values the run ends with.\n- A worker leaves the result atoms its assignment asks for unconsumed; the agent that spawned it consumes them.\n- A dry run consumes nothing. Only the formal run counts.\n\nNo checker error reports an unconsumed atom. It stays in your soroi reminder, and the run cannot end until every atom is consumed.",
+      "includedInNativeSystemPrompt": true
+    },
+    {
+      "path": "packages/omp-soroi/rules/soroi-exhaustive-destructure.md",
+      "body": "# soroi_eval: destructure object results exhaustively\n\nA node that returns an object is destructured in the call statement itself: every field, each renamed to a new atom name.\n\n```ts\nconst { curve: curve_2200c, log: log_2200c } = anneal(film, temp_2200c)\nstop(log_2200c)\n```\n\n- Write exactly the fields of the return type: none missing, none extra.\n- A field you do not need still gets a name; then `stop` it.\n- Never bind the whole object to one name: `const result = anneal(film, temp_2200c)` is wrong.\n- A node that returns a single value is not destructured: `const xrd_2200c = xrd_scan(curve_2200c)`.\n- Always `field: new_name`. Shorthand `{ curve, log }` is not allowed.\n\nBroken \u2192 the checker rejects the step with `destructure_mismatch` (missing or extra field, whole object bound to one name, single value destructured), or `statement_form` (shorthand without renaming).",
+      "includedInNativeSystemPrompt": true
+    },
+    {
+      "path": "packages/omp-soroi/rules/soroi-formal-unchanged.md",
+      "body": "# soroi_eval: submit the passing dry run unchanged as formal\n\n1. Call `soroi_eval` with `mode: \"dry_run\"`. Add `pins` only to keep a costly or side-effecting call from running.\n2. Wrong result? Change the code and dry run again.\n3. Right result? Call `soroi_eval` with `mode: \"formal\"`, the same `code` character for character, and the same `env`. No `pins`.\n\nIn the formal call never merge it with other steps, rewrite, reorder, rename, add or drop statements, or change a value. Changed code is a new step: dry run it first.\n\nOnly the formal run writes atoms that later steps can use; a dry run writes nothing.\n\nNo checker error reports changed formal code: the formal run is checked again and runs whatever you send, so a rewrite runs code no dry run has tried. `pins` in a formal call is rejected by the tool's parameters before any check.",
+      "includedInNativeSystemPrompt": true
+    },
+    {
+      "path": "packages/omp-soroi/rules/soroi-no-magic-values.md",
+      "body": "# soroi_eval: no magic values\n\nThe arguments of a call are atom names only. Never put a literal or another call inside the parentheses.\n\n- Wrong: `anneal(film, 2200)`. Right: `const temp_2200c = 2200`, then `anneal(film, temp_2200c)`.\n- Wrong: `score_model(curve_2200c, \"svm\")`. Right: `const method_svm = \"svm\"`, then `score_model(curve_2200c, method_svm)`.\n- Wrong: `report(summarize(score_a))`. Right: `const summary_a = summarize(score_a)`, then `report(summary_a)`.\n\n- Need a value? Define it as a root atom in this step, then pass its name.\n- Name it after what it is: `temp_2200c`, `method_svm`. Not `x` or `arg1`.\n\nBroken \u2192 the checker rejects the step with `statement_form`.",
+      "includedInNativeSystemPrompt": true
+    },
+    {
+      "path": "packages/omp-soroi/rules/soroi-three-statements.md",
+      "body": "# soroi_eval: only three kinds of statement\n\nEvery statement in `soroi_eval` code is exactly one of these three:\n\n1. Root atom: `const temp_2200c = 2200`. The value is one number, string or boolean literal.\n2. Call: `const svm_score = run_svm(p1, p2)`. For a node that returns an object: `const { curve: curve_2200c, log: log_2200c } = anneal(film, temp_2200c)`.\n3. Stop: `stop(log_2200c)`.\n\nNothing else: no `let`, `if`, `for`, `while`, `map`, `return`, functions, object or array literals, arithmetic or type annotations.\n\n- Several paths: several call statements in one step, each with its own name. They run in parallel.\n- Another round: the next step consumes this step's result (`draft_1` \u2192 `draft_2`).\n\nBroken \u2192 the checker rejects the step with `statement_form`.",
+      "includedInNativeSystemPrompt": true
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "ciRun": "https://github.com/Pepgent/soroi/actions/runs/41266214381",
+  "release": "soroi-e3d50121e2965c58b4dbc46f334524bbc51faff53911ba988fa0cc782215d766.tar",
+  "manifestVersion": "afa55d9a461fb549bd013112e3734ee8450063b7",
+  "nativeRulesMatched": 5,
+  "ruleComparison": "Actual native string blocks joined with LF; complete extracted bodies excluding frontmatter and surrounding whitespace.",
+  "skillComparison": "Native reader body equals actual package SKILL.md with only terminal LF omitted.",
+  "workerDefinitionMatched": true,
+  "settings": [
+    {
+      "kind": "settings",
+      "role": "Main",
+      "pid": 6,
+      "personality": "pragmatic",
+      "personalitySource": "overlay",
+      "approval": "yolo",
+      "ttl": 2000
+    },
+    {
+      "kind": "settings",
+      "role": "Main",
+      "pid": 6,
+      "personality": "pragmatic",
+      "personalitySource": "overlay",
+      "approval": "yolo",
+      "ttl": 2000
+    },
+    {
+      "kind": "settings",
+      "role": "LocalChild",
+      "pid": 197,
+      "personality": "none",
+      "personalitySource": "overlay",
+      "approval": "yolo",
+      "ttl": 2000
+    }
+  ],
+  "workerReturn": {
+    "type": "message",
+    "id": "edd8ce45",
+    "parentId": "a29e1a30",
+    "timestamp": "2026-11-01T02:57:18.836Z",
+    "runtime": {
+      "version": "18.14.2"
+    },
+    "message": {
+      "role": "toolResult",
+      "toolCallId": "call_ce46069aa86d4b6284634193",
+      "toolName": "soroi_return",
+      "content": [
+        {
+          "type": "text",
+          "text": "Result delivered to Main. End your turn now."
+        }
+      ],
+      "details": {},
+      "isError": false,
+      "timestamp": 1793501838836
+    }
+  },
+  "scope": "DIST-01 actual installer/extension/settings smoke, not A0 node CallReport or CUS04 exact changed diff.",
+  "diagnosticFailedAttempt": "First probe-only config omitted startup.setupWizard=false; setup wizard opened. Stopped container, copied previously exercised diagnostic config, then reran complete empty-HOME installation. No product changes."
+}
