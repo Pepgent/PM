@@ -22,7 +22,7 @@ v1–v3 的票作废，五席全部重投。
 - **代码事实：** `local://inv/d20-code-facts.md`（PM `evidence/inv/d20-code-facts.md`），以及 claude-high 选票中的逐行反例。
 - **U59 会话自有改动范围：** D15 盘点 `local://exec/d15/pepgent.md` 第二父差集，第 533–617 行。
 
-**计票：** 依 LEDGER C2-3（U95），五席投票，即总协调席（Main+GovClone）、claude-high、Argon（意图否决）、ArgonGovernance（治理否决）、LeadMentor。至少 4 席赞成、无专责否决、有效反例清零即为通过。
+**计票：** 依 `pepgent-soroi/AGENTS.md` C2-3 与 `LEDGER.md` U95，五席投票，即总协调席（Main 与其治理承接者合计一席）、claude-high、Argon（意图否决）、ArgonGovernance（治理否决）、LeadMentor。至少 4 席赞成、无专责否决、有效反例清零即为通过。后续提案、收票、计票、发布与归档由 council daemon 办理，秘书不人工收票。
 
 ## 决策表
 
