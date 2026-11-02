@@ -1,6 +1,6 @@
 # 阶段 B 席位异步总线汇总
 
-本轮按 Main 提供的 (R) 事实更新：**W-03 `pepgent-images` 的 D47-02 交付后退役**，AreaMgrImages-6 核实 [ALL_DONE](https://github.com/Pepgent/images/issues/18#issuecomment-6565574006)，images#18 CLOSED、PR#19 MERGED，images 全仓无 OPEN 项，Main 已执行退役命令。当前在岗 **W-10、W-04 两席**。Main 交办的 D48 执行结果与跨席位前置见下文；其中 deploy#26 在 Main 报告时仍 OPEN，秘书取回的更晚 DONE 评论与关闭时间确认其现已 CLOSED，不把关闭当作 W-04 已退役。阶段 C 义务仍由原 OPEN issue 承接；本轮不写 LEDGER、不重跑 runtime 或凭据验证、不启停或联系工人。
+本轮按 Main 提供的 (R) 事实更新：**W-11 `pepgent-council` 已进场承载 [council#6](https://github.com/Pepgent/council/issues/6)**，当前在岗 **W-10、W-04、W-11 三席**。Main 已撤回 CouncilTreeOwner 的旧追加派活，改由独立工程师承载；[homelab-tf#600](https://github.com/mouriya-s-lab/homelab-tf/issues/600) 的 apply 归专门 IaC 子代理 `IacCouncilIngress`，不再列为等待操作员。此前 W-03 退役与 deploy#26 关闭事实保持；承载转交不等于 apply、公网入口或 webhook 端到端验收完成。阶段 C 义务仍由原 OPEN issue 承接；本轮不写 LEDGER、不重跑 runtime 或凭据验证、不启停或联系工人。
 
 **并发纠错已发生，不追溯抹除违例：** Main 在已有 4 席时启动 deploy，曾形成 5 席，超过 D16-10 硬上限 4 且没有抢占令；治理席裁定退役 W-10，Main 完成交接退役纠错。此后 W-06 正常补入形成 4 席，D23 交付后退役回 3 席；这些是当时快照，不是当前进程盘点。R8 已由治理席降级（soroi `380ab02`）；本次正常轮换不等同持续约束永久合规，不因轮换改写 LEDGER R8/R13/R14。
 
@@ -18,13 +18,16 @@
 | W-04 `pepgent-deploy` | [deploy#26](https://github.com/Pepgent/deploy/issues/26) 已于 2026-11-02T00:01:01Z CLOSED（晚于 Main 的 OPEN 报告窗口） | [PR#27](https://github.com/Pepgent/deploy/pull/27) 于 2026-11-01T23:48:56Z MERGED | **仍在岗／切片已关闭**：Main 本次仍列 W-04 在岗；随后[执行方 DONE](https://github.com/Pepgent/deploy/issues/26#issuecomment-6565846243)记录验收 2 clone exit 0、6 项完成。只据原评论记局部 runtime，不重跑、不推断退役或阶段 C 通过 | Main 本次 (R) 在岗观察；GitHub 后续 DONE 2026-11-02T00:00:56Z、closedAt 00:01:01Z |
 | W-08 `pepgent-e2e` | [soroi#259](https://github.com/Pepgent/soroi/issues/259)、[#250](https://github.com/Pepgent/soroi/issues/250) 阶段 B 编写已交付；阶段 C 义务仍留原 OPEN issue | [PR#338](https://github.com/Pepgent/soroi/pull/338) 合入 #259 及 #250 此前交付；[PR#341](https://github.com/Pepgent/soroi/pull/341) 合入 #250 最终负例交付 | **全席阶段 B ALL_DONE／维持退役**：(R，Main 提供) AreaMgrSoroi-R4 核实 [ALL_DONE](https://github.com/Pepgent/soroi/issues/259#issuecomment-6564651940)，home 与 14 个切片 worktree 都干净，Main 已执行 `tern kill session pepgent-e2e`。按[依赖更正](https://github.com/Pepgent/soroi/issues/259#issuecomment-6564664717)，#336/#337 已由 PR#340 合入关闭，不再是现存 blocker，但 F22 仍待阶段 C 实测；不重开阶段 B。退役见 rolling-record 第 30 项，本次在岗组合取总述，不沿用历史快照 | 退役源头为 Main 前次 (R) 报告与 AreaMgrSoroi-R4 核实；原 ALL_DONE 观察为 2026-11-01T22:13Z，精确退役 UTC 未提供 |
 | W-10 `pepgent-web` | D20-03 三份文档全文语义核对；[WEB-07 / #29](https://github.com/Pepgent/Pepgent/issues/29) 保持关闭 | [PR#88](https://github.com/Pepgent/Pepgent/pull/88) 已合入；21 行待核实 UI 已按[结论评论](https://github.com/Pepgent/Pepgent/pull/88#issuecomment-6565460794)追认免票 | **继续在岗／不退役**：(R，Main 提供) D20-03 三份文档全文语义核对尚未完成。启动标识仍取 rolling-record 第 18 项，本次不是重新发车；UI 追认不等于文档核对完成，也不等于阶段 C 已验收 | Main 本次 (R) 在岗报告；秘书已取回 PR#88 与 #29 的追认结论评论，未提供精确 UTC |
+| W-11 `pepgent-council` | [council#6](https://github.com/Pepgent/council/issues/6)，依据 [soroi#321](https://github.com/Pepgent/soroi/issues/321) D7、U109 | 本次未提供新 PR，不推断实现状态 | **已进场／Main 已首次派活**：(R，Main 提供) home `/Users/mouriya/Ext/worktrees/pepgent-council-home` 为 detached `origin/main`，tern block `679889027989507`，peer `01a19992-f55b-7737-ade9-61e582f2c313`；独立工程师取代 CouncilTreeOwner 的旧追加派活。启动与投递不等于已消费或端到端验收通过 | Main 本次 (R) 进场报告；精确 UTC、pid、session-dir 未提供，不补造 |
 
 ## 本次候补顺序
 
-来源：Main 本次 (R) W-03 退役报告。**当前在岗 W-10、W-04 两席**；deploy#26 后续关闭不等于 W-04 已退役，未收到新的启停结论前不自行改进程状态。W-09 等此前退役事实保持，阶段 C 义务仍留原 OPEN issue，秘书不据任务关闭或排期意图启动/结束席位。
+来源：Main 本次 (R) W-11 进场报告。**当前在岗 W-10、W-04、W-11 三席**；deploy#26 关闭不等于 W-04 已退役，未收到新的启停结论前不自行改进程状态。W-09 等此前退役事实保持；`IacCouncilIngress` 是专门 IaC 子代理，不另计为 tern 工人席。阶段 C 义务仍留原 OPEN issue，秘书不据任务关闭或排期意图启动/结束席位。
 
 ## 依赖解除与证据
 
+- **council#6 独立承载纠正。** (R，Main 自报并交办记录) [council#6](https://github.com/Pepgent/council/issues/6) 不再归 CouncilTreeOwner。Main 此前用 `write agent://CouncilTreeOwner` 追加派活，违反 U97、U103、C4-2；已纠正为 W-11 独立工程师，启动标识见上表和 rolling-record 第 42 项。旧派活不继续作为有效承载，纠正不等于实现交付。
+- **公网入口 apply 不再等待操作员。** (R，Main 提供) [homelab-tf#600](https://github.com/mouriya-s-lab/homelab-tf/issues/600)（[PR#601](https://github.com/mouriya-s-lab/homelab-tf/pull/601)）的 apply 由 `IacCouncilIngress` 负责。Main 自报此前制造“等用户” blocker、要求用户 apply，违反 U7 与 AGENTS:127，现已撤回。仅更新责任与等待边界，不宣称 apply 已执行、公网入口已上线或 council#6 的 webhook 端到端验收已通过；秘书不执行基础设施操作或凭据验证。
 - **D48 授权动作执行结果与部署后续。** Main 报告且[deploy#26 登记评论 6565839690](https://github.com/Pepgent/deploy/issues/26#issuecomment-6565839690)记载：org 开关 true、只读 key `168412790` 已注册，隔离其他 SSH key 的 ls-remote exit 0，全 org 只有该 key。秘书只取回公开登记，不接触私钥或重跑验证。[deploy PR#27](https://github.com/Pepgent/deploy/pull/27)于 23:48:56Z 合入，images PR#19 已发布 ssh 客户端镜像（Main 提供）。Main 的 OPEN/待验收 2 窗口后，[执行方 DONE 评论](https://github.com/Pepgent/deploy/issues/26#issuecomment-6565846243)于 2026-11-02T00:00:56Z 记录容器内 clone exit 0、全部 6 项验收完成，GitHub 00:01:01Z 将 #26 关闭。记录使用最新源头状态，但不把局部 runtime、关闭或 key 注册等同阶段 C 验收、W-04 退役或实际送达。
 - **PR#88 的 21 行“待核实”UI 已全部追认免票。** Main 交办，且已从 [PR#88 结论评论](https://github.com/Pepgent/Pepgent/pull/88#issuecomment-6565460794)与 [#29 结案评论](https://github.com/Pepgent/Pepgent/issues/29#issuecomment-6565463019)取回：不立案、不开纠偏承载、代码不需要改动，#29 保持关闭；不回写已合入 PR 正文。闸门 A 原文原样归档 [pepgent29-ui-pending-gate-a.md](../../gates/pepgent29-ui-pending-gate-a.md)。未来接模板删除命令时恢复 danger 条件及锁图标原行引用纠正的附注留原评论，未据此新增实现任务；W-10 的三份文档核对仍未完成。
 - **D47 已定案归档。** 议会 `agenda.archived` #531（2026-11-01T23:35:32.481Z）确认 [PM#66](https://github.com/Pepgent/PM/issues/66) D47-01 v2、02 v1 各 5/5 通过（门槛 4），[定稿、修订、反驳与原票](https://github.com/Pepgent/PM/commit/e424f96869ea)已由 daemon 归档，替换“01 修订中”的旧状态。01 的私钥持久源与只读 bind 按 v2 执行，不经 Komodo Variable/Stack environment，Lab 双变量接口不变；02 由 images#18 承载。未据定案宣称已送达、恢复、部署或阶段 C 验收通过。
@@ -89,7 +92,7 @@ W-09 本次以命名分支 `pepgent-lab-home` 发车；Main 已确认并修正�
 
 - C1：只记录既定席位及授权范围；不改代码、design/、生产环境，不编写或运行测试，不以 hash 比对作证据。
 - C2：当前投票依 U95 / LEDGER C2-3 按职能席位与专责权重计票；D15/D16 的三族数字只作为当时历史事实保留，不追溯改票。秘书不投票、不判断设计。
-- C3：沿用十席矩阵，本轮不派工、不跨仓操作工程师工作树。
+- C3：既有席位与新增 W-11 各按 Main 已授权承载记录；秘书不自行增设席位、不派工、不跨仓操作工程师工作树。
 - C4：工程事实沿用 issue/PR，进程与停工观察标明具名片区经理或 Main 等拥有方及观察时间；实际巡查、送达与恢复确认由每仓片区经理依 U107 用 peer 单向负责，秘书不接管工人、不以评论已写或消息投递替代实际收到。
 - C5：不触碰冻结目录、不接触无关前端会话；不因本记录另设审批或验收门禁。
 
