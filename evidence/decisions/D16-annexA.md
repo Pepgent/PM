@@ -13,7 +13,7 @@
 | C5 | 已按 C1–C5、R1–R21 逐项核对；不查 session、git 历史、issue 编辑历史或 01a193fd；不改合法遗产、不恢复冻结工程。(D：LEDGER:57–69) |
 | R1 | 不重查历史设计或 session；只取指定当前决策文件。(D：LEDGER:76) |
 | R2 | 盘点 design 回写缺口，不改设计。(D：LEDGER:77) |
-| 迁仓目标 | U121 明确 Pepgent 组件仓的 org 为 Pepgent；仓 A Pepgent/soroi-store、仓 B Pepgent/omp-soroi 已存在并按 [D53 / PM#72](https://github.com/Pepgent/PM/issues/72) 留存，执行承载见 A2-02/A2-03。 |
+| R3 | 按各独立仓列清单；U121 明确 Pepgent 组件仓的 org 为 Pepgent，仓 A Pepgent/soroi-store、仓 B Pepgent/omp-soroi 已存在并按 [D53 / PM#72](https://github.com/Pepgent/PM/issues/72) 留存，执行承载见 A2-02/A2-03。(D：LEDGER:78；迁仓执行依据：D53) |
 | R4 | 双核审议由父会话负责，本附件不替代。(D：LEDGER:79) |
 | R5 | 不计票、不建 decision issue。(D：LEDGER:80) |
 | R6 | 本次为父分身委派的附件取证，不包揽秘书执行。(D：LEDGER:81) |
