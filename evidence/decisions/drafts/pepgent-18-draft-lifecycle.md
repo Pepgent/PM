@@ -1,6 +1,6 @@
 # 决策表草稿：Pepgent#18（LAB-11b）草稿与启动意图的生命周期
 
-- **状态：** 已由议会 daemon 立案为 D26（[Pepgent/PM#43](https://github.com/Pepgent/PM/issues/43)），LC-1 至 LC-6 依次对应 D26-01 至 D26-06。表决正文以该 issue 为准，本文件不是权威。
+- **状态：** 已由议会 daemon 立案为 D26（[Pepgent/PM#43](https://github.com/Pepgent/PM/issues/43)），LC-1 至 LC-6 依次对应 D26-01 至 D26-06，六行均以 4/4 通过并定稿。定稿正文见 `PM/evidence/decisions/D26-pepgent-18-draft-lifecycle.md`，本文件不是权威。
 - **起草：** governance-desk（总协调指挥席，与 `Main` 合计 1 票），起草者不另投票。
 - **来由：** [Pepgent/Pepgent#18](https://github.com/Pepgent/Pepgent/issues/18)，[BLOCKED 评论 6560165218](https://github.com/Pepgent/Pepgent/issues/18#issuecomment-6560165218) 第二节第 3、4 点。闸门结论已写回 #18：[评论 6561259743](https://github.com/Pepgent/Pepgent/issues/18#issuecomment-6561259743)。
 - **为什么要投票：** 闸门 A 判定第三、四项触及草稿与启动意图的公开生命周期缺口，必须 P0（`GATE/pepgent-18-gate-a.md:10-11`）；闸门 B 同样判定必须 P0，并要求两项合为同一议案逐行表决（`GATE/pepgent-18-gate-b.md:14-15,107`）。依据 `SOR/AGENTS.md:60`（C2-2）、`DEC/D10-repo-delivery.md:20`（D10-08 的“状态权威与生命周期”）。
