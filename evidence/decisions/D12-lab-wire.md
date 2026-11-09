@@ -455,7 +455,8 @@ export type LabCommand =
   | { kind: 'agentTemplate.saveVersion'; conversation: ConversationId; id: string }   // = 对该 Panel 会话 library.merge，paths = ['.omp/agents/<id>.md']（D46-05）
   | { kind: 'discussion.create'; lab: LabId; project: ProjectId | null; name: string }
   | { kind: 'discussion.prompt'; conversation: ConversationId; msg: string; text: string }   // = 根会话 human_irc enqueue（D7-09）
-  | { kind: 'discussion.load'; conversation: ConversationId; artifacts: ArtifactRef[] }
+  | { kind: 'discussion.load'; conversation: ConversationId; artifacts: ArtifactRef[] }   // 加入集合：已在 discussion_context 中的引用保持不变
+  | { kind: 'discussion.unload'; conversation: ConversationId; artifacts: ArtifactRef[] }   // 把引用移出 discussion_context
   | { kind: 'discussion.bind'; conversation: ConversationId; run: RunId }
   | { kind: 'discussion.rename'; conversation: ConversationId; name: string }
   | { kind: 'discussion.move'; conversation: ConversationId; project: ProjectId | null }
@@ -508,6 +509,7 @@ export type LabCommandOutput = {
   'discussion.create': { kind: 'created'; conversation: ConversationId }
   'discussion.prompt': Done
   'discussion.load': Done
+  'discussion.unload': Done
   'discussion.bind': Done
   'discussion.rename': Done
   'discussion.move': Done
@@ -552,7 +554,7 @@ export type LabCommandResult<C extends LabCommand> = LabCommandOutput[C['kind']]
 | `agentTemplate.writeFile`、`agentTemplate.removeFile`、`agentTemplate.saveVersion` | `editLibrary`，且是该 Panel 会话的 owner |
 | `discussion.create` | `discussion: create` |
 | `discussion.prompt` | `discussion: prompt`，且是该讨论的 owner |
-| `discussion.load`、`discussion.bind`、`discussion.rename`、`discussion.move`、`discussion.archive` | `write`，且是该讨论的 owner |
+| `discussion.load`、`discussion.unload`、`discussion.bind`、`discussion.rename`、`discussion.move`、`discussion.archive` | `write`，且是该讨论的 owner |
 | `conclusion.confirm` | `write`，且是该结论所在会话的 owner |
 | `panel.prompt` | `write`；Panel 会话不存在时以操作者为 owner 新建，存在时须是其 owner |
 | `panel.model` | `write`，且是该会话的 owner |
