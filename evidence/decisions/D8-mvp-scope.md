@@ -379,7 +379,7 @@ type Verdict = {
 | E2E-17 | W-08 F15；Slurm tail/shared_root、排队取消EndedUnstarted、不读拷出后remove | 所测REM-01–03、SOR-17a/17b、DIST-04、ENV-04合入 | F15 | spec合入 | low | Slurm统一S1全部义务通过 |
 | E2E-18 | W-08 F16/17 Agent spec | 所测SOR-18/19、MUX-07合入 | F16/17 | spec合入 | low | 远程Agent统一S1通过 |
 | E2E-19 | W-08 F26–30 S1 | 所测STO-05、MUX-04、LIB-01合入 | F26–30 | spec合入 | low | S1通过 |
-| E2E-20 | W-10 apps/web/tests/e2e-lab 的S2 runbook/check：F08–13、17/18、23–31 | 所测WEB-07、DEP-01/02以及SOR/LAB等全部实现合入（D16-10） | S2、F31 | runbook/check合入；阶段B不执行 | low | S1、E2E-21后真实浏览器全路径；EP6，D8-10三处核对 |
+| E2E-20 | W-10 apps/web/tests/e2e-lab 的S2 runbook/check：F08–10、12–14、17/18、23–31 | 所测WEB-07、DEP-01/02以及SOR/LAB等全部实现合入（D16-10） | S2、F31 | runbook/check合入；阶段B不执行 | low | S1、E2E-21后真实浏览器全路径；EP6，D8-10三处核对 |
 | E2E-21 | W-10 apps/web/tests/e2e-lab 的Lab server-function真实链路核对（§4.1） | 所测LAB-04/06/07a、DEP-01/03以及SOR等全部实现合入（D16-10） | S2 | 核对脚本合入；阶段B不执行 | low | 统一S1后、S2前，讨论→dial→运行→绑定→Ended图/run通知 |
 | D9-01 | 叶子字段清单：TS编译器API遍历18字段类型，列路径/类型 | WEB-07 | F32 | 完整清单，由low复核 | free | 统一S2之后以实际契约复核 |
 | D9-02 | 每叶子来源类别、投影位置与录制值 | D9-01、E2E-20 | F32 | 类别与证据路径齐全 | low | 必须已有真实线数据录制 |
