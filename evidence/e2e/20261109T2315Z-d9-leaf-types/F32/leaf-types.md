@@ -1,14 +1,19 @@
 # D9-01 leaf-type inventory — `LabSnapshot` (SNAP:24-58)
 
-- generated: 2026-11-09T23:15:34.747Z
+- generated: 2026-11-09T23:49:57.590Z
 - tool: `evidence/e2e/20261109T2315Z-d9-leaf-types/F32/source/leaf-types.mjs` (typescript 7.0.2, `typescript/unstable/sync`)
-- source: `Pepgent/Pepgent@28719824e1d8eaf118bf0a9a7f3d5cb900984ef8` `apps/web/src/client/contracts/lab-snapshot.ts`
+- source: `Pepgent/Pepgent@93261b6376ecf10285892abd1b4d9d209d712113` `apps/web/src/client/contracts/lab-snapshot.ts`
 - top-level fields: 18
 - leaf fields: 12158
 
 Path notation: `.` property, `[]` array element, `[k]` index-signature value,
-`[kind=x]` discriminated-union member, `*` non-object union member, `(optional)`
-property or union member that may be absent/undefined.
+`[kind=x]` discriminated-union member, `*` the primitive members of a union that also
+has object members.
+
+Markers after a leaf type:
+- `(optional)`: the property is declared with `?`, or its type union includes `undefined`.
+- `(nullable)`: the value may be `null` (its type union includes `null`). The type text of a nullable leaf keeps `| null`.
+- `(nullable parent)`: an ancestor's type union includes `null`, so this leaf is absent when that ancestor is null. It applies to every descendant of the nullable ancestor, not only its children.
 
 ## Coverage — 18 root fields (SNAP:24-58)
 
@@ -41,15 +46,15 @@ property or union member that may be absent/undefined.
 
 ```
 labs[].id: string
-labs[].glyph: LabGlyph | null  (optional)
+labs[].glyph: LabGlyph | null  (nullable)
 labs[].name*: string
 labs[].name[LabText].en: string
 labs[].name[LabText].zh-CN: string
 labs[].activity.en: string
 labs[].activity.zh-CN: string
-labs[].description*: string  (optional)
-labs[].description[LabText].en: string
-labs[].description[LabText].zh-CN: string
+labs[].description*: string | null  (nullable)
+labs[].description[LabText].en: string  (nullable parent)
+labs[].description[LabText].zh-CN: string  (nullable parent)
 ```
 
 ### `account` — LabAccount
@@ -73,8 +78,8 @@ members[].id: string
 members[].name*: string
 members[].name[LabText].en: string
 members[].name[LabText].zh-CN: string
-members[].initials: string | null  (optional)
-members[].avatarTone: AvatarTone | null  (optional)
+members[].initials: string | null  (nullable)
+members[].avatarTone: AvatarTone | null  (nullable)
 ```
 
 ### `projects` — readonly ProjectSummary[]
@@ -867,8 +872,8 @@ home.dialogs.sources.completion[kind="done"].detail[LabText].zh-CN: string
 home.dialogs.sources.completion[kind="close"].kind: "close"
 home.dialogs.sources.size: "lg" | "md" | "xl" | undefined  (optional)
 home.dialogs.sources.labelColumn: "aligned" | "none" | undefined  (optional)
-home.updated.en: string
-home.updated.zh-CN: string
+home.updated.en: string  (nullable parent)
+home.updated.zh-CN: string  (nullable parent)
 home.reportsThisWeek: number
 home.reports[].id: string  // The report's opaque identity.
 home.reports[].project: string
@@ -883,44 +888,44 @@ home.reports[].title[LabText].zh-CN: string
 home.reports[].paragraphs[]*: string
 home.reports[].paragraphs[][LabText].en: string
 home.reports[].paragraphs[][LabText].zh-CN: string
-home.reports[].equation.after: number
-home.reports[].equation.tex: string
-home.reports[].equation.number: string
-home.reports[].model*: string  (optional)
-home.reports[].model[LabText].en: string
-home.reports[].model[LabText].zh-CN: string
+home.reports[].equation.after: number  (nullable parent)
+home.reports[].equation.tex: string  (nullable parent)
+home.reports[].equation.number: string  (nullable parent)
+home.reports[].model*: string | null  (nullable)
+home.reports[].model[LabText].en: string  (nullable parent)
+home.reports[].model[LabText].zh-CN: string  (nullable parent)
 home.reports[].sourceCount: number
 home.reports[].tags[]*: string
 home.reports[].tags[][LabText].en: string
 home.reports[].tags[][LabText].zh-CN: string
 home.reports[].moreTagCount: number
-home.reports[].figure[kind="chart"].kind: "chart"
-home.reports[].figure[kind="chart"].label*: string  (optional)
-home.reports[].figure[kind="chart"].label[LabText].en: string
-home.reports[].figure[kind="chart"].label[LabText].zh-CN: string
-home.reports[].figure[kind="chart"].caption*: string  (optional)
-home.reports[].figure[kind="chart"].caption[LabText].en: string
-home.reports[].figure[kind="chart"].caption[LabText].zh-CN: string
-home.reports[].figure[kind="chart"].chart.title.en: string
-home.reports[].figure[kind="chart"].chart.title.zh-CN: string
-home.reports[].figure[kind="chart"].chart.xLabel.en: string
-home.reports[].figure[kind="chart"].chart.xLabel.zh-CN: string
-home.reports[].figure[kind="chart"].chart.yLabel.en: string
-home.reports[].figure[kind="chart"].chart.yLabel.zh-CN: string
-home.reports[].figure[kind="chart"].chart.seed: number
-home.reports[].figure[kind="chart"].chart.series[].name.en: string
-home.reports[].figure[kind="chart"].chart.series[].name.zh-CN: string
-home.reports[].figure[kind="chart"].chart.series[].floor: number  // Error model of one curve, sampled by the page: x = (i/140)^1.25 · 100000 for i = 0…140; e = 0.95·exp(−x/decay) + floor·(1 + 2.2·exp(−x/22000))·(1 + noise·(rnd − 0.5)); y = log10(min(e, 1)), plotted on 10⁰…10⁻⁴. `rnd` is the shared Park–Miller generator seeded with `HomeChart.seed`, consumed series by series.
-home.reports[].figure[kind="chart"].chart.series[].decay: number
-home.reports[].figure[kind="chart"].chart.series[].noise: number
-home.reports[].figure[kind="image"].kind: "image"
-home.reports[].figure[kind="image"].label*: string  (optional)
-home.reports[].figure[kind="image"].label[LabText].en: string
-home.reports[].figure[kind="image"].label[LabText].zh-CN: string
-home.reports[].figure[kind="image"].caption*: string  (optional)
-home.reports[].figure[kind="image"].caption[LabText].en: string
-home.reports[].figure[kind="image"].caption[LabText].zh-CN: string
-home.reports[].figure[kind="image"].placeholder: string
+home.reports[].figure[kind="chart"].kind: "chart"  (nullable parent)
+home.reports[].figure[kind="chart"].label*: string | null  (nullable) (nullable parent)
+home.reports[].figure[kind="chart"].label[LabText].en: string  (nullable parent)
+home.reports[].figure[kind="chart"].label[LabText].zh-CN: string  (nullable parent)
+home.reports[].figure[kind="chart"].caption*: string | null  (nullable) (nullable parent)
+home.reports[].figure[kind="chart"].caption[LabText].en: string  (nullable parent)
+home.reports[].figure[kind="chart"].caption[LabText].zh-CN: string  (nullable parent)
+home.reports[].figure[kind="chart"].chart.title.en: string  (nullable parent)
+home.reports[].figure[kind="chart"].chart.title.zh-CN: string  (nullable parent)
+home.reports[].figure[kind="chart"].chart.xLabel.en: string  (nullable parent)
+home.reports[].figure[kind="chart"].chart.xLabel.zh-CN: string  (nullable parent)
+home.reports[].figure[kind="chart"].chart.yLabel.en: string  (nullable parent)
+home.reports[].figure[kind="chart"].chart.yLabel.zh-CN: string  (nullable parent)
+home.reports[].figure[kind="chart"].chart.seed: number  (nullable parent)
+home.reports[].figure[kind="chart"].chart.series[].name.en: string  (nullable parent)
+home.reports[].figure[kind="chart"].chart.series[].name.zh-CN: string  (nullable parent)
+home.reports[].figure[kind="chart"].chart.series[].floor: number  (nullable parent)  // Error model of one curve, sampled by the page: x = (i/140)^1.25 · 100000 for i = 0…140; e = 0.95·exp(−x/decay) + floor·(1 + 2.2·exp(−x/22000))·(1 + noise·(rnd − 0.5)); y = log10(min(e, 1)), plotted on 10⁰…10⁻⁴. `rnd` is the shared Park–Miller generator seeded with `HomeChart.seed`, consumed series by series.
+home.reports[].figure[kind="chart"].chart.series[].decay: number  (nullable parent)
+home.reports[].figure[kind="chart"].chart.series[].noise: number  (nullable parent)
+home.reports[].figure[kind="image"].kind: "image"  (nullable parent)
+home.reports[].figure[kind="image"].label*: string | null  (nullable) (nullable parent)
+home.reports[].figure[kind="image"].label[LabText].en: string  (nullable parent)
+home.reports[].figure[kind="image"].label[LabText].zh-CN: string  (nullable parent)
+home.reports[].figure[kind="image"].caption*: string | null  (nullable) (nullable parent)
+home.reports[].figure[kind="image"].caption[LabText].en: string  (nullable parent)
+home.reports[].figure[kind="image"].caption[LabText].zh-CN: string  (nullable parent)
+home.reports[].figure[kind="image"].placeholder: string  (nullable parent)
 home.reports[].layout: "compact" | "full"  // `full` = the feature card with figure beside the text; `compact` = one-paragraph card with a thumbnail.
 home.events[].id: string
 home.events[].project: string | undefined  (optional)  // Absent = lab-wide (e.g. a milestone).
@@ -931,35 +936,35 @@ home.events[].date.zh-CN: string
 home.events[].dateShort.en: string
 home.events[].dateShort.zh-CN: string
 home.events[].time: string
-home.events[].title*: string  (optional)
-home.events[].title[LabText].en: string
-home.events[].title[LabText].zh-CN: string
-home.events[].text*: string  (optional)
-home.events[].text[LabText].en: string
-home.events[].text[LabText].zh-CN: string
-home.events[].action.label.en: string
-home.events[].action.label.zh-CN: string
-home.events[].action.dialog: HomeDialogId
-home.progress.percent: number | null  (optional)
-home.progress.phase*: string  (optional)
-home.progress.phase[LabText].en: string
-home.progress.phase[LabText].zh-CN: string
+home.events[].title*: string | null  (nullable)
+home.events[].title[LabText].en: string  (nullable parent)
+home.events[].title[LabText].zh-CN: string  (nullable parent)
+home.events[].text*: string | null  (nullable)
+home.events[].text[LabText].en: string  (nullable parent)
+home.events[].text[LabText].zh-CN: string  (nullable parent)
+home.events[].action.label.en: string  (nullable parent)
+home.events[].action.label.zh-CN: string  (nullable parent)
+home.events[].action.dialog: HomeDialogId  (nullable parent)
+home.progress.percent: number | null  (nullable)
+home.progress.phase*: string | null  (nullable)
+home.progress.phase[LabText].en: string  (nullable parent)
+home.progress.phase[LabText].zh-CN: string  (nullable parent)
 home.progress.milestones.done: number
 home.progress.milestones.total: number
-home.progress.next*: string  (optional)
-home.progress.next[LabText].en: string
-home.progress.next[LabText].zh-CN: string
-home.progress.estimate.en: string
-home.progress.estimate.zh-CN: string
-home.progress.detail*: string  (optional)
-home.progress.detail[LabText].en: string
-home.progress.detail[LabText].zh-CN: string
-home.clusters.health*: string  (optional)
-home.clusters.health[LabText].en: string
-home.clusters.health[LabText].zh-CN: string
-home.clusters.healthDetail*: string  (optional)
-home.clusters.healthDetail[LabText].en: string
-home.clusters.healthDetail[LabText].zh-CN: string
+home.progress.next*: string | null  (nullable)
+home.progress.next[LabText].en: string  (nullable parent)
+home.progress.next[LabText].zh-CN: string  (nullable parent)
+home.progress.estimate.en: string  (nullable parent)
+home.progress.estimate.zh-CN: string  (nullable parent)
+home.progress.detail*: string | null  (nullable)
+home.progress.detail[LabText].en: string  (nullable parent)
+home.progress.detail[LabText].zh-CN: string  (nullable parent)
+home.clusters.health*: string | null  (nullable)
+home.clusters.health[LabText].en: string  (nullable parent)
+home.clusters.health[LabText].zh-CN: string  (nullable parent)
+home.clusters.healthDetail*: string | null  (nullable)
+home.clusters.healthDetail[LabText].en: string  (nullable parent)
+home.clusters.healthDetail[LabText].zh-CN: string  (nullable parent)
 home.clusters.rows[].name: string
 home.clusters.rows[].usage*: string
 home.clusters.rows[].usage[LabText].en: string
@@ -973,9 +978,9 @@ home.discussions[].name*: string
 home.discussions[].name[LabText].en: string
 home.discussions[].name[LabText].zh-CN: string
 home.discussions[].project: string
-home.discussions[].activity*: string  (optional)
-home.discussions[].activity[LabText].en: string
-home.discussions[].activity[LabText].zh-CN: string
+home.discussions[].activity*: string | null  (nullable)
+home.discussions[].activity[LabText].en: string  (nullable parent)
+home.discussions[].activity[LabText].zh-CN: string  (nullable parent)
 home.discussions[].activitySignal: LabSignal | undefined  (optional)
 home.discussions[].experiments: string  // "R-021 · R-022 · R-018"
 home.quote.en: string
@@ -1127,7 +1132,7 @@ experimentFlows[string][mode="draft"].nodes[].timing[kind="interval"].kind: "int
 experimentFlows[string][mode="draft"].nodes[].timing[kind="interval"].startMinute: number
 experimentFlows[string][mode="draft"].nodes[].timing[kind="interval"].endMinute: number
 experimentFlows[string][mode="draft"].nodes[].timing[kind="estimate"].kind: "estimate"
-experimentFlows[string][mode="draft"].nodes[].timing[kind="estimate"].durationMinutes: number | null  (optional)
+experimentFlows[string][mode="draft"].nodes[].timing[kind="estimate"].durationMinutes: number | null  (nullable)
 experimentFlows[string][mode="draft"].nodes[].tableVerdict.text*: string
 experimentFlows[string][mode="draft"].nodes[].tableVerdict.text[LabText].en: string
 experimentFlows[string][mode="draft"].nodes[].tableVerdict.text[LabText].zh-CN: string
@@ -1165,42 +1170,42 @@ experimentFlows[string][mode="draft"].columns[][LabText].en: string
 experimentFlows[string][mode="draft"].columns[][LabText].zh-CN: string
 experimentFlows[string][mode="draft"].artifactContracts[].libraryId: string
 experimentFlows[string][mode="draft"].artifactContracts[].files[]: string
-experimentFlows[string][mode="draft"].selectedInstanceId: string | null  (optional)  // Null when the flow has no node.
-experimentFlows[string][mode="draft"].derivedFrom.run: string
-experimentFlows[string][mode="draft"].derivedFrom.changes[][kind="input"].kind: "input"
-experimentFlows[string][mode="draft"].derivedFrom.changes[][kind="input"].position: number
-experimentFlows[string][mode="draft"].derivedFrom.changes[][kind="input"].name: string
-experimentFlows[string][mode="draft"].derivedFrom.changes[][kind="input"].value: string
-experimentFlows[string][mode="draft"].derivedFrom.changes[][kind="version"].kind: "version"
-experimentFlows[string][mode="draft"].derivedFrom.changes[][kind="version"].fn: string
-experimentFlows[string][mode="draft"].derivedFrom.changes[][kind="version"].from: string
-experimentFlows[string][mode="draft"].derivedFrom.changes[][kind="version"].to: string
-experimentFlows[string][mode="draft"].rewoundTo: number | null  (optional)  // The graph shown is the one at this event sequence (`at`), not the latest.
-experimentFlows[string][mode="draft"].comparison.a: string
-experimentFlows[string][mode="draft"].comparison.b: string
-experimentFlows[string][mode="draft"].comparison.pairs[][kind="same"].kind: "same"
-experimentFlows[string][mode="draft"].comparison.pairs[][kind="same"].subject: string
-experimentFlows[string][mode="draft"].comparison.pairs[][kind="changed"].kind: "changed"
-experimentFlows[string][mode="draft"].comparison.pairs[][kind="changed"].subject: string
-experimentFlows[string][mode="draft"].comparison.pairs[][kind="changed"].fields[].field: string
-experimentFlows[string][mode="draft"].comparison.pairs[][kind="changed"].fields[].a: string | null  (optional)  // Display text of each side's value; null when the field is absent on that side.
-experimentFlows[string][mode="draft"].comparison.pairs[][kind="changed"].fields[].b: string | null  (optional)
-experimentFlows[string][mode="draft"].comparison.pairs[][kind="aborted"].kind: "aborted"
-experimentFlows[string][mode="draft"].comparison.pairs[][kind="aborted"].subject: string
-experimentFlows[string][mode="draft"].comparison.pairs[][kind="aborted"].side: "a" | "b" | "both"
-experimentFlows[string][mode="draft"].comparison.pairs[][kind∈"only_a"|"only_b"].kind: "only_a" | "only_b"
-experimentFlows[string][mode="draft"].comparison.pairs[][kind∈"only_a"|"only_b"].subject: string
-experimentFlows[string][mode="draft"].comparison.pairs[][kind="ambiguous"].kind: "ambiguous"
-experimentFlows[string][mode="draft"].comparison.pairs[][kind="ambiguous"].subject: string
-experimentFlows[string][mode="draft"].comparison.pairs[][kind="ambiguous"].a: number
-experimentFlows[string][mode="draft"].comparison.pairs[][kind="ambiguous"].b: number
-experimentFlows[string][mode="draft"].workspace.step: number
-experimentFlows[string][mode="draft"].workspace.position: number
-experimentFlows[string][mode="draft"].workspace.files[].path: string
-experimentFlows[string][mode="draft"].workspace.files[].size: number
-experimentFlows[string][mode="draft"].workspace.files[].content: string
+experimentFlows[string][mode="draft"].selectedInstanceId: string | null  (nullable)  // Null when the flow has no node.
+experimentFlows[string][mode="draft"].derivedFrom.run: string  (nullable parent)
+experimentFlows[string][mode="draft"].derivedFrom.changes[][kind="input"].kind: "input"  (nullable parent)
+experimentFlows[string][mode="draft"].derivedFrom.changes[][kind="input"].position: number  (nullable parent)
+experimentFlows[string][mode="draft"].derivedFrom.changes[][kind="input"].name: string  (nullable parent)
+experimentFlows[string][mode="draft"].derivedFrom.changes[][kind="input"].value: string  (nullable parent)
+experimentFlows[string][mode="draft"].derivedFrom.changes[][kind="version"].kind: "version"  (nullable parent)
+experimentFlows[string][mode="draft"].derivedFrom.changes[][kind="version"].fn: string  (nullable parent)
+experimentFlows[string][mode="draft"].derivedFrom.changes[][kind="version"].from: string  (nullable parent)
+experimentFlows[string][mode="draft"].derivedFrom.changes[][kind="version"].to: string  (nullable parent)
+experimentFlows[string][mode="draft"].rewoundTo: number | null  (nullable)  // The graph shown is the one at this event sequence (`at`), not the latest.
+experimentFlows[string][mode="draft"].comparison.a: string  (nullable parent)
+experimentFlows[string][mode="draft"].comparison.b: string  (nullable parent)
+experimentFlows[string][mode="draft"].comparison.pairs[][kind="same"].kind: "same"  (nullable parent)
+experimentFlows[string][mode="draft"].comparison.pairs[][kind="same"].subject: string  (nullable parent)
+experimentFlows[string][mode="draft"].comparison.pairs[][kind="changed"].kind: "changed"  (nullable parent)
+experimentFlows[string][mode="draft"].comparison.pairs[][kind="changed"].subject: string  (nullable parent)
+experimentFlows[string][mode="draft"].comparison.pairs[][kind="changed"].fields[].field: string  (nullable parent)
+experimentFlows[string][mode="draft"].comparison.pairs[][kind="changed"].fields[].a: string | null  (nullable) (nullable parent)  // Display text of each side's value; null when the field is absent on that side.
+experimentFlows[string][mode="draft"].comparison.pairs[][kind="changed"].fields[].b: string | null  (nullable) (nullable parent)
+experimentFlows[string][mode="draft"].comparison.pairs[][kind="aborted"].kind: "aborted"  (nullable parent)
+experimentFlows[string][mode="draft"].comparison.pairs[][kind="aborted"].subject: string  (nullable parent)
+experimentFlows[string][mode="draft"].comparison.pairs[][kind="aborted"].side: "a" | "b" | "both"  (nullable parent)
+experimentFlows[string][mode="draft"].comparison.pairs[][kind∈"only_a"|"only_b"].kind: "only_a" | "only_b"  (nullable parent)
+experimentFlows[string][mode="draft"].comparison.pairs[][kind∈"only_a"|"only_b"].subject: string  (nullable parent)
+experimentFlows[string][mode="draft"].comparison.pairs[][kind="ambiguous"].kind: "ambiguous"  (nullable parent)
+experimentFlows[string][mode="draft"].comparison.pairs[][kind="ambiguous"].subject: string  (nullable parent)
+experimentFlows[string][mode="draft"].comparison.pairs[][kind="ambiguous"].a: number  (nullable parent)
+experimentFlows[string][mode="draft"].comparison.pairs[][kind="ambiguous"].b: number  (nullable parent)
+experimentFlows[string][mode="draft"].workspace.step: number  (nullable parent)
+experimentFlows[string][mode="draft"].workspace.position: number  (nullable parent)
+experimentFlows[string][mode="draft"].workspace.files[].path: string  (nullable parent)
+experimentFlows[string][mode="draft"].workspace.files[].size: number  (nullable parent)
+experimentFlows[string][mode="draft"].workspace.files[].content: string  (nullable parent)
 experimentFlows[string][mode="draft"].mode: "draft"
-experimentFlows[string][mode="draft"].estimatedMinutes: number | null  (optional)  // Critical-path sum of the node estimates; null when a node has none.
+experimentFlows[string][mode="draft"].estimatedMinutes: number | null  (nullable)  // Critical-path sum of the node estimates; null when a node has none.
 experimentFlows[string][mode="draft"].dialogs.discard.id: string
 experimentFlows[string][mode="draft"].dialogs.discard.title*: string
 experimentFlows[string][mode="draft"].dialogs.discard.title[LabText].en: string
@@ -1957,7 +1962,7 @@ experimentFlows[string][mode="running"].nodes[].timing[kind="interval"].kind: "i
 experimentFlows[string][mode="running"].nodes[].timing[kind="interval"].startMinute: number
 experimentFlows[string][mode="running"].nodes[].timing[kind="interval"].endMinute: number
 experimentFlows[string][mode="running"].nodes[].timing[kind="estimate"].kind: "estimate"
-experimentFlows[string][mode="running"].nodes[].timing[kind="estimate"].durationMinutes: number | null  (optional)
+experimentFlows[string][mode="running"].nodes[].timing[kind="estimate"].durationMinutes: number | null  (nullable)
 experimentFlows[string][mode="running"].nodes[].tableVerdict.text*: string
 experimentFlows[string][mode="running"].nodes[].tableVerdict.text[LabText].en: string
 experimentFlows[string][mode="running"].nodes[].tableVerdict.text[LabText].zh-CN: string
@@ -1995,40 +2000,40 @@ experimentFlows[string][mode="running"].columns[][LabText].en: string
 experimentFlows[string][mode="running"].columns[][LabText].zh-CN: string
 experimentFlows[string][mode="running"].artifactContracts[].libraryId: string
 experimentFlows[string][mode="running"].artifactContracts[].files[]: string
-experimentFlows[string][mode="running"].selectedInstanceId: string | null  (optional)  // Null when the flow has no node.
-experimentFlows[string][mode="running"].derivedFrom.run: string
-experimentFlows[string][mode="running"].derivedFrom.changes[][kind="input"].kind: "input"
-experimentFlows[string][mode="running"].derivedFrom.changes[][kind="input"].position: number
-experimentFlows[string][mode="running"].derivedFrom.changes[][kind="input"].name: string
-experimentFlows[string][mode="running"].derivedFrom.changes[][kind="input"].value: string
-experimentFlows[string][mode="running"].derivedFrom.changes[][kind="version"].kind: "version"
-experimentFlows[string][mode="running"].derivedFrom.changes[][kind="version"].fn: string
-experimentFlows[string][mode="running"].derivedFrom.changes[][kind="version"].from: string
-experimentFlows[string][mode="running"].derivedFrom.changes[][kind="version"].to: string
-experimentFlows[string][mode="running"].rewoundTo: number | null  (optional)  // The graph shown is the one at this event sequence (`at`), not the latest.
-experimentFlows[string][mode="running"].comparison.a: string
-experimentFlows[string][mode="running"].comparison.b: string
-experimentFlows[string][mode="running"].comparison.pairs[][kind="same"].kind: "same"
-experimentFlows[string][mode="running"].comparison.pairs[][kind="same"].subject: string
-experimentFlows[string][mode="running"].comparison.pairs[][kind="changed"].kind: "changed"
-experimentFlows[string][mode="running"].comparison.pairs[][kind="changed"].subject: string
-experimentFlows[string][mode="running"].comparison.pairs[][kind="changed"].fields[].field: string
-experimentFlows[string][mode="running"].comparison.pairs[][kind="changed"].fields[].a: string | null  (optional)  // Display text of each side's value; null when the field is absent on that side.
-experimentFlows[string][mode="running"].comparison.pairs[][kind="changed"].fields[].b: string | null  (optional)
-experimentFlows[string][mode="running"].comparison.pairs[][kind="aborted"].kind: "aborted"
-experimentFlows[string][mode="running"].comparison.pairs[][kind="aborted"].subject: string
-experimentFlows[string][mode="running"].comparison.pairs[][kind="aborted"].side: "a" | "b" | "both"
-experimentFlows[string][mode="running"].comparison.pairs[][kind∈"only_a"|"only_b"].kind: "only_a" | "only_b"
-experimentFlows[string][mode="running"].comparison.pairs[][kind∈"only_a"|"only_b"].subject: string
-experimentFlows[string][mode="running"].comparison.pairs[][kind="ambiguous"].kind: "ambiguous"
-experimentFlows[string][mode="running"].comparison.pairs[][kind="ambiguous"].subject: string
-experimentFlows[string][mode="running"].comparison.pairs[][kind="ambiguous"].a: number
-experimentFlows[string][mode="running"].comparison.pairs[][kind="ambiguous"].b: number
-experimentFlows[string][mode="running"].workspace.step: number
-experimentFlows[string][mode="running"].workspace.position: number
-experimentFlows[string][mode="running"].workspace.files[].path: string
-experimentFlows[string][mode="running"].workspace.files[].size: number
-experimentFlows[string][mode="running"].workspace.files[].content: string
+experimentFlows[string][mode="running"].selectedInstanceId: string | null  (nullable)  // Null when the flow has no node.
+experimentFlows[string][mode="running"].derivedFrom.run: string  (nullable parent)
+experimentFlows[string][mode="running"].derivedFrom.changes[][kind="input"].kind: "input"  (nullable parent)
+experimentFlows[string][mode="running"].derivedFrom.changes[][kind="input"].position: number  (nullable parent)
+experimentFlows[string][mode="running"].derivedFrom.changes[][kind="input"].name: string  (nullable parent)
+experimentFlows[string][mode="running"].derivedFrom.changes[][kind="input"].value: string  (nullable parent)
+experimentFlows[string][mode="running"].derivedFrom.changes[][kind="version"].kind: "version"  (nullable parent)
+experimentFlows[string][mode="running"].derivedFrom.changes[][kind="version"].fn: string  (nullable parent)
+experimentFlows[string][mode="running"].derivedFrom.changes[][kind="version"].from: string  (nullable parent)
+experimentFlows[string][mode="running"].derivedFrom.changes[][kind="version"].to: string  (nullable parent)
+experimentFlows[string][mode="running"].rewoundTo: number | null  (nullable)  // The graph shown is the one at this event sequence (`at`), not the latest.
+experimentFlows[string][mode="running"].comparison.a: string  (nullable parent)
+experimentFlows[string][mode="running"].comparison.b: string  (nullable parent)
+experimentFlows[string][mode="running"].comparison.pairs[][kind="same"].kind: "same"  (nullable parent)
+experimentFlows[string][mode="running"].comparison.pairs[][kind="same"].subject: string  (nullable parent)
+experimentFlows[string][mode="running"].comparison.pairs[][kind="changed"].kind: "changed"  (nullable parent)
+experimentFlows[string][mode="running"].comparison.pairs[][kind="changed"].subject: string  (nullable parent)
+experimentFlows[string][mode="running"].comparison.pairs[][kind="changed"].fields[].field: string  (nullable parent)
+experimentFlows[string][mode="running"].comparison.pairs[][kind="changed"].fields[].a: string | null  (nullable) (nullable parent)  // Display text of each side's value; null when the field is absent on that side.
+experimentFlows[string][mode="running"].comparison.pairs[][kind="changed"].fields[].b: string | null  (nullable) (nullable parent)
+experimentFlows[string][mode="running"].comparison.pairs[][kind="aborted"].kind: "aborted"  (nullable parent)
+experimentFlows[string][mode="running"].comparison.pairs[][kind="aborted"].subject: string  (nullable parent)
+experimentFlows[string][mode="running"].comparison.pairs[][kind="aborted"].side: "a" | "b" | "both"  (nullable parent)
+experimentFlows[string][mode="running"].comparison.pairs[][kind∈"only_a"|"only_b"].kind: "only_a" | "only_b"  (nullable parent)
+experimentFlows[string][mode="running"].comparison.pairs[][kind∈"only_a"|"only_b"].subject: string  (nullable parent)
+experimentFlows[string][mode="running"].comparison.pairs[][kind="ambiguous"].kind: "ambiguous"  (nullable parent)
+experimentFlows[string][mode="running"].comparison.pairs[][kind="ambiguous"].subject: string  (nullable parent)
+experimentFlows[string][mode="running"].comparison.pairs[][kind="ambiguous"].a: number  (nullable parent)
+experimentFlows[string][mode="running"].comparison.pairs[][kind="ambiguous"].b: number  (nullable parent)
+experimentFlows[string][mode="running"].workspace.step: number  (nullable parent)
+experimentFlows[string][mode="running"].workspace.position: number  (nullable parent)
+experimentFlows[string][mode="running"].workspace.files[].path: string  (nullable parent)
+experimentFlows[string][mode="running"].workspace.files[].size: number  (nullable parent)
+experimentFlows[string][mode="running"].workspace.files[].content: string  (nullable parent)
 experimentFlows[string][mode="running"].mode: "running"
 experimentFlows[string][mode="running"].commits[].seq: any
 experimentFlows[string][mode="running"].commits[].minute: number
@@ -2038,7 +2043,7 @@ experimentFlows[string][mode="running"].clockStart.hour: number
 experimentFlows[string][mode="running"].clockStart.minute: number
 experimentFlows[string][mode="running"].now.hour: number
 experimentFlows[string][mode="running"].now.minute: number
-experimentFlows[string][mode="running"].remainingMinutes: number | null  (optional)  // Unknown: calls not yet committed cannot be known (D12, G47).
+experimentFlows[string][mode="running"].remainingMinutes: number | null  (nullable)  // Unknown: calls not yet committed cannot be known (D12, G47).
 experimentFlows[string][mode="running"].slots[].instanceId: string
 experimentFlows[string][mode="running"].slots[].writerSession: any
 experimentFlows[string][mode="running"].slots[].slot: string
@@ -2051,7 +2056,7 @@ experimentFlows[string][mode="running"].slots[].state[kind="awaiting_human"].sha
 experimentFlows[string][mode="running"].slots[].state[kind="awaiting_human"].shape[kind="record"].fields[string]: "boolean" | "file" | "number" | "string"
 experimentFlows[string][mode="running"].slots[].state[kind="running"].kind: "running"
 experimentFlows[string][mode="running"].slots[].state[kind="running"].body: "Agent" | "Program"
-experimentFlows[string][mode="running"].slots[].state[kind="running"].agentId: string | null  (optional)
+experimentFlows[string][mode="running"].slots[].state[kind="running"].agentId: string | null  (nullable)
 experimentFlows[string][mode="running"].dialogs.conflict.id: string
 experimentFlows[string][mode="running"].dialogs.conflict.title*: string
 experimentFlows[string][mode="running"].dialogs.conflict.title[LabText].en: string
@@ -2946,7 +2951,7 @@ experimentFlows[string][mode="ended"].nodes[].timing[kind="interval"].kind: "int
 experimentFlows[string][mode="ended"].nodes[].timing[kind="interval"].startMinute: number
 experimentFlows[string][mode="ended"].nodes[].timing[kind="interval"].endMinute: number
 experimentFlows[string][mode="ended"].nodes[].timing[kind="estimate"].kind: "estimate"
-experimentFlows[string][mode="ended"].nodes[].timing[kind="estimate"].durationMinutes: number | null  (optional)
+experimentFlows[string][mode="ended"].nodes[].timing[kind="estimate"].durationMinutes: number | null  (nullable)
 experimentFlows[string][mode="ended"].nodes[].tableVerdict.text*: string
 experimentFlows[string][mode="ended"].nodes[].tableVerdict.text[LabText].en: string
 experimentFlows[string][mode="ended"].nodes[].tableVerdict.text[LabText].zh-CN: string
@@ -2984,40 +2989,40 @@ experimentFlows[string][mode="ended"].columns[][LabText].en: string
 experimentFlows[string][mode="ended"].columns[][LabText].zh-CN: string
 experimentFlows[string][mode="ended"].artifactContracts[].libraryId: string
 experimentFlows[string][mode="ended"].artifactContracts[].files[]: string
-experimentFlows[string][mode="ended"].selectedInstanceId: string | null  (optional)  // Null when the flow has no node.
-experimentFlows[string][mode="ended"].derivedFrom.run: string
-experimentFlows[string][mode="ended"].derivedFrom.changes[][kind="input"].kind: "input"
-experimentFlows[string][mode="ended"].derivedFrom.changes[][kind="input"].position: number
-experimentFlows[string][mode="ended"].derivedFrom.changes[][kind="input"].name: string
-experimentFlows[string][mode="ended"].derivedFrom.changes[][kind="input"].value: string
-experimentFlows[string][mode="ended"].derivedFrom.changes[][kind="version"].kind: "version"
-experimentFlows[string][mode="ended"].derivedFrom.changes[][kind="version"].fn: string
-experimentFlows[string][mode="ended"].derivedFrom.changes[][kind="version"].from: string
-experimentFlows[string][mode="ended"].derivedFrom.changes[][kind="version"].to: string
-experimentFlows[string][mode="ended"].rewoundTo: number | null  (optional)  // The graph shown is the one at this event sequence (`at`), not the latest.
-experimentFlows[string][mode="ended"].comparison.a: string
-experimentFlows[string][mode="ended"].comparison.b: string
-experimentFlows[string][mode="ended"].comparison.pairs[][kind="same"].kind: "same"
-experimentFlows[string][mode="ended"].comparison.pairs[][kind="same"].subject: string
-experimentFlows[string][mode="ended"].comparison.pairs[][kind="changed"].kind: "changed"
-experimentFlows[string][mode="ended"].comparison.pairs[][kind="changed"].subject: string
-experimentFlows[string][mode="ended"].comparison.pairs[][kind="changed"].fields[].field: string
-experimentFlows[string][mode="ended"].comparison.pairs[][kind="changed"].fields[].a: string | null  (optional)  // Display text of each side's value; null when the field is absent on that side.
-experimentFlows[string][mode="ended"].comparison.pairs[][kind="changed"].fields[].b: string | null  (optional)
-experimentFlows[string][mode="ended"].comparison.pairs[][kind="aborted"].kind: "aborted"
-experimentFlows[string][mode="ended"].comparison.pairs[][kind="aborted"].subject: string
-experimentFlows[string][mode="ended"].comparison.pairs[][kind="aborted"].side: "a" | "b" | "both"
-experimentFlows[string][mode="ended"].comparison.pairs[][kind∈"only_a"|"only_b"].kind: "only_a" | "only_b"
-experimentFlows[string][mode="ended"].comparison.pairs[][kind∈"only_a"|"only_b"].subject: string
-experimentFlows[string][mode="ended"].comparison.pairs[][kind="ambiguous"].kind: "ambiguous"
-experimentFlows[string][mode="ended"].comparison.pairs[][kind="ambiguous"].subject: string
-experimentFlows[string][mode="ended"].comparison.pairs[][kind="ambiguous"].a: number
-experimentFlows[string][mode="ended"].comparison.pairs[][kind="ambiguous"].b: number
-experimentFlows[string][mode="ended"].workspace.step: number
-experimentFlows[string][mode="ended"].workspace.position: number
-experimentFlows[string][mode="ended"].workspace.files[].path: string
-experimentFlows[string][mode="ended"].workspace.files[].size: number
-experimentFlows[string][mode="ended"].workspace.files[].content: string
+experimentFlows[string][mode="ended"].selectedInstanceId: string | null  (nullable)  // Null when the flow has no node.
+experimentFlows[string][mode="ended"].derivedFrom.run: string  (nullable parent)
+experimentFlows[string][mode="ended"].derivedFrom.changes[][kind="input"].kind: "input"  (nullable parent)
+experimentFlows[string][mode="ended"].derivedFrom.changes[][kind="input"].position: number  (nullable parent)
+experimentFlows[string][mode="ended"].derivedFrom.changes[][kind="input"].name: string  (nullable parent)
+experimentFlows[string][mode="ended"].derivedFrom.changes[][kind="input"].value: string  (nullable parent)
+experimentFlows[string][mode="ended"].derivedFrom.changes[][kind="version"].kind: "version"  (nullable parent)
+experimentFlows[string][mode="ended"].derivedFrom.changes[][kind="version"].fn: string  (nullable parent)
+experimentFlows[string][mode="ended"].derivedFrom.changes[][kind="version"].from: string  (nullable parent)
+experimentFlows[string][mode="ended"].derivedFrom.changes[][kind="version"].to: string  (nullable parent)
+experimentFlows[string][mode="ended"].rewoundTo: number | null  (nullable)  // The graph shown is the one at this event sequence (`at`), not the latest.
+experimentFlows[string][mode="ended"].comparison.a: string  (nullable parent)
+experimentFlows[string][mode="ended"].comparison.b: string  (nullable parent)
+experimentFlows[string][mode="ended"].comparison.pairs[][kind="same"].kind: "same"  (nullable parent)
+experimentFlows[string][mode="ended"].comparison.pairs[][kind="same"].subject: string  (nullable parent)
+experimentFlows[string][mode="ended"].comparison.pairs[][kind="changed"].kind: "changed"  (nullable parent)
+experimentFlows[string][mode="ended"].comparison.pairs[][kind="changed"].subject: string  (nullable parent)
+experimentFlows[string][mode="ended"].comparison.pairs[][kind="changed"].fields[].field: string  (nullable parent)
+experimentFlows[string][mode="ended"].comparison.pairs[][kind="changed"].fields[].a: string | null  (nullable) (nullable parent)  // Display text of each side's value; null when the field is absent on that side.
+experimentFlows[string][mode="ended"].comparison.pairs[][kind="changed"].fields[].b: string | null  (nullable) (nullable parent)
+experimentFlows[string][mode="ended"].comparison.pairs[][kind="aborted"].kind: "aborted"  (nullable parent)
+experimentFlows[string][mode="ended"].comparison.pairs[][kind="aborted"].subject: string  (nullable parent)
+experimentFlows[string][mode="ended"].comparison.pairs[][kind="aborted"].side: "a" | "b" | "both"  (nullable parent)
+experimentFlows[string][mode="ended"].comparison.pairs[][kind∈"only_a"|"only_b"].kind: "only_a" | "only_b"  (nullable parent)
+experimentFlows[string][mode="ended"].comparison.pairs[][kind∈"only_a"|"only_b"].subject: string  (nullable parent)
+experimentFlows[string][mode="ended"].comparison.pairs[][kind="ambiguous"].kind: "ambiguous"  (nullable parent)
+experimentFlows[string][mode="ended"].comparison.pairs[][kind="ambiguous"].subject: string  (nullable parent)
+experimentFlows[string][mode="ended"].comparison.pairs[][kind="ambiguous"].a: number  (nullable parent)
+experimentFlows[string][mode="ended"].comparison.pairs[][kind="ambiguous"].b: number  (nullable parent)
+experimentFlows[string][mode="ended"].workspace.step: number  (nullable parent)
+experimentFlows[string][mode="ended"].workspace.position: number  (nullable parent)
+experimentFlows[string][mode="ended"].workspace.files[].path: string  (nullable parent)
+experimentFlows[string][mode="ended"].workspace.files[].size: number  (nullable parent)
+experimentFlows[string][mode="ended"].workspace.files[].content: string  (nullable parent)
 experimentFlows[string][mode="ended"].mode: "ended"
 experimentFlows[string][mode="ended"].commits[].seq: any
 experimentFlows[string][mode="ended"].commits[].minute: number
@@ -3029,12 +3034,12 @@ experimentFlows[string][mode="ended"].retro.endedLabel*: string
 experimentFlows[string][mode="ended"].retro.endedLabel[LabText].en: string
 experimentFlows[string][mode="ended"].retro.endedLabel[LabText].zh-CN: string
 experimentFlows[string][mode="ended"].retro.finishKind: "aborted" | "natural"
-experimentFlows[string][mode="ended"].retro.verdict*: string  (optional)  // No source for verdicts in the first version (D12).
-experimentFlows[string][mode="ended"].retro.verdict[LabText].en: string
-experimentFlows[string][mode="ended"].retro.verdict[LabText].zh-CN: string
-experimentFlows[string][mode="ended"].retro.totalMinutes: number | null  (optional)  // Whole-run facts, not derived from the displayed excerpt of the timeline/contracts.
+experimentFlows[string][mode="ended"].retro.verdict*: string | null  (nullable)  // No source for verdicts in the first version (D12).
+experimentFlows[string][mode="ended"].retro.verdict[LabText].en: string  (nullable parent)
+experimentFlows[string][mode="ended"].retro.verdict[LabText].zh-CN: string  (nullable parent)
+experimentFlows[string][mode="ended"].retro.totalMinutes: number | null  (nullable)  // Whole-run facts, not derived from the displayed excerpt of the timeline/contracts.
 experimentFlows[string][mode="ended"].retro.artifactCount: number
-experimentFlows[string][mode="ended"].retro.failedVerdictCount: number | null  (optional)
+experimentFlows[string][mode="ended"].retro.failedVerdictCount: number | null  (nullable)
 experimentFlows[string][mode="ended"].retro.interventionCount: number  // Committed human calls.
 experimentFlows[string][mode="ended"].dialogs.artifacts.id: string
 experimentFlows[string][mode="ended"].dialogs.artifacts.title*: string
@@ -3918,7 +3923,7 @@ flowEditor.title*: string
 flowEditor.title[LabText].en: string
 flowEditor.title[LabText].zh-CN: string
 flowEditor.origin.discussionId: string
-flowEditor.origin.retroRunId: string | null  (optional)
+flowEditor.origin.retroRunId: string | null  (nullable)
 flowEditor.origin.description*: string
 flowEditor.origin.description[LabText].en: string
 flowEditor.origin.description[LabText].zh-CN: string
@@ -3978,7 +3983,7 @@ flowEditor.columns[].index: number
 flowEditor.columns[].name*: string
 flowEditor.columns[].name[LabText].en: string
 flowEditor.columns[].name[LabText].zh-CN: string
-flowEditor.selectedInstanceId: string | null  (optional)
+flowEditor.selectedInstanceId: string | null  (nullable)
 flowEditor.suggestedLibraryIds[]: string
 flowEditor.savedLabel*: string
 flowEditor.savedLabel[LabText].en: string
@@ -4038,16 +4043,16 @@ nodeLibrary.definitions[].group: NodeGroup
 nodeLibrary.definitions[].name*: string
 nodeLibrary.definitions[].name[LabText].en: string
 nodeLibrary.definitions[].name[LabText].zh-CN: string
-nodeLibrary.definitions[].device*: string  (optional)
-nodeLibrary.definitions[].device[LabText].en: string
-nodeLibrary.definitions[].device[LabText].zh-CN: string
+nodeLibrary.definitions[].device*: string | null  (nullable)
+nodeLibrary.definitions[].device[LabText].en: string  (nullable parent)
+nodeLibrary.definitions[].device[LabText].zh-CN: string  (nullable parent)
 nodeLibrary.definitions[].usageCount: number  // Sum of usage calls, not the number of referenced runs.
 nodeLibrary.definitions[].duration*: string
 nodeLibrary.definitions[].duration[LabText].en: string
 nodeLibrary.definitions[].duration[LabText].zh-CN: string
-nodeLibrary.definitions[].image: string | null  (optional)
-nodeLibrary.definitions[].cluster: string | null  (optional)
-nodeLibrary.definitions[].devicePath: string | null  (optional)
+nodeLibrary.definitions[].image: string | null  (nullable)
+nodeLibrary.definitions[].cluster: string | null  (nullable)
+nodeLibrary.definitions[].devicePath: string | null  (nullable)
 nodeLibrary.definitions[].mounts[].path: string
 nodeLibrary.definitions[].mounts[].access: "device" | "ro" | "rw"
 nodeLibrary.definitions[].inputs[]*: string
@@ -4056,9 +4061,9 @@ nodeLibrary.definitions[].inputs[][LabText].zh-CN: string
 nodeLibrary.definitions[].parameters[].label*: string
 nodeLibrary.definitions[].parameters[].label[LabText].en: string
 nodeLibrary.definitions[].parameters[].label[LabText].zh-CN: string
-nodeLibrary.definitions[].parameters[].value*: string  (optional)
-nodeLibrary.definitions[].parameters[].value[LabText].en: string
-nodeLibrary.definitions[].parameters[].value[LabText].zh-CN: string
+nodeLibrary.definitions[].parameters[].value*: string | null  (nullable)
+nodeLibrary.definitions[].parameters[].value[LabText].en: string  (nullable parent)
+nodeLibrary.definitions[].parameters[].value[LabText].zh-CN: string  (nullable parent)
 nodeLibrary.definitions[].parameters[].type: string
 nodeLibrary.definitions[].parameters[].optional: boolean
 nodeLibrary.definitions[].signature: string
@@ -4067,15 +4072,15 @@ nodeLibrary.definitions[].fields[].name: string
 nodeLibrary.definitions[].fields[].type: string
 nodeLibrary.definitions[].body.kind: "Agent" | "Human" | "Program"
 nodeLibrary.definitions[].body.source: string
-nodeLibrary.definitions[].defaultEnvironment: string | null  (optional)
-nodeLibrary.definitions[].template: string | null  (optional)
+nodeLibrary.definitions[].defaultEnvironment: string | null  (nullable)
+nodeLibrary.definitions[].template: string | null  (nullable)
 nodeLibrary.definitions[].path: string
 nodeLibrary.definitions[].artifactContract[].file: string
 nodeLibrary.definitions[].artifactContract[].requirement: "required"
 nodeLibrary.definitions[].criteria[]*: string
 nodeLibrary.definitions[].criteria[][LabText].en: string
 nodeLibrary.definitions[].criteria[][LabText].zh-CN: string
-nodeLibrary.selectedDefinitionId: string | null  (optional)
+nodeLibrary.selectedDefinitionId: string | null  (nullable)
 nodeLibrary.library.commit: string
 nodeLibrary.library.sequence: number
 nodeLibrary.editScope[]: string
@@ -4117,9 +4122,9 @@ nodeLibrary.stagedChanges[].changes[][kind="remove"].old*: string
 nodeLibrary.stagedChanges[].changes[][kind="remove"].old[LabText].en: string
 nodeLibrary.stagedChanges[].changes[][kind="remove"].old[LabText].zh-CN: string
 nodeLibrary.experimentReferences[][kind="catalog_run"].fn: string
-nodeLibrary.experimentReferences[][kind="catalog_run"].name*: string  (optional)
-nodeLibrary.experimentReferences[][kind="catalog_run"].name[LabText].en: string
-nodeLibrary.experimentReferences[][kind="catalog_run"].name[LabText].zh-CN: string
+nodeLibrary.experimentReferences[][kind="catalog_run"].name*: string | null  (nullable)
+nodeLibrary.experimentReferences[][kind="catalog_run"].name[LabText].en: string  (nullable parent)
+nodeLibrary.experimentReferences[][kind="catalog_run"].name[LabText].zh-CN: string  (nullable parent)
 nodeLibrary.experimentReferences[][kind="catalog_run"].status: ExperimentStatus
 nodeLibrary.experimentReferences[][kind="catalog_run"].stateText*: string
 nodeLibrary.experimentReferences[][kind="catalog_run"].stateText[LabText].en: string
@@ -4132,9 +4137,9 @@ nodeLibrary.experimentReferences[][kind="catalog_run"].runId: string
 nodeLibrary.experimentReferences[][kind="catalog_run"].calls: number
 nodeLibrary.experimentReferences[][kind="catalog_run"].versions[]: string
 nodeLibrary.experimentReferences[][kind="page_draft"].fn: string
-nodeLibrary.experimentReferences[][kind="page_draft"].name*: string  (optional)
-nodeLibrary.experimentReferences[][kind="page_draft"].name[LabText].en: string
-nodeLibrary.experimentReferences[][kind="page_draft"].name[LabText].zh-CN: string
+nodeLibrary.experimentReferences[][kind="page_draft"].name*: string | null  (nullable)
+nodeLibrary.experimentReferences[][kind="page_draft"].name[LabText].en: string  (nullable parent)
+nodeLibrary.experimentReferences[][kind="page_draft"].name[LabText].zh-CN: string  (nullable parent)
 nodeLibrary.experimentReferences[][kind="page_draft"].status: ExperimentStatus
 nodeLibrary.experimentReferences[][kind="page_draft"].stateText*: string
 nodeLibrary.experimentReferences[][kind="page_draft"].stateText[LabText].en: string
@@ -4345,7 +4350,7 @@ automation.dialogs.new_rule.completion[kind="done"].detail[LabText].zh-CN: strin
 automation.dialogs.new_rule.completion[kind="close"].kind: "close"
 automation.dialogs.new_rule.size: "lg" | "md" | "xl" | undefined  (optional)
 automation.dialogs.new_rule.labelColumn: "aligned" | "none" | undefined  (optional)
-automation.selectedId: string | null  (optional)
+automation.selectedId: string | null  (nullable)
 automation.rules[].id: string
 automation.rules[].name*: string
 automation.rules[].name[LabText].en: string
@@ -4406,46 +4411,46 @@ automation.runs[][kind="waiting"].text[LabText].zh-CN: string
 automation.runs[][kind="waiting"].source*: string
 automation.runs[][kind="waiting"].source[LabText].en: string
 automation.runs[][kind="waiting"].source[LabText].zh-CN: string
-automation.runs[][kind="waiting"].duration*: string  (optional)
-automation.runs[][kind="waiting"].duration[LabText].en: string
-automation.runs[][kind="waiting"].duration[LabText].zh-CN: string
-automation.runs[][kind="waiting"].conversation.id: string
-automation.runs[][kind="waiting"].conversation.id.__@$brand@478.ConversationId: true
-automation.runs[][kind="waiting"].conversation.rule: string
-automation.runs[][kind="waiting"].conversation.rule.__@$brand@478.AutomationRuleId: true
-automation.runs[][kind="waiting"].conversation.automationRun: string
-automation.runs[][kind="waiting"].conversation.automationRun.__@$brand@478.AutomationRunId: true
-automation.runs[][kind="waiting"].conversation.owner: string
-automation.runs[][kind="waiting"].conversation.ownerName: string | null  (optional)
-automation.runs[][kind="waiting"].conversation.agent: string  (optional)
-automation.runs[][kind="waiting"].conversation.agent.__@$brand@478.AgentId: true
-automation.runs[][kind="waiting"].conversation.session: any
-automation.runs[][kind="waiting"].conversation.createdAt*: string
-automation.runs[][kind="waiting"].conversation.createdAt[LabText].en: string
-automation.runs[][kind="waiting"].conversation.createdAt[LabText].zh-CN: string
-automation.runs[][kind="waiting"].conversation.canHandBack: boolean
-automation.runs[][kind="waiting"].conversation.slots[].slot: string
-automation.runs[][kind="waiting"].conversation.slots[].fn: string
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].kind: "running"
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].body: "Agent" | "Program"
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].env: string
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].agentId: string  (optional)
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].agentId.__@$brand@478.AgentId: true
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].remoteRun: string | undefined  (optional)
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].startedAt: string
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].inputs[]: string
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"][string]: any
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].kind: "awaiting_human"
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].request: string
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].inputs[]: string
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].shape[kind="single"].kind: "single"
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].shape[kind="single"].type: "boolean" | "file" | "number" | "string"
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].shape[kind="record"].kind: "record"
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].shape[kind="record"].fields[string]: "boolean" | "file" | "number" | "string"
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].startedAt: string
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"][string]: any
-automation.runs[][kind="waiting"].conversation.slots[][string]: any
-automation.runs[][kind="waiting"].conversation.experiments[]: string
+automation.runs[][kind="waiting"].duration*: string | null  (nullable)
+automation.runs[][kind="waiting"].duration[LabText].en: string  (nullable parent)
+automation.runs[][kind="waiting"].duration[LabText].zh-CN: string  (nullable parent)
+automation.runs[][kind="waiting"].conversation.id: string  (nullable parent)
+automation.runs[][kind="waiting"].conversation.id.__@$brand@478.ConversationId: true  (nullable parent)
+automation.runs[][kind="waiting"].conversation.rule: string  (nullable parent)
+automation.runs[][kind="waiting"].conversation.rule.__@$brand@478.AutomationRuleId: true  (nullable parent)
+automation.runs[][kind="waiting"].conversation.automationRun: string  (nullable parent)
+automation.runs[][kind="waiting"].conversation.automationRun.__@$brand@478.AutomationRunId: true  (nullable parent)
+automation.runs[][kind="waiting"].conversation.owner: string  (nullable parent)
+automation.runs[][kind="waiting"].conversation.ownerName: string | null  (nullable) (nullable parent)
+automation.runs[][kind="waiting"].conversation.agent: string | null  (nullable) (nullable parent)
+automation.runs[][kind="waiting"].conversation.agent.__@$brand@478.AgentId: true  (nullable parent)
+automation.runs[][kind="waiting"].conversation.session: any  (nullable parent)
+automation.runs[][kind="waiting"].conversation.createdAt*: string  (nullable parent)
+automation.runs[][kind="waiting"].conversation.createdAt[LabText].en: string  (nullable parent)
+automation.runs[][kind="waiting"].conversation.createdAt[LabText].zh-CN: string  (nullable parent)
+automation.runs[][kind="waiting"].conversation.canHandBack: boolean  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].slot: string  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].fn: string  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].kind: "running"  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].body: "Agent" | "Program"  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].env: string  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].agentId: string  (optional) (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].agentId.__@$brand@478.AgentId: true  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].remoteRun: string | undefined  (optional) (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].startedAt: string  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].inputs[]: string  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"][string]: any  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].kind: "awaiting_human"  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].request: string  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].inputs[]: string  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].shape[kind="single"].kind: "single"  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].shape[kind="single"].type: "boolean" | "file" | "number" | "string"  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].shape[kind="record"].kind: "record"  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].shape[kind="record"].fields[string]: "boolean" | "file" | "number" | "string"  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].startedAt: string  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"][string]: any  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[][string]: any  (nullable parent)
+automation.runs[][kind="waiting"].conversation.experiments[]: string  (nullable parent)
 automation.runs[][kind="waiting"].kind: "waiting"
 automation.runs[][kind="waiting"].prompt*: string
 automation.runs[][kind="waiting"].prompt[LabText].en: string
@@ -4461,46 +4466,46 @@ automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].text[LabText].zh-CN:
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].source*: string
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].source[LabText].en: string
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].source[LabText].zh-CN: string
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].duration*: string  (optional)
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].duration[LabText].en: string
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].duration[LabText].zh-CN: string
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.id: string
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.id.__@$brand@478.ConversationId: true
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.rule: string
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.rule.__@$brand@478.AutomationRuleId: true
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.automationRun: string
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.automationRun.__@$brand@478.AutomationRunId: true
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.owner: string
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.ownerName: string | null  (optional)
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.agent: string  (optional)
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.agent.__@$brand@478.AgentId: true
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.session: any
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.createdAt*: string
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.createdAt[LabText].en: string
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.createdAt[LabText].zh-CN: string
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.canHandBack: boolean
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].slot: string
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].fn: string
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].kind: "running"
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].body: "Agent" | "Program"
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].env: string
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].agentId: string  (optional)
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].agentId.__@$brand@478.AgentId: true
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].remoteRun: string | undefined  (optional)
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].startedAt: string
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].inputs[]: string
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"][string]: any
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].kind: "awaiting_human"
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].request: string
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].inputs[]: string
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].shape[kind="single"].kind: "single"
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].shape[kind="single"].type: "boolean" | "file" | "number" | "string"
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].shape[kind="record"].kind: "record"
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].shape[kind="record"].fields[string]: "boolean" | "file" | "number" | "string"
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].startedAt: string
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"][string]: any
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[][string]: any
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.experiments[]: string
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].duration*: string | null  (nullable)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].duration[LabText].en: string  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].duration[LabText].zh-CN: string  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.id: string  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.id.__@$brand@478.ConversationId: true  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.rule: string  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.rule.__@$brand@478.AutomationRuleId: true  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.automationRun: string  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.automationRun.__@$brand@478.AutomationRunId: true  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.owner: string  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.ownerName: string | null  (nullable) (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.agent: string | null  (nullable) (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.agent.__@$brand@478.AgentId: true  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.session: any  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.createdAt*: string  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.createdAt[LabText].en: string  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.createdAt[LabText].zh-CN: string  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.canHandBack: boolean  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].slot: string  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].fn: string  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].kind: "running"  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].body: "Agent" | "Program"  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].env: string  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].agentId: string  (optional) (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].agentId.__@$brand@478.AgentId: true  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].remoteRun: string | undefined  (optional) (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].startedAt: string  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].inputs[]: string  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"][string]: any  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].kind: "awaiting_human"  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].request: string  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].inputs[]: string  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].shape[kind="single"].kind: "single"  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].shape[kind="single"].type: "boolean" | "file" | "number" | "string"  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].shape[kind="record"].kind: "record"  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].shape[kind="record"].fields[string]: "boolean" | "file" | "number" | "string"  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].startedAt: string  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"][string]: any  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[][string]: any  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.experiments[]: string  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].kind: "failed" | "ok" | "running" | "skipped"
 ```
 
@@ -4969,35 +4974,35 @@ datasets.artifacts[][kind="experiment"].path: string  // Experiment path, or sta
 datasets.artifacts[][kind="experiment"].name*: string
 datasets.artifacts[][kind="experiment"].name[LabText].en: string
 datasets.artifacts[][kind="experiment"].name[LabText].zh-CN: string
-datasets.artifacts[][kind="experiment"].extension: ArtifactExtension | null  (optional)
-datasets.artifacts[][kind="experiment"].role: ArtifactRole | null  (optional)
-datasets.artifacts[][kind="experiment"].size: string | null  (optional)
+datasets.artifacts[][kind="experiment"].extension: ArtifactExtension | null  (nullable)
+datasets.artifacts[][kind="experiment"].role: ArtifactRole | null  (nullable)
+datasets.artifacts[][kind="experiment"].size: string | null  (nullable)
 datasets.artifacts[][kind="experiment"].time*: string
 datasets.artifacts[][kind="experiment"].time[LabText].en: string
 datasets.artifacts[][kind="experiment"].time[LabText].zh-CN: string
 datasets.artifacts[][kind="experiment"].projectId: string
 datasets.artifacts[][kind="experiment"].verdict: ArtifactVerdict
-datasets.artifacts[][kind="experiment"].preview[kind="table"].kind: "table"
-datasets.artifacts[][kind="experiment"].preview[kind="table"].columns[]*: string
-datasets.artifacts[][kind="experiment"].preview[kind="table"].columns[][LabText].en: string
-datasets.artifacts[][kind="experiment"].preview[kind="table"].columns[][LabText].zh-CN: string
-datasets.artifacts[][kind="experiment"].preview[kind="table"].rows[][]*: string
-datasets.artifacts[][kind="experiment"].preview[kind="table"].rows[][][LabText].en: string
-datasets.artifacts[][kind="experiment"].preview[kind="table"].rows[][][LabText].zh-CN: string
-datasets.artifacts[][kind="experiment"].preview[kind="table"].highlightedRow: number | undefined  (optional)
-datasets.artifacts[][kind="experiment"].preview[kind="table"].note*: string  (optional)
-datasets.artifacts[][kind="experiment"].preview[kind="table"].note[LabText].en: string
-datasets.artifacts[][kind="experiment"].preview[kind="table"].note[LabText].zh-CN: string
-datasets.artifacts[][kind="experiment"].preview[kind="image"].kind: "image"
-datasets.artifacts[][kind="experiment"].preview[kind="image"].aspect[0]: number
-datasets.artifacts[][kind="experiment"].preview[kind="image"].aspect[1]: number
-datasets.artifacts[][kind="experiment"].preview[kind="image"].dimensions*: string
-datasets.artifacts[][kind="experiment"].preview[kind="image"].dimensions[LabText].en: string
-datasets.artifacts[][kind="experiment"].preview[kind="image"].dimensions[LabText].zh-CN: string
-datasets.artifacts[][kind="experiment"].preview[kind="text"].kind: "text"
-datasets.artifacts[][kind="experiment"].preview[kind="text"].text*: string
-datasets.artifacts[][kind="experiment"].preview[kind="text"].text[LabText].en: string
-datasets.artifacts[][kind="experiment"].preview[kind="text"].text[LabText].zh-CN: string
+datasets.artifacts[][kind="experiment"].preview[kind="table"].kind: "table"  (nullable parent)
+datasets.artifacts[][kind="experiment"].preview[kind="table"].columns[]*: string  (nullable parent)
+datasets.artifacts[][kind="experiment"].preview[kind="table"].columns[][LabText].en: string  (nullable parent)
+datasets.artifacts[][kind="experiment"].preview[kind="table"].columns[][LabText].zh-CN: string  (nullable parent)
+datasets.artifacts[][kind="experiment"].preview[kind="table"].rows[][]*: string  (nullable parent)
+datasets.artifacts[][kind="experiment"].preview[kind="table"].rows[][][LabText].en: string  (nullable parent)
+datasets.artifacts[][kind="experiment"].preview[kind="table"].rows[][][LabText].zh-CN: string  (nullable parent)
+datasets.artifacts[][kind="experiment"].preview[kind="table"].highlightedRow: number | undefined  (optional) (nullable parent)
+datasets.artifacts[][kind="experiment"].preview[kind="table"].note*: string  (optional) (nullable parent)
+datasets.artifacts[][kind="experiment"].preview[kind="table"].note[LabText].en: string  (nullable parent)
+datasets.artifacts[][kind="experiment"].preview[kind="table"].note[LabText].zh-CN: string  (nullable parent)
+datasets.artifacts[][kind="experiment"].preview[kind="image"].kind: "image"  (nullable parent)
+datasets.artifacts[][kind="experiment"].preview[kind="image"].aspect[0]: number  (nullable parent)
+datasets.artifacts[][kind="experiment"].preview[kind="image"].aspect[1]: number  (nullable parent)
+datasets.artifacts[][kind="experiment"].preview[kind="image"].dimensions*: string  (nullable parent)
+datasets.artifacts[][kind="experiment"].preview[kind="image"].dimensions[LabText].en: string  (nullable parent)
+datasets.artifacts[][kind="experiment"].preview[kind="image"].dimensions[LabText].zh-CN: string  (nullable parent)
+datasets.artifacts[][kind="experiment"].preview[kind="text"].kind: "text"  (nullable parent)
+datasets.artifacts[][kind="experiment"].preview[kind="text"].text*: string  (nullable parent)
+datasets.artifacts[][kind="experiment"].preview[kind="text"].text[LabText].en: string  (nullable parent)
+datasets.artifacts[][kind="experiment"].preview[kind="text"].text[LabText].zh-CN: string  (nullable parent)
 datasets.artifacts[][kind="experiment"].references[][kind="context"].kind: "context"
 datasets.artifacts[][kind="experiment"].references[][kind="context"].discussionId: string
 datasets.artifacts[][kind="experiment"].references[][kind="evidence"].kind: "evidence"
@@ -5023,35 +5028,35 @@ datasets.artifacts[][kind="discussion"].path: string  // Experiment path, or sta
 datasets.artifacts[][kind="discussion"].name*: string
 datasets.artifacts[][kind="discussion"].name[LabText].en: string
 datasets.artifacts[][kind="discussion"].name[LabText].zh-CN: string
-datasets.artifacts[][kind="discussion"].extension: ArtifactExtension | null  (optional)
-datasets.artifacts[][kind="discussion"].role: ArtifactRole | null  (optional)
-datasets.artifacts[][kind="discussion"].size: string | null  (optional)
+datasets.artifacts[][kind="discussion"].extension: ArtifactExtension | null  (nullable)
+datasets.artifacts[][kind="discussion"].role: ArtifactRole | null  (nullable)
+datasets.artifacts[][kind="discussion"].size: string | null  (nullable)
 datasets.artifacts[][kind="discussion"].time*: string
 datasets.artifacts[][kind="discussion"].time[LabText].en: string
 datasets.artifacts[][kind="discussion"].time[LabText].zh-CN: string
 datasets.artifacts[][kind="discussion"].projectId: string
 datasets.artifacts[][kind="discussion"].verdict: ArtifactVerdict
-datasets.artifacts[][kind="discussion"].preview[kind="table"].kind: "table"
-datasets.artifacts[][kind="discussion"].preview[kind="table"].columns[]*: string
-datasets.artifacts[][kind="discussion"].preview[kind="table"].columns[][LabText].en: string
-datasets.artifacts[][kind="discussion"].preview[kind="table"].columns[][LabText].zh-CN: string
-datasets.artifacts[][kind="discussion"].preview[kind="table"].rows[][]*: string
-datasets.artifacts[][kind="discussion"].preview[kind="table"].rows[][][LabText].en: string
-datasets.artifacts[][kind="discussion"].preview[kind="table"].rows[][][LabText].zh-CN: string
-datasets.artifacts[][kind="discussion"].preview[kind="table"].highlightedRow: number | undefined  (optional)
-datasets.artifacts[][kind="discussion"].preview[kind="table"].note*: string  (optional)
-datasets.artifacts[][kind="discussion"].preview[kind="table"].note[LabText].en: string
-datasets.artifacts[][kind="discussion"].preview[kind="table"].note[LabText].zh-CN: string
-datasets.artifacts[][kind="discussion"].preview[kind="image"].kind: "image"
-datasets.artifacts[][kind="discussion"].preview[kind="image"].aspect[0]: number
-datasets.artifacts[][kind="discussion"].preview[kind="image"].aspect[1]: number
-datasets.artifacts[][kind="discussion"].preview[kind="image"].dimensions*: string
-datasets.artifacts[][kind="discussion"].preview[kind="image"].dimensions[LabText].en: string
-datasets.artifacts[][kind="discussion"].preview[kind="image"].dimensions[LabText].zh-CN: string
-datasets.artifacts[][kind="discussion"].preview[kind="text"].kind: "text"
-datasets.artifacts[][kind="discussion"].preview[kind="text"].text*: string
-datasets.artifacts[][kind="discussion"].preview[kind="text"].text[LabText].en: string
-datasets.artifacts[][kind="discussion"].preview[kind="text"].text[LabText].zh-CN: string
+datasets.artifacts[][kind="discussion"].preview[kind="table"].kind: "table"  (nullable parent)
+datasets.artifacts[][kind="discussion"].preview[kind="table"].columns[]*: string  (nullable parent)
+datasets.artifacts[][kind="discussion"].preview[kind="table"].columns[][LabText].en: string  (nullable parent)
+datasets.artifacts[][kind="discussion"].preview[kind="table"].columns[][LabText].zh-CN: string  (nullable parent)
+datasets.artifacts[][kind="discussion"].preview[kind="table"].rows[][]*: string  (nullable parent)
+datasets.artifacts[][kind="discussion"].preview[kind="table"].rows[][][LabText].en: string  (nullable parent)
+datasets.artifacts[][kind="discussion"].preview[kind="table"].rows[][][LabText].zh-CN: string  (nullable parent)
+datasets.artifacts[][kind="discussion"].preview[kind="table"].highlightedRow: number | undefined  (optional) (nullable parent)
+datasets.artifacts[][kind="discussion"].preview[kind="table"].note*: string  (optional) (nullable parent)
+datasets.artifacts[][kind="discussion"].preview[kind="table"].note[LabText].en: string  (nullable parent)
+datasets.artifacts[][kind="discussion"].preview[kind="table"].note[LabText].zh-CN: string  (nullable parent)
+datasets.artifacts[][kind="discussion"].preview[kind="image"].kind: "image"  (nullable parent)
+datasets.artifacts[][kind="discussion"].preview[kind="image"].aspect[0]: number  (nullable parent)
+datasets.artifacts[][kind="discussion"].preview[kind="image"].aspect[1]: number  (nullable parent)
+datasets.artifacts[][kind="discussion"].preview[kind="image"].dimensions*: string  (nullable parent)
+datasets.artifacts[][kind="discussion"].preview[kind="image"].dimensions[LabText].en: string  (nullable parent)
+datasets.artifacts[][kind="discussion"].preview[kind="image"].dimensions[LabText].zh-CN: string  (nullable parent)
+datasets.artifacts[][kind="discussion"].preview[kind="text"].kind: "text"  (nullable parent)
+datasets.artifacts[][kind="discussion"].preview[kind="text"].text*: string  (nullable parent)
+datasets.artifacts[][kind="discussion"].preview[kind="text"].text[LabText].en: string  (nullable parent)
+datasets.artifacts[][kind="discussion"].preview[kind="text"].text[LabText].zh-CN: string  (nullable parent)
 datasets.artifacts[][kind="discussion"].references[][kind="context"].kind: "context"
 datasets.artifacts[][kind="discussion"].references[][kind="context"].discussionId: string
 datasets.artifacts[][kind="discussion"].references[][kind="evidence"].kind: "evidence"
@@ -5094,7 +5099,7 @@ discussions.saveConclusion.conclusion[kind="confirmed"].evidence*: string
 discussions.saveConclusion.conclusion[kind="confirmed"].evidence[LabText].en: string
 discussions.saveConclusion.conclusion[kind="confirmed"].evidence[LabText].zh-CN: string
 discussions.saveConclusion.conclusion[kind="pending"].kind: "pending"
-discussions.saveConclusion.conclusion[kind="pending"].pendingRunId: string | null  (optional)
+discussions.saveConclusion.conclusion[kind="pending"].pendingRunId: string | null  (nullable)
 discussions.saveConclusion.conclusion[kind="pending"].time*: string
 discussions.saveConclusion.conclusion[kind="pending"].time[LabText].en: string
 discussions.saveConclusion.conclusion[kind="pending"].time[LabText].zh-CN: string
@@ -6112,7 +6117,7 @@ discussions.discussions[].messages[][kind="ai"].day[LabText].zh-CN: string
 discussions.discussions[].messages[][kind="ai"].references[]: `${string}:${string}`
 discussions.discussions[].messages[][kind="ai"].kind: "ai"
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="plan"].kind: "plan"
-discussions.discussions[].messages[][kind="ai"].attachments[][kind="plan"].plan.runId: string | null  (optional)
+discussions.discussions[].messages[][kind="ai"].attachments[][kind="plan"].plan.runId: string | null  (nullable)
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="plan"].plan.title*: string
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="plan"].plan.title[LabText].en: string
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="plan"].plan.title[LabText].zh-CN: string
@@ -6129,7 +6134,7 @@ discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"]
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].draft.text*: string
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].draft.text[LabText].en: string
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].draft.text[LabText].zh-CN: string
-discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].draft.confidence: "medium" | null  (optional)
+discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].draft.confidence: "medium" | null  (nullable)
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].draft.evidence*: string
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].draft.evidence[LabText].en: string
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].draft.evidence[LabText].zh-CN: string
@@ -6144,7 +6149,7 @@ discussions.discussions[].conclusions[][kind="confirmed"].evidence*: string
 discussions.discussions[].conclusions[][kind="confirmed"].evidence[LabText].en: string
 discussions.discussions[].conclusions[][kind="confirmed"].evidence[LabText].zh-CN: string
 discussions.discussions[].conclusions[][kind="pending"].kind: "pending"
-discussions.discussions[].conclusions[][kind="pending"].pendingRunId: string | null  (optional)
+discussions.discussions[].conclusions[][kind="pending"].pendingRunId: string | null  (nullable)
 discussions.discussions[].conclusions[][kind="pending"].time*: string
 discussions.discussions[].conclusions[][kind="pending"].time[LabText].en: string
 discussions.discussions[].conclusions[][kind="pending"].time[LabText].zh-CN: string
@@ -7082,21 +7087,21 @@ clusters.clusters[].name: string
 clusters.clusters[].kind*: string
 clusters.clusters[].kind[LabText].en: string
 clusters.clusters[].kind[LabText].zh-CN: string
-clusters.clusters[].health: ClusterHealth | null  (optional)
-clusters.clusters[].isDefault: boolean | null  (optional)
+clusters.clusters[].health: ClusterHealth | null  (nullable)
+clusters.clusters[].isDefault: boolean | null  (nullable)
 clusters.clusters[].endpoint: string
-clusters.clusters[].reportedLoadPercent: number | null  (optional)
-clusters.clusters[].gpu.used: number
-clusters.clusters[].gpu.total: number
-clusters.clusters[].cpu.used: number
-clusters.clusters[].cpu.total: number
-clusters.clusters[].nodeCount: number | null  (optional)
-clusters.clusters[].healthText*: string  (optional)
-clusters.clusters[].healthText[LabText].en: string
-clusters.clusters[].healthText[LabText].zh-CN: string
-clusters.clusters[].handshakeAge*: string  (optional)
-clusters.clusters[].handshakeAge[LabText].en: string
-clusters.clusters[].handshakeAge[LabText].zh-CN: string
+clusters.clusters[].reportedLoadPercent: number | null  (nullable)
+clusters.clusters[].gpu.used: number  (nullable parent)
+clusters.clusters[].gpu.total: number  (nullable parent)
+clusters.clusters[].cpu.used: number  (nullable parent)
+clusters.clusters[].cpu.total: number  (nullable parent)
+clusters.clusters[].nodeCount: number | null  (nullable)
+clusters.clusters[].healthText*: string | null  (nullable)
+clusters.clusters[].healthText[LabText].en: string  (nullable parent)
+clusters.clusters[].healthText[LabText].zh-CN: string  (nullable parent)
+clusters.clusters[].handshakeAge*: string | null  (nullable)
+clusters.clusters[].handshakeAge[LabText].en: string  (nullable parent)
+clusters.clusters[].handshakeAge[LabText].zh-CN: string  (nullable parent)
 clusters.gpuNodePatterns[].clusterId: string
 clusters.gpuNodePatterns[].firstNode: number
 clusters.gpuNodePatterns[].gpusPerNode: number
@@ -7110,18 +7115,18 @@ clusters.gateways[].devices[LabText].zh-CN: string
 clusters.gateways[].health: ClusterHealth
 clusters.containers[].id: string
 clusters.containers[].name: string
-clusters.containers[].clusterId: string | null  (optional)
-clusters.containers[].host: string | null  (optional)
+clusters.containers[].clusterId: string | null  (nullable)
+clusters.containers[].host: string | null  (nullable)
 clusters.containers[].purpose: ContainerPurpose
 clusters.containers[].agentIds[]: string
-clusters.containers[].binding*: string  (optional)
-clusters.containers[].binding[LabText].en: string
-clusters.containers[].binding[LabText].zh-CN: string
-clusters.containers[].image: string | null  (optional)
+clusters.containers[].binding*: string | null  (nullable)
+clusters.containers[].binding[LabText].en: string  (nullable parent)
+clusters.containers[].binding[LabText].zh-CN: string  (nullable parent)
+clusters.containers[].image: string | null  (nullable)
 clusters.containers[].state: ContainerState
-clusters.containers[].uptime*: string  (optional)
-clusters.containers[].uptime[LabText].en: string
-clusters.containers[].uptime[LabText].zh-CN: string
+clusters.containers[].uptime*: string | null  (nullable)
+clusters.containers[].uptime[LabText].en: string  (nullable parent)
+clusters.containers[].uptime[LabText].zh-CN: string  (nullable parent)
 clusters.containers[].resources[kind="absent"].kind: "absent"
 clusters.containers[].resources[kind="present"].kind: "present"
 clusters.containers[].resources[kind="present"].cpu.used: number
@@ -7130,11 +7135,11 @@ clusters.containers[].resources[kind="present"].memoryGiB.used: number
 clusters.containers[].resources[kind="present"].memoryGiB.total: number
 clusters.containers[].mounts[].path: string
 clusters.containers[].mounts[].mode: "device" | "ro" | "rw"
-clusters.containers[].logs[].time: string | null  (optional)
+clusters.containers[].logs[].time: string | null  (nullable)
 clusters.containers[].logs[].message*: string
 clusters.containers[].logs[].message[LabText].en: string
 clusters.containers[].logs[].message[LabText].zh-CN: string
-clusters.containers[].logs[].severity: "error" | "stdout" | "warning" | null  (optional)
+clusters.containers[].logs[].severity: "error" | "stdout" | "warning" | null  (nullable)
 ```
 
 ### `connectCluster` — ConnectClusterFixture
@@ -8061,7 +8066,7 @@ connectCluster.paths[][kind="node"].defaults.auth[kind="password"].kind: "passwo
 connectCluster.paths[][kind="node"].defaults.auth[kind="password"].password: string
 connectCluster.paths[][kind="node"].defaults.auth[kind="agent"].kind: "agent"
 connectCluster.paths[][kind="node"].defaults.name: string
-connectCluster.paths[][kind="node"].defaults.clusterId: string | null  (optional)
+connectCluster.paths[][kind="node"].defaults.clusterId: string | null  (nullable)
 connectCluster.paths[][kind="node"].defaults.method: "manual" | "ssh"
 connectCluster.paths[][kind="node"].defaults.role: "agent" | "any" | "box" | "runner"
 connectCluster.paths[][kind="node"].defaults.labels: string
@@ -8155,20 +8160,20 @@ connectCluster.existingClusters[].clusterId: string
 connectCluster.existingClusters[].kind*: string
 connectCluster.existingClusters[].kind[LabText].en: string
 connectCluster.existingClusters[].kind[LabText].zh-CN: string
-connectCluster.existingClusters[].health: ClusterHealth | null  (optional)
-connectCluster.existingClusters[].nodeCount: number | null  (optional)
+connectCluster.existingClusters[].health: ClusterHealth | null  (nullable)
+connectCluster.existingClusters[].nodeCount: number | null  (nullable)
 connectCluster.existingClusters[].endpoint: string
-connectCluster.existingClusters[].gpu.used: number
-connectCluster.existingClusters[].gpu.total: number
-connectCluster.existingClusters[].isDefault: boolean | null  (optional)
+connectCluster.existingClusters[].gpu.used: number  (nullable parent)
+connectCluster.existingClusters[].gpu.total: number  (nullable parent)
+connectCluster.existingClusters[].isDefault: boolean | null  (nullable)
 connectCluster.clusterChoices[].clusterId: string
 connectCluster.clusterChoices[].kind*: string
 connectCluster.clusterChoices[].kind[LabText].en: string
 connectCluster.clusterChoices[].kind[LabText].zh-CN: string
-connectCluster.clusterChoices[].detail*: string  (optional)
-connectCluster.clusterChoices[].detail[LabText].en: string
-connectCluster.clusterChoices[].detail[LabText].zh-CN: string
-connectCluster.defaults.clusterId: string | null  (optional)
+connectCluster.clusterChoices[].detail*: string | null  (nullable)
+connectCluster.clusterChoices[].detail[LabText].en: string  (nullable parent)
+connectCluster.clusterChoices[].detail[LabText].zh-CN: string  (nullable parent)
+connectCluster.defaults.clusterId: string | null  (nullable)
 connectCluster.installLogs[]: string
 connectCluster.connectionTestResults[].kind: "controller" | "node_manual" | "node_ssh"
 connectCluster.connectionTestResults[].text*: string
@@ -8234,34 +8239,34 @@ containers.images[].conversation.scope.value*: string
 containers.images[].conversation.scope.value[LabText].en: string
 containers.images[].conversation.scope.value[LabText].zh-CN: string
 containers.images[].id: string
-containers.images[].group: "box" | "judge" | "runner" | null  (optional)
+containers.images[].group: "box" | "judge" | "runner" | null  (nullable)
 containers.images[].name: string
-containers.images[].tag: string | null  (optional)
-containers.images[].size: string | null  (optional)
-containers.images[].status: "pending" | "published" | null  (optional)
-containers.images[].nodeBindingCount: number | null  (optional)
+containers.images[].tag: string | null  (nullable)
+containers.images[].size: string | null  (nullable)
+containers.images[].status: "pending" | "published" | null  (nullable)
+containers.images[].nodeBindingCount: number | null  (nullable)
 containers.images[].base: string
-containers.images[].digest: string | null  (optional)
-containers.images[].note*: string  (optional)
-containers.images[].note[LabText].en: string
-containers.images[].note[LabText].zh-CN: string
+containers.images[].digest: string | null  (nullable)
+containers.images[].note*: string | null  (nullable)
+containers.images[].note[LabText].en: string  (nullable parent)
+containers.images[].note[LabText].zh-CN: string  (nullable parent)
 containers.images[].liveContainers[].name: string
-containers.images[].liveContainers[].location: string | null  (optional)
-containers.images[].liveContainers[].tag: string | null  (optional)
+containers.images[].liveContainers[].location: string | null  (nullable)
+containers.images[].liveContainers[].tag: string | null  (nullable)
 containers.images[].liveContainers[].state: ContainerState
-containers.images[].liveContainers[].binding: string | null  (optional)
+containers.images[].liveContainers[].binding: string | null  (nullable)
 containers.images[].dependencies[].name*: string
 containers.images[].dependencies[].name[LabText].en: string
 containers.images[].dependencies[].name[LabText].zh-CN: string
 containers.images[].dependencies[].version: string
 containers.images[].dependencies[].kind: DependencyKind
-containers.images[].dependencies[].source: DependencySource | null  (optional)
-containers.images[].dependencies[].reason*: string  (optional)
-containers.images[].dependencies[].reason[LabText].en: string
-containers.images[].dependencies[].reason[LabText].zh-CN: string
-containers.images[].dependencies[].change[kind∈"added"|"removed"|"unchanged"].kind: "added" | "removed" | "unchanged"
-containers.images[].dependencies[].change[kind∈"modified"|"upgraded"].kind: "modified" | "upgraded"
-containers.images[].dependencies[].change[kind∈"modified"|"upgraded"].replacement: string
+containers.images[].dependencies[].source: DependencySource | null  (nullable)
+containers.images[].dependencies[].reason*: string | null  (nullable)
+containers.images[].dependencies[].reason[LabText].en: string  (nullable parent)
+containers.images[].dependencies[].reason[LabText].zh-CN: string  (nullable parent)
+containers.images[].dependencies[].change[kind∈"added"|"removed"|"unchanged"].kind: "added" | "removed" | "unchanged"  (nullable parent)
+containers.images[].dependencies[].change[kind∈"modified"|"upgraded"].kind: "modified" | "upgraded"  (nullable parent)
+containers.images[].dependencies[].change[kind∈"modified"|"upgraded"].replacement: string  (nullable parent)
 containers.images[].builds[].tag: string
 containers.images[].builds[].state: "default" | "draft" | "history"
 containers.images[].builds[].size: string
@@ -8269,40 +8274,40 @@ containers.images[].builds[].note*: string
 containers.images[].builds[].note[LabText].en: string
 containers.images[].builds[].note[LabText].zh-CN: string
 containers.images[].layers[].kind: DependencyKind
-containers.images[].layers[].size: string | null  (optional)
-containers.images[].resources.cpu: number
-containers.images[].resources.memoryGiB: number
-containers.images[].resources.gpu: number
-containers.images[].resources.diskGiB: number
-containers.images[].resources.maxRuntimeHours: number
-containers.images[].resources.allowPreemptible: boolean
-containers.images[].resources.deviceAccess: boolean
-containers.images[].resources.outboundNetwork: boolean
-containers.images[].resources.boundClusters[]: string
-containers.images[].resources.primaryCluster: string | null  (optional)
-containers.images[].resources.selector: string | null  (optional)
-containers.images[].resources.priority: "high" | "low" | "normal"
+containers.images[].layers[].size: string | null  (nullable)
+containers.images[].resources.cpu: number  (nullable parent)
+containers.images[].resources.memoryGiB: number  (nullable parent)
+containers.images[].resources.gpu: number  (nullable parent)
+containers.images[].resources.diskGiB: number  (nullable parent)
+containers.images[].resources.maxRuntimeHours: number  (nullable parent)
+containers.images[].resources.allowPreemptible: boolean  (nullable parent)
+containers.images[].resources.deviceAccess: boolean  (nullable parent)
+containers.images[].resources.outboundNetwork: boolean  (nullable parent)
+containers.images[].resources.boundClusters[]: string  (nullable parent)
+containers.images[].resources.primaryCluster: string | null  (nullable) (nullable parent)
+containers.images[].resources.selector: string | null  (nullable) (nullable parent)
+containers.images[].resources.priority: "high" | "low" | "normal"  (nullable parent)
 containers.images[].directories[].id: string
-containers.images[].directories[].parentId: string | null  (optional)
+containers.images[].directories[].parentId: string | null  (nullable)
 containers.images[].directories[].name: string
-containers.images[].directories[].access: "editable" | "read_only" | "runtime_mount" | null  (optional)
-containers.images[].directories[].note*: string  (optional)
-containers.images[].directories[].note[LabText].en: string
-containers.images[].directories[].note[LabText].zh-CN: string
+containers.images[].directories[].access: "editable" | "read_only" | "runtime_mount" | null  (nullable)
+containers.images[].directories[].note*: string | null  (nullable)
+containers.images[].directories[].note[LabText].en: string  (nullable parent)
+containers.images[].directories[].note[LabText].zh-CN: string  (nullable parent)
 containers.images[].files[][kind="file"].id: string
 containers.images[].files[][kind="file"].directoryId: string
 containers.images[].files[][kind="file"].name*: string
 containers.images[].files[][kind="file"].name[LabText].en: string
 containers.images[].files[][kind="file"].name[LabText].zh-CN: string
 containers.images[].files[][kind="file"].size: string
-containers.images[].files[][kind="file"].modified*: string  (optional)
-containers.images[].files[][kind="file"].modified[LabText].en: string
-containers.images[].files[][kind="file"].modified[LabText].zh-CN: string
-containers.images[].files[][kind="file"].change: FileChange | null  (optional)
+containers.images[].files[][kind="file"].modified*: string | null  (nullable)
+containers.images[].files[][kind="file"].modified[LabText].en: string  (nullable parent)
+containers.images[].files[][kind="file"].modified[LabText].zh-CN: string  (nullable parent)
+containers.images[].files[][kind="file"].change: FileChange | null  (nullable)
 containers.images[].files[][kind="file"].kind: "file"
-containers.images[].files[][kind="file"].contents*: string  (optional)
-containers.images[].files[][kind="file"].contents[LabText].en: string
-containers.images[].files[][kind="file"].contents[LabText].zh-CN: string
+containers.images[].files[][kind="file"].contents*: string | null  (nullable)
+containers.images[].files[][kind="file"].contents[LabText].en: string  (nullable parent)
+containers.images[].files[][kind="file"].contents[LabText].zh-CN: string  (nullable parent)
 containers.images[].files[][kind="file"].format: "code" | "text"
 containers.images[].files[][kind="opaque_directory"].id: string
 containers.images[].files[][kind="opaque_directory"].directoryId: string
@@ -8310,28 +8315,28 @@ containers.images[].files[][kind="opaque_directory"].name*: string
 containers.images[].files[][kind="opaque_directory"].name[LabText].en: string
 containers.images[].files[][kind="opaque_directory"].name[LabText].zh-CN: string
 containers.images[].files[][kind="opaque_directory"].size: string
-containers.images[].files[][kind="opaque_directory"].modified*: string  (optional)
-containers.images[].files[][kind="opaque_directory"].modified[LabText].en: string
-containers.images[].files[][kind="opaque_directory"].modified[LabText].zh-CN: string
-containers.images[].files[][kind="opaque_directory"].change: FileChange | null  (optional)
+containers.images[].files[][kind="opaque_directory"].modified*: string | null  (nullable)
+containers.images[].files[][kind="opaque_directory"].modified[LabText].en: string  (nullable parent)
+containers.images[].files[][kind="opaque_directory"].modified[LabText].zh-CN: string  (nullable parent)
+containers.images[].files[][kind="opaque_directory"].change: FileChange | null  (nullable)
 containers.images[].files[][kind="opaque_directory"].kind: "opaque_directory"
 containers.images[].occupancy[].id: string
-containers.images[].occupancy[].parentId: string | null  (optional)
+containers.images[].occupancy[].parentId: string | null  (nullable)
 containers.images[].occupancy[].name*: string
 containers.images[].occupancy[].name[LabText].en: string
 containers.images[].occupancy[].name[LabText].zh-CN: string
 containers.images[].occupancy[].kind: "directory" | "file" | "runtime_mount"
-containers.images[].occupancy[].size[kind="fixed"].kind: "fixed"
-containers.images[].occupancy[].size[kind="fixed"].mb: number
-containers.images[].occupancy[].size[kind="image_size"].kind: "image_size"
-containers.images[].occupancy[].size[kind="image_size"].mbPerGiB: number
-containers.images[].occupancy[].layer*: string  (optional)
-containers.images[].occupancy[].layer[LabText].en: string
-containers.images[].occupancy[].layer[LabText].zh-CN: string
-containers.images[].occupancy[].change: FileChange | null  (optional)
-containers.images[].occupancy[].note*: string  (optional)
-containers.images[].occupancy[].note[LabText].en: string
-containers.images[].occupancy[].note[LabText].zh-CN: string
+containers.images[].occupancy[].size[kind="fixed"].kind: "fixed"  (nullable parent)
+containers.images[].occupancy[].size[kind="fixed"].mb: number  (nullable parent)
+containers.images[].occupancy[].size[kind="image_size"].kind: "image_size"  (nullable parent)
+containers.images[].occupancy[].size[kind="image_size"].mbPerGiB: number  (nullable parent)
+containers.images[].occupancy[].layer*: string | null  (nullable)
+containers.images[].occupancy[].layer[LabText].en: string  (nullable parent)
+containers.images[].occupancy[].layer[LabText].zh-CN: string  (nullable parent)
+containers.images[].occupancy[].change: FileChange | null  (nullable)
+containers.images[].occupancy[].note*: string | null  (nullable)
+containers.images[].occupancy[].note[LabText].en: string  (nullable parent)
+containers.images[].occupancy[].note[LabText].zh-CN: string  (nullable parent)
 containers.images[].terminal[].kind: "command" | "comment" | "error" | "stdout" | "success" | "warning"
 containers.images[].terminal[].text*: string
 containers.images[].terminal[].text[LabText].en: string
@@ -8855,27 +8860,27 @@ settings.agents[].description[LabText].zh-CN: string
 settings.agents[].version[kind="draft"].kind: "draft"
 settings.agents[].version[kind="saved"].kind: "saved"
 settings.agents[].version[kind="saved"].version: string
-settings.agents[].uses: number | null  (optional)
+settings.agents[].uses: number | null  (nullable)
 settings.agents[].lastSaved*: string
 settings.agents[].lastSaved[LabText].en: string
 settings.agents[].lastSaved[LabText].zh-CN: string
 settings.agents[].targets[]: string
 settings.agents[].models[].id: string
-settings.agents[].models[].purpose*: string  (optional)
-settings.agents[].models[].purpose[LabText].en: string
-settings.agents[].models[].purpose[LabText].zh-CN: string
+settings.agents[].models[].purpose*: string | null  (nullable)
+settings.agents[].models[].purpose[LabText].en: string  (nullable parent)
+settings.agents[].models[].purpose[LabText].zh-CN: string  (nullable parent)
 settings.agents[].entries[][kind="directory"].kind: "directory"
 settings.agents[].entries[][kind="directory"].path: string
-settings.agents[].entries[][kind="directory"].source: "added" | "repository" | "template" | null  (optional)
+settings.agents[].entries[][kind="directory"].source: "added" | "repository" | "template" | null  (nullable)
 settings.agents[].entries[][kind="file"].kind: "file"
 settings.agents[].entries[][kind="file"].path: string
-settings.agents[].entries[][kind="file"].source: "added" | "repository" | "template" | null  (optional)
+settings.agents[].entries[][kind="file"].source: "added" | "repository" | "template" | null  (nullable)
 settings.agents[].entries[][kind="file"].contents*: string
 settings.agents[].entries[][kind="file"].contents[LabText].en: string
 settings.agents[].entries[][kind="file"].contents[LabText].zh-CN: string
 settings.agents[].details[][kind="project_label"].kind: "project_label"
 settings.agents[].details[][kind="project_label"].createdById: string
-settings.agents[].details[][kind="project_label"].focusedByCount: number | null  (optional)
+settings.agents[].details[][kind="project_label"].focusedByCount: number | null  (nullable)
 settings.agents[].details[][kind="project_tagged_items"].kind: "project_tagged_items"
 settings.agents[].details[][kind∈"template_metadata"|"template_models"].kind: "template_metadata" | "template_models"
 settings.agents[].details[][kind∈"facts"|"list"].kind: "facts" | "list"
@@ -8901,19 +8906,19 @@ settings.agents[].details[][kind="toggles"].rows[].note*: string
 settings.agents[].details[][kind="toggles"].rows[].note[LabText].en: string
 settings.agents[].details[][kind="toggles"].rows[].note[LabText].zh-CN: string
 settings.agents[].details[][kind="toggles"].rows[].enabled: boolean
-settings.agents[].scratch.containerId: string
-settings.agents[].scratch.title: string
-settings.agents[].scratch.description*: string
-settings.agents[].scratch.description[LabText].en: string
-settings.agents[].scratch.description[LabText].zh-CN: string
-settings.agents[].scratch.addedFile.path: string
-settings.agents[].scratch.addedFile.contents*: string
-settings.agents[].scratch.addedFile.contents[LabText].en: string
-settings.agents[].scratch.addedFile.contents[LabText].zh-CN: string
-settings.agents[].scratch.transcript[].kind: "command" | "comment" | "error" | "stdout" | "success" | "warning"
-settings.agents[].scratch.transcript[].text*: string
-settings.agents[].scratch.transcript[].text[LabText].en: string
-settings.agents[].scratch.transcript[].text[LabText].zh-CN: string
+settings.agents[].scratch.containerId: string  (nullable parent)
+settings.agents[].scratch.title: string  (nullable parent)
+settings.agents[].scratch.description*: string  (nullable parent)
+settings.agents[].scratch.description[LabText].en: string  (nullable parent)
+settings.agents[].scratch.description[LabText].zh-CN: string  (nullable parent)
+settings.agents[].scratch.addedFile.path: string  (nullable parent)
+settings.agents[].scratch.addedFile.contents*: string  (nullable parent)
+settings.agents[].scratch.addedFile.contents[LabText].en: string  (nullable parent)
+settings.agents[].scratch.addedFile.contents[LabText].zh-CN: string  (nullable parent)
+settings.agents[].scratch.transcript[].kind: "command" | "comment" | "error" | "stdout" | "success" | "warning"  (nullable parent)
+settings.agents[].scratch.transcript[].text*: string  (nullable parent)
+settings.agents[].scratch.transcript[].text[LabText].en: string  (nullable parent)
+settings.agents[].scratch.transcript[].text[LabText].zh-CN: string  (nullable parent)
 settings.conversations.agents.sessions[].name*: string
 settings.conversations.agents.sessions[].name[LabText].en: string
 settings.conversations.agents.sessions[].name[LabText].zh-CN: string
@@ -12121,9 +12126,9 @@ settings.dialogSelection.duplicateValue: "selected_name_copy"
 settings.dialogSelection.mergeOptions: "exclude_selected_project"
 settings.members[].memberId: string
 settings.members[].email: string
-settings.members[].description*: string  (optional)
-settings.members[].description[LabText].en: string
-settings.members[].description[LabText].zh-CN: string
+settings.members[].description*: string | null  (nullable)
+settings.members[].description[LabText].en: string  (nullable parent)
+settings.members[].description[LabText].zh-CN: string  (nullable parent)
 settings.members[].role: MemberRole
 settings.members[].displayName*: string  // This page's prototype uses display names distinct from the shared member catalog.
 settings.members[].displayName[LabText].en: string
@@ -12132,23 +12137,23 @@ settings.members[].mainProjectId: string
 settings.members[].focusSummary[]*: string
 settings.members[].focusSummary[][LabText].en: string
 settings.members[].focusSummary[][LabText].zh-CN: string
-settings.members[].gpuHours.used: number | null  (optional)
+settings.members[].gpuHours.used: number | null  (nullable)
 settings.members[].gpuHours.quota[kind="unlimited"].kind: "unlimited"
 settings.members[].gpuHours.quota[kind="limited"].kind: "limited"
 settings.members[].gpuHours.quota[kind="limited"].hours: number
-settings.members[].lastActive*: string  (optional)
-settings.members[].lastActive[LabText].en: string
-settings.members[].lastActive[LabText].zh-CN: string
-settings.members[].presence: "offline" | "online" | null  (optional)
-settings.members[].canApprove*: string  (optional)
-settings.members[].canApprove[LabText].en: string
-settings.members[].canApprove[LabText].zh-CN: string
-settings.members[].permissions.startWithoutApproval: boolean
-settings.members[].permissions.buildImages: boolean
-settings.members[].permissions.manageMembers: boolean
+settings.members[].lastActive*: string | null  (nullable)
+settings.members[].lastActive[LabText].en: string  (nullable parent)
+settings.members[].lastActive[LabText].zh-CN: string  (nullable parent)
+settings.members[].presence: "offline" | "online" | null  (nullable)
+settings.members[].canApprove*: string | null  (nullable)
+settings.members[].canApprove[LabText].en: string  (nullable parent)
+settings.members[].canApprove[LabText].zh-CN: string  (nullable parent)
+settings.members[].permissions.startWithoutApproval: boolean  (nullable parent)
+settings.members[].permissions.buildImages: boolean  (nullable parent)
+settings.members[].permissions.manageMembers: boolean  (nullable parent)
 settings.members[].details[][kind="project_label"].kind: "project_label"
 settings.members[].details[][kind="project_label"].createdById: string
-settings.members[].details[][kind="project_label"].focusedByCount: number | null  (optional)
+settings.members[].details[][kind="project_label"].focusedByCount: number | null  (nullable)
 settings.members[].details[][kind="project_tagged_items"].kind: "project_tagged_items"
 settings.members[].details[][kind∈"template_metadata"|"template_models"].kind: "template_metadata" | "template_models"
 settings.members[].details[][kind∈"facts"|"list"].kind: "facts" | "list"
@@ -12179,19 +12184,19 @@ settings.roles[].label*: string
 settings.roles[].label[LabText].en: string
 settings.roles[].label[LabText].zh-CN: string
 settings.projects[].projectId: string
-settings.projects[].description*: string  (optional)
-settings.projects[].description[LabText].en: string
-settings.projects[].description[LabText].zh-CN: string
+settings.projects[].description*: string | null  (nullable)
+settings.projects[].description[LabText].en: string  (nullable parent)
+settings.projects[].description[LabText].zh-CN: string  (nullable parent)
 settings.projects[].state: "active" | "archived"
 settings.projects[].discussionCount: number
 settings.projects[].experimentCount: number
 settings.projects[].conclusionCount: number
-settings.projects[].lastActivity*: string  (optional)
-settings.projects[].lastActivity[LabText].en: string
-settings.projects[].lastActivity[LabText].zh-CN: string
+settings.projects[].lastActivity*: string | null  (nullable)
+settings.projects[].lastActivity[LabText].en: string  (nullable parent)
+settings.projects[].lastActivity[LabText].zh-CN: string  (nullable parent)
 settings.projects[].details[][kind="project_label"].kind: "project_label"
 settings.projects[].details[][kind="project_label"].createdById: string
-settings.projects[].details[][kind="project_label"].focusedByCount: number | null  (optional)
+settings.projects[].details[][kind="project_label"].focusedByCount: number | null  (nullable)
 settings.projects[].details[][kind="project_tagged_items"].kind: "project_tagged_items"
 settings.projects[].details[][kind∈"template_metadata"|"template_models"].kind: "template_metadata" | "template_models"
 settings.projects[].details[][kind∈"facts"|"list"].kind: "facts" | "list"
@@ -12224,16 +12229,16 @@ settings.repositories[].description[LabText].zh-CN: string
 settings.repositories[].status: "broken" | "ok" | "warning"
 settings.repositories[].branch: string
 settings.repositories[].images[]: string
-settings.repositories[].nodes*: string  (optional)
-settings.repositories[].nodes[LabText].en: string
-settings.repositories[].nodes[LabText].zh-CN: string
+settings.repositories[].nodes*: string | null  (nullable)
+settings.repositories[].nodes[LabText].en: string  (nullable parent)
+settings.repositories[].nodes[LabText].zh-CN: string  (nullable parent)
 settings.repositories[].lastSync*: string
 settings.repositories[].lastSync[LabText].en: string
 settings.repositories[].lastSync[LabText].zh-CN: string
 settings.repositories[].remote: string
 settings.repositories[].details[][kind="project_label"].kind: "project_label"
 settings.repositories[].details[][kind="project_label"].createdById: string
-settings.repositories[].details[][kind="project_label"].focusedByCount: number | null  (optional)
+settings.repositories[].details[][kind="project_label"].focusedByCount: number | null  (nullable)
 settings.repositories[].details[][kind="project_tagged_items"].kind: "project_tagged_items"
 settings.repositories[].details[][kind∈"template_metadata"|"template_models"].kind: "template_metadata" | "template_models"
 settings.repositories[].details[][kind∈"facts"|"list"].kind: "facts" | "list"
@@ -12273,7 +12278,7 @@ settings.discussions[].participantIds[]: string
 settings.discussions[].title*: string
 settings.discussions[].title[LabText].en: string
 settings.discussions[].title[LabText].zh-CN: string
-settings.discussions[].unread: boolean | null  (optional)
+settings.discussions[].unread: boolean | null  (nullable)
 settings.invitations[].email: string
 settings.invitations[].role: MemberRole
 settings.invitations[].description*: string
@@ -12307,7 +12312,7 @@ settings.repositoryEvents[].kind: string
 settings.repositoryEvents[].when*: string
 settings.repositoryEvents[].when[LabText].en: string
 settings.repositoryEvents[].when[LabText].zh-CN: string
-settings.repositoryEvents[].source: string | null  (optional)
+settings.repositoryEvents[].source: string | null  (nullable)
 settings.repositoryEvents[].description*: string
 settings.repositoryEvents[].description[LabText].en: string
 settings.repositoryEvents[].description[LabText].zh-CN: string

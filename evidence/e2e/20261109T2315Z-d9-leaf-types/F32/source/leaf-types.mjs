@@ -6,7 +6,7 @@
  * `apps/web/src/client/contracts/lab-snapshot.ts` of Pepgent/Pepgent with the
  * TypeScript compiler API (`typescript/unstable/sync`, the TypeScript 7 API the
  * repo already depends on) and writes every leaf field as
- *   <leaf path>: <type>
+ *   <leaf path>: <type>  [markers]
  * grouped per top-level field, to stdout and optionally to markdown / JSON.
  *
  * Usage:
@@ -74,6 +74,7 @@ const PRIMITIVE = TypeFlags.String | TypeFlags.StringLiteral |
 
 function isPrimitiveLike(t) { return Boolean(t.flags & PRIMITIVE); }
 function isNullish(t) { return Boolean(t.flags & NULLISH); }
+function hasFlag(t, flag) { return Boolean(t.flags & flag); }
 
 function docOf(sym) {
   try { return checker.getDocumentationCommentOfSymbol(sym)?.trim() || null; } catch { return null; }
@@ -108,25 +109,51 @@ function unionLabel(member, index) {
     ?? `[${member.getAliasSymbol()?.name ?? member.getSymbol()?.name ?? `member${index}`}]`;
 }
 
-const leaves = []; // {path, type, root, optional, doc}
+const leaves = []; // {path, type, root, optional, nullable, nullableParent, doc}
 const visited = new Set(); // type ids
 
-function leaf(path, type, root, optional, doc) {
-  leaves.push({ path, type, root, optional, doc });
+// Marks of the slot that holds a type:
+//   optional       the property is declared with `?`, or its type union includes `undefined`
+//   nullable       the type union includes `null`
+//   nullableParent an ancestor slot is nullable, so the leaf is absent when that ancestor is null
+function leaf(path, type, root, marks, doc) {
+  leaves.push({
+    path,
+    type,
+    root,
+    optional: marks.optional,
+    nullable: marks.nullable,
+    nullableParent: marks.nullableParent,
+    doc,
+  });
 }
 
-function traverse(type, path, root, optional, doc) {
-  // peel nullish members out of a union; remember optionality
+// Marks for a child slot: the child is absent when the slot holding its parent is null.
+function childMarks(parent, optional) {
+  return { optional, nullable: false, nullableParent: parent.nullableParent || parent.nullable };
+}
+
+// Type text of a leaf emitted from a slot. TS prints a union with its null member, so a union keeps it
+// as printed. A single member of a nullable union (an intersection member) has no null in its own text,
+// so the slot's null is appended to keep the text consistent with the `(nullable)` marker.
+function slotText(type, marks) {
+  return marks.nullable && !isUnionType(type) ? `${tstr(type)} | null` : tstr(type);
+}
+
+function traverse(type, path, root, inherited, doc) {
+  // peel nullish members out of a union; record them as marks on this slot
+  const slotMembers = isUnionType(type) ? (type.getTypes() ?? []) : [type];
+  const nonNull = slotMembers.filter((m) => !isNullish(m));
+  let marks = inherited;
   let rest = type;
-  let opt = optional;
-  if (isUnionType(rest)) {
-    const members = rest.getTypes() ?? [];
-    const nonNull = members.filter((m) => !isNullish(m));
-    if (nonNull.length !== members.length) {
-      opt = true;
-      if (nonNull.length === 0) { leaf(path, tstr(type), root, opt, doc); return; }
-      rest = nonNull.length === 1 ? nonNull[0] : { fakeUnion: nonNull };
-    }
+  if (nonNull.length !== slotMembers.length) {
+    marks = {
+      optional: inherited.optional || slotMembers.some((m) => hasFlag(m, TypeFlags.Undefined)),
+      nullable: inherited.nullable || slotMembers.some((m) => hasFlag(m, TypeFlags.Null)),
+      nullableParent: inherited.nullableParent,
+    };
+    if (nonNull.length === 0) { leaf(path, tstr(type), root, marks, doc); return; }
+    rest = nonNull.length === 1 ? nonNull[0] : { fakeUnion: nonNull };
   }
 
   // mixed unions: expand object members, leave primitives inline
@@ -135,54 +162,57 @@ function traverse(type, path, root, optional, doc) {
     const objects = members.filter((m) => !isPrimitiveLike(m));
     const atoms = members.filter(isPrimitiveLike);
     if (objects.length === 0) {
-      leaf(path, tstr(type), root, opt, doc);
+      leaf(path, tstr(type), root, marks, doc);
       return;
     }
     if (atoms.length > 0) {
-      leaf(`${path}*`, atoms.map(tstr).join(' | '), root, opt, doc);
+      const texts = atoms.map(tstr);
+      if (marks.nullable) texts.push('null');
+      leaf(`${path}*`, texts.join(' | '), root, marks, doc);
     }
     for (const [i, m] of objects.entries()) {
-      traverse(m, `${path}${unionLabel(m, i)}`, root, opt, doc);
+      traverse(m, `${path}${unionLabel(m, i)}`, root, marks, doc);
     }
     return;
   }
 
-  if (!rest.fakeUnion && isPrimitiveLike(rest)) { leaf(path, tstr(type), root, opt, doc); return; }
+  if (!rest.fakeUnion && isPrimitiveLike(rest)) { leaf(path, slotText(type, marks), root, marks, doc); return; }
 
   if (rest.isIntersectionType?.()) {
-    for (const m of rest.getTypes() ?? []) traverse(m, path, root, opt, doc);
+    for (const m of rest.getTypes() ?? []) traverse(m, path, root, marks, doc);
     return;
   }
 
   if (checker.isTupleType(rest)) {
     for (const [i, m] of (checker.getTypeArguments(rest) ?? []).entries()) {
-      traverse(m, `${path}[${i}]`, root, false, null);
+      traverse(m, `${path}[${i}]`, root, childMarks(marks, false), null);
     }
     return;
   }
   if (checker.isArrayType(rest)) {
     const elem = checker.getTypeArguments(rest)?.[0];
-    if (elem) { traverse(elem, `${path}[]`, root, false, null); return; }
-    leaf(path, tstr(type), root, opt, doc);
+    if (elem) { traverse(elem, `${path}[]`, root, childMarks(marks, false), null); return; }
+    leaf(path, slotText(type, marks), root, marks, doc);
     return;
   }
 
   const props = checker.getPropertiesOfType(rest);
   const indexes = checker.getIndexInfosOfType(rest);
   if (props.length === 0 && indexes.length === 0) {
-    leaf(path, tstr(type), root, opt, doc);
+    leaf(path, slotText(type, marks), root, marks, doc);
     return;
   }
-  if (visited.has(rest.id)) { leaf(path, `${tstr(rest)} <recursive>`, root, opt, doc); return; }
+  if (visited.has(rest.id)) { leaf(path, `${slotText(rest, marks)} <recursive>`, root, marks, doc); return; }
   visited.add(rest.id);
   try {
     for (const p of props) {
+      const child = childMarks(marks, Boolean(p.flags & SymbolFlags.Optional));
       const pt = typeOfProp(p);
-      if (!pt) { leaf(`${path}.${p.name}`, '<type unavailable>', root, Boolean(p.flags & SymbolFlags.Optional), docOf(p)); continue; }
-      traverse(pt, `${path}.${p.name}`, root, Boolean(p.flags & SymbolFlags.Optional), docOf(p));
+      if (!pt) { leaf(`${path}.${p.name}`, '<type unavailable>', root, child, docOf(p)); continue; }
+      traverse(pt, `${path}.${p.name}`, root, child, docOf(p));
     }
     for (const info of indexes) {
-      traverse(info.valueType, `${path}[${tstr(info.keyType)}]`, root, false, null);
+      traverse(info.valueType, `${path}[${tstr(info.keyType)}]`, root, childMarks(marks, false), null);
     }
   } finally {
     visited.delete(rest.id);
@@ -198,11 +228,26 @@ for (const prop of checker.getPropertiesOfType(snapshotType)) {
     doc: docOf(prop),
     leaves: 0,
   });
-  traverse(pt, prop.name, prop.name, Boolean(prop.flags & SymbolFlags.Optional), docOf(prop));
+  traverse(
+    pt,
+    prop.name,
+    prop.name,
+    { optional: Boolean(prop.flags & SymbolFlags.Optional), nullable: false, nullableParent: false },
+    docOf(prop),
+  );
 }
 for (const l of leaves) roots.find((r) => r.name === l.root).leaves++;
 
 // ---- output -----------------------------------------------------------------
+function markers(l) {
+  const parts = [
+    l.optional && '(optional)',
+    l.nullable && '(nullable)',
+    l.nullableParent && '(nullable parent)',
+  ].filter(Boolean);
+  return parts.length ? `  ${parts.join(' ')}` : '';
+}
+
 let sha = 'unknown';
 try {
   sha = execFileSync('git', ['-C', pepgentDir, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
@@ -218,8 +263,13 @@ lines.push(`- top-level fields: ${roots.length}`);
 lines.push(`- leaf fields: ${leaves.length}`);
 lines.push('');
 lines.push('Path notation: `.` property, `[]` array element, `[k]` index-signature value,');
-lines.push('`[kind=x]` discriminated-union member, `*` non-object union member, `(optional)`');
-lines.push('property or union member that may be absent/undefined.');
+lines.push('`[kind=x]` discriminated-union member, `*` the primitive members of a union that also');
+lines.push('has object members.');
+lines.push('');
+lines.push('Markers after a leaf type:');
+lines.push('- `(optional)`: the property is declared with `?`, or its type union includes `undefined`.');
+lines.push('- `(nullable)`: the value may be `null` (its type union includes `null`). The type text of a nullable leaf keeps `| null`.');
+lines.push('- `(nullable parent)`: an ancestor\'s type union includes `null`, so this leaf is absent when that ancestor is null. It applies to every descendant of the nullable ancestor, not only its children.');
 lines.push('');
 lines.push('## Coverage — 18 root fields (SNAP:24-58)');
 lines.push('');
@@ -235,9 +285,8 @@ for (const r of roots) {
   lines.push('');
   lines.push('```');
   for (const l of leaves.filter((x) => x.root === r.name)) {
-    const opt = l.optional ? '  (optional)' : '';
     const doc = l.doc ? `  // ${l.doc.replace(/\s+/g, ' ')}` : '';
-    lines.push(`${l.path}: ${l.type}${opt}${doc}`);
+    lines.push(`${l.path}: ${l.type}${markers(l)}${doc}`);
   }
   lines.push('```');
   lines.push('');

@@ -18,5 +18,5 @@ node leaf-types.mjs --pepgent <pepgent> --out-md ../leaf-types.md --out-json ../
 - `source/package.json` + `package-lock.json` — dependency of the script
   (`typescript`, the compiler API; matches the version Pepgent/Pepgent carries).
 
-Observed run (2026-11-10): `Pepgent/Pepgent@f4c3dc1`, 18 top-level fields,
+Observed run (2026-11-10): `Pepgent/Pepgent@93261b6376ecf10285892abd1b4d9d209d712113`, 18 top-level fields,
 12,158 leaf lines; inventory is `leaf-types.md` in this directory.
