@@ -50,4 +50,4 @@
 
 ## 三、迁仓执行承载
 
-- U121 明确 Pepgent 组件仓的 org 为 Pepgent，不是决策项。仓 A `Pepgent/soroi-store`、仓 B `Pepgent/omp-soroi` 已存在、private，按 [D53 / PM#72](https://github.com/Pepgent/PM/issues/72) D53-01 v2 留存。W-06 经 [A2-02 / soroi#345](https://github.com/Pepgent/soroi/issues/345)、W-07 经 [A2-03 / soroi#346](https://github.com/Pepgent/soroi/issues/346) 现在于阶段 B 执行导入，不设合入锁；W-08 的 soroi 切换和四个消费仓切换按 D53-05 v3、06 v2 的真实依赖推进，Main 以 [迁仓总 issue soroi#344](https://github.com/Pepgent/soroi/issues/344) 推进到完成标准。PM 与 design 回写分别由秘书、Argon 按 D53-07 v3 办理，与工程并行，不代表导入已合入或迁仓已完成。
+- U121 明确 Pepgent 组件仓的 org 为 Pepgent，不是决策项。仓 A `Pepgent/soroi-store`、仓 B `Pepgent/omp-soroi` 已存在、private，按 [D53 / PM#72](https://github.com/Pepgent/PM/issues/72) D53-01 v2 留存。W-06 经 [A2-02 / soroi#345](https://github.com/Pepgent/soroi/issues/345)、W-07 经 [A2-03 / soroi#346](https://github.com/Pepgent/soroi/issues/346) 承载导入，不设合入锁；W-08 的 soroi 切换和四个消费仓切换按 D53-05 v3、06 v2 的真实依赖推进，Main 以 [迁仓总 issue soroi#344](https://github.com/Pepgent/soroi/issues/344) 推进到完成标准。PM 与 design 回写分别由秘书、Argon 按 D53-07 v3 办理，与工程并行，不代表导入已合入或迁仓已完成。
