@@ -1,0 +1,52 @@
+[
+  {
+    "argv": [
+      "/usr/local/bin/bun",
+      "install"
+    ],
+    "exitCode": 0,
+    "stdout": "bun install v1.4.4 (38afee6c8)\n\n+ decimal.js@10.6.0\n\n1 package installed [47.00ms]\n",
+    "stderr": "Resolving dependencies\nResolved, downloaded and extracted [4]\nSaved lockfile\n"
+  },
+  {
+    "argv": [
+      "git",
+      "init",
+      "--initial-branch=main"
+    ],
+    "exitCode": 0,
+    "stdout": "Initialized empty Git repository in /tmp/soroi-a0/work/.git/\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "add",
+      "--",
+      ".gitignore",
+      "package.json",
+      "bun.lock",
+      "nodes/install_check_double.ts"
+    ],
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "-c",
+      "user.name=Soroi Install Check",
+      "-c",
+      "user.email=install-check@soroi.test",
+      "-c",
+      "commit.gpgSign=false",
+      "commit",
+      "-m",
+      "Initialize installation probe library"
+    ],
+    "exitCode": 0,
+    "stdout": "[main (root-commit) ca1bc40] Initialize installation probe library\n 4 files changed, 28 insertions(+)\n create mode 100644 .gitignore\n create mode 100644 bun.lock\n create mode 100644 nodes/install_check_double.ts\n create mode 100644 package.json\n",
+    "stderr": ""
+  }
+]

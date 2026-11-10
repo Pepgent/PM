@@ -1,0 +1,10 @@
+{
+  "root": "/home/agent/.omp/soroi/8a980fee221aed0b885e5a30f250449ffe1f0564ca4f7fa8c1678893f8716844/packages/omp-soroi",
+  "argv": [
+    "/home/agent/.local/bin/soroi",
+    "plugin",
+    "list",
+    "--json"
+  ],
+  "stdout": "{\n  \"npm\": [\n    {\n      \"name\": \"omp-soroi\",\n      \"version\": \"0.1.0\",\n      \"path\": \"/home/agent/.omp/plugins/node_modules/omp-soroi\",\n      \"manifest\": {\n        \"extensions\": [\n          \"./src/index.ts\"\n        ],\n        \"version\": \"0.1.0\"\n      },\n      \"enabledFeatures\": null,\n      \"enabled\": true\n    }\n  ],\n  \"marketplace\": []\n}\n"
+}

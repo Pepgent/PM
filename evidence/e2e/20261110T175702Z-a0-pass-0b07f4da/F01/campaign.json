@@ -1,0 +1,24 @@
+{
+  "evidenceDir": "/tmp/pepgent-dispatch/RecA0New/evidence/a0-row1",
+  "network": "pepgent-soroi-e2e",
+  "releaseTar": "/Users/mouriya/Ext/work/orbstack/pepgent-soroi-e2e/releases/42867142749/soroi-0b07f4dac40af7520a708f1b97f8c6628ccf13937737aa56a9757a506c2f9aaf/soroi-0b07f4dac40af7520a708f1b97f8c6628ccf13937737aa56a9757a506c2f9aaf.tar",
+  "build": {
+    "commits": { "soroi": "5468e2f553ccd1d76517dacab8a721f57721fb8f", "omp-soroi": "25f86f53ab73d04eea6b3158367f1929dcdeb51e" },
+    "release": "0b07f4dac40af7520a708f1b97f8c6628ccf13937737aa56a9757a506c2f9aaf",
+    "images": {
+      "IMG-01": "pepgent-registry.orb.local:5000/pepgent/omp-agent@sha256:ee23be181f1d06376796a99ea4369a892fd70978b67ddde69c717441832d69c1",
+      "IMG-05": "pepgent-registry.orb.local:5000/pepgent/central@sha256:59b76baf2ba05baee9cda0ead15cb5678b13f14022d5f0a0f44718f302ffe9a8"
+    },
+    "omp": "18.15.0",
+    "model": "opencode-go/deepseek-v4.1-flash"
+  },
+  "modelsFile": "/Users/mouriya/Ext/work/orbstack/pepgent-gateway/a0/models.yml",
+  "settingsFile": "/Users/mouriya/Ext/work/orbstack/pepgent-gateway/a0/config.yml",
+  "gatewayTokenFile": "/Users/mouriya/Ext/work/orbstack/pepgent-gateway/a0/token",
+  "muxAuthTokenFile": "/Users/mouriya/Ext/work/orbstack/pepgent-mux/token",
+  "env": { "SOROI_STORE_URL": "http://pepgent-soroi-e2e-store.orb.local:3001", "SOROI_MUX_URL": "ws://pepgent-soroi-e2e-mux.orb.local:8080" },
+  "installer": ["bun", "install.ts", "--home", "/home/agent", "--artifact", "/tmp/soroi-a0/soroi.tar"],
+  "ompArgs": ["--model", "opencode-go/deepseek-v4.1-flash", "--no-context-files", "--no-lsp", "--max-time", "180"],
+  "timeoutMs": 240000,
+  "ledgerFile": "/Users/mouriya/Ext/work/orbstack/pepgent-e2e-pty.jsonl"
+}
