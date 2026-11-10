@@ -1,0 +1,9 @@
+{
+  "name": "d9-01-leaf-types",
+  "private": true,
+  "description": "Leaf-type inventory of LabSnapshot (SNAP:24-58), D9-01 input.",
+  "type": "module",
+  "dependencies": {
+    "typescript": "latest"
+  }
+}
