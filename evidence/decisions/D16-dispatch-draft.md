@@ -12,7 +12,7 @@
 | 条款 / 要求 | 核对 |
 | --- | --- |
 | C1-1 | 席位只实现 soroi 定制与独立组件，不改 omp 宿主，不引入 omomp 的 fork、tern、watchdog 等设计 |
-| C1-2 | W-01..W-05 各占一个独立仓；soroi 在新仓 owner 授权前，分 W-06（`packages/store/**`）、W-07（插件、脚本、发行）、W-08（`e2e/**`、compose）三个互斥路径域；W-09、W-10 在两份独立克隆中工作，不碰 Pepgent 根 checkout，也不联系无关会话 |
+| C1-2 | W-01..W-05 各占一个独立仓；仓 A `Pepgent/soroi-store`、仓 B `Pepgent/omp-soroi` 已存在并按 [D53 / PM#72](https://github.com/Pepgent/PM/issues/72) 留存；W-06 经 [A2-02 / soroi#345](https://github.com/Pepgent/soroi/issues/345) 导入 store，W-07 经 [A2-03 / soroi#346](https://github.com/Pepgent/soroi/issues/346) 导入定制与发行，快照后各自唯一写源为目标仓；W-08 按 D53-05 v3 承载 soroi 的 e2e、根文件与 compose 切换；W-09、W-10 在两份独立克隆中工作，不碰 Pepgent 根 checkout，也不联系无关会话 |
 | C1-3 | 开发期各仓只做本仓检查，不设跨组件 live 门禁；代码写完之前不写、不跑测试；hash 比对不作证据。W-08 排在最后一波，等实现代码合入后才编写 E2E spec |
 | C1-4 | 测试只用 OrbStack 隔离环境，不碰生产，不解密 SOPS |
 | C2-1 | 主会话不裁决 BLOCKED 和分类，这两项按 D15-12 交治理分身与双核；契约空白交三族表决 |
@@ -30,7 +30,7 @@
 | C5-2 | 每个波次附本表的波次版 |
 | C5-3 | 第三节所列 9 个冻结目录永久不用；mux 草稿按第三节第 1 条还原 8 行 |
 | C5-4 | 进入第三节的启动程序前，工程冻结继续有效 |
-| R3 | 新仓 owner 仍未授权（只有用户能授权，不阻塞），迁仓前按互斥路径域开发 |
+| 迁仓执行（C1-2、U121） | Pepgent 组件仓的 org 为 Pepgent，不是决策项；两仓按 D53-01 v2 留存，Main 按 D53-02 v3 初始化 main，导入与切换按 D53-03..06 的真实承载推进，不因回写等待 |
 | R8、R9 | 保持 🏗。启动参数输出只证明该席位的命令符合 G-2，不足以证明一仓一进程、异步总线与分支纪律已经执行；要等拥有方提供完整的真实运行证据（各席位的 issue/PR 总线记录、分支与 worktree 纪律），才能分别升级为 ✅（C4-3） |
 | R13–R15 | 由各席位合法重做被回退的切片 |
 | R16、R17 | 阶段 C、D，不在本方案范围 |
@@ -48,6 +48,6 @@
 | P-6 | 冻结对象 | 第三节所列 9 个目录、mux 冻结分支 | 照录 phaseB-review-governance 第三节：9 个目录永久不用；W-04 在新路径 `pepgent-deploy-issue8` 接续；W-01 先还原 mux 草稿的 8 行，新 PR 合入后再删除旧分支 | 得到：D15 保护名单不受损 | 实现 |
 | P-7 | 阶段边界 | W-01..W-10 全部完成后 | 所有切片和 E2E spec 合入 main 后，进入阶段 C 统一组装验收（A0 → S1 F01–F30 → E2E-21 → S2 F08–F31），再进入阶段 D（D9/F32）；验收与测试席位另行派工，不在本方案内 | 得到：开发期与验收期分离（C1-3、G-7） | 串联 |
 
-## 三、未决（只有用户能授权，不阻塞）
+## 三、迁仓执行承载
 
-- 新仓 A（store）、B（omp-soroi）的 owner，候选为 RiriAgent、Mouriya-Emma、moat-lab、mouriya-s-lab、Pepgent。获授权后，W-06、W-07 的迁仓另行决策。
+- U121 明确 Pepgent 组件仓的 org 为 Pepgent，不是决策项。仓 A `Pepgent/soroi-store`、仓 B `Pepgent/omp-soroi` 已存在、private，按 [D53 / PM#72](https://github.com/Pepgent/PM/issues/72) D53-01 v2 留存。W-06 经 [A2-02 / soroi#345](https://github.com/Pepgent/soroi/issues/345)、W-07 经 [A2-03 / soroi#346](https://github.com/Pepgent/soroi/issues/346) 承载导入，不设合入锁；W-08 的 soroi 切换和四个消费仓切换按 D53-05 v3、06 v2 的真实依赖推进，Main 以 [迁仓总 issue soroi#344](https://github.com/Pepgent/soroi/issues/344) 推进到完成标准。PM 与 design 回写分别由秘书、Argon 按 D53-07 v3 办理，与工程并行，不代表导入已合入或迁仓已完成。

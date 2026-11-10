@@ -13,7 +13,7 @@
 | C5 | 已按 C1–C5、R1–R21 逐项核对；不查 session、git 历史、issue 编辑历史或 01a193fd；不改合法遗产、不恢复冻结工程。(D：LEDGER:57–69) |
 | R1 | 不重查历史设计或 session；只取指定当前决策文件。(D：LEDGER:76) |
 | R2 | 盘点 design 回写缺口，不改设计。(D：LEDGER:77) |
-| R3 | 按各独立仓列清单；仓 A/B owner 未授权不补定仓名。(D：LEDGER:78) |
+| R3 | 按各独立仓列清单；U121 明确 Pepgent 组件仓的 org 为 Pepgent，仓 A Pepgent/soroi-store、仓 B Pepgent/omp-soroi 已存在并按 [D53 / PM#72](https://github.com/Pepgent/PM/issues/72) 留存，执行承载见 A2-02/A2-03。(D：LEDGER:78；迁仓执行依据：D53) |
 | R4 | 双核审议由父会话负责，本附件不替代。(D：LEDGER:79) |
 | R5 | 不计票、不建 decision issue。(D：LEDGER:80) |
 | R6 | 本次为父分身委派的附件取证，不包揽秘书执行。(D：LEDGER:81) |
@@ -143,8 +143,8 @@ D10-05 要将上述 live 正文改为“统一 e2e 阶段工作项”并关联�
 | 编号 | 目标仓 | 明确动作与切片范围 | 来源条目与本次行号 | 当前可执行边界 |
 |---|---|---|---|---|
 | A2-01 | Pepgent/remote | **秘书开 issue**，由 remote 工程师随实现对齐 `design/remote.md`：remove 只等待终态、Slurm body/step 的 OCI 引用与目录时 digest 解析、EndedUnstarted 的既定含义；涉及 REM-01、REM-02、REM-05、REM-07。源定位为 remote 设计 :50、97、109、119–123、122、129、141。 | (D：D11B-solo-ruling-review.md:12、14–16，D11-10、D11-43A/B、D11-WB2；影响 :24、26) | 当前 remote OPEN=[]。(R) 本文只列授权要求，不创建、不指定新号。 |
-| A2-02 | 仓 A（候选 soroi-store，owner/最终名待用户选定） | **条件性新仓重建**：仅当 owner 不是 Pepgent、不能原仓转移 issue 时；STO 当前 OPEN 为 [#190](https://github.com/Pepgent/soroi/issues/190) STO-05、[#203](https://github.com/Pepgent/soroi/issues/203) STO-12。owner=Pepgent 路径是转移，不是新建。已关闭项不动。 | (D：D10-repo-delivery.md:16，D10-04⑦⑧；:36)；(R：soroi list) | **BLOCKED-A：目标仓 owner/最终仓名未授权**，不能填写真实目标仓链接或执行建/迁 issue。 |
-| A2-03 | 仓 B（候选 omp-soroi，owner/最终名待用户选定） | 同上条件性重建。当前 OPEN：SOR-07 [#215](https://github.com/Pepgent/soroi/issues/215)、SOR-09 [#196](https://github.com/Pepgent/soroi/issues/196)、SOR-11 [#205](https://github.com/Pepgent/soroi/issues/205)、SOR-12 [#211](https://github.com/Pepgent/soroi/issues/211)、SOR-13 [#209](https://github.com/Pepgent/soroi/issues/209)、SOR-14 [#216](https://github.com/Pepgent/soroi/issues/216)、SOR-15 [#217](https://github.com/Pepgent/soroi/issues/217)、SOR-16 [#207](https://github.com/Pepgent/soroi/issues/207)、SOR-17a [#214](https://github.com/Pepgent/soroi/issues/214)、SOR-17b [#223](https://github.com/Pepgent/soroi/issues/223)、SOR-18 [#222](https://github.com/Pepgent/soroi/issues/222)、SOR-19 [#229](https://github.com/Pepgent/soroi/issues/229)、SOR-20 [#228](https://github.com/Pepgent/soroi/issues/228)、DIST-02 [#224](https://github.com/Pepgent/soroi/issues/224)。CUS 无当前 OPEN。E2E 留 soroi。 | (D：D10:16 D10-04⑦⑧、:36；D8 映射 :40–68)；(R：soroi list) | **BLOCKED-B：同 A，目标仓未授权**；不把候选名当已存在目标仓。 |
+| A2-02 | 仓 A `Pepgent/soroi-store`；执行 issue 建在 `Pepgent/soroi` | **仓 A 迁仓执行：** [A2-02 / soroi#345](https://github.com/Pepgent/soroi/issues/345) 为 [迁仓总 issue soroi#344](https://github.com/Pepgent/soroi/issues/344) 的子 issue，W-06 以导入时 soroi main 的 packages/store 快照向仓 A main 开导入 PR；仓根布局、Dockerfile、镜像、工程规则和 store-contract 派生 workflow 按 D53-03 v1。快照后 store 唯一写源为仓 A；不再按 STO 转移/条件重建办理，已关闭项不动。 | [D53 / PM#72](https://github.com/Pepgent/PM/issues/72) D53-03 v1、07 v3 | 由 W-06 执行，只做仓 A 本仓检查即合入，不设开工锁或每 PR 合入锁；Main 依 D53-02 v3 建 main 作为导入 PR 的 base。 |
+| A2-03 | 仓 B `Pepgent/omp-soroi`；执行 issue 建在 `Pepgent/soroi` | **仓 B 迁仓执行：** [A2-03 / soroi#346](https://github.com/Pepgent/soroi/issues/346) 为 [迁仓总 issue soroi#344](https://github.com/Pepgent/soroi/issues/344) 的子 issue，W-07 导入定制与发行，根文件与 builder 按 D53-04 v2，消费仓 A store-contract；快照后插件与发行唯一写源为仓 B。4 个引用 store 源码的测试由 D53-05 v3 的 [soroi 切换 / #347](https://github.com/Pepgent/soroi/issues/347) 迁入 e2e，DIST-02 与 E2E 留 soroi；不再条件重建已关闭 SOR/CUS issue。 | [D53 / PM#72](https://github.com/Pepgent/PM/issues/72) D53-04 v2、05 v3、07 v3 | 由 W-07 执行，只做仓 B 本仓检查即合入，不设合入锁；导出接线 PR 依赖 A2-03 的导入，由 W-07 经 [soroi 切换 / #347](https://github.com/Pepgent/soroi/issues/347) 的“[仓 B 测试接线导出 / #348](https://github.com/Pepgent/soroi/issues/348)”子 issue，在仓 B 另开只改 exports 的 PR。 |
 | A2-04 | Pepgent/PM | D10-07 明确“新 PM decision issue D11”；范围是 LR 51 行分流与契约逐条审议，**不是实现切片或新的父子树**。D11-A/B/C 文件已分别指向 [PM#17](https://github.com/Pepgent/PM/issues/17)、[PM#21](https://github.com/Pepgent/PM/issues/21)、[PM#22](https://github.com/Pepgent/PM/issues/22)。 | (D：D10:19 D10-07；D11A:3、D11B:3、D11C:3) | 记录源中的明确新建要求，已有链接不是本次重建授权；本次未另查 PM issue 当前状态。 |
 | A2-05 | Pepgent/soroi | **由 D16-04 新增（不是盘点所得）**：秘书新建一个 issue，承载 D14-02 的安装器改动，正文引用已关闭的 DIST-01 [#199](https://github.com/Pepgent/soroi/issues/199) 与 D14-02。范围：`scripts/install.ts --artifact` 写出 `release.json`；`compose/central-entrypoint.sh` 传入 `--artifact`；插件开发说明随实现一并修改。owner 为 W-07，须先于 SOR-07（#215）合入。 | (D：D14-release-identity.md:29–30、34–37；D16-04) | D16 通过后才可执行。 |
 | A2-06 | Pepgent/soroi | **由 D16-04 新增**：秘书新建 issue，承载 PR260（soroi#260）中 `scripts/build-release.py` 的改动，按 D10-02 仓 B 新布局重写；正文引用 #260 与 D10-04④。owner 为 W-07。 | (D：D10-repo-delivery.md:16 D10-04④；D16-04) | D16 通过后执行 |
@@ -154,7 +154,7 @@ D10-05 要将上述 live 正文改为“统一 e2e 阶段工作项”并关联�
 | A2-10 | Pepgent/soroi | **由 D16-05 新增：** 秘书新建一个 issue，由 W-06 在同一个 PR 中完成，作为该席位的第一个切片。内容如下：<br>• 在 `packages/store/src/contract.ts` 中实现并导出 `RunComparisonSchema`、`ValueUsageSchema`、`ActivitySchema`；<br>• 在根 `package.json` 新增 `exports`：`./contract`、`./identity`；<br>• 补 `zod` 依赖；<br>• 重新生成 `bun.lock`。 | (D：D12-lab-wire.md:33；D10-10；D16-05①) | D16 通过后执行 |
 | A2-12 | Pepgent/Pepgent | **由 D16-03、D16-05 新增：** 秘书新建一个 issue，在 A2-10 合入后进行。内容如下：<br>• 落地 D12 的 `apps/web/src/protocol/lab/**`；<br>• 在依赖文件中以 git 依赖引用 `Pepgent/soroi` 默认分支的 store 契约。<br>owner 为 W-09，作为该席位的第一个切片；合入后 W-10 才能启动。 | (D：D12-01、D12:33；D16-03④；D16-05②) | D16 通过后执行 |
 
-**重开：0 条明确要求；挂父子边：0 条明确要求。** D10:30 的 child 6/8 为既有工作引用；D11/12/13/14 的影响表只列消费者与实现动作，未写“重开”或“挂父子边”。尤其 D14:36 指向已不在 soroi OPEN 列表中的 DIST-01/#199，仍不能据“安装器加参数”自行决定重开它。D10-05:17 的③要求把移出的义务写入对应 E2E/A0/S1/S2 正文，未明确要求新建 issue，故不添造新号。(D；R)
+**迁仓执行的父子边按 D53 办理：** A2-02、A2-03 均挂在 soroi#344 下，soroi 切换及其“[仓 B 测试接线导出 / #348](https://github.com/Pepgent/soroi/issues/348)”子项按 D53-05 v3。其余 D10–D14 的原始盘点不自动授权重开或新建；尤其 D14:36 指向已关闭的 DIST-01/#199，不能据“安装器加参数”自行重开。D10-05 移出的验收义务仍写入对应 E2E/A0/S1/S2 正文，不添造新号。
 
 ## 表 A3：正文回写目标及当前含有情况
 
@@ -220,10 +220,10 @@ D10-05 要将上述 live 正文改为“统一 e2e 阶段工作项”并关联�
 
 D13 当前正文没有明确要求秘书回写 PM D2–D8 或 soroi `design/*.md`；本附件没有自行把 D13 的实现动作转换为新的文档回写目标。D14-02/03 只指定安装器/调用入口/开发说明及切换实现；A3 对 PM/设计的明确目标来自 D14-01，不把所有消费者再增设为新文档动作。(D：D13:44–58；D14:28–42)
 
-## BLOCKED 清单
+## 迁仓执行与回写定位边界
 
-1. **BLOCKED-A（A2-02）：** 仓 A owner 与最终仓名尚待用户授权。来源明确给的是候选名及条件重建路径，不能从本次七仓 issue 状态推断授权。(D：D10:13、16、36；LEDGER R3)
-2. **BLOCKED-B（A2-03）：** 仓 B 同上。不能生成真实目标仓链接或把候选仓当既存仓。(D：同上)
+1. **A2-02：** [A2-02 / soroi#345](https://github.com/Pepgent/soroi/issues/345) 由 W-06 按 [D53 / PM#72](https://github.com/Pepgent/PM/issues/72) D53-03 v1 执行，目标仓为 Pepgent/soroi-store。
+2. **A2-03：** [A2-03 / soroi#346](https://github.com/Pepgent/soroi/issues/346) 由 W-07 按 D53-04 v2 执行，目标仓为 Pepgent/omp-soroi；[soroi 切换 / #347](https://github.com/Pepgent/soroi/issues/347)按 D53-05 v3 依赖对应导入与[仓 B 测试接线导出 / #348](https://github.com/Pepgent/soroi/issues/348)。U121 已明确 org 归属，两仓按 D53-01 v2 留存，不再等待用户选择或条件重建。
 3. **BLOCKED-C（A3-38）：** D11-WB2 的 `design/store.md`“提醒记录”目标缺精确落点，当前全文无该段。源条目与目标文件均已取得；缺的是领导层确定的回写位置，不是联网/凭据故障。不自行新增章节。(D：D11B:16；当前 design/store.md 全文)
 
 **读取失败/不可取得的 issue 正文：0。** 七仓 list 与点名 #182 view 均返回结果；未访问禁触 checkout、git 历史、issue 编辑历史、session，未执行实现、测试、hash 验证、issue 写入、评论、提交或 push。唯一写入是本附件。(R：上述命令返回；本次操作范围)
@@ -231,6 +231,6 @@ D13 当前正文没有明确要求秘书回写 PM D2–D8 或 soroi `design/*.md
 ## 条数
 
 - **A1：46 个当前 OPEN D8 映射 issue**：soroi 24、Pepgent 20、deploy 1、images 1、lab-library/remote/omp-rpc-mux 各 0。其中 45 个有开工锁/其 STARTED 执行要求，1 个（soroi#182）就这两类门禁无需改写；images#3 另有开发期 live 子 issue 指向。表内逐字开工锁/STARTED 引文共 174 行，不把功能验收或本仓检查算删除项。另附 **4 个点名 live issue 状态**，#182 与 A1 重叠，不重复计数。(R；D：D8 映射)
-- **A2：4 条明确 issue 操作要求**：remote 新建 1、owner 非 Pepgent 时条件性重建 2、D10-07 的 PM D11 决策新建要求 1。明确重开 0、挂父子边 0；不表示现在应再次新建已有 D11。(D)
+- **A2：4 条所列 issue 操作要求**：remote 新建 1、A2-02/A2-03 迁仓执行 2、D10-07 的 PM D11 决策新建要求 1。A2-02/A2-03 的真实父子边按 D53 挂入总 issue；其余原始盘点不表示现在应重开、新建已有 D11 或扩大挂接范围。
 - **A3：43 条限定目标回写/一致性核对项**，按“目标文档/定位/来源”归组，非去重文件数；范围外明确动作另附 5 行，不计入 A3。不是 43 个新 issue。(D)
-- **BLOCKED：3 项**（两项目标仓授权、一项回写定位）；数据读取失败 0。
+- **迁仓执行边界：** A2-02/A2-03 按 D53 执行，不再保留两项目标仓授权阻塞；其余历史取证范围与定位记录不因本次迁仓回写重做。历史盘点的数据读取失败为 0，不代表本次迁仓或回写已经完成。

@@ -12,7 +12,7 @@
 | 条款 / 要求 | 核对 |
 | --- | --- |
 | C1-1 | 席位只实现 soroi 定制与独立组件，不改 omp 宿主，不引入 omomp 的 fork、tern、watchdog 等设计 |
-| C1-2 | W-01..W-05 各占一个独立仓；soroi 在新仓 owner 授权前，分 W-06（`packages/store/**`）、W-07（插件、脚本、发行）、W-08（`e2e/**`、compose）三个互斥路径域；W-09、W-10 在两份独立克隆中工作，不碰 Pepgent 根 checkout，也不联系无关会话 |
+| C1-2 | W-01..W-05 各占一个独立仓；仓 A `Pepgent/soroi-store`、仓 B `Pepgent/omp-soroi` 已存在并按 [D53 / PM#72](https://github.com/Pepgent/PM/issues/72) 留存；W-06 经 [A2-02 / soroi#345](https://github.com/Pepgent/soroi/issues/345) 导入 store，W-07 经 [A2-03 / soroi#346](https://github.com/Pepgent/soroi/issues/346) 导入定制与发行，快照后各自唯一写源为目标仓；W-08 按 D53-05 v3 承载 soroi 的 e2e、根文件与 compose 切换；W-09、W-10 在两份独立克隆中工作，不碰 Pepgent 根 checkout，也不联系无关会话 |
 | C1-3 | 开发期各仓只做本仓编译、类型与基础检查，不设跨组件 live 门禁；代码写完之前不写、不跑测试；hash 比对不作证据。W-08 按 D16-10 逐 spec 读法编写，所测代码全部合入后按自身依赖就绪与空闲名额滚动启动，不固定排在最后 |
 | C1-4 | 测试只用 OrbStack 隔离环境，不碰生产，不解密 SOPS |
 | C2-1 | 主会话不单裁 BLOCKED 和分类；Main 每项用 task 新开空白治理承接者，会同 Argon、ArgonGovernance 依 D15-12 与现行正交双闸门初审；需表决的契约空白经 council 按独立职能席位逐条表决 |
@@ -30,7 +30,7 @@
 | C5-2 | 领导层每步实质核对 AGENTS.md C1–C5、LEDGER 用户原话与原任务/决策；发车记录归档供 ArgonGovernance 事后检查，不用 IRC 抄送双核，不要求每波签署或工程师 PR 贴长表 |
 | C5-3 | 第三节所列 9 个冻结目录永久不用；mux 草稿按第三节第 1 条还原 8 行 |
 | C5-4 | D16 通过即为最终派工授权，当回合发车；回写并行，不作为前置，不另设双核预审或签署门禁 |
-| 迁仓授权（C1-2、C2-4） | 新仓 owner 只有用户能授权，不阻塞迁仓前按互斥路径域开发 |
+| 迁仓执行（C1-2、U121） | Pepgent 组件仓的 org 为 Pepgent，不是决策项；两仓按 D53-01 v2 留存，Main 按 D53-02 v3 初始化 main，导入与切换按 D53-03..06 的真实承载推进，不因回写等待 |
 | 持续约束（C4-3.3） | 命令参数仅证明该次启动输入，不认证一仓一进程、总线与分支纪律永久合规；窗口观察及违例由独立巡检写入 PM evidence/argon/ 与 Issues，不写 LEDGER、不永久绿勾 |
 | 回退重做（C5-3） | 各席按 D15/D16 合法重做被回退切片，不破坏合法遗产 |
 | 统一验收（C1-5） | 阶段 C 全流程及阶段 D/F32 义务在原 issue 与 Project 中承接，不因派工完成而升级 |
@@ -48,6 +48,6 @@
 | P-6 | 冻结对象 | 第三节所列 9 个目录、mux 冻结分支 | 照录 phaseB-review-governance 第三节：9 个目录永久不用；W-04 在新路径 `pepgent-deploy-issue8` 接续；W-01 先还原 mux 草稿的 8 行，新 PR 合入后再删除旧分支 | 得到：D15 保护名单不受损 | 实现 |
 | P-7 | 阶段边界 | W-01..W-10 全部完成后 | 所有切片和 E2E spec 合入 main 后，进入阶段 C 统一组装验收（A0 → S1 F01–F30 → E2E-21 → S2 F08–F31），再进入阶段 D（D9/F32）；验收与测试席位另行派工，不在本方案内 | 得到：开发期与验收期分离（C1-3、G-7） | 串联 |
 
-## 三、未决（只有用户能授权，不阻塞）
+## 三、迁仓执行承载
 
-- 新仓 A（store）、B（omp-soroi）的 owner，候选为 RiriAgent、Mouriya-Emma、moat-lab、mouriya-s-lab、Pepgent。获授权后，W-06、W-07 的迁仓另行决策。
+- U121 明确 Pepgent 组件仓的 org 为 Pepgent，不是决策项。仓 A `Pepgent/soroi-store`、仓 B `Pepgent/omp-soroi` 已存在、private，按 [D53 / PM#72](https://github.com/Pepgent/PM/issues/72) D53-01 v2 留存。W-06 经 [A2-02 / soroi#345](https://github.com/Pepgent/soroi/issues/345)、W-07 经 [A2-03 / soroi#346](https://github.com/Pepgent/soroi/issues/346) 承载导入，不设合入锁；W-08 的 soroi 切换和四个消费仓切换按 D53-05 v3、06 v2 的真实依赖推进，Main 以 [迁仓总 issue soroi#344](https://github.com/Pepgent/soroi/issues/344) 推进到完成标准。PM 与 design 回写分别由秘书、Argon 按 D53-07 v3 办理，与工程并行，不代表导入已合入或迁仓已完成。
