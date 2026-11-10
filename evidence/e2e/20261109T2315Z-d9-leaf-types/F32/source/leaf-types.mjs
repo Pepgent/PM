@@ -14,9 +14,12 @@
  *
  * Requires `typescript` resolvable from this directory (`npm install` beside
  * this file); the same dependency Pepgent/Pepgent already carries.
+ * Requires `npm ci` at the Pepgent checkout root first: the contract files import
+ * `pepgent-store/contract` and `zod` from its node_modules. If a module does not resolve,
+ * or a leaf type is `any`, the script exits 1 listing the problems and writes no output.
  */
 import { createRequire } from 'node:module';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { execFileSync } from 'node:child_process';
@@ -50,6 +53,46 @@ if (!project) {
   process.exit(2);
 }
 const checker = project.checker;
+
+// ---- completeness guard (before traversal) ----------------------------------
+// The contract files import `pepgent-store/contract` and `zod`, which resolve only from the Pepgent
+// checkout's own node_modules (after `npm ci` there). An unresolved import types as `any` silently,
+// so the program must be complete before anything is traversed.
+// TypeScript names files with the spelling it was given for the snapshot and realpaths for what it
+// resolves (`/tmp` is `/private/tmp` on macOS), so each root is accepted in both spellings.
+const MODULE_RESOLUTION_CODES = new Set([2307, 2792, 2834, 2835, 2836, 7016]);
+const generatorModules = join(dirname(fileURLToPath(import.meta.url)), 'node_modules');
+const LOCAL_ROOTS = [...new Set([pepgentDir, realpathSync(pepgentDir), generatorModules, realpathSync(generatorModules)])]
+  .map((root) => `${root}/`);
+
+function abort(lines) {
+  api.close();
+  console.error(lines.join('\n'));
+  process.exit(1);
+}
+function location(fileName, pos) {
+  const before = readFileSync(fileName, 'utf8').slice(0, pos);
+  return `${fileName}:${before.split('\n').length}:${pos - before.lastIndexOf('\n')}`;
+}
+
+{
+  const { program } = project;
+  const moduleDiagnostics = [...program.getProgramDiagnostics(), ...program.getSemanticDiagnostics()]
+    .filter((d) => MODULE_RESOLUTION_CODES.has(d.code));
+  const outside = program.getSourceFileNames().filter((f) => !LOCAL_ROOTS.some((root) => f.startsWith(root)));
+  const problems = [
+    ...moduleDiagnostics.map((d) => (d.fileName
+      ? `${location(d.fileName, d.pos)} TS${d.code} ${d.text}`
+      : `(program) TS${d.code} ${d.text}`)),
+    ...outside.map((f) => `program file outside the Pepgent checkout and generator node_modules: ${f}`),
+  ];
+  if (problems.length > 0) {
+    abort([
+      'incomplete environment: run `npm ci` in the Pepgent checkout first. Problems:',
+      ...problems,
+    ]);
+  }
+}
 
 const sourceText = readFileSync(snapshotFile, 'utf8');
 const marker = 'interface LabSnapshot';
@@ -237,6 +280,17 @@ for (const prop of checker.getPropertiesOfType(snapshotType)) {
   );
 }
 for (const l of leaves) roots.find((r) => r.name === l.root).leaves++;
+
+// ---- completeness guard (after traversal, before any output) ------------------
+// `any` is what an unresolved type prints as, so a leaf typed `any` means the inventory is incomplete.
+// A quoted `"any"` is a string-literal member and is not matched.
+const untyped = leaves.filter((l) => /(?<!["\w])any(?!["\w])/.test(l.type));
+if (untyped.length > 0) {
+  abort([
+    `${untyped.length} leaf type(s) are \`any\`; their types did not resolve:`,
+    ...untyped.map((l) => `${l.path}: ${l.type}`),
+  ]);
+}
 
 // ---- output -----------------------------------------------------------------
 function markers(l) {
