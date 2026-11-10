@@ -39,7 +39,7 @@ LEDGER 基准为 soroi `8bfd70c`。逐步核对记录在 `local://decisions/D16-
 
 ## 不在本表的事项
 
-- **两仓与迁仓承载：** U121 明确 Pepgent 组件仓的 org 为 Pepgent，不是决策项。`Pepgent/soroi-store`、`Pepgent/omp-soroi` 已存在、private，按 [D53 / PM#72](https://github.com/Pepgent/PM/issues/72) D53-01 v2 留存；A2-02/A2-03 分别为 [A2-02 / soroi#345](https://github.com/Pepgent/soroi/issues/345)、[A2-03 / soroi#346](https://github.com/Pepgent/soroi/issues/346)，其余切换依 D53-05 v3、06 v2，由 Main 以 [迁仓总 issue soroi#344](https://github.com/Pepgent/soroi/issues/344) 推进。不再保留等待用户授权或条件重建分支。
+- **两仓与迁仓承载：** U121 明确 Pepgent 组件仓的 org 为 Pepgent，不是决策项。`Pepgent/soroi-store`、`Pepgent/omp-soroi` 已存在、private，按 [D53 / PM#72](https://github.com/Pepgent/PM/issues/72) D53-01 v2 留存；A2-02/A2-03 分别为 [A2-02 / soroi#345](https://github.com/Pepgent/soroi/issues/345)、[A2-03 / soroi#346](https://github.com/Pepgent/soroi/issues/346)，其余切换依 D53-05 v3、06 v2，由 Main 以 [迁仓总 issue soroi#344](https://github.com/Pepgent/soroi/issues/344) 推进。
 - **各席位的具体启动命令与 `peer_send` 全文：** 按 D16-12 写入发车记录并归档，由 ArgonGovernance 事后检查，不用 IRC 抄送双核，不等待回复。
 
 ## 对讨论者意见的处理
