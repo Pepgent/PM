@@ -1,6 +1,6 @@
 {
-  "generated": "2026-11-09T23:49:57.597Z",
-  "source": "Pepgent/Pepgent@93261b6376ecf10285892abd1b4d9d209d712113 apps/web/src/client/contracts/lab-snapshot.ts",
+  "generated": "2026-11-10T00:08:43.227Z",
+  "source": "Pepgent/Pepgent@fe2212c7a830714762f4d7fbc48ea0897f81b8b4 apps/web/src/client/contracts/lab-snapshot.ts",
   "typescript": "7.0.2",
   "roots": [
     {
@@ -17575,7 +17575,7 @@
     },
     {
       "path": "experimentFlows[string][mode=\"running\"].commits[].seq",
-      "type": "any",
+      "type": "number",
       "root": "experimentFlows",
       "optional": false,
       "nullable": false,
@@ -17665,7 +17665,7 @@
     },
     {
       "path": "experimentFlows[string][mode=\"running\"].slots[].writerSession",
-      "type": "any",
+      "type": "string",
       "root": "experimentFlows",
       "optional": false,
       "nullable": false,
@@ -26476,7 +26476,7 @@
     },
     {
       "path": "experimentFlows[string][mode=\"ended\"].commits[].seq",
-      "type": "any",
+      "type": "number",
       "root": "experimentFlows",
       "optional": false,
       "nullable": false,
@@ -38805,7 +38805,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind=\"waiting\"].conversation.id.__@$brand@478.ConversationId",
+      "path": "automation.runs[][kind=\"waiting\"].conversation.id.__@$brand@531.ConversationId",
       "type": "true",
       "root": "automation",
       "optional": false,
@@ -38823,7 +38823,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind=\"waiting\"].conversation.rule.__@$brand@478.AutomationRuleId",
+      "path": "automation.runs[][kind=\"waiting\"].conversation.rule.__@$brand@531.AutomationRuleId",
       "type": "true",
       "root": "automation",
       "optional": false,
@@ -38841,7 +38841,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind=\"waiting\"].conversation.automationRun.__@$brand@478.AutomationRunId",
+      "path": "automation.runs[][kind=\"waiting\"].conversation.automationRun.__@$brand@531.AutomationRunId",
       "type": "true",
       "root": "automation",
       "optional": false,
@@ -38877,7 +38877,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind=\"waiting\"].conversation.agent.__@$brand@478.AgentId",
+      "path": "automation.runs[][kind=\"waiting\"].conversation.agent.__@$brand@531.AgentId",
       "type": "true",
       "root": "automation",
       "optional": false,
@@ -38887,10 +38887,10 @@
     },
     {
       "path": "automation.runs[][kind=\"waiting\"].conversation.session",
-      "type": "any",
+      "type": "string | null",
       "root": "automation",
       "optional": false,
-      "nullable": false,
+      "nullable": true,
       "nullableParent": true,
       "doc": null
     },
@@ -38924,6 +38924,15 @@
     {
       "path": "automation.runs[][kind=\"waiting\"].conversation.canHandBack",
       "type": "boolean",
+      "root": "automation",
+      "optional": false,
+      "nullable": false,
+      "nullableParent": true,
+      "doc": null
+    },
+    {
+      "path": "automation.runs[][kind=\"waiting\"].conversation.slots[].writerSession",
+      "type": "string",
       "root": "automation",
       "optional": false,
       "nullable": false,
@@ -38985,7 +38994,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind=\"waiting\"].conversation.slots[].state[kind=\"running\"].agentId.__@$brand@478.AgentId",
+      "path": "automation.runs[][kind=\"waiting\"].conversation.slots[].state[kind=\"running\"].agentId.__@$brand@531.AgentId",
       "type": "true",
       "root": "automation",
       "optional": false,
@@ -39012,7 +39021,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind=\"waiting\"].conversation.slots[].state[kind=\"running\"].inputs[]",
+      "path": "automation.runs[][kind=\"waiting\"].conversation.slots[].state[kind=\"running\"].version",
       "type": "string",
       "root": "automation",
       "optional": false,
@@ -39021,8 +39030,8 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind=\"waiting\"].conversation.slots[].state[kind=\"running\"][string]",
-      "type": "any",
+      "path": "automation.runs[][kind=\"waiting\"].conversation.slots[].state[kind=\"running\"].inputs[]",
+      "type": "string",
       "root": "automation",
       "optional": false,
       "nullable": false,
@@ -39102,17 +39111,8 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind=\"waiting\"].conversation.slots[].state[kind=\"awaiting_human\"][string]",
-      "type": "any",
-      "root": "automation",
-      "optional": false,
-      "nullable": false,
-      "nullableParent": true,
-      "doc": null
-    },
-    {
-      "path": "automation.runs[][kind=\"waiting\"].conversation.slots[][string]",
-      "type": "any",
+      "path": "automation.runs[][kind=\"waiting\"].conversation.slots[].state[kind=\"awaiting_human\"].version",
+      "type": "string",
       "root": "automation",
       "optional": false,
       "nullable": false,
@@ -39300,7 +39300,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.id.__@$brand@478.ConversationId",
+      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.id.__@$brand@531.ConversationId",
       "type": "true",
       "root": "automation",
       "optional": false,
@@ -39318,7 +39318,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.rule.__@$brand@478.AutomationRuleId",
+      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.rule.__@$brand@531.AutomationRuleId",
       "type": "true",
       "root": "automation",
       "optional": false,
@@ -39336,7 +39336,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.automationRun.__@$brand@478.AutomationRunId",
+      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.automationRun.__@$brand@531.AutomationRunId",
       "type": "true",
       "root": "automation",
       "optional": false,
@@ -39372,7 +39372,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.agent.__@$brand@478.AgentId",
+      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.agent.__@$brand@531.AgentId",
       "type": "true",
       "root": "automation",
       "optional": false,
@@ -39382,10 +39382,10 @@
     },
     {
       "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.session",
-      "type": "any",
+      "type": "string | null",
       "root": "automation",
       "optional": false,
-      "nullable": false,
+      "nullable": true,
       "nullableParent": true,
       "doc": null
     },
@@ -39419,6 +39419,15 @@
     {
       "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.canHandBack",
       "type": "boolean",
+      "root": "automation",
+      "optional": false,
+      "nullable": false,
+      "nullableParent": true,
+      "doc": null
+    },
+    {
+      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.slots[].writerSession",
+      "type": "string",
       "root": "automation",
       "optional": false,
       "nullable": false,
@@ -39480,7 +39489,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.slots[].state[kind=\"running\"].agentId.__@$brand@478.AgentId",
+      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.slots[].state[kind=\"running\"].agentId.__@$brand@531.AgentId",
       "type": "true",
       "root": "automation",
       "optional": false,
@@ -39507,7 +39516,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.slots[].state[kind=\"running\"].inputs[]",
+      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.slots[].state[kind=\"running\"].version",
       "type": "string",
       "root": "automation",
       "optional": false,
@@ -39516,8 +39525,8 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.slots[].state[kind=\"running\"][string]",
-      "type": "any",
+      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.slots[].state[kind=\"running\"].inputs[]",
+      "type": "string",
       "root": "automation",
       "optional": false,
       "nullable": false,
@@ -39597,17 +39606,8 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.slots[].state[kind=\"awaiting_human\"][string]",
-      "type": "any",
-      "root": "automation",
-      "optional": false,
-      "nullable": false,
-      "nullableParent": true,
-      "doc": null
-    },
-    {
-      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.slots[][string]",
-      "type": "any",
+      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.slots[].state[kind=\"awaiting_human\"].version",
+      "type": "string",
       "root": "automation",
       "optional": false,
       "nullable": false,
@@ -54114,7 +54114,7 @@
       "doc": "Present when the attachment resolves to an authoritative conclusion."
     },
     {
-      "path": "discussions.discussions[].messages[][kind=\"ai\"].attachments[][kind=\"conclusion\"].draft.conclusionId.__@$brand@478.ConclusionId",
+      "path": "discussions.discussions[].messages[][kind=\"ai\"].attachments[][kind=\"conclusion\"].draft.conclusionId.__@$brand@531.ConclusionId",
       "type": "true",
       "root": "discussions",
       "optional": false,

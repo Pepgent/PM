@@ -1,8 +1,8 @@
 # D9-01 leaf-type inventory — `LabSnapshot` (SNAP:24-58)
 
-- generated: 2026-11-09T23:49:57.590Z
+- generated: 2026-11-10T00:08:43.220Z
 - tool: `evidence/e2e/20261109T2315Z-d9-leaf-types/F32/source/leaf-types.mjs` (typescript 7.0.2, `typescript/unstable/sync`)
-- source: `Pepgent/Pepgent@93261b6376ecf10285892abd1b4d9d209d712113` `apps/web/src/client/contracts/lab-snapshot.ts`
+- source: `Pepgent/Pepgent@fe2212c7a830714762f4d7fbc48ea0897f81b8b4` `apps/web/src/client/contracts/lab-snapshot.ts`
 - top-level fields: 18
 - leaf fields: 12158
 
@@ -2035,7 +2035,7 @@ experimentFlows[string][mode="running"].workspace.files[].path: string  (nullabl
 experimentFlows[string][mode="running"].workspace.files[].size: number  (nullable parent)
 experimentFlows[string][mode="running"].workspace.files[].content: string  (nullable parent)
 experimentFlows[string][mode="running"].mode: "running"
-experimentFlows[string][mode="running"].commits[].seq: any
+experimentFlows[string][mode="running"].commits[].seq: number
 experimentFlows[string][mode="running"].commits[].minute: number
 experimentFlows[string][mode="running"].axisSpan.lastStartMinute: number
 experimentFlows[string][mode="running"].axisSpan.endMinute: number
@@ -2045,7 +2045,7 @@ experimentFlows[string][mode="running"].now.hour: number
 experimentFlows[string][mode="running"].now.minute: number
 experimentFlows[string][mode="running"].remainingMinutes: number | null  (nullable)  // Unknown: calls not yet committed cannot be known (D12, G47).
 experimentFlows[string][mode="running"].slots[].instanceId: string
-experimentFlows[string][mode="running"].slots[].writerSession: any
+experimentFlows[string][mode="running"].slots[].writerSession: string
 experimentFlows[string][mode="running"].slots[].slot: string
 experimentFlows[string][mode="running"].slots[].fn: string
 experimentFlows[string][mode="running"].slots[].state[kind="awaiting_human"].kind: "awaiting_human"
@@ -3024,7 +3024,7 @@ experimentFlows[string][mode="ended"].workspace.files[].path: string  (nullable 
 experimentFlows[string][mode="ended"].workspace.files[].size: number  (nullable parent)
 experimentFlows[string][mode="ended"].workspace.files[].content: string  (nullable parent)
 experimentFlows[string][mode="ended"].mode: "ended"
-experimentFlows[string][mode="ended"].commits[].seq: any
+experimentFlows[string][mode="ended"].commits[].seq: number
 experimentFlows[string][mode="ended"].commits[].minute: number
 experimentFlows[string][mode="ended"].axisSpan.lastStartMinute: number
 experimentFlows[string][mode="ended"].axisSpan.endMinute: number
@@ -4415,31 +4415,32 @@ automation.runs[][kind="waiting"].duration*: string | null  (nullable)
 automation.runs[][kind="waiting"].duration[LabText].en: string  (nullable parent)
 automation.runs[][kind="waiting"].duration[LabText].zh-CN: string  (nullable parent)
 automation.runs[][kind="waiting"].conversation.id: string  (nullable parent)
-automation.runs[][kind="waiting"].conversation.id.__@$brand@478.ConversationId: true  (nullable parent)
+automation.runs[][kind="waiting"].conversation.id.__@$brand@531.ConversationId: true  (nullable parent)
 automation.runs[][kind="waiting"].conversation.rule: string  (nullable parent)
-automation.runs[][kind="waiting"].conversation.rule.__@$brand@478.AutomationRuleId: true  (nullable parent)
+automation.runs[][kind="waiting"].conversation.rule.__@$brand@531.AutomationRuleId: true  (nullable parent)
 automation.runs[][kind="waiting"].conversation.automationRun: string  (nullable parent)
-automation.runs[][kind="waiting"].conversation.automationRun.__@$brand@478.AutomationRunId: true  (nullable parent)
+automation.runs[][kind="waiting"].conversation.automationRun.__@$brand@531.AutomationRunId: true  (nullable parent)
 automation.runs[][kind="waiting"].conversation.owner: string  (nullable parent)
 automation.runs[][kind="waiting"].conversation.ownerName: string | null  (nullable) (nullable parent)
 automation.runs[][kind="waiting"].conversation.agent: string | null  (nullable) (nullable parent)
-automation.runs[][kind="waiting"].conversation.agent.__@$brand@478.AgentId: true  (nullable parent)
-automation.runs[][kind="waiting"].conversation.session: any  (nullable parent)
+automation.runs[][kind="waiting"].conversation.agent.__@$brand@531.AgentId: true  (nullable parent)
+automation.runs[][kind="waiting"].conversation.session: string | null  (nullable) (nullable parent)
 automation.runs[][kind="waiting"].conversation.createdAt*: string  (nullable parent)
 automation.runs[][kind="waiting"].conversation.createdAt[LabText].en: string  (nullable parent)
 automation.runs[][kind="waiting"].conversation.createdAt[LabText].zh-CN: string  (nullable parent)
 automation.runs[][kind="waiting"].conversation.canHandBack: boolean  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].writerSession: string  (nullable parent)
 automation.runs[][kind="waiting"].conversation.slots[].slot: string  (nullable parent)
 automation.runs[][kind="waiting"].conversation.slots[].fn: string  (nullable parent)
 automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].kind: "running"  (nullable parent)
 automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].body: "Agent" | "Program"  (nullable parent)
 automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].env: string  (nullable parent)
 automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].agentId: string  (optional) (nullable parent)
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].agentId.__@$brand@478.AgentId: true  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].agentId.__@$brand@531.AgentId: true  (nullable parent)
 automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].remoteRun: string | undefined  (optional) (nullable parent)
 automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].startedAt: string  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].version: string  (nullable parent)
 automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].inputs[]: string  (nullable parent)
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"][string]: any  (nullable parent)
 automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].kind: "awaiting_human"  (nullable parent)
 automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].request: string  (nullable parent)
 automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].inputs[]: string  (nullable parent)
@@ -4448,8 +4449,7 @@ automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_huma
 automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].shape[kind="record"].kind: "record"  (nullable parent)
 automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].shape[kind="record"].fields[string]: "boolean" | "file" | "number" | "string"  (nullable parent)
 automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].startedAt: string  (nullable parent)
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"][string]: any  (nullable parent)
-automation.runs[][kind="waiting"].conversation.slots[][string]: any  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="awaiting_human"].version: string  (nullable parent)
 automation.runs[][kind="waiting"].conversation.experiments[]: string  (nullable parent)
 automation.runs[][kind="waiting"].kind: "waiting"
 automation.runs[][kind="waiting"].prompt*: string
@@ -4470,31 +4470,32 @@ automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].duration*: string | 
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].duration[LabText].en: string  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].duration[LabText].zh-CN: string  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.id: string  (nullable parent)
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.id.__@$brand@478.ConversationId: true  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.id.__@$brand@531.ConversationId: true  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.rule: string  (nullable parent)
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.rule.__@$brand@478.AutomationRuleId: true  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.rule.__@$brand@531.AutomationRuleId: true  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.automationRun: string  (nullable parent)
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.automationRun.__@$brand@478.AutomationRunId: true  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.automationRun.__@$brand@531.AutomationRunId: true  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.owner: string  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.ownerName: string | null  (nullable) (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.agent: string | null  (nullable) (nullable parent)
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.agent.__@$brand@478.AgentId: true  (nullable parent)
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.session: any  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.agent.__@$brand@531.AgentId: true  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.session: string | null  (nullable) (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.createdAt*: string  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.createdAt[LabText].en: string  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.createdAt[LabText].zh-CN: string  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.canHandBack: boolean  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].writerSession: string  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].slot: string  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].fn: string  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].kind: "running"  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].body: "Agent" | "Program"  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].env: string  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].agentId: string  (optional) (nullable parent)
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].agentId.__@$brand@478.AgentId: true  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].agentId.__@$brand@531.AgentId: true  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].remoteRun: string | undefined  (optional) (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].startedAt: string  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].version: string  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].inputs[]: string  (nullable parent)
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"][string]: any  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].kind: "awaiting_human"  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].request: string  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].inputs[]: string  (nullable parent)
@@ -4503,8 +4504,7 @@ automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[]
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].shape[kind="record"].kind: "record"  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].shape[kind="record"].fields[string]: "boolean" | "file" | "number" | "string"  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].startedAt: string  (nullable parent)
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"][string]: any  (nullable parent)
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[][string]: any  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="awaiting_human"].version: string  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.experiments[]: string  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].kind: "failed" | "ok" | "running" | "skipped"
 ```
@@ -6130,7 +6130,7 @@ discussions.discussions[].messages[][kind="ai"].attachments[][kind="plan"].plan.
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="plan"].plan.steps[].node: string
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].kind: "conclusion"
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].draft.conclusionId: string  (optional)  // Present when the attachment resolves to an authoritative conclusion.
-discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].draft.conclusionId.__@$brand@478.ConclusionId: true
+discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].draft.conclusionId.__@$brand@531.ConclusionId: true
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].draft.text*: string
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].draft.text[LabText].en: string
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].draft.text[LabText].zh-CN: string
