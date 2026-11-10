@@ -1,0 +1,165 @@
+{
+  "flow": "F12",
+  "segment": "S1",
+  "env": "L",
+  "startedAt": "2026-11-10T19:23:28.856Z",
+  "endedAt": "2026-11-10T19:23:43.641Z",
+  "build": {
+    "commits": {
+      "soroi": "fbf5c3511632b659b5b907e36f62d57b63d35bc5",
+      "omp-soroi": "e676acbc5b37739f806d89f27a8005e6963e9f10"
+    },
+    "release": "d34c02cc3fb0c0df0f67ca7003373b677103e9f80e5e18081399a1f9d820aea8",
+    "images": {
+      "IMG-01": "pepgent-registry.orb.local:5000/pepgent/omp-agent@sha256:ee23be181f1d06376796a99ea4369a892fd70978b67ddde69c717441832d69c1",
+      "IMG-05": "pepgent-registry.orb.local:5000/pepgent/central@sha256:d344c3afae4c2673461173eaca210fa21c18011231db6afb8d473046ad024c31"
+    },
+    "omp": "18.18.6",
+    "model": "opencode-go/deepseek-v4.1-flash"
+  },
+  "runs": [
+    "01M73EMVJ7QZ252F32ZVM8GT55"
+  ],
+  "agents": [
+    "f12-rec220b-20261110T191750Z-0-0"
+  ],
+  "remoteRuns": [],
+  "assertions": [
+    {
+      "id": "formal-file-workload",
+      "claim": "The public soroi_eval entry formally commits the File root and all five consumers",
+      "source": {
+        "kind": "rpc",
+        "agent": "f12-rec220b-20261110T191750Z-0-0",
+        "frame": "42"
+      },
+      "expected": "\"formal\"",
+      "observed": "\"formal\"",
+      "pass": true
+    },
+    {
+      "id": "one-step",
+      "claim": "All five consumers belong to the one exact scripted committed step",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EMVJ7QZ252F32ZVM8GT55/stream?after=0"
+      },
+      "expected": "[\"const film = file(\\\"soroi-f12-32fddbd8bca84a63b5eb3897779161a0.bin\\\")\\nconst f12_description = \\\"薄膜中文检索样本32fddbd8bca84a63b5eb3897779161a0\\\"\\nconst f12_c = 2\\nconst f12_gamma = 0.5\\nconst f12_trees = 100\\nconst f12_length_scale = 2\\nconst f12_neighbors = 4\\nconst f12_learning_rate = 0.1\\nconst f12_epochs = 10\\nconst f12_svm = run_svm(film, f12_c, f12_gamma)\\nconst f12_rf = run_rf(film, f12_trees)\\nconst f12_gp = run_gp(film, f12_length_scale)\\nconst f12_knn = run_knn(film, f12_neighbors)\\nconst f12_lr = run_lr(film, f12_learning_rate, f12_epochs)\"]",
+      "observed": "[\"const film = file(\\\"soroi-f12-32fddbd8bca84a63b5eb3897779161a0.bin\\\")\\nconst f12_description = \\\"薄膜中文检索样本32fddbd8bca84a63b5eb3897779161a0\\\"\\nconst f12_c = 2\\nconst f12_gamma = 0.5\\nconst f12_trees = 100\\nconst f12_length_scale = 2\\nconst f12_neighbors = 4\\nconst f12_learning_rate = 0.1\\nconst f12_epochs = 10\\nconst f12_svm = run_svm(film, f12_c, f12_gamma)\\nconst f12_rf = run_rf(film, f12_trees)\\nconst f12_gp = run_gp(film, f12_length_scale)\\nconst f12_knn = run_knn(film, f12_neighbors)\\nconst f12_lr = run_lr(film, f12_learning_rate, f12_epochs)\"]",
+      "pass": true
+    },
+    {
+      "id": "five-file-consumers",
+      "claim": "The graph has exactly the five real File-input nodes in the same committed step",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EMVJ7QZ252F32ZVM8GT55/graph"
+      },
+      "expected": "[{\"fn\":\"run_svm\",\"step\":2,\"position\":0},{\"fn\":\"run_rf\",\"step\":2,\"position\":1},{\"fn\":\"run_gp\",\"step\":2,\"position\":2},{\"fn\":\"run_knn\",\"step\":2,\"position\":3},{\"fn\":\"run_lr\",\"step\":2,\"position\":4}]",
+      "observed": "[{\"fn\":\"run_svm\",\"step\":2,\"position\":0},{\"fn\":\"run_rf\",\"step\":2,\"position\":1},{\"fn\":\"run_gp\",\"step\":2,\"position\":2},{\"fn\":\"run_knn\",\"step\":2,\"position\":3},{\"fn\":\"run_lr\",\"step\":2,\"position\":4}]",
+      "pass": true
+    },
+    {
+      "id": "five-film-edges",
+      "claim": "Exactly five graph edges leave film, one to input 0 of each consumer in this step",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EMVJ7QZ252F32ZVM8GT55/graph"
+      },
+      "expected": "[{\"step\":2,\"position\":0,\"input\":0},{\"step\":2,\"position\":1,\"input\":0},{\"step\":2,\"position\":2,\"input\":0},{\"step\":2,\"position\":3,\"input\":0},{\"step\":2,\"position\":4,\"input\":0}]",
+      "observed": "[{\"step\":2,\"position\":0,\"input\":0},{\"step\":2,\"position\":1,\"input\":0},{\"step\":2,\"position\":2,\"input\":0},{\"step\":2,\"position\":3,\"input\":0},{\"step\":2,\"position\":4,\"input\":0}]",
+      "pass": true
+    },
+    {
+      "id": "film-file-root",
+      "claim": "film is a File Root with the relative input basename and the node-File media rule",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EMVJ7QZ252F32ZVM8GT55/graph"
+      },
+      "expected": "[{\"kind\":\"file\",\"name\":\"soroi-f12-32fddbd8bca84a63b5eb3897779161a0.bin\",\"media\":\"application/octet-stream\"}]",
+      "observed": "[{\"kind\":\"file\",\"name\":\"soroi-f12-32fddbd8bca84a63b5eb3897779161a0.bin\",\"media\":\"application/octet-stream\"}]",
+      "pass": true
+    },
+    {
+      "id": "file-readable",
+      "claim": "The formally published File root object is publicly readable",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/objects/e98a9c59ed84151cee448adfb4add5d1f034a4cff5017bd7da24a890baaddc68"
+      },
+      "expected": "200",
+      "observed": "200",
+      "pass": true
+    },
+    {
+      "id": "file-bytes",
+      "claim": "The File DSL publishes the actual bytes of the campaign input relative to launch.cwd",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/objects/e98a9c59ed84151cee448adfb4add5d1f034a4cff5017bd7da24a890baaddc68"
+      },
+      "expected": "[70,49,50,32,102,105,108,109,32,105,110,112,117,116,32,51,50,102,100,100,98,100,56,98,99,97,56,52,97,54,51,98,53,101,98,51,56,57,55,55,55,57,49,54,49,97,48,10]",
+      "observed": "[70,49,50,32,102,105,108,109,32,105,110,112,117,116,32,51,50,102,100,100,98,100,56,98,99,97,56,52,97,54,51,98,53,101,98,51,56,57,55,55,55,57,49,54,49,97,48,10]",
+      "pass": true
+    },
+    {
+      "id": "file-run-usage",
+      "claim": "Reverse lookup by the graph's File content locator lists this run and its film binding",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/values/e98a9c59ed84151cee448adfb4add5d1f034a4cff5017bd7da24a890baaddc68/runs"
+      },
+      "expected": "[{\"run\":\"01M73EMVJ7QZ252F32ZVM8GT55\",\"names\":[\"film\"]}]",
+      "observed": "[{\"run\":\"01M73EMVJ7QZ252F32ZVM8GT55\",\"names\":[\"film\"]}]",
+      "pass": true
+    },
+    {
+      "id": "chinese-root",
+      "claim": "The search workload contains the exact Chinese scalar string as a root atom, not File metadata",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EMVJ7QZ252F32ZVM8GT55/graph"
+      },
+      "expected": "[{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"string\",\"v\":\"薄膜中文检索样本32fddbd8bca84a63b5eb3897779161a0\"}}]",
+      "observed": "[{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"string\",\"v\":\"薄膜中文检索样本32fddbd8bca84a63b5eb3897779161a0\"}}]",
+      "pass": true
+    },
+    {
+      "id": "chinese-value-search",
+      "claim": "A Chinese substring search hits this run's complete Chinese root value",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/search?q=%E4%B8%AD%E6%96%87%E6%A3%80%E7%B4%A2"
+      },
+      "expected": "[{\"kind\":\"value\",\"text\":\"薄膜中文检索样本32fddbd8bca84a63b5eb3897779161a0\"}]",
+      "observed": "[{\"kind\":\"value\",\"text\":\"薄膜中文检索样本32fddbd8bca84a63b5eb3897779161a0\"}]",
+      "pass": true
+    },
+    {
+      "id": "chinese-code-search",
+      "claim": "The same Chinese substring search hits this run's complete committed step code",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/search?q=%E4%B8%AD%E6%96%87%E6%A3%80%E7%B4%A2"
+      },
+      "expected": "[{\"kind\":\"code\",\"text\":\"const film = file(\\\"soroi-f12-32fddbd8bca84a63b5eb3897779161a0.bin\\\")\\nconst f12_description = \\\"薄膜中文检索样本32fddbd8bca84a63b5eb3897779161a0\\\"\\nconst f12_c = 2\\nconst f12_gamma = 0.5\\nconst f12_trees = 100\\nconst f12_length_scale = 2\\nconst f12_neighbors = 4\\nconst f12_learning_rate = 0.1\\nconst f12_epochs = 10\\nconst f12_svm = run_svm(film, f12_c, f12_gamma)\\nconst f12_rf = run_rf(film, f12_trees)\\nconst f12_gp = run_gp(film, f12_length_scale)\\nconst f12_knn = run_knn(film, f12_neighbors)\\nconst f12_lr = run_lr(film, f12_learning_rate, f12_epochs)\"}]",
+      "observed": "[{\"kind\":\"code\",\"text\":\"const film = file(\\\"soroi-f12-32fddbd8bca84a63b5eb3897779161a0.bin\\\")\\nconst f12_description = \\\"薄膜中文检索样本32fddbd8bca84a63b5eb3897779161a0\\\"\\nconst f12_c = 2\\nconst f12_gamma = 0.5\\nconst f12_trees = 100\\nconst f12_length_scale = 2\\nconst f12_neighbors = 4\\nconst f12_learning_rate = 0.1\\nconst f12_epochs = 10\\nconst f12_svm = run_svm(film, f12_c, f12_gamma)\\nconst f12_rf = run_rf(film, f12_trees)\\nconst f12_gp = run_gp(film, f12_length_scale)\\nconst f12_knn = run_knn(film, f12_neighbors)\\nconst f12_lr = run_lr(film, f12_learning_rate, f12_epochs)\"}]",
+      "pass": true
+    }
+  ],
+  "deviations": [],
+  "result": {
+    "kind": "pass"
+  }
+}

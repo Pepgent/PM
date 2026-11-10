@@ -1,0 +1,399 @@
+{
+  "flow": "F09",
+  "segment": "S1",
+  "env": "L",
+  "startedAt": "2026-11-10T19:21:03.288Z",
+  "endedAt": "2026-11-10T19:21:49.725Z",
+  "build": {
+    "commits": {
+      "soroi": "fbf5c3511632b659b5b907e36f62d57b63d35bc5",
+      "omp-soroi": "e676acbc5b37739f806d89f27a8005e6963e9f10"
+    },
+    "release": "d34c02cc3fb0c0df0f67ca7003373b677103e9f80e5e18081399a1f9d820aea8",
+    "images": {
+      "IMG-01": "pepgent-registry.orb.local:5000/pepgent/omp-agent@sha256:ee23be181f1d06376796a99ea4369a892fd70978b67ddde69c717441832d69c1",
+      "IMG-05": "pepgent-registry.orb.local:5000/pepgent/central@sha256:d344c3afae4c2673461173eaca210fa21c18011231db6afb8d473046ad024c31"
+    },
+    "omp": "18.18.6",
+    "model": "opencode-go/deepseek-v4.1-flash"
+  },
+  "runs": [
+    "01M73EGDYD0J0MXPVF0J6G25CK",
+    "01M73EGNZPH6PGDKXH1D24E7ND",
+    "01M73EGX4Z62PYKRNBZMTHYT9T"
+  ],
+  "agents": [
+    "f09-rec220b-20261110T191750Z-0-0-writer",
+    "f09-rec220b-20261110T191750Z-0-0-reader"
+  ],
+  "remoteRuns": [],
+  "assertions": [
+    {
+      "id": "history-1-formal",
+      "claim": "The writer creates and completes a real anneal run",
+      "source": {
+        "kind": "rpc",
+        "agent": "f09-rec220b-20261110T191750Z-0-0-writer",
+        "frame": "177"
+      },
+      "expected": "\"formal\"",
+      "observed": "\"formal\"",
+      "pass": true
+    },
+    {
+      "id": "history-1-new-ended",
+      "claim": "Each historical run is newly opened and ended by consuming its outputs",
+      "source": {
+        "kind": "rpc",
+        "agent": "f09-rec220b-20261110T191750Z-0-0-writer",
+        "frame": "177"
+      },
+      "expected": "[true,true]",
+      "observed": "[true,true]",
+      "pass": true
+    },
+    {
+      "id": "history-1-owner",
+      "claim": "The historical graph belongs to the original root and is Ended",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EGDYD0J0MXPVF0J6G25CK/graph"
+      },
+      "expected": "[\"01M73EGDYD0J0MXPVF0J6G25CK\",\"01a1c6e8-1ec1-76c9-8f28-70c7fc5b6e80\",\"Ended\",[]]",
+      "observed": "[\"01M73EGDYD0J0MXPVF0J6G25CK\",\"01a1c6e8-1ec1-76c9-8f28-70c7fc5b6e80\",\"Ended\",[]]",
+      "pass": true
+    },
+    {
+      "id": "history-1-roots",
+      "claim": "The real workload has the supplied film and temperature roots",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EGDYD0J0MXPVF0J6G25CK/graph"
+      },
+      "expected": "[{\"kind\":\"Root\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_film\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"string\",\"v\":\"film_0d2c3fe211a2441281dabbdf73f74d92_0\"}}},{\"kind\":\"Root\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_temperature\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":2200}}}]",
+      "observed": "[{\"kind\":\"Root\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_film\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"string\",\"v\":\"film_0d2c3fe211a2441281dabbdf73f74d92_0\"}}},{\"kind\":\"Root\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_temperature\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":2200}}}]",
+      "pass": true
+    },
+    {
+      "id": "history-1-program",
+      "claim": "The persisted call is the actual central anneal Program with both named outputs",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EGDYD0J0MXPVF0J6G25CK/graph"
+      },
+      "expected": "[{\"fn\":\"anneal\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"outputs\":[{\"field\":\"curve\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_curve\"},{\"field\":\"log\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_log\"}]}]",
+      "observed": "[{\"fn\":\"anneal\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"outputs\":[{\"field\":\"curve\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_curve\"},{\"field\":\"log\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_log\"}]}]",
+      "pass": true
+    },
+    {
+      "id": "history-1-curve",
+      "claim": "anneal returns the business value temperature / 100 + film.length",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EGDYD0J0MXPVF0J6G25CK/graph"
+      },
+      "expected": "{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":61}}",
+      "observed": "{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":61}}",
+      "pass": true
+    },
+    {
+      "id": "history-1-log",
+      "claim": "The committed File is readable with the exact anneal business bytes",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/objects/dd401db482ef3f49aa06fd5713997cb6d74407190f6d7a34d18a969d5455b458"
+      },
+      "expected": "[102,105,108,109,61,102,105,108,109,95,48,100,50,99,51,102,101,50,49,49,97,50,52,52,49,50,56,49,100,97,98,98,100,102,55,51,102,55,52,100,57,50,95,48,10,116,101,109,112,101,114,97,116,117,114,101,61,50,50,48,48,10,99,117,114,118,101,61,54,49,10]",
+      "observed": "[102,105,108,109,61,102,105,108,109,95,48,100,50,99,51,102,101,50,49,49,97,50,52,52,49,50,56,49,100,97,98,98,100,102,55,51,102,55,52,100,57,50,95,48,10,116,101,109,112,101,114,97,116,117,114,101,61,50,50,48,48,10,99,117,114,118,101,61,54,49,10]",
+      "pass": true
+    },
+    {
+      "id": "history-2-formal",
+      "claim": "The writer creates and completes a real anneal run",
+      "source": {
+        "kind": "rpc",
+        "agent": "f09-rec220b-20261110T191750Z-0-0-writer",
+        "frame": "334"
+      },
+      "expected": "\"formal\"",
+      "observed": "\"formal\"",
+      "pass": true
+    },
+    {
+      "id": "history-2-new-ended",
+      "claim": "Each historical run is newly opened and ended by consuming its outputs",
+      "source": {
+        "kind": "rpc",
+        "agent": "f09-rec220b-20261110T191750Z-0-0-writer",
+        "frame": "334"
+      },
+      "expected": "[true,true]",
+      "observed": "[true,true]",
+      "pass": true
+    },
+    {
+      "id": "history-2-owner",
+      "claim": "The historical graph belongs to the original root and is Ended",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EGNZPH6PGDKXH1D24E7ND/graph"
+      },
+      "expected": "[\"01M73EGNZPH6PGDKXH1D24E7ND\",\"01a1c6e8-1ec1-76c9-8f28-70c7fc5b6e80\",\"Ended\",[]]",
+      "observed": "[\"01M73EGNZPH6PGDKXH1D24E7ND\",\"01a1c6e8-1ec1-76c9-8f28-70c7fc5b6e80\",\"Ended\",[]]",
+      "pass": true
+    },
+    {
+      "id": "history-2-roots",
+      "claim": "The real workload has the supplied film and temperature roots",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EGNZPH6PGDKXH1D24E7ND/graph"
+      },
+      "expected": "[{\"kind\":\"Root\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_film\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"string\",\"v\":\"film_0d2c3fe211a2441281dabbdf73f74d92_1\"}}},{\"kind\":\"Root\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_temperature\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":2300}}}]",
+      "observed": "[{\"kind\":\"Root\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_film\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"string\",\"v\":\"film_0d2c3fe211a2441281dabbdf73f74d92_1\"}}},{\"kind\":\"Root\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_temperature\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":2300}}}]",
+      "pass": true
+    },
+    {
+      "id": "history-2-program",
+      "claim": "The persisted call is the actual central anneal Program with both named outputs",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EGNZPH6PGDKXH1D24E7ND/graph"
+      },
+      "expected": "[{\"fn\":\"anneal\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"outputs\":[{\"field\":\"curve\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_curve\"},{\"field\":\"log\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_log\"}]}]",
+      "observed": "[{\"fn\":\"anneal\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"outputs\":[{\"field\":\"curve\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_curve\"},{\"field\":\"log\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_log\"}]}]",
+      "pass": true
+    },
+    {
+      "id": "history-2-curve",
+      "claim": "anneal returns the business value temperature / 100 + film.length",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EGNZPH6PGDKXH1D24E7ND/graph"
+      },
+      "expected": "{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":62}}",
+      "observed": "{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":62}}",
+      "pass": true
+    },
+    {
+      "id": "history-2-log",
+      "claim": "The committed File is readable with the exact anneal business bytes",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/objects/fd61b61923e3878b746d3d1d8710f22db4873d35111f5c06f1728749d4f2e0b8"
+      },
+      "expected": "[102,105,108,109,61,102,105,108,109,95,48,100,50,99,51,102,101,50,49,49,97,50,52,52,49,50,56,49,100,97,98,98,100,102,55,51,102,55,52,100,57,50,95,49,10,116,101,109,112,101,114,97,116,117,114,101,61,50,51,48,48,10,99,117,114,118,101,61,54,50,10]",
+      "observed": "[102,105,108,109,61,102,105,108,109,95,48,100,50,99,51,102,101,50,49,49,97,50,52,52,49,50,56,49,100,97,98,98,100,102,55,51,102,55,52,100,57,50,95,49,10,116,101,109,112,101,114,97,116,117,114,101,61,50,51,48,48,10,99,117,114,118,101,61,54,50,10]",
+      "pass": true
+    },
+    {
+      "id": "two-historical-runs",
+      "claim": "Two distinct committed runs exist before the writer root is closed",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs"
+      },
+      "expected": "[2,2]",
+      "observed": "[2,2]",
+      "pass": true
+    },
+    {
+      "id": "writer-normal-close",
+      "claim": "LabStandIn.close completed normal generation and writer shutdown with zero exit",
+      "source": {
+        "kind": "rpc",
+        "agent": "f09-rec220b-20261110T191750Z-0-0-writer",
+        "frame": "383"
+      },
+      "expected": "0",
+      "observed": "0",
+      "pass": true
+    },
+    {
+      "id": "replacement-model",
+      "claim": "The replacement root uses the same selected model",
+      "source": {
+        "kind": "rpc",
+        "agent": "f09-rec220b-20261110T191750Z-0-0-reader",
+        "frame": "394"
+      },
+      "expected": "\"opencode-go/deepseek-v4.1-flash\"",
+      "observed": "\"opencode-go/deepseek-v4.1-flash\"",
+      "pass": true
+    },
+    {
+      "id": "new-root-session",
+      "claim": "The replacement root has a new authoritative sessionId",
+      "source": {
+        "kind": "transcript",
+        "file": "f09-rec220b-20261110T191750Z-0-0-reader-session.json",
+        "lines": [
+          1,
+          6
+        ]
+      },
+      "expected": "false",
+      "observed": "false",
+      "pass": true
+    },
+    {
+      "id": "historical-runs-listed",
+      "claim": "After root replacement /runs lists both historical runs under their original holder",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs"
+      },
+      "expected": "[{\"run\":\"01M73EGDYD0J0MXPVF0J6G25CK\",\"holder\":\"01a1c6e8-1ec1-76c9-8f28-70c7fc5b6e80\",\"state\":\"Ended\"},{\"run\":\"01M73EGNZPH6PGDKXH1D24E7ND\",\"holder\":\"01a1c6e8-1ec1-76c9-8f28-70c7fc5b6e80\",\"state\":\"Ended\"}]",
+      "observed": "[{\"run\":\"01M73EGDYD0J0MXPVF0J6G25CK\",\"holder\":\"01a1c6e8-1ec1-76c9-8f28-70c7fc5b6e80\",\"state\":\"Ended\"},{\"run\":\"01M73EGNZPH6PGDKXH1D24E7ND\",\"holder\":\"01a1c6e8-1ec1-76c9-8f28-70c7fc5b6e80\",\"state\":\"Ended\"}]",
+      "pass": true
+    },
+    {
+      "id": "reopened-history-1-graph",
+      "claim": "The old graph's complete structural and business facts survive writer exit",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EGDYD0J0MXPVF0J6G25CK/graph"
+      },
+      "expected": "{\"run\":\"01M73EGDYD0J0MXPVF0J6G25CK\",\"holder\":\"01a1c6e8-1ec1-76c9-8f28-70c7fc5b6e80\",\"derivedFrom\":null,\"state\":\"Ended\",\"at\":7,\"nodes\":[{\"kind\":\"Root\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_film\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"string\",\"v\":\"film_0d2c3fe211a2441281dabbdf73f74d92_0\"}}},{\"kind\":\"Root\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_temperature\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":2200}}},{\"kind\":\"Call\",\"step\":2,\"position\":0,\"fn\":\"anneal\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:21:09.824Z\",\"endedAt\":\"2026-11-10T19:21:09.836Z\",\"outputs\":[{\"field\":\"curve\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_curve\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":61}}},{\"field\":\"log\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_log\",\"value\":{\"kind\":\"file\",\"media\":\"text/plain;charset=utf-8\",\"name\":\"anneal-b4a067c3-a0ca-4245-aa36-5344034334fb.txt\"}}]}],\"unconsumed\":[],\"edges\":[{\"from\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_film\",\"to\":{\"step\":2,\"position\":0,\"input\":0}},{\"from\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_temperature\",\"to\":{\"step\":2,\"position\":0,\"input\":1}}]}",
+      "observed": "{\"run\":\"01M73EGDYD0J0MXPVF0J6G25CK\",\"holder\":\"01a1c6e8-1ec1-76c9-8f28-70c7fc5b6e80\",\"derivedFrom\":null,\"state\":\"Ended\",\"at\":7,\"nodes\":[{\"kind\":\"Root\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_film\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"string\",\"v\":\"film_0d2c3fe211a2441281dabbdf73f74d92_0\"}}},{\"kind\":\"Root\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_temperature\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":2200}}},{\"kind\":\"Call\",\"step\":2,\"position\":0,\"fn\":\"anneal\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:21:09.824Z\",\"endedAt\":\"2026-11-10T19:21:09.836Z\",\"outputs\":[{\"field\":\"curve\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_curve\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":61}}},{\"field\":\"log\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_log\",\"value\":{\"kind\":\"file\",\"media\":\"text/plain;charset=utf-8\",\"name\":\"anneal-b4a067c3-a0ca-4245-aa36-5344034334fb.txt\"}}]}],\"unconsumed\":[],\"edges\":[{\"from\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_film\",\"to\":{\"step\":2,\"position\":0,\"input\":0}},{\"from\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_temperature\",\"to\":{\"step\":2,\"position\":0,\"input\":1}}]}",
+      "pass": true
+    },
+    {
+      "id": "reopened-history-1-object",
+      "claim": "The historical File bytes remain readable after writer exit",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/objects/dd401db482ef3f49aa06fd5713997cb6d74407190f6d7a34d18a969d5455b458"
+      },
+      "expected": "[102,105,108,109,61,102,105,108,109,95,48,100,50,99,51,102,101,50,49,49,97,50,52,52,49,50,56,49,100,97,98,98,100,102,55,51,102,55,52,100,57,50,95,48,10,116,101,109,112,101,114,97,116,117,114,101,61,50,50,48,48,10,99,117,114,118,101,61,54,49,10]",
+      "observed": "[102,105,108,109,61,102,105,108,109,95,48,100,50,99,51,102,101,50,49,49,97,50,52,52,49,50,56,49,100,97,98,98,100,102,55,51,102,55,52,100,57,50,95,48,10,116,101,109,112,101,114,97,116,117,114,101,61,50,50,48,48,10,99,117,114,118,101,61,54,49,10]",
+      "pass": true
+    },
+    {
+      "id": "reopened-history-2-graph",
+      "claim": "The old graph's complete structural and business facts survive writer exit",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EGNZPH6PGDKXH1D24E7ND/graph"
+      },
+      "expected": "{\"run\":\"01M73EGNZPH6PGDKXH1D24E7ND\",\"holder\":\"01a1c6e8-1ec1-76c9-8f28-70c7fc5b6e80\",\"derivedFrom\":null,\"state\":\"Ended\",\"at\":7,\"nodes\":[{\"kind\":\"Root\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_film\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"string\",\"v\":\"film_0d2c3fe211a2441281dabbdf73f74d92_1\"}}},{\"kind\":\"Root\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_temperature\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":2300}}},{\"kind\":\"Call\",\"step\":2,\"position\":0,\"fn\":\"anneal\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:21:18.056Z\",\"endedAt\":\"2026-11-10T19:21:18.069Z\",\"outputs\":[{\"field\":\"curve\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_curve\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":62}}},{\"field\":\"log\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_log\",\"value\":{\"kind\":\"file\",\"media\":\"text/plain;charset=utf-8\",\"name\":\"anneal-61f46a24-9807-494a-9c98-ca4ef803f0b1.txt\"}}]}],\"unconsumed\":[],\"edges\":[{\"from\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_film\",\"to\":{\"step\":2,\"position\":0,\"input\":0}},{\"from\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_temperature\",\"to\":{\"step\":2,\"position\":0,\"input\":1}}]}",
+      "observed": "{\"run\":\"01M73EGNZPH6PGDKXH1D24E7ND\",\"holder\":\"01a1c6e8-1ec1-76c9-8f28-70c7fc5b6e80\",\"derivedFrom\":null,\"state\":\"Ended\",\"at\":7,\"nodes\":[{\"kind\":\"Root\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_film\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"string\",\"v\":\"film_0d2c3fe211a2441281dabbdf73f74d92_1\"}}},{\"kind\":\"Root\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_temperature\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":2300}}},{\"kind\":\"Call\",\"step\":2,\"position\":0,\"fn\":\"anneal\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:21:18.056Z\",\"endedAt\":\"2026-11-10T19:21:18.069Z\",\"outputs\":[{\"field\":\"curve\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_curve\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":62}}},{\"field\":\"log\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_log\",\"value\":{\"kind\":\"file\",\"media\":\"text/plain;charset=utf-8\",\"name\":\"anneal-61f46a24-9807-494a-9c98-ca4ef803f0b1.txt\"}}]}],\"unconsumed\":[],\"edges\":[{\"from\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_film\",\"to\":{\"step\":2,\"position\":0,\"input\":0}},{\"from\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_temperature\",\"to\":{\"step\":2,\"position\":0,\"input\":1}}]}",
+      "pass": true
+    },
+    {
+      "id": "reopened-history-2-object",
+      "claim": "The historical File bytes remain readable after writer exit",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/objects/fd61b61923e3878b746d3d1d8710f22db4873d35111f5c06f1728749d4f2e0b8"
+      },
+      "expected": "[102,105,108,109,61,102,105,108,109,95,48,100,50,99,51,102,101,50,49,49,97,50,52,52,49,50,56,49,100,97,98,98,100,102,55,51,102,55,52,100,57,50,95,49,10,116,101,109,112,101,114,97,116,117,114,101,61,50,51,48,48,10,99,117,114,118,101,61,54,50,10]",
+      "observed": "[102,105,108,109,61,102,105,108,109,95,48,100,50,99,51,102,101,50,49,49,97,50,52,52,49,50,56,49,100,97,98,98,100,102,55,51,102,55,52,100,57,50,95,49,10,116,101,109,112,101,114,97,116,117,114,101,61,50,51,48,48,10,99,117,114,118,101,61,54,50,10]",
+      "pass": true
+    },
+    {
+      "id": "new-run-formal",
+      "claim": "The replacement root starts a real new run before testing isolation",
+      "source": {
+        "kind": "rpc",
+        "agent": "f09-rec220b-20261110T191750Z-0-0-reader",
+        "frame": "475"
+      },
+      "expected": "\"formal\"",
+      "observed": "\"formal\"",
+      "pass": true
+    },
+    {
+      "id": "new-run-identity",
+      "claim": "The isolation probe runs in a newly opened run, not either historical run",
+      "source": {
+        "kind": "rpc",
+        "agent": "f09-rec220b-20261110T191750Z-0-0-reader",
+        "frame": "475"
+      },
+      "expected": "[true,false,false]",
+      "observed": "[true,false,false]",
+      "pass": true
+    },
+    {
+      "id": "new-run-holder",
+      "claim": "The new run is owned by the replacement root session",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EGX4Z62PYKRNBZMTHYT9T/graph"
+      },
+      "expected": "\"01a1c6e8-64b7-71bf-91c0-1b3d586f5999\"",
+      "observed": "\"01a1c6e8-64b7-71bf-91c0-1b3d586f5999\"",
+      "pass": true
+    },
+    {
+      "id": "old-atom-1-unknown",
+      "claim": "An old run's atom name is not resolvable in the new run",
+      "source": {
+        "kind": "rpc",
+        "agent": "f09-rec220b-20261110T191750Z-0-0-reader",
+        "frame": "711"
+      },
+      "expected": "{\"kind\":\"check_error\",\"errors\":[{\"kind\":\"unknown_atom\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_curve\"}]}",
+      "observed": "{\"kind\":\"check_error\",\"errors\":[{\"kind\":\"unknown_atom\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_0_curve\"}]}",
+      "pass": true
+    },
+    {
+      "id": "old-atom-1-no-commit",
+      "claim": "The rejected cross-run reference does not modify the new run",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EGX4Z62PYKRNBZMTHYT9T/graph"
+      },
+      "expected": "{\"run\":\"01M73EGX4Z62PYKRNBZMTHYT9T\",\"holder\":\"01a1c6e8-64b7-71bf-91c0-1b3d586f5999\",\"derivedFrom\":null,\"state\":\"Open\",\"at\":2,\"nodes\":[{\"kind\":\"Root\",\"name\":\"f09_fresh_9122adfe0a884b84bbcdae321fa87518\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":21}}}],\"unconsumed\":[\"f09_fresh_9122adfe0a884b84bbcdae321fa87518\"],\"edges\":[]}",
+      "observed": "{\"run\":\"01M73EGX4Z62PYKRNBZMTHYT9T\",\"holder\":\"01a1c6e8-64b7-71bf-91c0-1b3d586f5999\",\"derivedFrom\":null,\"state\":\"Open\",\"at\":2,\"nodes\":[{\"kind\":\"Root\",\"name\":\"f09_fresh_9122adfe0a884b84bbcdae321fa87518\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":21}}}],\"unconsumed\":[\"f09_fresh_9122adfe0a884b84bbcdae321fa87518\"],\"edges\":[]}",
+      "pass": true
+    },
+    {
+      "id": "old-atom-2-unknown",
+      "claim": "An old run's atom name is not resolvable in the new run",
+      "source": {
+        "kind": "rpc",
+        "agent": "f09-rec220b-20261110T191750Z-0-0-reader",
+        "frame": "983"
+      },
+      "expected": "{\"kind\":\"check_error\",\"errors\":[{\"kind\":\"unknown_atom\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_curve\"}]}",
+      "observed": "{\"kind\":\"check_error\",\"errors\":[{\"kind\":\"unknown_atom\",\"name\":\"f09_0d2c3fe211a2441281dabbdf73f74d92_1_curve\"}]}",
+      "pass": true
+    },
+    {
+      "id": "old-atom-2-no-commit",
+      "claim": "The rejected cross-run reference does not modify the new run",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EGX4Z62PYKRNBZMTHYT9T/graph"
+      },
+      "expected": "{\"run\":\"01M73EGX4Z62PYKRNBZMTHYT9T\",\"holder\":\"01a1c6e8-64b7-71bf-91c0-1b3d586f5999\",\"derivedFrom\":null,\"state\":\"Open\",\"at\":2,\"nodes\":[{\"kind\":\"Root\",\"name\":\"f09_fresh_9122adfe0a884b84bbcdae321fa87518\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":21}}}],\"unconsumed\":[\"f09_fresh_9122adfe0a884b84bbcdae321fa87518\"],\"edges\":[]}",
+      "observed": "{\"run\":\"01M73EGX4Z62PYKRNBZMTHYT9T\",\"holder\":\"01a1c6e8-64b7-71bf-91c0-1b3d586f5999\",\"derivedFrom\":null,\"state\":\"Open\",\"at\":2,\"nodes\":[{\"kind\":\"Root\",\"name\":\"f09_fresh_9122adfe0a884b84bbcdae321fa87518\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":21}}}],\"unconsumed\":[\"f09_fresh_9122adfe0a884b84bbcdae321fa87518\"],\"edges\":[]}",
+      "pass": true
+    }
+  ],
+  "deviations": [],
+  "result": {
+    "kind": "pass"
+  }
+}

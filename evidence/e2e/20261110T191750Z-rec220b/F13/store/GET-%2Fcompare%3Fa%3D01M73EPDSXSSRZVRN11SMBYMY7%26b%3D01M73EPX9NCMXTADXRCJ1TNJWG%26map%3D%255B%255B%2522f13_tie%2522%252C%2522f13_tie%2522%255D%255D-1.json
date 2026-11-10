@@ -1,0 +1,25 @@
+{
+  "evidenceId": "a58d485a-0772-41ed-97b6-1d4a1b53baae",
+  "method": "GET",
+  "path": "/compare?a=01M73EPDSXSSRZVRN11SMBYMY7&b=01M73EPX9NCMXTADXRCJ1TNJWG&map=%5B%5B%22f13_tie%22%2C%22f13_tie%22%5D%5D",
+  "status": 200,
+  "requestRpcLine": 1153,
+  "responseRpcLine": 1153,
+  "capture": {
+    "kind": "complete"
+  },
+  "headers": [
+    [
+      "content-length",
+      "2221"
+    ],
+    [
+      "content-type",
+      "application/json;charset=utf-8"
+    ],
+    [
+      "date",
+      "Tue, 10 Nov 2026 19:24:48 GMT"
+    ]
+  ]
+}

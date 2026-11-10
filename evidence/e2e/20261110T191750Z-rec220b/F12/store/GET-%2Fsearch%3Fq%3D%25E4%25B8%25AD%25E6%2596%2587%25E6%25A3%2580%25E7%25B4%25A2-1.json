@@ -1,0 +1,25 @@
+{
+  "evidenceId": "6ecc0860-2df8-40c4-9d0d-fa5c77ca7aff",
+  "method": "GET",
+  "path": "/search?q=%E4%B8%AD%E6%96%87%E6%A3%80%E7%B4%A2",
+  "status": 200,
+  "requestRpcLine": 132,
+  "responseRpcLine": 132,
+  "capture": {
+    "kind": "complete"
+  },
+  "headers": [
+    [
+      "content-length",
+      "1445"
+    ],
+    [
+      "content-type",
+      "application/json;charset=utf-8"
+    ],
+    [
+      "date",
+      "Tue, 10 Nov 2026 19:23:38 GMT"
+    ]
+  ]
+}

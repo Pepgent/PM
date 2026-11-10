@@ -1,0 +1,50 @@
+: connected
+
+id: 1
+event: run_started
+data: {"seq":1,"at":"2026-11-10T19:23:34.855Z","kind":"run_started","records":{"nodes":[],"edges":[]}}
+
+id: 2
+event: step_committed
+data: {"seq":2,"at":"2026-11-10T19:23:34.855Z","kind":"step_committed","step":{"session":"01a1c6ea-5771-7376-bdf4-2ae8b126dcdc","code":"const film = file(\"soroi-f12-32fddbd8bca84a63b5eb3897779161a0.bin\")\nconst f12_description = \"薄膜中文检索样本32fddbd8bca84a63b5eb3897779161a0\"\nconst f12_c = 2\nconst f12_gamma = 0.5\nconst f12_trees = 100\nconst f12_length_scale = 2\nconst f12_neighbors = 4\nconst f12_learning_rate = 0.1\nconst f12_epochs = 10\nconst f12_svm = run_svm(film, f12_c, f12_gamma)\nconst f12_rf = run_rf(film, f12_trees)\nconst f12_gp = run_gp(film, f12_length_scale)\nconst f12_knn = run_knn(film, f12_neighbors)\nconst f12_lr = run_lr(film, f12_learning_rate, f12_epochs)"},"records":{"nodes":[{"kind":"Root","name":"f12_c","value":{"kind":"scalar","scalar":{"kind":"number","v":2}}},{"kind":"Root","name":"f12_description","value":{"kind":"scalar","scalar":{"kind":"string","v":"薄膜中文检索样本32fddbd8bca84a63b5eb3897779161a0"}}},{"kind":"Root","name":"f12_epochs","value":{"kind":"scalar","scalar":{"kind":"number","v":10}}},{"kind":"Root","name":"f12_gamma","value":{"kind":"scalar","scalar":{"kind":"number","v":0.5}}},{"kind":"Root","name":"f12_learning_rate","value":{"kind":"scalar","scalar":{"kind":"number","v":0.1}}},{"kind":"Root","name":"f12_length_scale","value":{"kind":"scalar","scalar":{"kind":"number","v":2}}},{"kind":"Root","name":"f12_neighbors","value":{"kind":"scalar","scalar":{"kind":"number","v":4}}},{"kind":"Root","name":"f12_trees","value":{"kind":"scalar","scalar":{"kind":"number","v":100}}},{"kind":"Root","name":"film","value":{"kind":"file","content":"e98a9c59ed84151cee448adfb4add5d1f034a4cff5017bd7da24a890baaddc68","media":"application/octet-stream","name":"soroi-f12-32fddbd8bca84a63b5eb3897779161a0.bin"}},{"kind":"Call","capture":"f2c1d0291d44aea3b15452f7d408ce855bb771099041512b27ef8050f6c82e86","step":2,"position":0,"fn":"run_svm","version":"27a5fd862ef17412b7075dd863e4532638dfa90dc5cd91b6136834acc4596fa1","body":"Program","env":{"kind":"central"},"status":{"kind":"Ended"},"startedAt":"2026-11-10T19:23:34.821Z","endedAt":"2026-11-10T19:23:34.832Z","outputs":[{"field":"","name":"f12_svm","value":{"kind":"scalar","scalar":{"kind":"number","v":50.5}}}],"transcript":null},{"kind":"Call","capture":"7616a35e0a80e1dcbf463f521c6e3d1fc6c878b8adebbe235ecddbd13e237116","step":2,"position":1,"fn":"run_rf","version":"75ee8a440a2abb91e807281b120c858b5d3b7b1bba522491f6233aba5c655d47","body":"Program","env":{"kind":"central"},"status":{"kind":"Ended"},"startedAt":"2026-11-10T19:23:34.843Z","endedAt":"2026-11-10T19:23:34.852Z","outputs":[{"field":"","name":"f12_rf","value":{"kind":"scalar","scalar":{"kind":"number","v":49}}}],"transcript":null},{"kind":"Call","capture":"3a3696947e4655060bdc5bc56a775d573d2c8a0b1eb3ee0d40bc1586d146cca3","step":2,"position":2,"fn":"run_gp","version":"fd57772d02412e34f03764960dd13a3f0ec88d3e1269bf651e0b55c0910d0a80","body":"Program","env":{"kind":"central"},"status":{"kind":"Ended"},"startedAt":"2026-11-10T19:23:34.838Z","endedAt":"2026-11-10T19:23:34.848Z","outputs":[{"field":"","name":"f12_gp","value":{"kind":"scalar","scalar":{"kind":"number","v":48.5}}}],"transcript":null},{"kind":"Call","capture":"ef878a9f44df12a4827c896d5482e069d3a3dcda83ff05017eaa830e26340cc9","step":2,"position":3,"fn":"run_knn","version":"33e8f6d2ae12059c742ed8063e34d0736f6abfb0b3c1e2902a89f945d3b64acc","body":"Program","env":{"kind":"central"},"status":{"kind":"Ended"},"startedAt":"2026-11-10T19:23:34.832Z","endedAt":"2026-11-10T19:23:34.843Z","outputs":[{"field":"","name":"f12_knn","value":{"kind":"scalar","scalar":{"kind":"number","v":48.25}}}],"transcript":null},{"kind":"Call","capture":"e4801e20d95af093054ddf3f232de32d956282b1db110c96f90b919da1273753","step":2,"position":4,"fn":"run_lr","version":"7bd1d08e49c09170dcc4bababab0b564d3581e923d233e174ce2dd3d4c07cc73","body":"Program","env":{"kind":"central"},"status":{"kind":"Ended"},"startedAt":"2026-11-10T19:23:34.826Z","endedAt":"2026-11-10T19:23:34.837Z","outputs":[{"field":"","name":"f12_lr","value":{"kind":"scalar","scalar":{"kind":"number","v":49}}}],"transcript":null}],"edges":[{"from":"film","to":{"step":2,"position":0,"input":0}},{"from":"f12_c","to":{"step":2,"position":0,"input":1}},{"from":"f12_gamma","to":{"step":2,"position":0,"input":2}},{"from":"film","to":{"step":2,"position":1,"input":0}},{"from":"f12_trees","to":{"step":2,"position":1,"input":1}},{"from":"film","to":{"step":2,"position":2,"input":0}},{"from":"f12_length_scale","to":{"step":2,"position":2,"input":1}},{"from":"film","to":{"step":2,"position":3,"input":0}},{"from":"f12_neighbors","to":{"step":2,"position":3,"input":1}},{"from":"film","to":{"step":2,"position":4,"input":0}},{"from":"f12_learning_rate","to":{"step":2,"position":4,"input":1}},{"from":"f12_epochs","to":{"step":2,"position":4,"input":2}}]}}
+
+id: 3
+event: call_started
+data: {"seq":3,"at":"2026-11-10T19:23:34.821Z","kind":"call_started","step":2,"position":0}
+
+id: 4
+event: call_ended
+data: {"seq":4,"at":"2026-11-10T19:23:34.832Z","kind":"call_ended","step":2,"position":0}
+
+id: 5
+event: call_started
+data: {"seq":5,"at":"2026-11-10T19:23:34.843Z","kind":"call_started","step":2,"position":1}
+
+id: 6
+event: call_ended
+data: {"seq":6,"at":"2026-11-10T19:23:34.852Z","kind":"call_ended","step":2,"position":1}
+
+id: 7
+event: call_started
+data: {"seq":7,"at":"2026-11-10T19:23:34.838Z","kind":"call_started","step":2,"position":2}
+
+id: 8
+event: call_ended
+data: {"seq":8,"at":"2026-11-10T19:23:34.848Z","kind":"call_ended","step":2,"position":2}
+
+id: 9
+event: call_started
+data: {"seq":9,"at":"2026-11-10T19:23:34.832Z","kind":"call_started","step":2,"position":3}
+
+id: 10
+event: call_ended
+data: {"seq":10,"at":"2026-11-10T19:23:34.843Z","kind":"call_ended","step":2,"position":3}
+
+id: 11
+event: call_started
+data: {"seq":11,"at":"2026-11-10T19:23:34.826Z","kind":"call_started","step":2,"position":4}
+
+id: 12
+event: call_ended
+data: {"seq":12,"at":"2026-11-10T19:23:34.837Z","kind":"call_ended","step":2,"position":4}
+

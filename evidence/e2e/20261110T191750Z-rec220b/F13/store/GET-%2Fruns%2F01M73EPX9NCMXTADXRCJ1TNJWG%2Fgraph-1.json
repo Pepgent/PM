@@ -1,0 +1,25 @@
+{
+  "evidenceId": "a58d485a-0772-41ed-97b6-1d4a1b53baae",
+  "method": "GET",
+  "path": "/runs/01M73EPX9NCMXTADXRCJ1TNJWG/graph",
+  "status": 200,
+  "requestRpcLine": 1124,
+  "responseRpcLine": 1124,
+  "capture": {
+    "kind": "complete"
+  },
+  "headers": [
+    [
+      "content-length",
+      "1338"
+    ],
+    [
+      "content-type",
+      "application/json;charset=utf-8"
+    ],
+    [
+      "date",
+      "Tue, 10 Nov 2026 19:24:46 GMT"
+    ]
+  ]
+}

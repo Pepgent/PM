@@ -1,0 +1,25 @@
+{
+  "evidenceId": "3dae7a3e-15c3-48db-bc15-880df10892e8",
+  "method": "GET",
+  "path": "/captures/1a003c6e13d417cd8397904720ea79fe94872318c9cc481d3a29f6e7382b22ec",
+  "status": 404,
+  "requestRpcLine": 187,
+  "responseRpcLine": 187,
+  "capture": {
+    "kind": "complete"
+  },
+  "headers": [
+    [
+      "content-length",
+      "57"
+    ],
+    [
+      "content-type",
+      "application/json;charset=utf-8"
+    ],
+    [
+      "date",
+      "Tue, 10 Nov 2026 19:22:41 GMT"
+    ]
+  ]
+}

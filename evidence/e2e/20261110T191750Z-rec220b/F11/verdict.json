@@ -1,0 +1,334 @@
+{
+  "flow": "F11",
+  "segment": "S1",
+  "env": "L",
+  "startedAt": "2026-11-10T19:23:07.521Z",
+  "endedAt": "2026-11-10T19:23:18.172Z",
+  "build": {
+    "commits": {
+      "soroi": "fbf5c3511632b659b5b907e36f62d57b63d35bc5",
+      "omp-soroi": "e676acbc5b37739f806d89f27a8005e6963e9f10"
+    },
+    "release": "d34c02cc3fb0c0df0f67ca7003373b677103e9f80e5e18081399a1f9d820aea8",
+    "images": {
+      "IMG-01": "pepgent-registry.orb.local:5000/pepgent/omp-agent@sha256:ee23be181f1d06376796a99ea4369a892fd70978b67ddde69c717441832d69c1",
+      "IMG-05": "pepgent-registry.orb.local:5000/pepgent/central@sha256:d344c3afae4c2673461173eaca210fa21c18011231db6afb8d473046ad024c31"
+    },
+    "omp": "18.18.6",
+    "model": "opencode-go/deepseek-v4.1-flash"
+  },
+  "runs": [
+    "01M73EM5JQ1EZD19JXZKWSV7T8",
+    "01M73EM99N2MMDZ7Y6QVD5CEJC"
+  ],
+  "agents": [
+    "f11-rec220b-20261110T191750Z-0-0"
+  ],
+  "remoteRuns": [],
+  "assertions": [
+    {
+      "id": "a-formal",
+      "claim": "Run A commits the exact calc(x1) workload through soroi_eval",
+      "source": {
+        "kind": "rpc",
+        "agent": "f11-rec220b-20261110T191750Z-0-0",
+        "frame": "113"
+      },
+      "expected": "\"formal\"",
+      "observed": "\"formal\"",
+      "pass": true
+    },
+    {
+      "id": "a-lifecycle",
+      "claim": "A opens and ends with stop before the request that opens B",
+      "source": {
+        "kind": "rpc",
+        "agent": "f11-rec220b-20261110T191750Z-0-0",
+        "frame": "113"
+      },
+      "expected": "[true,true]",
+      "observed": "[true,true]",
+      "pass": true
+    },
+    {
+      "id": "a-ended",
+      "claim": "The store confirms A is ended with no unconsumed atoms",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EM5JQ1EZD19JXZKWSV7T8/graph"
+      },
+      "expected": "[\"Ended\",[]]",
+      "observed": "[\"Ended\",[]]",
+      "pass": true
+    },
+    {
+      "id": "a-holder",
+      "claim": "A belongs to the current root session",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EM5JQ1EZD19JXZKWSV7T8/graph"
+      },
+      "expected": "\"01a1c6ea-043b-71d4-868a-85c2d43e2e7a\"",
+      "observed": "\"01a1c6ea-043b-71d4-868a-85c2d43e2e7a\"",
+      "pass": true
+    },
+    {
+      "id": "a-calc-count",
+      "claim": "The run contains exactly the required completed calc call",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EM5JQ1EZD19JXZKWSV7T8/graph"
+      },
+      "expected": "1",
+      "observed": "1",
+      "pass": true
+    },
+    {
+      "id": "a-central-program",
+      "claim": "The real lab-library calc executes as a central Program",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EM5JQ1EZD19JXZKWSV7T8/graph"
+      },
+      "expected": "[\"Program\",\"central\"]",
+      "observed": "[\"Program\",\"central\"]",
+      "pass": true
+    },
+    {
+      "id": "a-input-value",
+      "claim": "The renamed numeric root has the lab-library calc input value",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EM5JQ1EZD19JXZKWSV7T8/graph"
+      },
+      "expected": "[{\"kind\":\"Root\",\"name\":\"x1\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":21}}}]",
+      "observed": "[{\"kind\":\"Root\",\"name\":\"x1\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":21}}}]",
+      "pass": true
+    },
+    {
+      "id": "a-input-edge",
+      "claim": "Input position zero of this exact calc uses the run's own renamed root atom",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EM5JQ1EZD19JXZKWSV7T8/graph"
+      },
+      "expected": "[{\"from\":\"x1\",\"to\":{\"step\":2,\"position\":0,\"input\":0}}]",
+      "observed": "[{\"from\":\"x1\",\"to\":{\"step\":2,\"position\":0,\"input\":0}}]",
+      "pass": true
+    },
+    {
+      "id": "a-output-binding",
+      "claim": "calc doubles 21 and binds its scalar result to this run's output name",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EM5JQ1EZD19JXZKWSV7T8/graph"
+      },
+      "expected": "[{\"field\":\"\",\"name\":\"y1\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":42}}}]",
+      "observed": "[{\"field\":\"\",\"name\":\"y1\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":42}}}]",
+      "pass": true
+    },
+    {
+      "id": "b-formal",
+      "claim": "Run B commits calc(x2) with renamed equal-valued input and output atoms",
+      "source": {
+        "kind": "rpc",
+        "agent": "f11-rec220b-20261110T191750Z-0-0",
+        "frame": "189"
+      },
+      "expected": "\"formal\"",
+      "observed": "\"formal\"",
+      "pass": true
+    },
+    {
+      "id": "b-lifecycle",
+      "claim": "The second workload opens and ends a new run",
+      "source": {
+        "kind": "rpc",
+        "agent": "f11-rec220b-20261110T191750Z-0-0",
+        "frame": "189"
+      },
+      "expected": "[true,true,true]",
+      "observed": "[true,true,true]",
+      "pass": true
+    },
+    {
+      "id": "b-ended",
+      "claim": "The store confirms B is ended with no unconsumed atoms",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EM99N2MMDZ7Y6QVD5CEJC/graph"
+      },
+      "expected": "[\"Ended\",[]]",
+      "observed": "[\"Ended\",[]]",
+      "pass": true
+    },
+    {
+      "id": "b-holder",
+      "claim": "The two distinct runs are owned by the same root session",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EM99N2MMDZ7Y6QVD5CEJC/graph"
+      },
+      "expected": "\"01a1c6ea-043b-71d4-868a-85c2d43e2e7a\"",
+      "observed": "\"01a1c6ea-043b-71d4-868a-85c2d43e2e7a\"",
+      "pass": true
+    },
+    {
+      "id": "b-calc-count",
+      "claim": "The run contains exactly the required completed calc call",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EM99N2MMDZ7Y6QVD5CEJC/graph"
+      },
+      "expected": "1",
+      "observed": "1",
+      "pass": true
+    },
+    {
+      "id": "b-central-program",
+      "claim": "The real lab-library calc executes as a central Program",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EM99N2MMDZ7Y6QVD5CEJC/graph"
+      },
+      "expected": "[\"Program\",\"central\"]",
+      "observed": "[\"Program\",\"central\"]",
+      "pass": true
+    },
+    {
+      "id": "b-input-value",
+      "claim": "The renamed numeric root has the lab-library calc input value",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EM99N2MMDZ7Y6QVD5CEJC/graph"
+      },
+      "expected": "[{\"kind\":\"Root\",\"name\":\"x2\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":21}}}]",
+      "observed": "[{\"kind\":\"Root\",\"name\":\"x2\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":21}}}]",
+      "pass": true
+    },
+    {
+      "id": "b-input-edge",
+      "claim": "Input position zero of this exact calc uses the run's own renamed root atom",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EM99N2MMDZ7Y6QVD5CEJC/graph"
+      },
+      "expected": "[{\"from\":\"x2\",\"to\":{\"step\":2,\"position\":0,\"input\":0}}]",
+      "observed": "[{\"from\":\"x2\",\"to\":{\"step\":2,\"position\":0,\"input\":0}}]",
+      "pass": true
+    },
+    {
+      "id": "b-output-binding",
+      "claim": "calc doubles 21 and binds its scalar result to this run's output name",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EM99N2MMDZ7Y6QVD5CEJC/graph"
+      },
+      "expected": "[{\"field\":\"\",\"name\":\"y2\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":42}}}]",
+      "observed": "[{\"field\":\"\",\"name\":\"y2\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":42}}}]",
+      "pass": true
+    },
+    {
+      "id": "b-graph-adopted",
+      "claim": "D8 F11: B's calc(x2) call has graph status Adopted",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EM99N2MMDZ7Y6QVD5CEJC/graph"
+      },
+      "expected": "{\"kind\":\"Adopted\"}",
+      "observed": "{\"kind\":\"Adopted\"}",
+      "pass": true
+    },
+    {
+      "id": "b-stream-adopted",
+      "claim": "D8 F11: the public stream records call_adopted at the exact calc(x2) coordinates",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EM99N2MMDZ7Y6QVD5CEJC/stream?after=0"
+      },
+      "expected": "[{\"kind\":\"call_adopted\",\"step\":2,\"position\":0}]",
+      "observed": "[{\"kind\":\"call_adopted\",\"step\":2,\"position\":0}]",
+      "pass": true
+    },
+    {
+      "id": "b-stream-terminal",
+      "claim": "The recorded B stream includes the terminal run_ended event",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EM99N2MMDZ7Y6QVD5CEJC/stream?after=0"
+      },
+      "expected": "\"run_ended\"",
+      "observed": "\"run_ended\"",
+      "pass": true
+    },
+    {
+      "id": "b-committed-code",
+      "claim": "The adoption marker refers to the exact committed B workload in the root session",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EM99N2MMDZ7Y6QVD5CEJC/stream?after=0"
+      },
+      "expected": "[{\"session\":\"01a1c6ea-043b-71d4-868a-85c2d43e2e7a\",\"code\":\"const x2 = 21;\\nconst y2 = calc(x2);\\nstop(y2);\"}]",
+      "observed": "[{\"session\":\"01a1c6ea-043b-71d4-868a-85c2d43e2e7a\",\"code\":\"const x2 = 21;\\nconst y2 = calc(x2);\\nstop(y2);\"}]",
+      "pass": true
+    },
+    {
+      "id": "b-committed-call",
+      "claim": "D11-C1's commit-level records carry the same calc call addressed by call_adopted",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EM99N2MMDZ7Y6QVD5CEJC/stream?after=0"
+      },
+      "expected": "[{\"step\":2,\"position\":0,\"fn\":\"calc\",\"outputs\":[{\"field\":\"\",\"name\":\"y2\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":42}}}]}]",
+      "observed": "[{\"step\":2,\"position\":0,\"fn\":\"calc\",\"outputs\":[{\"field\":\"\",\"name\":\"y2\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":42}}}]}]",
+      "pass": true
+    },
+    {
+      "id": "comparison-runs",
+      "claim": "The comparison response identifies exactly the two formal runs",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/compare?a=01M73EM5JQ1EZD19JXZKWSV7T8&b=01M73EM99N2MMDZ7Y6QVD5CEJC"
+      },
+      "expected": "[\"01M73EM5JQ1EZD19JXZKWSV7T8\",\"01M73EM99N2MMDZ7Y6QVD5CEJC\"]",
+      "observed": "[\"01M73EM5JQ1EZD19JXZKWSV7T8\",\"01M73EM99N2MMDZ7Y6QVD5CEJC\"]",
+      "pass": true
+    },
+    {
+      "id": "calc-same-capture",
+      "claim": "D8 F11: compare pairs A's calc(x1) and B's calc(x2) as SameCapture, not SameValue",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/compare?a=01M73EM5JQ1EZD19JXZKWSV7T8&b=01M73EM99N2MMDZ7Y6QVD5CEJC"
+      },
+      "expected": "[{\"a\":{\"step\":2,\"position\":0,\"fn\":\"calc\",\"outputs\":[{\"field\":\"\",\"name\":\"y1\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":42}}}]},\"b\":{\"step\":2,\"position\":0,\"fn\":\"calc\",\"outputs\":[{\"field\":\"\",\"name\":\"y2\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":42}}}]}}]",
+      "observed": "[{\"a\":{\"step\":2,\"position\":0,\"fn\":\"calc\",\"outputs\":[{\"field\":\"\",\"name\":\"y1\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":42}}}]},\"b\":{\"step\":2,\"position\":0,\"fn\":\"calc\",\"outputs\":[{\"field\":\"\",\"name\":\"y2\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":42}}}]}}]",
+      "pass": true
+    }
+  ],
+  "deviations": [],
+  "result": {
+    "kind": "pass"
+  }
+}

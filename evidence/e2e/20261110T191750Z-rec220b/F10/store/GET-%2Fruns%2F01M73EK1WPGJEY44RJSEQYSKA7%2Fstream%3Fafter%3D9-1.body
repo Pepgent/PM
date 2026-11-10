@@ -1,0 +1,6 @@
+: connected
+
+id: 10
+event: run_ended
+data: {"seq":10,"at":"2026-11-10T19:22:49.987Z","kind":"run_ended"}
+

@@ -1,0 +1,588 @@
+{
+  "flow": "F13",
+  "segment": "S1",
+  "env": "L",
+  "startedAt": "2026-11-10T19:23:53.439Z",
+  "endedAt": "2026-11-10T19:24:49.155Z",
+  "build": {
+    "commits": {
+      "soroi": "fbf5c3511632b659b5b907e36f62d57b63d35bc5",
+      "omp-soroi": "e676acbc5b37739f806d89f27a8005e6963e9f10"
+    },
+    "release": "d34c02cc3fb0c0df0f67ca7003373b677103e9f80e5e18081399a1f9d820aea8",
+    "images": {
+      "IMG-01": "pepgent-registry.orb.local:5000/pepgent/omp-agent@sha256:ee23be181f1d06376796a99ea4369a892fd70978b67ddde69c717441832d69c1",
+      "IMG-05": "pepgent-registry.orb.local:5000/pepgent/central@sha256:d344c3afae4c2673461173eaca210fa21c18011231db6afb8d473046ad024c31"
+    },
+    "omp": "18.18.6",
+    "model": "opencode-go/deepseek-v4.1-flash"
+  },
+  "runs": [
+    "01M73ENVFZQ30M8CFCMSDZE12J",
+    "01M73EP54TVQKFK955S7EH6199",
+    "01M73EPDSXSSRZVRN11SMBYMY7",
+    "01M73EPX9NCMXTADXRCJ1TNJWG"
+  ],
+  "agents": [
+    "f13-rec220b-20261110T191750Z-0-0"
+  ],
+  "remoteRuns": [],
+  "assertions": [
+    {
+      "id": "r1-formal",
+      "claim": "The exact workload opens an ordinary formal run through the installed Main",
+      "source": {
+        "kind": "rpc",
+        "agent": "f13-rec220b-20261110T191750Z-0-0",
+        "frame": "433"
+      },
+      "expected": "\"formal\"",
+      "observed": "\"formal\"",
+      "pass": true
+    },
+    {
+      "id": "r1-new-run",
+      "claim": "Each comparison side is a newly opened run, not a derived snapshot",
+      "source": {
+        "kind": "rpc",
+        "agent": "f13-rec220b-20261110T191750Z-0-0",
+        "frame": "433"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "r2-formal",
+      "claim": "The exact workload opens an ordinary formal run through the installed Main",
+      "source": {
+        "kind": "rpc",
+        "agent": "f13-rec220b-20261110T191750Z-0-0",
+        "frame": "650"
+      },
+      "expected": "\"formal\"",
+      "observed": "\"formal\"",
+      "pass": true
+    },
+    {
+      "id": "r2-new-run",
+      "claim": "Each comparison side is a newly opened run, not a derived snapshot",
+      "source": {
+        "kind": "rpc",
+        "agent": "f13-rec220b-20261110T191750Z-0-0",
+        "frame": "650"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "r1-terminal",
+      "claim": "The fixture is an ended ordinary run with exactly the intended committed nodes",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73ENVFZQ30M8CFCMSDZE12J/graph"
+      },
+      "expected": "{\"state\":\"Ended\",\"derivedFrom\":null,\"nodes\":5,\"unconsumed\":[]}",
+      "observed": "{\"state\":\"Ended\",\"derivedFrom\":null,\"nodes\":5,\"unconsumed\":[]}",
+      "pass": true
+    },
+    {
+      "id": "r1-roots",
+      "claim": "The committed numeric roots equal the scripted values",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73ENVFZQ30M8CFCMSDZE12J/graph"
+      },
+      "expected": "[{\"kind\":\"Root\",\"name\":\"f13_base\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":21}}},{\"kind\":\"Root\",\"name\":\"f13_changed\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":10}}}]",
+      "observed": "[{\"kind\":\"Root\",\"name\":\"f13_base\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":21}}},{\"kind\":\"Root\",\"name\":\"f13_changed\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":10}}}]",
+      "pass": true
+    },
+    {
+      "id": "r1-f13_stable",
+      "claim": "The actual central Program preserves every positional input and returns the lab-library main formula",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73ENVFZQ30M8CFCMSDZE12J/graph"
+      },
+      "expected": "{\"fn\":\"calc\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"ordinary\":true,\"inputs\":[{\"from\":\"f13_base\",\"input\":0}],\"outputs\":[{\"field\":\"\",\"name\":\"f13_stable\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":42}}}]}",
+      "observed": "{\"fn\":\"calc\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"ordinary\":true,\"inputs\":[{\"from\":\"f13_base\",\"input\":0}],\"outputs\":[{\"field\":\"\",\"name\":\"f13_stable\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":42}}}]}",
+      "pass": true
+    },
+    {
+      "id": "r1-f13_affected",
+      "claim": "The actual central Program preserves every positional input and returns the lab-library main formula",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73ENVFZQ30M8CFCMSDZE12J/graph"
+      },
+      "expected": "{\"fn\":\"calc\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"ordinary\":true,\"inputs\":[{\"from\":\"f13_changed\",\"input\":0}],\"outputs\":[{\"field\":\"\",\"name\":\"f13_affected\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":20}}}]}",
+      "observed": "{\"fn\":\"calc\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"ordinary\":true,\"inputs\":[{\"from\":\"f13_changed\",\"input\":0}],\"outputs\":[{\"field\":\"\",\"name\":\"f13_affected\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":20}}}]}",
+      "pass": true
+    },
+    {
+      "id": "r1-f13_mean",
+      "claim": "The actual central Program preserves every positional input and returns the lab-library main formula",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73ENVFZQ30M8CFCMSDZE12J/graph"
+      },
+      "expected": "{\"fn\":\"compare_scores\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"ordinary\":true,\"inputs\":[{\"from\":\"f13_stable\",\"input\":0},{\"from\":\"f13_affected\",\"input\":1},{\"from\":\"f13_stable\",\"input\":2},{\"from\":\"f13_stable\",\"input\":3},{\"from\":\"f13_stable\",\"input\":4}],\"outputs\":[{\"field\":\"\",\"name\":\"f13_mean\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":37.6}}}]}",
+      "observed": "{\"fn\":\"compare_scores\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"ordinary\":true,\"inputs\":[{\"from\":\"f13_stable\",\"input\":0},{\"from\":\"f13_affected\",\"input\":1},{\"from\":\"f13_stable\",\"input\":2},{\"from\":\"f13_stable\",\"input\":3},{\"from\":\"f13_stable\",\"input\":4}],\"outputs\":[{\"field\":\"\",\"name\":\"f13_mean\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":37.6}}}]}",
+      "pass": true
+    },
+    {
+      "id": "r1-edges",
+      "claim": "The graph has no additional input edges outside the declared workload",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73ENVFZQ30M8CFCMSDZE12J/graph"
+      },
+      "expected": "7",
+      "observed": "7",
+      "pass": true
+    },
+    {
+      "id": "r2-terminal",
+      "claim": "The fixture is an ended ordinary run with exactly the intended committed nodes",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EP54TVQKFK955S7EH6199/graph"
+      },
+      "expected": "{\"state\":\"Ended\",\"derivedFrom\":null,\"nodes\":5,\"unconsumed\":[]}",
+      "observed": "{\"state\":\"Ended\",\"derivedFrom\":null,\"nodes\":5,\"unconsumed\":[]}",
+      "pass": true
+    },
+    {
+      "id": "r2-roots",
+      "claim": "The committed numeric roots equal the scripted values",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EP54TVQKFK955S7EH6199/graph"
+      },
+      "expected": "[{\"kind\":\"Root\",\"name\":\"f13_base\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":21}}},{\"kind\":\"Root\",\"name\":\"f13_changed\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":11}}}]",
+      "observed": "[{\"kind\":\"Root\",\"name\":\"f13_base\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":21}}},{\"kind\":\"Root\",\"name\":\"f13_changed\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":11}}}]",
+      "pass": true
+    },
+    {
+      "id": "r2-f13_stable",
+      "claim": "The actual central Program preserves every positional input and returns the lab-library main formula",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EP54TVQKFK955S7EH6199/graph"
+      },
+      "expected": "{\"fn\":\"calc\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"ordinary\":true,\"inputs\":[{\"from\":\"f13_base\",\"input\":0}],\"outputs\":[{\"field\":\"\",\"name\":\"f13_stable\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":42}}}]}",
+      "observed": "{\"fn\":\"calc\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"ordinary\":true,\"inputs\":[{\"from\":\"f13_base\",\"input\":0}],\"outputs\":[{\"field\":\"\",\"name\":\"f13_stable\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":42}}}]}",
+      "pass": true
+    },
+    {
+      "id": "r2-f13_affected",
+      "claim": "The actual central Program preserves every positional input and returns the lab-library main formula",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EP54TVQKFK955S7EH6199/graph"
+      },
+      "expected": "{\"fn\":\"calc\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"ordinary\":true,\"inputs\":[{\"from\":\"f13_changed\",\"input\":0}],\"outputs\":[{\"field\":\"\",\"name\":\"f13_affected\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":22}}}]}",
+      "observed": "{\"fn\":\"calc\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"ordinary\":true,\"inputs\":[{\"from\":\"f13_changed\",\"input\":0}],\"outputs\":[{\"field\":\"\",\"name\":\"f13_affected\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":22}}}]}",
+      "pass": true
+    },
+    {
+      "id": "r2-f13_mean",
+      "claim": "The actual central Program preserves every positional input and returns the lab-library main formula",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EP54TVQKFK955S7EH6199/graph"
+      },
+      "expected": "{\"fn\":\"compare_scores\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"ordinary\":true,\"inputs\":[{\"from\":\"f13_stable\",\"input\":0},{\"from\":\"f13_affected\",\"input\":1},{\"from\":\"f13_stable\",\"input\":2},{\"from\":\"f13_stable\",\"input\":3},{\"from\":\"f13_stable\",\"input\":4}],\"outputs\":[{\"field\":\"\",\"name\":\"f13_mean\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":38}}}]}",
+      "observed": "{\"fn\":\"compare_scores\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"ordinary\":true,\"inputs\":[{\"from\":\"f13_stable\",\"input\":0},{\"from\":\"f13_affected\",\"input\":1},{\"from\":\"f13_stable\",\"input\":2},{\"from\":\"f13_stable\",\"input\":3},{\"from\":\"f13_stable\",\"input\":4}],\"outputs\":[{\"field\":\"\",\"name\":\"f13_mean\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":38}}}]}",
+      "pass": true
+    },
+    {
+      "id": "r2-edges",
+      "claim": "The graph has no additional input edges outside the declared workload",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EP54TVQKFK955S7EH6199/graph"
+      },
+      "expected": "7",
+      "observed": "7",
+      "pass": true
+    },
+    {
+      "id": "compare-01M73ENVFZQ30M8CFCMSDZE12J-01M73EP54TVQKFK955S7EH6199-automatic",
+      "claim": "The comparison response identifies the requested real runs",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/compare?a=01M73ENVFZQ30M8CFCMSDZE12J&b=01M73EP54TVQKFK955S7EH6199"
+      },
+      "expected": "{\"a\":\"01M73ENVFZQ30M8CFCMSDZE12J\",\"b\":\"01M73EP54TVQKFK955S7EH6199\"}",
+      "observed": "{\"a\":\"01M73ENVFZQ30M8CFCMSDZE12J\",\"b\":\"01M73EP54TVQKFK955S7EH6199\"}",
+      "pass": true
+    },
+    {
+      "id": "changed-pair-count",
+      "claim": "Automatic comparison pairs all roots and calls, without extra or ambiguous matches",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/compare?a=01M73ENVFZQ30M8CFCMSDZE12J&b=01M73EP54TVQKFK955S7EH6199"
+      },
+      "expected": "5",
+      "observed": "5",
+      "pass": true
+    },
+    {
+      "id": "unchanged-root",
+      "claim": "D11-13A uses SameValue for the unchanged root",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/compare?a=01M73ENVFZQ30M8CFCMSDZE12J&b=01M73EP54TVQKFK955S7EH6199"
+      },
+      "expected": "{\"kind\":\"SameValue\",\"a\":{\"kind\":\"Root\",\"name\":\"f13_base\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":21}}},\"b\":{\"kind\":\"Root\",\"name\":\"f13_base\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":21}}}}",
+      "observed": "{\"kind\":\"SameValue\",\"a\":{\"kind\":\"Root\",\"name\":\"f13_base\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":21}}},\"b\":{\"kind\":\"Root\",\"name\":\"f13_base\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":21}}}}",
+      "pass": true
+    },
+    {
+      "id": "changed-root-fields",
+      "claim": "R2 changes exactly one R1 root; Changed exposes both original and replacement scalar values",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/compare?a=01M73ENVFZQ30M8CFCMSDZE12J&b=01M73EP54TVQKFK955S7EH6199"
+      },
+      "expected": "{\"kind\":\"Changed\",\"a\":{\"kind\":\"Root\",\"name\":\"f13_changed\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":10}}},\"b\":{\"kind\":\"Root\",\"name\":\"f13_changed\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":11}}},\"fields\":[{\"kind\":\"Both\",\"field\":\"\",\"a\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":10}},\"b\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":11}}}]}",
+      "observed": "{\"kind\":\"Changed\",\"a\":{\"kind\":\"Root\",\"name\":\"f13_changed\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":10}}},\"b\":{\"kind\":\"Root\",\"name\":\"f13_changed\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":11}}},\"fields\":[{\"kind\":\"Both\",\"field\":\"\",\"a\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":10}},\"b\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":11}}}]}",
+      "pass": true
+    },
+    {
+      "id": "upstream-same-capture",
+      "claim": "The unaffected completed upstream calc is SameCapture, without reading capture identities",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/compare?a=01M73ENVFZQ30M8CFCMSDZE12J&b=01M73EP54TVQKFK955S7EH6199"
+      },
+      "expected": "{\"kind\":\"SameCapture\",\"a\":{\"kind\":\"Call\",\"step\":2,\"position\":0,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Adopted\"},\"startedAt\":\"2026-11-10T19:24:07.519Z\",\"endedAt\":\"2026-11-10T19:24:07.519Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_stable\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":42}}}]},\"b\":{\"kind\":\"Call\",\"step\":2,\"position\":0,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Adopted\"},\"startedAt\":\"2026-11-10T19:24:17.383Z\",\"endedAt\":\"2026-11-10T19:24:17.383Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_stable\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":42}}}]}}",
+      "observed": "{\"kind\":\"SameCapture\",\"a\":{\"kind\":\"Call\",\"step\":2,\"position\":0,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Adopted\"},\"startedAt\":\"2026-11-10T19:24:07.519Z\",\"endedAt\":\"2026-11-10T19:24:07.519Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_stable\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":42}}}]},\"b\":{\"kind\":\"Call\",\"step\":2,\"position\":0,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Adopted\"},\"startedAt\":\"2026-11-10T19:24:17.383Z\",\"endedAt\":\"2026-11-10T19:24:17.383Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_stable\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":42}}}]}}",
+      "pass": true
+    },
+    {
+      "id": "f13_affected-changed-fields",
+      "claim": "Every affected path call is Changed and every field contains the exact two business values and committed nodes",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/compare?a=01M73ENVFZQ30M8CFCMSDZE12J&b=01M73EP54TVQKFK955S7EH6199"
+      },
+      "expected": "{\"kind\":\"Changed\",\"a\":{\"kind\":\"Call\",\"step\":2,\"position\":1,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:24:07.523Z\",\"endedAt\":\"2026-11-10T19:24:07.533Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_affected\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":20}}}]},\"b\":{\"kind\":\"Call\",\"step\":2,\"position\":1,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:24:17.391Z\",\"endedAt\":\"2026-11-10T19:24:17.412Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_affected\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":22}}}]},\"fields\":[{\"kind\":\"Both\",\"field\":\"\",\"a\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":20}},\"b\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":22}}}]}",
+      "observed": "{\"kind\":\"Changed\",\"a\":{\"kind\":\"Call\",\"step\":2,\"position\":1,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:24:07.523Z\",\"endedAt\":\"2026-11-10T19:24:07.533Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_affected\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":20}}}]},\"b\":{\"kind\":\"Call\",\"step\":2,\"position\":1,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:24:17.391Z\",\"endedAt\":\"2026-11-10T19:24:17.412Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_affected\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":22}}}]},\"fields\":[{\"kind\":\"Both\",\"field\":\"\",\"a\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":20}},\"b\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":22}}}]}",
+      "pass": true
+    },
+    {
+      "id": "f13_mean-changed-fields",
+      "claim": "Every affected path call is Changed and every field contains the exact two business values and committed nodes",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/compare?a=01M73ENVFZQ30M8CFCMSDZE12J&b=01M73EP54TVQKFK955S7EH6199"
+      },
+      "expected": "{\"kind\":\"Changed\",\"a\":{\"kind\":\"Call\",\"step\":2,\"position\":2,\"fn\":\"compare_scores\",\"version\":\"00d9ebefbd981fdde91959f008484f9368af1006a2ad38e220c4f6d1791e7fd8\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:24:07.540Z\",\"endedAt\":\"2026-11-10T19:24:07.550Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_mean\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":37.6}}}]},\"b\":{\"kind\":\"Call\",\"step\":2,\"position\":2,\"fn\":\"compare_scores\",\"version\":\"00d9ebefbd981fdde91959f008484f9368af1006a2ad38e220c4f6d1791e7fd8\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:24:17.421Z\",\"endedAt\":\"2026-11-10T19:24:17.433Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_mean\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":38}}}]},\"fields\":[{\"kind\":\"Both\",\"field\":\"\",\"a\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":37.6}},\"b\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":38}}}]}",
+      "observed": "{\"kind\":\"Changed\",\"a\":{\"kind\":\"Call\",\"step\":2,\"position\":2,\"fn\":\"compare_scores\",\"version\":\"00d9ebefbd981fdde91959f008484f9368af1006a2ad38e220c4f6d1791e7fd8\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:24:07.540Z\",\"endedAt\":\"2026-11-10T19:24:07.550Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_mean\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":37.6}}}]},\"b\":{\"kind\":\"Call\",\"step\":2,\"position\":2,\"fn\":\"compare_scores\",\"version\":\"00d9ebefbd981fdde91959f008484f9368af1006a2ad38e220c4f6d1791e7fd8\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:24:17.421Z\",\"endedAt\":\"2026-11-10T19:24:17.433Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_mean\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":38}}}]},\"fields\":[{\"kind\":\"Both\",\"field\":\"\",\"a\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":37.6}},\"b\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":38}}}]}",
+      "pass": true
+    },
+    {
+      "id": "ambiguous-a-formal",
+      "claim": "The exact workload opens an ordinary formal run through the installed Main",
+      "source": {
+        "kind": "rpc",
+        "agent": "f13-rec220b-20261110T191750Z-0-0",
+        "frame": "807"
+      },
+      "expected": "\"formal\"",
+      "observed": "\"formal\"",
+      "pass": true
+    },
+    {
+      "id": "ambiguous-a-new-run",
+      "claim": "Each comparison side is a newly opened run, not a derived snapshot",
+      "source": {
+        "kind": "rpc",
+        "agent": "f13-rec220b-20261110T191750Z-0-0",
+        "frame": "807"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "ambiguous-b-formal",
+      "claim": "The exact workload opens an ordinary formal run through the installed Main",
+      "source": {
+        "kind": "rpc",
+        "agent": "f13-rec220b-20261110T191750Z-0-0",
+        "frame": "984"
+      },
+      "expected": "\"formal\"",
+      "observed": "\"formal\"",
+      "pass": true
+    },
+    {
+      "id": "ambiguous-b-new-run",
+      "claim": "Each comparison side is a newly opened run, not a derived snapshot",
+      "source": {
+        "kind": "rpc",
+        "agent": "f13-rec220b-20261110T191750Z-0-0",
+        "frame": "984"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "ambiguous-a-terminal",
+      "claim": "The fixture is an ended ordinary run with exactly the intended committed nodes",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EPDSXSSRZVRN11SMBYMY7/graph"
+      },
+      "expected": "{\"state\":\"Ended\",\"derivedFrom\":null,\"nodes\":3,\"unconsumed\":[]}",
+      "observed": "{\"state\":\"Ended\",\"derivedFrom\":null,\"nodes\":3,\"unconsumed\":[]}",
+      "pass": true
+    },
+    {
+      "id": "ambiguous-a-roots",
+      "claim": "The committed numeric roots equal the scripted values",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EPDSXSSRZVRN11SMBYMY7/graph"
+      },
+      "expected": "[{\"kind\":\"Root\",\"name\":\"f13_tie\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":7}}}]",
+      "observed": "[{\"kind\":\"Root\",\"name\":\"f13_tie\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":7}}}]",
+      "pass": true
+    },
+    {
+      "id": "ambiguous-a-f13_first",
+      "claim": "The actual central Program preserves every positional input and returns the lab-library main formula",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EPDSXSSRZVRN11SMBYMY7/graph"
+      },
+      "expected": "{\"fn\":\"calc\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"ordinary\":true,\"inputs\":[{\"from\":\"f13_tie\",\"input\":0}],\"outputs\":[{\"field\":\"\",\"name\":\"f13_first\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]}",
+      "observed": "{\"fn\":\"calc\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"ordinary\":true,\"inputs\":[{\"from\":\"f13_tie\",\"input\":0}],\"outputs\":[{\"field\":\"\",\"name\":\"f13_first\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]}",
+      "pass": true
+    },
+    {
+      "id": "ambiguous-a-f13_second",
+      "claim": "The actual central Program preserves every positional input and returns the lab-library main formula",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EPDSXSSRZVRN11SMBYMY7/graph"
+      },
+      "expected": "{\"fn\":\"calc\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"ordinary\":true,\"inputs\":[{\"from\":\"f13_tie\",\"input\":0}],\"outputs\":[{\"field\":\"\",\"name\":\"f13_second\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]}",
+      "observed": "{\"fn\":\"calc\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"ordinary\":true,\"inputs\":[{\"from\":\"f13_tie\",\"input\":0}],\"outputs\":[{\"field\":\"\",\"name\":\"f13_second\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]}",
+      "pass": true
+    },
+    {
+      "id": "ambiguous-a-edges",
+      "claim": "The graph has no additional input edges outside the declared workload",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EPDSXSSRZVRN11SMBYMY7/graph"
+      },
+      "expected": "2",
+      "observed": "2",
+      "pass": true
+    },
+    {
+      "id": "ambiguous-b-terminal",
+      "claim": "The fixture is an ended ordinary run with exactly the intended committed nodes",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EPX9NCMXTADXRCJ1TNJWG/graph"
+      },
+      "expected": "{\"state\":\"Ended\",\"derivedFrom\":null,\"nodes\":3,\"unconsumed\":[]}",
+      "observed": "{\"state\":\"Ended\",\"derivedFrom\":null,\"nodes\":3,\"unconsumed\":[]}",
+      "pass": true
+    },
+    {
+      "id": "ambiguous-b-roots",
+      "claim": "The committed numeric roots equal the scripted values",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EPX9NCMXTADXRCJ1TNJWG/graph"
+      },
+      "expected": "[{\"kind\":\"Root\",\"name\":\"f13_tie\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":7}}}]",
+      "observed": "[{\"kind\":\"Root\",\"name\":\"f13_tie\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":7}}}]",
+      "pass": true
+    },
+    {
+      "id": "ambiguous-b-f13_first",
+      "claim": "The actual central Program preserves every positional input and returns the lab-library main formula",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EPX9NCMXTADXRCJ1TNJWG/graph"
+      },
+      "expected": "{\"fn\":\"calc\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"ordinary\":true,\"inputs\":[{\"from\":\"f13_tie\",\"input\":0}],\"outputs\":[{\"field\":\"\",\"name\":\"f13_first\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]}",
+      "observed": "{\"fn\":\"calc\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"ordinary\":true,\"inputs\":[{\"from\":\"f13_tie\",\"input\":0}],\"outputs\":[{\"field\":\"\",\"name\":\"f13_first\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]}",
+      "pass": true
+    },
+    {
+      "id": "ambiguous-b-f13_second",
+      "claim": "The actual central Program preserves every positional input and returns the lab-library main formula",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EPX9NCMXTADXRCJ1TNJWG/graph"
+      },
+      "expected": "{\"fn\":\"calc\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"ordinary\":true,\"inputs\":[{\"from\":\"f13_tie\",\"input\":0}],\"outputs\":[{\"field\":\"\",\"name\":\"f13_second\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]}",
+      "observed": "{\"fn\":\"calc\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"ordinary\":true,\"inputs\":[{\"from\":\"f13_tie\",\"input\":0}],\"outputs\":[{\"field\":\"\",\"name\":\"f13_second\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]}",
+      "pass": true
+    },
+    {
+      "id": "ambiguous-b-edges",
+      "claim": "The graph has no additional input edges outside the declared workload",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EPX9NCMXTADXRCJ1TNJWG/graph"
+      },
+      "expected": "2",
+      "observed": "2",
+      "pass": true
+    },
+    {
+      "id": "distinct-runs",
+      "claim": "All four comparison fixtures were independently allocated ordinary runs",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73EPX9NCMXTADXRCJ1TNJWG/graph"
+      },
+      "expected": "4",
+      "observed": "4",
+      "pass": true
+    },
+    {
+      "id": "compare-01M73EPDSXSSRZVRN11SMBYMY7-01M73EPX9NCMXTADXRCJ1TNJWG-automatic",
+      "claim": "The comparison response identifies the requested real runs",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/compare?a=01M73EPDSXSSRZVRN11SMBYMY7&b=01M73EPX9NCMXTADXRCJ1TNJWG"
+      },
+      "expected": "{\"a\":\"01M73EPDSXSSRZVRN11SMBYMY7\",\"b\":\"01M73EPX9NCMXTADXRCJ1TNJWG\"}",
+      "observed": "{\"a\":\"01M73EPDSXSSRZVRN11SMBYMY7\",\"b\":\"01M73EPX9NCMXTADXRCJ1TNJWG\"}",
+      "pass": true
+    },
+    {
+      "id": "ambiguous-automatic-pair-count",
+      "claim": "Only the common root and the unresolved calc component are returned",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/compare?a=01M73EPDSXSSRZVRN11SMBYMY7&b=01M73EPX9NCMXTADXRCJ1TNJWG"
+      },
+      "expected": "2",
+      "observed": "2",
+      "pass": true
+    },
+    {
+      "id": "ambiguous-automatic-root",
+      "claim": "Root input identity is already uniquely aligned, so it cannot disambiguate duplicate calls",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/compare?a=01M73EPDSXSSRZVRN11SMBYMY7&b=01M73EPX9NCMXTADXRCJ1TNJWG"
+      },
+      "expected": "{\"kind\":\"SameValue\",\"a\":{\"kind\":\"Root\",\"name\":\"f13_tie\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":7}}},\"b\":{\"kind\":\"Root\",\"name\":\"f13_tie\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":7}}}}",
+      "observed": "{\"kind\":\"SameValue\",\"a\":{\"kind\":\"Root\",\"name\":\"f13_tie\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":7}}},\"b\":{\"kind\":\"Root\",\"name\":\"f13_tie\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":7}}}}",
+      "pass": true
+    },
+    {
+      "id": "ambiguous-automatic-candidates",
+      "claim": "D6-13 returns Ambiguous with both same-function candidates on both sides; input identity, source, and root mapping cannot select one",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/compare?a=01M73EPDSXSSRZVRN11SMBYMY7&b=01M73EPX9NCMXTADXRCJ1TNJWG"
+      },
+      "expected": "[{\"kind\":\"Ambiguous\",\"fn\":\"calc\",\"a\":[{\"kind\":\"Call\",\"step\":2,\"position\":0,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:24:26.284Z\",\"endedAt\":\"2026-11-10T19:24:26.295Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_first\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]},{\"kind\":\"Call\",\"step\":2,\"position\":1,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:24:26.290Z\",\"endedAt\":\"2026-11-10T19:24:26.300Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_second\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]}],\"b\":[{\"kind\":\"Call\",\"step\":2,\"position\":0,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Adopted\"},\"startedAt\":\"2026-11-10T19:24:42.155Z\",\"endedAt\":\"2026-11-10T19:24:42.155Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_first\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]},{\"kind\":\"Call\",\"step\":2,\"position\":1,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Adopted\"},\"startedAt\":\"2026-11-10T19:24:42.164Z\",\"endedAt\":\"2026-11-10T19:24:42.164Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_second\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]}]}]",
+      "observed": "[{\"kind\":\"Ambiguous\",\"fn\":\"calc\",\"a\":[{\"kind\":\"Call\",\"step\":2,\"position\":0,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:24:26.284Z\",\"endedAt\":\"2026-11-10T19:24:26.295Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_first\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]},{\"kind\":\"Call\",\"step\":2,\"position\":1,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:24:26.290Z\",\"endedAt\":\"2026-11-10T19:24:26.300Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_second\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]}],\"b\":[{\"kind\":\"Call\",\"step\":2,\"position\":0,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Adopted\"},\"startedAt\":\"2026-11-10T19:24:42.155Z\",\"endedAt\":\"2026-11-10T19:24:42.155Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_first\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]},{\"kind\":\"Call\",\"step\":2,\"position\":1,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Adopted\"},\"startedAt\":\"2026-11-10T19:24:42.164Z\",\"endedAt\":\"2026-11-10T19:24:42.164Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_second\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]}]}]",
+      "pass": true
+    },
+    {
+      "id": "compare-01M73EPDSXSSRZVRN11SMBYMY7-01M73EPX9NCMXTADXRCJ1TNJWG-mapped",
+      "claim": "The comparison response identifies the requested real runs",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/compare?a=01M73EPDSXSSRZVRN11SMBYMY7&b=01M73EPX9NCMXTADXRCJ1TNJWG&map=%5B%5B%22f13_tie%22%2C%22f13_tie%22%5D%5D"
+      },
+      "expected": "{\"a\":\"01M73EPDSXSSRZVRN11SMBYMY7\",\"b\":\"01M73EPX9NCMXTADXRCJ1TNJWG\"}",
+      "observed": "{\"a\":\"01M73EPDSXSSRZVRN11SMBYMY7\",\"b\":\"01M73EPX9NCMXTADXRCJ1TNJWG\"}",
+      "pass": true
+    },
+    {
+      "id": "ambiguous-mapped-pair-count",
+      "claim": "Only the common root and the unresolved calc component are returned",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/compare?a=01M73EPDSXSSRZVRN11SMBYMY7&b=01M73EPX9NCMXTADXRCJ1TNJWG&map=%5B%5B%22f13_tie%22%2C%22f13_tie%22%5D%5D"
+      },
+      "expected": "2",
+      "observed": "2",
+      "pass": true
+    },
+    {
+      "id": "ambiguous-mapped-root",
+      "claim": "Root input identity is already uniquely aligned, so it cannot disambiguate duplicate calls",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/compare?a=01M73EPDSXSSRZVRN11SMBYMY7&b=01M73EPX9NCMXTADXRCJ1TNJWG&map=%5B%5B%22f13_tie%22%2C%22f13_tie%22%5D%5D"
+      },
+      "expected": "{\"kind\":\"SameValue\",\"a\":{\"kind\":\"Root\",\"name\":\"f13_tie\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":7}}},\"b\":{\"kind\":\"Root\",\"name\":\"f13_tie\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":7}}}}",
+      "observed": "{\"kind\":\"SameValue\",\"a\":{\"kind\":\"Root\",\"name\":\"f13_tie\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":7}}},\"b\":{\"kind\":\"Root\",\"name\":\"f13_tie\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":7}}}}",
+      "pass": true
+    },
+    {
+      "id": "ambiguous-mapped-candidates",
+      "claim": "D6-13 returns Ambiguous with both same-function candidates on both sides; input identity, source, and root mapping cannot select one",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/compare?a=01M73EPDSXSSRZVRN11SMBYMY7&b=01M73EPX9NCMXTADXRCJ1TNJWG&map=%5B%5B%22f13_tie%22%2C%22f13_tie%22%5D%5D"
+      },
+      "expected": "[{\"kind\":\"Ambiguous\",\"fn\":\"calc\",\"a\":[{\"kind\":\"Call\",\"step\":2,\"position\":0,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:24:26.284Z\",\"endedAt\":\"2026-11-10T19:24:26.295Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_first\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]},{\"kind\":\"Call\",\"step\":2,\"position\":1,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:24:26.290Z\",\"endedAt\":\"2026-11-10T19:24:26.300Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_second\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]}],\"b\":[{\"kind\":\"Call\",\"step\":2,\"position\":0,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Adopted\"},\"startedAt\":\"2026-11-10T19:24:42.155Z\",\"endedAt\":\"2026-11-10T19:24:42.155Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_first\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]},{\"kind\":\"Call\",\"step\":2,\"position\":1,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Adopted\"},\"startedAt\":\"2026-11-10T19:24:42.164Z\",\"endedAt\":\"2026-11-10T19:24:42.164Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_second\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]}]}]",
+      "observed": "[{\"kind\":\"Ambiguous\",\"fn\":\"calc\",\"a\":[{\"kind\":\"Call\",\"step\":2,\"position\":0,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:24:26.284Z\",\"endedAt\":\"2026-11-10T19:24:26.295Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_first\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]},{\"kind\":\"Call\",\"step\":2,\"position\":1,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:24:26.290Z\",\"endedAt\":\"2026-11-10T19:24:26.300Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_second\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]}],\"b\":[{\"kind\":\"Call\",\"step\":2,\"position\":0,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Adopted\"},\"startedAt\":\"2026-11-10T19:24:42.155Z\",\"endedAt\":\"2026-11-10T19:24:42.155Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_first\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]},{\"kind\":\"Call\",\"step\":2,\"position\":1,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Adopted\"},\"startedAt\":\"2026-11-10T19:24:42.164Z\",\"endedAt\":\"2026-11-10T19:24:42.164Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f13_second\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":14}}}]}]}]",
+      "pass": true
+    }
+  ],
+  "deviations": [],
+  "result": {
+    "kind": "pass"
+  }
+}

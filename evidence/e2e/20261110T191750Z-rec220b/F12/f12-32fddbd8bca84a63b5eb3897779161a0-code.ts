@@ -1,0 +1,14 @@
+const film = file("soroi-f12-32fddbd8bca84a63b5eb3897779161a0.bin")
+const f12_description = "薄膜中文检索样本32fddbd8bca84a63b5eb3897779161a0"
+const f12_c = 2
+const f12_gamma = 0.5
+const f12_trees = 100
+const f12_length_scale = 2
+const f12_neighbors = 4
+const f12_learning_rate = 0.1
+const f12_epochs = 10
+const f12_svm = run_svm(film, f12_c, f12_gamma)
+const f12_rf = run_rf(film, f12_trees)
+const f12_gp = run_gp(film, f12_length_scale)
+const f12_knn = run_knn(film, f12_neighbors)
+const f12_lr = run_lr(film, f12_learning_rate, f12_epochs)

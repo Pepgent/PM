@@ -1,0 +1,18 @@
+: connected
+
+id: 7
+event: call_ended
+data: {"seq":7,"at":"2026-11-10T19:22:42.373Z","kind":"call_ended","step":5,"position":0}
+
+id: 8
+event: step_committed
+data: {"seq":8,"at":"2026-11-10T19:22:49.820Z","kind":"step_committed","step":{"session":"01a1c6e9-4e79-7655-b7b6-333ee774a7cd","code":"stop(f10_z)"},"records":{"nodes":[],"edges":[]}}
+
+id: 9
+event: atom_stopped
+data: {"seq":9,"at":"2026-11-10T19:22:49.820Z","kind":"atom_stopped","name":"f10_z"}
+
+id: 10
+event: run_ended
+data: {"seq":10,"at":"2026-11-10T19:22:49.987Z","kind":"run_ended"}
+

@@ -1,0 +1,76 @@
+{
+  "evidenceId": "3dae7a3e-15c3-48db-bc15-880df10892e8",
+  "method": "GET",
+  "path": "/runs/01M73EK1WPGJEY44RJSEQYSKA7/stream?after=0",
+  "status": 200,
+  "requestRpcLine": 268,
+  "responseRpcLine": 268,
+  "capture": {
+    "kind": "stream",
+    "headersRpcLine": 268,
+    "blocks": [
+      {
+        "raw": ": connected",
+        "rpcLine": 268
+      },
+      {
+        "raw": "id: 1\nevent: run_started\ndata: {\"seq\":1,\"at\":\"2026-11-10T19:22:35.798Z\",\"kind\":\"run_started\",\"records\":{\"nodes\":[],\"edges\":[]}}",
+        "rpcLine": 268
+      },
+      {
+        "raw": "id: 2\nevent: step_committed\ndata: {\"seq\":2,\"at\":\"2026-11-10T19:22:35.798Z\",\"kind\":\"step_committed\",\"step\":{\"session\":\"01a1c6e9-4e79-7655-b7b6-333ee774a7cd\",\"code\":\"const f10_x = 21\\nconst f10_y = calc(f10_x)\"},\"records\":{\"nodes\":[{\"kind\":\"Root\",\"name\":\"f10_x\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":21}}},{\"kind\":\"Call\",\"capture\":\"3c61e6134b91fbe71f3b4ef25940378b845c94a581894914b3620d84e206ea01\",\"step\":2,\"position\":0,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:22:35.786Z\",\"endedAt\":\"2026-11-10T19:22:35.797Z\",\"outputs\":[{\"field\":\"\",\"name\":\"f10_y\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":42}}}],\"transcript\":null}],\"edges\":[{\"from\":\"f10_x\",\"to\":{\"step\":2,\"position\":0,\"input\":0}}]}}",
+        "rpcLine": 268
+      },
+      {
+        "raw": "id: 3\nevent: call_started\ndata: {\"seq\":3,\"at\":\"2026-11-10T19:22:35.786Z\",\"kind\":\"call_started\",\"step\":2,\"position\":0}",
+        "rpcLine": 268
+      },
+      {
+        "raw": "id: 4\nevent: call_ended\ndata: {\"seq\":4,\"at\":\"2026-11-10T19:22:35.797Z\",\"kind\":\"call_ended\",\"step\":2,\"position\":0}",
+        "rpcLine": 268
+      },
+      {
+        "raw": "id: 5\nevent: step_committed\ndata: {\"seq\":5,\"at\":\"2026-11-10T19:22:42.374Z\",\"kind\":\"step_committed\",\"step\":{\"session\":\"01a1c6e9-4e79-7655-b7b6-333ee774a7cd\",\"code\":\"const f10_z = calc(f10_y)\"},\"records\":{\"nodes\":[{\"kind\":\"Call\",\"capture\":\"1a003c6e13d417cd8397904720ea79fe94872318c9cc481d3a29f6e7382b22ec\",\"step\":5,\"position\":0,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T19:22:42.362Z\",\"endedAt\":\"2026-11-10T19:22:42.373Z\",\"outputs\":[{\"field\":\"\",\"name\":\"f10_z\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":84}}}],\"transcript\":null}],\"edges\":[{\"from\":\"f10_y\",\"to\":{\"step\":5,\"position\":0,\"input\":0}}]}}",
+        "rpcLine": 268
+      },
+      {
+        "raw": "id: 6\nevent: call_started\ndata: {\"seq\":6,\"at\":\"2026-11-10T19:22:42.362Z\",\"kind\":\"call_started\",\"step\":5,\"position\":0}",
+        "rpcLine": 268
+      },
+      {
+        "raw": "id: 7\nevent: call_ended\ndata: {\"seq\":7,\"at\":\"2026-11-10T19:22:42.373Z\",\"kind\":\"call_ended\",\"step\":5,\"position\":0}",
+        "rpcLine": 268
+      },
+      {
+        "raw": "id: 8\nevent: step_committed\ndata: {\"seq\":8,\"at\":\"2026-11-10T19:22:49.820Z\",\"kind\":\"step_committed\",\"step\":{\"session\":\"01a1c6e9-4e79-7655-b7b6-333ee774a7cd\",\"code\":\"stop(f10_z)\"},\"records\":{\"nodes\":[],\"edges\":[]}}",
+        "rpcLine": 268
+      },
+      {
+        "raw": "id: 9\nevent: atom_stopped\ndata: {\"seq\":9,\"at\":\"2026-11-10T19:22:49.820Z\",\"kind\":\"atom_stopped\",\"name\":\"f10_z\"}",
+        "rpcLine": 268
+      },
+      {
+        "raw": "id: 10\nevent: run_ended\ndata: {\"seq\":10,\"at\":\"2026-11-10T19:22:49.987Z\",\"kind\":\"run_ended\"}",
+        "rpcLine": 268
+      }
+    ]
+  },
+  "headers": [
+    [
+      "cache-control",
+      "no-cache"
+    ],
+    [
+      "content-type",
+      "text/event-stream; charset=utf-8"
+    ],
+    [
+      "date",
+      "Tue, 10 Nov 2026 19:22:51 GMT"
+    ],
+    [
+      "transfer-encoding",
+      "chunked"
+    ]
+  ]
+}

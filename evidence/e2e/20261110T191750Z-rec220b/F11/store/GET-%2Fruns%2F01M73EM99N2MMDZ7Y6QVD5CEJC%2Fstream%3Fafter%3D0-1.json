@@ -1,0 +1,29 @@
+{
+  "evidenceId": "dba66971-d444-410e-af3c-eed606925396",
+  "method": "GET",
+  "path": "/runs/01M73EM99N2MMDZ7Y6QVD5CEJC/stream?after=0",
+  "status": 200,
+  "requestRpcLine": 222,
+  "responseRpcLine": 222,
+  "capture": {
+    "kind": "complete"
+  },
+  "headers": [
+    [
+      "cache-control",
+      "no-cache"
+    ],
+    [
+      "content-type",
+      "text/event-stream; charset=utf-8"
+    ],
+    [
+      "date",
+      "Tue, 10 Nov 2026 19:23:17 GMT"
+    ],
+    [
+      "transfer-encoding",
+      "chunked"
+    ]
+  ]
+}

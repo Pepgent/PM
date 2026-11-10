@@ -1,0 +1,52 @@
+{
+  "evidenceId": "3dae7a3e-15c3-48db-bc15-880df10892e8",
+  "method": "GET",
+  "path": "/runs/01M73EK1WPGJEY44RJSEQYSKA7/stream?after=6",
+  "status": 200,
+  "requestRpcLine": 268,
+  "responseRpcLine": 268,
+  "capture": {
+    "kind": "stream",
+    "headersRpcLine": 268,
+    "blocks": [
+      {
+        "raw": ": connected",
+        "rpcLine": 268
+      },
+      {
+        "raw": "id: 7\nevent: call_ended\ndata: {\"seq\":7,\"at\":\"2026-11-10T19:22:42.373Z\",\"kind\":\"call_ended\",\"step\":5,\"position\":0}",
+        "rpcLine": 268
+      },
+      {
+        "raw": "id: 8\nevent: step_committed\ndata: {\"seq\":8,\"at\":\"2026-11-10T19:22:49.820Z\",\"kind\":\"step_committed\",\"step\":{\"session\":\"01a1c6e9-4e79-7655-b7b6-333ee774a7cd\",\"code\":\"stop(f10_z)\"},\"records\":{\"nodes\":[],\"edges\":[]}}",
+        "rpcLine": 268
+      },
+      {
+        "raw": "id: 9\nevent: atom_stopped\ndata: {\"seq\":9,\"at\":\"2026-11-10T19:22:49.820Z\",\"kind\":\"atom_stopped\",\"name\":\"f10_z\"}",
+        "rpcLine": 268
+      },
+      {
+        "raw": "id: 10\nevent: run_ended\ndata: {\"seq\":10,\"at\":\"2026-11-10T19:22:49.987Z\",\"kind\":\"run_ended\"}",
+        "rpcLine": 268
+      }
+    ]
+  },
+  "headers": [
+    [
+      "cache-control",
+      "no-cache"
+    ],
+    [
+      "content-type",
+      "text/event-stream; charset=utf-8"
+    ],
+    [
+      "date",
+      "Tue, 10 Nov 2026 19:22:52 GMT"
+    ],
+    [
+      "transfer-encoding",
+      "chunked"
+    ]
+  ]
+}

@@ -1,0 +1,5 @@
+const f09_0d2c3fe211a2441281dabbdf73f74d92_1_film = "film_0d2c3fe211a2441281dabbdf73f74d92_1"
+const f09_0d2c3fe211a2441281dabbdf73f74d92_1_temperature = 2300
+const { curve: f09_0d2c3fe211a2441281dabbdf73f74d92_1_curve, log: f09_0d2c3fe211a2441281dabbdf73f74d92_1_log } = anneal(f09_0d2c3fe211a2441281dabbdf73f74d92_1_film, f09_0d2c3fe211a2441281dabbdf73f74d92_1_temperature)
+stop(f09_0d2c3fe211a2441281dabbdf73f74d92_1_curve)
+stop(f09_0d2c3fe211a2441281dabbdf73f74d92_1_log)

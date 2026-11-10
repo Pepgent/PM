@@ -1,0 +1,26 @@
+[
+  {
+    "run": "remote-01m6anvvyt67fp53020zkqyh1q",
+    "template": "infra-slurm-check",
+    "backend": "slurm",
+    "lifecycle": [
+      {
+        "event": "queued",
+        "at": "2026-11-01T04:28:43.877814161Z"
+      },
+      {
+        "event": "running",
+        "started_at": "2026-11-01T04:28:46Z"
+      },
+      {
+        "event": "ended",
+        "started_at": "2026-11-01T04:28:46Z",
+        "ended_at": "2026-11-01T04:28:48Z"
+      },
+      {
+        "event": "removed",
+        "at": "2026-11-01T04:28:49.174584668Z"
+      }
+    ]
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "evidenceId": "3dae7a3e-15c3-48db-bc15-880df10892e8",
+  "method": "GET",
+  "path": "/agents/events",
+  "status": 200,
+  "requestRpcLine": 268,
+  "responseRpcLine": 268,
+  "capture": {
+    "kind": "stream",
+    "headersRpcLine": 268,
+    "blocks": [
+      {
+        "raw": "data: {\"kind\":\"writer_up\",\"agentId\":\"f10-rec220b-20261110T191750Z-0-0\"}",
+        "rpcLine": 268
+      },
+      {
+        "raw": "data: {\"kind\":\"generation_up\",\"agentId\":\"f10-rec220b-20261110T191750Z-0-0\",\"generation\":\"ac7448a3-8b3c-4b3a-9498-b96907ee15b7\",\"where\":{\"kind\":\"local\",\"host\":\"e67054b444af\"}}",
+        "rpcLine": 268
+      }
+    ]
+  },
+  "headers": [
+    [
+      "cache-control",
+      "no-cache"
+    ],
+    [
+      "content-type",
+      "text/event-stream"
+    ],
+    [
+      "date",
+      "Tue, 10 Nov 2026 19:22:51 GMT"
+    ],
+    [
+      "transfer-encoding",
+      "chunked"
+    ]
+  ]
+}

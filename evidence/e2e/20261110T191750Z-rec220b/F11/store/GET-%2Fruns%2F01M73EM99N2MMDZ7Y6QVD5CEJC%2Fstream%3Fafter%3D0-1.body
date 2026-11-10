@@ -1,0 +1,22 @@
+: connected
+
+id: 1
+event: run_started
+data: {"seq":1,"at":"2026-11-10T19:23:16.149Z","kind":"run_started","records":{"nodes":[],"edges":[]}}
+
+id: 2
+event: step_committed
+data: {"seq":2,"at":"2026-11-10T19:23:16.149Z","kind":"step_committed","step":{"session":"01a1c6ea-043b-71d4-868a-85c2d43e2e7a","code":"const x2 = 21;\nconst y2 = calc(x2);\nstop(y2);"},"records":{"nodes":[{"kind":"Root","name":"x2","value":{"kind":"scalar","scalar":{"kind":"number","v":21}}},{"kind":"Call","capture":"3c61e6134b91fbe71f3b4ef25940378b845c94a581894914b3620d84e206ea01","step":2,"position":0,"fn":"calc","version":"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d","body":"Program","env":{"kind":"central"},"status":{"kind":"Adopted"},"startedAt":"2026-11-10T19:23:16.149Z","endedAt":"2026-11-10T19:23:16.149Z","outputs":[{"field":"","name":"y2","value":{"kind":"scalar","scalar":{"kind":"number","v":42}}}],"transcript":null}],"edges":[{"from":"x2","to":{"step":2,"position":0,"input":0}}]}}
+
+id: 3
+event: call_adopted
+data: {"seq":3,"at":"2026-11-10T19:23:16.149Z","kind":"call_adopted","step":2,"position":0}
+
+id: 4
+event: atom_stopped
+data: {"seq":4,"at":"2026-11-10T19:23:16.149Z","kind":"atom_stopped","name":"y2"}
+
+id: 5
+event: run_ended
+data: {"seq":5,"at":"2026-11-10T19:23:16.385Z","kind":"run_ended"}
+
