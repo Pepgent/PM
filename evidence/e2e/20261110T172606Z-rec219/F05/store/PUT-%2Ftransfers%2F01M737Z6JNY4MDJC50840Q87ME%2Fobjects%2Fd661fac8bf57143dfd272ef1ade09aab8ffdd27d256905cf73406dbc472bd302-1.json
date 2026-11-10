@@ -1,0 +1,17 @@
+{
+  "evidenceId": "4a5108a8-26ca-47ce-9472-14612795e4e9",
+  "method": "PUT",
+  "path": "/transfers/01M737Z6JNY4MDJC50840Q87ME/objects/d661fac8bf57143dfd272ef1ade09aab8ffdd27d256905cf73406dbc472bd302",
+  "status": 204,
+  "requestRpcLine": 123,
+  "responseRpcLine": 123,
+  "capture": {
+    "kind": "complete"
+  },
+  "headers": [
+    [
+      "date",
+      "Tue, 10 Nov 2026 17:26:53 GMT"
+    ]
+  ]
+}

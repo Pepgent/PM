@@ -1,0 +1,37 @@
+{
+  "evidenceDir": "/work/evidence/e2e/20261110T172606Z-rec219/F05",
+  "storeUrl": "http://pepgent-soroi-e2e-store.orb.local:3001",
+  "a0Verdict": "/work/a0-verdict.json",
+  "models": [
+    "opencode-go/deepseek-v4.1-flash",
+    "openai-codex/gpt-6-luna",
+    "anthropic/claude-haiku-5-5"
+  ],
+  "reproduce": "docker exec -u 1000:1000 -w /work pepgent-soroi-e2e-central sh -ec 'MUX_AUTH_TOKEN=$(cat /run/secrets/mux-auth-token) && PEPGENT_GATEWAY_TOKEN=$(cat /run/secrets/gateway-client-token) && export MUX_AUTH_TOKEN PEPGENT_GATEWAY_TOKEN && exec bun run --cwd /opt/soroi/e2e f05 --config /work/campaigns/f05-rec219.json'",
+  "launch": {
+    "muxUrl": "ws://pepgent-soroi-e2e-mux.orb.local:8080",
+    "agent": "f05-rec219-20261110T172606Z",
+    "muxBinary": "/usr/local/bin/omp-rpc-mux",
+    "command": [
+      "/home/agent/.local/bin/soroi",
+      "--mode",
+      "rpc",
+      "--session-dir",
+      "/tmp/soroi-f05-rec219-20261110T172606Z/sessions"
+    ],
+    "cwd": "/work/lab-library",
+    "timeoutMs": 600000
+  },
+  "build": {
+    "commits": {
+      "soroi": "aed4d6f4c3d4062cab95adf0aa1a4cedbfa291fe",
+      "omp-soroi": "dc7d05d4b219a12a191078fac5604658682fe103"
+    },
+    "release": "c85c66c6cc01e07c41637c7ae3fe3436ad5183203c9379fb9d3b405b8d6fbc76",
+    "images": {
+      "IMG-05": "pepgent-registry.orb.local:5000/pepgent/central@sha256:2918d73ca68fc938eed1885b66395cb575e9c760f1ebdcb560ab051592484cb8"
+    },
+    "omp": "18.18.6",
+    "model": "opencode-go/deepseek-v4.1-flash"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "evidenceId": "4a5108a8-26ca-47ce-9472-14612795e4e9",
+  "method": "GET",
+  "path": "/runs?state=Open",
+  "status": 200,
+  "requestRpcLine": 968,
+  "responseRpcLine": 968,
+  "capture": {
+    "kind": "complete"
+  },
+  "headers": [
+    [
+      "content-length",
+      "925"
+    ],
+    [
+      "content-type",
+      "application/json;charset=utf-8"
+    ],
+    [
+      "date",
+      "Tue, 10 Nov 2026 17:27:36 GMT"
+    ]
+  ]
+}

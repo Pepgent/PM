@@ -1,0 +1,34 @@
+: connected
+
+id: 1
+event: run_started
+data: {"seq":1,"at":"2026-11-10T17:27:28.157Z","kind":"run_started","records":{"nodes":[],"edges":[]}}
+
+id: 2
+event: step_committed
+data: {"seq":2,"at":"2026-11-10T17:27:28.157Z","kind":"step_committed","step":{"session":"01a1c67f-e3aa-7359-a838-8a24114b943c","code":"const f04_input = 131966342792\nconst f04_film = \"film_1eb9ce9688e541ea8d23c032d2a3cff9\"\nconst f04_temp = 2200\nconst f04_doubled = calc(f04_input)\nconst { score: f04_score, report: f04_report } = review(f04_doubled)\nconst { curve: f04_curve, log: f04_log } = anneal(f04_film, f04_temp)"},"records":{"nodes":[{"kind":"Root","name":"f04_film","value":{"kind":"scalar","scalar":{"kind":"string","v":"film_1eb9ce9688e541ea8d23c032d2a3cff9"}}},{"kind":"Root","name":"f04_input","value":{"kind":"scalar","scalar":{"kind":"number","v":131966342792}}},{"kind":"Root","name":"f04_temp","value":{"kind":"scalar","scalar":{"kind":"number","v":2200}}},{"kind":"Call","capture":"588d4370e0cf30eba532782d7062709472fdbdb816a37c9351bb34699c231c8a","step":2,"position":0,"fn":"calc","version":"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d","body":"Program","env":{"kind":"central"},"status":{"kind":"Ended"},"startedAt":"2026-11-10T17:27:25.515Z","endedAt":"2026-11-10T17:27:25.526Z","outputs":[{"field":"","name":"f04_doubled","value":{"kind":"scalar","scalar":{"kind":"number","v":263932685584}}}],"transcript":null},{"kind":"Call","capture":"92144dc2e658a00031171b28e5c25e7cc2fe13553d858470f2d373ea9d428d35","step":2,"position":1,"fn":"review","version":"a5d7e59860ce0daad0c25abe4272fded8cf9f4118e6d73af5dc1ab165c95a847","body":"Agent","env":{"kind":"central"},"status":{"kind":"Ended"},"startedAt":"2026-11-10T17:27:25.537Z","endedAt":"2026-11-10T17:27:28.154Z","outputs":[{"field":"score","name":"f04_score","value":{"kind":"scalar","scalar":{"kind":"number","v":263932685584}}},{"field":"report","name":"f04_report","value":{"kind":"file","content":"ca3d9cf652f3168d097d080c0548a6a792a723ed145998c2cc7c72379673f97c","media":"text/plain;charset=utf-8","name":"review-e7da8b46-915f-4656-831f-1d14e82c46dd.txt"}}],"transcript":"01a1c680-166e-77be-b0c2-e2259f6a4fe7"},{"kind":"Call","capture":"6b16c0e5aba4ab52d5a81e124e8503815041a69d1ecf9e43faae5133f132b653","step":2,"position":2,"fn":"anneal","version":"2b5cd65a7b8d1de71bff09aa554214dad7a332102e485fbde4c9a3971cbd9d31","body":"Program","env":{"kind":"central"},"status":{"kind":"Ended"},"startedAt":"2026-11-10T17:27:25.521Z","endedAt":"2026-11-10T17:27:25.537Z","outputs":[{"field":"curve","name":"f04_curve","value":{"kind":"scalar","scalar":{"kind":"number","v":59}}},{"field":"log","name":"f04_log","value":{"kind":"file","content":"b4dcafe3ab3f1f60040680c03cbe12c0df03ef3f9b23cee0921b3c357ad6bade","media":"text/plain;charset=utf-8","name":"anneal-aede06e1-da65-4afa-88ef-1ba19fbb4d1e.txt"}}],"transcript":null}],"edges":[{"from":"f04_input","to":{"step":2,"position":0,"input":0}},{"from":"f04_doubled","to":{"step":2,"position":1,"input":0}},{"from":"f04_film","to":{"step":2,"position":2,"input":0}},{"from":"f04_temp","to":{"step":2,"position":2,"input":1}}]}}
+
+id: 3
+event: call_started
+data: {"seq":3,"at":"2026-11-10T17:27:25.515Z","kind":"call_started","step":2,"position":0}
+
+id: 4
+event: call_ended
+data: {"seq":4,"at":"2026-11-10T17:27:25.526Z","kind":"call_ended","step":2,"position":0}
+
+id: 5
+event: call_started
+data: {"seq":5,"at":"2026-11-10T17:27:25.537Z","kind":"call_started","step":2,"position":1}
+
+id: 6
+event: call_ended
+data: {"seq":6,"at":"2026-11-10T17:27:28.154Z","kind":"call_ended","step":2,"position":1}
+
+id: 7
+event: call_started
+data: {"seq":7,"at":"2026-11-10T17:27:25.521Z","kind":"call_started","step":2,"position":2}
+
+id: 8
+event: call_ended
+data: {"seq":8,"at":"2026-11-10T17:27:25.537Z","kind":"call_ended","step":2,"position":2}
+

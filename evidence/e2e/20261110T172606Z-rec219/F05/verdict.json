@@ -1,0 +1,332 @@
+{
+  "flow": "F05",
+  "segment": "S1",
+  "env": "L",
+  "startedAt": "2026-11-10T17:26:46.639Z",
+  "endedAt": "2026-11-10T17:27:39.316Z",
+  "build": {
+    "commits": {
+      "soroi": "aed4d6f4c3d4062cab95adf0aa1a4cedbfa291fe",
+      "omp-soroi": "dc7d05d4b219a12a191078fac5604658682fe103"
+    },
+    "release": "c85c66c6cc01e07c41637c7ae3fe3436ad5183203c9379fb9d3b405b8d6fbc76",
+    "images": {
+      "IMG-05": "pepgent-registry.orb.local:5000/pepgent/central@sha256:2918d73ca68fc938eed1885b66395cb575e9c760f1ebdcb560ab051592484cb8"
+    },
+    "omp": "18.18.6",
+    "model": "anthropic/claude-haiku-5-5"
+  },
+  "runs": [
+    "01M738084X5ZM37FJYEK3DN6TN"
+  ],
+  "agents": [
+    "f05-rec219-20261110T172606Z-0-0",
+    "f05-rec219-20261110T172606Z-0-1",
+    "f05-rec219-20261110T172606Z-1-0",
+    "f05-rec219-20261110T172606Z-2-0",
+    "review"
+  ],
+  "remoteRuns": [],
+  "assertions": [
+    {
+      "id": "f04-dry-run",
+      "claim": "The unchanged F04 workload is first evaluated as a pinned dry run",
+      "source": {
+        "kind": "rpc",
+        "agent": "f05-rec219-20261110T172606Z-2-0",
+        "frame": "538"
+      },
+      "expected": "\"dry_run\"",
+      "observed": "\"dry_run\"",
+      "pass": true
+    },
+    {
+      "id": "dry-call-outcomes",
+      "claim": "The F04 dry run executes its unpinned Programs and pins every review output",
+      "source": {
+        "kind": "rpc",
+        "agent": "f05-rec219-20261110T172606Z-2-0",
+        "frame": "538"
+      },
+      "expected": "[{\"names\":[\"f04_doubled\"],\"outcome\":\"ran\"},{\"names\":[\"f04_report\",\"f04_score\"],\"outcome\":\"pinned\"},{\"names\":[\"f04_curve\",\"f04_log\"],\"outcome\":\"ran\"}]",
+      "observed": "[{\"names\":[\"f04_doubled\"],\"outcome\":\"ran\"},{\"names\":[\"f04_report\",\"f04_score\"],\"outcome\":\"pinned\"},{\"names\":[\"f04_curve\",\"f04_log\"],\"outcome\":\"ran\"}]",
+      "pass": true
+    },
+    {
+      "id": "dry-no-agent",
+      "claim": "The pinned review dry run does not create an Agent",
+      "source": {
+        "kind": "mux",
+        "path": "/agents"
+      },
+      "expected": "[\"f05-rec219-20261110T172606Z-2-0\"]",
+      "observed": "[\"f05-rec219-20261110T172606Z-2-0\"]",
+      "pass": true
+    },
+    {
+      "id": "formal-eval",
+      "claim": "The same workload commits through the installed soroi_eval formal entry",
+      "source": {
+        "kind": "rpc",
+        "agent": "f05-rec219-20261110T172606Z-2-0",
+        "frame": "719"
+      },
+      "expected": "\"formal\"",
+      "observed": "\"formal\"",
+      "pass": true
+    },
+    {
+      "id": "unchanged-tool-code",
+      "claim": "The original formal tool arguments preserve the dry-run code byte for byte and contain no pins",
+      "source": {
+        "kind": "rpc",
+        "agent": "f05-rec219-20261110T172606Z-2-0",
+        "frame": "717"
+      },
+      "expected": "{\"mode\":\"formal\",\"code\":\"const f04_input = 131966342792\\nconst f04_film = \\\"film_1eb9ce9688e541ea8d23c032d2a3cff9\\\"\\nconst f04_temp = 2200\\nconst f04_doubled = calc(f04_input)\\nconst { score: f04_score, report: f04_report } = review(f04_doubled)\\nconst { curve: f04_curve, log: f04_log } = anneal(f04_film, f04_temp)\"}",
+      "observed": "{\"mode\":\"formal\",\"code\":\"const f04_input = 131966342792\\nconst f04_film = \\\"film_1eb9ce9688e541ea8d23c032d2a3cff9\\\"\\nconst f04_temp = 2200\\nconst f04_doubled = calc(f04_input)\\nconst { score: f04_score, report: f04_report } = review(f04_doubled)\\nconst { curve: f04_curve, log: f04_log } = anneal(f04_film, f04_temp)\"}",
+      "pass": true
+    },
+    {
+      "id": "formal-call-outcomes",
+      "claim": "Every formal CallReport is ran or reused, with exactly the three F04 output bindings",
+      "source": {
+        "kind": "rpc",
+        "agent": "f05-rec219-20261110T172606Z-2-0",
+        "frame": "719"
+      },
+      "expected": "[[\"f04_doubled\"],[\"f04_report\",\"f04_score\"],[\"f04_curve\",\"f04_log\"]]",
+      "observed": "[[\"f04_doubled\"],[\"f04_report\",\"f04_score\"],[\"f04_curve\",\"f04_log\"]]",
+      "pass": true
+    },
+    {
+      "id": "no-formal-substitutes",
+      "claim": "No formal call remains pinned, human, failed or otherwise outside ran/reused",
+      "source": {
+        "kind": "rpc",
+        "agent": "f05-rec219-20261110T172606Z-2-0",
+        "frame": "719"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "review-really-ran",
+      "claim": "Formal review actually runs rather than reusing or retaining its dry-run pins",
+      "source": {
+        "kind": "rpc",
+        "agent": "f05-rec219-20261110T172606Z-2-0",
+        "frame": "719"
+      },
+      "expected": "[\"ran\"]",
+      "observed": "[\"ran\"]",
+      "pass": true
+    },
+    {
+      "id": "unchanged-committed-code",
+      "claim": "Exactly one committed step retains the dry-run code byte for byte and the root owning session",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M738084X5ZM37FJYEK3DN6TN/stream?after=0"
+      },
+      "expected": "[{\"session\":\"01a1c67f-e3aa-7359-a838-8a24114b943c\",\"code\":\"const f04_input = 131966342792\\nconst f04_film = \\\"film_1eb9ce9688e541ea8d23c032d2a3cff9\\\"\\nconst f04_temp = 2200\\nconst f04_doubled = calc(f04_input)\\nconst { score: f04_score, report: f04_report } = review(f04_doubled)\\nconst { curve: f04_curve, log: f04_log } = anneal(f04_film, f04_temp)\"}]",
+      "observed": "[{\"session\":\"01a1c67f-e3aa-7359-a838-8a24114b943c\",\"code\":\"const f04_input = 131966342792\\nconst f04_film = \\\"film_1eb9ce9688e541ea8d23c032d2a3cff9\\\"\\nconst f04_temp = 2200\\nconst f04_doubled = calc(f04_input)\\nconst { score: f04_score, report: f04_report } = review(f04_doubled)\\nconst { curve: f04_curve, log: f04_log } = anneal(f04_film, f04_temp)\"}]",
+      "pass": true
+    },
+    {
+      "id": "committed-records",
+      "claim": "D11-C1 commit-level records carry precisely the graph's nodes and input edges",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M738084X5ZM37FJYEK3DN6TN/stream?after=0"
+      },
+      "expected": "{\"nodes\":[{\"kind\":\"Root\",\"name\":\"f04_film\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"string\",\"v\":\"film_1eb9ce9688e541ea8d23c032d2a3cff9\"}}},{\"kind\":\"Root\",\"name\":\"f04_input\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":131966342792}}},{\"kind\":\"Root\",\"name\":\"f04_temp\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":2200}}},{\"kind\":\"Call\",\"step\":2,\"position\":0,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T17:27:25.515Z\",\"endedAt\":\"2026-11-10T17:27:25.526Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f04_doubled\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":263932685584}}}]},{\"kind\":\"Call\",\"step\":2,\"position\":1,\"fn\":\"review\",\"version\":\"a5d7e59860ce0daad0c25abe4272fded8cf9f4118e6d73af5dc1ab165c95a847\",\"body\":\"Agent\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T17:27:25.537Z\",\"endedAt\":\"2026-11-10T17:27:28.154Z\",\"transcript\":\"01a1c680-166e-77be-b0c2-e2259f6a4fe7\",\"outputs\":[{\"field\":\"score\",\"name\":\"f04_score\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":263932685584}}},{\"field\":\"report\",\"name\":\"f04_report\",\"value\":{\"kind\":\"file\",\"content\":\"ca3d9cf652f3168d097d080c0548a6a792a723ed145998c2cc7c72379673f97c\",\"media\":\"text/plain;charset=utf-8\",\"name\":\"review-e7da8b46-915f-4656-831f-1d14e82c46dd.txt\"}}]},{\"kind\":\"Call\",\"step\":2,\"position\":2,\"fn\":\"anneal\",\"version\":\"2b5cd65a7b8d1de71bff09aa554214dad7a332102e485fbde4c9a3971cbd9d31\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T17:27:25.521Z\",\"endedAt\":\"2026-11-10T17:27:25.537Z\",\"transcript\":null,\"outputs\":[{\"field\":\"curve\",\"name\":\"f04_curve\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":59}}},{\"field\":\"log\",\"name\":\"f04_log\",\"value\":{\"kind\":\"file\",\"content\":\"b4dcafe3ab3f1f60040680c03cbe12c0df03ef3f9b23cee0921b3c357ad6bade\",\"media\":\"text/plain;charset=utf-8\",\"name\":\"anneal-aede06e1-da65-4afa-88ef-1ba19fbb4d1e.txt\"}}]}],\"edges\":[{\"from\":\"f04_input\",\"to\":{\"step\":2,\"position\":0,\"input\":0}},{\"from\":\"f04_doubled\",\"to\":{\"step\":2,\"position\":1,\"input\":0}},{\"from\":\"f04_film\",\"to\":{\"step\":2,\"position\":2,\"input\":0}},{\"from\":\"f04_temp\",\"to\":{\"step\":2,\"position\":2,\"input\":1}}]}",
+      "observed": "{\"nodes\":[{\"kind\":\"Root\",\"name\":\"f04_film\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"string\",\"v\":\"film_1eb9ce9688e541ea8d23c032d2a3cff9\"}}},{\"kind\":\"Root\",\"name\":\"f04_input\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":131966342792}}},{\"kind\":\"Root\",\"name\":\"f04_temp\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":2200}}},{\"kind\":\"Call\",\"step\":2,\"position\":0,\"fn\":\"calc\",\"version\":\"075ebc9d920fb5f89fd8f67c589e69f6203d5b5a1fc52f238f3c47f9d9a43e6d\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T17:27:25.515Z\",\"endedAt\":\"2026-11-10T17:27:25.526Z\",\"transcript\":null,\"outputs\":[{\"field\":\"\",\"name\":\"f04_doubled\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":263932685584}}}]},{\"kind\":\"Call\",\"step\":2,\"position\":1,\"fn\":\"review\",\"version\":\"a5d7e59860ce0daad0c25abe4272fded8cf9f4118e6d73af5dc1ab165c95a847\",\"body\":\"Agent\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T17:27:25.537Z\",\"endedAt\":\"2026-11-10T17:27:28.154Z\",\"transcript\":\"01a1c680-166e-77be-b0c2-e2259f6a4fe7\",\"outputs\":[{\"field\":\"score\",\"name\":\"f04_score\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":263932685584}}},{\"field\":\"report\",\"name\":\"f04_report\",\"value\":{\"kind\":\"file\",\"content\":\"ca3d9cf652f3168d097d080c0548a6a792a723ed145998c2cc7c72379673f97c\",\"media\":\"text/plain;charset=utf-8\",\"name\":\"review-e7da8b46-915f-4656-831f-1d14e82c46dd.txt\"}}]},{\"kind\":\"Call\",\"step\":2,\"position\":2,\"fn\":\"anneal\",\"version\":\"2b5cd65a7b8d1de71bff09aa554214dad7a332102e485fbde4c9a3971cbd9d31\",\"body\":\"Program\",\"env\":{\"kind\":\"central\"},\"status\":{\"kind\":\"Ended\"},\"startedAt\":\"2026-11-10T17:27:25.521Z\",\"endedAt\":\"2026-11-10T17:27:25.537Z\",\"transcript\":null,\"outputs\":[{\"field\":\"curve\",\"name\":\"f04_curve\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":59}}},{\"field\":\"log\",\"name\":\"f04_log\",\"value\":{\"kind\":\"file\",\"content\":\"b4dcafe3ab3f1f60040680c03cbe12c0df03ef3f9b23cee0921b3c357ad6bade\",\"media\":\"text/plain;charset=utf-8\",\"name\":\"anneal-aede06e1-da65-4afa-88ef-1ba19fbb4d1e.txt\"}}]}],\"edges\":[{\"from\":\"f04_input\",\"to\":{\"step\":2,\"position\":0,\"input\":0}},{\"from\":\"f04_doubled\",\"to\":{\"step\":2,\"position\":1,\"input\":0}},{\"from\":\"f04_film\",\"to\":{\"step\":2,\"position\":2,\"input\":0}},{\"from\":\"f04_temp\",\"to\":{\"step\":2,\"position\":2,\"input\":1}}]}",
+      "pass": true
+    },
+    {
+      "id": "formal-call-graph",
+      "claim": "The single formal step contains all three real calls at their committed coordinates",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M738084X5ZM37FJYEK3DN6TN/graph"
+      },
+      "expected": "[\"calc\",\"review\",\"anneal\"]",
+      "observed": "[\"calc\",\"review\",\"anneal\"]",
+      "pass": true
+    },
+    {
+      "id": "agent-capture",
+      "claim": "Review completes a central Agent capture, not a Program or pin substitute, and records a transcript sessionId",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M738084X5ZM37FJYEK3DN6TN/graph"
+      },
+      "expected": "{\"body\":\"Agent\",\"status\":{\"kind\":\"Ended\"},\"env\":{\"kind\":\"central\"},\"session\":true}",
+      "observed": "{\"body\":\"Agent\",\"status\":{\"kind\":\"Ended\"},\"env\":{\"kind\":\"central\"},\"session\":true}",
+      "pass": true
+    },
+    {
+      "id": "review-transition",
+      "claim": "The review coordinates have actual call_started then call_ended transitions, not adoption",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M738084X5ZM37FJYEK3DN6TN/stream?after=0"
+      },
+      "expected": "[\"call_started\",\"call_ended\"]",
+      "observed": "[\"call_started\",\"call_ended\"]",
+      "pass": true
+    },
+    {
+      "id": "capture-session",
+      "claim": "The Agent graph transcript is this newly spawned child's native sessionId, not the root session",
+      "source": {
+        "kind": "rpc",
+        "agent": "review",
+        "frame": "920"
+      },
+      "expected": "[\"01a1c680-166e-77be-b0c2-e2259f6a4fe7\",true]",
+      "observed": "[\"01a1c680-166e-77be-b0c2-e2259f6a4fe7\",true]",
+      "pass": true
+    },
+    {
+      "id": "persisted-session",
+      "claim": "The retained native transcript records the capture's actual sessionId",
+      "source": {
+        "kind": "transcript",
+        "file": "f05-rec219-20261110T172606Z-2-0-review.jsonl",
+        "lines": [
+          1,
+          13
+        ]
+      },
+      "expected": "\"01a1c680-166e-77be-b0c2-e2259f6a4fe7\"",
+      "observed": "\"01a1c680-166e-77be-b0c2-e2259f6a4fe7\"",
+      "pass": true
+    },
+    {
+      "id": "accepted-capture-return",
+      "claim": "The actual review transcript contains exactly one successfully accepted typed soroi_return with its supplied score and File path",
+      "source": {
+        "kind": "transcript",
+        "file": "f05-rec219-20261110T172606Z-2-0-review.jsonl",
+        "lines": [
+          1,
+          13
+        ]
+      },
+      "expected": "[{\"score\":263932685584,\"reportPath\":true}]",
+      "observed": "[{\"score\":263932685584,\"reportPath\":true}]",
+      "pass": true
+    },
+    {
+      "id": "unique-capture-child",
+      "claim": "Exactly one newly registered local child owns the review capture transcript",
+      "source": {
+        "kind": "mux",
+        "path": "/agents"
+      },
+      "expected": "1",
+      "observed": "1",
+      "pass": true
+    },
+    {
+      "id": "review-score",
+      "claim": "The actual Agent handback preserves the supplied doubled input instead of the pinned score",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M738084X5ZM37FJYEK3DN6TN/graph"
+      },
+      "expected": "{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":263932685584}}",
+      "observed": "{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":263932685584}}",
+      "pass": true
+    },
+    {
+      "id": "produced-files",
+      "claim": "Both the real review report and anneal log are committed File outputs",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M738084X5ZM37FJYEK3DN6TN/graph"
+      },
+      "expected": "[\"f04_log\",\"f04_report\"]",
+      "observed": "[\"f04_log\",\"f04_report\"]",
+      "pass": true
+    },
+    {
+      "id": "f04_report-published",
+      "claim": "The actual formal File object is publicly readable",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/objects/ca3d9cf652f3168d097d080c0548a6a792a723ed145998c2cc7c72379673f97c"
+      },
+      "expected": "200",
+      "observed": "200",
+      "pass": true
+    },
+    {
+      "id": "f04_report-bytes",
+      "claim": "The published File contains the exact real node output for the scripted inputs",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/objects/ca3d9cf652f3168d097d080c0548a6a792a723ed145998c2cc7c72379673f97c"
+      },
+      "expected": "\"score=263932685584\\n\"",
+      "observed": "\"score=263932685584\\n\"",
+      "pass": true
+    },
+    {
+      "id": "f04_log-published",
+      "claim": "The actual formal File object is publicly readable",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/objects/b4dcafe3ab3f1f60040680c03cbe12c0df03ef3f9b23cee0921b3c357ad6bade"
+      },
+      "expected": "200",
+      "observed": "200",
+      "pass": true
+    },
+    {
+      "id": "f04_log-bytes",
+      "claim": "The published File contains the exact real node output for the scripted inputs",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/objects/b4dcafe3ab3f1f60040680c03cbe12c0df03ef3f9b23cee0921b3c357ad6bade"
+      },
+      "expected": "\"film=film_1eb9ce9688e541ea8d23c032d2a3cff9\\ntemperature=2200\\ncurve=59\\n\"",
+      "observed": "\"film=film_1eb9ce9688e541ea8d23c032d2a3cff9\\ntemperature=2200\\ncurve=59\\n\"",
+      "pass": true
+    }
+  ],
+  "deviations": [
+    {
+      "prompt": 1,
+      "model": "opencode-go/deepseek-v4.1-flash",
+      "note": "Model deviated from scripted tool input: [{\"id\":\"call_c747bace2752468d8da98e15\",\"name\":\"soroi_eval\",\"args\":{\"mode\":\"dry_run\",\"code\":\"const f04_input = 486377690364\\nconst f04_film = \\\"film_713e5e94fcbc44c697ef3743d550efdb\\\"\\nconst f04_temp = 2200\\nconst f04_doubled = calc(f04_input)\\nconst { score: f04_score, report: f04_report } = review(f04_doubled)\\nconst { curve: f04_curve, log: f04_log } = anneal(f04_film, f04_temp)\",\"pins\":\"{\\\"f04_score\\\": 42, \\\"f04_report\\\": {\\\"file\\\": \\\"/tmp/soroi-f05-pin-wY92UQ/pinned-report.txt\\\"}}\"},\"line\":122}]"
+    },
+    {
+      "prompt": 2,
+      "model": "opencode-go/deepseek-v4.1-flash",
+      "note": "Model deviated from scripted tool input: [{\"id\":\"call_7f3e9fcf254448508563d8c5\",\"name\":\"soroi_eval\",\"args\":{\"mode\":\"dry_run\",\"code\":\"const f04_input = 531573633798\\nconst f04_film = \\\"film_7bc441f3067445269d144ff29b068e47\\\"\\nconst f04_temp = 2200\\nconst f04_doubled = calc(f04_input)\\nconst { score: f04_score, report: f04_report } = review(f04_doubled)\\nconst { curve: f04_curve, log: f04_log } = anneal(f04_film, f04_temp)\",\"pins\":\"{\\\"f04_score\\\": 42, \\\"f04_report\\\": {\\\"file\\\": \\\"/tmp/soroi-f05-pin-f2O0CX/pinned-report.txt\\\"}}\"},\"line\":325}]"
+    },
+    {
+      "prompt": 1,
+      "model": "openai-codex/gpt-6-luna",
+      "note": "Model turn failed: {\"message\":\"Unknown model: openai-codex/gpt-6-luna\",\"provider\":\"openai-codex\",\"model\":\"gpt-6-luna\",\"retryable\":false}"
+    }
+  ],
+  "result": {
+    "kind": "pass"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "evidenceId": "4a5108a8-26ca-47ce-9472-14612795e4e9",
+  "method": "GET",
+  "path": "/agents",
+  "status": 200,
+  "requestRpcLine": 658,
+  "responseRpcLine": 658,
+  "capture": {
+    "kind": "complete"
+  },
+  "headers": [
+    [
+      "content-length",
+      "223"
+    ],
+    [
+      "content-type",
+      "application/json"
+    ],
+    [
+      "date",
+      "Tue, 10 Nov 2026 17:27:22 GMT"
+    ]
+  ]
+}

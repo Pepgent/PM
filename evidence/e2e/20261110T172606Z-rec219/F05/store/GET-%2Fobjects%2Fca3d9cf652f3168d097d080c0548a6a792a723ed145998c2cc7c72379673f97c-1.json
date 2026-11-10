@@ -1,0 +1,29 @@
+{
+  "evidenceId": "4a5108a8-26ca-47ce-9472-14612795e4e9",
+  "method": "GET",
+  "path": "/objects/ca3d9cf652f3168d097d080c0548a6a792a723ed145998c2cc7c72379673f97c",
+  "status": 200,
+  "requestRpcLine": 920,
+  "responseRpcLine": 920,
+  "capture": {
+    "kind": "complete"
+  },
+  "headers": [
+    [
+      "content-disposition",
+      "filename=\"ca3d9cf652f3168d097d080c0548a6a792a723ed145998c2cc7c72379673f97c\""
+    ],
+    [
+      "content-length",
+      "19"
+    ],
+    [
+      "content-type",
+      "application/octet-stream"
+    ],
+    [
+      "date",
+      "Tue, 10 Nov 2026 17:27:33 GMT"
+    ]
+  ]
+}
