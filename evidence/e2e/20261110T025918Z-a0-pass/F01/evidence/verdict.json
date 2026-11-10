@@ -1,0 +1,120 @@
+{
+  "flow": "F01",
+  "segment": "A0",
+  "env": "L",
+  "startedAt": "2026-11-10T02:59:23.472Z",
+  "endedAt": "2026-11-10T03:00:57.060Z",
+  "build": {
+    "commits": {
+      "soroi": "7d83c5d57d296986cf7dc233b19f5462511e937d",
+      "omp-soroi": "dc7d05d4b219a12a191078fac5604658682fe103"
+    },
+    "images": {
+      "IMG-01": "pepgent-registry.orb.local:5000/pepgent/omp-agent@sha256:ee23be181f1d06376796a99ea4369a892fd70978b67ddde69c717441832d69c1"
+    },
+    "release": "c85c66c6cc01e07c41637c7ae3fe3436ad5183203c9379fb9d3b405b8d6fbc76",
+    "omp": "18.15.0",
+    "model": "opencode-go/deepseek-v4.1-flash"
+  },
+  "runs": [],
+  "agents": [
+    "InstallCheckWorker"
+  ],
+  "remoteRuns": [],
+  "assertions": [
+    {
+      "id": "extension",
+      "claim": "Installed Soroi tools execute a real unpinned Program and return its CallReport",
+      "source": {
+        "kind": "transcript",
+        "file": "proof/sessions/2026-11-10T02-59-24-002Z_01a1c365-62e2-76f9-aebb-620fc9bc8f43.jsonl",
+        "lines": [
+          12,
+          14
+        ]
+      },
+      "expected": "{\"tools\":[\"soroi_eval\",\"soroi_task\"],\"mode\":\"dry_run\",\"call\":\"const install_output = install_check_double(install_input)\",\"outcome\":\"ran\",\"env\":\"central\",\"output\":\"42\"}",
+      "observed": "{\"tools\":[\"soroi_eval\",\"soroi_task\"],\"mode\":\"dry_run\",\"result\":{\"kind\":\"success\",\"value\":{\"mode\":\"dry_run\",\"calls\":[{\"call\":\"const install_output = install_check_double(install_input)\",\"outcome\":\"ran\",\"env\":\"central\",\"outputs\":{\"install_output\":\"42\"}}]}}}",
+      "pass": true
+    },
+    {
+      "id": "agent",
+      "claim": "Named installed worker uses its discovered definition, inherited model and actual return tool",
+      "source": {
+        "kind": "transcript",
+        "file": "proof/sessions/2026-11-10T02-59-24-002Z_01a1c365-62e2-76f9-aebb-620fc9bc8f43/InstallCheckWorker.jsonl",
+        "lines": [
+          4,
+          4
+        ]
+      },
+      "expected": "{\"agent\":\"soroi-worker\",\"model\":\"opencode-go/deepseek-v4.1-flash\",\"definitionBodyIncluded\":true,\"acceptedReturn\":true,\"process\":\"the spawned local generation\"}",
+      "observed": "{\"definition\":{\"name\":\"soroi-worker\",\"filePath\":\"/home/agent/.omp/plugins/node_modules/omp-soroi/agents/soroi-worker.md\",\"models\":[]},\"rootModel\":\"opencode-go/deepseek-v4.1-flash\",\"childModel\":\"opencode-go/deepseek-v4.1-flash\",\"spawned\":{\"generation\":\"16c53fc2-27bf-4a0d-aa38-6ee3247654e6\",\"where\":{\"kind\":\"local\",\"host\":\"b5c4f15634da\"}},\"observed\":{\"kind\":\"generation\",\"generation\":\"16c53fc2-27bf-4a0d-aa38-6ee3247654e6\",\"host\":\"b5c4f15634da\"},\"acceptedReturn\":true}",
+      "pass": true
+    },
+    {
+      "id": "skill",
+      "claim": "Native skill URI returns the actual installed skill body",
+      "source": {
+        "kind": "transcript",
+        "file": "proof/sessions/2026-11-10T02-59-24-002Z_01a1c365-62e2-76f9-aebb-620fc9bc8f43.jsonl",
+        "lines": [
+          8,
+          10
+        ]
+      },
+      "expected": "{\"path\":\"skill://soroi-eval\",\"body\":\"installed SKILL.md, with the native reader's terminal-LF normalization\"}",
+      "observed": "{\"path\":\"/home/agent/.omp/plugins/node_modules/omp-soroi/skills/soroi-eval/SKILL.md\",\"characters\":8688}",
+      "pass": true
+    },
+    {
+      "id": "rule",
+      "claim": "Native transcript records every installed product rule in the assembled system prompt",
+      "source": {
+        "kind": "transcript",
+        "file": "proof/sessions/2026-11-10T02-59-24-002Z_01a1c365-62e2-76f9-aebb-620fc9bc8f43.jsonl",
+        "lines": [
+          5,
+          5
+        ]
+      },
+      "expected": "{\"required\":[\"soroi-three-statements.md\",\"soroi-no-magic-values.md\",\"soroi-exhaustive-destructure.md\",\"soroi-consume-every-atom.md\",\"soroi-formal-unchanged.md\"],\"fullBodiesIncluded\":true}",
+      "observed": "[{\"file\":\"soroi-consume-every-atom.md\",\"alwaysApply\":true,\"included\":true},{\"file\":\"soroi-exhaustive-destructure.md\",\"alwaysApply\":true,\"included\":true},{\"file\":\"soroi-formal-unchanged.md\",\"alwaysApply\":true,\"included\":true},{\"file\":\"soroi-no-magic-values.md\",\"alwaysApply\":true,\"included\":true},{\"file\":\"soroi-three-statements.md\",\"alwaysApply\":true,\"included\":true}]",
+      "pass": true
+    },
+    {
+      "id": "settings",
+      "claim": "The real child overlay overrides parent personality without resetting the main TTL",
+      "source": {
+        "kind": "transcript",
+        "file": "proof/sessions/2026-11-10T02-59-24-002Z_01a1c365-62e2-76f9-aebb-620fc9bc8f43/InstallCheckWorker.jsonl",
+        "lines": [
+          4,
+          4
+        ]
+      },
+      "expected": "{\"parent\":{\"personality\":\"pragmatic\",\"idleTtlMs\":2000},\"child\":{\"personality\":\"none\",\"approval\":\"yolo\",\"idleTtlMs\":2000}}",
+      "observed": "{\"parent\":{\"personality\":\"pragmatic\",\"approval\":\"yolo\",\"idleTtlMs\":2000},\"child\":{\"personality\":\"none\",\"approval\":\"yolo\",\"idleTtlMs\":2000}}",
+      "pass": true
+    },
+    {
+      "id": "a0-driver-cleanup",
+      "claim": "Docker, PTY and temporary-input lifecycles ended",
+      "source": {
+        "kind": "transcript",
+        "file": "cleanup.json",
+        "lines": [
+          1,
+          1
+        ]
+      },
+      "expected": "[]",
+      "observed": "[]",
+      "pass": true
+    }
+  ],
+  "deviations": [],
+  "result": {
+    "kind": "pass"
+  }
+}

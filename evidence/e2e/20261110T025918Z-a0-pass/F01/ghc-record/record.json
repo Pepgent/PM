@@ -1,0 +1,33 @@
+{
+  "id": "20261110T025918Z-cd78a1",
+  "issue": "Pepgent/soroi#235",
+  "rows": [
+    1
+  ],
+  "step": "run",
+  "capture": {
+    "kind": "run",
+    "command": "bun /tmp/pepgent-dispatch/Rec235A0/emit-campaign.ts | e2e/pty/a0-install.sh /dev/stdin",
+    "shell": "/bin/zsh",
+    "cwd": "/private/tmp/pepgent-dispatch/Rec235A0/soroi",
+    "completion": {
+      "kind": "exited",
+      "code": 0
+    },
+    "stdoutLines": 1,
+    "stderrLines": 0
+  },
+  "startedAt": "2026-11-10T02:59:18.914Z",
+  "endedAt": "2026-11-10T03:00:57.070Z",
+  "checkouts": [
+    {
+      "repo": "Pepgent/soroi",
+      "path": "/private/tmp/pepgent-dispatch/Rec235A0/soroi",
+      "head": "7d83c5d57d296986cf7dc233b19f5462511e937d",
+      "cleanBefore": true,
+      "cleanAfter": true
+    }
+  ],
+  "attachments": [],
+  "issueRev": "2026-11-10T02:51:12Z"
+}
