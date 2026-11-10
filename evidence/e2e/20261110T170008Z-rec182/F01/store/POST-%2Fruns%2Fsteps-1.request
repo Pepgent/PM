@@ -1,0 +1,1 @@
+{"run":{"kind":"open","session":"01a1c667-a5e9-767e-931f-222ae7bb7333"},"session":"01a1c667-a5e9-767e-931f-222ae7bb7333","code":"const temp_2200c = 2200\nstop(temp_2200c)","roots":[{"name":"temp_2200c","value":{"kind":"scalar","scalar":{"kind":"number","v":2200}}}],"calls":[],"stops":["temp_2200c"],"versions":[],"transfer":"01M736FF0YCXEESNVRKRM2YSW0"}

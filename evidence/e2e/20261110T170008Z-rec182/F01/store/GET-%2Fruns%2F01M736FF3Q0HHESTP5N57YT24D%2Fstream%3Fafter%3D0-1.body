@@ -1,0 +1,18 @@
+: connected
+
+id: 1
+event: run_started
+data: {"seq":1,"at":"2026-11-10T17:00:49.655Z","kind":"run_started","records":{"nodes":[],"edges":[]}}
+
+id: 2
+event: step_committed
+data: {"seq":2,"at":"2026-11-10T17:00:49.655Z","kind":"step_committed","step":{"session":"01a1c667-a5e9-767e-931f-222ae7bb7333","code":"const temp_2200c = 2200\nstop(temp_2200c)"},"records":{"nodes":[{"kind":"Root","name":"temp_2200c","value":{"kind":"scalar","scalar":{"kind":"number","v":2200}}}],"edges":[]}}
+
+id: 3
+event: atom_stopped
+data: {"seq":3,"at":"2026-11-10T17:00:49.655Z","kind":"atom_stopped","name":"temp_2200c"}
+
+id: 4
+event: run_ended
+data: {"seq":4,"at":"2026-11-10T17:00:49.852Z","kind":"run_ended"}
+

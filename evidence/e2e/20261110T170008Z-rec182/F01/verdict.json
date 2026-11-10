@@ -1,0 +1,217 @@
+{
+  "flow": "F01",
+  "segment": "S1",
+  "env": "L",
+  "startedAt": "2026-11-10T17:00:43.736Z",
+  "endedAt": "2026-11-10T17:00:51.559Z",
+  "build": {
+    "commits": {
+      "soroi": "aed4d6f4c3d4062cab95adf0aa1a4cedbfa291fe",
+      "omp-soroi": "dc7d05d4b219a12a191078fac5604658682fe103"
+    },
+    "release": "c85c66c6cc01e07c41637c7ae3fe3436ad5183203c9379fb9d3b405b8d6fbc76",
+    "images": {
+      "IMG-05": "pepgent-registry.orb.local:5000/pepgent/central@sha256:2918d73ca68fc938eed1885b66395cb575e9c760f1ebdcb560ab051592484cb8"
+    },
+    "omp": "18.18.6",
+    "model": "opencode-go/deepseek-v4.1-flash"
+  },
+  "runs": [
+    "01M736FF3Q0HHESTP5N57YT24D"
+  ],
+  "agents": [
+    "f01-rec182-20261110T170008Z"
+  ],
+  "remoteRuns": [],
+  "assertions": [
+    {
+      "id": "a0",
+      "claim": "The same release passed installation prerequisite A0",
+      "source": {
+        "kind": "transcript",
+        "file": "a0-verdict.json",
+        "lines": [
+          1,
+          1
+        ]
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "live-build",
+      "claim": "This campaign identifies a real release, commits, images and omp",
+      "source": {
+        "kind": "transcript",
+        "file": "verdict.json",
+        "lines": [
+          1,
+          1
+        ]
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "script",
+      "claim": "The model invoked the exact formal step",
+      "source": {
+        "kind": "rpc",
+        "agent": "f01-rec182-20261110T170008Z",
+        "frame": "74"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "tool-result",
+      "claim": "The formal tool result confirms the new run ended",
+      "source": {
+        "kind": "rpc",
+        "agent": "f01-rec182-20261110T170008Z",
+        "frame": "75"
+      },
+      "expected": "[\"formal\",true,true,false,[]]",
+      "observed": "[\"formal\",true,true,false,[]]",
+      "pass": true
+    },
+    {
+      "id": "ended-list",
+      "claim": "The ended list contains this run with its root session as holder",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs?state=Ended"
+      },
+      "expected": "[{\"run\":\"01M736FF3Q0HHESTP5N57YT24D\",\"holder\":\"01a1c667-a5e9-767e-931f-222ae7bb7333\",\"state\":\"Ended\"}]",
+      "observed": "[{\"run\":\"01M736FF3Q0HHESTP5N57YT24D\",\"holder\":\"01a1c667-a5e9-767e-931f-222ae7bb7333\",\"state\":\"Ended\"}]",
+      "pass": true
+    },
+    {
+      "id": "graph-state",
+      "claim": "The graph belongs to the root session and is ended",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M736FF3Q0HHESTP5N57YT24D/graph"
+      },
+      "expected": "[\"01M736FF3Q0HHESTP5N57YT24D\",\"01a1c667-a5e9-767e-931f-222ae7bb7333\",\"Ended\"]",
+      "observed": "[\"01M736FF3Q0HHESTP5N57YT24D\",\"01a1c667-a5e9-767e-931f-222ae7bb7333\",\"Ended\"]",
+      "pass": true
+    },
+    {
+      "id": "root",
+      "claim": "The only graph node is Root temp_2200c = 2200",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M736FF3Q0HHESTP5N57YT24D/graph"
+      },
+      "expected": "[{\"kind\":\"Root\",\"name\":\"temp_2200c\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":2200}}}]",
+      "observed": "[{\"kind\":\"Root\",\"name\":\"temp_2200c\",\"value\":{\"kind\":\"scalar\",\"scalar\":{\"kind\":\"number\",\"v\":2200}}}]",
+      "pass": true
+    },
+    {
+      "id": "consumed",
+      "claim": "No edge or unconsumed atom remains",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M736FF3Q0HHESTP5N57YT24D/graph"
+      },
+      "expected": "[[],[]]",
+      "observed": "[[],[]]",
+      "pass": true
+    },
+    {
+      "id": "event-order",
+      "claim": "The stream contains exactly the four F01 lifecycle events",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M736FF3Q0HHESTP5N57YT24D/stream?after=0"
+      },
+      "expected": "[\"run_started\",\"step_committed\",\"atom_stopped\",\"run_ended\"]",
+      "observed": "[\"run_started\",\"step_committed\",\"atom_stopped\",\"run_ended\"]",
+      "pass": true
+    },
+    {
+      "id": "event-seq",
+      "claim": "The stream sequences increase strictly and end at graph.at",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M736FF3Q0HHESTP5N57YT24D/stream?after=0"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "step-code",
+      "claim": "The committed step preserves exact code and session",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M736FF3Q0HHESTP5N57YT24D/stream?after=0"
+      },
+      "expected": "{\"session\":\"01a1c667-a5e9-767e-931f-222ae7bb7333\",\"code\":\"const temp_2200c = 2200\\nstop(temp_2200c)\"}",
+      "observed": "{\"session\":\"01a1c667-a5e9-767e-931f-222ae7bb7333\",\"code\":\"const temp_2200c = 2200\\nstop(temp_2200c)\"}",
+      "pass": true
+    },
+    {
+      "id": "stopped-name",
+      "claim": "The stop event names the required atom",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M736FF3Q0HHESTP5N57YT24D/stream?after=0"
+      },
+      "expected": "[\"temp_2200c\"]",
+      "observed": "[\"temp_2200c\"]",
+      "pass": true
+    },
+    {
+      "id": "open-step",
+      "claim": "The supervisor submitted this root step as open",
+      "source": {
+        "kind": "store",
+        "method": "POST",
+        "path": "/runs/steps"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "supervisor-end",
+      "claim": "The supervisor requested end and received the store Ended response",
+      "source": {
+        "kind": "store",
+        "method": "POST",
+        "path": "/runs/01M736FF3Q0HHESTP5N57YT24D/end"
+      },
+      "expected": "[{\"kind\":\"Ended\",\"seq\":4}]",
+      "observed": "[{\"kind\":\"Ended\",\"seq\":4}]",
+      "pass": true
+    },
+    {
+      "id": "lifecycle",
+      "claim": "The generation exits before writer closure",
+      "source": {
+        "kind": "mux",
+        "path": "/agents/f01-rec182-20261110T170008Z/writer"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    }
+  ],
+  "deviations": [],
+  "result": {
+    "kind": "pass"
+  }
+}
