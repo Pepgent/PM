@@ -1,6 +1,6 @@
 # D9-01 leaf-type inventory — `LabSnapshot` (SNAP:24-58)
 
-- generated: 2026-11-10T00:08:43.220Z
+- generated: 2026-11-10T00:20:43.542Z
 - tool: `evidence/e2e/20261109T2315Z-d9-leaf-types/F32/source/leaf-types.mjs` (typescript 7.0.2, `typescript/unstable/sync`)
 - source: `Pepgent/Pepgent@fe2212c7a830714762f4d7fbc48ea0897f81b8b4` `apps/web/src/client/contracts/lab-snapshot.ts`
 - top-level fields: 18
@@ -9,6 +9,7 @@
 Path notation: `.` property, `[]` array element, `[k]` index-signature value,
 `[kind=x]` discriminated-union member, `*` the primitive members of a union that also
 has object members.
+`[name]` (unquoted) a property keyed by a unique symbol; `name` is the symbol's description. TypeScript's per-checkout symbol id is not printed.
 
 Markers after a leaf type:
 - `(optional)`: the property is declared with `?`, or its type union includes `undefined`.
@@ -4415,15 +4416,15 @@ automation.runs[][kind="waiting"].duration*: string | null  (nullable)
 automation.runs[][kind="waiting"].duration[LabText].en: string  (nullable parent)
 automation.runs[][kind="waiting"].duration[LabText].zh-CN: string  (nullable parent)
 automation.runs[][kind="waiting"].conversation.id: string  (nullable parent)
-automation.runs[][kind="waiting"].conversation.id.__@$brand@531.ConversationId: true  (nullable parent)
+automation.runs[][kind="waiting"].conversation.id[$brand].ConversationId: true  (nullable parent)
 automation.runs[][kind="waiting"].conversation.rule: string  (nullable parent)
-automation.runs[][kind="waiting"].conversation.rule.__@$brand@531.AutomationRuleId: true  (nullable parent)
+automation.runs[][kind="waiting"].conversation.rule[$brand].AutomationRuleId: true  (nullable parent)
 automation.runs[][kind="waiting"].conversation.automationRun: string  (nullable parent)
-automation.runs[][kind="waiting"].conversation.automationRun.__@$brand@531.AutomationRunId: true  (nullable parent)
+automation.runs[][kind="waiting"].conversation.automationRun[$brand].AutomationRunId: true  (nullable parent)
 automation.runs[][kind="waiting"].conversation.owner: string  (nullable parent)
 automation.runs[][kind="waiting"].conversation.ownerName: string | null  (nullable) (nullable parent)
 automation.runs[][kind="waiting"].conversation.agent: string | null  (nullable) (nullable parent)
-automation.runs[][kind="waiting"].conversation.agent.__@$brand@531.AgentId: true  (nullable parent)
+automation.runs[][kind="waiting"].conversation.agent[$brand].AgentId: true  (nullable parent)
 automation.runs[][kind="waiting"].conversation.session: string | null  (nullable) (nullable parent)
 automation.runs[][kind="waiting"].conversation.createdAt*: string  (nullable parent)
 automation.runs[][kind="waiting"].conversation.createdAt[LabText].en: string  (nullable parent)
@@ -4436,7 +4437,7 @@ automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].kin
 automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].body: "Agent" | "Program"  (nullable parent)
 automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].env: string  (nullable parent)
 automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].agentId: string  (optional) (nullable parent)
-automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].agentId.__@$brand@531.AgentId: true  (nullable parent)
+automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].agentId[$brand].AgentId: true  (nullable parent)
 automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].remoteRun: string | undefined  (optional) (nullable parent)
 automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].startedAt: string  (nullable parent)
 automation.runs[][kind="waiting"].conversation.slots[].state[kind="running"].version: string  (nullable parent)
@@ -4470,15 +4471,15 @@ automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].duration*: string | 
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].duration[LabText].en: string  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].duration[LabText].zh-CN: string  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.id: string  (nullable parent)
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.id.__@$brand@531.ConversationId: true  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.id[$brand].ConversationId: true  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.rule: string  (nullable parent)
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.rule.__@$brand@531.AutomationRuleId: true  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.rule[$brand].AutomationRuleId: true  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.automationRun: string  (nullable parent)
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.automationRun.__@$brand@531.AutomationRunId: true  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.automationRun[$brand].AutomationRunId: true  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.owner: string  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.ownerName: string | null  (nullable) (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.agent: string | null  (nullable) (nullable parent)
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.agent.__@$brand@531.AgentId: true  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.agent[$brand].AgentId: true  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.session: string | null  (nullable) (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.createdAt*: string  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.createdAt[LabText].en: string  (nullable parent)
@@ -4491,7 +4492,7 @@ automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[]
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].body: "Agent" | "Program"  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].env: string  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].agentId: string  (optional) (nullable parent)
-automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].agentId.__@$brand@531.AgentId: true  (nullable parent)
+automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].agentId[$brand].AgentId: true  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].remoteRun: string | undefined  (optional) (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].startedAt: string  (nullable parent)
 automation.runs[][kind∈"failed"|"ok"|"running"|"skipped"].conversation.slots[].state[kind="running"].version: string  (nullable parent)
@@ -6130,7 +6131,7 @@ discussions.discussions[].messages[][kind="ai"].attachments[][kind="plan"].plan.
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="plan"].plan.steps[].node: string
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].kind: "conclusion"
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].draft.conclusionId: string  (optional)  // Present when the attachment resolves to an authoritative conclusion.
-discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].draft.conclusionId.__@$brand@531.ConclusionId: true
+discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].draft.conclusionId[$brand].ConclusionId: true
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].draft.text*: string
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].draft.text[LabText].en: string
 discussions.discussions[].messages[][kind="ai"].attachments[][kind="conclusion"].draft.text[LabText].zh-CN: string

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-10T00:08:43.227Z",
+  "generated": "2026-11-10T00:20:43.549Z",
   "source": "Pepgent/Pepgent@fe2212c7a830714762f4d7fbc48ea0897f81b8b4 apps/web/src/client/contracts/lab-snapshot.ts",
   "typescript": "7.0.2",
   "roots": [
@@ -38805,7 +38805,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind=\"waiting\"].conversation.id.__@$brand@531.ConversationId",
+      "path": "automation.runs[][kind=\"waiting\"].conversation.id[$brand].ConversationId",
       "type": "true",
       "root": "automation",
       "optional": false,
@@ -38823,7 +38823,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind=\"waiting\"].conversation.rule.__@$brand@531.AutomationRuleId",
+      "path": "automation.runs[][kind=\"waiting\"].conversation.rule[$brand].AutomationRuleId",
       "type": "true",
       "root": "automation",
       "optional": false,
@@ -38841,7 +38841,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind=\"waiting\"].conversation.automationRun.__@$brand@531.AutomationRunId",
+      "path": "automation.runs[][kind=\"waiting\"].conversation.automationRun[$brand].AutomationRunId",
       "type": "true",
       "root": "automation",
       "optional": false,
@@ -38877,7 +38877,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind=\"waiting\"].conversation.agent.__@$brand@531.AgentId",
+      "path": "automation.runs[][kind=\"waiting\"].conversation.agent[$brand].AgentId",
       "type": "true",
       "root": "automation",
       "optional": false,
@@ -38994,7 +38994,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind=\"waiting\"].conversation.slots[].state[kind=\"running\"].agentId.__@$brand@531.AgentId",
+      "path": "automation.runs[][kind=\"waiting\"].conversation.slots[].state[kind=\"running\"].agentId[$brand].AgentId",
       "type": "true",
       "root": "automation",
       "optional": false,
@@ -39300,7 +39300,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.id.__@$brand@531.ConversationId",
+      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.id[$brand].ConversationId",
       "type": "true",
       "root": "automation",
       "optional": false,
@@ -39318,7 +39318,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.rule.__@$brand@531.AutomationRuleId",
+      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.rule[$brand].AutomationRuleId",
       "type": "true",
       "root": "automation",
       "optional": false,
@@ -39336,7 +39336,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.automationRun.__@$brand@531.AutomationRunId",
+      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.automationRun[$brand].AutomationRunId",
       "type": "true",
       "root": "automation",
       "optional": false,
@@ -39372,7 +39372,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.agent.__@$brand@531.AgentId",
+      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.agent[$brand].AgentId",
       "type": "true",
       "root": "automation",
       "optional": false,
@@ -39489,7 +39489,7 @@
       "doc": null
     },
     {
-      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.slots[].state[kind=\"running\"].agentId.__@$brand@531.AgentId",
+      "path": "automation.runs[][kind∈\"failed\"|\"ok\"|\"running\"|\"skipped\"].conversation.slots[].state[kind=\"running\"].agentId[$brand].AgentId",
       "type": "true",
       "root": "automation",
       "optional": false,
@@ -54114,7 +54114,7 @@
       "doc": "Present when the attachment resolves to an authoritative conclusion."
     },
     {
-      "path": "discussions.discussions[].messages[][kind=\"ai\"].attachments[][kind=\"conclusion\"].draft.conclusionId.__@$brand@531.ConclusionId",
+      "path": "discussions.discussions[].messages[][kind=\"ai\"].attachments[][kind=\"conclusion\"].draft.conclusionId[$brand].ConclusionId",
       "type": "true",
       "root": "discussions",
       "optional": false,

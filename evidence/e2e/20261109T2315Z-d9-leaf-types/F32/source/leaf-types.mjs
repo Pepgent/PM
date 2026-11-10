@@ -130,6 +130,17 @@ function typeOfProp(sym) {
   try { return checker.getTypeOfSymbolAtLocation(sym, decl); } catch { return undefined; }
 }
 function tstr(t) { return checker.typeToString(t); }
+// TypeScript names a property keyed by a unique symbol `__@<description>@<id>`; `<id>` is internal to the
+// checkout's program and differs between checkouts, so paths show `[<description>]` instead.
+const UNIQUE_SYMBOL_NAME = /^__@(.+?)(?:@\d+)?$/;
+function keyText(name) {
+  const m = UNIQUE_SYMBOL_NAME.exec(name);
+  return m ? `[${m[1]}]` : name;
+}
+// Path of the property `name` under `path`; a unique-symbol key takes no dot.
+function childPath(path, name) {
+  return UNIQUE_SYMBOL_NAME.test(name) ? `${path}${keyText(name)}` : `${path}.${name}`;
+}
 
 function discriminantLabel(member) {
   for (const name of ['kind', 'type', 'status', 'mode', 'tag', 'group', 'role']) {
@@ -251,8 +262,8 @@ function traverse(type, path, root, inherited, doc) {
     for (const p of props) {
       const child = childMarks(marks, Boolean(p.flags & SymbolFlags.Optional));
       const pt = typeOfProp(p);
-      if (!pt) { leaf(`${path}.${p.name}`, '<type unavailable>', root, child, docOf(p)); continue; }
-      traverse(pt, `${path}.${p.name}`, root, child, docOf(p));
+      if (!pt) { leaf(childPath(path, p.name), '<type unavailable>', root, child, docOf(p)); continue; }
+      traverse(pt, childPath(path, p.name), root, child, docOf(p));
     }
     for (const info of indexes) {
       traverse(info.valueType, `${path}[${tstr(info.keyType)}]`, root, childMarks(marks, false), null);
@@ -266,15 +277,15 @@ const roots = [];
 for (const prop of checker.getPropertiesOfType(snapshotType)) {
   const pt = typeOfProp(prop);
   roots.push({
-    name: prop.name,
+    name: keyText(prop.name),
     type: tstr(pt),
     doc: docOf(prop),
     leaves: 0,
   });
   traverse(
     pt,
-    prop.name,
-    prop.name,
+    keyText(prop.name),
+    keyText(prop.name),
     { optional: Boolean(prop.flags & SymbolFlags.Optional), nullable: false, nullableParent: false },
     docOf(prop),
   );
@@ -319,6 +330,7 @@ lines.push('');
 lines.push('Path notation: `.` property, `[]` array element, `[k]` index-signature value,');
 lines.push('`[kind=x]` discriminated-union member, `*` the primitive members of a union that also');
 lines.push('has object members.');
+lines.push("`[name]` (unquoted) a property keyed by a unique symbol; `name` is the symbol's description. TypeScript's per-checkout symbol id is not printed.");
 lines.push('');
 lines.push('Markers after a leaf type:');
 lines.push('- `(optional)`: the property is declared with `?`, or its type union includes `undefined`.');
