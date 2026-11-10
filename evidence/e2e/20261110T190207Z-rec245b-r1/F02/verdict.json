@@ -1,0 +1,201 @@
+{
+  "flow": "F02",
+  "segment": "S1",
+  "env": "L",
+  "startedAt": "2026-11-10T19:03:43.310Z",
+  "endedAt": "2026-11-10T19:03:53.925Z",
+  "build": {
+    "commits": {
+      "soroi": "fbf5c3511632b659b5b907e36f62d57b63d35bc5",
+      "omp-soroi": "e676acbc5b37739f806d89f27a8005e6963e9f10"
+    },
+    "release": "d34c02cc3fb0c0df0f67ca7003373b677103e9f80e5e18081399a1f9d820aea8",
+    "images": {
+      "IMG-01": "pepgent-registry.orb.local:5000/pepgent/omp-agent@sha256:ee23be181f1d06376796a99ea4369a892fd70978b67ddde69c717441832d69c1",
+      "IMG-05": "pepgent-registry.orb.local:5000/pepgent/central@sha256:d344c3afae4c2673461173eaca210fa21c18011231db6afb8d473046ad024c31"
+    },
+    "omp": "18.18.6",
+    "model": "opencode-go/deepseek-v4.1-flash"
+  },
+  "runs": [
+    "01M73DGMSW1ABK0EMDSQX6Q6X0"
+  ],
+  "agents": [
+    "f02-rec245b-20261110T190207Z-0-0"
+  ],
+  "remoteRuns": [],
+  "assertions": [
+    {
+      "id": "root-open",
+      "claim": "The first formal step opens but does not end the root run",
+      "source": {
+        "kind": "rpc",
+        "agent": "f02-rec245b-20261110T190207Z-0-0",
+        "frame": "239"
+      },
+      "expected": "[true,false]",
+      "observed": "[true,false]",
+      "pass": true
+    },
+    {
+      "id": "initial-unconsumed",
+      "claim": "The first step leaves the required atom unconsumed",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73DGMSW1ABK0EMDSQX6Q6X0/state"
+      },
+      "expected": "[\"f02_seed\"]",
+      "observed": "[\"f02_seed\"]",
+      "pass": true
+    },
+    {
+      "id": "continuation-outcome-0",
+      "claim": "A formal continuation does not fail execution or return another mode",
+      "source": {
+        "kind": "rpc",
+        "agent": "f02-rec245b-20261110T190207Z-0-0",
+        "frame": "344"
+      },
+      "expected": "\"formal\"",
+      "observed": "\"formal\"",
+      "pass": true
+    },
+    {
+      "id": "continuation-run-0",
+      "claim": "Continuation writes the same run",
+      "source": {
+        "kind": "rpc",
+        "agent": "f02-rec245b-20261110T190207Z-0-0",
+        "frame": "344"
+      },
+      "expected": "\"01M73DGMSW1ABK0EMDSQX6Q6X0\"",
+      "observed": "\"01M73DGMSW1ABK0EMDSQX6Q6X0\"",
+      "pass": true
+    },
+    {
+      "id": "ended",
+      "claim": "The root supervisor ended the fully consumed run",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73DGMSW1ABK0EMDSQX6Q6X0/graph"
+      },
+      "expected": "[\"Ended\",[]]",
+      "observed": "[\"Ended\",[]]",
+      "pass": true
+    },
+    {
+      "id": "holder",
+      "claim": "The root session owns the graph",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73DGMSW1ABK0EMDSQX6Q6X0/graph"
+      },
+      "expected": "\"01a1c6d8-4048-7316-a6c3-814bb93b5d28\"",
+      "observed": "\"01a1c6d8-4048-7316-a6c3-814bb93b5d28\"",
+      "pass": true
+    },
+    {
+      "id": "step-count",
+      "claim": "Every accepted eval has one committed step",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73DGMSW1ABK0EMDSQX6Q6X0/stream?after=0"
+      },
+      "expected": "2",
+      "observed": "2",
+      "pass": true
+    },
+    {
+      "id": "terminal-event",
+      "claim": "Exactly one run_ended follows the committed steps",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73DGMSW1ABK0EMDSQX6Q6X0/stream?after=0"
+      },
+      "expected": "[1,\"run_ended\"]",
+      "observed": "[1,\"run_ended\"]",
+      "pass": true
+    },
+    {
+      "id": "step-code-1",
+      "claim": "The committed continuation preserves the actual tool code and writer session",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73DGMSW1ABK0EMDSQX6Q6X0/stream?after=0"
+      },
+      "expected": "[\"01a1c6d8-4048-7316-a6c3-814bb93b5d28\",\"stop(f02_seed)\"]",
+      "observed": "[\"01a1c6d8-4048-7316-a6c3-814bb93b5d28\",\"stop(f02_seed)\"]",
+      "pass": true
+    },
+    {
+      "id": "reminder-request-1",
+      "claim": "The same model candidate's reminder precedes its assistant tool call on the active transcript branch",
+      "source": {
+        "kind": "rpc",
+        "agent": "f02-rec245b-20261110T190207Z-0-0",
+        "frame": "373"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "reminder-set-1",
+      "claim": "The request reminder records the unconsumed names before its first eval, not state produced within that response",
+      "source": {
+        "kind": "rpc",
+        "agent": "f02-rec245b-20261110T190207Z-0-0",
+        "frame": "373"
+      },
+      "expected": "[\"f02_seed\"]",
+      "observed": "[\"f02_seed\"]",
+      "pass": true
+    },
+    {
+      "id": "reminder-format-1",
+      "claim": "Reminder atom rows carry preview and a D5-13 origin",
+      "source": {
+        "kind": "rpc",
+        "agent": "f02-rec245b-20261110T190207Z-0-0",
+        "frame": "373"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "committed-input-edges",
+      "claim": "Every graph edge originates in a prior committed atom",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73DGMSW1ABK0EMDSQX6Q6X0/graph"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "supervisor-end",
+      "claim": "The supervisor obtained Ended only after the formal steps",
+      "source": {
+        "kind": "store",
+        "method": "POST",
+        "path": "/runs/01M73DGMSW1ABK0EMDSQX6Q6X0/end"
+      },
+      "expected": "[{\"kind\":\"Ended\",\"seq\":5}]",
+      "observed": "[{\"kind\":\"Ended\",\"seq\":5}]",
+      "pass": true
+    }
+  ],
+  "deviations": [],
+  "result": {
+    "kind": "pass"
+  }
+}

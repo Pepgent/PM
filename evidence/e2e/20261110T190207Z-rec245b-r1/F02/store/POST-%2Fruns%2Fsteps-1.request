@@ -1,0 +1,1 @@
+{"run":{"kind":"open","session":"01a1c6d8-4048-7316-a6c3-814bb93b5d28"},"session":"01a1c6d8-4048-7316-a6c3-814bb93b5d28","code":"const f02_seed = 21","roots":[{"name":"f02_seed","value":{"kind":"scalar","scalar":{"kind":"number","v":21}}}],"calls":[],"stops":[],"versions":[],"transfer":"01M73DGMPNNM0Z7KD4W5A2R78Y"}

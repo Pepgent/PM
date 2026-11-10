@@ -1,0 +1,25 @@
+{
+  "evidenceId": "189b2808-4063-4657-b453-56f9d84c806e",
+  "method": "POST",
+  "path": "/transfers",
+  "status": 201,
+  "requestRpcLine": 1528,
+  "responseRpcLine": 1530,
+  "capture": {
+    "kind": "complete"
+  },
+  "headers": [
+    [
+      "content-length",
+      "41"
+    ],
+    [
+      "content-type",
+      "application/json;charset=utf-8"
+    ],
+    [
+      "date",
+      "Tue, 10 Nov 2026 19:06:19 GMT"
+    ]
+  ]
+}

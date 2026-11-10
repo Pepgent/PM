@@ -1,0 +1,22 @@
+: connected
+
+id: 1
+event: run_started
+data: {"seq":1,"at":"2026-11-10T19:03:48.285Z","kind":"run_started","records":{"nodes":[],"edges":[]}}
+
+id: 2
+event: step_committed
+data: {"seq":2,"at":"2026-11-10T19:03:48.285Z","kind":"step_committed","step":{"session":"01a1c6d8-4048-7316-a6c3-814bb93b5d28","code":"const f02_seed = 21"},"records":{"nodes":[{"kind":"Root","name":"f02_seed","value":{"kind":"scalar","scalar":{"kind":"number","v":21}}}],"edges":[]}}
+
+id: 3
+event: step_committed
+data: {"seq":3,"at":"2026-11-10T19:03:51.932Z","kind":"step_committed","step":{"session":"01a1c6d8-4048-7316-a6c3-814bb93b5d28","code":"stop(f02_seed)"},"records":{"nodes":[],"edges":[]}}
+
+id: 4
+event: atom_stopped
+data: {"seq":4,"at":"2026-11-10T19:03:51.932Z","kind":"atom_stopped","name":"f02_seed"}
+
+id: 5
+event: run_ended
+data: {"seq":5,"at":"2026-11-10T19:03:52.096Z","kind":"run_ended"}
+

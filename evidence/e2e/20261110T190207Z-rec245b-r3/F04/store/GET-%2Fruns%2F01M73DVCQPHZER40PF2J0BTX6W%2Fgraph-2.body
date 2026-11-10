@@ -1,0 +1,1 @@
+{"run":"01M73DVCQPHZER40PF2J0BTX6W","holder":"01a1c6dd-9c02-73c2-b94d-dfd6a281bacf","derivedFrom":null,"state":"Open","at":2,"nodes":[{"kind":"Root","name":"f04_anchor","value":{"kind":"scalar","scalar":{"kind":"number","v":1}}}],"edges":[],"unconsumed":["f04_anchor"]}

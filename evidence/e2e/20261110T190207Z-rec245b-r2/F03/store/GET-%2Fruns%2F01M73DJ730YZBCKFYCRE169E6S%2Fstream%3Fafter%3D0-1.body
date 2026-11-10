@@ -1,0 +1,38 @@
+: connected
+
+id: 1
+event: run_started
+data: {"seq":1,"at":"2026-11-10T19:04:39.776Z","kind":"run_started","records":{"nodes":[],"edges":[]}}
+
+id: 2
+event: step_committed
+data: {"seq":2,"at":"2026-11-10T19:04:39.776Z","kind":"step_committed","step":{"session":"01a1c6d8-e5de-7046-9179-9cd842673139","code":"const f03_numeric = 21\nconst f03_film = \"film_d8c770aad50f4de582db5fbdeaee2c9e\"\nconst f03_temp = 2200\nconst f03_duration = 1000\nconst f03_label_0 = \"f03_d8c770aad50f4de582db5fbdeaee2c9e_0\"\nconst f03_label_1 = \"f03_d8c770aad50f4de582db5fbdeaee2c9e_1\"\nconst f03_label_2 = \"f03_d8c770aad50f4de582db5fbdeaee2c9e_2\"\nconst f03_label_3 = \"f03_d8c770aad50f4de582db5fbdeaee2c9e_3\"\nconst f03_label_4 = \"f03_d8c770aad50f4de582db5fbdeaee2c9e_4\"\nconst f03_label_5 = \"f03_d8c770aad50f4de582db5fbdeaee2c9e_5\"\nconst f03_label_6 = \"f03_d8c770aad50f4de582db5fbdeaee2c9e_6\"\nconst f03_label_7 = \"f03_d8c770aad50f4de582db5fbdeaee2c9e_7\"\nconst f03_label_8 = \"f03_d8c770aad50f4de582db5fbdeaee2c9e_8\"\nconst f03_good_0 = \"f03_d8c770aad50f4de582db5fbdeaee2c9e_left\"\nconst f03_good_1 = \"f03_d8c770aad50f4de582db5fbdeaee2c9e_right\""},"records":{"nodes":[{"kind":"Root","name":"f03_duration","value":{"kind":"scalar","scalar":{"kind":"number","v":1000}}},{"kind":"Root","name":"f03_film","value":{"kind":"scalar","scalar":{"kind":"string","v":"film_d8c770aad50f4de582db5fbdeaee2c9e"}}},{"kind":"Root","name":"f03_good_0","value":{"kind":"scalar","scalar":{"kind":"string","v":"f03_d8c770aad50f4de582db5fbdeaee2c9e_left"}}},{"kind":"Root","name":"f03_good_1","value":{"kind":"scalar","scalar":{"kind":"string","v":"f03_d8c770aad50f4de582db5fbdeaee2c9e_right"}}},{"kind":"Root","name":"f03_label_0","value":{"kind":"scalar","scalar":{"kind":"string","v":"f03_d8c770aad50f4de582db5fbdeaee2c9e_0"}}},{"kind":"Root","name":"f03_label_1","value":{"kind":"scalar","scalar":{"kind":"string","v":"f03_d8c770aad50f4de582db5fbdeaee2c9e_1"}}},{"kind":"Root","name":"f03_label_2","value":{"kind":"scalar","scalar":{"kind":"string","v":"f03_d8c770aad50f4de582db5fbdeaee2c9e_2"}}},{"kind":"Root","name":"f03_label_3","value":{"kind":"scalar","scalar":{"kind":"string","v":"f03_d8c770aad50f4de582db5fbdeaee2c9e_3"}}},{"kind":"Root","name":"f03_label_4","value":{"kind":"scalar","scalar":{"kind":"string","v":"f03_d8c770aad50f4de582db5fbdeaee2c9e_4"}}},{"kind":"Root","name":"f03_label_5","value":{"kind":"scalar","scalar":{"kind":"string","v":"f03_d8c770aad50f4de582db5fbdeaee2c9e_5"}}},{"kind":"Root","name":"f03_label_6","value":{"kind":"scalar","scalar":{"kind":"string","v":"f03_d8c770aad50f4de582db5fbdeaee2c9e_6"}}},{"kind":"Root","name":"f03_label_7","value":{"kind":"scalar","scalar":{"kind":"string","v":"f03_d8c770aad50f4de582db5fbdeaee2c9e_7"}}},{"kind":"Root","name":"f03_label_8","value":{"kind":"scalar","scalar":{"kind":"string","v":"f03_d8c770aad50f4de582db5fbdeaee2c9e_8"}}},{"kind":"Root","name":"f03_numeric","value":{"kind":"scalar","scalar":{"kind":"number","v":21}}},{"kind":"Root","name":"f03_temp","value":{"kind":"scalar","scalar":{"kind":"number","v":2200}}}],"edges":[]}}
+
+id: 3
+event: step_committed
+data: {"seq":3,"at":"2026-11-10T19:06:50.791Z","kind":"step_committed","step":{"session":"01a1c6d8-e5de-7046-9179-9cd842673139","code":"const { label: good_left_label, duration_ms: good_left_duration } = slow_step(f03_good_0, f03_duration)\nconst { label: good_right_label, duration_ms: good_right_duration } = slow_step(f03_good_1, f03_duration)\nconst { curve: good_curve, log: good_log } = anneal(f03_film, f03_temp)"},"records":{"nodes":[{"kind":"Call","capture":"410b0e67b044ce28b518a4460fa77508d99e1984366ac81789e54805ae2b6b08","step":3,"position":0,"fn":"slow_step","version":"1721e08908d08b1bbeecdeab9ae2b9653056501eab2f84ad49a57cc25be3a13b","body":"Program","env":{"kind":"central"},"status":{"kind":"Ended"},"startedAt":"2026-11-10T19:06:49.759Z","endedAt":"2026-11-10T19:06:50.777Z","outputs":[{"field":"label","name":"good_left_label","value":{"kind":"scalar","scalar":{"kind":"string","v":"f03_d8c770aad50f4de582db5fbdeaee2c9e_left"}}},{"field":"duration_ms","name":"good_left_duration","value":{"kind":"scalar","scalar":{"kind":"number","v":1000}}}],"transcript":null},{"kind":"Call","capture":"38625a8123fc0344558f3279110b484fec7a4cffac75b7e99b5ce2ece080f97f","step":3,"position":1,"fn":"slow_step","version":"1721e08908d08b1bbeecdeab9ae2b9653056501eab2f84ad49a57cc25be3a13b","body":"Program","env":{"kind":"central"},"status":{"kind":"Ended"},"startedAt":"2026-11-10T19:06:49.770Z","endedAt":"2026-11-10T19:06:50.786Z","outputs":[{"field":"label","name":"good_right_label","value":{"kind":"scalar","scalar":{"kind":"string","v":"f03_d8c770aad50f4de582db5fbdeaee2c9e_right"}}},{"field":"duration_ms","name":"good_right_duration","value":{"kind":"scalar","scalar":{"kind":"number","v":1000}}}],"transcript":null},{"kind":"Call","capture":"6452af24afea715ca1b740a5894fe17dd5c45643b1258dddf0f194e0f88e85e4","step":3,"position":2,"fn":"anneal","version":"2b5cd65a7b8d1de71bff09aa554214dad7a332102e485fbde4c9a3971cbd9d31","body":"Program","env":{"kind":"central"},"status":{"kind":"Ended"},"startedAt":"2026-11-10T19:06:49.764Z","endedAt":"2026-11-10T19:06:49.780Z","outputs":[{"field":"curve","name":"good_curve","value":{"kind":"scalar","scalar":{"kind":"number","v":59}}},{"field":"log","name":"good_log","value":{"kind":"file","content":"0c70a1c1186b05386b33005fd66ba24889d52806f78a900ef27bd10b14e3bbd1","media":"text/plain;charset=utf-8","name":"anneal-337de81b-1557-4247-8ee2-1b10ba2b6075.txt"}}],"transcript":null}],"edges":[{"from":"f03_good_0","to":{"step":3,"position":0,"input":0}},{"from":"f03_duration","to":{"step":3,"position":0,"input":1}},{"from":"f03_good_1","to":{"step":3,"position":1,"input":0}},{"from":"f03_duration","to":{"step":3,"position":1,"input":1}},{"from":"f03_film","to":{"step":3,"position":2,"input":0}},{"from":"f03_temp","to":{"step":3,"position":2,"input":1}}]}}
+
+id: 4
+event: call_started
+data: {"seq":4,"at":"2026-11-10T19:06:49.759Z","kind":"call_started","step":3,"position":0}
+
+id: 5
+event: call_ended
+data: {"seq":5,"at":"2026-11-10T19:06:50.777Z","kind":"call_ended","step":3,"position":0}
+
+id: 6
+event: call_started
+data: {"seq":6,"at":"2026-11-10T19:06:49.770Z","kind":"call_started","step":3,"position":1}
+
+id: 7
+event: call_ended
+data: {"seq":7,"at":"2026-11-10T19:06:50.786Z","kind":"call_ended","step":3,"position":1}
+
+id: 8
+event: call_started
+data: {"seq":8,"at":"2026-11-10T19:06:49.764Z","kind":"call_started","step":3,"position":2}
+
+id: 9
+event: call_ended
+data: {"seq":9,"at":"2026-11-10T19:06:49.780Z","kind":"call_ended","step":3,"position":2}
+

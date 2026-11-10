@@ -1,0 +1,17 @@
+{
+  "evidenceId": "189b2808-4063-4657-b453-56f9d84c806e",
+  "method": "DELETE",
+  "path": "/transfers/01M73DNP93KWEQ1BQ01KGE4WF4",
+  "status": 204,
+  "requestRpcLine": 1753,
+  "responseRpcLine": 1753,
+  "capture": {
+    "kind": "complete"
+  },
+  "headers": [
+    [
+      "date",
+      "Tue, 10 Nov 2026 19:06:33 GMT"
+    ]
+  ]
+}

@@ -1,0 +1,461 @@
+{
+  "flow": "F03",
+  "segment": "S1",
+  "env": "L",
+  "startedAt": "2026-11-10T19:04:25.716Z",
+  "endedAt": "2026-11-10T19:07:12.153Z",
+  "build": {
+    "commits": {
+      "soroi": "fbf5c3511632b659b5b907e36f62d57b63d35bc5",
+      "omp-soroi": "e676acbc5b37739f806d89f27a8005e6963e9f10"
+    },
+    "release": "d34c02cc3fb0c0df0f67ca7003373b677103e9f80e5e18081399a1f9d820aea8",
+    "images": {
+      "IMG-01": "pepgent-registry.orb.local:5000/pepgent/omp-agent@sha256:ee23be181f1d06376796a99ea4369a892fd70978b67ddde69c717441832d69c1",
+      "IMG-05": "pepgent-registry.orb.local:5000/pepgent/central@sha256:d344c3afae4c2673461173eaca210fa21c18011231db6afb8d473046ad024c31"
+    },
+    "omp": "18.18.6",
+    "model": "opencode-go/deepseek-v4.1-flash"
+  },
+  "runs": [
+    "01M73DJ730YZBCKFYCRE169E6S"
+  ],
+  "agents": [
+    "f03-rec245b-20261110T190207Z-0-0"
+  ],
+  "remoteRuns": [],
+  "assertions": [
+    {
+      "id": "check-loop",
+      "claim": "The complete invalid step is rejected with the required CheckError kind",
+      "source": {
+        "kind": "rpc",
+        "agent": "f03-rec245b-20261110T190207Z-0-0",
+        "frame": "369"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "no-commit-loop",
+      "claim": "Rejected code does not advance the authoritative run sequence",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73DJ730YZBCKFYCRE169E6S/graph"
+      },
+      "expected": "2",
+      "observed": "2",
+      "pass": true
+    },
+    {
+      "id": "not-started-loop",
+      "claim": "The invalid step's independent slow_step body never started",
+      "source": {
+        "kind": "transcript",
+        "file": "markers/f03_d8c770aad50f4de582db5fbdeaee2c9e_0-after.json",
+        "lines": [
+          1,
+          1
+        ]
+      },
+      "expected": "{\"kind\":\"absent\"}",
+      "observed": "{\"kind\":\"absent\"}",
+      "pass": true
+    },
+    {
+      "id": "check-map",
+      "claim": "The complete invalid step is rejected with the required CheckError kind",
+      "source": {
+        "kind": "rpc",
+        "agent": "f03-rec245b-20261110T190207Z-0-0",
+        "frame": "530"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "no-commit-map",
+      "claim": "Rejected code does not advance the authoritative run sequence",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73DJ730YZBCKFYCRE169E6S/graph"
+      },
+      "expected": "2",
+      "observed": "2",
+      "pass": true
+    },
+    {
+      "id": "not-started-map",
+      "claim": "The invalid step's independent slow_step body never started",
+      "source": {
+        "kind": "transcript",
+        "file": "markers/f03_d8c770aad50f4de582db5fbdeaee2c9e_1-after.json",
+        "lines": [
+          1,
+          1
+        ]
+      },
+      "expected": "{\"kind\":\"absent\"}",
+      "observed": "{\"kind\":\"absent\"}",
+      "pass": true
+    },
+    {
+      "id": "check-object",
+      "claim": "The complete invalid step is rejected with the required CheckError kind",
+      "source": {
+        "kind": "rpc",
+        "agent": "f03-rec245b-20261110T190207Z-0-0",
+        "frame": "695"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "no-commit-object",
+      "claim": "Rejected code does not advance the authoritative run sequence",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73DJ730YZBCKFYCRE169E6S/graph"
+      },
+      "expected": "2",
+      "observed": "2",
+      "pass": true
+    },
+    {
+      "id": "not-started-object",
+      "claim": "The invalid step's independent slow_step body never started",
+      "source": {
+        "kind": "transcript",
+        "file": "markers/f03_d8c770aad50f4de582db5fbdeaee2c9e_2-after.json",
+        "lines": [
+          1,
+          1
+        ]
+      },
+      "expected": "{\"kind\":\"absent\"}",
+      "observed": "{\"kind\":\"absent\"}",
+      "pass": true
+    },
+    {
+      "id": "check-array",
+      "claim": "The complete invalid step is rejected with the required CheckError kind",
+      "source": {
+        "kind": "rpc",
+        "agent": "f03-rec245b-20261110T190207Z-0-0",
+        "frame": "839"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "no-commit-array",
+      "claim": "Rejected code does not advance the authoritative run sequence",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73DJ730YZBCKFYCRE169E6S/graph"
+      },
+      "expected": "2",
+      "observed": "2",
+      "pass": true
+    },
+    {
+      "id": "not-started-array",
+      "claim": "The invalid step's independent slow_step body never started",
+      "source": {
+        "kind": "transcript",
+        "file": "markers/f03_d8c770aad50f4de582db5fbdeaee2c9e_3-after.json",
+        "lines": [
+          1,
+          1
+        ]
+      },
+      "expected": "{\"kind\":\"absent\"}",
+      "observed": "{\"kind\":\"absent\"}",
+      "pass": true
+    },
+    {
+      "id": "check-magic",
+      "claim": "The complete invalid step is rejected with the required CheckError kind",
+      "source": {
+        "kind": "rpc",
+        "agent": "f03-rec245b-20261110T190207Z-0-0",
+        "frame": "1022"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "no-commit-magic",
+      "claim": "Rejected code does not advance the authoritative run sequence",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73DJ730YZBCKFYCRE169E6S/graph"
+      },
+      "expected": "2",
+      "observed": "2",
+      "pass": true
+    },
+    {
+      "id": "not-started-magic",
+      "claim": "The invalid step's independent slow_step body never started",
+      "source": {
+        "kind": "transcript",
+        "file": "markers/f03_d8c770aad50f4de582db5fbdeaee2c9e_4-after.json",
+        "lines": [
+          1,
+          1
+        ]
+      },
+      "expected": "{\"kind\":\"absent\"}",
+      "observed": "{\"kind\":\"absent\"}",
+      "pass": true
+    },
+    {
+      "id": "check-duplicate",
+      "claim": "The complete invalid step is rejected with the required CheckError kind",
+      "source": {
+        "kind": "rpc",
+        "agent": "f03-rec245b-20261110T190207Z-0-0",
+        "frame": "1194"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "no-commit-duplicate",
+      "claim": "Rejected code does not advance the authoritative run sequence",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73DJ730YZBCKFYCRE169E6S/graph"
+      },
+      "expected": "2",
+      "observed": "2",
+      "pass": true
+    },
+    {
+      "id": "not-started-duplicate",
+      "claim": "The invalid step's independent slow_step body never started",
+      "source": {
+        "kind": "transcript",
+        "file": "markers/f03_d8c770aad50f4de582db5fbdeaee2c9e_5-after.json",
+        "lines": [
+          1,
+          1
+        ]
+      },
+      "expected": "{\"kind\":\"absent\"}",
+      "observed": "{\"kind\":\"absent\"}",
+      "pass": true
+    },
+    {
+      "id": "check-type",
+      "claim": "The complete invalid step is rejected with the required CheckError kind",
+      "source": {
+        "kind": "rpc",
+        "agent": "f03-rec245b-20261110T190207Z-0-0",
+        "frame": "1373"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "no-commit-type",
+      "claim": "Rejected code does not advance the authoritative run sequence",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73DJ730YZBCKFYCRE169E6S/graph"
+      },
+      "expected": "2",
+      "observed": "2",
+      "pass": true
+    },
+    {
+      "id": "not-started-type",
+      "claim": "The invalid step's independent slow_step body never started",
+      "source": {
+        "kind": "transcript",
+        "file": "markers/f03_d8c770aad50f4de582db5fbdeaee2c9e_6-after.json",
+        "lines": [
+          1,
+          1
+        ]
+      },
+      "expected": "{\"kind\":\"absent\"}",
+      "observed": "{\"kind\":\"absent\"}",
+      "pass": true
+    },
+    {
+      "id": "check-nested",
+      "claim": "The complete invalid step is rejected with the required CheckError kind",
+      "source": {
+        "kind": "rpc",
+        "agent": "f03-rec245b-20261110T190207Z-0-0",
+        "frame": "1531"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "no-commit-nested",
+      "claim": "Rejected code does not advance the authoritative run sequence",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73DJ730YZBCKFYCRE169E6S/graph"
+      },
+      "expected": "2",
+      "observed": "2",
+      "pass": true
+    },
+    {
+      "id": "not-started-nested",
+      "claim": "The invalid step's independent slow_step body never started",
+      "source": {
+        "kind": "transcript",
+        "file": "markers/f03_d8c770aad50f4de582db5fbdeaee2c9e_7-after.json",
+        "lines": [
+          1,
+          1
+        ]
+      },
+      "expected": "{\"kind\":\"absent\"}",
+      "observed": "{\"kind\":\"absent\"}",
+      "pass": true
+    },
+    {
+      "id": "check-destructure",
+      "claim": "The complete invalid step is rejected with the required CheckError kind",
+      "source": {
+        "kind": "rpc",
+        "agent": "f03-rec245b-20261110T190207Z-0-0",
+        "frame": "1754"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "no-commit-destructure",
+      "claim": "Rejected code does not advance the authoritative run sequence",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73DJ730YZBCKFYCRE169E6S/graph"
+      },
+      "expected": "2",
+      "observed": "2",
+      "pass": true
+    },
+    {
+      "id": "not-started-destructure",
+      "claim": "The invalid step's independent slow_step body never started",
+      "source": {
+        "kind": "transcript",
+        "file": "markers/f03_d8c770aad50f4de582db5fbdeaee2c9e_8-after.json",
+        "lines": [
+          1,
+          1
+        ]
+      },
+      "expected": "{\"kind\":\"absent\"}",
+      "observed": "{\"kind\":\"absent\"}",
+      "pass": true
+    },
+    {
+      "id": "no-new-agents",
+      "claim": "Invalid code starts no agent writer",
+      "source": {
+        "kind": "mux",
+        "path": "/agents"
+      },
+      "expected": "[\"f03-rec245b-20261110T190207Z-0-0\"]",
+      "observed": "[\"f03-rec245b-20261110T190207Z-0-0\"]",
+      "pass": true
+    },
+    {
+      "id": "stream-no-invalid-writes",
+      "claim": "No events were appended during the invalid-step phase",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73DJ730YZBCKFYCRE169E6S/stream?after=0"
+      },
+      "expected": "[]",
+      "observed": "[]",
+      "pass": true
+    },
+    {
+      "id": "positive-marker-0",
+      "claim": "The marker probe detects a genuinely started legal body",
+      "source": {
+        "kind": "transcript",
+        "file": "markers/f03_d8c770aad50f4de582db5fbdeaee2c9e_left-positive.json",
+        "lines": [
+          1,
+          1
+        ]
+      },
+      "expected": "{\"kind\":\"present\",\"label\":\"f03_d8c770aad50f4de582db5fbdeaee2c9e_left\",\"duration\":1000}",
+      "observed": "{\"kind\":\"present\",\"label\":\"f03_d8c770aad50f4de582db5fbdeaee2c9e_left\",\"duration\":1000}",
+      "pass": true
+    },
+    {
+      "id": "positive-marker-1",
+      "claim": "The marker probe detects a genuinely started legal body",
+      "source": {
+        "kind": "transcript",
+        "file": "markers/f03_d8c770aad50f4de582db5fbdeaee2c9e_right-positive.json",
+        "lines": [
+          1,
+          1
+        ]
+      },
+      "expected": "{\"kind\":\"present\",\"label\":\"f03_d8c770aad50f4de582db5fbdeaee2c9e_right\",\"duration\":1000}",
+      "observed": "{\"kind\":\"present\",\"label\":\"f03_d8c770aad50f4de582db5fbdeaee2c9e_right\",\"duration\":1000}",
+      "pass": true
+    },
+    {
+      "id": "overlapping-calls",
+      "claim": "The two independent legal slow_step intervals overlap",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73DJ730YZBCKFYCRE169E6S/activity"
+      },
+      "expected": "true",
+      "observed": "true",
+      "pass": true
+    },
+    {
+      "id": "independent-outputs",
+      "claim": "Each destructured field is an independently named output atom",
+      "source": {
+        "kind": "store",
+        "method": "GET",
+        "path": "/runs/01M73DJ730YZBCKFYCRE169E6S/graph"
+      },
+      "expected": "[\"good_curve\",\"good_left_duration\",\"good_left_label\",\"good_log\",\"good_right_duration\",\"good_right_label\"]",
+      "observed": "[\"good_curve\",\"good_left_duration\",\"good_left_label\",\"good_log\",\"good_right_duration\",\"good_right_label\"]",
+      "pass": true
+    }
+  ],
+  "deviations": [],
+  "result": {
+    "kind": "pass"
+  }
+}
